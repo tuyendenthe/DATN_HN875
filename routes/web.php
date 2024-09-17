@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('shop', function(){
-    return view('users.shop.shop');
+
+Route::get('/', function () {
+    return view('clients.blog');
+});
+
+Route::get('cart', function () {
+    return view('clients.cart');
+});
+Route::get('checkout', function () {
+    return view('clients.checkout');
 });
