@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('clients.blog');
 });
+Route::get('cart', function () {
+    return view('clients.cart');
+});
+Route::get('checkout', function () {
+    return view('clients.checkout');
+});
