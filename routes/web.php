@@ -23,3 +23,6 @@ Route::get('cart', function () {
 Route::get('checkout', function () {
     return view('clients.checkout');
 });
+Route::get('index', function () {
+    return view('clients.index');
+});

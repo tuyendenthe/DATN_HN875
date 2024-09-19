@@ -1,31 +1,6 @@
-<!DOCTYPE html>
-<html class="no-js" lang="">
+@extends('clients.master')
+@section('content')
 
-
-<!-- Mirrored from www.devsnews.com/template/epixx-prev/epixx/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 16:29:45 GMT -->
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Epix - Electronics eCommerce HTML Template</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link rel="manifest" href="https://devsnews.com/template/epixx-prev/epixx/site.webmanifest/" />
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
-    <!-- Place favicon.ico in the root directory -->
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
-    <link rel="stylesheet" href="assets/css/magnific-popup.css" />
-    <link rel="stylesheet" href="assets/css/nice-select.css" />
-    <link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css" />
-    <link rel="stylesheet" href="assets/css/slick.css" />
-    <link rel="stylesheet" href="assets/css/meanmenu.css" />
-    <link rel="stylesheet" href="assets/css/swipper.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-</head>
 
 <body>
     <!-- header area start -->
@@ -221,7 +196,7 @@
                 <ul class="p-0">
                     <li><i class="fal fa-map"></i>12/A, Mirnada City Tower, NYC</li>
                     <li><i class="fal fa-phone-alt"></i><a href="tell:+876864764764">+876 864 764 764</a></li>
-                    <li><i class="fal fa-envelope-open"></i><a href="https://www.devsnews.com/cdn-cgi/l/email-protection#28494c454146684f45494144064b4745"><span class="__cf_email__" data-cfemail="6706030a0e0927000a060e0b4904080a">[email&#160;protected]</span></a></li>  
+                    <li><i class="fal fa-envelope-open"></i><a href="https://www.devsnews.com/cdn-cgi/l/email-protection#28494c454146684f45494144064b4745"><span class="__cf_email__" data-cfemail="6706030a0e0927000a060e0b4904080a">[email&#160;protected]</span></a></li>
                 </ul>
                 <div class="sidebar__menu--social">
                     <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -2619,120 +2594,8 @@
         </div>
         <!-- subscribe center area end -->
     </main>
-    <!-- footer area start -->
-    <footer class="footer-area footer-area-3 bg-black-2 footer-3 pt-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-xxl-3 col-lg-4 footer-address-col">
-                    <div class="f-logo mb-40">
-                        <a href="index-3.html"><img src="assets/img/logo/logo-white.png" alt=""></a>
-                    </div>
-                    <div class="f-address">
-                        <ul>
-                            <li>
-                                <span>Address:</span>
-                                <p>4851 Willow Greene Sreet 133<br>
-                                    Western Sahara NY, UK</p>
-                            </li>
-                            <li>
-                                <span>Support:</span>
-                                <p>(+05) 1800 650 190</p>
-                            </li>
-                            <li>
-                                <span>E-mail:</span>
-                                <p><a href="https://www.devsnews.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5733323a3817322f363a273b327934383a">[email&#160;protected]</a></p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-xxl-9 col-lg-8">
-                    <div class="row pl-65 footer-space-3">
-                        <div class="col-xxl col-6 col-md-3 col-lg-3">
-                            <div class="footer-widget mb-30">
-                                <h4 class="epix-footer-title">Information</h4>
-                                <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="contact.html">Delivery Information</a></li>
-                                    <li><a href="shop.html">New products</a></li>
-                                    <li><a href="shop.html">Best sales</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xxl col-6 col-md-3 col-lg-3">
-                            <div class="footer-widget mb-30">
-                                <h4 class="epix-footer-title">My Account</h4>
-                                <ul>
-                                    <li><a href="register.html">My Account</a></li>
-                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                    <li><a href="cart.html">Wish List</a></li>
-                                    <li><a href="checkout.html">Prices drop</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xxl col-6 col-md-3 col-lg-3">
-                            <div class="footer-widget mb-30">
-                                <h4 class="epix-footer-title">Categories</h4>
-                                <ul>
-                                    <li><a href="shop.html">Headphone</a></li>
-                                    <li><a href="shop.html">Phone &amp; Tablet</a></li>
-                                    <li><a href="shop.html">Game &amp; Console</a></li>
-                                    <li><a href="shop.html">Laptop &amp; Computer</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xxl col-6 col-md-3 col-lg-3">
-                            <div class="footer-widget mb-30">
-                                <h4 class="epix-footer-title">Customer Service</h4>
-                                <ul>
-                                    <li><a href="contact.html">Sitemap</a></li>
-                                    <li><a href="register.html">My Account</a></li>
-                                    <li><a href="contact.html">Delivery Information</a></li>
-                                    <li><a href="checkout.html">Order History</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer area end -->
-    <!-- footer copyright start -->
-    <div class="footer-copyright-2 bg-black-2-i ">
-        <div class="container">
-            <div class="row">
-                <div class="col-xxl-3 col-lg-3 col-md-4 mb-20 mb-lg-0">
-                    <img src="assets/img/icon/payment.png" alt="">
-                </div>
-                <div class="col-xxl-9 col-lg-9 col-md-8 text-lg-end">
-                    <div class="text-md-end">
-                        <p>Copyrights © 2021 EPIXX - Powered By <a href="https://bdevs.net/">BDevs</a>. All Rights Reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- footer copyright end -->
 
-    <!-- JS here -->
-    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/slick.min.js"></script>
-    <script src="assets/js/swipper-bundle.min.js"></script>
-    <script src="assets/js/jquery.meanmenu.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/nice-select.js"></script>
-    <script src="assets/js/jquery.elevatezoom.js"></script>
-    <script src="assets/js/jquery-ui-slider-range.js"></script>
-    <script src="assets/js/jquery.scrollUp.min.js"></script>
-    <script src="assets/js/countdown.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/mouse-wheel.min.js"></script>
-    <script src="assets/js/main.js"></script>
 </body>
 
 
-<!-- Mirrored from www.devsnews.com/template/epixx-prev/epixx/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 16:30:07 GMT -->
-</html>
+@endsection
