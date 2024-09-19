@@ -26,3 +26,6 @@ Route::get('checkout', function () {
 Route::get('index', function () {
     return view('clients.index');
 });
+Route::get('login', function () {
+    return view('clients.login');
+});
