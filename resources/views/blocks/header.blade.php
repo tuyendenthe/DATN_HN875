@@ -1,4 +1,3 @@
-<!-- header area start -->
 <header class="header-area d-none d-lg-block">
     <div class="header-top-3">
         <div class="container">
@@ -6,7 +5,7 @@
                 <div class="col-xxl-4 col-lg-4">
                     <div class="top-left-3 d-inline-block">
                         <div class="header-contact-3">
-                            <a href="https://devsnews.com/template/epixx-prev/epixx/18000344585/"><i class="fal fa-headphones-alt"></i> 18000 344 585</a>
+                            <a href="tel:18000344585"><i class="fal fa-headphones-alt"></i> 18000 344 585</a>
                         </div>
                     </div>
                     <div class="select-boxes select-boxes-3">
@@ -47,7 +46,7 @@
         <div class="container">
             <div class="header-wrap-3">
                 <div class="logo">
-                    <a href="index-3.html"><img src="{{asset('laptop/assets/img/logo/logo.png')}}" alt=""></a>
+                    <a href="index-3.html"><img src="assets/img/logo/logo.png" alt=""></a>
                 </div>
                 <div class="header-form-3">
                     <form action="#">
@@ -155,60 +154,22 @@
     </div>
     <!-- /. main header 3 -->
 </header>
-
 <!-- header area end -->
-<div class="mobile-header d-lg-none">
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
+    <div class="mobile-header d-lg-none">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
                 <div class="logo">
                     <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
                 </div>
-            </div>
-            <div class="col-6">
-                <div class="bar-icon text-end">
-                    <button class="toggle-nav-menu sidebar-menu-toggle">
-                        <i class="fal fa-bars"></i>
-                    </button>
+                </div>
+                <div class="col-6">
+                    <div class="bar-icon text-end">
+                        <button class="toggle-nav-menu sidebar-menu-toggle">
+                            <i class="fal fa-bars"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- /. mobile header -->
-<!-- slide-bar start -->
-<div class="fix">
-    <div class="side-info d-lg-none">
-        <button class="side-info-close"><i class="fal fa-times"></i></button>
-
-        <div class="side__logo mb-25">
-            <a href="index.html"><img src="assets/img/logo/logo.png" alt="logo" /></a>
-        </div>
-
-        <div class="mobile-menu"></div>
-
-        <div class="contact-infos mt-30 mb-30">
-            <div class="contact-list mb-30">
-                <h4>Contact Info</h4>
-                <ul class="p-0">
-                    <li><i class="fal fa-map"></i>12/A, Mirnada City Tower, NYC</li>
-                    <li><i class="fal fa-phone-alt"></i><a href="tell:+876864764764">+876 864 764 764</a></li>
-                    <li><i class="fal fa-envelope-open"></i><a href="#"><span class="__cf_email__"
-                                data-cfemail="29484d444047694e44484045074a4644">[email&#160;protected]</span></a>
-                    </li>
-                </ul>
-                <div class="sidebar__menu--social">
-                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</div>
-<div class="offcanvas-overlay"></div>
-<!-- slide-bar end -->

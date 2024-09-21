@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Bill;
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,16 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('bill_details', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('password');
-            $table->string('image');
-            $table->integer('add');
-            $table->integer('rank');
-            $table->integer('poin');
-            $table->string('role');
+            $table->foreignIdFor(Product::class)->constrained();
+            $table->foreignIdFor(Bill::class)->constrained();
+            $table->string('bill_code');
+            $table->integer( 'quantity');
+
+
+
+
 
             $table->rememberToken();
             $table->timestamps();
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        //
     }
 };
