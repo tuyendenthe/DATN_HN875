@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,16 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('contact', function (Blueprint $table) {
             $table->id();
+
             $table->string('name');
-            $table->string('email');
-            $table->string('password');
-            $table->string('image');
-            $table->integer('add');
-            $table->integer('rank');
-            $table->integer('poin');
-            $table->string('role');
+            $table->string( 'email');
+            $table->string('content');
+            $table->integer('phone');
+            $table->foreignIdFor( Status::class)->constrained();
+
+
+
 
             $table->rememberToken();
             $table->timestamps();
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        //
     }
 };

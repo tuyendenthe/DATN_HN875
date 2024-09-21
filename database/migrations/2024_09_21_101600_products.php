@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Variant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,16 +13,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Category::class)->constrained();
+            $table->foreignIdFor(Variant::class)->constrained();
             $table->string('name');
-            $table->string('email');
-            $table->string('password');
+
             $table->string('image');
-            $table->integer('add');
-            $table->integer('rank');
-            $table->integer('poin');
-            $table->string('role');
+            $table->string('content');
+            $table->integer('content_short');
+            $table->integer('role');
+
 
             $table->rememberToken();
             $table->timestamps();
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        //
     }
 };
