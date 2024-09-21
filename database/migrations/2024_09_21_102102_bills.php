@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('bill_code');
             $table->foreignIdFor( Status::class)->constrained();
             $table->string('payment');
-
+   /** ok xong  */
 
 
 
