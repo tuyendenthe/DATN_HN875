@@ -31,7 +31,7 @@
 
 <body>
     @include('blocks.header')
-    
+
     <main>
         @yield('content')
     </main>
