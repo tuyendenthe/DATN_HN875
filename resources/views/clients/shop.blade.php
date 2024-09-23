@@ -1,4 +1,4 @@
-@extends('users.layouts.defaut')
+@extends('clients.master')
 
 @push('style')
 
@@ -90,7 +90,7 @@
                                 <h4 class="epix-s-widget-title">RECENT PRODUCTS</h4>
                                 <div class="epix-product-list mb-20">
                                     <div class="thumb">
-                                        <a href="single-product.html"><img src="assets/img/product/side-sm-img-2.jpg" alt=""></a>
+                                        <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/side-sm-img-2.jpg')}}" alt=""></a>
                                     </div>
                                     <div class="content">
                                         <h4 class="epix-list-product-sm-title"><a href="single-product.html">Loose Oversized</a></h4>
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="epix-product-list mb-20">
                                     <div class="thumb">
-                                        <a href="single-product.html"><img src="assets/img/product/side-sm-img-3.jpg" alt=""></a>
+                                        <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/side-sm-img-3.jpg')}}" alt=""></a>
                                     </div>
                                     <div class="content">
                                         <h4 class="epix-list-product-sm-title"><a href="single-product.html">Loose Oversized</a></h4>
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="epix-product-list mb-20">
                                     <div class="thumb">
-                                        <a href="single-product.html"><img src="assets/img/product/side-sm-img-4.jpg" alt=""></a>
+                                        <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/side-sm-img-4.jpg')}}" alt=""></a>
                                     </div>
                                     <div class="content">
                                         <h4 class="epix-list-product-sm-title"><a href="single-product.html">Loose Oversized</a></h4>
@@ -177,7 +177,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-1.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-1.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$230.00</span>
@@ -209,7 +209,7 @@
                                                                 <span data-bg-color="#e6cab2"></span>
                                                                 <span data-bg-color="#998d88"></span>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-2.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-2.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price"><del>$150.99</del> <span
@@ -237,7 +237,7 @@
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-3.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-3.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$175.00</span>
@@ -269,7 +269,7 @@
                                                                 <span data-bg-color="#65dd97"></span>
                                                                 <span data-bg-color="#f58a5a"></span>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-5.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-5.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price"><del>$150.99</del><span
@@ -297,7 +297,7 @@
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-4.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-4.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$195.00</span>
@@ -324,7 +324,7 @@
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-4.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-4.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$195.00</span>
@@ -352,7 +352,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-1.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-1.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$230.00</span>
@@ -384,7 +384,7 @@
                                                                 <span data-bg-color="#e6cab2"></span>
                                                                 <span data-bg-color="#998d88"></span>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-2.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-2.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price"><del>$150.99</del> <span
@@ -412,7 +412,7 @@
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-3.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-3.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$175.00</span>
@@ -444,7 +444,7 @@
                                                                 <span data-bg-color="#65dd97"></span>
                                                                 <span data-bg-color="#f58a5a"></span>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-5.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-5.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price"><del>$150.99</del><span
@@ -472,7 +472,7 @@
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-4.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-4.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$195.00</span>
@@ -499,7 +499,7 @@
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-4.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-4.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$195.00</span>
@@ -527,7 +527,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-1.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-1.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$230.00</span>
@@ -559,7 +559,7 @@
                                                                 <span data-bg-color="#e6cab2"></span>
                                                                 <span data-bg-color="#998d88"></span>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-2.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-2.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price"><del>$150.99</del> <span
@@ -587,7 +587,7 @@
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-3.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-3.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$175.00</span>
@@ -619,7 +619,7 @@
                                                                 <span data-bg-color="#65dd97"></span>
                                                                 <span data-bg-color="#f58a5a"></span>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-5.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-5.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price"><del>$150.99</del><span
@@ -647,7 +647,7 @@
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-4.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-4.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$195.00</span>
@@ -674,7 +674,7 @@
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-4.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-4.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$195.00</span>
@@ -702,7 +702,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-1.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-1.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">$230.00</span>
@@ -734,7 +734,7 @@
                                                                 <span data-bg-color="#e6cab2"></span>
                                                                 <span data-bg-color="#998d88"></span>
                                                             </div>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-2.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-2.png')}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price"><del>$150.99</del> <span
@@ -767,7 +767,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-1.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-1.png')}}" alt=""></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-xl-9">
@@ -814,7 +814,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-2.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-2.png')}}" alt=""></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-xl-9">
@@ -861,7 +861,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-3.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-3.png')}}" alt=""></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-xl-9">
@@ -908,7 +908,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-4.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-4.png')}}" alt=""></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-xl-9">
@@ -954,7 +954,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="assets/img/product/appilience-5.png" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-5.png')}}" alt=""></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-xl-9">

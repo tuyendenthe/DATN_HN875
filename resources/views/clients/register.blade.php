@@ -1,4 +1,4 @@
-@extends('users.layouts.defaut')
+@extends('clients.master')
 
 @push('style')
 
