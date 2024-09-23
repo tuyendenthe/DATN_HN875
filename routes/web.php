@@ -17,6 +17,10 @@ Route::get('/shop', function () {
     return view('clients.shop');
 });
 
+Route::get('/index', function () {
+    return view('clients.index');
+});
+
 Route::get('cart', function () {
     return view('clients.cart');
 });
@@ -43,6 +47,9 @@ Route::get('/single_blog', function () {
 
 Route::get('/register', function () {
     return view('clients.register');
+});
+Route::get('/login', function () {
+    return view('clients.login');
 });
 
 Route::prefix('admin1')->group(function() {
