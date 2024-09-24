@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Basic Datatable</h5>
                         <div class="table-responsive">
-                            <table id="zero_config" class="table table-striped table-bordered">
+                            <table id="zero_config" class="table">
                                 <a href="{{ route('products.addProduct') }}">Thêm mới</a>
                                 <thead>
                                     <tr>
@@ -58,11 +58,11 @@
                                         <td>{{ $value->content }}</td>
                                         <td>{{ $value->content_short }}</td>
                                         <td>
-                                            <a href="{{ route('products.updateProduct', $value->id) }}">sửa</a>
+                                            <a class="btn btn-primary m-1" href="{{ route('products.updateProduct', $value->id) }}">sửa</a>
                                             <form action="{{ route('products.deleteProduct', $value->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button onclick="return confirm('Bạn có muốn xóa không?')"
+                                                <button class="btn btn-danger m-1" onclick="return confirm('Bạn có muốn xóa không?')"
                                                     class="">Xóa</button>
                                             </form>
 

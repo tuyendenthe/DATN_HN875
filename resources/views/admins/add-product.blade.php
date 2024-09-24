@@ -18,7 +18,7 @@
     </div>
 
     <div class="container-fluid">
-        <form action="{{ route('products.addPostProduct') }}" method="post" enctype="multipart/form-data">
+        <form class="form-control" action="{{ route('products.addPostProduct') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-12">
@@ -44,20 +44,24 @@
                 </div>
                 <div class="col-12">
                     Mô tả ngắn:
-                    <input type="text" name="content_short" value="{{ old('content_short') }}" class="form-control">
+                    <br>
+                    {{-- <input type="text" name="content_short" value="{{ old('content_short') }}" class="form-control"> --}}
+
+                    <textarea name="content_short" id="" value="{{ old('content_short') }}"  class="form-control"  cols="30" rows="10"></textarea>
                     @error('content_short')
-                        <span class="" style="color: red">{{ $message }}</span>
-                    @enderror
+                    <span class="" style="color: red">{{ $message }}</span>
+                @enderror
                 </div>
                 <div class="col-12">
                     Mô Tả:
-                    <input type="text" name="content" value="{{ old('content') }}" class="form-control">
+                    {{-- <input type="text" name="content" value="{{ old('content') }}" class="form-control"> --}}
+                    <textarea name="content" id="" value="{{ old('content') }}"  class="form-control"  cols="30" rows="10"></textarea>
                     @error('content')
                         <span class="" style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
 
-                <button>Thêm mới</button>
+                <button class="form-control m-2 btn btn-primary">Thêm mới</button>
             </div>
         </form>
         <!-- ============================================================== -->
