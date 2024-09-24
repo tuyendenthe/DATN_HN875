@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPostController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,18 @@ Route::prefix('admin1')->group(function() {
 
 Route::resource('admin1/category', CategoryController::class);
 Route::resource('admin1/category_post', CategoryPostController::class);
+
+
+
+Route::prefix('/products')->name('products.')->group(function () {
+    Route::get('/', [ProductController::class, 'listProduct'])->name('listProduct');
+    Route::get('add-product', [ProductController::class, 'addProduct'])->name('addProduct');
+    Route::post('add-product', [ProductController::class, 'addPostProduct'])->name('addPostProduct');
+    Route::get('update-product/{id}', [ProductController::class, 'updateProduct'])->name('updateProduct');
+    Route::put('update-product/{id}', [ProductController::class, 'updatePutProduct'])->name('updatePutProduct');
+    Route::delete('delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
+});
+
 
 
 
