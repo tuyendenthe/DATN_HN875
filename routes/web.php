@@ -20,6 +20,10 @@ Route::get('/shop', function () {
     return view('clients.shop');
 });
 
+Route::get('/index', function () {
+    return view('clients.index');
+});
+
 Route::get('cart', function () {
     return view('clients.cart');
 });
@@ -46,6 +50,9 @@ Route::get('/single_blog', function () {
 
 Route::get('/register', function () {
     return view('clients.register');
+});
+Route::get('/login', function () {
+    return view('clients.login');
 });
 
 Route::prefix('admin1')->group(function() {
@@ -77,6 +84,9 @@ Route::prefix('admin1')->group(function() {
         return view('admins.form-wizard');
     })->name('form-wizard');
 });
-//category
+
 Route::resource('admin1/category', CategoryController::class);
 Route::resource('admin1/category_post', CategoryPostController::class);
+
+
+
