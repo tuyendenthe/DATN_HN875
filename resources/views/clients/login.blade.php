@@ -3,7 +3,11 @@
 @push('style')
 
 @section('content')
-<main>
+
+<body>
+
+
+    <main>
         <!-- prealoder area start -->
         <div id="loading">
             <div id="loading-center">
@@ -18,11 +22,11 @@
         <!-- breadcrumb area start -->
         <div class="epix-breadcrumb-area">
             <div class="container">
-                <h4 class="epix-breadcrumb-title">Sign up Page</h4>
+                <h4 class="epix-breadcrumb-title">Login Page</h4>
                 <div class="epix-breadcrumb">
                     <ul>
                         <li><a href="index-3.html">Home</a></li>
-                        <li><span>Sign up</span></li>
+                        <li><span>Login</span></li>
                     </ul>
                 </div>
             </div>
@@ -34,18 +38,24 @@
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
                         <div class="basic-login">
-                            <h3 class="text-center mb-60">Signup From Here</h3>
+                            <h3 class="text-center mb-60">Login From Here</h3>
                             <form action="#">
-                                <label for="name">Username <span>**</span></label>
-                                <input id="name" type="text" placeholder="Enter Username">
-                                <label for="email-id">Email Address <span>**</span></label>
-                                <input id="email-id" type="text" placeholder="Email address...">
+                                <label for="name">Email Address <span>**</span></label>
+                                <input id="name" type="text" placeholder="Email address..." />
                                 <label for="pass">Password <span>**</span></label>
-                                <input id="pass" type="password" placeholder="Enter password...">
-                                <div class="mt-10"></div>
-                                <button class="os-btn w-100">Register Now</button>
+                                <input id="pass" type="password" placeholder="Enter password..." />
+                                <div class="login-action mb-20 fix">
+                                    <span class="log-rem f-left">
+                                        <input id="remember" type="checkbox" />
+                                        <label for="remember">Remember me!</label>
+                                    </span>
+                                    <span class="forgot-login f-right">
+                                        <a href="register.html">Lost your password?</a>
+                                    </span>
+                                </div>
+                                <button class="os-btn w-100">Login Now</button>
                                 <div class="or-divide"><span>or</span></div>
-                                <a href="login.html" class="os-btn os-btn-black w-100">login Now</a>
+                                <a href="register.html" class="os-btn os-btn-black w-100">Register Now</a>
                             </form>
                         </div>
                     </div>
@@ -54,7 +64,9 @@
         </section>
         <!-- register area end -->
     </main>
-@endsection    
+
+</main>
+@endsection
 
 @push('script')
 @endpush
