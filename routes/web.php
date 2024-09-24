@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryPostController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,3 +84,9 @@ Route::prefix('admin1')->group(function() {
         return view('admins.form-wizard');
     })->name('form-wizard');
 });
+
+Route::resource('admin1/category', CategoryController::class);
+Route::resource('admin1/category_post', CategoryPostController::class);
+
+
+
