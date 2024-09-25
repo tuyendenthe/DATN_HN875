@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="postbox__thumb w-img">
-                            <img src="assets/img/blog/blog-big-1.jpg" alt="">
+                            <img src="{{asset('laptop/assets/img/blog/blog-big-1.jpg')}}" alt="">
                         </div>
 
                         <div class="postbox__wrapper mb-70">
@@ -66,7 +66,7 @@
                                 </div>
                             </article>
                             <div class="postbox__details-img w-img mb-60">
-                                <img src="assets/img/blog/blog-big-2.jpg" alt="">
+                                <img src="{{asset('laptop/assets/img/blog/blog-big-2.jpg')}}" alt="">
                             </div>
                             <div class="postbox__text">
                                 <p>Koma and Torus are two tea infusers, each with an original design and a concealed function. Koma has a
@@ -115,7 +115,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="blog__item mb-30">
                                         <div class="blog__thumb fix">
-                                            <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/" class="w-img"><img src="assets/img/blog/blog-1.jpg" alt="blog"></a>
+                                            <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/" class="w-img"><img src="{{asset('laptop/assets/img/blog/blog-1.jpg' )}}" alt="blog"></a>
                                         </div>
                                         <div class="blog__content">
                                             <h4><a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/">Anteposuerit litterarum formas.</a></h4>
@@ -129,7 +129,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="blog__item mb-30">
                                         <div class="blog__thumb fix">
-                                            <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/" class="w-img"><img src="assets/img/blog/blog-2.jpg" alt="blog"></a>
+                                            <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/" class="w-img"><img src="{{asset('laptop/assets/img/blog/blog-2.jpg')}}" alt="blog"></a>
                                         </div>
                                         <div class="blog__content">
                                             <h4><a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/">Hanging fruit to identify a ballpark</a></h4>
@@ -152,7 +152,7 @@
                                     <li>
                                         <div class="comments-box">
                                             <div class="comments-avatar">
-                                                <img src="assets/img/blog/comments/avater-3.png" alt="">
+                                                <img src="{{asset('laptop/assets/img/blog/comments/avater-3.png')}}" alt="">
                                             </div>
                                             <div class="comments-text">
                                                 <div class="avatar-name">
@@ -170,7 +170,7 @@
                                     <li class="children">
                                         <div class="comments-box">
                                             <div class="comments-avatar">
-                                                <img src="assets/img/blog/comments/avater-3.png" alt="">
+                                                <img src="{{asset('laptop/assets/img/blog/comments/avater-3.png')}}" alt="">
                                             </div>
                                             <div class="comments-text">
                                                 <div class="avatar-name">
@@ -187,7 +187,7 @@
                                     <li>
                                         <div class="comments-box">
                                             <div class="comments-avatar">
-                                                <img src="assets/img/blog/comments/avater-3.png" alt="">
+                                                <img src="{{asset('laptop/assets/img/blog/comments/avater-3.png')}}" alt="">
                                             </div>
                                             <div class="comments-text">
                                                 <div class="avatar-name">
@@ -277,7 +277,7 @@
                                     <ul>
                                         <li class="d-flex">
                                             <div class="rc__post-thumb mr-20 ">
-                                                <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/"><img src="assets/img/blog/blog-sm-1.jpg" alt="blog-1"></a>
+                                                <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/"><img src="{{asset('laptop/assets/img/blog/blog-sm-1.jpg')}}" alt="blog-1"></a>
                                             </div>
                                             <div class="rc__post-content">
                                                 <h6>
@@ -290,7 +290,7 @@
                                         </li>
                                         <li class="d-flex">
                                             <div class="rc__post-thumb mr-20 ">
-                                                <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/"><img src="assets/img/blog/blog-sm-2.png" alt="blog-1"></a>
+                                                <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/"><img src="{{asset('laptop/assets/img/blog/blog-sm-2.png')}}" alt="blog-1"></a>
                                             </div>
                                             <div class="rc__post-content">
                                                 <h6>
@@ -303,7 +303,7 @@
                                         </li>
                                         <li class="d-flex">
                                             <div class="rc__post-thumb mr-20 ">
-                                                <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/"><img src="assets/img/blog/blog-sm-3.png" alt="blog-1"></a>
+                                                <a href="https://devsnews.com/template/epixx-prev/epixx/blog-details.html/"><img src="{{asset('laptop/assets/img/blog/blog-sm-3.png')}}" alt="blog-1"></a>
                                             </div>
                                             <div class="rc__post-content">
                                                 <h6>
@@ -327,7 +327,7 @@
                                     <ul>
                                         <li class="d-flex mb-20">
                                             <div class="rc__comments-avater mr-15">
-                                                <img src="assets/img/blog/comments/avater-3.png" alt="">
+                                                <img src="{{asset('laptop/assets/img/blog/comments/avater-3.png')}}" alt="">
                                             </div>
                                             <div class="rc__comments-content">
                                                 <h6>Salim Rana</h6>
@@ -337,7 +337,7 @@
                                         </li>
                                         <li class="d-flex mb-20">
                                             <div class="rc__comments-avater mr-15">
-                                                <img src="assets/img/blog/comments/avater-3.png" alt="">
+                                                <img src="{{asset('laptop/assets/img/blog/comments/avater-3.png')}}" alt="">
                                             </div>
                                             <div class="rc__comments-content">
                                                 <h6>Hemal Akhand</h6>
@@ -347,7 +347,7 @@
                                         </li>
                                         <li class="d-flex mb-20">
                                             <div class="rc__comments-avater mr-15">
-                                                <img src="assets/img/blog/comments/avater-3.png" alt="">
+                                                <img src="{{asset('laptop/assets/img/blog/comments/avater-3.png')}}" alt="">
                                             </div>
                                             <div class="rc__comments-content">
                                                 <h6>John Deo</h6>

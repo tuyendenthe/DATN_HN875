@@ -39,7 +39,7 @@
                                             <div class="epix-featured">
                                                 <span>featured</span>
                                             </div>
-                                            <img src="assets/img/product/signle-product-1.jpg" data-zoom-image="assets/img/product/signle-product-1.jpg" class="img-fluid zoom-img-hover" alt="">
+                                            <img src="{{asset('laptop/assets/img/product/signle-product-1.jpg')}}" data-zoom-image="{{asset('laptop/assets/img/product/signle-product-1.jpg')}}" class="img-fluid zoom-img-hover" alt="">
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="epix-single-2">
@@ -47,7 +47,7 @@
                                             <div class="epix-featured">
                                                 <span>new</span>
                                             </div>
-                                            <img src="assets/img/product/signle-product-2.jpg" data-zoom-image="assets/img/product/signle-product-2.jpg" class="img-fluid zoom-img-hover" alt="">
+                                            <img src="{{asset('laptop/assets/img/product/signle-product-2.jpg')}}" data-zoom-image="{{asset('laptop/assets/img/product/signle-product-2.jpg')}}" class="img-fluid zoom-img-hover" alt="">
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="epix-single-3">
@@ -55,7 +55,7 @@
                                             <div class="epix-featured">
                                                 <span>hot</span>
                                             </div>
-                                            <img src="assets/img/product/signle-product-3.jpg" data-zoom-image="assets/img/product/signle-product-3.jpg" class="img-fluid zoom-img-hover" alt="">
+                                            <img src="{{asset('laptop/assets/img/product/signle-product-3.jpg')}}" data-zoom-image="{{asset('laptop/assets/img/product/signle-product-3.jpg')}}" class="img-fluid zoom-img-hover" alt="">
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="epix-single-4">
@@ -63,7 +63,7 @@
                                             <div class="epix-featured">
                                                 <span>featured</span>
                                             </div>
-                                            <img src="assets/img/product/signle-product-4.jpg" data-zoom-image="assets/img/product/signle-product-4.jpg" class="img-fluid" alt="">
+                                            <img src="{{asset('laptop/assets/img/product/signle-product-4.jpg')}}" data-zoom-image="{{asset('laptop/assets/img/product/signle-product-4.jpg')}}" class="img-fluid" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -74,25 +74,25 @@
                                 <li>
                                     <button class="active" value="1" data-bs-toggle="pill" data-bs-target="#epix-single-1"
                                         type="button">
-                                        <img width="98" height="98" src="assets/img/product/single-product-sm-1.jpg" alt="">
+                                        <img width="98" height="98" src="{{asset('laptop/assets/img/product/single-product-sm-1.jpg')}}" alt="">
                                     </button>
                                 </li>
                                 <li>
                                     <button data-bs-toggle="pill"  value="2" data-bs-target="#epix-single-2"
                                         type="button">
-                                    <img width="98" height="98" src="assets/img/product/single-product-sm-2.jpg" alt="">
+                                    <img width="98" height="98" src="{{asset('laptop/assets/img/product/single-product-sm-2.jpg')}}" alt="">
                                     </button>
                                 </li>
                                 <li>
                                     <button data-bs-toggle="pill"  value="3" data-bs-target="#epix-single-3"
                                         type="button">
-                                    <img width="98" height="98" src="assets/img/product/single-product-sm-3.jpg" alt="">
+                                    <img width="98" height="98" src="{{asset('laptop/assets/img/product/single-product-sm-3.jpg')}}" alt="">
                                     </button>
                                 </li>
                                 <li>
                                     <button data-bs-toggle="pill"  value="4" data-bs-target="#epix-single-4"
                                         type="button">
-                                    <img width="98" height="98" src="assets/img/product/single-product-sm-4.jpg" alt="">
+                                    <img width="98" height="98" src="{{asset('laptop/assets/img/product/single-product-sm-4.jpg')}}" alt="">
                                     </button>
                                 </li>
                             </ul>
@@ -168,13 +168,13 @@
                             <div class="col-xxl-9 col-lg-9">
                                 <div class="purchase-collection-products-thumbs">
                                     <div class="single-purchase-collection-product">
-                                        <a href="single-product.html" target="_blank" ><img src="assets/img/product/product-1-1.jpg" alt=""></a>
+                                        <a href="single-product.html" target="_blank" ><img src="{{asset('laptop/assets/img/product/product-1-1.jpg')}}" alt=""></a>
                                     </div>
                                     <div class="single-purchase-collection-product">
-                                        <a href="single-product.html" target="_blank"><img src="assets/img/product/product-1-2.jpg" alt=""></a>
+                                        <a href="single-product.html" target="_blank"><img src="{{asset('laptop/assets/img/product/product-1-2.jpg')}}" alt=""></a>
                                     </div>
                                     <div class="single-purchase-collection-product">
-                                        <a href="single-product.html" target="_blank"><img src="assets/img/product/product-1-3.jpg" alt=""></a>
+                                        <a href="single-product.html" target="_blank"><img src="{{asset('laptop/assets/img/product/product-1-3.jpg')}}" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="product-collection-products-content">
@@ -445,7 +445,7 @@
                                                 <ul class="epix-commentlist mb-50">
                                                     <li class="epix-comment-item">
                                                         <div class="epix-comment-thumb">
-                                                            <img src="assets/img/user/user-1.png" alt="">
+                                                            <img src="{{asset('laptop/assets/img/user/user-1.png')}}" alt="">
                                                         </div>
                                                         <div class="epix-comment-content">
                                                             <div class="epix-comment-top">
@@ -466,7 +466,7 @@
                                                     </li>
                                                     <li class="epix-comment-item">
                                                         <div class="epix-comment-thumb">
-                                                            <img src="assets/img/user/user-2.png" alt="">
+                                                            <img src="{{asset('laptop/assets/img/user/user-2.png')}}" alt="">
                                                         </div>
                                                         <div class="epix-comment-content">
                                                             <div class="epix-comment-top">
@@ -487,7 +487,7 @@
                                                     </li>
                                                     <li class="epix-comment-item">
                                                         <div class="epix-comment-thumb">
-                                                            <img src="assets/img/user/user-3.png" alt="">
+                                                            <img src="{{asset('laptop/assets/img/user/user-3.png')}}" alt="">
                                                         </div>
                                                         <div class="epix-comment-content">
                                                             <div class="epix-comment-top">

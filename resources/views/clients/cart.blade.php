@@ -44,7 +44,7 @@
                         <tbody>
                             <tr>
                                 <td class="product-thumbnail"><a href="https://devsnews.com/template/epixx-prev/epixx/product-details.html/"><img
-                                            src="assets/img/product/product-1-1.jpg" alt=""></a></td>
+                                            src="{{asset('laptop/assets/img/product/product-1-1.jpg')}}" alt=""></a></td>
                                 <td class="product-name"><a href="https://devsnews.com/template/epixx-prev/epixx/product-details.html/">Bakix Furniture</a></td>
                                 <td class="product-price"><span class="amount">$130.00</span></td>
                                 <td>
@@ -61,7 +61,7 @@
                             </tr>
                             <tr>
                                 <td class="product-thumbnail"><a href="https://devsnews.com/template/epixx-prev/epixx/product-details.html/"><img
-                                            src="assets/img/product/product-1-2.jpg" alt=""></a></td>
+                                            src="{{asset('laptop/assets/img/product/product-1-2.jpg')}}" alt=""></a></td>
                                 <td class="product-name"><a href="https://devsnews.com/template/epixx-prev/epixx/product-details.html/">Sujon Chair Set</a></td>
                                 <td class="product-price"><span class="amount">$120.50</span></td>
                                 <td>
