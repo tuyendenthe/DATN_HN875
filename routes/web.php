@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPostController;
 use App\Models\Category;
@@ -88,6 +89,7 @@ Route::prefix('admin1')->group(function() {
 
 Route::resource('admin1/category', CategoryController::class);
 Route::resource('admin1/category_post', CategoryPostController::class);
+Route::resource('admin1/banner', BannerController::class);
 
 
 

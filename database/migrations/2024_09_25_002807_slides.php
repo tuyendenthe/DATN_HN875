@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slide', function (Blueprint $table) {
+        Schema::create('slides', function (Blueprint $table) {
             $table->id();
-
             $table->string('image');
-
-
-
-
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
