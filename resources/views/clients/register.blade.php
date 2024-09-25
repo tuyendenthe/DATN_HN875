@@ -35,18 +35,34 @@
                     <div class="col-lg-8 offset-lg-2">
                         <div class="basic-login">
                             <h3 class="text-center mb-60">Signup From Here</h3>
-                            <form action="#">
+                            <form action="{{ route('postRegister') }}" method="post">
+                                @csrf
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
                                 <label for="name">Username <span>**</span></label>
-                                <input id="name" type="text" placeholder="Enter Username">
-                                <label for="email-id">Email Address <span>**</span></label>
-                                <input id="email-id" type="text" placeholder="Email address...">
-                                <label for="pass">Password <span>**</span></label>
-                                <input id="pass" type="password" placeholder="Enter password...">
-                                <div class="mt-10"></div>
-                                <button class="os-btn w-100">Register Now</button>
+                                <input id="name" name="name" type="text" placeholder="Enter Username">
+
+                                <label for="email">Email Address <span>**</span></label>
+                                <input id="email" name="email" type="text" placeholder="Email address...">
+
+                                <label for="password">Password <span>**</span></label>
+                                <input id="password" name="password" type="password" placeholder="Enter password...">
+
+
+
+                                <button class="btn btn-success w-100">Register Now</button>
                                 <div class="or-divide"><span>or</span></div>
-                                <a href="login.html" class="os-btn os-btn-black w-100">login Now</a>
+                                <a href="{{route('login')}}" class="os-btn os-btn-black w-100">login Now</a>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -54,7 +70,7 @@
         </section>
         <!-- register area end -->
     </main>
-@endsection    
+@endsection
 
 @push('script')
 @endpush

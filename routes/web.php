@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryPostController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,12 +51,11 @@ Route::get('/single_blog', function () {
     return view('clients.single_blog');
 });
 
-Route::get('/register', function () {
-    return view('clients.register');
-});
-Route::get('/login', function () {
-    return view('clients.login');
-});
+Route::get('login',[AuthenController::class,'login'])->name('login');
+Route::post('login',[AuthenController::class,'postLogin'])->name('postLogin');
+Route::get('logout',[AuthenController::class,'logout'])->name('logout');
+Route::get('register',[AuthenController::class,'register'])->name('register');
+Route::post('register',[AuthenController::class,'postRegister'])->name('postRegister');
 
 Route::prefix('admin1')->group(function() {
     Route::get('/dashboard', function () {
