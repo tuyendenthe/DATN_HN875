@@ -4,6 +4,56 @@
 
 @section('content')
 
+
+
+    <div class="container">
+        @if (session('message'))
+            <div id="notification" class="notification alert alert-danger" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
+
+        <!-- Other content here -->
+    </div>
+
+    <style>
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var notification = document.getElementById('notification');
+
+            if (notification) {
+                // Show the notification
+                notification.style.display = 'block';
+
+                // Hide the notification after 5 seconds
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 5000);
+
+                // Optional: Add hover effect to keep it visible
+                notification.addEventListener('mouseenter', function() {
+                    notification.style.display = 'block';
+                });
+
+                notification.addEventListener('mouseleave', function() {
+                    notification.style.display = 'none';
+                });
+            }
+        });
+    </script>
+
 <body>
 
 
@@ -39,23 +89,31 @@
                     <div class="col-lg-8 offset-lg-2">
                         <div class="basic-login">
                             <h3 class="text-center mb-60">Login From Here</h3>
-                            <form action="#">
-                                <label for="name">Email Address <span>**</span></label>
-                                <input id="name" type="text" placeholder="Email address..." />
-                                <label for="pass">Password <span>**</span></label>
-                                <input id="pass" type="password" placeholder="Enter password..." />
-                                <div class="login-action mb-20 fix">
-                                    <span class="log-rem f-left">
-                                        <input id="remember" type="checkbox" />
-                                        <label for="remember">Remember me!</label>
-                                    </span>
-                                    <span class="forgot-login f-right">
-                                        <a href="register.html">Lost your password?</a>
-                                    </span>
-                                </div>
-                                <button class="os-btn w-100">Login Now</button>
+                            <form action="{{ route('postLogin') }}" method="post">
+                                @csrf
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+
+
+                                <label for="email">Email Address <span>**</span></label>
+                                <input id="email" name="email" type="text" placeholder="Email address...">
+
+                                <label for="password">Password <span>**</span></label>
+                                <input id="password" name="password" type="password" placeholder="Enter password...">
+
+
+
+                                <button type="submit" class="btn btn-success w-100">Login Now</button>
                                 <div class="or-divide"><span>or</span></div>
-                                <a href="register.html" class="os-btn os-btn-black w-100">Register Now</a>
+                                <a href="{{route('register')}}" class="os-btn os-btn-black w-100">Register Now</a>
                             </form>
                         </div>
                     </div>
