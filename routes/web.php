@@ -3,6 +3,7 @@
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPostController;
+use App\Http\Controllers\HomeUserController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -20,12 +21,14 @@ use App\Http\Controllers\AuthenController;
 */
 
 Route::get('/shop', function () {
-    return view('clients.shop');
+    return View('clients.shop');
 });
 
-Route::get('/index', function () {
-    return view('clients.index');
-});
+
+Route::get('/index', [HomeUserController::class, 'index']);
+Route::get('/index/{id}', [HomeUserController::class, 'show']);
+
+
 
 Route::get('cart', function () {
     return view('clients.cart');
