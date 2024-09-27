@@ -24,7 +24,7 @@
         </div>
     </div>
     <!-- breadcrumb area end -->
-    
+
     <!-- single product area start -->
     <div class="single-product-area mb-100">
         <div class="container">
@@ -101,6 +101,7 @@
                     <!-- /. single product left -->
                 </div>
                 <div class="col-xxl-6 col-lg-6">
+
                     <div class="epix-single-product-right">
                         <div class="rating">
                             <i class="fas fa-star active"></i>
@@ -109,34 +110,33 @@
                             <i class="fas fa-star-half"></i>
                             <i class="fas fa-star text-gray"></i>
                         </div>
-                        <h4 class="epix-single-product-title">Microsoft Surface Laptop 3-15”<br>Touch-Screen</h4>
-                        <p class="epix-product-details-short-description">
+                        <h4 class="epix-single-product-title">{{ $products->name }}<br></h4>
+                        <!-- <p class="epix-product-details-short-description">
                             Screen Size: 8 Inches<br>
                             Screen Resolution: 1280 x 800 pixels
-                        </p>
+                        </p> -->
                         <p class="epix-product-details-short-description">
-                            Mircrosoft Surface Laptop computer is an electronic device, operating under the control of instructions stored in its own memory that can accept
-                            data (input), process the data according to specified rules, produce information (output), and store the information for
-                            future use1. Any kind of computers consists of HARDWARE AND SOFTWARE
+                        {{ $products->content_short }}
                         </p>
                         <p class="price">
                             <span class="epix-price-amount">
                                 <bdi>
-                                    <span class="epix-price-currency-symbol">$</span>
-                                    750.00
+                                    <span class="epix-price-currency-symbol">VNĐ</span>
+                                    {{ $products->price }}
+
                                 </bdi>
                             </span>
                             <span class="devider">-</span>
                             <span class="epix-price-amount">
                                 <bdi>
-                                    <span class="epix-price-currency-symbol">$</span>
-                                    950.00
+                                    <span class="epix-price-currency-symbol">VNĐ</span>
+                                    {{ $products->price }}
                                 </bdi>
                             </span>
                         </p>
                         <form action="#" class="epix-cart-variation">
                             <div class="epix-product-label mb-35">
-                                <a  href="#" class="title">SERIES CPU</a>
+                                <a  href="#" class="title">Biến thể</a>
                                 <div class="taglist">
                                     <a href="shop.html">Core i5</a>
                                     <a href="shop.html">Core i7</a>
@@ -160,42 +160,7 @@
                     <!-- /. single product right -->
                 </div>
             </div>
-            <div class="row justify-content-center mb-50">
-                <div class="col-xxl-10">
-                    <div class="purchase-collection-box">
-                        <h5 class="purchase-collection-title">FREQUENTLY BOUGHT TOGETHER</h5>
-                        <div class="row">
-                            <div class="col-xxl-9 col-lg-9">
-                                <div class="purchase-collection-products-thumbs">
-                                    <div class="single-purchase-collection-product">
-                                        <a href="single-product.html" target="_blank" ><img src="{{asset('laptop/assets/img/product/product-1-1.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="single-purchase-collection-product">
-                                        <a href="single-product.html" target="_blank"><img src="{{asset('laptop/assets/img/product/product-1-2.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="single-purchase-collection-product">
-                                        <a href="single-product.html" target="_blank"><img src="{{asset('laptop/assets/img/product/product-1-3.jpg')}}" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="product-collection-products-content">
-                                    <p class="epix-single-product-desc">This Product: Microsoft Surface Laptop 3-15” Touch-Screen – Core i5 – $750.00</p>
-                                    <p class="epix-single-product-desc">Desktop Webcam, HD 720p Widescreen – $200.00</p>
-                                    <p class="epix-single-product-desc">Verbatim Optical Mouse USB Accessibility – $30.00</p>
-                                </div>
-                            </div>
-                            <div class="col-xxl-3 col-lg-3">
-                                <div class="purchase-collection-product-content">
-                                    <h5 class="epix-purchase-title">Price for all:</h5>
-                                    <div class="price">
-                                        <h5 class="epix-price-count">980.00</h5>
-                                        <a href="cart.html" class="add-cart-theme text-uppercase">add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-xxl-12">
                     <div class="epix-single-product-description">
@@ -218,27 +183,7 @@
                                 <div class="tab-content" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="tab-1-1" role="tabpanel">
                                         <div class="epix-single-product-content">
-                                            <p>WIWU Pencil Pro stylus pencil comes with a tilt sensitivity function. Tilt sensitivity supports drawing different lines
-                                            and shadows by tilting to different angles. It is powered by palm rejection technology that provides a natural and
-                                            accurate writing feeling, no need to wear gloves. To connect this pen to your device, no Bluetooth or App is required,
-                                            just turn it on/off by clicking the cap button 1 time with your finger, it will pair automatically. A 1.2 mm POM tip
-                                            same as the official iPad pencil has been used. It is made of Carton Fiber. It has higher sensitivity, more accurate
-                                            signal comparing to other ordinary stylus pens. No lag/offset/breaking point, no scratch on the iPad screen. Just enjoy
-                                            the smooth experience. The screw-type design tip is very easy to replace. 1.5-2H charging time supports up to 20H of
-                                            continuous use. 
-                                            </p>
-                                            <p>It automatically turns in to auto-sleep mode to save power after 5 min. This stylus pen is compatible
-                                            with the following models: iPad 8th/ 7th/ 6th Gen 10.2" & 9.7": A2270/ A2428/ A2429/ A2430/ A2197/ A2200/ A2198/ A1893/
-                                            A1954, iPad Pro 12.9" 3rd/4th Gen: A1983/ A1895/ A1876/ A2014/ A2069/ A2232/ A2233/ A2229, iPad Pro 11" 1st/2nd Gen:
-                                            A1980/ A2013/ A1934/ A1979/ A2228/ A2068/ A2230/ A2231, iPad Air 3rd/4th Gen 10.9" & 10.5": A2123/ A2152/ A2153/ A2154/
-                                            A2316/ A2324/ A2325/ A2072, iPad Mini 5th Gen: A2124/ A2126/ A2133/ A2125. It has no warranty.
-                                            12 action keys help you play the games easily and free driver installation make the games much easier
-                                            USB connection with DirectInput API
-                                            Plug and play setup
-                                            Trip around the build-in vibration motor, vibration can provide a perfect and great performance
-                                            8 buttons and 2 mini-joysticks
-                                            Turbo, clear and auto functions
-                                            01 year warranty</p>
+                                        {{ $products->content }}
                                             <div class="row">
                                                 <div class="col-xxl-7">
                                                     <div class="epix-featured-list">
