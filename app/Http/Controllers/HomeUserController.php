@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class HomeUserController extends Controller
 
     public function index()
     {
+        // dd($cart);
         // Lấy tối đa 10 sản phẩm từ bảng products
         $products = Product::latest()->take(10)->get();
 

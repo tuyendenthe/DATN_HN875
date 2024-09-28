@@ -7,7 +7,11 @@ use App\Http\Controllers\HomeUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenController;
+
+use App\Http\Controllers\CartController;
+use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +29,7 @@ use App\Http\Controllers\SearchController;
 // });
 
 
+Route::get('/', [HomeUserController::class, 'index']);
 Route::get('/index', [HomeUserController::class, 'index']);
 Route::get('/index/{id}', [HomeUserController::class, 'show']);
 
@@ -104,6 +109,14 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::get('update-product/{id}', [ProductController::class, 'updateProduct'])->name('updateProduct');
     Route::put('update-product/{id}', [ProductController::class, 'updatePutProduct'])->name('updatePutProduct');
     Route::delete('delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
+});
+// them gio hang
+Route::group(['prefix'=> 'cart'], function(){
+        // Router::get('/cart',[CartController::class, 'view'])->name('cart.view');
+        // Router::get('/cart/{product}',[CartController::class, 'addToCart'])->name('cart.add');
+        Route::get('/cart',[CartController::class, 'view'])->name('cart.view');
+        Route::get('/cart/{product}',[CartController::class, 'addCart'])->name('cart.add');
+
 });
 
 

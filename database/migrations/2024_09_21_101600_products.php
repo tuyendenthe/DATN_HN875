@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Category::class)->nullable()->constrained();
-            $table->foreignIdFor(Variant::class)->nullable()->constrained();
+
             $table->string('name');
 
             $table->string('image');
-            $table->string('price');
+
             $table->string('content');
             $table->string('content_short');
             $table->integer('role')->nullable();

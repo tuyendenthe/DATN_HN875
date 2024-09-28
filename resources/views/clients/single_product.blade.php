@@ -1,5 +1,46 @@
 @extends('clients.master')
 @section('content')
+<style>
+       .variant-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        .variant-box {
+            padding: 10px; /* Giảm padding để hộp nhỏ hơn */
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px; /* Giảm kích thước chiều rộng */
+            height: 70px; /* Giảm kích thước chiều cao */
+            transition: 0.3s;
+            position: relative;
+            user-select: none;
+            font-size: 12px; /* Giảm kích thước chữ */
+        }
+        .variant-box.selected {
+            border-color: #007bff;
+            background-color: #e7f1ff;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .variant-box input[type="radio"] {
+            display: none; /* Ẩn radio button */
+        }
+        .variant-box:hover {
+            border-color: #007bff;
+        }
+        .price-display {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+</style>
     <!-- prealoder area start -->
     <div id="loading">
         <div id="loading-center">
@@ -118,7 +159,7 @@
                         <p class="epix-product-details-short-description">
                         {{ $products->content_short }}
                         </p>
-                        <p class="price">
+                        {{-- <p class="price">
                             <span class="epix-price-amount">
                                 <bdi>
                                     <span class="epix-price-currency-symbol">VNĐ</span>
@@ -133,25 +174,47 @@
                                     {{ $products->price }}
                                 </bdi>
                             </span>
-                        </p>
+                        </p> --}}
+                        <div class="price-display">
+                            Giá: <span id="product-price" name="product-price">0,000</span> VNĐ
+                        </div>
                         <form action="#" class="epix-cart-variation">
                             <div class="epix-product-label mb-35">
-                                <a  href="#" class="title">Biến thể</a>
-                                <div class="taglist">
+                                <a  href="#" class="title">Chọn màu sắc cho sản phẩm</a>
+                                {{-- <div class="taglist">
                                     <a href="shop.html">Core i5</a>
                                     <a href="shop.html">Core i7</a>
                                     <a href="shop.html">Core i9</a>
+                                </div> --}}
+                                <div class="container">
+
+                                    <div class="variant-container">
+                                        <div class="variant-box" data-value="red" data-price="200000" onclick="selectVariant(this)">
+                                            <input type="radio" name="variant" id="red" value="red">
+                                            <label for="red">Đỏ</label>
+                                        </div>
+                                        <div class="variant-box" data-value="green" data-price="250000" onclick="selectVariant(this)">
+                                            <input type="radio" name="variant" id="green" value="green">
+                                            <label for="green">Xanh</label>
+                                        </div>
+                                        <div class="variant-box" data-value="blue" data-price="300000" onclick="selectVariant(this)">
+                                            <input type="radio" name="variant" id="blue" value="blue">
+                                            <label for="blue">Dương</label>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                             <div class="epix-quantity-validation">
                                 <div class="wrap-2 d-block d-sm-inline-block mb-15 mb-sm-0">
                                     <div class="d-inline-block border-gray mr-20">
-                                        <div class="epix-quantity-form">
+                                        {{-- <div class="epix-quantity-form">
                                             <div class="cart-plus-minus"></div>
                                             <input type="text" value="2">
-                                        </div>
+                                        </div> --}}
+
                                     </div>
-                                    <a href="cart.html" class="cart-btn mr-15">Add to cart</a>
+                                    <a href="{{ route('cart.add',$products->id) }}" class="cart-btn mr-15">Add to cart</a>
                                 </div>
                                 <a href="checkout.html" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">Buy Now</a>
                             </div>
@@ -514,4 +577,24 @@
         </div>
     </div>
     <!-- single product area end -->
+    <script>
+         function selectVariant(element) {
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box');
+        variants.forEach(function(variant) {
+            variant.classList.remove('selected');
+        });
+
+        // Thêm class "selected" cho hộp được chọn
+        element.classList.add('selected');
+
+        // Đánh dấu radio button tương ứng
+        var radioButton = element.querySelector('input[type="radio"]');
+        radioButton.checked = true;
+
+        // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
+        var selectedPrice = element.getAttribute('data-price');
+        document.getElementById('product-price').innerText = selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    </script>
 @endsection
