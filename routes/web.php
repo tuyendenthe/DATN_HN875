@@ -110,6 +110,19 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::put('update-product/{id}', [ProductController::class, 'updatePutProduct'])->name('updatePutProduct');
     Route::delete('delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
 });
+
+/* -------------------------------- BIẾN THỂ -------------------------------- */
+Route::prefix('/variants')->name('variants.')->group(function () {
+    Route::get('/{product_id}', [VariantController::class, 'listVariant'])->name('listVariant');
+    Route::get('add-variant/{product_id}', [VariantController::class, 'addVariant'])->name('addVariant');
+    Route::post('add-variant/{product_id}', [VariantController::class, 'addPostVariant'])->name('addPostVariant');
+    Route::get('edit-variant/{id}', [VariantController::class, 'editVariant'])->name('editVariant');
+    Route::put('edit-variant/{id}', [VariantController::class, 'editPutVariant'])->name('editPutVariant');
+    Route::delete('delete-variant/{id}', [VariantController::class, 'deleteVariant'])->name('deleteVariant');
+});
+/* -------------------------------- BIẾN THỂ -------------------------------- */
+
+
 // them gio hang
 Route::group(['prefix'=> 'cart'], function(){
         // Router::get('/cart',[CartController::class, 'view'])->name('cart.view');
