@@ -43,13 +43,13 @@ CSS INDEX
 28. Checkout
 29. Preloader
 
-******************************************************* 
+*******************************************************
 *************************************************************** */
 /*
 ************
 *************************
 01. common
-******************************************************* 
+*******************************************************
 *************************************************************** */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Jost:wght@300;400;500;600;700;800;900&amp;display=swap");
 body {
@@ -59,7 +59,30 @@ body {
   color: var(-clr-body-text);
   font-size: 15px;
 }
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
 
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
 .img, img {
   max-width: 100%;
   -webkit-transition: all 0.3s linear 0s;

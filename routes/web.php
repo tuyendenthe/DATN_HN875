@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenController;
 
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
+
+
 use App\Http\Controllers\CartController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
@@ -23,6 +27,21 @@ use App\Http\Controllers\SearchController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+
+Route::get('/shop', function () {
+    return view('clients.shop');
+})->name('shop');
+
+
+Route::get('/', function () {
+    return view('clients.index');
+})->name('index');
 
 // Route::get('/shop', function () {
 //     return view('clients.shop');
@@ -36,6 +55,7 @@ Route::get('/index/{id}', [HomeUserController::class, 'show']);
 Route::post('/search', [SearchController::class, 'search'])->name('search');
 Route::post('/search-product', [SearchController::class, 'searchProduct'])->name('search.product');
 
+
 Route::get('cart', function () {
     return view('clients.cart');
 });
@@ -44,21 +64,23 @@ Route::get('checkout', function () {
     return view('clients.checkout');
 });
 
+
 Route::get('/blog', function () {
     return view('clients.blog');
-});
+})->name('blog');
+
 
 Route::get('/about', function () {
     return view('clients.about');
-});
+})->name('about');
 
 Route::get('/single_product', function () {
     return view('clients.single_product');
-});
+})->name('single_product');
 
 Route::get('/single_blog', function () {
     return view('clients.single_blog');
-});
+})->name('single_blog');
 
 Route::get('login',[AuthenController::class,'login'])->name('login');
 Route::post('login',[AuthenController::class,'postLogin'])->name('postLogin');
@@ -66,7 +88,7 @@ Route::get('logout',[AuthenController::class,'logout'])->name('logout');
 Route::get('register',[AuthenController::class,'register'])->name('register');
 Route::post('register',[AuthenController::class,'postRegister'])->name('postRegister');
 
-Route::prefix('admin1')->group(function() {
+Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'],function() {
     Route::get('/dashboard', function () {
         return view('admins.dashboard');
     })->name('dashboard');

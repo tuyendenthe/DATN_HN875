@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{asset('laptop/assets/css/meanmenu.css')}}" />
     <link rel="stylesheet" href="{{asset('laptop/assets/css/swipper.css')}}" />
     @stack('style')
+    
 </head>
 
 <body>
@@ -33,14 +34,14 @@
         @include('users.layouts.header')
     <!-- /. mobile header -->
     <!-- slide-bar start -->
-    
+
     <!-- slide-bar end -->
     @include('users.layouts.sidebar')
 
     <main>
         @yield('content')
     </main>
- 
+
     <!-- footer area start -->
     @include('users.layouts.footer')
     <!-- footer copyright end -->

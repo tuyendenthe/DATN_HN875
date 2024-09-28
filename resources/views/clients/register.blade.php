@@ -57,7 +57,7 @@
                                 <input id="password" name="password" type="password" placeholder="Enter password...">
 
 
-
+                                
                                 <button class="btn btn-success w-100">Register Now</button>
                                 <div class="or-divide"><span>or</span></div>
                                 <a href="{{route('login')}}" class="os-btn os-btn-black w-100">login Now</a>
