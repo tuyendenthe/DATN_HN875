@@ -31,9 +31,16 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Basic Datatable</h5>
+                        
                         <div class="table-responsive">
                             <table id="zero_config" class="table">
-                                <a href="{{ route('products.addProduct') }}">Thêm mới</a>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <a href="{{ route('products.addProduct') }}" class="btn btn-primary">Thêm mới</a>
+                                    <form action="{{route('search.product')}}" method="POST">
+                                        @csrf
+                                        <input type="text" placeholder="Search anything here.." name="keyw">
+                                    </form>
+                                </div>
                                 <thead>
                                     <tr>
                                         <th>STT</th>

@@ -12,4 +12,10 @@ class SearchController extends Controller
 
         return view('clients.shop', compact('products'));
     }
+
+    public function searchProduct(Request $req) {
+        $listProducts = Product::where('name', 'like', '%'. $req->keyw . '%')->get();
+
+        return view('admins.tables', compact('listProducts'));
+    }
 }

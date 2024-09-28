@@ -29,6 +29,7 @@ Route::get('/index', [HomeUserController::class, 'index']);
 Route::get('/index/{id}', [HomeUserController::class, 'show']);
 
 Route::post('/search', [SearchController::class, 'search'])->name('search');
+Route::post('/search-product', [SearchController::class, 'searchProduct'])->name('search.product');
 
 Route::get('cart', function () {
     return view('clients.cart');
