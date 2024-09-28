@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('add');
             $table->integer('rank');
             $table->integer('poin');
-            $table->string('role');
+            $table->enum('role', ['1', '2'])->default('2')->comment('1 admin | 2 user'); // 1 admin | 2 user
 
             $table->rememberToken();
             $table->timestamps();

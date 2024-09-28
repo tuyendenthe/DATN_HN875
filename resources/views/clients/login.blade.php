@@ -110,8 +110,11 @@
                                 <input id="password" name="password" type="password" placeholder="Enter password...">
 
 
-
+                                <a href="{{ route('password.request') }}" class="forgot-password w-100">Quên mật khẩu?</a>
                                 <button type="submit" class="btn btn-success w-100">Login Now</button>
+
+
+
                                 <div class="or-divide"><span>or</span></div>
                                 <a href="{{route('register')}}" class="os-btn os-btn-black w-100">Register Now</a>
                             </form>

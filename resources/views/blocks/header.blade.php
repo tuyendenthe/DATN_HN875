@@ -30,10 +30,26 @@
                 <div class="col-xl-8  col-lg-8">
                     <div class="header-right-3 text-end">
                         <div class="h-top-list-3 d-inline-block">
-                            <a href="register.html"><i class="fal fa-user"></i>Log in / Register </a>
+
+
                             <a href="single-product.html"><i class="fal fa-balance-scale"></i>Compare</a>
                             <a href="cart.html"><i class="fal fa-heart"></i>Wishlist</a>
                             <a href="cart.html" class="header-cart-3"><i class="fal fa-shopping-bag"></i>0 / $0.00</a>
+                            <div class="user-menu">
+                                @if(Auth::check())
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle"><i class="fal fa-user"></i> Tài khoản</a>
+                                        <div class="dropdown-menu">
+                                            <a href="">Cập nhật tài khoản</a>
+                                            <a href="">Đơn hàng của bạn</a>
+                                            <a href="{{ route('logout') }}">Đăng xuất</a>
+
+                                        </div>
+                                    </div>
+                                @else
+                                    <a href="{{ route('login') }}"><i class="fal fa-user"></i> Log in / Register</a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -57,16 +73,12 @@
                 <div class="header-nav header-nav-3">
                     <nav id="mobile-menu">
                         <ul>
-                            <li class="menu-item-has-children no-after"><a href="index-3.html">Home</a>
-                                <ul class="sub-menu">
-                                    <li><a href="index.html">Home Style 1</a></li>
-                                    <li><a href="index-2.html">Home Style 2</a></li>
-                                    <li><a href="index-3.html">Home Style 3</a></li>
-                                </ul>
+                            <li class="menu-item-has-children no-after"><a href="{{ route('index') }}">Home</a>
+
                             </li>
-                            <li class="menu-item-has-children has-mega no-after"><a href="shop.html">Shop</a>
+                            <li class="menu-item-has-children has-mega no-after"><a href="{{ route('shop') }}">Shop</a>
                                 <div class="mega-menu" data-background="assets/img/bg/mega-menu-bg-1.jpg">
-                                    <ul>
+                                    {{-- <ul>
                                         <li>
                                             <ul>
                                                 <li class="title"><a href="shop.html">SHOP LAYOUT</a></li>
@@ -110,18 +122,18 @@
                                                 <li><a href="shop.html">NikeCourts Air Zoom</a></li>
                                             </ul>
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                             </li>
-                            <li><a href="about.html">About</a></li>
+                            <li><a href="{{ route('about') }}">About</a></li>
                             <li>
-                                <a href="blog.html">Blog</a>
+                                <a href="{{ route('blog') }}">Blog</a>
                                 <ul class="sub-menu">
-                                    <li><a href="blog.html">Blog List</a></li>
-                                    <li><a href="single-blog.html">Blog Details</a></li>
+                                    <li><a href="{{ route('blog') }}">Blog List</a></li>
+                                    <li><a href="{{ route('single_blog') }}">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="contact.html">Contact us</a></li>
+                            <li><a href="">Contact us</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -155,21 +167,21 @@
     <!-- /. main header 3 -->
 </header>
 <!-- header area end -->
-    <div class="mobile-header d-lg-none">
-        <div class="container">
-            <div class="row">
-                <div class="col-6">
+<div class="mobile-header d-lg-none">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
                 <div class="logo">
                     <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
                 </div>
-                </div>
-                <div class="col-6">
-                    <div class="bar-icon text-end">
-                        <button class="toggle-nav-menu sidebar-menu-toggle">
-                            <i class="fal fa-bars"></i>
-                        </button>
-                    </div>
+            </div>
+            <div class="col-6">
+                <div class="bar-icon text-end">
+                    <button class="toggle-nav-menu sidebar-menu-toggle">
+                        <i class="fal fa-bars"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+</div>
