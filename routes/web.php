@@ -3,12 +3,20 @@
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPostController;
-use App\Models\Category;
+use App\Http\Controllers\HomeUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenController;
+
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+
+
+use App\Http\Controllers\CartController;
+use Illuminate\Routing\Router;
+use App\Http\Controllers\SearchController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +33,7 @@ Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showRese
 Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 
+
 Route::get('/shop', function () {
     return view('clients.shop');
 })->name('shop');
@@ -33,6 +42,19 @@ Route::get('/shop', function () {
 Route::get('/', function () {
     return view('clients.index');
 })->name('index');
+
+// Route::get('/shop', function () {
+//     return view('clients.shop');
+// });
+
+
+Route::get('/', [HomeUserController::class, 'index']);
+Route::get('/index', [HomeUserController::class, 'index']);
+Route::get('/index/{id}', [HomeUserController::class, 'show']);
+
+Route::post('/search', [SearchController::class, 'search'])->name('search');
+Route::post('/search-product', [SearchController::class, 'searchProduct'])->name('search.product');
+
 
 Route::get('cart', function () {
     return view('clients.cart');
@@ -109,6 +131,14 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::get('update-product/{id}', [ProductController::class, 'updateProduct'])->name('updateProduct');
     Route::put('update-product/{id}', [ProductController::class, 'updatePutProduct'])->name('updatePutProduct');
     Route::delete('delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
+});
+// them gio hang
+Route::group(['prefix'=> 'cart'], function(){
+        // Router::get('/cart',[CartController::class, 'view'])->name('cart.view');
+        // Router::get('/cart/{product}',[CartController::class, 'addToCart'])->name('cart.add');
+        Route::get('/cart',[CartController::class, 'view'])->name('cart.view');
+        Route::get('/cart/{product}',[CartController::class, 'addCart'])->name('cart.add');
+
 });
 
 

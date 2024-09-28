@@ -65,8 +65,9 @@
                     <a href="index-3.html"><img src="assets/img/logo/logo.png" alt=""></a>
                 </div>
                 <div class="header-form-3">
-                    <form action="#">
-                        <input type="text" placeholder="Search anything here..">
+                    <form action="{{route('search')}}" method="POST">
+                        @csrf
+                        <input type="text" placeholder="Search anything here.." name="keyw">
                         <button><i class="fal fa-search"></i></button>
                     </form>
                 </div>

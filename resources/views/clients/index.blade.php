@@ -199,12 +199,12 @@
             </div>
             <div class="product-tabs">
                 <div class="tab-list">
-                    <ul class="nav nav-tabs" id="myTab2" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class=" active" data-bs-toggle="tab" data-bs-target="#tab1"
-                                type="button">Headphone (08)</button>
+                    <ul class="" id="myTab2" role="tablist">
+                        <li class="" role="presentation">
+                            <button class=" " data-bs-toggle="tab" data-bs-target="#tab1"
+                                type="">Sản phẩm mới nhất</button>
                         </li>
-                        <li class="nav-item" role="presentation">
+                        <!-- <li class="nav-item" role="presentation">
                             <button data-bs-toggle="tab" data-bs-target="#tab2" type="button">Television
                                 (05)</button>
                         </li>
@@ -213,7 +213,7 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button data-bs-toggle="tab" data-bs-target="#tab4" type="button">Smartphones (06)</button>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="tab-content">
@@ -222,9 +222,12 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="single-product-4">
+                                        @foreach ( $products as $item )
+
                                         <div class="product-top">
+
                                             <div class="wrap">
-                                                <span class="epix-p-subtitle">Speakers</span>
+                                                <span class="epix-p-subtitle">Danh mục</span>
                                                 <div class="actions">
                                                     <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
                                                     <a href="cart.html"><i class="fal fa-heart"></i></a>
@@ -241,161 +244,26 @@
                                                         <i class="fal fa-shopping-cart"></i>
                                                     </a>
                                                 </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/1.jpg')}}"
+                                                <a href="{{ url('/index/' . $item->id) }}">
+                                                    <img src="{{ Storage::url($item->image) }}"
                                                         alt=""></a>
                                             </div>
                                         </div>
                                         <div class="content">
-                                            <h4><a href="single-product.html">Apple iPhone 5s 4.785-Inch
-                                                    Black 128GB</a></h4>
+                                            <h4><a href="{{ url('/index/' . $item->id) }}">{{ $item->name }}</a></h4>
                                             <div class="price-box">
-                                                <span class="price"><del>$150.99</del> <span
-                                                        class="active">$205.00</span></span>
-                                                <a href="single-product.html">+ Select Option</a>
+                                                <span class="price"><del>{{ $item->price }}</del> <span
+                                                        class="active">{{ $item->price }}</span></span>
+                                                <!-- <a href="single-product.html">+ Select Option</a> -->
                                             </div>
                                         </div>
+                                        @endforeach
+
                                     </div>
                                 </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Headphones</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/2.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Ultra Wireless S5 Headphone
-                                                    with Bluetooth</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$180.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">sMARTPhones</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/3.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">MacBook Pro Retina Touch
-                                                    Core 16GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$228.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">gAMES, Office</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/4.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Samsung Galaxy S8+ Black
-                                                    White 64GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price"><del>$150.99</del> <span
-                                                        class="active">$205.00</span></span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Computers, Office</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/5.jpg')}}" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">ES62-T Steam Iron Nonstick
-                                                    with Soleplate</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$175.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+
+
                             </div>
                         </div>
                     </div>
