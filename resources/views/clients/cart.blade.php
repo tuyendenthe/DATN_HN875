@@ -1,7 +1,7 @@
 @extends('clients.master')
 
 @section('content')
-    <!-- prealoder area start -->
+    <!-- preloader area start -->
     <div id="loading">
         <div id="loading-center">
             <div id="loading-center-absolute">
@@ -11,20 +11,22 @@
             </div>
         </div>
     </div>
-    <!-- prealoder area end -->
+    <!-- preloader area end -->
+
     <!-- breadcrumb area start -->
     <div class="epix-breadcrumb-area mb-100">
         <div class="container">
             <h4 class="epix-breadcrumb-title">Cart PAGE</h4>
             <div class="epix-breadcrumb">
                 <ul>
-                    <li><a href="index-3.html">Home</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
                     <li><span>Cart Page</span></li>
                 </ul>
             </div>
         </div>
     </div>
     <!-- breadcrumb area end -->
+
     <!-- cart area start -->
     <div class="cart-area pb-100">
         <div class="container">
@@ -35,6 +37,7 @@
                             <tr>
                                 <th class="product-thumbnail">Images</th>
                                 <th class="cart-product-name">Product</th>
+                                <th class="product-variant">Variant</th>
                                 <th class="product-price">Unit Price</th>
                                 <th class="product-quantity">Quantity</th>
                                 <th class="product-subtotal">Total</th>
@@ -42,40 +45,52 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="product-thumbnail"><a href="https://devsnews.com/template/epixx-prev/epixx/product-details.html/"><img
-                                            src="{{asset('laptop/assets/img/product/product-1-1.jpg')}}" alt=""></a></td>
-                                <td class="product-name"><a href="https://devsnews.com/template/epixx-prev/epixx/product-details.html/">Bakix Furniture</a></td>
-                                <td class="product-price"><span class="amount">$130.00</span></td>
-                                <td>
-                                    <div class="d-inline-block border-gray">
-                                        <div class="epix-quantity-form">
-                                            <button class="minus">-</button>
-                                            <input type="text" value="2">
-                                            <button class="plus">+</button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="product-subtotal"><span class="amount">$130.00</span></td>
-                                <td class="product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td class="product-thumbnail"><a href="https://devsnews.com/template/epixx-prev/epixx/product-details.html/"><img
-                                            src="{{asset('laptop/assets/img/product/product-1-2.jpg')}}" alt=""></a></td>
-                                <td class="product-name"><a href="https://devsnews.com/template/epixx-prev/epixx/product-details.html/">Sujon Chair Set</a></td>
-                                <td class="product-price"><span class="amount">$120.50</span></td>
-                                <td>
-                                    <div class="d-inline-block border-gray">
-                                        <div class="epix-quantity-form">
-                                            <button class="minus">-</button>
-                                            <input type="text" value="2">
-                                            <button class="plus">+</button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="product-subtotal"><span class="amount">$120.50</span></td>
-                                <td class="product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                            </tr>
+                            @if(session('cart') && count(session('cart')) > 0)
+                                @php
+                                    $total = 0;
+                                @endphp
+                                @foreach(session('cart') as $key => $item)
+                                @if(is_array($item))
+                                    @php
+                                    // dd($item);
+                                        $subtotal = $item['price'] * $item['quantity'];
+                                        $total += $subtotal;
+                                    @endphp
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <a href="{{ route('product.details', $item['product_id']) }}">
+                                                <img src="{{ asset('laptop/assets/img/product/product-1-1.jpg') }}" alt="">
+                                            </a>
+                                        </td>
+                                        <td class="cart-product-name">
+                                            <a href="{{ route('product.details', $item['product_id']) }}">{{ $item['product_name'] }}</a>
+                                        </td>
+                                        <td class="product-variant">{{ $item['variant_name'] }}</td>
+
+                                        <td class="product-price"><span class="amount">{{ number_format($item['price'], 0, ',', '.') }} VNĐ</span></td>
+                                        <td>
+                                            <div class="d-inline-block border-gray">
+                                                <div class="epix-quantity-form">
+
+                                                    <input type="number" min="1" max="{{ $item['quantity_variant'] }}" value="{{ $item['quantity'] }}" onkeydown="return false;">
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal">
+                                            <span class="amount">{{ number_format($subtotal, 0, ',', '.') }} VNĐ</span>
+                                        </td>
+                                        <td class="product-remove">
+                                            <a href="{{ route('cart.remove', $key) }}"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="7" class="text-center">Giỏ hàng của bạn đang trống.</td>
+                                </tr>
+                           @endif
                         </tbody>
                     </table>
                 </div>
@@ -83,10 +98,8 @@
                     <div class="col-12">
                         <div class="coupon-all">
                             <div class="coupon">
-                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code"
-                                    type="text">
-                                <button class="os-btn os-btn-black" name="apply_coupon" type="submit">Apply
-                                    coupon</button>
+                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
+                                <button class="os-btn os-btn-black" name="apply_coupon" type="submit">Apply coupon</button>
                             </div>
                             <div class="coupon2">
                                 <button class="os-btn os-btn-black" name="update_cart" type="submit">Update cart</button>
@@ -99,10 +112,11 @@
                         <div class="cart-page-total">
                             <h2>Cart totals</h2>
                             <ul class="mb-20">
-                                <li>Subtotal <span>$250.00</span></li>
-                                <li>Total <span>$250.00</span></li>
+                                <li>Subtotal <span>{{ number_format($total ?? 0, 0, ',', '.') }} VNĐ</span></li>
+                                <li>Total <span>{{ number_format($total ?? 0, 0, ',', '.') }} VNĐ</span></li>
                             </ul>
-                            <a class="os-btn" href="checkout.html">Proceed to checkout</a>
+                            <a class="os-btn" href="">Proceed to checkout</a>
+                            {{-- <a class="os-btn" href="{{ route('checkout') }}">Proceed to checkout</a> --}}
                         </div>
                     </div>
                 </div>
