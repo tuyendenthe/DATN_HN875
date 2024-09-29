@@ -12,4 +12,11 @@ class Product extends Model
     protected $table = 'products';
     protected $primaryKey = 'id';
     protected $fillable = ['name', 'image', 'content', 'content_short', 'price'];
+
+    // Product.php
+public function variants()
+{
+    return $this->hasMany(Variant::class);
+}
+
 }

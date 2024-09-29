@@ -222,6 +222,7 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="single-product-4">
+
                                         @foreach ( $products as $item )
 
                                         <div class="product-top">
@@ -252,8 +253,19 @@
                                         <div class="content">
                                             <h4><a href="{{ url('/index/' . $item->id) }}">{{ $item->name }}</a></h4>
                                             <div class="price-box">
-                                                <span class="price"><del>{{ $item->price }}</del> <span
-                                                        class="active">{{ $item->price }}</span></span>
+
+
+                                                @php
+                                                $minPrice = $item->variants()->min('price');
+                                                $maxPrice = $item->variants()->max('price');
+                                                @endphp
+
+                                                <span class="price">
+                                                    <span class="active">{{ $minPrice }}VNĐ</span> <!-- Hiển thị giá thấp nhất -->
+                                                    <span class="active"> ->{{ $maxPrice }}VNĐ</span> <!-- Hiển thị giá cao nhất -->
+
+                                                </span>
+
                                                 <!-- <a href="single-product.html">+ Select Option</a> -->
                                             </div>
                                         </div>
@@ -2209,40 +2221,40 @@
                     </div>
                 </div>
                 <div class="col-xxl-6 col-xl-6">
-                   <div class="brand-wrap">
-                    <div class="row">
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="contact.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand.png')}}" alt=""></a>
+                    <div class="brand-wrap">
+                        <div class="row">
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="contact.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand2.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand2.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand3.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand3.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand4.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand4.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand5.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand5.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand6.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand6.png')}}" alt=""></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                   </div>
                 </div>
             </div>
         </div>
