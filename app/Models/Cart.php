@@ -13,9 +13,14 @@ class Cart
   public function __construct(){
     $this->totalPrice = 5000;
   }
-  public function add($product){
-    dd($product);
-  }
+  public function add($product, $variant = null){
+    // Bạn có thể thêm logic để xử lý thông tin sản phẩm và biến thể vào giỏ hàng
+    dd([
+        'product' => $product,
+        'variant' => $variant,
+    ]);
+}
+
   public function update(){
 
   }
