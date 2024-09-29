@@ -162,51 +162,33 @@
                         <i class="fas fa-star text-gray"></i>
                     </div>
                     <h4 class="epix-single-product-title">{{ $products->name }}<br></h4>
-                    <!-- <p class="epix-product-details-short-description">
-                            Screen Size: 8 Inches<br>
-                            Screen Resolution: 1280 x 800 pixels
-                        </p> -->
                     <p class="epix-product-details-short-description">
                         {{ $products->content_short }}
                     </p>
 
                     <div class="price-display">
                         Giá: <span id="product-price" name="product-price">0,000</span> VNĐ
-
                     </div>
-                    <form action="#" class="epix-cart-variation">
+
+                    <!-- Form để thêm vào giỏ hàng -->
+                    <form action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
+                        @csrf
                         <div class="epix-product-label mb-35">
                             <a href="#" class="title">Chọn màu sắc cho sản phẩm</a>
-                            {{-- <div class="taglist">
-                                    <a href="shop.html">Core i5</a>
-                                    <a href="shop.html">Core i7</a>
-                                    <a href="shop.html">Core i9</a>
-                                </div> --}}
                             <div class="container">
-
                                 <div class="variant-container">
                                     @foreach($products->variants as $variant)
                                     <div class="variant-box" data-value="{{ $variant->name }}" data-price="{{ $variant->price }}" onclick="selectVariant(this)">
-                                        <input type="radio" name="variant" id="{{ $variant->id }}" value="{{ $variant->name }}">
+                                        <input type="radio" name="variant_id" id="{{ $variant->id }}" value="{{ $variant->id }}">
                                         <label for="{{ $variant->id }}">{{ $variant->name }}</label>
                                     </div>
                                     @endforeach
-                                    <!-- <div class="variant-box" data-value="red" data-price="200000" onclick="selectVariant(this)">
-                                            <input type="radio" name="variant" id="red" value="red">
-                                            <label for="red">Đỏ</label>
-                                        </div>
-                                        <div class="variant-box" data-value="green" data-price="250000" onclick="selectVariant(this)">
-                                            <input type="radio" name="variant" id="green" value="green">
-                                            <label for="green">Xanh</label>
-                                        </div>
-                                        <div class="variant-box" data-value="blue" data-price="300000" onclick="selectVariant(this)">
-                                            <input type="radio" name="variant" id="blue" value="blue">
-                                            <label for="blue">Dương</label>
-                                        </div> -->
                                 </div>
                             </div>
-
                         </div>
+
+
+
                         <div class="epix-quantity-validation">
                             <div class="wrap-2 d-block d-sm-inline-block mb-15 mb-sm-0">
                                 <div class="d-inline-block border-gray mr-20">
@@ -216,7 +198,8 @@
                                         </div> --}}
 
                                 </div>
-                                <a href="{{ route('cart.add',$products->id) }}" class="cart-btn mr-15">Add to cart</a>
+                                <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">Thêm vào giỏ hàng</button>
+                    </form>
                             </div>
                             <a href="checkout.html" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">Buy Now</a>
                         </div>
@@ -598,5 +581,26 @@
         var selectedPrice = element.getAttribute('data-price');
         document.getElementById('product-price').innerText = selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+    function updateQuantity(key, quantityChange) {
+    let form = document.createElement('form');
+    form.method = 'POST';
+    form.action = `/cart/update/${key}`;
+
+    let input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'quantity';
+    input.value = quantityChange;
+
+    let csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = '_token';
+    csrfInput.value = '{{ csrf_token() }}';
+
+    form.appendChild(input);
+    form.appendChild(csrfInput);
+    document.body.appendChild(form);
+    form.submit();
+}
+
 </script>
 @endsection
