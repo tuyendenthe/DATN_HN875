@@ -7,7 +7,7 @@
 <body>
     <h1>Khôi phục mật khẩu</h1>
     <p>Chào bạn,</p>
-    <p>Để khôi phục mật khẩu, hãy nhấp vào liên kết dưới đây:</p>
+    <p>Để khôi phục mật khẩu tài khoản TechZone, hãy nhấp vào liên kết dưới đây:</p>
     <a href="{{ url('password/reset', $token) }}">Khôi phục mật khẩu</a>
     <p>Nếu bạn không yêu cầu khôi phục mật khẩu, hãy bỏ qua email này.</p>
 </body>
