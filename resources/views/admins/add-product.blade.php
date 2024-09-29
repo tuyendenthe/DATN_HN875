@@ -28,13 +28,6 @@
                         <span class="" style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class='col-12'>
-                    <label for="">Giá</label>
-                    <input type="number" name='price' class='form-control' value="{{ old('price') }}">
-                    @error('price')
-                        <span class="" style="color: red">{{ $message }}</span>
-                    @enderror
-                </div>
                 <div class="col-12">
                     Ảnh:
                     <input type="file" name="image" class="form-control">

@@ -15,6 +15,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\CartController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\VariantController;
 
 
 /*

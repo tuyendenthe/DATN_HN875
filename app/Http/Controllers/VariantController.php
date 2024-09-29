@@ -6,6 +6,20 @@ use App\Models\Variant;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryPostController;
+use App\Http\Controllers\HomeUserController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthenController;
+
+use App\Http\Controllers\CartController;
+use Illuminate\Routing\Router;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\VariantController;
+
+
+
 class VariantController extends Controller
 {
     // Danh sách biến thể của sản phẩm
