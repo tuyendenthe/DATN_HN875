@@ -22,15 +22,11 @@ class ResetPasswordMail extends Mailable
     public function build()
     {
         return $this->subject('Khôi phục mật khẩu')
-                    ->view('emails.reset_password'); // Đảm bảo rằng tên view đúng
-    }
-    public function envelope()
-{
-    // Bỏ phương thức này
-}
+                    ->view('emails.reset_password')
+                    ->with([
+                        'token' => $this->token,
+                        'email' => $this->email,
+                    ]);
 
-public function content()
-{
-    // Bỏ phương thức này
-}
+    }
 }

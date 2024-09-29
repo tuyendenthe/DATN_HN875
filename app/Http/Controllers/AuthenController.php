@@ -65,7 +65,7 @@ class AuthenController extends Controller
         $req->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8', // Ensure you have a password confirmation field
+            'password' => 'required|string|min:8|confirmed', // Ensure you have a password confirmation field
         ], [
             'name.required' => 'Tên không được để trống.',
             'name.string' => 'Tên phải là chuỗi.',
@@ -80,7 +80,7 @@ class AuthenController extends Controller
             'password.required' => 'Mật khẩu không được để trống.',
             'password.string' => 'Mật khẩu phải là chuỗi.',
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
-
+            'password.confirmed' => 'Mật khẩu không trùng khớp',
         ]);
 
         $data = [

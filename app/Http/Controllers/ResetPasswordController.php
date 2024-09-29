@@ -18,8 +18,14 @@ public function reset(Request $request)
 {
     $request->validate([
         'email' => 'required|email',
-        'password' => 'required|confirmed|min:6',
+        'password' => 'required|confirmed|min:8',
         'token' => 'required',
+    ], [
+        'email.required' => 'Email không được để trống',
+        'email.email' => 'Email không đúng định dạng',
+        'password.required' => 'Mật khẩu không được để trống',
+        'password.confirmed' => 'Mật khẩu không trùng khớp',
+        'password.min' => 'Mật khẩu không đủ 8 ký tự',
     ]);
 
     $resetStatus = Password::reset(
@@ -31,7 +37,8 @@ public function reset(Request $request)
     );
 
     return $resetStatus === Password::PASSWORD_RESET
-        ? redirect()->route('login')->with('status', 'Mật khẩu đã được khôi phục!')
+        ? redirect()->route('login')->with([
+            'message' => 'Mật khẩu đã được khôi phục!'])
         : back()->withErrors(['email' => 'Đã xảy ra lỗi.']);
 }
 }

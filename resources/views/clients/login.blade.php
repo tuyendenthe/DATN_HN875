@@ -40,7 +40,7 @@
                 // Hide the notification after 5 seconds
                 setTimeout(function() {
                     notification.style.display = 'none';
-                }, 5000);
+                }, 7000);
 
                 // Optional: Add hover effect to keep it visible
                 notification.addEventListener('mouseenter', function() {
@@ -75,7 +75,7 @@
                 <h4 class="epix-breadcrumb-title">Login Page</h4>
                 <div class="epix-breadcrumb">
                     <ul>
-                        <li><a href="index-3.html">Home</a></li>
+                        <li><a href="{{route('index')}}">Home</a></li>
                         <li><span>Login</span></li>
                     </ul>
                 </div>
