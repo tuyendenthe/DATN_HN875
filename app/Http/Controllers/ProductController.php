@@ -40,7 +40,6 @@ class ProductController extends Controller
             'name' => $req->name,
             'image' => $path,
             'content' => $req->content,
-            'price' => $req->price,
             'content_short' => $req->content_short,
         ];
        

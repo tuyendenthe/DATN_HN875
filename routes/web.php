@@ -17,6 +17,8 @@ use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VariantController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

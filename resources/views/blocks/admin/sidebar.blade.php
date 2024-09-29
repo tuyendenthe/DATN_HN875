@@ -14,6 +14,14 @@
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category_post.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Category Post</span></a></li>
                     </ul>
                 </li>
+                {{-- /* --------------------------------- PRODUCT -------------------------------- */ --}}
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Product </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.listProduct')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Products</span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.addProduct')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Product Post</span></a></li>
+                    </ul>
+                </li>
+                {{-- /* --------------------------------- PRODUCT -------------------------------- */ --}}
                 {{-- // --}}
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('widgets')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('tables')}}" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
