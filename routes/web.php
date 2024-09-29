@@ -48,7 +48,7 @@ Route::get('/', function () {
 // });
 
 
-Route::get('/', [HomeUserController::class, 'index']);
+// Route::get('/', [HomeUserController::class, 'index']);
 Route::get('/index', [HomeUserController::class, 'index']);
 Route::get('/index/{id}', [HomeUserController::class, 'show']);
 
