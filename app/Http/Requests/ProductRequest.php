@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
             'name' => 'required',
             'content' => 'required',
             'content_short' => 'required',
-            'price' => 'required',
+           
             'image' => 'required',
         ];
     }
@@ -36,7 +36,7 @@ class ProductRequest extends FormRequest
             'name.required' => 'Tên sản phẩm không được để trống.',
             'content.required' => 'Nội dung sản phẩm không được để trống.',
             'content_short.required' => 'Nội dung ngắn sản phẩm không được để trống.',
-            'price.required' => 'Giá sản phẩm không được để trống.',
+
             'image.required' => 'Ảnh sản phẩm không được để trống.',
         ];
     }
