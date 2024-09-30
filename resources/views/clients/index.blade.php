@@ -1,7 +1,17 @@
 @extends('clients.master')
 
 @section('content')
+
 <main>
+    <style>
+        .custom-col {
+
+
+    width: 19.2%; /* 100% / 5 = 20%, but accounting for margins and padding */
+    }
+
+
+    </style>
     <!-- prealoder area start -->
     <div id="loading">
         <div id="loading-center">
@@ -201,7 +211,8 @@
                 <div class="tab-list">
                     <ul class="" id="myTab2" role="tablist">
                         <li class="" role="presentation">
-                            <button class=" " data-bs-toggle="tab" data-bs-target="#tab1"
+                            <button class="  "
+                             {{-- data-bs-toggle="tab" data-bs-target="#tab1" --}}
                                 type="">Sản phẩm mới nhất</button>
                         </li>
                         <!-- <li class="nav-item" role="presentation">
@@ -222,51 +233,59 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="single-product-4">
-                                        @foreach ( $products as $item )
+                                        <div class="row ms-4"> <!-- Add row wrapper -->
 
-                                        <div class="product-top">
+                                            @foreach ($products as $item)
 
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Danh mục</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
+                                                <div class="col-lg-2 custom-col col-md-1 col-sm-3 m-4"> <!-- 5 items per row -->
+                                                    <div class="product-top">
+                                                        <div class="wrap">
+                                                            <span class="epix-p-subtitle">Danh mục</span>
+                                                            <div class="actions">
+                                                                <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
+                                                                <a href="cart.html"><i class="fal fa-heart"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="thumb">
+                                                            <div class="epix-action">
+                                                                <a href="single-product.html" class="p-cart product-popup-toggle">
+                                                                    <i class="fal fa-eye"></i>
+                                                                    <i class="fal fa-eye"></i>
+                                                                </a>
+                                                                <a href="shop.html" class="p-cart">
+                                                                    <i class="fal fa-shopping-cart"></i>
+                                                                    <i class="fal fa-shopping-cart"></i>
+                                                                </a>
+                                                            </div>
+                                                            <a href="{{ url('/index/' . $item->id) }}">
+                                                                <img src="{{ Storage::url($item->image) }}" alt="">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="content">
+                                                        <h4><a href="{{ url('/index/' . $item->id) }}">{{ $item->name }}</a></h4>
+                                                        <div class="price-box">
+                                                            @php
+                                                                $minPrice = $item->variants()->min('price');
+                                                                $maxPrice = $item->variants()->max('price');
+                                                            @endphp
+                                                            <span class="price">
+                                                                <span class="active">{{ $minPrice }}VNĐ</span> <!-- Hiển thị giá thấp nhất -->
+                                                                <span class="active"> ->{{ $maxPrice }}VNĐ</span> <!-- Hiển thị giá cao nhất -->
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="{{ url('/index/' . $item->id) }}">
-                                                    <img src="{{ Storage::url($item->image) }}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="{{ url('/index/' . $item->id) }}">{{ $item->name }}</a></h4>
-                                            <div class="price-box">
-                                                <span class="price"><del>{{ $item->price }}</del> <span
-                                                        class="active">{{ $item->price }}</span></span>
-                                                <!-- <a href="single-product.html">+ Select Option</a> -->
-                                            </div>
-                                        </div>
-                                        @endforeach
 
+                                            @endforeach
+
+                                        </div> <!-- End row wrapper -->
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="tab2">
                         <div class="swiper-container tab-product-active">
                             <div class="swiper-wrapper">
@@ -2209,40 +2228,40 @@
                     </div>
                 </div>
                 <div class="col-xxl-6 col-xl-6">
-                   <div class="brand-wrap">
-                    <div class="row">
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="contact.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand.png')}}" alt=""></a>
+                    <div class="brand-wrap">
+                        <div class="row">
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="contact.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand2.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand2.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand3.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand3.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand4.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand4.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand5.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand5.png')}}" alt=""></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xxl-4 col-6 col-md-4">
-                            <div class="brand-logo mb-55">
-                                <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand6.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-6 col-md-4">
+                                <div class="brand-logo mb-55">
+                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand6.png')}}" alt=""></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                   </div>
                 </div>
             </div>
         </div>

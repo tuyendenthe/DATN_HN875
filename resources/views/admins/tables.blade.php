@@ -45,7 +45,6 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Tên sản phẩm</th>
-                                        <th>Giá</th>
                                         <th>Ảnh</th>
                                         <th>Mô tả</th>
                                         <th>Mô tả ngắn</th>
@@ -53,32 +52,33 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    @if (isset($listProducts) && !empty($listProducts))
                                         @foreach ($listProducts as $key => $value)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $value->name }}</td>
-                                        <td>{{ $value->price }}</td>
-                                        <td>
-                                            <img src="{{ Storage::url($value->image) }}" alt="" width="100">
-                                        </td>
-                                        <td>{{ $value->content }}</td>
-                                        <td>{{ $value->content_short }}</td>
-                                        <td>
-                                            <a class="btn btn-primary m-1" href="{{ route('products.updateProduct', $value->id) }}">sửa</a>
-                                            <form action="{{ route('products.deleteProduct', $value->id) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger m-1" onclick="return confirm('Bạn có muốn xóa không?')"
-                                                    class="">Xóa</button>
-                                            </form>
-
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $value->name }}</td>
+                                            <td>
+                                                <img src="{{ Storage::url($value->image) }}" alt="" width="100">
+                                            </td>
+                                            <td>{{ $value->content }}</td>
+                                            <td>{{ $value->content_short }}</td>
+                                            <td>
+                                                <a class="btn btn-info m-1" href="{{ route('variants.listVariant', $value->id) }}">Biến thể</a>
+                                                <a class="btn btn-primary m-1" href="{{ route('products.updateProduct', $value->id) }}">Sửa</a>
+                                                <form action="{{ route('products.deleteProduct', $value->id) }}" method="post" style="display:inline;">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger m-1" onclick="return confirm('Bạn có muốn xóa không?')">Xóa</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="7" class="text-center">Không có sản phẩm nào.</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
-
                             </table>
                         </div>
 

@@ -25,28 +25,28 @@ class ProductController extends Controller
 
     public function addPostProduct(ProductRequest $req)
     {
-
+        // dd($req);
         $path = null;
-       
+
         if ($req->hasFile('image')) {
             $image = $req->image;
             $newName = $req->name . '_' . $image->hashName();
             $path = $image->storeAs('images/products', $newName);
-            // $data['image'] = Storage::put('product',$request->file('product'));
+            // $data['image'] = Storage::put('product',$req->file('product'));
 
 
         }
         $data =  [
             'name' => $req->name,
             'image' => $path,
-            'content' => $req->content,
-            'price' => $req->price,
+
             'content_short' => $req->content_short,
+            'content' => $req->content,
         ];
-       
+
 
         Product::create($data);
-        return redirect()->route('products.listProduct');
+        return redirect()->route('products.listProduct') ;
     }
 
     public function updateProduct($id)

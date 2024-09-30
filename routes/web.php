@@ -15,6 +15,8 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\CartController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\VariantController;
+
 
 
 /*
@@ -51,6 +53,8 @@ Route::get('/', function () {
 // Route::get('/', [HomeUserController::class, 'index']);
 // Route::get('/index', [HomeUserController::class, 'index']);
 Route::get('/index/{id}', [HomeUserController::class, 'show']);
+Route::get('/index', [HomeUserController::class, 'index'])->name('home');
+Route::get('/index/{id}', [HomeUserController::class, 'show'])->name('product.details');
 
 Route::post('/search', [SearchController::class, 'search'])->name('search');
 Route::post('/search-product', [SearchController::class, 'searchProduct'])->name('search.product');
@@ -132,14 +136,32 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::put('update-product/{id}', [ProductController::class, 'updatePutProduct'])->name('updatePutProduct');
     Route::delete('delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
 });
-// them gio hang
-Route::group(['prefix'=> 'cart'], function(){
-        // Router::get('/cart',[CartController::class, 'view'])->name('cart.view');
-        // Router::get('/cart/{product}',[CartController::class, 'addToCart'])->name('cart.add');
-        Route::get('/cart',[CartController::class, 'view'])->name('cart.view');
-        Route::get('/cart/{product}',[CartController::class, 'addCart'])->name('cart.add');
 
+/* -------------------------------- BIẾN THỂ -------------------------------- */
+Route::prefix('/variants')->name('variants.')->group(function () {
+    Route::get('/{product_id}', [VariantController::class, 'listVariant'])->name('listVariant');
+    Route::get('add-variant/{product_id}', [VariantController::class, 'addVariant'])->name('addVariant');
+    Route::post('add-variant/{product_id}', [VariantController::class, 'addPostVariant'])->name('addPostVariant');
+    Route::get('edit-variant/{id}', [VariantController::class, 'editVariant'])->name('editVariant');
+    Route::put('edit-variant/{id}', [VariantController::class, 'editPutVariant'])->name('editPutVariant');
+    Route::delete('delete-variant/{id}', [VariantController::class, 'deleteVariant'])->name('deleteVariant');
 });
+/* -------------------------------- BIẾN THỂ -------------------------------- */
+
+
+// Thêm vào giỏ hàng
+// Route để xem giỏ hàng
+Route::get('/cart', [CartController::class, 'view'])->name('cart.view');
+
+// Route để cập nhật số lượng sản phẩm
+Route::post('/cart/update/{key}', [CartController::class, 'updateQuantity'])->name('cart.update');
+
+// Route để xóa sản phẩm khỏi giỏ hàng
+Route::get('/cart/remove/{key}', [CartController::class, 'removeCartItem'])->name('cart.remove');
+// Thêm sản phẩm vào giỏ hàng
+Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('cart.add');
+
+
 
 
 

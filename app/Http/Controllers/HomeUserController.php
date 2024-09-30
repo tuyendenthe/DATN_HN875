@@ -21,6 +21,7 @@ class HomeUserController extends Controller
         $products = Product::latest()->take(10)->get();
 
 
+
         // Trả về view và truyền danh sách sản phẩm
         return view('clients.index', compact('products'));
     }
@@ -39,9 +40,7 @@ class HomeUserController extends Controller
 
     public function store(Request $request)
     {
-        $products = Product::findOrFail($id);
 
-        return view('clients.single_product', compact('products'));
     }
 
     /**
@@ -52,7 +51,7 @@ class HomeUserController extends Controller
 
     public function show(string $id)
     {
-        $products = Product::findOrFail($id);
+        $products = Product::with('variants')->findOrFail($id);
 
         return view('clients.single_product', compact('products'));
     }
