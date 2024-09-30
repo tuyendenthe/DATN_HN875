@@ -21,7 +21,7 @@
                 <h4 class="epix-breadcrumb-title">Sign up Page</h4>
                 <div class="epix-breadcrumb">
                     <ul>
-                        <li><a href="{{route('home')}}">Home</a></li>
+                        <li><a href="{{route('index')}}">Home</a></li>
                         <li><span>Sign up</span></li>
                     </ul>
                 </div>

@@ -38,7 +38,7 @@ class AuthenController extends Controller
                     'message'=>'Đăng nhập thành công']);
 
             } else {
-                return redirect()->route('home')->with([
+                return redirect()->route('index')->with([
                     'message'=>'Đăng nhập thành công']);
             }
         } else {

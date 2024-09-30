@@ -74,7 +74,7 @@
                 <div class="header-nav header-nav-3">
                     <nav id="mobile-menu">
                         <ul>
-                            <li class="menu-item-has-children no-after"><a href="{{ route('home') }}">Home</a>
+                            <li class="menu-item-has-children no-after"><a href="{{ route('index') }}">Home</a>
 
                             </li>
                             <li class="menu-item-has-children has-mega no-after"><a href="{{ route('shop') }}">Shop</a>
