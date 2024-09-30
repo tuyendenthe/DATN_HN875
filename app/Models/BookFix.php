@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fix_book extends Model
+class BookFix extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name', 'email', 'phone', 'fix_date', 'content','status_id',
+    ];
 }

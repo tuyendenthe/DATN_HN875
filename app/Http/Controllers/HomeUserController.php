@@ -18,7 +18,7 @@ class HomeUserController extends Controller
     {
         // dd($cart);
         // Lấy tối đa 10 sản phẩm từ bảng products
-        $products = Product::latest()->take(10)->get();
+        $products = Product::latest()->take(8)->get();
 
 
 

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BookFixController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPostController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -56,8 +58,26 @@ Route::get('/index/{id}', [HomeUserController::class, 'show']);
 Route::get('/', [HomeUserController::class, 'index'])->name('index');
 Route::get('/index/{id}', [HomeUserController::class, 'show'])->name('product.details');
 
+Route::get('/contact', function () {
+    return view('clients.contact');
+})->name('contact.form');
+
+Route::post('/contact', [ContactController::class, 'sendContact'])->name('contact.send');
+
+Route::get('/book-fix', function () {
+    return view('clients.bookfix');
+})->name('bookfix.form');
+
+Route::post('/book-fix', [BookFixController::class, 'sendBookFix'])->name('bookfix.send');
+
+
+
 Route::post('/search', [SearchController::class, 'search'])->name('search');
 Route::post('/search-product', [SearchController::class, 'searchProduct'])->name('search.product');
+
+// Route::get('contact', function () {
+//     return view('clients.contact');
+// });
 
 
 Route::get('cart', function () {
@@ -97,9 +117,11 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'],function() {
         return view('admins.dashboard');
     })->name('dashboard');
 
+
     Route::get('/chart', function () {
         return view('admins.chart');
     })->name('chart');
+
 
     Route::get('/widgets', function () {
         return view('admins.widgets');
@@ -125,6 +147,15 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'],function() {
 Route::resource('admin1/category', CategoryController::class);
 Route::resource('admin1/category_post', CategoryPostController::class);
 Route::resource('admin1/banner', BannerController::class);
+Route::resource('admin1/contact', ContactController::class);
+Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
+Route::patch('/contact/{contact}/failed', [ContactController::class, 'updateFailed'])->name('contact.failed');
+
+Route::resource('admin1/bookfix', BookFixController::class);
+Route::patch('/bookfix/{bookfix}/success', [BookFixController::class, 'updateSuccess'])->name('bookfix.success');
+Route::patch('/bookfix/{bookfix}/failed', [BookFixController::class, 'updateFailed'])->name('bookfix.failed');
+
+
 
 
 
