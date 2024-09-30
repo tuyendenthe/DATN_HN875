@@ -19,7 +19,7 @@
             <h4 class="epix-breadcrumb-title">Cart PAGE</h4>
             <div class="epix-breadcrumb">
                 <ul>
-                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('index') }}">Home</a></li>
                     <li><span>Cart Page</span></li>
                 </ul>
             </div>
