@@ -38,7 +38,7 @@ class AuthenController extends Controller
                     'message'=>'Đăng nhập thành công']);
 
             } else {
-                return redirect()->route('index')->with([
+                return redirect()->route('home')->with([
                     'message'=>'Đăng nhập thành công']);
             }
         } else {
@@ -82,11 +82,12 @@ class AuthenController extends Controller
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
             'password.confirmed' => 'Mật khẩu không trùng khớp',
         ]);
-
+        $image = 'images/products/adminsczx_UfAaaAvjkq9htIZzCcL5hCrJpPbGqsJscKEt7bk7.jpg';
         $data = [
             'name' => $req->name,
             'email' => $req->email,
-            'password' => Hash::make($req->password), // Hash the password
+            'password' => Hash::make($req->password),
+            'image' => $image,
         ];
 
         User::create($data); // Create the user

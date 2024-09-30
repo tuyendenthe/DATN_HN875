@@ -75,7 +75,7 @@
                 <h4 class="epix-breadcrumb-title">Login Page</h4>
                 <div class="epix-breadcrumb">
                     <ul>
-                        <li><a href="{{route('index')}}">Home</a></li>
+                        <li><a href="{{route('home')}}">Home</a></li>
                         <li><span>Login</span></li>
                     </ul>
                 </div>

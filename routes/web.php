@@ -41,17 +41,19 @@ Route::get('/shop', function () {
 })->name('shop');
 
 
-Route::get('/', function () {
-    return view('clients.index');
-})->name('index');
+// Route::get('/', function () {
+//     return view('clients.index');
+// })->name('index');
 
-// Route::get('/shop', function () {
+// Route::get('/shop', function () {S
 //     return view('clients.shop');
 // });
 
 
 // Route::get('/', [HomeUserController::class, 'index']);
-Route::get('/index', [HomeUserController::class, 'index'])->name('home');
+// Route::get('/index', [HomeUserController::class, 'index']);
+Route::get('/index/{id}', [HomeUserController::class, 'show']);
+Route::get('/', [HomeUserController::class, 'index'])->name('index');
 Route::get('/index/{id}', [HomeUserController::class, 'show'])->name('product.details');
 
 Route::post('/search', [SearchController::class, 'search'])->name('search');
@@ -158,9 +160,3 @@ Route::post('/cart/update/{key}', [CartController::class, 'updateQuantity'])->na
 Route::get('/cart/remove/{key}', [CartController::class, 'removeCartItem'])->name('cart.remove');
 // Thêm sản phẩm vào giỏ hàng
 Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('cart.add');
-
-
-
-
-
-
