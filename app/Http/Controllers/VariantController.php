@@ -16,7 +16,7 @@ use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\CartController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\VariantController;
+// use App\Http\Controllers\VariantController;
 
 
 
