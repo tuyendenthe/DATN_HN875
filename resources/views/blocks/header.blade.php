@@ -134,7 +134,9 @@
                                     <li><a href="{{ route('single_blog') }}">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="">Contact us</a></li>
+                            <li><a href="{{ route('contact.send') }}">Contact us</a></li>
+                            <li><a href="{{ route('bookfix.send') }}">Book fix</a></li>
+
                         </ul>
                     </nav>
                 </div>

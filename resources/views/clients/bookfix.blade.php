@@ -80,8 +80,8 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="contact__form">
-                        <h3>Liên hệ chúng tôi</h3>
-                        <form action="{{ route('contact.send') }}" method="POST" id="contact-form" enctype="multipart/form-data">
+                        <h3>Đặt lịch sửa chữa</h3>
+                        <form action="{{ route('bookfix.send') }}" method="POST" id="bookfix-form" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6">
@@ -109,6 +109,17 @@
                                         <label>Số điện thoại <span class="required">*</span></label>
                                         <input type="text" name="phone" value="{{ old('phone') }}">
                                         @error('phone')
+                                        <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="contact__input">
+                                        <label>Ngày sửa chữa <span class="required">*</span></label>
+                                        <input type="date" name="fix_date" value="{{ old('fix_date') }}">
+                                        @error('fix_date')
                                         <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>

@@ -12,15 +12,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fix_book', function (Blueprint $table) {
+        Schema::create('book_fixes', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
-            $table->string( 'email');
-            $table->string('content');
+            $table->string('email');
+            $table->text('content')->nullable();
             $table->integer('phone');
-            $table->foreignIdFor( Status::class)->constrained();
-
+            $table->unsignedBigInteger('status_id')->default(1);
+            $table->date('fix_date')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
