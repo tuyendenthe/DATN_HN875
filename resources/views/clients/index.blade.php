@@ -7,11 +7,18 @@
         .custom-col {
 
 
-    width: 19.2%; /* 100% / 5 = 20%, but accounting for margins and padding */
-    }
-
-
+            width: 19.2%;
+            /* 100% / 5 = 20%, but accounting for margins and padding */
+        }
     </style>
+    <style>
+    .carousel-inner img {
+        width: 100%; /* Chiều rộng tự điều chỉnh theo kích thước slide */
+        height: 400px; /* Chiều cao cố định */
+        object-fit: cover; /* Giữ tỷ lệ của ảnh */
+    }
+</style>
+
     <!-- prealoder area start -->
     <div id="loading">
         <div id="loading-center">
@@ -24,7 +31,9 @@
     </div>
     <!-- prealoder area end -->
     <!-- slider area start -->
-    <div class="slider-area">
+    <!-- <div class="slider-area">
+
+
         <div class="pl-20 pr-20">
             <div class="row row-20">
                 <div class="col-xxl-6 col-lg-6 slider-col-3-1">
@@ -128,6 +137,32 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{asset('laptop/assets/img/banner/video-banner.jpg')}}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{{asset('laptop/assets/img/banner/video-banner.jpg')}}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{{asset('laptop/assets/img/banner/video-banner.jpg')}}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
     <!-- slider area end -->
     <!-- category area start -->
@@ -212,7 +247,7 @@
                     <ul class="" id="myTab2" role="tablist">
                         <li class="" role="presentation">
                             <button class="  "
-                             {{-- data-bs-toggle="tab" data-bs-target="#tab1" --}}
+                                {{-- data-bs-toggle="tab" data-bs-target="#tab1" --}}
                                 type="">Sản phẩm mới nhất</button>
                         </li>
                         <!-- <li class="nav-item" role="presentation">
@@ -237,45 +272,45 @@
 
                                             @foreach ($products as $item)
 
-                                                <div class="col-lg-2 custom-col col-md-1 col-sm-3 m-4"> <!-- 5 items per row -->
-                                                    <div class="product-top">
-                                                        <div class="wrap">
-                                                            <span class="epix-p-subtitle">Danh mục</span>
-                                                            <div class="actions">
-                                                                <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                                <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                            </div>
+                                            <div class="col-lg-2 custom-col col-md-1 col-sm-3 m-4"> <!-- 5 items per row -->
+                                                <div class="product-top">
+                                                    <div class="wrap">
+                                                        <span class="epix-p-subtitle">Danh mục</span>
+                                                        <div class="actions">
+                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
+                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
                                                         </div>
-                                                        <div class="thumb">
-                                                            <div class="epix-action">
-                                                                <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                    <i class="fal fa-eye"></i>
-                                                                    <i class="fal fa-eye"></i>
-                                                                </a>
-                                                                <a href="shop.html" class="p-cart">
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                </a>
-                                                            </div>
-                                                            <a href="{{ url('/index/' . $item->id) }}">
-                                                                <img src="{{ Storage::url($item->image) }}" alt="">
+                                                    </div>
+                                                    <div class="thumb">
+                                                        <div class="epix-action">
+                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
+                                                                <i class="fal fa-eye"></i>
+                                                                <i class="fal fa-eye"></i>
+                                                            </a>
+                                                            <a href="shop.html" class="p-cart">
+                                                                <i class="fal fa-shopping-cart"></i>
+                                                                <i class="fal fa-shopping-cart"></i>
                                                             </a>
                                                         </div>
-                                                    </div>
-                                                    <div class="content">
-                                                        <h4><a href="{{ url('/index/' . $item->id) }}">{{ $item->name }}</a></h4>
-                                                        <div class="price-box">
-                                                            @php
-                                                                $minPrice = $item->variants()->min('price');
-                                                                $maxPrice = $item->variants()->max('price');
-                                                            @endphp
-                                                            <span class="price">
-                                                                <span class="active">{{ $minPrice }}VNĐ</span> <!-- Hiển thị giá thấp nhất -->
-                                                                <span class="active"> ->{{ $maxPrice }}VNĐ</span> <!-- Hiển thị giá cao nhất -->
-                                                            </span>
-                                                        </div>
+                                                        <a href="{{ url('/index/' . $item->id) }}">
+                                                            <img src="{{ Storage::url($item->image) }}" alt="">
+                                                        </a>
                                                     </div>
                                                 </div>
+                                                <div class="content">
+                                                    <h4><a href="{{ url('/index/' . $item->id) }}">{{ $item->name }}</a></h4>
+                                                    <div class="price-box">
+                                                        @php
+                                                        $minPrice = $item->variants()->min('price');
+                                                        $maxPrice = $item->variants()->max('price');
+                                                        @endphp
+                                                        <span class="price">
+                                                            <span class="active">{{ $minPrice }}VNĐ</span> <!-- Hiển thị giá thấp nhất -->
+                                                            <span class="active"> ->{{ $maxPrice }}VNĐ</span> <!-- Hiển thị giá cao nhất -->
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             @endforeach
 
