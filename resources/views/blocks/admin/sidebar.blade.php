@@ -21,6 +21,8 @@
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.addProduct')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Product Post</span></a></li>
                     </ul>
                 </li>
+                {{-- /* --------------------------------- Banner -------------------------------- */ --}}
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('banner.index')}}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Banner</span></a></li>
                 {{-- /* --------------------------------- PRODUCT -------------------------------- */ --}}
                 {{-- // --}}
 
