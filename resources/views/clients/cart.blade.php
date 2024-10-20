@@ -1,18 +1,6 @@
 @extends('clients.master')
 
 @section('content')
-    <!-- preloader area start -->
-    <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="object" id="first_object"></div>
-                <div class="object" id="second_object"></div>
-                <div class="object" id="third_object"></div>
-            </div>
-        </div>
-    </div>
-    <!-- preloader area end -->
-
     <!-- breadcrumb area start -->
     <div class="epix-breadcrumb-area mb-100">
         <div class="container">
@@ -65,14 +53,30 @@
                                         <td class="cart-product-name">
                                             <a href="{{ route('product.details', $item['product_id']) }}">{{ $item['product_name'] }}</a>
                                         </td>
-                                        <td class="product-variant">{{ $item['variant_name'] }}</td>
+                                        <td class="product-variant">
+                                            <ul>
+                                                @foreach ($item['variant_name'] as $key => $name)
+                                                    @if ($name != "")
+                                                        @if ($key == 0)
+                                                            <li>Phiên bản: {{ $name }}</li>
+                                                        @endif
+                                                        @if ($key == 1)
+                                                            <li>Màu sắc: {{ $name }}</li>
+                                                        @endif
+                                                        @if ($key == 2)
+                                                            <li>Bộ nhớ: {{ $name }}</li>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </td>
 
                                         <td class="product-price"><span class="amount">{{ number_format($item['price'], 0, ',', '.') }} VNĐ</span></td>
                                         <td>
                                             <div class="d-inline-block border-gray">
                                                 <div class="epix-quantity-form">
 
-                                                    <input type="number" min="1" max="{{ $item['quantity_variant'] }}" value="{{ $item['quantity'] }}" onkeydown="return false;">
+                                                    <input type="number" min="1" value="{{ $item['quantity'] }}" onkeydown="return false;">
 
                                                 </div>
                                             </div>
@@ -81,7 +85,7 @@
                                             <span class="amount">{{ number_format($subtotal, 0, ',', '.') }} VNĐ</span>
                                         </td>
                                         <td class="product-remove">
-                                            <a href="{{ route('cart.remove', $key) }}"><i class="fa fa-times"></i></a>
+                                            <a href="{{ route('cart.remove', $item['product_id'] . '-' . $item['price']) }}"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     @endif

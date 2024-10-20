@@ -41,20 +41,33 @@ class CartController extends Controller
 
     public function addCart(Request $request, Product $product)
     {
-        $variant_id = $request->input('variant_id');
-        $variant = Variant::find($variant_id);
+        $variant_id_1 = $request->input('variant_id_1');
+        $variant_id_2 = $request->input('variant_id_2');
+        $variant_id_3 = $request->input('variant_id_3');
+        $variant1 = Variant::find($variant_id_1);
+        $variant2 = Variant::find($variant_id_2);
+        $variant3 = Variant::find($variant_id_3);
+
+        $variant1_price = Variant::find($variant_id_1) == null ? 0 : $variant1->price;
+        $variant2_price = Variant::find($variant_id_2) == null ? 0 : $variant2->price;
+        $variant3_price = Variant::find($variant_id_3) == null ? 0 : $variant3->price;
+
+        $variant1_name = Variant::find($variant_id_1) == null ? '' : $variant1->name;
+        $variant2_name = Variant::find($variant_id_2) == null ? '' : $variant2->name;
+        $variant3_name = Variant::find($variant_id_3) == null ? '' : $variant3->name;
 
         $cart = session()->get('cart', []);
         $productId = $product->id;
         $productName = $product->name;
-        $productPrice = $variant->price;
-        $variantName = $variant->name;
+        $productPrice = $product->price + $variant1_price + $variant2_price + $variant3_price;
+        $variantName1 = $variant1_name;
+        $variantName2 = $variant2_name;
+        $variantName3 = $variant3_name;
         $quantity = 1;
-        $quantity_variant = $variant->quantity;
         $cartItems = session('cart', []);
 
         // Create a unique key for the product-variant combination
-        $cartKey = $productId . '-' . $variant_id;
+        $cartKey = $productId . '-' . $productPrice;
 
         if (isset($cartItems[$cartKey])) {
             $cartItems[$cartKey]['quantity'] += 1;
@@ -62,10 +75,8 @@ class CartController extends Controller
             $cartItems[$cartKey] = [
                 'product_id' => $productId,
                 'product_name' => $productName,
-                'variant_id' => $variant_id,
-                'variant_name' => $variantName,
+                'variant_name' => [$variantName1, $variantName2, $variantName3],
                 'quantity' => $quantity,
-                'quantity_variant' => $quantity_variant,
                 'price' => $productPrice,
             ];
         }

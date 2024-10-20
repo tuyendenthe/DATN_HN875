@@ -33,14 +33,25 @@
                         <form action="{{ route('variants.addPostVariant', $product->id) }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Tên biến thể:</label>
+                                <label for="name">Loại biến thể:</label>
+                                <select class="form-control" name="type">
+                                    <option selected value="1">Phiên bản</option>
+                                    <option value="2">Màu sắc</option>
+                                    <option value="3">Bộ nhớ (RAM)</option>
+                                </select>
+                                @error('type')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Giá trị:</label>
                                 <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="price">Giá:</label>
+                                <label for="price">Giá bán:</label>
                                 <input type="number" name="price" class="form-control" value="{{ old('price') }}">
                                 @error('price')
                                     <span class="text-danger">{{ $message }}</span>
