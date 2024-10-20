@@ -21,6 +21,7 @@ use App\Http\Controllers\VariantController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -176,7 +177,6 @@ Route::prefix('/variants')->name('variants.')->group(function () {
     Route::delete('delete-variant/{id}', [VariantController::class, 'deleteVariant'])->name('deleteVariant');
 });
 /* -------------------------------- BIẾN THỂ -------------------------------- */
-
 
 // Thêm vào giỏ hàng
 // Route để xem giỏ hàng
