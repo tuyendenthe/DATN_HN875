@@ -66,14 +66,32 @@
                                         <td class="cart-product-name">
                                             <a href="{{ route('product.details', $item['product_id']) }}">{{ $item['product_name'] }}</a>
                                         </td>
-                                        <td class="product-variant">{{ $item['variant_name'] }}</td>
+                                        <td class="product-variant">
+                                            <ul>
+                                                @foreach ($item['variant_name'] as $key => $name)
+                                                    @if ($name != "")
+                                                        @if ($key == 0)
+                                                            <li>Phiên bản: {{ $name }}</li>
+                                                        @endif
+                                                        @if ($key == 1)
+                                                            <li>Màu sắc: {{ $name }}</li>
+                                                        @endif
+                                                        @if ($key == 2)
+                                                            <li>Bộ nhớ: {{ $name }}</li>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </td>
 
                                         <td class="product-price"><span class="amount">{{ number_format($item['price'], 0, ',', '.') }} VNĐ</span></td>
                                         <td>
                                             <div class="d-inline-block border-gray">
                                                 <div class="epix-quantity-form">
 
-                                                    <input type="number" min="1" max="{{ $item['quantity_variant'] }}" value="{{ $item['quantity'] }}" onkeydown="return false;">
+                                                    <input type="number" min="1"
+                                                     {{-- max=" {{ $item['quantity_variant'] }}" --}}
+                                                     value="{{ $item['quantity'] }}" onkeydown="return false;">
 
                                                 </div>
                                             </div>

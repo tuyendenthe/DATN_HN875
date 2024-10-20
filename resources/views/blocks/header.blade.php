@@ -5,10 +5,10 @@
                 <div class="col-xxl-4 col-lg-4">
                     <div class="top-left-3 d-inline-block">
                         <div class="header-contact-3">
-                            <a href="tel:0362978755"><i class="fal fa-headphones-alt"></i> 0362978755</a>
+                            <a href="tel:18000344585"><i class="fal fa-headphones-alt"></i> 18000 344 585</a>
                         </div>
                     </div>
-                    {{-- <div class="select-boxes select-boxes-3">
+                    <div class="select-boxes select-boxes-3">
                         <div class="select-default select-default-3">
                             <button>EN <i class="fal fa-angle-down"></i></button>
                             <ul>
@@ -25,16 +25,16 @@
                                 <li><a href="#">Dinar</a></li>
                             </ul>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
                 <div class="col-xl-8  col-lg-8">
                     <div class="header-right-3 text-end">
                         <div class="h-top-list-3 d-inline-block">
 
 
-                            {{-- <a href="single-product.html"><i class="fal fa-balance-scale"></i>Compare</a> --}}
-                            <a href="{{ route('cart.view') }}"><i class="fal fa-heart"></i>Wishlist</a>
-                            <a href="{{ route('cart.view') }}" class="header-cart-3"><i class="fal fa-shopping-bag"></i>0 / $0.00</a>
+                            <a href="single-product.html"><i class="fal fa-balance-scale"></i>Compare</a>
+                            <a href="cart.html"><i class="fal fa-heart"></i>Wishlist</a>
+                            <a href="cart.html" class="header-cart-3"><i class="fal fa-shopping-bag"></i>0 / $0.00</a>
                             <div class="user-menu">
                                 @if(Auth::check())
                                     <div class="dropdown">

@@ -44,6 +44,7 @@ class VariantController extends Controller
             'name' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|integer',
+            'type' => 'required|integer',
         ]);
 
         Variant::create([
@@ -51,6 +52,7 @@ class VariantController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
+            'type' => $request->type,
         ]);
 
         return redirect()->route('variants.listVariant', $product_id)->with('success', 'Thêm biến thể thành công');
