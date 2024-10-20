@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Variant;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -100,7 +101,23 @@ class CartController extends Controller
         return redirect()->route('cart.view');
     }
 
-    // Hàm để xóa sản phẩm khỏi giỏ hàng
+    public function applyCoupon(Request $request)
+    {
+        $voucherCode = $request->input('coupon_code');
+        $voucher = Voucher::where('voucher_code', $voucherCode)->first();
+
+        if ($voucher && $voucher->quantity > 0 ) {
+            $discount = $voucher->price_sale;
+            return response()->json(['success' => true, 'discount' => $discount]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Bạn không đủ điều kiện dùng hoặc hết hạn.']);
+        }
+    }
+
+
+
+
+
     public function removeCartItem($key)
     {
         $cart = session()->get('cart');

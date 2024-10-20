@@ -80,9 +80,7 @@ Route::post('/search-product', [SearchController::class, 'searchProduct'])->name
 // });
 
 
-Route::get('cart', function () {
-    return view('clients.cart');
-});
+
 
 Route::get('checkout', function () {
     return view('clients.checkout');
@@ -191,3 +189,7 @@ Route::post('/cart/update/{key}', [CartController::class, 'updateQuantity'])->na
 Route::get('/cart/remove/{key}', [CartController::class, 'removeCartItem'])->name('cart.remove');
 // Thêm sản phẩm vào giỏ hàng
 Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('cart.add');
+
+
+Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
+
