@@ -125,9 +125,6 @@ class CartController extends Controller
     }
 
 
-
-
-
     public function removeCartItem($key)
     {
         $cart = session()->get('cart');

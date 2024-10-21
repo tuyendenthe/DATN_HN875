@@ -18,6 +18,7 @@ use App\Http\Controllers\CartController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VariantController;
+use App\Http\Controllers\FlashSaleController;
 
 
 
@@ -177,6 +178,17 @@ Route::prefix('/variants')->name('variants.')->group(function () {
     Route::delete('delete-variant/{id}', [VariantController::class, 'deleteVariant'])->name('deleteVariant');
 });
 /* -------------------------------- BIẾN THỂ -------------------------------- */
+
+/* -------------------------------- FLASH SALE -------------------------------- */
+Route::prefix('/flash-sale')->name('flash_sale.')->group(function () {
+    Route::get('/', [FlashSaleController::class, 'index'])->name('index');
+    Route::get('/show/{id}', [FlashSaleController::class, 'show'])->name('show');
+    Route::get('/create', [FlashSaleController::class, 'create'])->name('create');
+    Route::post('/store', [FlashSaleController::class, 'store'])->name('store');
+    Route::put('/update/{id}', [FlashSaleController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [FlashSaleController::class, 'delete'])->name('delete');
+});
+/* -------------------------------- FLASH SALE -------------------------------- */
 
 // Thêm vào giỏ hàng
 // Route để xem giỏ hàng
