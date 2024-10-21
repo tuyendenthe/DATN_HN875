@@ -575,9 +575,9 @@
 </div>
 <!-- single product area end -->
 <script>
-    var phienban = '';
-    var mausac = '';
-    var bonho = '';
+    var phienban = 0;
+    var mausac = 0;
+    var bonho = 0;
     var giaban = '{{ $products->price }}';
     function selectVariant1(element) {
         giaban = '{{ $products->price }}';
@@ -596,8 +596,8 @@
 
         // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
         var selectedPrice = element.getAttribute('data-price');
-        giaban = parseInt(giaban) + parseInt(selectedPrice)
-        document.getElementById('product-price').innerText = giaban;
+        phienban = parseInt(selectedPrice);
+        document.getElementById('product-price').innerText = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
     }
 
     function selectVariant2(element) {
@@ -616,8 +616,8 @@
 
         // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
         var selectedPrice = element.getAttribute('data-price');
-        giaban = parseInt(giaban) + parseInt(selectedPrice)
-        document.getElementById('product-price').innerText = giaban;
+        mausac = parseInt(selectedPrice);
+        document.getElementById('product-price').innerText = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
     }
 
     function selectVariant3(element) {
@@ -636,8 +636,8 @@
 
         // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
         var selectedPrice = element.getAttribute('data-price');
-        giaban = parseInt(giaban) + parseInt(selectedPrice)
-        document.getElementById('product-price').innerText = giaban;
+        bonho = parseInt(selectedPrice);
+        document.getElementById('product-price').innerText = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
     }
 </script>
 @endsection
