@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\FlashSale;
 use Illuminate\Http\Request;
 
 class HomeUserController extends Controller
@@ -20,10 +21,14 @@ class HomeUserController extends Controller
         // Lấy tối đa 10 sản phẩm từ bảng products
         $products = Product::latest()->take(8)->get();
 
-
+        $flashSales = FlashSale::with('product')
+            ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
+            ->orderBy('time_end', 'asc')
+            ->limit(4)
+            ->get();
 
         // Trả về view và truyền danh sách sản phẩm
-        return view('clients.index', compact('products'));
+        return view('clients.index', compact('products', 'flashSales'));
     }
 
     /**

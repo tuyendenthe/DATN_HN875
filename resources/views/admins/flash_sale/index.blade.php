@@ -31,7 +31,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
-                            <a href="{{ route('flash_sale.create') }}" class="btn btn-primary">Thêm Sản Phẩm Flash Sale</a>
+                            <a href="{{ route('flash_sale.create') }}" class="btn btn-primary">Thêm Mới</a>
                         </div>
                         <div class="table-responsive">
                             <table id="zero_config" class="table">
