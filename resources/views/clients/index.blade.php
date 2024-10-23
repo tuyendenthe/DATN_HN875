@@ -572,7 +572,7 @@
     <section class="slider-area">
       <div class="slider-active">
         <div class="single-slider d-flex align-items-center slider-height"
-          data-background="assets/img/slider/slider-1.jpg">
+          data-background="https://th.bing.com/th/id/OIP.jnoyoTqzhiFCYCu2BJYbUAHaE3?rs=1&pid=ImgDetMain">
           <div class="container">
             <div class="slider-content text-center text-center">
               <span class="epix-slide-subtitle" data-animation="fadeInUp">Sale 30% Discount</span>
@@ -582,7 +582,7 @@
           </div>
         </div>
         <div class="single-slider d-flex align-items-center slider-height"
-          data-background="assets/img/slider/slider-1.jpg">
+          data-background="https://th.bing.com/th/id/OIP.jnoyoTqzhiFCYCu2BJYbUAHaE3?rs=1&pid=ImgDetMain">
           <div class="container">
             <div class="slider-content text-center text-center">
               <span class="epix-slide-subtitle">Sale 30% Discount</span>
@@ -624,7 +624,7 @@
           </div>
           <div class="col-xxl-6 col-lg-6">
             <div class="epix-single-banner-2 mb-30 wow fadeInUp" data-wow-delay=".4s"
-              data-background="assets/img/banner/banner-2.jpg">
+              data-background="https://th.bing.com/th/id/OIP.jnoyoTqzhiFCYCu2BJYbUAHaE3?rs=1&pid=ImgDetMain">
               <h3 class="epix-c-heading-2">Google Mini<br>
                 Home Appliances<br>
                 Nest 4.0</h3>
@@ -636,7 +636,7 @@
     </section>
     <!-- banner area end -->
     <!-- new arrival area start -->
-    <section class="new-arrival pt-65 pb-95">
+    {{-- <section class="new-arrival pt-65 pb-95">
       <div class="container">
         <div class="row mb-45">
           <div class="col-xxl-12">
@@ -875,11 +875,11 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --}}
     <!-- new arrival area end -->
 
     <!-- promo area start -->
-    <section class="promo-area pb-100">
+    {{-- <section class="promo-area pb-100">
       <div class="container">
         <div class="promo-banner pl-75 pr-90 pt-30 pb-35 theme-bg">
           <div class="row">
@@ -918,224 +918,98 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --}}
     <!-- promo area end -->
     <!-- deals area start -->
-    <section class="deals-area bg-gray pt-40">
-      <div class="container">
-        <div class="deals-product bg-white">
-          <div class="row  align-items-center">
-            <div class="col-xxl-3 col-xl-3">
-              <div class="deal-product-left">
-                <h3 class="deals-title">Super Deals<br>
-                  During This Week</h3>
-                <div class="deals-countdown mb-25">
-                  <div class="countdown-inner" data-countdown="" data-date="Oct 20 2024 12:20:22">
-                    <ul>
-                      <li><span data-days="">401</span> Days</li>
-                      <li><span data-hours="">1</span> Hours</li>
-                      <li><span data-minutes="">29</span> min</li>
-                      <li><span data-seconds="">40</span> sec</li>
-                    </ul>
-                  </div>
-                </div>
-                <a href="shop.html" class="link-details">View All Deals<i class="fal fa-angle-right"></i></a>
-              </div>
-            </div>
-            <div class="col-xxl-9 col-xl-9">
-              <div class="deal-product-wrap pl-80">
-                <div class="d-product-active">
-                  <div class="swiper-container d-product-active">
-                    <div class="swiper-wrapper">
-                      <div class="swiper-slide">
-                        <div class="epix-single-product epix-single-product-2">
-                          <div class="epix-product-thumb epix-product-thumb-2">
-                            <span class="sale">sale</span>
-                            <a href="single-product.html"><img src="assets/img/product/27.jpg" class="img-fluid"
-                                alt=""></a>
-                            <div class="epix-action">
-                              <a href="single-product.html" class="p-cart product-popup-toggle">
-                                <i class="fal fa-eye"></i>
-                                <i class="fal fa-eye"></i>
-                              </a>
-                              <a href="cart.html" class="p-cart">
-                                <i class="fal fa-heart"></i>
-                                <i class="fal fa-heart"></i>
-                              </a>
-                              <a href="cart.html" class="p-cart">
-                                <i class="fal fa-shopping-cart"></i>
-                                <i class="fal fa-shopping-cart"></i>
-                              </a>
-                            </div>
-                          </div>
-                          <div class="epix-product-content">
-                            <div class="wrap">
-                              <span class="epix-p-subtitle">Tablets</span>
-                              <div class="rating">
-                                <i class="fal fa-star"></i>
-                                <span>4.5</span>
-                              </div>
-                            </div>
-                            <h5 class="epix-p-title"><a href="single-product.html">IPhone 11 – Yellow</a></h5>
-                            <div class="price-box">
-                              <span class="price"><del>$150.99</del><span class="active">$199.00</span></span>
-                              <a href="single-product.html">+ Select Option</a>
-                            </div>
-                          </div>
+    @if($flashSales->count())
+        <section class="deals-area bg-gray pt-40">
+            <div class="container">
+                <div class="deals-product bg-white">
+                <div class="row  align-items-center">
+                    <div class="col-xxl-3 col-xl-3">
+                    <div class="deal-product-left">
+                        <h3 class="deals-title">Siêu<br>
+                        Flash Sale</h3>
+                        <div class="deals-countdown mb-25">
+
+                        <div class="countdown-inner" data-countdown="" data-date="{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $flashSales[0]->time_end)->format('M d Y H:i:s') }}">
+                            <ul>
+                                <li><span data-days="">0</span> Ngày</li>
+                                <li><span data-hours="">0</span> Giờ</li>
+                                <li><span data-minutes="">0</span> Phút</li>
+                                <li><span data-seconds="">0</span> Giây</li>
+                            </ul>
                         </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="epix-single-product epix-single-product-2">
-                          <div class="epix-product-thumb">
-                            <span class="sale">sale</span>
-                            <a href="single-product.html"><img src="assets/img/product/23.jpg" class="img-fluid"
-                                alt=""></a>
-                            <div class="epix-action">
-                              <a href="single-product.html" class="p-cart product-popup-toggle">
-                                <i class="fal fa-eye"></i>
-                                <i class="fal fa-eye"></i>
-                              </a>
-                              <a href="cart.html" class="p-cart">
-                                <i class="fal fa-heart"></i>
-                                <i class="fal fa-heart"></i>
-                              </a>
-                              <a href="cart.html" class="p-cart">
-                                <i class="fal fa-shopping-cart"></i>
-                                <i class="fal fa-shopping-cart"></i>
-                              </a>
-                            </div>
-                          </div>
-                          <div class="epix-product-content">
-                            <div class="wrap">
-                              <span class="epix-p-subtitle">LAPTOPS</span>
-                              <div class="rating">
-                                <i class="fal fa-star"></i>
-                                <span>2.3</span>
-                              </div>
-                            </div>
-                            <h5 class="epix-p-title"><a href="single-product.html">Purple 12 Mini Aparat</a></h5>
-                            <div class="price-box">
-                              <span class="price">$230.00</span>
-                              <a href="single-product.html">+ Select Option</a>
-                            </div>
-                          </div>
                         </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="epix-single-product epix-single-product-2">
-                          <div class="epix-product-thumb">
-                            <span class="sale">sale</span>
-                            <a href="single-product.html"><img src="assets/img/product/24.jpg" class="img-fluid"
-                                alt=""></a>
-                            <div class="epix-action">
-                              <a href="single-product.html" class="p-cart product-popup-toggle">
-                                <i class="fal fa-eye"></i>
-                                <i class="fal fa-eye"></i>
-                              </a>
-                              <a href="cart.html" class="p-cart">
-                                <i class="fal fa-heart"></i>
-                                <i class="fal fa-heart"></i>
-                              </a>
-                              <a href="cart.html" class="p-cart">
-                                <i class="fal fa-shopping-cart"></i>
-                                <i class="fal fa-shopping-cart"></i>
-                              </a>
-                            </div>
-                          </div>
-                          <div class="epix-product-content">
-                            <div class="wrap">
-                              <span class="epix-p-subtitle">Tablets</span>
-                              <div class="rating">
-                                <i class="fal fa-star"></i>
-                                <span>2.3</span>
-                              </div>
-                            </div>
-                            <h5 class="epix-p-title"><a href="single-product.html">Tablet Revolve 810 </a></h5>
-                            <div class="price-box">
-                              <span class="price">$230.00</span>
-                              <a href="single-product.html">+ Select Option</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="epix-single-product epix-single-product-2">
-                          <div class="epix-product-thumb">
-                            <span class="sale">sale</span>
-                            <a href="single-product.html"><img src="assets/img/product/6.jpg" class="img-fluid"
-                                alt=""></a>
-                            <div class="epix-action">
-                              <a href="single-product.html" class="p-cart product-popup-toggle">
-                                <i class="fal fa-eye"></i>
-                                <i class="fal fa-eye"></i>
-                              </a>
-                              <a href="cart.html" class="p-cart">
-                                <i class="fal fa-heart"></i>
-                                <i class="fal fa-heart"></i>
-                              </a>
-                              <a href="cart.html" class="p-cart">
-                                <i class="fal fa-shopping-cart"></i>
-                                <i class="fal fa-shopping-cart"></i>
-                              </a>
-                            </div>
-                          </div>
-                          <div class="epix-product-content">
-                            <div class="wrap">
-                              <span class="epix-p-subtitle">Tablets</span>
-                              <div class="rating">
-                                <i class="fal fa-star"></i>
-                                <span>4.5</span>
-                              </div>
-                            </div>
-                            <h5 class="epix-p-title"><a href="single-product.html">IPhone 11 – Yellow</a></h5>
-                            <div class="price-box">
-                              <span class="price"><del>$150.99</del><span class="active">$199.00</span></span>
-                              <a href="single-product.html">+ Select Option</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                        <a href="shop.html" class="link-details">Xem Tất Cả<i class="fal fa-angle-right"></i></a>
                     </div>
-                  </div>
+                    </div>
+                    <div class="col-xxl-9 col-xl-9">
+                    <div class="deal-product-wrap pl-80">
+                        <div class="d-product-active">
+                        <div class="swiper-container d-product-active">
+                            <div class="swiper-wrapper">
+
+                                @foreach ($flashSales as $flashSale)
+                                    <div class="swiper-slide" style="flex-shrink: unset;">
+                                        <div class="epix-single-product epix-single-product-2">
+                                            <div class="epix-product-thumb epix-product-thumb-2">
+                                                <span class="sale">sale</span>
+                                                <a href="{{ route('product.details', $flashSale->product->id) }}">
+                                                    <img src="{{ Storage::url($flashSale->product->image) }}" class="img-fluid">
+                                                </a>
+                                                <div class="epix-action">
+                                                <a href="{{ route('product.details', $flashSale->product->id) }}" class="p-cart product-popup-toggle">
+                                                    <i class="fal fa-eye"></i>
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="cart.html" class="p-cart">
+                                                    <i class="fal fa-heart"></i>
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a href="cart.html" class="p-cart">
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                </a>
+                                                </div>
+                                            </div>
+                                            <div class="epix-product-content">
+                                                <div class="wrap">
+                                                <span class="epix-p-subtitle">Đánh giá</span>
+                                                <div class="rating">
+                                                    <i class="fal fa-star"></i>
+                                                    <span>4.5</span>
+                                                </div>
+                                                </div>
+                                                <h5 class="epix-p-title"><a href="{{ route('product.details', $flashSale->product->id) }}">{{ $flashSale->product->name }}</a></h5>
+                                                <div class="price-box">
+                                                    <span class="price"><span class="active">{{ number_format($flashSale->product->price) }}đ</span></span>
+                                                    <a href="{{ route('product.details', $flashSale->product->id) }}">+ Xem Thêm</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- /. deals product wrap -->
+                    </div>
                 </div>
-              </div>
-              <!-- /. deals product wrap -->
+                </div>
+
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="deal-product-collection pl-100 pr-100">
+
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xxl-12">
-            <div class="deal-product-collection pl-100 pr-100">
-              <div class="single-collection after-border">
-                <div class="d-collection-thumb">
-                  <img src="assets/img/product/29.png" alt="">
-                </div>
-                <div class="d-collection-content">
-                  <h4><a href="single-product.html">New Design Features On<br>
-                      Galaxy S10 Series</a></h4>
-                  <a href="shop.html" class="link-details">See All Products<i class="fal fa-angle-right"></i></a>
-                </div>
-              </div>
-              <div class="single-collection">
-                <div class="text-xl-end">
-                  <div class="d-collection-thumb">
-                    <img src="assets/img/product/30.png" alt="">
-                  </div>
-                  <div class="d-collection-content text-start">
-                    <h4><a href="single-product.html">Xbox X|S Next-Gen <br>
-                        Say Hello to G7 Console.</a></h4>
-                    <a href="shop.html" class="link-details">See All Products<i class="fal fa-angle-right"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
+        </section>
+    @endif
     <!-- deals area end -->
     <!-- unmissed area start -->
     <section class="unmissed-area pt-95 pb-100">

@@ -5,11 +5,11 @@
     <!-- breadcrumb area start -->
     <div class="epix-breadcrumb-area mb-100">
         <div class="container">
-            <h4 class="epix-breadcrumb-title">Cart PAGE</h4>
+            <h4 class="epix-breadcrumb-title">Giỏ Hàng</h4>
             <div class="epix-breadcrumb">
                 <ul>
-                    <li><a href="{{ route('index') }}">Home</a></li>
-                    <li><span>Cart Page</span></li>
+                    <li><a href="{{ route('index') }}">Trang chủ</a></li>
+                    <li><span>Giỏ Hàng</span></li>
                 </ul>
             </div>
         </div>
@@ -24,13 +24,13 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="product-thumbnail">Images</th>
-                                <th class="cart-product-name">Product</th>
-                                <th class="product-variant">Variant</th>
-                                <th class="product-price">Unit Price</th>
-                                <th class="product-quantity">Quantity</th>
-                                <th class="product-subtotal">Total</th>
-                                <th class="product-remove">Remove</th>
+                                <th class="product-thumbnail">Hình Ảnh</th>
+                                <th class="cart-product-name">Sản Phẩm</th>
+                                <th class="product-variant">Loại</th>
+                                <th class="product-price">Đơn Giá</th>
+                                <th class="product-quantity">Số Lượng</th>
+                                <th class="product-subtotal">Thành Tiền</th>
+                                <th class="product-remove">Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +41,7 @@
                                 @foreach(session('cart') as $key => $item)
                                 @if(is_array($item))
                                 @php
+                                $discount=0;
 
                                     $subtotal = $item['price'] * $item['quantity'];
                                     $total += $subtotal;
@@ -98,6 +99,7 @@
                                 <tr>
                                     @php
                                         $total = 0;
+
                                     @endphp
                                     <td colspan="7" class="text-center">Giỏ hàng của bạn đang trống.</td>
                                 </tr>
@@ -113,13 +115,13 @@
                                 <form action="{{ route('cart.applyCoupon') }}" method="POST">
 
                                     @csrf
-                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
+                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Nhập Mã Giảm Giá" type="text">
                                 {{-- <input type="hidden" name="total" id="total" value="{{ $total }}"> --}}
-                                <button class="os-btn os-btn-black" name="apply_coupon" type="submit">Apply coupon</button>
+                                <button class="btn btn-primary" name="apply_coupon" type="submit">Áp Dụng</button>
                             </form>
                             </div>
                             <div class="coupon2">
-                                <button class="os-btn os-btn-black" name="update_cart" type="submit">Update cart</button>
+                                <button class="os-btn os-btn-info" name="update_cart" type="submit">Tải Lại</button>
 
                             </div>
                         </div>
@@ -133,20 +135,25 @@
                         <div class="cart-page-total">
                             @php
                                     // dd($item);
-                                    $discount=0;
+
 
 
                                     @endphp
-                            <h2>Cart totals</h2>
+                            <h2>Tiền Giỏ Hàng</h2>
                             <ul class="mb-20">
-                                <li>Subtotal <span>{{ number_format($total ?? 0, 0, ',', '.') }} VNĐ</span></li>
-                                <li>Voucher <span id="discount" name="discount">{{ number_format($discount ?? 0, 0, ',', '.') }}VNĐ</span> </li>
+                                <li>Thành tiền <span>{{ number_format($total ?? 0, 0, ',', '.') }} VNĐ</span></li>
+                                <li>Mã Giảm Giá <span id="discount" name="discount">{{ number_format($discount ?? 0, 0, ',', '.') }}VNĐ</span> </li>
                                 @php
+                                $sale = $discount;
                                      $totalAll = $total - $discount;
+
                                 @endphp
-                                <li>Total <span id="totalAll" name="totalAll" >{{ number_format($totalAll ?? 0, 0, ',', '.') }} VNĐ</span></li>
+                                <li>Tổng Tiền <span id="totalAll" name="totalAll" >{{ number_format($totalAll ?? 0, 0, ',', '.') }} VNĐ</span></li>
+                           @php
+
+                           @endphp
                             </ul>
-                            <a class="os-btn" href="">Proceed to checkout</a>
+                            <a class="btn btn-primary" href="">Thanh Toán</a>
                             {{-- <a class="os-btn" href="{{ route('checkout') }}">Proceed to checkout</a> --}}
                         </div>
                     </div>
@@ -178,8 +185,10 @@
                     console.log('AJAX response:', response); // Kiểm tra dữ liệu trả về từ AJAX
                     if (response.success) {
                         $('#discount').text(response.discount.toLocaleString('vi-VN') + ' VNĐ');
-                        $('#totalAll').text(response.totalAfterDiscount.toLocaleString('vi-VN') + ' VNĐ');
-                        alert('Coupon applied successfully!');
+                        var totalAll = total - response.discount;
+                        $('#totalAll').text(totalAll.toLocaleString('vi-VN') + ' VNĐ');
+                    //    $('#totalAll').text(response.totalAll.toLocaleString('vi-VN') + ' VNĐ');
+                        alert('Đã áp dụng mã giảm giá thành công !');
                     } else {
                         alert(response.message);
                     }
