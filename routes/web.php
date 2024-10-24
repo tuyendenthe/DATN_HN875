@@ -18,6 +18,8 @@ use App\Http\Controllers\CartController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VariantController;
+use App\Http\Controllers\FlashSaleController;
+
 
 
 
@@ -80,9 +82,7 @@ Route::post('/search-product', [SearchController::class, 'searchProduct'])->name
 // });
 
 
-Route::get('cart', function () {
-    return view('clients.cart');
-});
+
 
 Route::get('checkout', function () {
     return view('clients.checkout');
@@ -179,6 +179,16 @@ Route::prefix('/variants')->name('variants.')->group(function () {
 });
 /* -------------------------------- BIẾN THỂ -------------------------------- */
 
+/* -------------------------------- FLASH SALE -------------------------------- */
+Route::prefix('/flash-sale')->name('flash_sale.')->group(function () {
+    Route::get('/', [FlashSaleController::class, 'index'])->name('index');
+    Route::get('/show/{id}', [FlashSaleController::class, 'show'])->name('show');
+    Route::get('/create', [FlashSaleController::class, 'create'])->name('create');
+    Route::post('/store', [FlashSaleController::class, 'store'])->name('store');
+    Route::put('/update/{id}', [FlashSaleController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [FlashSaleController::class, 'delete'])->name('delete');
+});
+/* -------------------------------- FLASH SALE -------------------------------- */
 
 // Thêm vào giỏ hàng
 // Route để xem giỏ hàng
@@ -191,3 +201,7 @@ Route::post('/cart/update/{key}', [CartController::class, 'updateQuantity'])->na
 Route::get('/cart/remove/{key}', [CartController::class, 'removeCartItem'])->name('cart.remove');
 // Thêm sản phẩm vào giỏ hàng
 Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('cart.add');
+
+
+Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
+

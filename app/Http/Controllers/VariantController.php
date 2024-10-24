@@ -38,22 +38,26 @@ class VariantController extends Controller
     }
 
     // Lưu biến thể mới
-    public function addPostVariant(Request $request, $product_id)
+    public function addPostVariant(Request $request)
     {
+        // dd($request);
+
         $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|integer',
+            'type' => 'required|integer',
         ]);
 
         Variant::create([
-            'product_id' => $product_id,
+            'product_id' => $request->product_id,
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
+            'type' => $request->type,
         ]);
 
-        return redirect()->route('variants.listVariant', $product_id)->with('success', 'Thêm biến thể thành công');
+        return redirect()->route('variants.listVariant',  $request->product_id)->with('success', 'Thêm biến thể thành công');
     }
 
     // Trang chỉnh sửa biến thể

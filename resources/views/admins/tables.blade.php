@@ -35,7 +35,10 @@
                         <div class="table-responsive">
                             <table id="zero_config" class="table">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <a href="{{ route('products.addProduct') }}" class="btn btn-primary">Thêm mới</a>
+                                    <div>
+                                        <a href="{{ route('products.addProduct') }}" class="btn btn-primary">Thêm mới</a>
+                                        <a href="{{ route('flash_sale.index') }}" class="btn btn-warning">Flash Sale</a>
+                                    </div>
                                     <form action="{{route('search.product')}}" method="POST">
                                         @csrf
                                         <input type="text" placeholder="Search anything here.." name="keyw">

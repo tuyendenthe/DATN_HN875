@@ -18,13 +18,20 @@
     </div>
 
     <div class="container-fluid">
-        <form class="form-control" action="{{ route('products.addPostProduct') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('products.addPostProduct') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-12">
                     Tên:
                     <input type="text" name="name" value="{{ old('name') }}" class="form-control">
                     @error('name')
+                        <span class="" style="color: red">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class='col-12'>
+                    <label for="">Giá</label>
+                    <input type="number" name='price' class='form-control' value="{{ old('price') }}">
+                    @error('price')
                         <span class="" style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
@@ -37,24 +44,20 @@
                 </div>
                 <div class="col-12">
                     Mô tả ngắn:
-                    <br>
-                    {{-- <input type="text" name="content_short" value="{{ old('content_short') }}" class="form-control"> --}}
-
-                    <textarea name="content_short" id="" value="{{ old('content_short') }}"  class="form-control"  cols="30" rows="10"></textarea>
+                    <input type="text" name="content_short" value="{{ old('content_short') }}" class="form-control">
                     @error('content_short')
-                    <span class="" style="color: red">{{ $message }}</span>
-                @enderror
+                        <span class="" style="color: red">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-12">
                     Mô Tả:
-                    {{-- <input type="text" name="content" value="{{ old('content') }}" class="form-control"> --}}
-                    <textarea name="content" id="" value="{{ old('content') }}"  class="form-control"  cols="30" rows="10"></textarea>
+                    <input type="text" name="content" value="{{ old('content') }}" class="form-control">
                     @error('content')
                         <span class="" style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
 
-                <button class="form-control m-2 btn btn-primary">Thêm mới</button>
+                <button>Thêm mới</button>
             </div>
         </form>
         <!-- ============================================================== -->

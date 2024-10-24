@@ -4,12 +4,12 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Thêm biến thể mới cho sản phẩm: {{ $product->name }}</h4>
+                <h4 class="page-title">Thêm Flash Sale cho sản phẩm</h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Thêm biến thể</li>
+                            <li class="breadcrumb-item active" aria-current="page">Thêm Flash Sale</li>
                         </ol>
                     </nav>
                 </div>
@@ -30,41 +30,27 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('variants.addPostVariant', $product->id) }}" method="post">
+                        <form action="{{ route('flash_sale.store') }}" method="post">
                             @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <div class="form-group">
-                                <label for="name">Loại biến thể:</label>
-                                <select class="form-control" name="type">
-                                    <option selected value="1">Phiên bản</option>
-                                    <option value="2">Màu sắc</option>
-                                    <option value="3">Bộ nhớ (RAM)</option>
+                                <label for="name">Chọn Sản Phẩm</label>
+                                <select class="form-control" name="product_id" required>
+                                    @foreach ($products as $product)
+                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    @endforeach
                                 </select>
-                                @error('type')
+                                @error('product_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="name">Giá trị:</label>
-                                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-                                @error('name')
+                                <label for="name">Ngày Hết Hạn</label>
+                                <input type="datetime-local" name="time_end" class="form-control" required>
+                                @error('time_end')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="price">Giá bán:</label>
-                                <input type="number" name="price" class="form-control" value="{{ old('price') }}">
-                                @error('price')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="quantity">Số lượng:</label>
-                                <input type="number" name="quantity" class="form-control" value="{{ old('quantity') }}">
-                                @error('quantity')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+
                             <button type="submit" class="btn btn-success">Thêm mới</button>
                         </form>
                     </div>

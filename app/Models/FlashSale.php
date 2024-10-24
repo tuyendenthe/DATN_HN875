@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 
-class Variant extends Model
+class FlashSale extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'name', 'price', 'quantity','type'];
+    protected $fillable = [
+        'product_id',
+        'time_end'
+    ];
 
     public function product()
     {
