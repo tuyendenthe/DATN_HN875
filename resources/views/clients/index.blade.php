@@ -954,7 +954,15 @@
                                     <div class="swiper-slide" style="flex-shrink: unset;">
                                         <div class="epix-single-product epix-single-product-2">
                                             <div class="epix-product-thumb epix-product-thumb-2">
-                                                <span class="sale">sale</span>
+                                                <span class="sale">
+                                                    @php
+                                                        $percent_off = 0;
+                                                        if($flashSale->price_original > 0){
+                                                            $percent_off = (($flashSale->price_original - $flashSale->price_sale) / $flashSale->price_original) * 100;
+                                                        }
+                                                    @endphp
+                                                    Giảm {{ number_format($percent_off, 0) }}%
+                                                </span>
                                                 <a href="{{ route('product.details', $flashSale->product->id) }}">
                                                     <img src="{{ Storage::url($flashSale->product->image) }}" class="img-fluid">
                                                 </a>
@@ -983,7 +991,7 @@
                                                 </div>
                                                 <h5 class="epix-p-title"><a href="{{ route('product.details', $flashSale->product->id) }}">{{ $flashSale->product->name }}</a></h5>
                                                 <div class="price-box">
-                                                    <span class="price"><span class="active">{{ number_format($flashSale->product->price) }}đ</span></span>
+                                                    <span class="price"><sup>{{ number_format($flashSale->price_original) }}đ</sup><span class="active">{{ number_format($flashSale->price_sale) }}đ</span></span>
                                                     <a href="{{ route('product.details', $flashSale->product->id) }}">+ Xem Thêm</a>
                                                 </div>
                                             </div>

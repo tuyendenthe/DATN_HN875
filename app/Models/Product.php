@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory, softDeletes;
     protected $table = 'products';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'image', 'content', 'content_short'];
+    protected $fillable = ['name', 'image', 'content', 'price', 'content_short'];
 
     // Product.php
 public function variants()
