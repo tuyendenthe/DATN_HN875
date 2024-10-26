@@ -12,7 +12,9 @@ class FlashSale extends Model
 
     protected $fillable = [
         'product_id',
-        'time_end'
+        'time_end',
+        'price_original',
+        'price_sale'
     ];
 
     public function product()

@@ -5,7 +5,7 @@
                 <div class="col-xxl-4 col-lg-4">
                     <div class="top-left-3 d-inline-block">
                         <div class="header-contact-3">
-                            <a href="tel:18000344585"><i class="fal fa-headphones-alt"></i> 18000 344 585</a>
+                            <a href="0362978755"><i class="fal fa-headphones-alt"></i> 0362978755</a>
                         </div>
                     </div>
                     <div class="select-boxes select-boxes-3">
@@ -17,14 +17,14 @@
                                 <li><a href="#">USA</a></li>
                             </ul>
                         </div>
-                        <div class="select-default ml-10">
+                        {{-- <div class="select-default ml-10">
                             <button>EUR <i class="fal fa-angle-down"></i></button>
                             <ul>
                                 <li><a href="#">EUR</a></li>
                                 <li><a href="#">Taka</a></li>
                                 <li><a href="#">Dinar</a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-xl-8  col-lg-8">
@@ -47,7 +47,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    <a href="{{ route('login') }}"><i class="fal fa-user"></i> Log in / Register</a>
+                                    <a href="{{ route('login') }}"><i class="fal fa-user"></i> Đăng Nhập / Đăng Kí</a>
                                 @endif
                             </div>
                         </div>
