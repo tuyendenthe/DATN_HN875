@@ -74,8 +74,8 @@
               <div class="text-end">
                 <div class="epix-t-right">
                   <div class="ht-actions">
-                    <a href="login.html">Đăng nhập / Đăng ký</a>
-                    <a href="checkout.html">Theo dõi đơn hàng</a>
+                    <a href="{{route('login')}}">Đăng nhập</a>
+                    <a href="#">Theo dõi đơn hàng</a>
                   </div>
                   <div class="epix-ht-social">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
