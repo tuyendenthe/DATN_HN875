@@ -39,43 +39,31 @@
                 <nav id="mobile-menu">
                   <ul>
                     <li>
-                      <a href="index-2.html">Home</a>
-                      <ul class="sub-menu">
-                        <li><a href="index.html">Home Layout 1</a></li>
-                        <li><a href="index-2.html">Home Layout 2</a></li>
-                        <li><a href="index-3.html">Home Layout 3</a></li>
-                      </ul>
+                      <a href="{{route('index')}}">Trang chủ</a>
                     </li>
+
+                    <li>
+                      <a href="{{route('about')}}">About</a>
                     </li>
                     <li>
-                      <a href="shop.html">Shop</a>
+                      <a href="{{route('shop')}}">Sản phẩm</a>
                       <ul class="sub-menu">
                         <li><a href="shop.html"><span>Shop Grid</span></a></li>
-                        <li><a href="single-product.html">Single Product</a></li>
+                        <li><a href="{{route('single_product')}}">Single Product</a></li>
                       </ul>
                     </li>
                     <li>
-                      <a href="about.html">About</a>
-                    </li>
-                    <li>
-                      <a href="blog.html">Blog</a>
+                      <a href="{{route('blog')}}">Tin tức</a>
                       <ul class="sub-menu">
-                        <li><a href="blog.html">Blog List</a></li>
-                        <li><a href="single-blog.html">Blog Details</a></li>
+                        <li><a href="blog.html">Danh sách tin tức</a></li>
+                        <li><a href="single-blog.html">Chi tiết tin tức</a></li>
                       </ul>
                     </li>
                     <li>
-                      <a href="contact.html">Contact us</a>
+                      <a href="{{route('contact.form')}}">Liên hệ</a>
                     </li>
                     <li>
-                      <a href="#">Pages</a>
-                      <ul class="sub-menu">
-                        <li><a href="cart.html">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="error.html">404 Error</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Register</a></li>
-                      </ul>
+                      <a href="{{route('bookfix.form')}}">Đặt lịch sửa chữa</a>
                     </li>
                   </ul>
                 </nav>
@@ -86,8 +74,8 @@
               <div class="text-end">
                 <div class="epix-t-right">
                   <div class="ht-actions">
-                    <a href="login.html">Log in / Sign Up</a>
-                    <a href="checkout.html">Track Order</a>
+                    <a href="login.html">Đăng nhập / Đăng ký</a>
+                    <a href="checkout.html">Theo dõi đơn hàng</a>
                   </div>
                   <div class="epix-ht-social">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -114,7 +102,7 @@
               <div class="epix-header-flex">
                 <div class="epix-side-dropdown d-none d-xl-block">
                   <button class="epix-side-btn epix-side-btn-1">
-                    <span class="bars"></span><span class="text">All Department</span><i class="fal fa-angle-down"></i>
+                    <span class="bars"></span><span class="text">Linh kiện</span><i class="fal fa-angle-down"></i>
                   </button>
                   <ul>
                     <li><a href="#">Science</a></li>
@@ -141,7 +129,7 @@
                       <span>0</span>
                     </div>
                     <div class="content">
-                      <span>Wishlist</span>
+                      <span>Yêu thích</span>
                     </div>
                   </a>
                 </div>
@@ -152,7 +140,7 @@
                       <span>0</span>
                     </div>
                     <div class="content">
-                      <span> Cart</span>
+                      <span> Giỏ hàng</span>
                     </div>
                   </a>
                 </div>
@@ -170,19 +158,14 @@
                   <ul>
                     <li class="menu-item-has-children">
                       <a href="shop.html">Home</a>
-                      <ul class="sub-menu">
-                        <li><a href="index.html">Home Style 1</a></li>
-                        <li><a href="index-2.html">Home Style 2</a></li>
-                        <li><a href="index-3.html">Home Style 3</a></li>
-                      </ul>
                     </li>
                     <li class="menu-item-has-children has-mega">
-                      <a href="shop.html">Gadgets</a>
+                      <a href="shop.html">Tiện ích</a>
                       <div class="mega-menu" data-background="assets/img/bg/mega-menu-bg-1.jpg">
                         <ul>
                           <li>
                             <ul>
-                              <li class="title"><a href="shop.html">SHOP LAYOUT</a></li>
+                              <li class="title"><a href="shop.html">Cửa hàng</a></li>
                               <li><a href="shop.html">Pagination</a></li>
                               <li><a href="shop.html">Ajax Load More</a></li>
                               <li><a href="shop.html">Infinite Scroll</a></li>
@@ -277,7 +260,7 @@
                       </div>
                     </li>
                     <li class="menu-item-has-children has-mega">
-                      <a href="shop.html">Accessories</a>
+                      <a href="shop.html">Phụ kiện</a>
                       <div class="mega-menu" data-background="assets/img/bg/mega-menu-bg-1.jpg">
                         <ul>
                           <li>
@@ -327,7 +310,7 @@
                       </div>
                     </li>
                     <li class="menu-item-has-children has-mega">
-                      <a href="shop.html">Phone & Tablet</a>
+                      <a href="shop.html">Điện thoại và Máy tính bảng</a>
                       <div class="mega-menu" data-background="assets/img/bg/mega-menu-bg-1.jpg">
                         <ul>
                           <li>
@@ -377,57 +360,7 @@
                       </div>
                     </li>
                     <li class="menu-item-has-children has-mega">
-                      <a href="shop.html">Game Console</a>
-                      <div class="mega-menu" data-background="assets/img/bg/mega-menu-bg-1.jpg">
-                        <ul>
-                          <li>
-                            <ul>
-                              <li class="title"><a href="shop.html">SHOP LAYOUT</a></li>
-                              <li><a href="shop.html">Pagination</a></li>
-                              <li><a href="shop.html">Ajax Load More</a></li>
-                              <li><a href="shop.html">Infinite Scroll</a></li>
-                              <li><a href="shop.html">Sidebar Right</a></li>
-                              <li><a href="shop.html">Sidebar Left</a></li>
-                            </ul>
-                          </li>
-                          <li>
-                            <ul>
-                              <li class="title"><a href="shop.html">SHOP PAGES</a></li>
-                              <li><a href="shop.html">List View</a></li>
-                              <li><a href="shop.html">Small Products</a></li>
-                              <li><a href="shop.html">Large Products</a></li>
-                              <li><a href="shop.html">Shop — 3 Items</a></li>
-                              <li><a href="shop.html">Shop — 4 Items</a></li>
-                              <li><a href="shop.html">Shop — 5 Items</a></li>
-                            </ul>
-                          </li>
-                          <li>
-                            <ul>
-                              <li class="title"><a href="shop.html">PRODUCT LAYOUT</a></li>
-                              <li><a href="shop.html">Description Sticky</a></li>
-                              <li><a href="shop.html">Product Carousel</a></li>
-                              <li><a href="shop.html">Gallery Modern</a></li>
-                              <li><a href="shop.html">Thumbnail Left</a></li>
-                              <li><a href="shop.html">Thumbnail Right</a></li>
-                              <li><a href="shop.html">Thumbnail Botttom</a></li>
-                            </ul>
-                          </li>
-                          <li>
-                            <ul>
-                              <li class="title"><a href="shop.html">Basketball</a></li>
-                              <li><a href="shop.html">East Hampton Fleece</a></li>
-                              <li><a href="shop.html">Faxon Canvas Low</a></li>
-                              <li><a href="shop.html">Habitasse Dictumst</a></li>
-                              <li><a href="shop.html">Kaoreet Lobortis</a></li>
-                              <li><a href="shop.html">NikeCourt Zoom Prestige</a></li>
-                              <li><a href="shop.html">NikeCourts Air Zoom</a></li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li class="menu-item-has-children has-mega">
-                      <a href="#">Cameras & GPS</a>
+                      <a href="#">Máy ảnh & GPS</a>
                       <div class="mega-menu" data-background="assets/img/bg/mega-menu-bg-1.jpg">
                         <ul>
                           <li>
@@ -495,9 +428,9 @@
                     </ul>
                   </div>
                   <div class="select-default ml-10">
-                    <button>EUR <i class="fal fa-angle-down"></i></button>
+                    <button>VN <i class="fal fa-angle-down"></i></button>
                     <ul>
-                      <li><a href="#">EUR</a></li>
+                      <li><a href="#">VN</a></li>
                       <li><a href="#">Taka</a></li>
                       <li><a href="#">Dinar</a></li>
                     </ul>
@@ -533,7 +466,7 @@
   <!-- header area end -->
 
   <!-- slide-bar start -->
-  <div class="fix">
+  {{-- <div class="fix">
     <div class="side-info d-lg-none">
       <button class="side-info-close"><i class="fal fa-times"></i></button>
 
@@ -563,7 +496,7 @@
       </div>
 
     </div>
-  </div>
+  </div> --}}
   <div class="offcanvas-overlay"></div>
   <!-- slide-bar end -->
   <main>
@@ -604,18 +537,21 @@
             <div class="epix-single-banner mb-30 wow fadeInUp" data-wow-delay=".2s"
               data-background="assets/img/banner/banner-1.jpg">
               <div class="epix-collection-box">
-                <h3 class="epix-c-heading">Collection Of 2021</h3>
+                <h3 class="epix-c-heading">Bộ sưu tập năm 2021</h3>
                 <div class="epix-c-list">
                   <ul>
                     <li><a href="shop.html">Galaxy Tabs & Ides</a></li>
-                    <li><a href="shop.html">Tab Accessories</a></li>
-                    <li><a href="shop.html">Mobile Phones</a></li>
-                    <li><a href="shop.html">Camcorders</a></li>
-                    <li><a href="shop.html">Fitness Trackers</a></li>
-                    <li><a href="shop.html">Action Cams</a></li>
-                    <li><a href="shop.html">Hard Drives</a></li>
-                    <li><a href="shop.html">iPad & Tablets </a></li>
-                    <li><a href="shop.html">Portable Audio</a></li>
+                    <li><a href="shop.html">Phụ kiện</a></li>
+                    <li><a href="shop.html">MacBook</a></li>
+                    <li><a href="shop.html">Laptop Acer</a></li>
+                    <li><a href="shop.html">Laptop Asus</a></li>
+                    <li><a href="shop.html">Laptop Dell</a></li>
+                    <li><a href="shop.html">Laptop MSI</a></li>
+                    <li><a href="shop.html">Laptop Lenovo</a></li>
+                    <li><a href="shop.html">Laptop HP</a></li>
+                    <li><a href="shop.html">Ổ cứng</a></li>
+                    <li><a href="shop.html">iPad & Máy tính bảng </a></li>
+                    <li><a href="shop.html">Ram</a></li>
                   </ul>
                 </div>
               </div>
@@ -1025,27 +961,25 @@
         <div class="row">
           <div class="col-xxl-3 col-xl-3 col-sm-6 unmissed-col-1">
             <div class="unmissed-sidebar">
-              <h4 class="epix-sidebar-title">Unmissed Items</h4>
+              <h4 class="epix-sidebar-title">Danh mục</h4>
               <ul class="epix-um-list">
-                <li class="has-arrow"><a href="shop.html"><i class="fal fa-desktop"></i><span>Desktop PCs</span></a>
+                <li class="has-arrow"><a href="shop.html"><i class="fal fa-desktop"></i><span>MacBook</span></a>
                 </li>
-                <li class="has-arrow"><a href="shop.html"><i class="fal fa-laptop"></i><span>Cosnoles & Games</span></a>
+                <li class="has-arrow"><a href="shop.html"><i class="fal fa-laptop"></i><span>Acer</span></a>
                 </li>
-                <li class="has-arrow"><a href="shop.html"><i class="fal fa-mobile-android"></i><span>Video
-                      Cameras</span></a>
+                <li class="has-arrow"><a href="shop.html"><i class="fal fa-mobile-android"></i><span>Asus</span></a>
                 </li>
-                <li class="has-arrow"><a href="shop.html"><i class="fal fa-camera-retro"></i><span>Home Theater &
-                      Audio</span></a></li>
-                <li class="has-arrow"><a href="shop.html"><i class="fal fa-video"></i><span>Digital Cameras</span></a>
+                <li class="has-arrow"><a href="shop.html"><i class="fal fa-camera-retro"></i><span>Dell</span></a></li>
+                <li class="has-arrow"><a href="shop.html"><i class="fal fa-video"></i><span>MSI</span></a>
                 </li>
-                <li class="has-arrow"><a href="shop.html"><i class="fal fa-mouse"></i><span>Smart Electronics</span></a>
+                <li class="has-arrow"><a href="shop.html"><i class="fal fa-mouse"></i><span>Lenovo</span></a>
                 </li>
-                <li class="has-arrow"><a href="shop.html"><i class="fal fa-laptop"></i><span>Cosnoles & Games</span></a>
+                <li class="has-arrow"><a href="shop.html"><i class="fal fa-laptop"></i><span>HP</span></a>
                 </li>
                 <li class="has-arrow"><a href="shop.html"><i
-                      class="fal fa-camera-retro"></i><span>Accessories</span></a></li>
+                      class="fal fa-camera-retro"></i><span>Ổ cứng</span></a></li>
               </ul>
-              <a href="shop.html" class="link-details">See All Products<i class="fal fa-angle-right"></i></a>
+              <a href="shop.html" class="link-details">Xem tất cả sản phẩm<i class="fal fa-angle-right"></i></a>
             </div>
           </div>
           <div class="col-xxl-9 col-xl-9 unmissed-col-2">
@@ -1347,7 +1281,7 @@
           <div class="text-center d-inline-block">
             <h5 class="epix-s-banner-subtitle">45% Flate On</h5>
             <h3 class="epix-s-banner-title">Gadgets</h3>
-            <a href="shop.html" class="epix-btn-1" tabindex="0"><span>Explore Now<i
+            <a href="shop.html" class="epix-btn-1" tabindex="0"><span>Khám phá ngay<i
                   class="fal fa-angle-right"></i></span></a>
           </div>
         </div>
@@ -1368,9 +1302,9 @@
                       <img src="assets/img/icon/service-1.png" alt="">
                     </div>
                     <div class="epix-s-content">
-                      <a href="shop.html" class="epix-s-link">Free Shipping</a>
-                      <p>The new variations pass of <br>
-                        Lorem avaible..</p>
+                      <a href="shop.html" class="epix-s-link">Giao hàng miễn phí</a>
+                      <p>Các biến thể mới vượt qua  <br>
+                        Lorem có sẵn..</p>
                     </div>
                   </div>
                 </div>
@@ -1380,9 +1314,9 @@
                       <img src="assets/img/icon/service-2.png" alt="">
                     </div>
                     <div class="epix-s-content">
-                      <a href="shop.html" class="epix-s-link">20 Day Returns</a>
-                      <p>The new variations pass of <br>
-                        Lorem avaible..</p>
+                      <a href="shop.html" class="epix-s-link">Trả hàng trong 20 ngày</a>
+                      <p>Các biến thể mới vượt qua  <br>
+                        Lorem có sẵn..</p>
                     </div>
                   </div>
                 </div>
@@ -1392,9 +1326,9 @@
                       <img src="assets/img/icon/service-3.png" alt="">
                     </div>
                     <div class="epix-s-content">
-                      <a href="shop.html" class="epix-s-link">Secure Payment</a>
-                      <p>The new variations pass of <br>
-                        Lorem avaible..</p>
+                      <a href="shop.html" class="epix-s-link">Thanh toán an toàn</a>
+                      <p>Các biến thể mới vượt qua  <br>
+                        Lorem có sẵn..</p>
                     </div>
                   </div>
                 </div>
@@ -1403,9 +1337,9 @@
           </div>
           <div class="col-xxl-4 col-xl-6 wow fadeInUp" data-wow-delay="1s">
             <div class="epix-newsletter-form pl-50">
-              <h4 class="epix-newsletter-title">Sign Up For Newsletter</h4>
+              <h4 class="epix-newsletter-title">Đăng ký nhận bản tin</h4>
               <form action="#">
-                <input type="text" placeholder="Enter Your Email">
+                <input type="text" placeholder="Nhập email của bạn">
                 <button type="submit">
                   <i class="fal fa-long-arrow-right"></i>
                 </button>
@@ -1425,7 +1359,7 @@
           <div class="row mb-35">
             <div class="col-xxl-12">
               <div class="epix-section-title text-center">
-                <h5 class="s-title">Handpicked Products For You</h5>
+                <h5 class="s-title">Sản phẩm được lựa chọn cẩn thận cho bạn</h5>
               </div>
             </div>
           </div>
@@ -1434,7 +1368,7 @@
               <div class="epix-handpicked-banner" data-background="assets/img/banner/product-banner-2.jpg">
                 <h4 class="epix-h-banner-text">Smart Series 4.0<br>
                   Extraordinary Watches</h4>
-                <a href="shop.html" class="epix-white-btn"><span>Shop Now<i class="fal fa-angle-right"></i></span></a>
+                <a href="shop.html" class="epix-white-btn"><span>Mua ngay<i class="fal fa-angle-right"></i></span></a>
               </div>
             </div>
           </div>
@@ -1681,8 +1615,8 @@
       <div class="container">
         <div class="row">
           <div class="col-xxl-2 col-xl-4">
-            <h4 class="epix-brand-title">Trusted by
-              500+ Brands</h4>
+            <h4 class="epix-brand-title">Được tin cậy bởi
+              500+ Thương hiệu</h4>
           </div>
           <div class="col-xxl-10 col-xl-8">
             <div class="brand-carousel">
@@ -1720,9 +1654,9 @@
           <div class="col-xxl-3 col-xl-3 footer-col-1 col-sm-6 col-md-8 col-lg-8">
             <div class="footer-widget widget mb-30 widget-about">
               <div class="widget-about">
-                <h4 class="epix-footer-title">Get The App</h4>
-                <p><a href="index.html">Epixx</a> App is now available on Google<br>
-                  Play & App Store. Get it now.</p>
+                <h4 class="epix-footer-title">Tải ứng dụng</h4>
+                <p><a href="index.html">Epixx</a> Ứng dụng hiện đã có trên Google<br>
+                  Play & App Store. Nhận nó ngay bây giờ.</p>
                 <div class="logo-list logo-list-1">
                   <a href="#"><img src="assets/img/icon/icon-app-store.png" alt=""></a>
                   <a href="#"><img src="assets/img/icon/icon-google-play.png" alt=""></a>
@@ -1735,40 +1669,40 @@
             <div class="row">
               <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                 <div class="footer-widget mb-30">
-                  <h4 class="epix-footer-title">Information</h4>
+                  <h4 class="epix-footer-title">Thông tin</h4>
                   <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="shop.html">Delivery Information</a></li>
-                    <li><a href="shop.html">New products</a></li>
-                    <li><a href="shop.html">Best sales</a></li>
-                    <li><a href="login.html">My Account</a></li>
-                    <li><a href="cart.html">Order History</a></li>
+                    <li><a href="about.html">Về chúng tôi</a></li>
+                    <li><a href="shop.html">Thông tin giao hàng</a></li>
+                    <li><a href="shop.html">Sản phẩm mới</a></li>
+                    <li><a href="shop.html">Hàng tốt nhất</a></li>
+                    <li><a href="login.html">Tài khoản của tôi</a></li>
+                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xxl-4 col-sm-6 col-md-4  col-lg-4  col-xl-4">
                 <div class="footer-widget mb-30">
-                  <h4 class="epix-footer-title">My Account</h4>
+                  <h4 class="epix-footer-title">Tài khoản của tôi</h4>
                   <ul>
-                    <li><a href="login.html">My Account</a></li>
-                    <li><a href="cart.html">Shopping Cart</a></li>
-                    <li><a href="cart.html">Wish List</a></li>
-                    <li><a href="shop.html">Prices drop</a></li>
-                    <li><a href="cart.html">Order History</a></li>
-                    <li><a href="cart.html">International Orders</a></li>
+                    <li><a href="login.html">Tài khoản của tôi</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                    <li><a href="cart.html">Sản phẩm yêu thích</a></li>
+                    <li><a href="shop.html">Giá giảm</a></li>
+                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                    <li><a href="cart.html">Đơn hàng quốc tế</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xxl-4 col-sm-6 col-md-4  col-lg-4  col-xl-4">
                 <div class="footer-widget mb-30">
-                  <h4 class="epix-footer-title">Customer Service</h4>
+                  <h4 class="epix-footer-title">Dịch vụ khách hàng</h4>
                   <ul>
-                    <li><a href="contact.html">Sitemap</a></li>
-                    <li><a href="contact.html">My Account</a></li>
-                    <li><a href="contact.html">Delivery Information</a></li>
-                    <li><a href="cart.html">Order History</a></li>
-                    <li><a href="cart.html">Wish List</a></li>
-                    <li><a href="shop.html">Specials</a></li>
+                    <li><a href="contact.html">Sơ đồ trang web</a></li>
+                    <li><a href="contact.html">Tài khoản của tôi</a></li>
+                    <li><a href="contact.html">Thông tin giao hàng</a></li>
+                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                    <li><a href="cart.html">Sản phẩm yêu thích</a></li>
+                    <li><a href="shop.html">Đặc biệt</a></li>
                   </ul>
                 </div>
               </div>
@@ -1777,21 +1711,21 @@
           <!-- /. footer menu widget -->
           <div class="col-xxl-3 col-xl-3 footer-col-3 col-sm-6 col-md-4 col-lg-4 order-first order-xl-last">
             <div class="footer-widget widget mb-30 widget-contact">
-              <h4 class="epix-footer-title">Contact Info</h4>
+              <h4 class="epix-footer-title">Thông tin liên hệ</h4>
               <div class="contact-info">
                 <div class="info-main d-flex">
                   <div class="contact-icon mr-15">
                     <img src="assets/img/icon/icon-contact.png" alt="">
                   </div>
                   <div class="contact-desc">
-                    <p>Hotline Free 24/24:<br>
+                    <p>Hotline miễn phí 24/24:<br>
                       <a href="tel:0123456789">0123456789</a>
                     </p>
                   </div>
                 </div>
                 <div class="info-sub">
                   <p>
-                    Your address goes here.<br>
+                    Địa chỉ ở đây.<br>
                     <a href="https://www.devsnews.com/cdn-cgi/l/email-protection#086c6d6567486d70696578646d266b6765"><span class="__cf_email__" data-cfemail="dbbfbeb6b49bbea3bab6abb7bef5b8b4b6">[email&#160;protected]</span></a>
                   </p>
                 </div>
