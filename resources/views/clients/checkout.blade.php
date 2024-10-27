@@ -88,7 +88,8 @@
     <!-- checkout-area start -->
     <section class="checkout-area pb-70">
         <div class="container">
-            <form action="#">
+            <form action="{{ route('checkout.store')  }} " method="POST">
+                @csrf
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="checkbox-form">
@@ -109,16 +110,11 @@
                                         </select>
                                     </div> --}}
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
-                                        <label>Họ <span class="required">*</span></label>
-                                        <input type="text" placeholder="Nhập họ" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Tên <span class="required">*</span></label>
-                                        <input type="text" placeholder="Nhập tên" />
+                                        <label>Họ Và Tên <span class="required">*</span></label>
+                                        <input type="text" name="name" placeholder="Nhập tên" />
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-12">
@@ -130,7 +126,7 @@
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Địa Chỉ Nhận Hàng <span class="required">*</span></label>
-                                        <input type="text" placeholder="Nhập địa chỉ của bạn" />
+                                        <input type="text" name="add" placeholder="Nhập địa chỉ của bạn" />
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-12">
@@ -159,13 +155,13 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Email  <span class="required">*</span></label>
-                                        <input type="email" placeholder="Nhập Email" />
+                                        <input type="email" name="email" placeholder="Nhập Email" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Số Điện Thoại <span class="required">*</span></label>
-                                        <input type="text" placeholder="Nhập Số Điện Thoại" />
+                                        <input type="text" name="phone" placeholder="Nhập Số Điện Thoại" />
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-12">
@@ -271,7 +267,7 @@
                             <div class="order-notes">
                                 <div class="checkout-form-list">
                                     <label>Ghi Chú </label>
-                                    <textarea id="checkout-mess" cols="30" rows="10"
+                                    <textarea id="checkout-mess" name="note" cols="30" rows="10"
                                         placeholder="Nhập Nội Dung"></textarea>
                                 </div>
                             </div>
@@ -305,7 +301,10 @@
                                             <td class="product-name">
                                                 {{ $item['product_name'] }} <strong class="product-quantity"> × {{ $item['quantity'] }}</strong>
                                             </td>
+                                            <input type="hidden" name="quantity[]" value="{{ $item['quantity'] }}">
+                                            <input type="hidden" name="id_product[]" value="{{ $item['product_id'] }}">
                                             <td class="product-total">
+                                                <input type="hidden" name="subtotal[]" value="{{ $subtotal }}">
                                                 <span class="amount">{{$subtotal  }} VNĐ</span>
                                             </td>
                                         </tr>
@@ -320,6 +319,7 @@
                                         <tr class="cart-subtotal">
                                             <th>Tổng Cộng Giỏ Hàng</th>
                                             <td><span class="amount">{{ $request->total }}</span></td>
+                                            <input type="hidden" name="total" value="{{ $request->total }}">
                                         </tr>
                                         <tr class="cart-voucher">
                                             <th>Mã Giảm Giá</th>
@@ -330,13 +330,13 @@
                                             <td>
                                                 <ul>
                                                     <li>
-                                                        <input id="amount" type="radio" name="checkout" />
+                                                        <input id="amount" type="radio" value="GHN" name="checkout" />
                                                         <label for="amount">
-                                                            Giao Hàng Nhanh <span class="amount">25,000 VNĐ</span>
+                                                            Giao Hàng Nhanh <span class="amount" >25,000 VNĐ</span>
                                                         </label>
                                                     </li>
                                                     <li>
-                                                        <input id="shipping" type="radio" name="checkout" />
+                                                        <input id="shipping" type="radio" value="HT" name="checkout" />
                                                         <label for="shipping"> Hỏa Tốc <span class="amount">25,000 VNĐ</span></label>
                                                     </li>
                                                     <li></li>

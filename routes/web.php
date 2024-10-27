@@ -208,7 +208,9 @@ Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('
 /* -------------------------------- FLASH SALE -------------------------------- */
 Route::prefix('/checkout')->name('checkout.')->group(function () {
     Route::get('/', [CheckoutController::class, 'index'])->name('index');
-    
+    Route::post('/store', [CheckoutController::class, 'store'])->name('store');
+    Route::get('/success', [CheckoutController::class, 'ok'])->name('success');
+
 });
 
 /* -------------------------------- FLASH SALE -------------------------------- */
