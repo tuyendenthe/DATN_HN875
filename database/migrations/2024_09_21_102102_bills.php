@@ -15,17 +15,26 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor( User::class)->constrained();
+
+
             $table->string('bill_code');
-            $table->foreignIdFor( Status::class)->constrained();
-            $table->string('payment');
-   /** ok xong  */
+            $table->string('name');
+            $table->integer('phone');
+            $table->string('email');
+            $table->string('note');
+            $table->string('checkout');
+
+            $table->string('payment_method');
+            $table->integer('total');
+            $table->string('status');
 
 
 
 
-            $table->rememberToken();
-            $table->timestamps();
+
+
+
+            $table->timestamps('date_created');
         });
     }
 

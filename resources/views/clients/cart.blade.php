@@ -99,6 +99,7 @@
                                 <tr>
                                     @php
                                         $total = 0;
+                                        $discount=0;
 
                                     @endphp
                                     <td colspan="7" class="text-center">Giỏ hàng của bạn đang trống.</td>
@@ -112,7 +113,7 @@
                     <div class="col-12">
                         <div class="coupon-all">
                             <div class="coupon">
-                                <form action="{{ route('cart.applyCoupon') }}" method="POST">
+                                <form id="applyCouponForm" action="{{ route('cart.applyCoupon') }}" method="POST">
 
                                     @csrf
                                 <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Nhập Mã Giảm Giá" type="text">
@@ -139,7 +140,9 @@
 
 
                                     @endphp
-                            <h2>Tiền Giỏ Hàng</h2>
+                                    {{-- <form id="checkoutForm" action="{{ route('checkout.index') }}" method="POST">
+                                        @csrf --}}
+                            <h4>Tổng Tiền Giỏ Hàng</h2>
                             <ul class="mb-20">
                                 <li>Thành tiền <span>{{ number_format($total ?? 0, 0, ',', '.') }} VNĐ</span></li>
                                 <li>Mã Giảm Giá <span id="discount" name="discount">{{ number_format($discount ?? 0, 0, ',', '.') }}VNĐ</span> </li>
@@ -148,12 +151,18 @@
                                      $totalAll = $total - $discount;
 
                                 @endphp
-                                <li>Tổng Tiền <span id="totalAll" name="totalAll" >{{ number_format($totalAll ?? 0, 0, ',', '.') }} VNĐ</span></li>
-                           @php
 
-                           @endphp
+                                <li>Tổng Tiền <span id="totalAll" name="totalAll" >{{ number_format($totalAll ?? 0, 0, ',', '.') }} VNĐ</span></li>
+
                             </ul>
-                            <a class="btn btn-primary" href="">Thanh Toán</a>
+                            {{-- <a class="btn btn-primary"
+                            href="{{ route('checkout.index', ['total' => $total, 'discount' => $discount, 'totalAll' => $totalAll]) }}">
+                            Thanh Toán
+                         </a> --}}
+                         <a id="checkoutLink" class="btn btn-primary" href="#">Thanh Toán</a>
+
+                            {{-- <button type="submit" class="btn btn-primary">Thanh Toán</button>
+                        </form> --}}
                             {{-- <a class="os-btn" href="{{ route('checkout') }}">Proceed to checkout</a> --}}
                         </div>
                     </div>
@@ -166,7 +175,7 @@
 <script>
     $(document).ready(function() {
         // Xử lý áp dụng voucher
-        $('form').on('submit', function(e) {
+        $('#applyCouponForm').on('submit', function(e) {
             e.preventDefault();
 
             var couponCode = $('#coupon_code').val();
@@ -220,6 +229,21 @@
         //         }
         //     });
         // });
+        document.getElementById('checkoutLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ <a>
+
+    // Lấy giá trị discount từ thẻ span
+    var discount = parseFloat($('#discount').text().replace(/[^\d.-]/g, '')); // Chuyển đổi thành số
+    var total = {{ $total ?? 0 }};
+    var totalAll = total - discount;
+
+    // Tạo URL với query string
+    var url = "{{ route('checkout.index') }}?total=" + total + "&discount=" + discount + "&totalAll=" + totalAll;
+
+    // Chuyển hướng đến URL mới
+    window.location.href = url;
+});
+
     });
 </script>
 

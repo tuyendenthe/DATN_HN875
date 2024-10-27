@@ -44,6 +44,13 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="name">Phần Trăm Giảm</label>
+                                <input type="number" min="1" max="100" name="percent" class="form-control" placeholder="Nhập phần trăm giảm" required>
+                                @error('percent')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="name">Ngày Hết Hạn</label>
                                 <input type="datetime-local" name="time_end" class="form-control" required>
                                 @error('time_end')

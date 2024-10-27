@@ -15,6 +15,7 @@ use App\Http\Controllers\ResetPasswordController;
 
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VariantController;
@@ -200,4 +201,12 @@ Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('ca
 
 
 Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
+/* -------------------------------- FLASH SALE -------------------------------- */
+Route::prefix('/checkout')->name('checkout.')->group(function () {
+    Route::get('/', [CheckoutController::class, 'index'])->name('index');
+    Route::post('/store', [CheckoutController::class, 'store'])->name('store');
+    Route::get('/success', [CheckoutController::class, 'ok'])->name('success');
 
+});
+
+/* -------------------------------- FLASH SALE -------------------------------- */
