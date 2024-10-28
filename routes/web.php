@@ -20,9 +20,7 @@ use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\FlashSaleController;
-
-
-
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +39,7 @@ Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name(
 
 
 
-Route::get('/shop', function () {
-    return view('clients.shop');
-})->name('shop');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 
 
 // Route::get('/', function () {

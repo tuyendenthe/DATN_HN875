@@ -19,7 +19,8 @@ class HomeUserController extends Controller
     {
         // dd($cart);
         // Lấy tối đa 10 sản phẩm từ bảng products
-        $products = Product::latest()->take(8)->get();
+        $products = (Product::with('category'))->latest()->take(8)->get();
+        // dd($products);
 
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))

@@ -38,14 +38,9 @@
                                 <h4 class="epix-s-widget-title">SHOP BY CATEGORIES</h4>
                                 <div class="epix-taglist">
                                     <ul>
-                                        <li><a href="shop.html">Accessories</a></li>
-                                        <li><a href="shop.html">Cameras & Photos</a></li>
-                                        <li><a href="shop.html">Computer & Laptop</a></li>
-                                        <li><a href="shop.html">Electronic & Housewares</a></li>
-                                        <li><a href="shop.html">Games & Accessories</a></li>
-                                        <li><a href="shop.html">Smartphone & Tablet</a></li>
-                                        <li><a href="shop.html">TV & Audio</a></li>
-                                        <li><a href="shop.html">Uncategorized</a></li>
+                                    @foreach ($categories as $item)
+                                        <li><a href="shop.html">{{$item->name}}</a></li>
+                                    @endforeach
                                     </ul>
                                 </div>
                             </div>
