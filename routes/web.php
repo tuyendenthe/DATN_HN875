@@ -9,7 +9,7 @@ use App\Http\Controllers\HomeUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenController;
-
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 
@@ -112,17 +112,30 @@ Route::post('login',[AuthenController::class,'postLogin'])->name('postLogin');
 Route::get('logout',[AuthenController::class,'logout'])->name('logout');
 Route::get('register',[AuthenController::class,'register'])->name('register');
 Route::post('register',[AuthenController::class,'postRegister'])->name('postRegister');
+Route::middleware(['auth'])->group(function () {
+    Route::get('account/edit', [AuthenController::class, 'editUser'])->name('account.edit');
+    Route::put('account/update', [AuthenController::class, 'updateUser'])->name('account.update');
+});
 
-Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'],function() {
+
+Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::get('/dashboard', function () {
         return view('admins.dashboard');
     })->name('dashboard');
 
 
+    // CRUD user
+    Route::get('/listUser', [UserController::class, 'listUser'])->name('admin1.users.listuser');
+    Route::get('/createUser', [UserController::class, 'addUser'])->name('admin1.users.adduser'); // Đặt tên route
+    Route::post('/createUser', [UserController::class, 'store'])->name('admin1.users.store');
+    Route::get('/editUser/{id}', [UserController::class, 'edit'])->name('admin1.users.edit');
+    Route::put('/editUser/{id}', [UserController::class, 'update'])->name('admin1.users.update');
+    Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('admin1.users.destroy');
+    Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
+
     Route::get('/chart', function () {
         return view('admins.chart');
     })->name('chart');
-
 
     Route::get('/widgets', function () {
         return view('admins.widgets');

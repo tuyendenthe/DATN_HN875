@@ -64,6 +64,63 @@ body {
     display: inline-block;
 }
 
+.dropdown-toggle {
+    text-decoration: none; /* Remove underline */
+    color: #fff; /* Text color */
+    background-color: #007bff; /* Button background color */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: 600; /* Bold text */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+.dropdown-toggle:hover {
+    background-color: #0056b3; /* Darker background on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.dropdown-menu {
+    display: none; /* Hide the dropdown by default */
+    position: absolute; /* Position it relative to the user menu */
+    background-color: #fff; /* Dropdown background color */
+    border: 1px solid #ccc; /* Border around dropdown */
+    border-radius: 5px; /* Rounded corners for dropdown */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    z-index: 1000; /* Ensure it appears above other elements */
+    width: 200px; /* Fixed width for dropdown */
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Display the dropdown on hover */
+}
+
+.dropdown-menu a {
+    display: block; /* Make links block-level for better click area */
+    padding: 10px 15px; /* Padding for the links */
+    text-decoration: none; /* Remove underline */
+    color: #333; /* Text color */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0; /* Light background on hover */
+}
+
+/* Optional: Add a transition effect for the dropdown */
+.dropdown-menu {
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.3s ease; /* Fade in effect */
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Show dropdown */
+    opacity: 1; /* Fade in */
+}
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
 .dropdown {
     position: relative;
 }
