@@ -31,11 +31,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Basic Datatable</h5>
-                        
+
                         <div class="table-responsive">
                             <table id="zero_config" class="table">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <a href="{{ route('products.addProduct') }}" class="btn btn-primary">Thêm mới</a>
+                                    <div>
+                                        <a href="{{ route('products.addProduct') }}" class="btn btn-primary">Thêm mới</a>
+                                        <a href="{{ route('flash_sale.index') }}" class="btn btn-warning">Flash Sale</a>
+                                    </div>
                                     <form action="{{route('search.product')}}" method="POST">
                                         @csrf
                                         <input type="text" placeholder="Search anything here.." name="keyw">
@@ -46,7 +49,7 @@
                                         <th>STT</th>
                                         <th>Tên sản phẩm</th>
                                         <th>Ảnh</th>
-                                        <th>Mô tả</th>
+                                        {{-- <th>Mô tả</th> --}}
                                         <th>Mô tả ngắn</th>
                                         <th>Hành Động</th>
                                     </tr>
@@ -60,7 +63,7 @@
                                             <td>
                                                 <img src="{{ Storage::url($value->image) }}" alt="" width="100">
                                             </td>
-                                            <td>{{ $value->content }}</td>
+                                            {{-- <td>{{ $value->content }}</td> --}}
                                             <td>{{ $value->content_short }}</td>
                                             <td>
                                                 <a class="btn btn-info m-1" href="{{ route('variants.listVariant', $value->id) }}">Biến thể</a>

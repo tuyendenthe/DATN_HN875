@@ -13,6 +13,41 @@ use Illuminate\Support\Facades\Route;
 
 class AuthenController extends Controller
 {
+    public function editUser()
+    {
+        $user = Auth::user();
+        return view('clients.edit_user', compact('user'));
+    }
+    public function updateUser(Request $req)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('message', 'Bạn cần đăng nhập để cập nhật thông tin.');
+        }
+
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'name.required' => 'Tên không được để trống.',
+            'email.required' => 'Email không được để trống.',
+            'image.image' => 'File tải lên phải là hình ảnh.',
+        ]);
+
+        $user = Auth::user();
+        $user->name = $req->name;
+        $user->email = $req->email;
+
+
+        if ($req->hasFile('image')) {
+            $path = $req->file('image')->store('images/users');
+            $user->image = $path;
+        }
+
+        $user->save();
+
+        return redirect()->route('index')->with('message', 'Cập nhật tài khoản thành công');
+    }
     public function login(){
         return view('clients.login');
     }
@@ -65,7 +100,7 @@ class AuthenController extends Controller
         $req->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed', // Ensure you have a password confirmation field
+            'password' => 'required|string|min:8|confirmed',
         ], [
             'name.required' => 'Tên không được để trống.',
             'name.string' => 'Tên phải là chuỗi.',
@@ -82,14 +117,15 @@ class AuthenController extends Controller
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
             'password.confirmed' => 'Mật khẩu không trùng khớp',
         ]);
-
+        $image = 'images/products/adminsczx_UfAaaAvjkq9htIZzCcL5hCrJpPbGqsJscKEt7bk7.jpg';
         $data = [
             'name' => $req->name,
             'email' => $req->email,
-            'password' => Hash::make($req->password), // Hash the password
+            'password' => Hash::make($req->password),
+            'image' => $image,
         ];
 
-        User::create($data); // Create the user
+        User::create($data);
 
         return redirect()->route('login')->with([
             'message' => 'Đăng ký thành công',

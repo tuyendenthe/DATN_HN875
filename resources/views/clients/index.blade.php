@@ -1,1516 +1,1048 @@
-@extends('clients.master')
-
-@section('content')
-
-<main>
-    <style>
-        .custom-col {
+<!DOCTYPE html>
+<html class="no-js" lang="">
 
 
-    width: 19.2%; /* 100% / 5 = 20%, but accounting for margins and padding */
-    }
+<!-- Mirrored from www.devsnews.com/template/epixx-prev/epixx/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 16:30:41 GMT -->
 
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Epix - Electronics eCommerce HTML Template</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    </style>
-    <!-- prealoder area start -->
-    <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="object" id="first_object"></div>
-                <div class="object" id="second_object"></div>
-                <div class="object" id="third_object"></div>
+    <link rel="manifest" href="https://devsnews.com/template/epixx-prev/epixx/site.webmanifest/" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{{ asset('laptop/assets//css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('laptop/assets/css/fontawesome-all.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('laptop/assets/css/animate.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('laptop/assets/css/magnific-popup.css') }}" />
+    <link rel="stylesheet" href="{{ asset('laptop/assets/css/nice-select.css') }}" />
+    <link rel="stylesheet" href="{{ asset('laptop/assets/css/pe-icon-7-stroke.css') }}" />
+    <link rel="stylesheet" href="{{ asset('laptop/assets/css/slick.css') }}" />
+    <link rel="stylesheet" href="{{ asset('laptop/assets/css/meanmenu.css') }}" />
+    <link rel="stylesheet" href="{{ asset('laptop/assets/css/swipper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('laptop/assets/css/main.css') }}" />
+</head>
+
+<body>
+    <!-- header area start -->
+    @include('blocks.header')
+    <!-- header area end -->
+
+    <!-- slide-bar start -->
+    <div class="container">
+        @if (session('message'))
+            <div id="notification" class="notification alert alert-danger" role="alert">
+                {{ session('message') }}
             </div>
+        @endif
+
+        <!-- Other content here -->
+    </div>
+
+    <style>
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var notification = document.getElementById('notification');
+
+            if (notification) {
+                // Show the notification
+                notification.style.display = 'block';
+
+                // Hide the notification after 5 seconds
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 7000);
+
+                // Optional: Add hover effect to keep it visible
+                notification.addEventListener('mouseenter', function() {
+                    notification.style.display = 'block';
+                });
+
+                notification.addEventListener('mouseleave', function() {
+                    notification.style.display = 'none';
+                });
+            }
+        });
+    </script>
+    <div class="fix">
+        <div class="side-info d-lg-none">
+            <button class="side-info-close"><i class="fal fa-times"></i></button>
+
+            <div class="side__logo mb-25">
+                <a href="index.html"><img src="assets/img/logo/logo.png" alt="logo" /></a>
+            </div>
+
+            <div class="mobile-menu"></div>
+
+            <div class="contact-infos mt-30 mb-30">
+                <div class="contact-list mb-30">
+                    <h4>Contact Info</h4>
+                    <ul class="p-0">
+                        <li><i class="fal fa-map"></i>12/A, Mirnada City Tower, NYC</li>
+                        <li><i class="fal fa-phone-alt"></i><a href="tell:+876864764764">+876 864 764 764</a></li>
+                        <li><i class="fal fa-envelope-open"></i><a
+                                href="https://www.devsnews.com/cdn-cgi/l/email-protection#c2a3a6afabac82a5afa3abaeeca1adaf"><span
+                                    class="__cf_email__"
+                                    data-cfemail="8aebeee7e3e4caede7ebe3e6a4e9e5e7">[email&#160;protected]</span></a>
+                        </li>
+                    </ul>
+                    <div class="sidebar__menu--social">
+                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
-    <!-- prealoder area end -->
-    <!-- slider area start -->
-    <div class="slider-area">
-        <div class="pl-20 pr-20">
-            <div class="row row-20">
-                <div class="col-xxl-6 col-lg-6 slider-col-3-1">
-                    <div class="slider-active-2 swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="single-slider mb-20 mb-md-0 d-block slider-height-3  d-flex align-items-center"
-                                    data-background="{{asset('laptop/assets/img/slider/main-banner-4.jpg')}}">
-                                    <div class="slider-content-3">
-                                        <h5 class="slide-subtitle-3">bang & olufsen</h5>
-                                        <h2 class="slide-title-3">Beoplay a1</h2>
-                                        <p>Epixx is World’s largest otd online marketplace<br>
-                                            the connecting buyers with suppliers.</p>
-                                        <a href="shop.html" class="transparent-btn">Explore Now <i
-                                                class="fal fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="single-slider mb-20 mb-lg-0 d-block slider-height-3  d-flex align-items-center"
-                                    data-background="{{asset('laptop/assets/img/slider/main-banner-5.jpg')}}">
-                                    <div class="slider-content-3">
-                                        <h5 class="slide-subtitle-3">bang & olufsen</h5>
-                                        <h2 class="slide-title-3">Beoplay a1</h2>
-                                        <p>Epixx is World’s largest otd online marketplace<br>
-                                            the connecting buyers with suppliers.</p>
-                                        <a href="shop.html" class="transparent-btn">Explore Now <i
-                                                class="fal fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="single-slider mb-30 mb-lg-0 d-block slider-height-3  d-flex align-items-center"
-                                    data-background="{{asset('laptop/assets/img/slider/main-banner-4.jpg')}}">
-                                    <div class="slider-content-3">
-                                        <h5 class="slide-subtitle-3">bang & olufsen</h5>
-                                        <h2 class="slide-title-3">Beoplay a1</h2>
-                                        <p>Epixx is World’s largest otd online marketplace<br>
-                                            the connecting buyers with suppliers.</p>
-                                        <a href="shop.html" class="transparent-btn">Explore Now <i
-                                                class="fal fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="single-slider mb-30 mb-lg-0 d-block slider-height-3  d-flex align-items-center"
-                                    data-background="{{asset('laptop/assets/img/slider/main-banner-5.jpg')}}">
-                                    <div class="slider-content-3">
-                                        <h5 class="slide-subtitle-3">bang & olufsen</h5>
-                                        <h2 class="slide-title-3">Beoplay a1</h2>
-                                        <p>Epixx is World’s largest otd online marketplace<br>
-                                            the connecting buyers with suppliers.</p>
-                                        <a href="shop.html" class="transparent-btn">Explore Now <i
-                                                class="fal fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="offcanvas-overlay"></div>
+    <!-- slide-bar end -->
+    <main>
+
+        <!-- slider area start -->
+        <section class="slider-area">
+            <div class="slider-active">
+                <div class="single-slider d-flex align-items-center slider-height"
+                    data-background="https://th.bing.com/th/id/OIP.jnoyoTqzhiFCYCu2BJYbUAHaE3?rs=1&pid=ImgDetMain">
+                    <div class="container">
+                        <div class="slider-content text-center text-center">
+                            <span class="epix-slide-subtitle" data-animation="fadeInUp">Sale 30% Discount</span>
+                            <h2 class="epix-slide-title">console</h2>
+                            <a href="shop.html" class="epix-btn-1"><span>Purchase Now<i
+                                        class="fal fa-angle-right"></i></span></a>
                         </div>
-                        <div class="swiper-paginations pagination-3"></div>
                     </div>
                 </div>
-                <div class="col-xxl-6 col-lg-6 slider-col-3-2">
-                    <div class="row row-20">
-                        <div class="col-xxl-6 col-sm-6 slider-col-3-3 mb-20">
-                            <div class="video-product-box video-pro-height">
-                                <img src="{{asset('laptop/assets/img/banner/video-banner.jpg')}}" alt="">
-                                <a href="https://www.youtube.com/watch?v=LQw2ljPHJU0" class="popup-video"><i class="fal fa-play"></i></a>
+                <div class="single-slider d-flex align-items-center slider-height"
+                    data-background="https://th.bing.com/th/id/OIP.jnoyoTqzhiFCYCu2BJYbUAHaE3?rs=1&pid=ImgDetMain">
+                    <div class="container">
+                        <div class="slider-content text-center text-center">
+                            <span class="epix-slide-subtitle">Sale 30% Discount</span>
+                            <h2 class="epix-slide-title">console</h2>
+                            <a href="shop.html" class="epix-btn-1"><span>Purchase Now<i
+                                        class="fal fa-angle-right"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- slider area end -->
+
+        <!-- banner area start -->
+        <section class="banner-area pt-30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-6 col-lg-6">
+
+                        <div class="epix-single-banner mb-30 wow fadeInUp" data-wow-delay=".2s"
+                            data-background="assets/img/banner/banner-1.jpg">
+                            <div class="epix-collection-box">
+                                <h3 class="epix-c-heading">Bộ sưu tập năm 2021</h3>
+                                <div class="epix-c-list">
+                                    <ul>
+                                        <li><a href="shop.html">Galaxy Tabs & Ides</a></li>
+                                        <li><a href="shop.html">Phụ kiện</a></li>
+                                        <li><a href="shop.html">MacBook</a></li>
+                                        <li><a href="shop.html">Laptop Acer</a></li>
+                                        <li><a href="shop.html">Laptop Asus</a></li>
+                                        <li><a href="shop.html">Laptop Dell</a></li>
+                                        <li><a href="shop.html">Laptop MSI</a></li>
+                                        <li><a href="shop.html">Laptop Lenovo</a></li>
+                                        <li><a href="shop.html">Laptop HP</a></li>
+                                        <li><a href="shop.html">Ổ cứng</a></li>
+                                        <li><a href="shop.html">iPad & Máy tính bảng </a></li>
+                                        <li><a href="shop.html">Ram</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-xxl-6 col-sm-6 slider-col-3-4 mb-20">
-                            <div class="banner-3-1">
-                                <div class="thumb video-pro-height">
-                                    <img src="{{asset('laptop/assets/img/banner/page-3-banner.jpg')}}" class="has-overlay-img" alt="">
-                                </div>
-                                <div class="content">
-                                    <h3>Music Monster</h3>
-                                    <p>Epixx is World’s largest online<br>
-                                        the connecting buyers.</p>
-                                    <a href="shop.html" class="transparent-btn">Shop Now <i
+
+                    </div>
+                    <div class="col-xxl-6 col-lg-6">
+                        <div class="epix-single-banner-2 mb-30 wow fadeInUp" data-wow-delay=".4s"
+                            data-background="https://th.bing.com/th/id/OIP.jnoyoTqzhiFCYCu2BJYbUAHaE3?rs=1&pid=ImgDetMain">
+                            <h3 class="epix-c-heading-2">Google Mini<br>
+                                Home Appliances<br>
+                                Nest 4.0</h3>
+                            <a href="shop.html" class="epix-white-btn"><span>Shop Now<i
+                                        class="fal fa-angle-right"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- banner area end -->
+        <!-- new arrival area start -->
+        {{-- <section class="new-arrival pt-65 pb-95">
+      <div class="container">
+        <div class="row mb-45">
+          <div class="col-xxl-12">
+            <div class="epix-section-title text-center">
+              <h5 class="s-title">Newest Arrivals Of This Month</h5>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xxl-5 col-xl-5 arrival-col-1">
+            <div class="banner-3 wow fadeInUp" data-wow-delay=".2s">
+              <div class="thumb">
+                <img src="assets/img/banner/banner-3.jpg" class="w-100" alt="">
+              </div>
+              <div class="content">
+                <span class="shipping text-uppercase">*Free shipping</span>
+                <h3>Watches</h3>
+                <a href="shop.html" class="epix-btn-2"><span>Explore Now<i class="fal fa-angle-right"></i></span></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-7 col-xl-7 product-col-space arrival-col-2">
+            <div class="row g-0">
+              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4">
+                <div class="epix-single-product wow fadeInUp" data-wow-delay=".2s">
+                  <div class="epix-product-thumb">
+                    <a href="single-product.html"><img src="assets/img/product/23.jpg" class="img-fluid" alt=""></a>
+                    <div class="epix-action">
+                      <a href="single-product.html" class="p-cart product-popup-toggle">
+                        <i class="fal fa-eye"></i>
+                        <i class="fal fa-eye"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-heart"></i>
+                        <i class="fal fa-heart"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-shopping-cart"></i>
+                        <i class="fal fa-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="epix-product-content">
+                    <div class="wrap">
+                      <span class="epix-p-subtitle">Speakers</span>
+                      <div class="rating">
+                        <i class="fal fa-star"></i>
+                        <span>2.5</span>
+                      </div>
+                    </div>
+                    <h5 class="epix-p-title"><a href="single-product.html">Originals Win Camera</a></h5>
+                    <div class="price-box">
+                      <span class="price">$150.99</span>
+                      <a href="single-product.html">+ Select Option</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".4s">
+                <div class="epix-single-product">
+                  <div class="epix-product-thumb">
+                    <a href="single-product.html"><img src="assets/img/product/6.jpg" class="img-fluid" alt=""></a>
+                    <div class="epix-action">
+                      <a href="single-product.html" class="p-cart product-popup-toggle">
+                        <i class="fal fa-eye"></i>
+                        <i class="fal fa-eye"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-heart"></i>
+                        <i class="fal fa-heart"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-shopping-cart"></i>
+                        <i class="fal fa-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="epix-product-content">
+                    <div class="wrap">
+                      <span class="epix-p-subtitle">Cameras</span>
+                      <div class="rating">
+                        <i class="fal fa-star"></i>
+                        <span>4.5</span>
+                      </div>
+                    </div>
+                    <h5 class="epix-p-title"><a href="single-product.html">Sodales Par Iaculis</a></h5>
+                    <div class="price-box">
+                      <span class="price">$125.99</span>
+                      <a href="single-product.html">+ Select Option</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".6s">
+                <div class="epix-single-product">
+                  <div class="epix-product-thumb">
+                    <span class="sale">sale</span>
+                    <a href="single-product.html"><img src="assets/img/product/2.jpg" class="img-fluid" alt=""></a>
+                    <div class="epix-action">
+                      <a href="single-product.html" class="p-cart product-popup-toggle">
+                        <i class="fal fa-eye"></i>
+                        <i class="fal fa-eye"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-heart"></i>
+                        <i class="fal fa-heart"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-shopping-cart"></i>
+                        <i class="fal fa-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="epix-product-content">
+                    <div class="wrap">
+                      <span class="epix-p-subtitle">Cameras</span>
+                      <div class="rating">
+                        <i class="fal fa-star"></i>
+                        <span>3.3</span>
+                      </div>
+                    </div>
+                    <h5 class="epix-p-title"><a href="single-product.html">Sceleris Quie Nostra</a></h5>
+                    <div class="price-box">
+                      <span class="price">$32.99</span>
+                      <a href="single-product.html">+ Select Option</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".8s">
+                <div class="epix-single-product">
+                  <div class="epix-product-thumb">
+                    <a href="single-product.html"><img src="assets/img/product/14.jpg" class="img-fluid" alt=""></a>
+                    <div class="epix-action">
+                      <a href="single-product.html" class="p-cart product-popup-toggle">
+                        <i class="fal fa-eye"></i>
+                        <i class="fal fa-eye"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-heart"></i>
+                        <i class="fal fa-heart"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-shopping-cart"></i>
+                        <i class="fal fa-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="epix-product-content">
+                    <div class="wrap">
+                      <span class="epix-p-subtitle">Laptops</span>
+                      <div class="rating">
+                        <i class="fal fa-star"></i>
+                        <span>2.4</span>
+                      </div>
+                    </div>
+                    <h5 class="epix-p-title"><a href="single-product.html">Wireless Audio System</a></h5>
+                    <div class="price-box">
+                      <span class="price">$150.00</span>
+                      <a href="single-product.html">+ Select Option</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay="1s">
+                <div class="epix-single-product">
+                  <div class="epix-product-thumb">
+                    <a href="single-product.html"><img src="assets/img/product/25.jpg" class="img-fluid" alt=""></a>
+                    <div class="epix-action">
+                      <a href="single-product.html" class="p-cart product-popup-toggle">
+                        <i class="fal fa-eye"></i>
+                        <i class="fal fa-eye"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-heart"></i>
+                        <i class="fal fa-heart"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-shopping-cart"></i>
+                        <i class="fal fa-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="epix-product-content">
+                    <div class="wrap">
+                      <span class="epix-p-subtitle">Tablets</span>
+                      <div class="rating">
+                        <i class="fal fa-star"></i>
+                        <span>2.4</span>
+                      </div>
+                    </div>
+                    <h5 class="epix-p-title"><a href="single-product.html">Game Console Conller</a></h5>
+                    <div class="price-box">
+                      <span class="price"><del>$150.99</del> <span class="active">$215.00</span></span>
+                      <a href="single-product.html">+ Select Option</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4">
+                <div class="epix-single-product wow fadeInUp" data-wow-delay="1.2s">
+                  <div class="epix-product-thumb">
+                    <a href="single-product.html"><img src="assets/img/product/22.jpg" class="img-fluid" alt=""></a>
+                    <div class="epix-action">
+                      <a href="single-product.html" class="p-cart product-popup-toggle">
+                        <i class="fal fa-eye"></i>
+                        <i class="fal fa-eye"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-heart"></i>
+                        <i class="fal fa-heart"></i>
+                      </a>
+                      <a href="cart.html" class="p-cart">
+                        <i class="fal fa-shopping-cart"></i>
+                        <i class="fal fa-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="epix-product-content">
+                    <div class="wrap">
+                      <span class="epix-p-subtitle">Speakers</span>
+                      <div class="rating">
+                        <i class="fal fa-star"></i>
+                        <span>2.4</span>
+                      </div>
+                    </div>
+                    <h5 class="epix-p-title"><a href="single-product.html">Tablet Thin Elite Book</a></h5>
+                    <div class="price-box">
+                      <span class="price">$212.00</span>
+                      <a href="single-product.html">+ Select Option</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> --}}
+        <!-- new arrival area end -->
+
+        <!-- promo area start -->
+        {{-- <section class="promo-area pb-100">
+      <div class="container">
+        <div class="promo-banner pl-75 pr-90 pt-30 pb-35 theme-bg">
+          <div class="row">
+            <div class="col-xxl-5 col-xl-5 col-lg-6">
+              <div class="box-wrap">
+                <div class="epix-p-box">
+                  <div class="epix-p-icon">
+                    <img src="assets/img/icon/television.png" alt="">
+                    <span class="label">Television</span>
+                  </div>
+                </div>
+                <div class="epix-p-box">
+                  <div class="epix-p-icon">
+                    <img src="assets/img/icon/headphone.png" alt="">
+                    <span class="label">Headphone</span>
+                  </div>
+                </div>
+                <div class="epix-p-box">
+                  <div class="epix-p-icon">
+                    <img src="assets/img/icon/computer.png" alt="">
+                    <span class="label">Computers</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 d-none d-xl-block">
+              <div class="promo-img">
+                <img src="assets/img/banner/promo-img.png" alt="">
+              </div>
+            </div>
+            <div
+              class="col-xxl-4 col-xl-4 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-end">
+              <h3 class="promo-title d-inline-block text-center">Shop & Save Big On <br>
+                Listed Categories Here</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> --}}
+        <!-- promo area end -->
+        <!-- deals area start -->
+        @if ($flashSales->count())
+            <section class="deals-area bg-gray pt-40">
+                <div class="container">
+                    <div class="deals-product bg-white">
+                        <div class="row  align-items-center">
+                            <div class="col-xxl-3 col-xl-3">
+                                <div class="deal-product-left">
+                                    <h3 class="deals-title">Siêu<br>
+                                        Flash Sale</h3>
+                                    <div class="deals-countdown mb-25">
+
+                                        <div class="countdown-inner" data-countdown=""
+                                            data-date="{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $flashSales[0]->time_end)->format('M d Y H:i:s') }}">
+                                            <ul>
+                                                <li><span data-days="">0</span> Ngày</li>
+                                                <li><span data-hours="">0</span> Giờ</li>
+                                                <li><span data-minutes="">0</span> Phút</li>
+                                                <li><span data-seconds="">0</span> Giây</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <a href="shop.html" class="link-details">Xem Tất Cả<i
                                             class="fal fa-angle-right"></i></a>
                                 </div>
+                            </div>
+                            <div class="col-xxl-9 col-xl-9">
+                                <div class="deal-product-wrap pl-80">
+                                    <div class="d-product-active">
+                                        <div class="swiper-container d-product-active">
+                                            <div class="swiper-wrapper">
+
+                                                @foreach ($flashSales as $flashSale)
+                                                    <div class="swiper-slide" style="flex-shrink: unset;">
+                                                        <div class="epix-single-product epix-single-product-2">
+                                                            <div class="epix-product-thumb epix-product-thumb-2">
+                                                                <span class="sale">sale</span>
+                                                                <a
+                                                                    href="{{ route('product.details', $flashSale->product->id) }}">
+                                                                    <img src="{{ Storage::url($flashSale->product->image) }}"
+                                                                        class="img-fluid">
+                                                                </a>
+                                                                <div class="epix-action">
+                                                                    <a href="{{ route('product.details', $flashSale->product->id) }}"
+                                                                        class="p-cart product-popup-toggle">
+                                                                        <i class="fal fa-eye"></i>
+                                                                        <i class="fal fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="cart.html" class="p-cart">
+                                                                        <i class="fal fa-heart"></i>
+                                                                        <i class="fal fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="cart.html" class="p-cart">
+                                                                        <i class="fal fa-shopping-cart"></i>
+                                                                        <i class="fal fa-shopping-cart"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="epix-product-content">
+                                                                <div class="wrap">
+                                                                    <span class="epix-p-subtitle">Đánh giá</span>
+                                                                    <div class="rating">
+                                                                        <i class="fal fa-star"></i>
+                                                                        <span>4.5</span>
+                                                                    </div>
+                                                                </div>
+                                                                <h5 class="epix-p-title"><a
+                                                                        href="{{ route('product.details', $flashSale->product->id) }}">{{ $flashSale->product->name }}</a>
+                                                                </h5>
+                                                                <div class="price-box">
+                                                                    <span class="price"><span
+                                                                            class="active">{{ number_format($flashSale->product->price) }}đ</span></span>
+                                                                    <a
+                                                                        href="{{ route('product.details', $flashSale->product->id) }}">+
+                                                                        Xem Thêm</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /. deals product wrap -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xxl-12">
+                            <div class="deal-product-collection pl-100 pr-100">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
+        <!-- deals area end -->
+        <!-- unmissed area start -->
+        <section class="unmissed-area pt-95 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-3 col-xl-3 col-sm-6 unmissed-col-1">
+                        <div class="unmissed-sidebar">
+                            <h4 class="epix-sidebar-title">Danh mục</h4>
+                            <ul class="epix-um-list">
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-desktop"></i><span>MacBook</span></a>
+                                </li>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-laptop"></i><span>Acer</span></a>
+                                </li>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-mobile-android"></i><span>Asus</span></a>
+                                </li>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-camera-retro"></i><span>Dell</span></a></li>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-video"></i><span>MSI</span></a>
+                                </li>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-mouse"></i><span>Lenovo</span></a>
+                                </li>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-laptop"></i><span>HP</span></a>
+                                </li>
+                                <li class="has-arrow"><a href="shop.html"><i class="fal fa-camera-retro"></i><span>Ổ
+                                            cứng</span></a></li>
+                            </ul>
+                            <a href="shop.html" class="link-details">Xem tất cả sản phẩm<i
+                                    class="fal fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-xxl-9 col-xl-9 unmissed-col-2">
+                        <div class="product-col-space-2">
+                            <div class="row g-0">
+                                @foreach ($products as $item)
+                                    <div class="col-xxl-3 col-sm-6 col-md-4 col-lg-4 col-xl-3 wow fadeInUp"
+                                        data-wow-delay=".2s">
+                                        <div class="epix-single-product">
+                                            <div class="epix-product-thumb epix-product-thumb-3">
+                                                <a href="single-product.html"><img src="assets/img/product/23.jpg"
+                                                        class="img-fluid" alt=""></a>
+                                                <div class="epix-action">
+                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
+                                                        <i class="fal fa-eye"></i>
+                                                        <i class="fal fa-eye"></i>
+                                                    </a>
+                                                    <a href="cart.html" class="p-cart">
+                                                        <i class="fal fa-heart"></i>
+                                                        <i class="fal fa-heart"></i>
+                                                    </a>
+                                                    <a href="cart.html" class="p-cart">
+                                                        <i class="fal fa-shopping-cart"></i>
+                                                        <i class="fal fa-shopping-cart"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="epix-product-content">
+                                                <div class="wrap">
+                                                    <span
+                                                        class="epix-p-subtitle">{{ optional(optional($item)->category)->name ?? 'No Category' }}</span>
+                                                    <div class="rating">
+                                                        <i class="fal fa-star"></i>
+                                                        <span>2.5</span>
+                                                    </div>
+                                                </div>
+                                                <h5 class="epix-p-title"><a
+                                                        href="single-product.html">{{ $item->name }}</a></h5>
+                                                <div class="price-box">
+                                                    <span class="price">{{ $item->price }}</span>
+                                                    <a href="single-product.html">+ Select Option</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- unmissed end -->
+        <!-- sub banner area start -->
+        <section class="sub-banner-area pb-100">
+            <div class="container">
+                <div class="banner-inner pt-95 pb-80 pl-95 pr-95"
+                    data-background="assets/img/banner/offer-banner-2.jpg">
+                    <div class="text-center d-inline-block">
+                        <h5 class="epix-s-banner-subtitle">45% Flate On</h5>
+                        <h3 class="epix-s-banner-title">Tiện ích</h3>
+                        <a href="shop.html" class="epix-btn-1" tabindex="0"><span>Khám phá ngay<i
+                                    class="fal fa-angle-right"></i></span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- sub banner area end -->
+
+        <!-- service area start -->
+        <div class="service-area pb-95">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-8">
+                        <div class="service-wrapper">
+                            <div class="row s-row">
+                                <div class="col-xxl-4 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="epix-single-service">
+                                        <div class="epix-s-icon">
+                                            <img src="assets/img/icon/service-1.png" alt="">
+                                        </div>
+                                        <div class="epix-s-content">
+                                            <a href="shop.html" class="epix-s-link">Giao hàng miễn phí</a>
+                                            <p>Các biến thể mới vượt qua <br>
+                                                Lorem có sẵn..</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-4 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                                    <div class="epix-single-service">
+                                        <div class="epix-s-icon">
+                                            <img src="assets/img/icon/service-2.png" alt="">
+                                        </div>
+                                        <div class="epix-s-content">
+                                            <a href="shop.html" class="epix-s-link">Trả hàng trong 20 ngày</a>
+                                            <p>Các biến thể mới vượt qua <br>
+                                                Lorem có sẵn..</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-4 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
+                                    <div class="epix-single-service">
+                                        <div class="epix-s-icon">
+                                            <img src="assets/img/icon/service-3.png" alt="">
+                                        </div>
+                                        <div class="epix-s-content">
+                                            <a href="shop.html" class="epix-s-link">Thanh toán an toàn</a>
+                                            <p>Các biến thể mới vượt qua <br>
+                                                Lorem có sẵn..</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-6 wow fadeInUp" data-wow-delay="1s">
+                        <div class="epix-newsletter-form pl-50">
+                            <h4 class="epix-newsletter-title">Đăng ký nhận bản tin</h4>
+                            <form action="#">
+                                <input type="text" placeholder="Nhập email của bạn">
+                                <button type="submit">
+                                    <i class="fal fa-long-arrow-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <!-- /. service newsletter -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- service area end -->
+
+        <!-- handpicked area start -->
+        <div class="handpicked-area bg-gray pt-40 pb-95">
+            <div class="container">
+                <div class="handpicked-inner pl-30 pr-30 pt-35 bg-white">
+                    <div class="row mb-35">
+                        <div class="col-xxl-12">
+                            <div class="epix-section-title text-center">
+                                <h5 class="s-title">Sản phẩm được lựa chọn cẩn thận cho bạn</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-45">
+                        <div class="col-xxl-12">
+                            <div class="epix-handpicked-banner"
+                                data-background="assets/img/banner/product-banner-2.jpg">
+                                <h4 class="epix-h-banner-text">Dòng thông minh 4.0
+                                </h4>
+                                <a href="shop.html" class="epix-white-btn"><span>Mua ngay<i
+                                            class="fal fa-angle-right"></i></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xxl-12">
-                            <div class="banner-3-1">
-                                <div class="thumb video-pro-height-2">
-                                    <img src="{{asset('laptop/assets/img/banner/page-3-banner-2.jpg')}}" alt="">
+                        <div class="col-xxl-4 col-sm-6 col-md-4">
+                            <div class="epix-handpicked-product mb-50">
+                                <div class="epix-h-pro-thumb mr-35">
+                                    <a href="single-product.html"><img src="assets/img/product/1.jpg"
+                                            alt=""></a>
                                 </div>
-                                <div class="content">
-                                    <h3>xBox 5</h3>
-                                    <p>Epixx is World’s largest online<br>
-                                        the connecting buyers.</p>
-                                    <a href="shop.html" class="transparent-btn">Shop Now <i
-                                            class="fal fa-angle-right"></i></a>
+                                <div class="epix-h-pro-content">
+                                    <div class="epix-product-content pe-0 ps-0 pt-0 pb-0">
+                                        <div class="wrap">
+                                            <span class="epix-p-subtitle">Laptops</span>
+                                            <div class="rating">
+                                                <i class="fal fa-star"></i>
+                                                <span>2.4</span>
+                                            </div>
+                                        </div>
+                                        <h5 class="epix-p-title"><a href="single-product.html">Wireless Audio
+                                                System</a></h5>
+                                        <div class="price-box mb-15">
+                                            <span class="price">$150.00</span>
+                                            <a href="single-product.html">+ Select Option</a>
+                                        </div>
+                                        <div class="epix-p-quantity mr-10">
+                                            <form action="#">
+                                                <button class="epix-price-increment cart-plus">+</button>
+                                                <button class="epix-price-decrement cart-minus">-</button>
+                                                <input type="text" value="1">
+                                            </form>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <div class="epix-action">
+                                                <a href="cart.html" class="p-cart">
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-sm-6  col-md-4">
+                            <div class="epix-handpicked-product mb-50">
+                                <div class="epix-h-pro-thumb mr-35">
+                                    <a href="single-product.html"><img src="assets/img/product/18.jpg"
+                                            alt=""></a>
+                                </div>
+                                <div class="epix-h-pro-content">
+                                    <div class="epix-product-content pe-0 ps-0 pt-0 pb-0">
+                                        <div class="wrap">
+                                            <span class="epix-p-subtitle">Cameras</span>
+                                            <div class="rating">
+                                                <i class="fal fa-star"></i>
+                                                <span>3.3</span>
+                                            </div>
+                                        </div>
+                                        <h5 class="epix-p-title"><a href="single-product.html">White Mini Smart NX
+                                                06</a></h5>
+                                        <div class="price-box mb-15">
+                                            <span class="price">$143.00</span>
+                                            <a href="single-product.html">+ Select Option</a>
+                                        </div>
+                                        <div class="epix-p-quantity mr-10">
+                                            <form action="#">
+                                                <button class="epix-price-increment  cart-plus">+</button>
+                                                <button class="epix-price-decrement  cart-minus">-</button>
+                                                <input type="text" value="1">
+                                            </form>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <div class="epix-action">
+                                                <a href="cart.html" class="p-cart">
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-sm-6  col-md-4">
+                            <div class="epix-handpicked-product mb-50">
+                                <div class="epix-h-pro-thumb mr-35">
+                                    <a href="single-product.html"><img src="assets/img/product/32.jpg"
+                                            alt=""></a>
+                                </div>
+                                <div class="epix-h-pro-content">
+                                    <div class="epix-product-content pe-0 ps-0 pt-0 pb-0">
+                                        <div class="wrap">
+                                            <span class="epix-p-subtitle">Printers</span>
+                                            <div class="rating">
+                                                <i class="fal fa-star"></i>
+                                                <span>4.5</span>
+                                            </div>
+                                        </div>
+                                        <h5 class="epix-p-title"><a href="single-product.html">Full Color Laser Pro
+                                                452</a></h5>
+                                        <div class="price-box mb-15">
+                                            <span class="price">$250.00</span>
+                                            <a href="single-product.html">+ Select Option</a>
+                                        </div>
+                                        <div class="epix-p-quantity mr-10">
+                                            <form action="#">
+                                                <button class="epix-price-increment  cart-plus">+</button>
+                                                <button class="epix-price-decrement  cart-minus">-</button>
+                                                <input type="text" value="1">
+                                            </form>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <div class="epix-action">
+                                                <a href="cart.html" class="p-cart">
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-sm-6  col-md-4">
+                            <div class="epix-handpicked-product mb-50">
+                                <div class="epix-h-pro-thumb mr-35">
+                                    <span class="sale">sale</span>
+                                    <a href="single-product.html"><img src="assets/img/product/24.jpg"
+                                            alt=""></a>
+                                </div>
+                                <div class="epix-h-pro-content">
+                                    <div class="epix-product-content pe-0 ps-0 pt-0 pb-0">
+                                        <div class="wrap">
+                                            <span class="epix-p-subtitle">Cameras</span>
+                                            <div class="rating">
+                                                <i class="fal fa-star"></i>
+                                                <span>3.1</span>
+                                            </div>
+                                        </div>
+                                        <h5 class="epix-p-title"><a href="single-product.html">Smartphone 32GB LTE</a>
+                                        </h5>
+                                        <div class="price-box mb-15">
+                                            <span class="price"><del>$150.00</del><span
+                                                    class="active">$120.99</span></span>
+                                            <a href="single-product.html">+ Select Option</a>
+                                        </div>
+                                        <div class="epix-p-quantity mr-10">
+                                            <form action="#">
+                                                <button class="epix-price-increment  cart-plus">+</button>
+                                                <button class="epix-price-decrement  cart-minus">-</button>
+                                                <input type="text" value="1">
+                                            </form>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <div class="epix-action">
+                                                <a href="cart.html" class="p-cart">
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-sm-6  col-md-4">
+                            <div class="epix-handpicked-product mb-50">
+                                <div class="epix-h-pro-thumb mr-35">
+                                    <span class="sale">sale</span>
+                                    <a href="single-product.html"><img src="assets/img/product/23.jpg"
+                                            alt=""></a>
+                                </div>
+                                <div class="epix-h-pro-content">
+                                    <div class="epix-product-content pe-0 ps-0 pt-0 pb-0">
+                                        <div class="wrap">
+                                            <span class="epix-p-subtitle">Laptops</span>
+                                            <div class="rating">
+                                                <i class="fal fa-star"></i>
+                                                <span>3.1</span>
+                                            </div>
+                                        </div>
+                                        <h5 class="epix-p-title"><a href="single-product.html">Universal Headphones
+                                                12</a></h5>
+                                        <div class="price-box mb-15">
+                                            <span class="price">$210.00</span>
+                                            <a href="single-product.html">+ Select Option</a>
+                                        </div>
+                                        <div class="epix-p-quantity mr-10">
+                                            <form action="#">
+                                                <button class="epix-price-increment  cart-plus">+</button>
+                                                <button class="epix-price-decrement  cart-minus">-</button>
+                                                <input type="text" value="1">
+                                            </form>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <div class="epix-action">
+                                                <a href="cart.html" class="p-cart">
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-sm-6  col-md-4">
+                            <div class="epix-handpicked-product mb-50">
+                                <div class="epix-h-pro-thumb mr-35">
+                                    <span class="sale">sale</span>
+                                    <a href="single-product.html"><img src="assets/img/product/28.jpg"
+                                            alt=""></a>
+                                </div>
+                                <div class="epix-h-pro-content">
+                                    <div class="epix-product-content pe-0 ps-0 pt-0 pb-0">
+                                        <div class="wrap">
+                                            <span class="epix-p-subtitle">Cameras</span>
+                                            <div class="rating">
+                                                <i class="fal fa-star"></i>
+                                                <span>3.1</span>
+                                            </div>
+                                        </div>
+                                        <h5 class="epix-p-title"><a href="single-product.html">Notebook Widescreen
+                                                Y7</a></h5>
+                                        <div class="price-box mb-15">
+                                            <span class="price"><del>$150.00</del><span
+                                                    class="active">$199.00</span></span>
+                                            <a href="single-product.html">+ Select Option</a>
+                                        </div>
+                                        <div class="epix-p-quantity mr-10">
+                                            <form action="#">
+                                                <button class="epix-price-increment  cart-plus">+</button>
+                                                <button class="epix-price-decrement  cart-minus">-</button>
+                                                <input type="text" value="1">
+                                            </form>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <div class="epix-action">
+                                                <a href="cart.html" class="p-cart">
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /. handpicked products -->
                 </div>
             </div>
         </div>
-    </div>
-    <!-- slider area end -->
-    <!-- category area start -->
-    <div class="category-area category-3-space pt-95 pb-100">
-        <div class="container">
-            <div class="row align-items-center mb-80 category-row-space-3">
-                <div class="col-xxl-3 col-md-5">
-                    <div class="epix-section-title-4">
-                        <h3 class="s-title">Find Exactly What<br> You Need</h3>
-                        <p>Epixx is World’s largest otd online<br>
-                            marketplace the connecting buyers<br>
-                            with suppliers.</p>
-                    </div>
+        <!-- handpicked area end -->
+        <!-- brand area start -->
+        <div class="brand-area bg-gray pb-95 ">
+            <div class="container">
+                <div class="row">
+                    <h4 class="epix-brand-title">Được tin cậy bởi
+                        500+ Thương hiệu</h4>
                 </div>
-                <div class="col-xxl-9 col-md-7">
-                    <div class="category-wrap category-wrap-3 pl-25">
-                        <div class="single-category category-3 text-center d-inline-block">
-                            <a href="shop.html">
-                                <div class="cat-icon">
-                                    <i class="pe-7s-monitor"></i>
-                                </div>
-                                <div class="cat-link">
-                                    Television
-                                </div>
-                            </a>
-                        </div>
-                        <div class="single-category category-3 text-center d-inline-block">
-                            <a href="shop.html">
-                                <div class="cat-icon">
-                                    <i class="pe-7s-headphones"></i>
-                                </div>
-                                <div class="cat-link">
-                                    Headphones
-                                </div>
-                            </a>
-                        </div>
-                        <div class="single-category category-3 text-center d-inline-block">
-                            <a href="shop.html">
-                                <div class="cat-icon">
-                                    <i class="pe-7s-display1"></i>
-                                </div>
-                                <div class="cat-link">
-                                    Computers
-                                </div>
-                            </a>
-                        </div>
-                        <div class="single-category category-3 text-center d-inline-block">
-                            <a href="shop.html">
-                                <div class="cat-icon">
-                                    <i class="pe-7s-phone"></i>
-                                </div>
-                                <div class="cat-link">
-                                    Computers
-                                </div>
-                            </a>
-                        </div>
-                        <div class="single-category category-3 text-center d-inline-block">
-                            <a href="shop.html">
-                                <div class="cat-icon">
-                                    <i class="pe-7s-cup"></i>
-                                </div>
-                                <div class="cat-link">
-                                    Accessories
-                                </div>
-                            </a>
-                        </div>
-                        <div class="single-category category-3 text-center d-inline-block">
-                            <a href="shop.html">
-                                <div class="cat-icon">
-                                    <i class="pe-7s-home"></i>
-                                </div>
-                                <div class="cat-link">
-                                    Appliances
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-tabs">
-                <div class="tab-list">
-                    <ul class="" id="myTab2" role="tablist">
-                        <li class="" role="presentation">
-                            <button class="  "
-                             {{-- data-bs-toggle="tab" data-bs-target="#tab1" --}}
-                                type="">Sản phẩm mới nhất</button>
-                        </li>
-                        <!-- <li class="nav-item" role="presentation">
-                            <button data-bs-toggle="tab" data-bs-target="#tab2" type="button">Television
-                                (05)</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button data-bs-toggle="tab" data-bs-target="#tab3" type="button">Accessories (03)</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button data-bs-toggle="tab" data-bs-target="#tab4" type="button">Smartphones (06)</button>
-                        </li> -->
-                    </ul>
-                </div>
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="tab1">
-                        <div class="swiper-container tab-product-active">
+                <div class="col-xxl-10 col-xl-8">
+                    <div class="brand-carousel">
+                        <div class="brand-active swiper-container">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="row ms-4"> <!-- Add row wrapper -->
-
-                                            @foreach ($products as $item)
-
-                                                <div class="col-lg-2 custom-col col-md-1 col-sm-3 m-4"> <!-- 5 items per row -->
-                                                    <div class="product-top">
-                                                        <div class="wrap">
-                                                            <span class="epix-p-subtitle">Danh mục</span>
-                                                            <div class="actions">
-                                                                <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                                <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="thumb">
-                                                            <div class="epix-action">
-                                                                <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                    <i class="fal fa-eye"></i>
-                                                                    <i class="fal fa-eye"></i>
-                                                                </a>
-                                                                <a href="shop.html" class="p-cart">
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                </a>
-                                                            </div>
-                                                            <a href="{{ url('/index/' . $item->id) }}">
-                                                                <img src="{{ Storage::url($item->image) }}" alt="">
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="content">
-                                                        <h4><a href="{{ url('/index/' . $item->id) }}">{{ $item->name }}</a></h4>
-                                                        <div class="price-box">
-                                                            @php
-                                                                $minPrice = $item->variants()->min('price');
-                                                                $maxPrice = $item->variants()->max('price');
-                                                            @endphp
-                                                            <span class="price">
-                                                                <span class="active">{{ $minPrice }}VNĐ</span> <!-- Hiển thị giá thấp nhất -->
-                                                                <span class="active"> ->{{ $maxPrice }}VNĐ</span> <!-- Hiển thị giá cao nhất -->
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            @endforeach
-
-                                        </div> <!-- End row wrapper -->
-                                    </div>
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-1.png" alt=""></a>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab2">
-                        <div class="swiper-container tab-product-active">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">gAMES, Office</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/4.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Samsung Galaxy S8+ Black
-                                                    White 64GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price"><del>$150.99</del> <span
-                                                        class="active">$205.00</span></span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-2.png" alt=""></a>
                                 </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Computers, Office</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/5.jpg')}}" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">ES62-T Steam Iron Nonstick
-                                                    with Soleplate</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$175.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-3.png" alt=""></a>
                                 </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Speakers</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/1.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Apple iPhone 5s 4.785-Inch
-                                                    Black 128GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price"><del>$150.99</del> <span
-                                                        class="active">$205.00</span></span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-4.png" alt=""></a>
                                 </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Headphones</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/2.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Ultra Wireless S5 Headphone
-                                                    with Bluetooth</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$180.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">sMARTPhones</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/3.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">MacBook Pro Retina Touch
-                                                    Core 16GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$228.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab3">
-                        <div class="swiper-container tab-product-active">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Speakers</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/1.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Apple iPhone 5s 4.785-Inch
-                                                    Black 128GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price"><del>$150.99</del> <span
-                                                        class="active">$205.00</span></span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Headphones</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/2.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Ultra Wireless S5 Headphone
-                                                    with Bluetooth</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$180.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">sMARTPhones</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/3.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">MacBook Pro Retina Touch
-                                                    Core 16GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$228.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">gAMES, Office</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/4.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Samsung Galaxy S8+ Black
-                                                    White 64GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price"><del>$150.99</del> <span
-                                                        class="active">$205.00</span></span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Computers, Office</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="assets/img/product/5.jpg" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">ES62-T Steam Iron Nonstick
-                                                    with Soleplate</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$175.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab4">
-                        <div class="swiper-container tab-product-active">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">gAMES, Office</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/4.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Samsung Galaxy S8+ Black
-                                                    White 64GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price"><del>$150.99</del> <span
-                                                        class="active">$205.00</span></span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Computers, Office</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/5.jpg')}}" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">ES62-T Steam Iron Nonstick
-                                                    with Soleplate</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$175.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Speakers</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/1.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Apple iPhone 5s 4.785-Inch
-                                                    Black 128GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price"><del>$150.99</del> <span
-                                                        class="active">$205.00</span></span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">Headphones</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/2.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">Ultra Wireless S5 Headphone
-                                                    with Bluetooth</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$180.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="single-product-4">
-                                        <div class="product-top">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">sMARTPhones</span>
-                                                <div class="actions">
-                                                    <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                    <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="thumb">
-                                                <div class="epix-action">
-                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                    <a href="shop.html" class="p-cart">
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                        <i class="fal fa-shopping-cart"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/3.jpg')}}"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="single-product.html">MacBook Pro Retina Touch
-                                                    Core 16GB</a></h4>
-                                            <div class="price-box">
-                                                <span class="price">$228.00</span>
-                                                <a href="single-product.html">+ Select Option</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /. product tab -->
-        </div>
-    </div>
-    <!-- category area end -->
-    <!-- offer banner 2 start -->
-    <div class="offer-banner-2 pt-110 pb-110 bg-default mb-100"
-        data-background="assets/img/banner/offer-banner-3.jpg">
-        <div class="container">
-            <div class="offer-banner-2-content pt-60 pb-35">
-                <div class="offer-product-box">
-                    <img src="{{asset('laptop/assets/img/product/2.jpg')}}" alt="">
-                </div>
-                <div class="offer-product-content">
-                    <div class="wrap">
-                        <span class="epix-p-subtitle d-block">Headpones, Office</span>
-                        <h3 class="title"><a href="single-product.html">Denon AH-D7100 Music Maniac <br>
-                                Headphones</a></h3>
-                        <div class="price-box">
-                            <span class="price"><span class="active">$205.00</span></span>
-                            <a href="single-product.html">+ Select Option</a>
-                        </div>
-                    </div>
-                    <div class="offer-label mb-15">
-                        <span>Hurry up! Offer ends in:</span>
-                    </div>
-                    <div class="deals-countdown deals-countdown-2 mb-25">
-                        <div class="countdown-inner" data-countdown="" data-date="Mar 02 2022 20:20:22">
-                            <ul>
-                                <li><span data-days="">401</span> Days</li>
-                                <li><span data-hours="">1</span> Hours</li>
-                                <li><span data-minutes="">29</span> min</li>
-                                <li><span data-seconds="">40</span> sec</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- offer banner 2 end -->
-    <!-- trending product area start -->
-    <div class="trending-product-area pb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-xxl-3 col-lg-3 trending-col-1">
-                    <div class="trending-banner">
-                        <a href="shop.html"><img src="{{asset('laptop/assets/img/banner/trending-banner.jpg')}}" class="img-fluid" alt=""></a>
-                        <div class="t-banner-content">
-                            <a href="shop.html" class="epix-white-btn-2">Smart Phone</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-9 col-lg-9 trending-col-2">
-                    <div class="trending-right border-bottom-1 mb-25">
-                        <div class="row align-items-end">
-                            <div class="col-xxl-6 col-md-6">
-                                <div class="epix-section-title-4">
-                                    <h3 class="s-title">Trending Products</h3>
-                                </div>
-                            </div>
-                            <div class="col-xxl-6 col-md-6">
-                                <div class="product-tabs-2">
-                                    <ul class="nav justify-content-md-end" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="active" data-bs-toggle="tab" data-bs-target="#tab-1-1"
-                                                type="button">On Sell</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="" data-bs-toggle="tab" data-bs-target="#tab-1-2"
-                                                type="button" role="tab">Htot Sell</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="" data-bs-toggle="tab" data-bs-target="#tab-1-3"
-                                                type="button">Trend</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-
-                                            <button class="" data-bs-toggle="tab" data-bs-target="#tab-1-4"
-                                                type="button">Best Sell</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-content-2">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="tab-1-1">
-                                <div class="trending-active swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Headphones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/11.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">20W Universal World Travel <br>
-                                                            New Converter</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$240.00</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">sMARTPhones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/12.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Vantech VP-153C Camera <br>
-                                                            Full HDM</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$188.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">gAMES, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/13.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Acer 11.6 Chromebook Intel <br>
-                                                            Celeron 12GB</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$150.99</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Computers, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/14.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">ES62-T Steam Iron Nonstick <br>
-                                                            with Soleplate</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$190.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab-1-2">
-                                <div class="trending-active swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Computers, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/15.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">ES62-T Steam Iron Nonstick <br>
-                                                            with Soleplate</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$190.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Headphones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/16.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">20W Universal World Travel <br>
-                                                            New Converter</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$240.00</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">sMARTPhones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/17.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Vantech VP-153C Camera <br>
-                                                            Full HDM</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$188.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">gAMES, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/18.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Acer 11.6 Chromebook Intel <br>
-                                                            Celeron 12GB</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$150.99</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab-1-3">
-                                <div class="trending-active swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">sMARTPhones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/17.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Vantech VP-153C Camera <br>
-                                                            Full HDM</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$188.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">gAMES, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/18.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Acer 11.6 Chromebook Intel <br>
-                                                            Celeron 12GB</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$150.99</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Computers, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/15.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">ES62-T Steam Iron Nonstick <br>
-                                                            with Soleplate</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$190.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Headphones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/16.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">20W Universal World Travel <br>
-                                                            New Converter</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$240.00</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab-1-4">
-                                <div class="trending-active swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">sMARTPhones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/17.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Vantech VP-153C Camera <br>
-                                                            Full HDM</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$188.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">gAMES, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/18.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Acer 11.6 Chromebook Intel <br>
-                                                            Celeron 12GB</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$150.99</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Computers, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/15.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">ES62-T Steam Iron Nonstick <br>
-                                                            with Soleplate</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$190.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Headphones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/16.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">20W Universal World Travel <br>
-                                                            New Converter</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$240.00</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-5.png" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -1518,754 +1050,136 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- trending product area end -->
-    <!-- featured product area start -->
-    <div class="featured-product-area pb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-xxl-3 col-lg-3 trending-col-1">
-                    <div class="trending-banner">
-                        <a href="shop.html"><img src="{{asset('laptop/assets/img/banner/featured-banner.jpg')}}" class="img-fluid" alt=""></a>
-                        <div class="t-banner-content">
-                            <a href="shop.html" class="epix-white-btn-2">Smart Phone</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-9 col-lg-9 trending-col-2">
-                    <div class="trending-right border-bottom-1 mb-25">
-                        <div class="row align-items-end">
-                            <div class="col-xxl-6 col-md-6">
-                                <div class="epix-section-title-4">
-                                    <h3 class="s-title">Featured Products</h3>
-                                </div>
-                            </div>
-                            <div class="col-xxl-6 col-md-6">
-                                <div class="product-tabs-2">
-                                    <ul class="nav justify-content-md-end" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="active" data-bs-toggle="tab" data-bs-target="#tab-2-1"
-                                                type="button">16% Off</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="" data-bs-toggle="tab" data-bs-target="#tab-2-2"
-                                                type="button" role="tab">25% Off</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="" data-bs-toggle="tab" data-bs-target="#tab-2-3"
-                                                type="button">33% Off</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-
-                                            <button class="" data-bs-toggle="tab" data-bs-target="#tab-2-4"
-                                                type="button">45%Off</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-content-2">
-                        <div class="tab-content" id="myTabContent2">
-                            <div class="tab-pane fade show active" id="tab-2-1">
-                                <div class="trending-active swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">gAMES, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img
-                                                                src="{{asset('laptop/assets/img/product/featured-pro-1.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Leoaa Powerbeat Wireless<br>
-                                                            in Ear Head</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$240.00</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Headphones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img
-                                                                src="{{asset('laptop/assets/img/product/featured-pro-2.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Head Powerbeats Wireless <br>
-                                                            In Ear VN</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$210.00</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Computers, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img
-                                                                src="{{asset('laptop/assets/img/product/featured-pro-3.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Pc Del – 11.6 Chromebook <br>
-                                                            With Intenet</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$150.99</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">sMARTPhones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-4.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Sony Alpha A60 Mirrorless<br>
-                                                            Camera</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$190.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab-2-2">
-                                <div class="trending-active swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Computers, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="assets/img/product/trending-4.jpg"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">ES62-T Steam Iron Nonstick <br>
-                                                            with Soleplate</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$190.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Headphones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-1.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">20W Universal World Travel <br>
-                                                            New Converter</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$240.00</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">sMARTPhones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-2.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Vantech VP-153C Camera <br>
-                                                            Full HDM</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$188.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">gAMES, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-3.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Acer 11.6 Chromebook Intel <br>
-                                                            Celeron 12GB</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$150.99</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab-2-3">
-                                <div class="trending-active swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Headphones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-1.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">20W Universal World Travel <br>
-                                                            New Converter</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$240.00</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">sMARTPhones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-2.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Vantech VP-153C Camera <br>
-                                                            Full HDM</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$188.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">gAMES, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-3.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Acer 11.6 Chromebook Intel <br>
-                                                            Celeron 12GB</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$150.99</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Computers, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-4.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">ES62-T Steam Iron Nonstick <br>
-                                                            with Soleplate</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$190.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab-2-4">
-                                <div class="trending-active swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Computers, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-4.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">ES62-T Steam Iron Nonstick <br>
-                                                            with Soleplate</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$190.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">Headphones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-1.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">20W Universal World Travel <br>
-                                                            New Converter</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$240.00</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">sMARTPhones</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-2.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Vantech VP-153C Camera <br>
-                                                            Full HDM</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price"><del>$150.00</del><span
-                                                                class="active">$188.00</span></span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="single-product-4 single-trending-product">
-                                                <div class="product-top">
-                                                    <div class="wrap">
-                                                        <span class="epix-p-subtitle">gAMES, Office</span>
-                                                        <div class="actions">
-                                                            <a href="single-product.html"><i class="fal fa-compress-alt"></i></a>
-                                                            <a href="cart.html"><i class="fal fa-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <div class="epix-action">
-                                                            <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                <i class="fal fa-eye"></i>
-                                                                <i class="fal fa-eye"></i>
-                                                            </a>
-                                                            <a href="shop.html" class="p-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a href="single-product.html"> <img src="{{asset('laptop/assets/img/product/trending-3.jpg')}}"
-                                                                alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="single-product.html">Acer 11.6 Chromebook Intel <br>
-                                                            Celeron 12GB</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="price">$150.99</span>
-                                                        <a href="single-product.html">+ Select Option</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-    <!-- featured product area end -->
-    <!-- banner area 2 start -->
-    <div class="banner-area-2 pb-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-xxl-6 col-lg-6">
-                    <div class="banner-3-1 style-2 mb-30">
-                        <div class="thumb">
-                            <img src="{{asset('laptop/assets/img/banner/banner-2-1.jpg')}}" class="img-fluid" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Earburds</h3>
-                            <p>Epixx is World largest marketplace<br>
-                                connecting buyers suppliers.</p>
-                            <a href="shop.html" class="transparent-btn text-capitalize rounded-0">Purchase It <i class="fal fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-6 col-lg-6">
-                    <div class="banner-3-1 style-2 mb-30">
-                        <div class="thumb">
-                            <img src="{{asset('laptop/assets/img/banner/banner-2-2.jpg')}}" class="img-fluid" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Monitors</h3>
-                            <p>Epixx is World largest marketplace<br>
-                                connecting buyers suppliers.</p>
-                            <a href="shop.html" class="transparent-btn text-capitalize rounded-0">Explore Now <i class="fal fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- banner area 2 end -->
-    <!-- subscribe center area start -->
-    <div class="subscribe-center-area bg-gray-2 pt-115 pb-115">
-        <div class="container">
-            <div class="row">
-                <div class="col-xxl-6 col-xl-6">
-                    <div class="subscribe-wrap">
-                        <div class="subscribe-left text-center mb-35">
-                            <h4>Subscribe Now &<br>
-                                Get Product Discount 10%</h4>
-                        </div>
-                        <div class="d-block text-center">
-                            <div class="epix-subscribe-form epix-subscribe-form-2">
-                                <form action="#" class="mb-20">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Enter Your Email">
-                                        <button type="submit">SUBMIT</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="hint">
-                                <p>Will be used in accordance with our <a href="contact.html">Privacy Policy</a></p>
+        <!-- brand area end -->
+    </main>
+    <!-- footer area start -->
+    <footer class="footer-area footer-1 bg-black  pt-85">
+        <div class="footer-main pb-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-3 col-xl-3 footer-col-1 col-sm-6 col-md-8 col-lg-8">
+                        <div class="footer-widget widget mb-30 widget-about">
+                            <div class="widget-about">
+                                <h4 class="epix-footer-title">Tải ứng dụng</h4>
+                                <p><a href="index.html">Epixx</a> Ứng dụng hiện đã có trên Google<br>
+                                    Play & App Store. Nhận nó ngay bây giờ.</p>
+                                <div class="logo-list logo-list-1">
+                                    <a href="#"><img src="assets/img/icon/icon-app-store.png"
+                                            alt=""></a>
+                                    <a href="#"><img src="assets/img/icon/icon-google-play.png"
+                                            alt=""></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xxl-6 col-xl-6">
-                    <div class="brand-wrap">
+                    <!-- /. footer about widget -->
+                    <div class="col-xxl-6 col-xl-6  footer-col-2">
                         <div class="row">
-                            <div class="col-xxl-4 col-6 col-md-4">
-                                <div class="brand-logo mb-55">
-                                    <a href="contact.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                                <div class="footer-widget mb-30">
+                                    <h4 class="epix-footer-title">Thông tin</h4>
+                                    <ul>
+                                        <li><a href="about.html">Về chúng tôi</a></li>
+                    <li><a href="shop.html">Thông tin giao hàng</a></li>
+                    <li><a href="shop.html">Sản phẩm mới</a></li>
+                    <li><a href="shop.html">Hàng tốt nhất</a></li>
+                    <li><a href="login.html">Tài khoản của tôi</a></li>
+                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-xxl-4 col-6 col-md-4">
-                                <div class="brand-logo mb-55">
-                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand2.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-sm-6 col-md-4  col-lg-4  col-xl-4">
+                                <div class="footer-widget mb-30">
+                                    <h4 class="epix-footer-title">Tài khoản của tôi</h4>
+                                    <ul>
+                                        <li><a href="login.html">Tài khoản của tôi</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                    <li><a href="cart.html">Sản phẩm yêu thích</a></li>
+                    <li><a href="shop.html">Giá giảm</a></li>
+                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                    <li><a href="cart.html">Đơn hàng quốc tế</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-xxl-4 col-6 col-md-4">
-                                <div class="brand-logo mb-55">
-                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand3.png')}}" alt=""></a>
-                                </div>
-                            </div>
-                            <div class="col-xxl-4 col-6 col-md-4">
-                                <div class="brand-logo mb-55">
-                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand4.png')}}" alt=""></a>
-                                </div>
-                            </div>
-                            <div class="col-xxl-4 col-6 col-md-4">
-                                <div class="brand-logo mb-55">
-                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand5.png')}}" alt=""></a>
-                                </div>
-                            </div>
-                            <div class="col-xxl-4 col-6 col-md-4">
-                                <div class="brand-logo mb-55">
-                                    <a href="shop.html"><img src="{{asset('laptop/assets/img/brand/brand2/brand6.png')}}" alt=""></a>
+                            <div class="col-xxl-4 col-sm-6 col-md-4  col-lg-4  col-xl-4">
+                                <div class="footer-widget mb-30">
+                                    <h4 class="epix-footer-title">Dịch vụ khách hàng</h4>
+                                    <ul>
+                                        <li><a href="contact.html">Sơ đồ trang web</a></li>
+                    <li><a href="contact.html">Tài khoản của tôi</a></li>
+                    <li><a href="contact.html">Thông tin giao hàng</a></li>
+                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                    <li><a href="cart.html">Sản phẩm yêu thích</a></li>
+                    <li><a href="shop.html">Đặc biệt</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /. footer menu widget -->
+                    <div class="col-xxl-3 col-xl-3 footer-col-3 col-sm-6 col-md-4 col-lg-4 order-first order-xl-last">
+                        <div class="footer-widget widget mb-30 widget-contact">
+                            <h4 class="epix-footer-title">Thông tin liên hệ</h4>
+                            <div class="contact-info">
+                                <div class="info-main d-flex">
+                                    <div class="contact-icon mr-15">
+                                        <img src="assets/img/icon/icon-contact.png" alt="">
+                                    </div>
+                                    <div class="contact-desc">
+                                        <p>Miễn phí 24/24:<br>
+                                            <a href="tel:0123456789">0123456789</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="info-sub">
+                                    <p>
+                                        Địa chỉ ở đây.<br>
+                                        <a
+                                            href="https://www.devsnews.com/cdn-cgi/l/email-protection#086c6d6567486d70696578646d266b6765"><span
+                                                class="__cf_email__"
+                                                data-cfemail="dbbfbeb6b49bbea3bab6abb7bef5b8b4b6">[email&#160;protected]</span></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /. footer contact widget -->
                 </div>
             </div>
         </div>
-    </div>
-    <!-- subscribe center area end -->
-</main>
-@endsection
+        <!-- /. main footer -->
+        <div class="footer-copyright text-xl-center">
+            <div class="container">
+                <p>© 2021 Epixx - Made By <a href="https://www.devsnews.com/support/">BDevs</a>. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+
+        <!-- /. copyright footer -->
+    </footer>
+    <!-- footer area end -->
+    <!-- JS here -->
+    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="{{ asset('laptop/assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/slick.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/swipper-bundle.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/jquery.meanmenu.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/jquery.elevatezoom.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/nice-select.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/countdown.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/jquery-ui-slider-range.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/mouse-wheel.min.js') }}"></script>
+    <script src="{{ asset('laptop/assets/js/main.js') }}"></script>
+</body>
+
+
+<!-- Mirrored from www.devsnews.com/template/epixx-prev/epixx/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 16:30:49 GMT -->
+
+</html>

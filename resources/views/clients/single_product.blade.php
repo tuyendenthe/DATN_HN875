@@ -51,17 +51,7 @@
         font-weight: bold;
     }
 </style>
-<!-- prealoder area start -->
-<div id="loading">
-    <div id="loading-center">
-        <div id="loading-center-absolute">
-            <div class="object" id="first_object"></div>
-            <div class="object" id="second_object"></div>
-            <div class="object" id="third_object"></div>
-        </div>
-    </div>
-</div>
-<!-- prealoder area end -->
+
 <!-- breadcrumb area start -->
 <div class="epix-breadcrumb-area mb-40">
     <div class="container">
@@ -167,38 +157,60 @@
                     </p>
 
                     <div class="price-display">
-                        Giá: <span id="product-price" name="product-price">0,000</span> VNĐ
+                        Giá: <span id="product-price" name="product-price">{{ $products->price }}</span> VNĐ
                     </div>
 
                     <!-- Form để thêm vào giỏ hàng -->
                     <form action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
                         @csrf
                         <div class="epix-product-label mb-35">
-                            <a href="#" class="title">Chọn màu sắc cho sản phẩm</a>
+                            <a href="#" class="title">Chọn phiên bản</a>
                             <div class="container">
                                 <div class="variant-container">
                                     @foreach($products->variants as $variant)
-                                    <div class="variant-box" data-value="{{ $variant->name }}" data-price="{{ $variant->price }}" onclick="selectVariant(this)">
-                                        <input type="radio" name="variant_id" id="{{ $variant->id }}" value="{{ $variant->id }}">
-                                        <label for="{{ $variant->id }}">{{ $variant->name }}</label>
-                                    </div>
+                                        @if ($variant->type == 1)
+                                            <div class="variant-box variant-box1" data-value="{{ $variant->name }}" data-price="{{ $variant->price }}" onclick="selectVariant1(this)">
+                                                <input type="radio" name="variant_id_1" id="{{ $variant->id }}" value="{{ $variant->id }}">
+                                                <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                            </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>
                         </div>
 
-
-
-                        <div class="epix-quantity-validation">
-                            <div class="wrap-2 d-block d-sm-inline-block mb-15 mb-sm-0">
-                                <div class="d-inline-block border-gray mr-20">
-                                    {{-- <div class="epix-quantity-form">
-                                            <div class="cart-plus-minus"></div>
-                                            <input type="text" value="2">
-                                        </div> --}}
-
+                        <div class="epix-product-label mb-35">
+                            <a href="#" class="title">Chọn màu sắc</a>
+                            <div class="container">
+                                <div class="variant-container">
+                                    @foreach($products->variants as $variant)
+                                        @if ($variant->type == 2)
+                                            <div class="variant-box variant-box2" data-value="{{ $variant->name }}" data-price="{{ $variant->price }}" onclick="selectVariant2(this)">
+                                                <input type="radio" name="variant_id_2" id="{{ $variant->id }}" value="{{ $variant->id }}">
+                                                <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
-                                <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">Thêm vào giỏ hàng</button>
+                            </div>
+                        </div>
+
+                        <div class="epix-product-label mb-35">
+                            <a href="#" class="title">Chọn bộ nhớ (RAM)</a>
+                            <div class="container">
+                                <div class="variant-container">
+                                    @foreach($products->variants as $variant)
+                                        @if ($variant->type == 3)
+                                            <div class="variant-box variant-box3" data-value="{{ $variant->name }}" data-price="{{ $variant->price }}" onclick="selectVariant3(this)">
+                                                <input type="radio" name="variant_id_3" id="{{ $variant->id }}" value="{{ $variant->id }}">
+                                                <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">Thêm vào giỏ hàng</button>
                     </form>
                             </div>
                             <a href="checkout.html" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">Buy Now</a>
@@ -563,9 +575,14 @@
 </div>
 <!-- single product area end -->
 <script>
-    function selectVariant(element) {
+    var phienban = 0;
+    var mausac = 0;
+    var bonho = 0;
+    var giaban = '{{ $products->price }}';
+    function selectVariant1(element) {
+        giaban = '{{ $products->price }}';
         // Xóa class "selected" khỏi tất cả các hộp
-        var variants = document.querySelectorAll('.variant-box');
+        var variants = document.querySelectorAll('.variant-box1');
         variants.forEach(function(variant) {
             variant.classList.remove('selected');
         });
@@ -579,28 +596,48 @@
 
         // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
         var selectedPrice = element.getAttribute('data-price');
-        document.getElementById('product-price').innerText = selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        phienban = parseInt(selectedPrice);
+        document.getElementById('product-price').innerText = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
     }
-    function updateQuantity(key, quantityChange) {
-    let form = document.createElement('form');
-    form.method = 'POST';
-    form.action = `/cart/update/${key}`;
 
-    let input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'quantity';
-    input.value = quantityChange;
+    function selectVariant2(element) {
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box2');
+        variants.forEach(function(variant) {
+            variant.classList.remove('selected');
+        });
 
-    let csrfInput = document.createElement('input');
-    csrfInput.type = 'hidden';
-    csrfInput.name = '_token';
-    csrfInput.value = '{{ csrf_token() }}';
+        // Thêm class "selected" cho hộp được chọn
+        element.classList.add('selected');
 
-    form.appendChild(input);
-    form.appendChild(csrfInput);
-    document.body.appendChild(form);
-    form.submit();
-}
+        // Đánh dấu radio button tương ứng
+        var radioButton = element.querySelector('input[type="radio"]');
+        radioButton.checked = true;
 
+        // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
+        var selectedPrice = element.getAttribute('data-price');
+        mausac = parseInt(selectedPrice);
+        document.getElementById('product-price').innerText = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
+    }
+
+    function selectVariant3(element) {
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box3');
+        variants.forEach(function(variant) {
+            variant.classList.remove('selected');
+        });
+
+        // Thêm class "selected" cho hộp được chọn
+        element.classList.add('selected');
+
+        // Đánh dấu radio button tương ứng
+        var radioButton = element.querySelector('input[type="radio"]');
+        radioButton.checked = true;
+
+        // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
+        var selectedPrice = element.getAttribute('data-price');
+        bonho = parseInt(selectedPrice);
+        document.getElementById('product-price').innerText = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
+    }
 </script>
 @endsection
