@@ -111,18 +111,21 @@
                         <div class="epix-single-banner mb-30 wow fadeInUp" data-wow-delay=".2s"
                             data-background="assets/img/banner/banner-1.jpg">
                             <div class="epix-collection-box">
-                                <h3 class="epix-c-heading">Collection Of 2021</h3>
+                                <h3 class="epix-c-heading">Bộ sưu tập năm 2021</h3>
                                 <div class="epix-c-list">
                                     <ul>
                                         <li><a href="shop.html">Galaxy Tabs & Ides</a></li>
-                                        <li><a href="shop.html">Tab Accessories</a></li>
-                                        <li><a href="shop.html">Mobile Phones</a></li>
-                                        <li><a href="shop.html">Camcorders</a></li>
-                                        <li><a href="shop.html">Fitness Trackers</a></li>
-                                        <li><a href="shop.html">Action Cams</a></li>
-                                        <li><a href="shop.html">Hard Drives</a></li>
-                                        <li><a href="shop.html">iPad & Tablets </a></li>
-                                        <li><a href="shop.html">Portable Audio</a></li>
+                                        <li><a href="shop.html">Phụ kiện</a></li>
+                                        <li><a href="shop.html">MacBook</a></li>
+                                        <li><a href="shop.html">Laptop Acer</a></li>
+                                        <li><a href="shop.html">Laptop Asus</a></li>
+                                        <li><a href="shop.html">Laptop Dell</a></li>
+                                        <li><a href="shop.html">Laptop MSI</a></li>
+                                        <li><a href="shop.html">Laptop Lenovo</a></li>
+                                        <li><a href="shop.html">Laptop HP</a></li>
+                                        <li><a href="shop.html">Ổ cứng</a></li>
+                                        <li><a href="shop.html">iPad & Máy tính bảng </a></li>
+                                        <li><a href="shop.html">Ram</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -535,34 +538,32 @@
                 <div class="row">
                     <div class="col-xxl-3 col-xl-3 col-sm-6 unmissed-col-1">
                         <div class="unmissed-sidebar">
-                            <h4 class="epix-sidebar-title">Unmissed Items</h4>
+                            <h4 class="epix-sidebar-title">Danh mục</h4>
                             <ul class="epix-um-list">
-                                <li class="has-arrow"><a href="shop.html"><i class="fal fa-desktop"></i><span>Desktop
-                                            PCs</span></a>
-                                </li>
-                                <li class="has-arrow"><a href="shop.html"><i class="fal fa-laptop"></i><span>Cosnoles
-                                            & Games</span></a>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-desktop"></i><span>MacBook</span></a>
                                 </li>
                                 <li class="has-arrow"><a href="shop.html"><i
-                                            class="fal fa-mobile-android"></i><span>Video
-                                            Cameras</span></a>
+                                            class="fal fa-laptop"></i><span>Acer</span></a>
                                 </li>
                                 <li class="has-arrow"><a href="shop.html"><i
-                                            class="fal fa-camera-retro"></i><span>Home Theater &
-                                            Audio</span></a></li>
-                                <li class="has-arrow"><a href="shop.html"><i class="fal fa-video"></i><span>Digital
-                                            Cameras</span></a>
-                                </li>
-                                <li class="has-arrow"><a href="shop.html"><i class="fal fa-mouse"></i><span>Smart
-                                            Electronics</span></a>
-                                </li>
-                                <li class="has-arrow"><a href="shop.html"><i class="fal fa-laptop"></i><span>Cosnoles
-                                            & Games</span></a>
+                                            class="fal fa-mobile-android"></i><span>Asus</span></a>
                                 </li>
                                 <li class="has-arrow"><a href="shop.html"><i
-                                            class="fal fa-camera-retro"></i><span>Accessories</span></a></li>
+                                            class="fal fa-camera-retro"></i><span>Dell</span></a></li>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-video"></i><span>MSI</span></a>
+                                </li>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-mouse"></i><span>Lenovo</span></a>
+                                </li>
+                                <li class="has-arrow"><a href="shop.html"><i
+                                            class="fal fa-laptop"></i><span>HP</span></a>
+                                </li>
+                                <li class="has-arrow"><a href="shop.html"><i class="fal fa-camera-retro"></i><span>Ổ
+                                            cứng</span></a></li>
                             </ul>
-                            <a href="shop.html" class="link-details">See All Products<i
+                            <a href="shop.html" class="link-details">Xem tất cả sản phẩm<i
                                     class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
@@ -570,43 +571,45 @@
                         <div class="product-col-space-2">
                             <div class="row g-0">
                                 @foreach ($products as $item)
-                                <div class="col-xxl-3 col-sm-6 col-md-4 col-lg-4 col-xl-3 wow fadeInUp"
-                                    data-wow-delay=".2s">
-                                    <div class="epix-single-product">
-                                        <div class="epix-product-thumb epix-product-thumb-3">
-                                            <a href="single-product.html"><img src="assets/img/product/23.jpg"
-                                                    class="img-fluid" alt=""></a>
-                                            <div class="epix-action">
-                                                <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                    <i class="fal fa-eye"></i>
-                                                    <i class="fal fa-eye"></i>
-                                                </a>
-                                                <a href="cart.html" class="p-cart">
-                                                    <i class="fal fa-heart"></i>
-                                                    <i class="fal fa-heart"></i>
-                                                </a>
-                                                <a href="cart.html" class="p-cart">
-                                                    <i class="fal fa-shopping-cart"></i>
-                                                    <i class="fal fa-shopping-cart"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="epix-product-content">
-                                            <div class="wrap">
-                                                <span class="epix-p-subtitle">{{$item->category->name}}</span>
-                                                <div class="rating">
-                                                    <i class="fal fa-star"></i>
-                                                    <span>2.5</span>
+                                    <div class="col-xxl-3 col-sm-6 col-md-4 col-lg-4 col-xl-3 wow fadeInUp"
+                                        data-wow-delay=".2s">
+                                        <div class="epix-single-product">
+                                            <div class="epix-product-thumb epix-product-thumb-3">
+                                                <a href="single-product.html"><img src="assets/img/product/23.jpg"
+                                                        class="img-fluid" alt=""></a>
+                                                <div class="epix-action">
+                                                    <a href="single-product.html" class="p-cart product-popup-toggle">
+                                                        <i class="fal fa-eye"></i>
+                                                        <i class="fal fa-eye"></i>
+                                                    </a>
+                                                    <a href="cart.html" class="p-cart">
+                                                        <i class="fal fa-heart"></i>
+                                                        <i class="fal fa-heart"></i>
+                                                    </a>
+                                                    <a href="cart.html" class="p-cart">
+                                                        <i class="fal fa-shopping-cart"></i>
+                                                        <i class="fal fa-shopping-cart"></i>
+                                                    </a>
                                                 </div>
                                             </div>
-                                            <h5 class="epix-p-title"><a href="single-product.html">{{$item->name}}</a></h5>
-                                            <div class="price-box">
-                                                <span class="price">{{$item->price}}</span>
-                                                <a href="single-product.html">+ Select Option</a>
+                                            <div class="epix-product-content">
+                                                <div class="wrap">
+                                                    <span
+                                                        class="epix-p-subtitle">{{ optional(optional($item)->category)->name ?? 'No Category' }}</span>
+                                                    <div class="rating">
+                                                        <i class="fal fa-star"></i>
+                                                        <span>2.5</span>
+                                                    </div>
+                                                </div>
+                                                <h5 class="epix-p-title"><a
+                                                        href="single-product.html">{{ $item->name }}</a></h5>
+                                                <div class="price-box">
+                                                    <span class="price">{{ $item->price }}</span>
+                                                    <a href="single-product.html">+ Select Option</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -622,8 +625,8 @@
                     data-background="assets/img/banner/offer-banner-2.jpg">
                     <div class="text-center d-inline-block">
                         <h5 class="epix-s-banner-subtitle">45% Flate On</h5>
-                        <h3 class="epix-s-banner-title">Gadgets</h3>
-                        <a href="shop.html" class="epix-btn-1" tabindex="0"><span>Explore Now<i
+                        <h3 class="epix-s-banner-title">Tiện ích</h3>
+                        <a href="shop.html" class="epix-btn-1" tabindex="0"><span>Khám phá ngay<i
                                     class="fal fa-angle-right"></i></span></a>
                     </div>
                 </div>
@@ -644,9 +647,9 @@
                                             <img src="assets/img/icon/service-1.png" alt="">
                                         </div>
                                         <div class="epix-s-content">
-                                            <a href="shop.html" class="epix-s-link">Free Shipping</a>
-                                            <p>The new variations pass of <br>
-                                                Lorem avaible..</p>
+                                            <a href="shop.html" class="epix-s-link">Giao hàng miễn phí</a>
+                                            <p>Các biến thể mới vượt qua <br>
+                                                Lorem có sẵn..</p>
                                         </div>
                                     </div>
                                 </div>
@@ -656,9 +659,9 @@
                                             <img src="assets/img/icon/service-2.png" alt="">
                                         </div>
                                         <div class="epix-s-content">
-                                            <a href="shop.html" class="epix-s-link">20 Day Returns</a>
-                                            <p>The new variations pass of <br>
-                                                Lorem avaible..</p>
+                                            <a href="shop.html" class="epix-s-link">Trả hàng trong 20 ngày</a>
+                                            <p>Các biến thể mới vượt qua <br>
+                                                Lorem có sẵn..</p>
                                         </div>
                                     </div>
                                 </div>
@@ -668,9 +671,9 @@
                                             <img src="assets/img/icon/service-3.png" alt="">
                                         </div>
                                         <div class="epix-s-content">
-                                            <a href="shop.html" class="epix-s-link">Secure Payment</a>
-                                            <p>The new variations pass of <br>
-                                                Lorem avaible..</p>
+                                            <a href="shop.html" class="epix-s-link">Thanh toán an toàn</a>
+                                            <p>Các biến thể mới vượt qua <br>
+                                                Lorem có sẵn..</p>
                                         </div>
                                     </div>
                                 </div>
@@ -679,9 +682,9 @@
                     </div>
                     <div class="col-xxl-4 col-xl-6 wow fadeInUp" data-wow-delay="1s">
                         <div class="epix-newsletter-form pl-50">
-                            <h4 class="epix-newsletter-title">Sign Up For Newsletter</h4>
+                            <h4 class="epix-newsletter-title">Đăng ký nhận bản tin</h4>
                             <form action="#">
-                                <input type="text" placeholder="Enter Your Email">
+                                <input type="text" placeholder="Nhập email của bạn">
                                 <button type="submit">
                                     <i class="fal fa-long-arrow-right"></i>
                                 </button>
@@ -701,7 +704,7 @@
                     <div class="row mb-35">
                         <div class="col-xxl-12">
                             <div class="epix-section-title text-center">
-                                <h5 class="s-title">Handpicked Products For You</h5>
+                                <h5 class="s-title">Sản phẩm được lựa chọn cẩn thận cho bạn</h5>
                             </div>
                         </div>
                     </div>
@@ -709,9 +712,9 @@
                         <div class="col-xxl-12">
                             <div class="epix-handpicked-banner"
                                 data-background="assets/img/banner/product-banner-2.jpg">
-                                <h4 class="epix-h-banner-text">Smart Series 4.0<br>
-                                    Extraordinary Watches</h4>
-                                <a href="shop.html" class="epix-white-btn"><span>Shop Now<i
+                                <h4 class="epix-h-banner-text">Dòng thông minh 4.0
+                                </h4>
+                                <a href="shop.html" class="epix-white-btn"><span>Mua ngay<i
                                             class="fal fa-angle-right"></i></span></a>
                             </div>
                         </div>
@@ -972,40 +975,34 @@
         <div class="brand-area bg-gray pb-95 ">
             <div class="container">
                 <div class="row">
-                    <div class="col-xxl-2 col-xl-4">
-                        <h4 class="epix-brand-title">Trusted by
-                            500+ Brands</h4>
-                    </div>
-                    <div class="col-xxl-10 col-xl-8">
-                        <div class="brand-carousel">
-                            <div class="brand-active swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide single-brand text-xl-end">
-                                        <a href="shop.html"><img src="assets/img/brand/brand-1.png"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="swiper-slide single-brand text-xl-end">
-                                        <a href="shop.html"><img src="assets/img/brand/brand-2.png"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="swiper-slide single-brand text-xl-end">
-                                        <a href="shop.html"><img src="assets/img/brand/brand-3.png"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="swiper-slide single-brand text-xl-end">
-                                        <a href="shop.html"><img src="assets/img/brand/brand-4.png"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="swiper-slide single-brand text-xl-end">
-                                        <a href="shop.html"><img src="assets/img/brand/brand-5.png"
-                                                alt=""></a>
-                                    </div>
+                    <h4 class="epix-brand-title">Được tin cậy bởi
+                        500+ Thương hiệu</h4>
+                </div>
+                <div class="col-xxl-10 col-xl-8">
+                    <div class="brand-carousel">
+                        <div class="brand-active swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-1.png" alt=""></a>
+                                </div>
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-2.png" alt=""></a>
+                                </div>
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-3.png" alt=""></a>
+                                </div>
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-4.png" alt=""></a>
+                                </div>
+                                <div class="swiper-slide single-brand text-xl-end">
+                                    <a href="shop.html"><img src="assets/img/brand/brand-5.png" alt=""></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <!-- brand area end -->
     </main>
@@ -1017,9 +1014,9 @@
                     <div class="col-xxl-3 col-xl-3 footer-col-1 col-sm-6 col-md-8 col-lg-8">
                         <div class="footer-widget widget mb-30 widget-about">
                             <div class="widget-about">
-                                <h4 class="epix-footer-title">Get The App</h4>
-                                <p><a href="index.html">Epixx</a> App is now available on Google<br>
-                                    Play & App Store. Get it now.</p>
+                                <h4 class="epix-footer-title">Tải ứng dụng</h4>
+                                <p><a href="index.html">Epixx</a> Ứng dụng hiện đã có trên Google<br>
+                                    Play & App Store. Nhận nó ngay bây giờ.</p>
                                 <div class="logo-list logo-list-1">
                                     <a href="#"><img src="assets/img/icon/icon-app-store.png"
                                             alt=""></a>
@@ -1034,40 +1031,40 @@
                         <div class="row">
                             <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                                 <div class="footer-widget mb-30">
-                                    <h4 class="epix-footer-title">Information</h4>
+                                    <h4 class="epix-footer-title">Thông tin</h4>
                                     <ul>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="shop.html">Delivery Information</a></li>
-                                        <li><a href="shop.html">New products</a></li>
-                                        <li><a href="shop.html">Best sales</a></li>
-                                        <li><a href="login.html">My Account</a></li>
-                                        <li><a href="cart.html">Order History</a></li>
+                                        <li><a href="about.html">Về chúng tôi</a></li>
+                    <li><a href="shop.html">Thông tin giao hàng</a></li>
+                    <li><a href="shop.html">Sản phẩm mới</a></li>
+                    <li><a href="shop.html">Hàng tốt nhất</a></li>
+                    <li><a href="login.html">Tài khoản của tôi</a></li>
+                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-xxl-4 col-sm-6 col-md-4  col-lg-4  col-xl-4">
                                 <div class="footer-widget mb-30">
-                                    <h4 class="epix-footer-title">My Account</h4>
+                                    <h4 class="epix-footer-title">Tài khoản của tôi</h4>
                                     <ul>
-                                        <li><a href="login.html">My Account</a></li>
-                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="cart.html">Wish List</a></li>
-                                        <li><a href="shop.html">Prices drop</a></li>
-                                        <li><a href="cart.html">Order History</a></li>
-                                        <li><a href="cart.html">International Orders</a></li>
+                                        <li><a href="login.html">Tài khoản của tôi</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                    <li><a href="cart.html">Sản phẩm yêu thích</a></li>
+                    <li><a href="shop.html">Giá giảm</a></li>
+                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                    <li><a href="cart.html">Đơn hàng quốc tế</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-xxl-4 col-sm-6 col-md-4  col-lg-4  col-xl-4">
                                 <div class="footer-widget mb-30">
-                                    <h4 class="epix-footer-title">Customer Service</h4>
+                                    <h4 class="epix-footer-title">Dịch vụ khách hàng</h4>
                                     <ul>
-                                        <li><a href="contact.html">Sitemap</a></li>
-                                        <li><a href="contact.html">My Account</a></li>
-                                        <li><a href="contact.html">Delivery Information</a></li>
-                                        <li><a href="cart.html">Order History</a></li>
-                                        <li><a href="cart.html">Wish List</a></li>
-                                        <li><a href="shop.html">Specials</a></li>
+                                        <li><a href="contact.html">Sơ đồ trang web</a></li>
+                    <li><a href="contact.html">Tài khoản của tôi</a></li>
+                    <li><a href="contact.html">Thông tin giao hàng</a></li>
+                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                    <li><a href="cart.html">Sản phẩm yêu thích</a></li>
+                    <li><a href="shop.html">Đặc biệt</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1076,21 +1073,21 @@
                     <!-- /. footer menu widget -->
                     <div class="col-xxl-3 col-xl-3 footer-col-3 col-sm-6 col-md-4 col-lg-4 order-first order-xl-last">
                         <div class="footer-widget widget mb-30 widget-contact">
-                            <h4 class="epix-footer-title">Contact Info</h4>
+                            <h4 class="epix-footer-title">Thông tin liên hệ</h4>
                             <div class="contact-info">
                                 <div class="info-main d-flex">
                                     <div class="contact-icon mr-15">
                                         <img src="assets/img/icon/icon-contact.png" alt="">
                                     </div>
                                     <div class="contact-desc">
-                                        <p>Hotline Free 24/24:<br>
+                                        <p>Miễn phí 24/24:<br>
                                             <a href="tel:0123456789">0123456789</a>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="info-sub">
                                     <p>
-                                        Your address goes here.<br>
+                                        Địa chỉ ở đây.<br>
                                         <a
                                             href="https://www.devsnews.com/cdn-cgi/l/email-protection#086c6d6567486d70696578646d266b6765"><span
                                                 class="__cf_email__"
