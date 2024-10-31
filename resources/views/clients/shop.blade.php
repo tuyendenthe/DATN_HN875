@@ -18,11 +18,11 @@
         <!-- breadcrumb area start -->
         <div class="epix-breadcrumb-area mb-40">
             <div class="container">
-                <h4 class="epix-breadcrumb-title">SHOP PAGE</h4>
+                <h4 class="epix-breadcrumb-title">Cửa Hàng</h4>
                 <div class="epix-breadcrumb">
                     <ul>
-                        <li><a href="index-3.html">Home</a></li>
-                        <li><span>Shop Page</span></li>
+                        <li><a href="index-3.html">Trang chủ</a></li>
+                        <li><span>Trang cửa hàng</span></li>
                     </ul>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <div class="col-xxl-3 col-lg-4">
                         <div class="epix-sidebar-area">
                             <div class="epix-sidebar-widget mb-40">
-                                <h4 class="epix-s-widget-title">SHOP BY CATEGORIES</h4>
+                                <h4 class="epix-s-widget-title">MUA SẮM THEO DANH MỤC</h4>
                                 <div class="epix-taglist">
                                     <ul>
                                     @foreach ($categories as $item)
@@ -45,17 +45,17 @@
                                 </div>
                             </div>
                             <div class="epix-sidebar-widget">
-                                <h4 class="epix-s-widget-title">PRICE</h4>
+                                <h4 class="epix-s-widget-title">GIÁ</h4>
                                 <div class="slider-range mb-40">
                                     <div id="slider-range"></div>
                                     <p>
-                                        <label for="amount">Price :</label>
+                                        <label for="amount">Giá :</label>
                                         <input type="text" id="amount" readonly>
                                     </p>
                                 </div>
                             </div>
                             <div class="epix-sidebar-widget mb-40">
-                                <h4 class="epix-s-widget-title">COLORS</h4>
+                                <h4 class="epix-s-widget-title">Màu</h4>
                                 <div class="epix-color-scheme">
                                     <ul>
                                         <li>
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="epix-sidebar-widget mb-40">
-                                <h4 class="epix-s-widget-title">RECENT PRODUCTS</h4>
+                                <h4 class="epix-s-widget-title">Sản Phẩm Gần Đây</h4>
                                 <div class="epix-product-list mb-20">
                                     <div class="thumb">
                                         <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/side-sm-img-2.jpg')}}" alt=""></a>
@@ -137,7 +137,7 @@
                                     </div>
                                     <div class="epix-ch-right">
                                         <div class="show-text">
-                                            <span>Showing 1–12 of 20 results</span>
+                                            <span>Hiển thị 1–12 trong 20 kết quả</span>
                                         </div>
                                         <div class="sort-wrapper">
                                             <select name="select" id="select">
@@ -436,14 +436,14 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center justify-xl-content-left">
                                     <li class="page-item disabled">
-                                        <a class="page-link prev" href="shop.html" tabindex="-1"><i class="fal fa-angle-left"></i> Prev</a>
+                                        <a class="page-link prev" href="shop.html" tabindex="-1"><i class="fal fa-angle-left"></i> Trước</a>
                                     </li>
                                     <li class="page-item"><a class="page-link" href="shop.html">1</a></li>
                                     <li class="page-item"><a class="page-link" href="shop.html">2</a></li>
                                     <li class="page-item"><a class="page-link" href="shop.html">3</a></li>
                                     <li class="page-item"><a class="page-link" href="shop.html">4</a></li>
                                     <li class="page-item">
-                                        <a class="page-link next" href="shop.html">Next <i class="fal fa-angle-right"></i></a>
+                                        <a class="page-link next" href="shop.html">Sau <i class="fal fa-angle-right"></i></a>
                                     </li>
                                 </ul>
                             </nav>
