@@ -15,11 +15,11 @@
         <!-- breadcrumb area start -->
         <div class="epix-breadcrumb-area">
             <div class="container">
-                <h4 class="epix-breadcrumb-title">BLOG PAGE</h4>
+                <h4 class="epix-breadcrumb-title">Trang Tin Tức</h4>
                 <div class="epix-breadcrumb">
                     <ul>
-                        <li><a href="index-3.html">Home</a></li>
-                        <li><span>Blog Page</span></li>
+                        <li><a href="index-3.html">Trang chủ</a></li>
+                        <li><span>Trang tin tức</span></li>
                     </ul>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                                     <p>A Capitalize on low hanging fruit to identify a ballpark value added activity to beta
                                         test. Override the digital divide with additional clickthroughs from DevOps.
                                         Nanotechnology immersion along the information highway will close the [...]</p>
-                                    <a href="single-blog.html" class="os-btn">read more</a>
+                                    <a href="single-blog.html" class="os-btn">Đọc thêm</a>
                                 </div>
                             </div>
                             <div class="blog__item blog__border-bottom mb-60 pb-60">
@@ -67,7 +67,7 @@
                                         digital divide with additional clickthroughs from DevOps. Nanotechnology immersion
                                         along the information
                                         highway will close the [...]</p>
-                                    <a href="single-blog.html" class="os-btn">read more</a>
+                                    <a href="single-blog.html" class="os-btn">Đọc thêm</a>
                                 </div>
                             </div>
                             <div class="blog__item blog__border-bottom mb-60 pb-60">
@@ -85,7 +85,7 @@
                                     <p>A Capitalize on low hanging fruit to identify a ballpark value added activity to beta
                                         test. Override the digital divide with additional clickthroughs from DevOps.
                                         Nanotechnology immersion along the information highway will close the [...]</p>
-                                    <a href="single-blog.html" class="os-btn">read more</a>
+                                    <a href="single-blog.html" class="os-btn">Đọc thêm</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -119,7 +119,7 @@
                             </div>
                             <div class="sidebar__widget mb-55">
                                 <div class="sidebar__widget-title mb-25">
-                                    <h3>Product Categories</h3>
+                                    <h3>Danh mục sản phẩm</h3>
                                 </div>
                                 <div class="sidebar__widget-content">
                                     <div class="categories">
@@ -137,7 +137,7 @@
                             </div>
                             <div class="sidebar__widget mb-55">
                                 <div class="sidebar__widget-title mb-25">
-                                    <h3>Latest Posts</h3>
+                                    <h3>Bài viết mới nhất</h3>
                                 </div>
                                 <div class="sidebar__widget-content">
                                     <div class="rc__post-wrapper">
@@ -190,7 +190,7 @@
                             </div>
                             <div class="sidebar__widget mb-55">
                                 <div class="sidebar__widget-title mb-25">
-                                    <h3>Recent Comments</h3>
+                                    <h3>Phản hồi gần đây</h3>
                                 </div>
                                 <div class="sidebar__widget-content">
                                     <div class="rc__comments">
@@ -231,7 +231,7 @@
                             </div>
                             <div class="sidebar__widget mb-55">
                                 <div class="sidebar__widget-title mb-25">
-                                    <h3>Archives</h3>
+                                    <h3>Lưu trữ</h3>
                                 </div>
                                 <div class="sidebar__widget-content">
                                     <div class="sidebar__links">

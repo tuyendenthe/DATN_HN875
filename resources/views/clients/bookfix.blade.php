@@ -16,11 +16,11 @@
     <!-- breadcrumb area start -->
     <div class="epix-breadcrumb-area mb-100">
         <div class="container">
-            <h4 class="epix-breadcrumb-title">Cart PAGE</h4>
+            <h4 class="epix-breadcrumb-title">Trang Đặt lịch</h4>
             <div class="epix-breadcrumb">
                 <ul>
-                    <li><a href="index-3.html">Home</a></li>
-                    <li><span>Cart Page</span></li>
+                    <li><a href="index-3.html">Trang chủ</a></li>
+                    <li><span>Trang đặt lịch</span></li>
                 </ul>
             </div>
         </div>
@@ -32,15 +32,15 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6">
                     <div class="contact__info">
-                        <h3>Find us here.</h3>
+                        <h3>Tìm chúng tôi ở đây.</h3>
                         <ul class="mb-55">
                             <li class="d-flex mb-35">
                                 <div class="contact__info-icon mr-20">
                                     <i class="fal fa-map-marker-alt"></i>
                                 </div>
                                 <div class="contact__info-content">
-                                    <h6>Address:</h6>
-                                    <span>1234 Heaven Stress, Beverly Hill, Melbourne, USA.</span>
+                                    <h6>Địa chỉ:</h6>
+                                    <span>Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</span>
                                 </div>
                             </li>
                             <li class="d-flex mb-35">
@@ -49,7 +49,8 @@
                                 </div>
                                 <div class="contact__info-content">
                                     <h6>Email:</h6>
-                                    <span><a href="https://www.devsnews.com/cdn-cgi/l/email-protection#6e070008012e0b160f031e020b400d0103" class="__cf_email__" data-cfemail="a7e4c8c9d3c6c4d3e7c2d5c2c9d3cfc2cac289c4c8ca"><span class="__cf_email__" data-cfemail="f39a9d959cb3968b929e839f96dd909c9e">[email&#160;protected]</span></a></span>
+                                    <span><a href="https://www.devsnews.com/cdn-cgi/l/email-protection#6e070008012e0b160f031e020b400d0103" class="__cf_email__" data-cfemail="a7e4c8c9d3c6c4d3e7c2d5c2c9d3cfc2cac289c4c8ca"><span class="__cf_email__" data-cfemail="f39a9d959cb3968b929e839f96dd909c9e">Email:
+                                        tuyentvph40779@fpt.edu.vn</span></a></span>
                                 </div>
                             </li>
                             <li class="d-flex mb-35">
@@ -57,15 +58,15 @@
                                     <i class="fal fa-phone-alt"></i>
                                 </div>
                                 <div class="contact__info-content">
-                                    <h6>Number Phone:</h6>
-                                    <span>(800) 123 456 789, (800) 987 654 321</span>
+                                    <h6>Số điện thoại:</h6>
+                                    <span>0362978755, 0325561001</span>
                                 </div>
                             </li>
                         </ul>
-                        <p>Outstock is a premium Templates theme with advanced admin module. It’s extremely customizable,
-                            easy to use and fully responsive and retina ready. Vel illum dolore eu feugiat nulla facilisis
-                            at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit
-                            augue duis dolore te feugait nulla facilisi.</p>
+                        <p>Outstock là một theme mẫu cao cấp với mô-đun quản trị tiên tiến. Nó cực kỳ tùy biến, dễ sử
+                                dụng và hoàn toàn phản hồi tốt trên các thiết bị di động và màn hình độ phân giải cao. Vel
+                                illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui
+                                blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
 
                         <div class="contact__social">
                             <ul>
