@@ -201,12 +201,17 @@ Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('ca
 
 
 Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
-/* -------------------------------- FLASH SALE -------------------------------- */
+/* -------------------------------- checkout -------------------------------- */
 Route::prefix('/checkout')->name('checkout.')->group(function () {
     Route::get('/', [CheckoutController::class, 'index'])->name('index');
     Route::post('/store', [CheckoutController::class, 'store'])->name('store');
     Route::get('/success', [CheckoutController::class, 'ok'])->name('success');
+    Route::get('/list', [CheckoutController::class, 'list'])->name('list');
+    Route::get('/history', [CheckoutController::class, 'history'])->name('history');
+    Route::get('/detail/{bill_code}', [CheckoutController::class, 'detail'])->name('detail');
+    Route::get('/edit/{bill_code}', [CheckoutController::class, 'edit'])->name('edit');
+    Route::put('/edit/{bill_code}', [CheckoutController::class, 'editput'])->name('editput');
 
 });
 
-/* -------------------------------- FLASH SALE -------------------------------- */
+/* -------------------------------- checkout -------------------------------- */

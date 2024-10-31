@@ -91,7 +91,7 @@ class CartController extends Controller
     {
         // Lấy giỏ hàng từ session
         $cart = session()->get('cart', []);
-
+        // dd($cart);
         // Trả về view giỏ hàng
         return view('clients.cart', compact('cart'));
     }
