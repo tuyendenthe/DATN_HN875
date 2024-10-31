@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Status;
 class Bill extends Model
 {
     use HasFactory;
@@ -18,4 +18,10 @@ class Bill extends Model
 'total',
 
 'status',];
+
+// public function status()
+// {
+//     return $this->belongsTo(Status::class);
+// }
 }
+
