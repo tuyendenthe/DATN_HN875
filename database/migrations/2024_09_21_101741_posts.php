@@ -22,10 +22,6 @@ return new class extends Migration
             $table->longText('content');
             $table->foreignIdFor(Category_post::class)->constrained();
 
-
-
-
-            $table->rememberToken();
             $table->timestamps();
         });
     }

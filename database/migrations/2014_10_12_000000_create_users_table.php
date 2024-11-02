@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('poin')->nullable();
             $table->enum('role', ['1', '2'])->default('2')->comment('1 admin | 2 user'); // 1 admin | 2 user
 
-            $table->rememberToken();
             $table->timestamps();
         });
     }
