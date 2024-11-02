@@ -9,6 +9,7 @@
     <title>Epix - Electronics eCommerce HTML Template</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
 
     <link rel="manifest" href="https://devsnews.com/template/epixx-prev/epixx/site.webmanifest/" />
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
@@ -26,6 +27,7 @@
     <link rel="stylesheet" href="{{asset('laptop/assets/css/meanmenu.css')}}" />
     <link rel="stylesheet" href="{{asset('laptop/assets/css/swipper.css')}}" />
     @stack('style')
+
 </head>
 
 <body>
@@ -33,14 +35,14 @@
         @include('users.layouts.header')
     <!-- /. mobile header -->
     <!-- slide-bar start -->
-    
+
     <!-- slide-bar end -->
     @include('users.layouts.sidebar')
 
     <main>
         @yield('content')
     </main>
- 
+
     <!-- footer area start -->
     @include('users.layouts.footer')
     <!-- footer copyright end -->

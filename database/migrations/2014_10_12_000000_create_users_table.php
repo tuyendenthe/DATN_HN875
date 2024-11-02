@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('image');
-            $table->integer('add');
-            $table->integer('rank');
-            $table->integer('poin');
-            $table->string('role');
+            $table->integer('add')->nullable();
+            $table->integer('rank')->nullable();
+            $table->integer('poin')->nullable();
+            $table->enum('role', ['1', '2'])->default('2')->comment('1 admin | 2 user'); // 1 admin | 2 user
 
             $table->rememberToken();
             $table->timestamps();
