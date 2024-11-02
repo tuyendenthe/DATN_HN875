@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('content_short');
             $table->longText('content');
+            $table->string('image')->nullable(); // Thêm cột image
             $table->foreignIdFor(Category_post::class)->constrained();
-
             $table->timestamps();
         });
     }

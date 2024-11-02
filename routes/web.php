@@ -20,6 +20,7 @@ use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\FlashSaleController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopController;
 
 /*
@@ -86,10 +87,12 @@ Route::get('checkout', function () {
 });
 
 
-Route::get('/blog', function () {
-    return view('clients.blog');
-})->name('blog');
+Route::get('/blog', [PostController::class, 'clientIndex'])->name('blog');
+Route::get('/single_blog/{post}', [PostController::class, 'clientShow'])->name('single_blog');
 
+// Route::get('/single_blog', function () {
+//     return view('clients.single_blog');
+// })->name('single_blog');
 
 Route::get('/about', function () {
     return view('clients.about');
@@ -99,9 +102,7 @@ Route::get('/single_product', function () {
     return view('clients.single_product');
 })->name('single_product');
 
-Route::get('/single_blog', function () {
-    return view('clients.single_blog');
-})->name('single_blog');
+
 
 Route::get('login',[AuthenController::class,'login'])->name('login');
 Route::post('login',[AuthenController::class,'postLogin'])->name('postLogin');
@@ -143,6 +144,8 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'],function() {
 
 Route::resource('admin1/category', CategoryController::class);
 Route::resource('admin1/category_post', CategoryPostController::class);
+Route::resource('admin1/post', PostController::class);
+
 Route::resource('admin1/banner', BannerController::class);
 Route::resource('admin1/contact', ContactController::class);
 Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
