@@ -21,12 +21,6 @@ return new class extends Migration
             $table->integer('phone');
             // $table->foreignIdFor( Status::class)->constrained();
             $table->unsignedBigInteger(column: 'status_id')->default(1);
-
-
-
-
-
-            $table->rememberToken();
             $table->timestamps();
         });
     }

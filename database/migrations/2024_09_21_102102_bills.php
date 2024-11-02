@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-
-
             $table->string('bill_code');
             $table->string('name');
             $table->integer('phone');
@@ -27,13 +25,6 @@ return new class extends Migration
             $table->string('payment_method');
             $table->integer('total');
             $table->string('status');
-
-
-
-
-
-
-
             $table->timestamps('date_created');
         });
     }
