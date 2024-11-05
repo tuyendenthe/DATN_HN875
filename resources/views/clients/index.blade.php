@@ -34,6 +34,53 @@
     <!-- header area end -->
 
     <!-- slide-bar start -->
+    <div class="container">
+        @if (session('message'))
+            <div id="notification" class="notification alert alert-danger" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
+
+        <!-- Other content here -->
+    </div>
+
+    <style>
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var notification = document.getElementById('notification');
+
+            if (notification) {
+                // Show the notification
+                notification.style.display = 'block';
+
+                // Hide the notification after 5 seconds
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 7000);
+
+                // Optional: Add hover effect to keep it visible
+                notification.addEventListener('mouseenter', function() {
+                    notification.style.display = 'block';
+                });
+
+                notification.addEventListener('mouseleave', function() {
+                    notification.style.display = 'none';
+                });
+            }
+        });
+    </script>
     <div class="fix">
         <div class="side-info d-lg-none">
             <button class="side-info-close"><i class="fal fa-times"></i></button>
