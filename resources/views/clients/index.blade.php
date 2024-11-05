@@ -26,6 +26,30 @@
     <link rel="stylesheet" href="{{ asset('laptop/assets/css/meanmenu.css') }}" />
     <link rel="stylesheet" href="{{ asset('laptop/assets/css/swipper.css') }}" />
     <link rel="stylesheet" href="{{ asset('laptop/assets/css/main.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <style>
+        .swiper-container {
+            width: 100%;
+            height: 600px;
+            /* Thay đổi chiều cao theo nhu cầu */
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slider-content {
+            color: white;
+            /* Màu chữ */
+            text-align: center;
+            /* Căn giữa nội dung */
+        }
+    </style>
 </head>
 
 <body>
@@ -118,35 +142,30 @@
     </div>
     <div class="offcanvas-overlay"></div>
     <!-- slide-bar end -->
+
     <main>
 
         <!-- slider area start -->
-        <section class="slider-area">
-            <div class="slider-active">
-                <div class="single-slider d-flex align-items-center slider-height"
-                    data-background="https://th.bing.com/th/id/OIP.jnoyoTqzhiFCYCu2BJYbUAHaE3?rs=1&pid=ImgDetMain">
-                    <div class="container">
-                        <div class="slider-content text-center text-center">
-                            <span class="epix-slide-subtitle" data-animation="fadeInUp">Sale 30% Discount</span>
-                            <h2 class="epix-slide-title">console</h2>
-                            <a href="shop.html" class="epix-btn-1"><span>Purchase Now<i
-                                        class="fal fa-angle-right"></i></span></a>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                @foreach ($banners as $banner)
+                    <div class="swiper-slide" style="background-image: url('{{ asset($banner->image) }}');">
+                        <div class="container">
+                            <div class="slider-content">
+                                <span class="epix-slide-subtitle">{{ $banner->title }}</span>
+                                <h2 class="epix-slide-title">{{ $banner->description }}</h2>
+                                <a href="shop.html" class="epix-btn-1">
+                                    <span>Purchase Now<i class="fal fa-angle-right"></i></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="single-slider d-flex align-items-center slider-height"
-                    data-background="https://th.bing.com/th/id/OIP.jnoyoTqzhiFCYCu2BJYbUAHaE3?rs=1&pid=ImgDetMain">
-                    <div class="container">
-                        <div class="slider-content text-center text-center">
-                            <span class="epix-slide-subtitle">Sale 30% Discount</span>
-                            <h2 class="epix-slide-title">console</h2>
-                            <a href="shop.html" class="epix-btn-1"><span>Purchase Now<i
-                                        class="fal fa-angle-right"></i></span></a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
-        </section>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
         <!-- slider area end -->
 
         <!-- banner area start -->
@@ -171,8 +190,6 @@
                                         <li><a href="shop.html">Laptop Lenovo</a></li>
                                         <li><a href="shop.html">Laptop HP</a></li>
                                         <li><a href="shop.html">Ổ cứng</a></li>
-                                        <li><a href="shop.html">iPad & Máy tính bảng </a></li>
-                                        <li><a href="shop.html">Ram</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -623,9 +640,7 @@
                                         <div class="epix-single-product">
                                             <div class="epix-product-thumb epix-product-thumb-3">
                                                 <a href="single-product.html">
-                                                    <img src="{{ Storage::url($item->image) }}"
-                                                    {{-- <img src="assets/img/product/23.jpg" --}}
-
+                                                    <img src="{{ Storage::url($item->image) }}" {{-- <img src="assets/img/product/23.jpg" --}}
                                                         class="img-fluid" alt=""></a>
                                                 <div class="epix-action">
                                                     <a href="single-product.html" class="p-cart product-popup-toggle">
@@ -1084,11 +1099,11 @@
                                     <h4 class="epix-footer-title">Thông tin</h4>
                                     <ul>
                                         <li><a href="about.html">Về chúng tôi</a></li>
-                    <li><a href="shop.html">Thông tin giao hàng</a></li>
-                    <li><a href="shop.html">Sản phẩm mới</a></li>
-                    <li><a href="shop.html">Hàng tốt nhất</a></li>
-                    <li><a href="login.html">Tài khoản của tôi</a></li>
-                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                                        <li><a href="shop.html">Thông tin giao hàng</a></li>
+                                        <li><a href="shop.html">Sản phẩm mới</a></li>
+                                        <li><a href="shop.html">Hàng tốt nhất</a></li>
+                                        <li><a href="login.html">Tài khoản của tôi</a></li>
+                                        <li><a href="cart.html">Lịch sử đặt hàng</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1097,11 +1112,11 @@
                                     <h4 class="epix-footer-title">Tài khoản của tôi</h4>
                                     <ul>
                                         <li><a href="login.html">Tài khoản của tôi</a></li>
-                    <li><a href="cart.html">Giỏ hàng</a></li>
-                    <li><a href="cart.html">Sản phẩm yêu thích</a></li>
-                    <li><a href="shop.html">Giá giảm</a></li>
-                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
-                    <li><a href="cart.html">Đơn hàng quốc tế</a></li>
+                                        <li><a href="cart.html">Giỏ hàng</a></li>
+                                        <li><a href="cart.html">Sản phẩm yêu thích</a></li>
+                                        <li><a href="shop.html">Giá giảm</a></li>
+                                        <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                                        <li><a href="cart.html">Đơn hàng quốc tế</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1110,11 +1125,11 @@
                                     <h4 class="epix-footer-title">Dịch vụ khách hàng</h4>
                                     <ul>
                                         <li><a href="contact.html">Sơ đồ trang web</a></li>
-                    <li><a href="contact.html">Tài khoản của tôi</a></li>
-                    <li><a href="contact.html">Thông tin giao hàng</a></li>
-                    <li><a href="cart.html">Lịch sử đặt hàng</a></li>
-                    <li><a href="cart.html">Sản phẩm yêu thích</a></li>
-                    <li><a href="shop.html">Đặc biệt</a></li>
+                                        <li><a href="contact.html">Tài khoản của tôi</a></li>
+                                        <li><a href="contact.html">Thông tin giao hàng</a></li>
+                                        <li><a href="cart.html">Lịch sử đặt hàng</a></li>
+                                        <li><a href="cart.html">Sản phẩm yêu thích</a></li>
+                                        <li><a href="shop.html">Đặc biệt</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1162,6 +1177,24 @@
         <!-- /. copyright footer -->
     </footer>
     <!-- footer area end -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
     <!-- JS here -->
     <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="{{ asset('laptop/assets/js/jquery.min.js') }}"></script>
@@ -1180,6 +1213,8 @@
     <script src="{{ asset('laptop/assets/js/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('laptop/assets/js/mouse-wheel.min.js') }}"></script>
     <script src="{{ asset('laptop/assets/js/main.js') }}"></script>
+
+
 </body>
 
 
