@@ -33,81 +33,30 @@
                 <div class="col-xl-9 col-lg-8">
                     <div class="blog-content-left single-blog-content-left-padding">
                         <div class="postbox__title mb-55">
-                            <h1>Anteposuerit litterarum formas.</h1>
+                            <h1>{{ $post->title }}</h1> <!-- Hiển thị tiêu đề bài viết -->
                             <div class="blog__meta">
-                                <span>By <a href="blog.html">Hemal Akhand</a></span>
-                                <span>/ September 14, 2017</span>
+                                <span>By <a href="blog.html">{{ $post->user->name }}</a></span> <!-- Hiển thị tên tác giả -->
+                                <span>/ {{ $post->created_at->format('F j, Y') }}</span> <!-- Hiển thị ngày đăng -->
                             </div>
                         </div>
                         <div class="postbox__thumb w-img">
-                            <img src="{{asset('laptop/assets/img/blog/blog-big-1.jpg')}}" alt="">
+                            <img src="{{ asset('storage/' . $post->image) }}" alt=""> <!-- Hiển thị hình ảnh -->
                         </div>
-
                         <div class="postbox__wrapper mb-70">
                             <div class="postbox__text mt-65">
-                                <p>Diga, Koma and Torus are three kitchen utensils designed for <span class="highlight theme">Ommo</span>, a
-                                    new design-oriented brand introduced at the Ambiente show in February 2016. <span
-                                        class="highlight">Minimalist approach, bright colors, stainless steel and matte plastic</span>,
-                                    abstract shapes and curved lines are the defining features of these products designed to be extremely
-                                    functional, user-friendly and fun.</p>
+                                <p>{{ $post->content_short }}</p> <!-- Hiển thị nội dung bài viết -->
                             </div>
-                            <div class="postbox__text">
-                                <p>Diga is a two-color melamine salad bowl where vegetables can be washed, drained and served. The disk at
-                                    the bottom of the bowl can be turned counterclockwise to drain water when washing vegetables and it can
-                                    be turned clockwise to lock the drain and hold condiments in the bowl when serving.</p>
-                            </div>
-                            <article class="postbox format-quote mt-45 mb-50">
-                                <div class="postbox__quote">
-                                    <blockquote>
-                                        <p> <i class="fas fa-quote-right"></i> Many desktop publishing packages and web page editors now use
-                                            Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web
-                                            sites still in their infancy. </p>
-                                    </blockquote>
-                                </div>
-                            </article>
-                            <div class="postbox__details-img w-img mb-60">
-                                <img src="{{asset('laptop/assets/img/blog/blog-big-2.jpg')}}" alt="">
-                            </div>
-                            <div class="postbox__text">
-                                <p>Koma and Torus are two tea infusers, each with an original design and a concealed function. Koma has a
-                                    round base and a long stainless steel-trimmed handle which offers a comfortable grip and allows.
-                                </p>
-                            </div>
-                            <div class="postbox__text">
-                                <p>And the brushed steel cover opens and closes at the touch of a finger to easily fill and empty the
-                                    infuser. The perfect way to enjoy brewing tea. Torus is donut-shaped and can cling to any cup. It is
-                                    accompanied by a case that can contain up to three different diffusers and can be used for dry storage
-                                    of loose tea.
-                                </p>
-                            </div>
+                            <!-- Nếu bạn có thêm các phần khác như hình ảnh hoặc quote, bạn có thể thêm vào đây -->
                         </div>
-
-                        <div class="postbox__share mb-95">
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-6">
-                                    <div class="postbox__social">
-                                        <span>Share to friends:</span>
-                                        <ul>
-                                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-share-alt"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6">
-                                    <div class="postbox__tag f-right">
-                                        <span>Tags :</span>
-                                        <a href="blog.html">Furniture,</a>
-                                        <a href="blog.html">Erentheme,</a>
-                                        <a href="blog.html">Chair, </a>
-                                        <a href="blog.html">Decor</a>
-                                    </div>
-                                </div>
+                        <div class="postbox__wrapper mb-70">
+                            <div class="postbox__text mt-65">
+                                <p>{{ $post->content }}</p> <!-- Hiển thị nội dung bài viết -->
                             </div>
+                            <!-- Nếu bạn có thêm các phần khác như hình ảnh hoặc quote, bạn có thể thêm vào đây -->
                         </div>
+                   
                         
-                        <div class="postbox__related-title">
+                        {{-- <div class="postbox__related-title">
                             <h3>You Might Also Like</h3>
                         </div>
                         <div class="postbox__related-item">
@@ -141,7 +90,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="postbox__line mt-65"></div>
                         <div class="postbox__comments pt-90">
                             <div class="postbox__comment-title mb-30">

@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('category_posts', function (Blueprint $table) {
             $table->id();
-
             $table->string('name');
             $table->string('detail');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -19,10 +19,8 @@ return new class extends Migration
             $table->string('email');
             $table->text('content')->nullable();
             $table->integer('phone');
-            $table->unsignedBigInteger('status_id')->default(1);
             $table->date('fix_date')->nullable();
 
-            $table->rememberToken();
             $table->timestamps();
         });
     }

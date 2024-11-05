@@ -12,15 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('variants', function (Blueprint $table) {
+        Schema::create('flash_sales', function (Blueprint $table) {
             $table->id();
-
-            $table->integer('type');
-            $table->string('name');
-            $table->integer('price');
-            $table->integer('quantity');
-
             $table->foreignIdFor(Product::class)->constrained();
+            $table->datetime('time_end');
+            $table->integer('price_original');
+            $table->integer('price_sale');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('flash_sales');
     }
 };

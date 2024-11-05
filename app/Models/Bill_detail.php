@@ -13,6 +13,7 @@ class Bill_detail extends Model
     'bill_code',
     'quantity',
     'subtotal',
+    'variant',
 ];
     }
 

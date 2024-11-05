@@ -20,6 +20,7 @@ use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\FlashSaleController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopController;
 
 /*
@@ -90,10 +91,12 @@ Route::get('checkout', function () {
 });
 
 
-Route::get('/blog', function () {
-    return view('clients.blog');
-})->name('blog');
+Route::get('/blog', [PostController::class, 'clientIndex'])->name('blog');
+Route::get('/single_blog/{post}', [PostController::class, 'clientShow'])->name('single_blog');
 
+// Route::get('/single_blog', function () {
+//     return view('clients.single_blog');
+// })->name('single_blog');
 
 Route::get('/about', function () {
     return view('clients.about');
@@ -103,9 +106,7 @@ Route::get('/single_product', function () {
     return view('clients.single_product');
 })->name('single_product');
 
-Route::get('/single_blog', function () {
-    return view('clients.single_blog');
-})->name('single_blog');
+
 
 Route::get('login',[AuthenController::class,'login'])->name('login');
 Route::post('login',[AuthenController::class,'postLogin'])->name('postLogin');
@@ -160,6 +161,8 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
 
 Route::resource('admin1/category', CategoryController::class);
 Route::resource('admin1/category_post', CategoryPostController::class);
+Route::resource('admin1/post', PostController::class);
+
 Route::resource('admin1/banner', BannerController::class);
 Route::resource('admin1/contact', ContactController::class);
 Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
@@ -218,12 +221,17 @@ Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('ca
 
 
 Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
-/* -------------------------------- FLASH SALE -------------------------------- */
+/* -------------------------------- checkout -------------------------------- */
 Route::prefix('/checkout')->name('checkout.')->group(function () {
     Route::get('/', [CheckoutController::class, 'index'])->name('index');
     Route::post('/store', [CheckoutController::class, 'store'])->name('store');
     Route::get('/success', [CheckoutController::class, 'ok'])->name('success');
+    Route::get('/list', [CheckoutController::class, 'list'])->name('list');
+    Route::get('/history', [CheckoutController::class, 'history'])->name('history');
+    Route::get('/detail/{bill_code}', [CheckoutController::class, 'detail'])->name('detail');
+    Route::get('/edit/{bill_code}', [CheckoutController::class, 'edit'])->name('edit');
+    Route::put('/edit/{bill_code}', [CheckoutController::class, 'editput'])->name('editput');
 
 });
 
-/* -------------------------------- FLASH SALE -------------------------------- */
+/* -------------------------------- checkout -------------------------------- */

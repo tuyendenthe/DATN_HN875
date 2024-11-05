@@ -24,8 +24,13 @@
                                     <li>
                                         <a href="{{ route('blog') }}">Tin tức</a>
                                         <ul class="sub-menu">
+
                                             <li><a href="blog.html">Danh sách tin tức</a></li>
                                             <li><a href="single-blog.html">Chi tiết tin tức</a></li>
+
+                                            <li><a href="{{ route('blog') }}">Danh sách tin tức</a></li>
+                                            {{-- <li><a href="{{ route('single_blog') }}">Chi tiết tin tức</a></li> --}}
+
                                         </ul>
                                     </li>
                                     <li>
