@@ -12,6 +12,7 @@ class ProductController extends Controller
     public function listProduct()
     {
         $listProducts = Product::all();
+       
         return view('admins.tables')->with([
             'listProducts' => $listProducts
         ]);

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('slides', function (Blueprint $table) {
             $table->id();
             $table->string('image');
-            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });

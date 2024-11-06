@@ -12,8 +12,9 @@ class BannerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function upload_image($imageFile){
-        if($imageFile){
+    public function upload_image($imageFile)
+    {
+        if ($imageFile) {
             $imageName = time() . '-' . uniqid() . '-' . $imageFile->getClientOriginalExtension();
 
             $imageFile->move(public_path('uploads'), $imageName);
@@ -40,7 +41,7 @@ class BannerController extends Controller
     public function store(BannerRequest $request)
     {
         $data = $request->all();
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $data['image'] = $this->upload_image($request->file('image'));
         }
         Slide::create($data);
@@ -62,7 +63,6 @@ class BannerController extends Controller
     {
         $banner = Slide::find($id);
         return view('admins.banner.edit', compact('banner'));
-
     }
 
     /**
@@ -72,9 +72,12 @@ class BannerController extends Controller
     {
         $data = $request->all();
         $Banner = Slide::findOrFail($id);
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $data['image'] = $this->upload_image($request->file('image'));
-            unlink($Banner->image);
+            if (!empty($Banner->image) && file_exists(public_path($Banner->image))) {
+                // Xóa file cũ
+                unlink(public_path($Banner->image));
+            }
         }
 
         $Banner->update($data);
@@ -86,7 +89,7 @@ class BannerController extends Controller
      */
     public function destroy(string $id)
     {
-        $banner =Slide::find($id);
+        $banner = Slide::find($id);
         $banner->delete();
         return redirect()->route('banner.index')->with('success', 'Xoa thanh cong');
     }

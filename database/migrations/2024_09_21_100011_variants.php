@@ -15,14 +15,12 @@ return new class extends Migration
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
 
+            $table->integer('type');
             $table->string('name');
-
-
             $table->integer('price');
             $table->integer('quantity');
 
             $table->foreignIdFor(Product::class)->constrained();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
