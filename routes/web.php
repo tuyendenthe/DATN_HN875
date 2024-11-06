@@ -21,6 +21,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\FlashSaleController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ShopController;
 
 /*
@@ -83,6 +84,7 @@ Route::post('/search-product', [SearchController::class, 'searchProduct'])->name
 //     return view('clients.contact');
 // });
 
+Route::post('/post-review', [ReviewsController::class, 'postReview'])->name('post.review')->middleware('auth');
 
 
 
@@ -106,6 +108,9 @@ Route::get('/single_product', function () {
     return view('clients.single_product');
 })->name('single_product');
 
+Route::get('/test', function () {
+    return view('clients.review');
+});
 
 
 Route::get('login',[AuthenController::class,'login'])->name('login');
