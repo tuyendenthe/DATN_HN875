@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\FlashSale;
 use App\Models\Slide;
@@ -58,7 +59,10 @@ class HomeUserController extends Controller
     {
         $products = Product::with('variants')->findOrFail($id);
 
-        return view('clients.single_product', compact('products'));
+        $reviews = Comment::where('product_id', $id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+        return view('clients.single_product', compact(['products','reviews']));
     }
 
     /**
