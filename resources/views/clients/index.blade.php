@@ -164,7 +164,6 @@
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
         </div>
         <!-- slider area end -->
 
@@ -1184,10 +1183,6 @@
             autoplay: {
                 delay: 3000,
                 disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
             },
             navigation: {
                 nextEl: '.swiper-button-next',
