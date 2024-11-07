@@ -119,8 +119,8 @@
                 <div class="contact-list mb-30">
                     <h4>Contact Info</h4>
                     <ul class="p-0">
-                        <li><i class="fal fa-map"></i>12/A, Mirnada City Tower, NYC</li>
-                        <li><i class="fal fa-phone-alt"></i><a href="tell:+876864764764">+876 864 764 764</a></li>
+                        <li><i class="fal fa-map"></i>no.1 Nam Dinh, Viet Nam</li>
+                        <li><i class="fal fa-phone-alt"></i><a href="tell:+876864764764">0362978755</a></li>
                         <li><i class="fal fa-envelope-open"></i><a
                                 href="https://www.devsnews.com/cdn-cgi/l/email-protection#c2a3a6afabac82a5afa3abaeeca1adaf"><span
                                     class="__cf_email__"
