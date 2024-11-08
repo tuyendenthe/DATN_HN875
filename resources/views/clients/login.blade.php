@@ -40,7 +40,7 @@
                 // Hide the notification after 5 seconds
                 setTimeout(function() {
                     notification.style.display = 'none';
-                }, 7000);
+                }, 8000);
 
                 // Optional: Add hover effect to keep it visible
                 notification.addEventListener('mouseenter', function() {

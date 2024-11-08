@@ -138,7 +138,7 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::put('/editUser/{id}', [UserController::class, 'update'])->name('admin1.users.update');
     Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('admin1.users.destroy');
     Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
-
+    Route::post('/toggleUserStatus/{id}', [UserController::class, 'toggleStatus'])->name('admin1.users.toggleStatus');
     Route::get('/chart', function () {
         return view('admins.chart');
     })->name('chart');
