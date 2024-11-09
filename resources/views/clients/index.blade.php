@@ -639,7 +639,7 @@
                                         <div class="epix-single-product">
                                             <div class="epix-product-thumb epix-product-thumb-3">
                                                 <a href="single-product.html">
-                                                    <img src="{{ Storage::url($item->image) }}" {{-- <img src="assets/img/product/23.jpg" --}}
+                                                    <img src="{{ asset($item->image) }}" {{-- <img src="assets/img/product/23.jpg" --}}
                                                         class="img-fluid" alt=""></a>
                                                 <div class="epix-action">
                                                     <a href="single-product.html" class="p-cart product-popup-toggle">
