@@ -74,6 +74,7 @@
     <script src="{{asset('admin/assets/libs/chart/matrix.charts.js')}}"></script>
     <script src="{{asset('admin/assets/libs/chart/jquery.flot.pie.min.js')}}"></script>
     <script src="{{asset('admin/assets/libs/chart/turning-series.js')}}"></script>
+    @yield('script')
 </body>
 
 </html>

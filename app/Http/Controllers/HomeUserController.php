@@ -59,7 +59,7 @@ class HomeUserController extends Controller
     {
         $products = Product::with('variants')->findOrFail($id);
 
-        $reviews = Comment::where('product_id', $id)
+        $reviews = Comment::where('product_id', $id)->where('status', 1)
         ->orderBy('created_at', 'desc')
         ->get();
         return view('clients.single_product', compact(['products','reviews']));

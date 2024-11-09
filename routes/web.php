@@ -85,6 +85,11 @@ Route::post('/search-product', [SearchController::class, 'searchProduct'])->name
 // });
 
 Route::post('/post-review', [ReviewsController::class, 'postReview'])->name('post.review')->middleware('auth');
+Route::middleware('auth')->prefix('admin1/comment')->group(function() {
+    Route::get('/', [ReviewsController::class, 'listComment'])->name('list-comment');
+    Route::delete('/comment/{id}', [ReviewsController::class, 'deleteComment'])->name('delete-comment');
+    Route::post('/update-status', [ReviewsController::class, 'updateStatus'])->name('update-status');
+});
 
 
 
