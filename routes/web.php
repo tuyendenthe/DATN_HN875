@@ -232,10 +232,12 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
     Route::post('/store', [CheckoutController::class, 'store'])->name('store');
     Route::get('/success', [CheckoutController::class, 'ok'])->name('success');
     Route::get('/list', [CheckoutController::class, 'list'])->name('list');
+    Route::get('/status/{id}', [CheckoutController::class, 'status'])->name('status');
     Route::get('/history', [CheckoutController::class, 'history'])->name('history');
     Route::get('/detail/{bill_code}', [CheckoutController::class, 'detail'])->name('detail');
     Route::get('/edit/{bill_code}', [CheckoutController::class, 'edit'])->name('edit');
     Route::put('/edit/{bill_code}', [CheckoutController::class, 'editput'])->name('editput');
+    Route::post('/updatestatus/{id}', [CheckoutController::class, 'updatestatus'])->name('updatestatus');
 
 });
 

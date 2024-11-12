@@ -22,6 +22,7 @@
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.addProduct')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Product Post</span></a></li>
                     </ul>
                 </li>
+                  {{-- /* --------------------------------- đơn hàng -------------------------------- */ --}}
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Quản Lý Đơn Hàng </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('checkout.list')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Đơn Hàng Đang Thực Hiện</span></a></li>

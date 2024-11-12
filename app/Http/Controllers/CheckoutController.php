@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Bill;
 use App\Models\Bill_detail;
+use App\Models\Status;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,7 +50,7 @@ $randomString = substr(str_shuffle($characters), 0, 10);
 
         // Lấy dữ liệu từ session cart
         $cart = session()->get('cart'); // Hoặc cách khác để lấy cart của bạn
-
+        //
         foreach ($product_ids as $item => $id_product) {
             // Lấy thông tin sản phẩm từ cart
             $product_id= $id_product;
@@ -150,6 +151,20 @@ $randomString = substr(str_shuffle($characters), 0, 10);
 
 
 
+    }
+    public function status( $id){
+        // dd($id);
+           $data = Bill::find($id);
+        //    dd($data);
+        $statuses = Status::where('id', '>=', $data->status)->get();
+
+        return view('admins.checkout.status', compact('data', 'statuses'));
+    }
+    public function updateStatus(Request $request, $id){
+        // dd($id);
+        Bill::where('id', $id)->update(['status' => $request->status_id]);
+
+        return redirect()->route("checkout.list")->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
 
 }
