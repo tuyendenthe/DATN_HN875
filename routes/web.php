@@ -82,12 +82,20 @@ Route::post('/book-fix', [BookFixController::class, 'sendBookFix'])->name('bookf
 
 Route::post('/search', [SearchController::class, 'search'])->name('search');
 Route::post('/search-product', [SearchController::class, 'searchProduct'])->name('search.product');
+Route::get('/search-order', [SearchController::class, 'searchCheckout'])->name('search.order');
+Route::get('/history', [CheckoutController::class, 'history'])->name('order.history');
+
 
 // Route::get('contact', function () {
 //     return view('clients.contact');
 // });
 
 Route::post('/post-review', [ReviewsController::class, 'postReview'])->name('post.review')->middleware('auth');
+Route::middleware('auth')->prefix('admin1/comment')->group(function() {
+    Route::get('/', [ReviewsController::class, 'listComment'])->name('list-comment');
+    Route::delete('/comment/{id}', [ReviewsController::class, 'deleteComment'])->name('delete-comment');
+    Route::post('/update-status', [ReviewsController::class, 'updateStatus'])->name('update-status');
+});
 
 
 

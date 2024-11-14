@@ -173,7 +173,7 @@
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-1.png')}}" alt=""></a>
+                                                            <a href="single-product.html"><img src="{{asset($item->image)}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
                                                             <span class="price">${{$item->price}}</span>

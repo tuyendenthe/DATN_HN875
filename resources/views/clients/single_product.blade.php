@@ -584,7 +584,7 @@ button:hover {
                                                     </div>
                                                     <br>
                                                     <label for="comment">Comment:</label>
-                                                    <textarea name="comment" id="comment"></textarea>
+                                                    <textarea name="content" id="comment"></textarea>
                                                 
                                                     <button type="submit">Submit</button>
                                                 </form>

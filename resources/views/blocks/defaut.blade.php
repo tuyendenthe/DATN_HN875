@@ -65,7 +65,6 @@
     <script src="{{asset('laptop/assets/js/mouse-wheel.min.js')}}"></script>
     <script src="{{asset('laptop/assets/js/main.js')}}"></script>
 
-
     @static('script')
 </body>
 

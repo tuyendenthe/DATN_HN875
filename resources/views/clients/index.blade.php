@@ -119,8 +119,8 @@
                 <div class="contact-list mb-30">
                     <h4>Contact Info</h4>
                     <ul class="p-0">
-                        <li><i class="fal fa-map"></i>12/A, Mirnada City Tower, NYC</li>
-                        <li><i class="fal fa-phone-alt"></i><a href="tell:+876864764764">+876 864 764 764</a></li>
+                        <li><i class="fal fa-map"></i>no.1 Nam Dinh, Viet Nam</li>
+                        <li><i class="fal fa-phone-alt"></i><a href="tell:+876864764764">0362978755</a></li>
                         <li><i class="fal fa-envelope-open"></i><a
                                 href="https://www.devsnews.com/cdn-cgi/l/email-protection#c2a3a6afabac82a5afa3abaeeca1adaf"><span
                                     class="__cf_email__"
@@ -164,7 +164,6 @@
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
         </div>
         <!-- slider area end -->
 
@@ -640,7 +639,7 @@
                                         <div class="epix-single-product">
                                             <div class="epix-product-thumb epix-product-thumb-3">
                                                 <a href="single-product.html">
-                                                    <img src="{{ Storage::url($item->image) }}" {{-- <img src="assets/img/product/23.jpg" --}}
+                                                    <img src="{{ asset($item->image) }}" {{-- <img src="assets/img/product/23.jpg" --}}
                                                         class="img-fluid" alt=""></a>
                                                 <div class="epix-action">
                                                     <a href="single-product.html" class="p-cart product-popup-toggle">
@@ -1184,10 +1183,6 @@
             autoplay: {
                 delay: 3000,
                 disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
             },
             navigation: {
                 nextEl: '.swiper-button-next',
