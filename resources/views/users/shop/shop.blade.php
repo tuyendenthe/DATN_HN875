@@ -65,10 +65,7 @@
                                     <ul>
                                         <li>
                                             <a href="#" class="active" data-bg-color="#D1D1D1"></a>
-                                            <a href="#" data-bg-color="#FC7C8D"></a>
-                                            <a href="#" data-bg-color="#FEE496"></a>
                                             <a href="#" data-bg-color="#161616"></a>
-                                            <a href="#" data-bg-color="#00A651)"></a>
                                             <a href="#" data-bg-color="#F50000"></a>
                                         </li>
                                     </ul>
@@ -1016,7 +1013,7 @@
         </div>
         <!-- shop product area end -->
     </main>
-@endsection    
+@endsection
 
 @push('script')
 @endpush
