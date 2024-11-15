@@ -27,6 +27,27 @@
     <link rel="stylesheet" href= {{asset('laptop/assets/css/meanmenu.css')}}  />
     <link rel="stylesheet" href= {{asset('laptop/assets/css/swipper.css')}} />
     <link rel="stylesheet" href= {{asset('laptop/assets/css/main.css')}}  />
+    <style>
+        .search-results {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .search-results .result-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .search-results .result-item:hover {
+            background-color: #f0f0f0;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,6 +77,7 @@
     <script src="{{asset('laptop/assets/js/imagesloaded.pkgd.min.js')}} "></script>
     <script src="{{asset('laptop/assets/js/mouse-wheel.min.js')}} "></script>
     <script src="{{asset('laptop/assets/js/main.js')}} "></script>
+
 </body>
 
 

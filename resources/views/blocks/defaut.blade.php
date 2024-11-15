@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="{{asset('laptop/assets/css/meanmenu.css')}}" />
     <link rel="stylesheet" href="{{asset('laptop/assets/css/swipper.css')}}" />
     @stack('style')
-
 </head>
 
 <body>

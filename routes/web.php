@@ -45,6 +45,10 @@ Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name(
 
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop/{id}', [ShopController::class, 'shopWithCategories'])->name('shopWithCategories');
+Route::get('/shop/filter-by-price/{priceRange}', [ShopController::class, 'shopWithRange'])->name('shop.filterByPrice');
+Route::get('/search-products', [HomeUserController::class, 'searchProducts'])->name('search.products');
+Route::get('/shop/filter-by-color/{selectedColor}', [ShopController::class, 'shopWithColor'])->name('shop.filterByColor');
 
 
 // Route::get('/', function () {
@@ -115,9 +119,10 @@ Route::get('/about', function () {
     return view('clients.about');
 })->name('about');
 
-Route::get('/single_product', function () {
-    return view('clients.single_product');
-})->name('single_product');
+//Route::get('/single_product/{id}', function () {
+//    return view('clients.single_product');
+//})->name('single_product');
+Route::get('/single_product/{id}', [HomeUserController::class, 'show'])->name('single_product');
 
 Route::get('/test', function () {
     return view('clients.review');
