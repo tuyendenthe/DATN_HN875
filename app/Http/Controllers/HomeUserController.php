@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\FlashSale;
@@ -24,6 +25,7 @@ class HomeUserController extends Controller
         $products = (Product::with('category'))->latest()->take(8)->get();
         // dd($products);
         // dd($products);
+        $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
             ->orderBy('time_end', 'asc')
@@ -32,7 +34,7 @@ class HomeUserController extends Controller
         $banners = Slide::all();
 
         // Trả về view và truyền danh sách sản phẩm
-        return view('clients.index', compact('products', 'flashSales', 'banners'));
+        return view('clients.index', compact('products', 'flashSales', 'banners','categories'));
     }
 
     /**
@@ -87,5 +89,36 @@ class HomeUserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function searchProducts(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $products = Product::where('name', 'LIKE', "%$keyword%")
+            ->take(10)
+            ->get();
+
+        $output = '';
+        if ($products->count() > 0) {
+            foreach ($products as $product) {
+                $output .= '
+                    <a href="/single_product/' . $product->id . '" class="result-item" style="display: flex;
+                                                    align-items: center;
+                                                    padding: 10px;
+                                                    cursor: pointer;
+                                                    border-bottom: 1px solid #f0f0f0;
+                                                    text-decoration: none">
+                        <img style="margin-right: 10px;border-radius: 5px;" width="40px" height="40px" src="' . asset($product->image) . '" alt="' . $product->name . '" />
+                        <div class="product-info" style="display: flex;flex-direction: column;">
+                            <span class="product-name">' . $product->name . '</span>
+                            <span class="product-price">' . number_format($product->price, 0, ',', '.') . ' đ</span>
+                        </div>
+                    </a>
+                ';
+            }
+        } else {
+            $output .= '<div class="result-item">No products found</div>';
+        }
+
+        return $output;
     }
 }

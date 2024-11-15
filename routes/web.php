@@ -159,6 +159,8 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     //     return view('admins.chart');
     // })->name('chart');
     Route::get('/chart', [ChartController::class, 'index'])->name('chart');
+    Route::get('/product_statistics', [ChartController::class, 'product_statistics'])->name('product_statistics');
+
 
 
     Route::get('/widgets', function () {
