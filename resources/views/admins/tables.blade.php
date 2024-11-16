@@ -61,7 +61,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->name }}</td>
                                             <td>
-                                                <img src="{{ Storage::url($value->image) }}" alt="" width="100">
+                                                <img src="{{ asset($value->image) }}" alt="" width="100">
                                             </td>
                                             {{-- <td>{{ $value->content }}</td> --}}
                                             <td>{{ $value->content_short }}</td>

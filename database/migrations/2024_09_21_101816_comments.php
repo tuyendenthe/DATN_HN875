@@ -19,11 +19,6 @@ return new class extends Migration
             $table->foreignIdFor(Product::class)->constrained();
             $table->string('content');
             $table->integer('star');
-
-
-
-
-            $table->rememberToken();
             $table->timestamps();
         });
     }

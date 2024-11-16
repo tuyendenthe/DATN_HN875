@@ -49,6 +49,19 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="name">Phần Trăm Giảm</label>
+                                @php
+                                    $percent_off = 0;
+                                    if($flashSale->price_original > 0){
+                                        $percent_off = (($flashSale->price_original - $flashSale->price_sale) / $flashSale->price_original) * 100;
+                                    }
+                                @endphp
+                                <input type="number" min="1" max="100" name="percent" value="{{ $percent_off }}" placeholder="Nhập phần trăm giảm" class="form-control" required>
+                                @error('percent')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="name">Ngày Hết Hạn</label>
                                 <input type="datetime-local" name="time_end" class="form-control" value="{{ old('time_end', \Carbon\Carbon::parse($flashSale->time_end)->format('Y-m-d\TH:i')) }}" required>
                                 @error('time_end')

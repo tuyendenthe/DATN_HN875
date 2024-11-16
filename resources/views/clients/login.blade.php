@@ -40,7 +40,7 @@
                 // Hide the notification after 5 seconds
                 setTimeout(function() {
                     notification.style.display = 'none';
-                }, 7000);
+                }, 8000);
 
                 // Optional: Add hover effect to keep it visible
                 notification.addEventListener('mouseenter', function() {
@@ -72,11 +72,11 @@
         <!-- breadcrumb area start -->
         <div class="epix-breadcrumb-area">
             <div class="container">
-                <h4 class="epix-breadcrumb-title">Login Page</h4>
+                <h4 class="epix-breadcrumb-title">Trang Đăng nhập</h4>
                 <div class="epix-breadcrumb">
                     <ul>
-                        <li><a href="{{route('index')}}">Home</a></li>
-                        <li><span>Login</span></li>
+                        <li><a href="{{route('index')}}">Trang chủ</a></li>
+                        <li><span>Đăng nhập</span></li>
                     </ul>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
                         <div class="basic-login">
-                            <h3 class="text-center mb-60">Login From Here</h3>
+                            <h3 class="text-center mb-60">Đăng Nhập </h3>
                             <form action="{{ route('postLogin') }}" method="post">
                                 @csrf
                                 @if ($errors->any())
@@ -103,20 +103,20 @@
 
 
 
-                                <label for="email">Email Address <span>**</span></label>
-                                <input id="email" name="email" type="text" placeholder="Email address...">
+                                <label for="email">Địa chỉ email <span>**</span></label>
+                                <input id="email" name="email" type="text" placeholder="Địa chỉ email...">
 
-                                <label for="password">Password <span>**</span></label>
-                                <input id="password" name="password" type="password" placeholder="Enter password...">
+                                <label for="password">Mật khẩu <span>**</span></label>
+                                <input id="password" name="password" type="password" placeholder="Nhập mật khẩu...">
 
 
                                 <a href="{{ route('password.request') }}" class="forgot-password w-100">Quên mật khẩu?</a>
-                                <button type="submit" class="btn btn-success w-100">Login Now</button>
+                                <button type="submit" class="btn btn-success w-100">Đăng nhập ngay</button>
 
 
 
-                                <div class="or-divide"><span>or</span></div>
-                                <a href="{{route('register')}}" class="os-btn os-btn-black w-100">Register Now</a>
+                                <div class="or-divide"><span>hoặc</span></div>
+                                <a href="{{route('register')}}" class="os-btn os-btn-black w-100">Đăng ký ngay</a>
                             </form>
                         </div>
                     </div>

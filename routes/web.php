@@ -9,17 +9,21 @@ use App\Http\Controllers\HomeUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenController;
-
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\FlashSaleController;
-
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ChartController;
 
 
 
@@ -40,9 +44,11 @@ Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name(
 
 
 
-Route::get('/shop', function () {
-    return view('clients.shop');
-})->name('shop');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop/{id}', [ShopController::class, 'shopWithCategories'])->name('shopWithCategories');
+Route::get('/shop/filter-by-price/{priceRange}', [ShopController::class, 'shopWithRange'])->name('shop.filterByPrice');
+Route::get('/search-products', [HomeUserController::class, 'searchProducts'])->name('search.products');
+Route::get('/shop/filter-by-color/{selectedColor}', [ShopController::class, 'shopWithColor'])->name('shop.filterByColor');
 
 
 // Route::get('/', function () {
@@ -57,7 +63,11 @@ Route::get('/shop', function () {
 // Route::get('/', [HomeUserController::class, 'index']);
 // Route::get('/index', [HomeUserController::class, 'index']);
 Route::get('/index/{id}', [HomeUserController::class, 'show']);
+
+Route::get('/index', [HomeUserController::class, 'index'])->name('home');
+
 Route::get('/', [HomeUserController::class, 'index'])->name('index');
+
 Route::get('/index/{id}', [HomeUserController::class, 'show'])->name('product.details');
 
 Route::get('/contact', function () {
@@ -76,11 +86,20 @@ Route::post('/book-fix', [BookFixController::class, 'sendBookFix'])->name('bookf
 
 Route::post('/search', [SearchController::class, 'search'])->name('search');
 Route::post('/search-product', [SearchController::class, 'searchProduct'])->name('search.product');
+Route::get('/search-order', [SearchController::class, 'searchCheckout'])->name('search.order');
+Route::get('/history', [CheckoutController::class, 'history'])->name('order.history');
+
 
 // Route::get('contact', function () {
 //     return view('clients.contact');
 // });
 
+Route::post('/post-review', [ReviewsController::class, 'postReview'])->name('post.review')->middleware('auth');
+Route::middleware('auth')->prefix('admin1/comment')->group(function() {
+    Route::get('/', [ReviewsController::class, 'listComment'])->name('list-comment');
+    Route::delete('/comment/{id}', [ReviewsController::class, 'deleteComment'])->name('delete-comment');
+    Route::post('/update-status', [ReviewsController::class, 'updateStatus'])->name('update-status');
+});
 
 
 
@@ -89,35 +108,63 @@ Route::get('checkout', function () {
 });
 
 
-Route::get('/blog', function () {
-    return view('clients.blog');
-})->name('blog');
+Route::get('/blog', [PostController::class, 'clientIndex'])->name('blog');
+Route::get('/single_blog/{post}', [PostController::class, 'clientShow'])->name('single_blog');
 
+// Route::get('/single_blog', function () {
+//     return view('clients.single_blog');
+// })->name('single_blog');
 
 Route::get('/about', function () {
     return view('clients.about');
 })->name('about');
 
-Route::get('/single_product', function () {
-    return view('clients.single_product');
-})->name('single_product');
+//Route::get('/single_product/{id}', function () {
+//    return view('clients.single_product');
+//})->name('single_product');
+Route::get('/single_product/{id}', [HomeUserController::class, 'show'])->name('single_product');
 
-Route::get('/single_blog', function () {
-    return view('clients.single_blog');
-})->name('single_blog');
+Route::get('/test', function () {
+    return view('clients.review');
+});
+
 
 Route::get('login',[AuthenController::class,'login'])->name('login');
 Route::post('login',[AuthenController::class,'postLogin'])->name('postLogin');
 Route::get('logout',[AuthenController::class,'logout'])->name('logout');
 Route::get('register',[AuthenController::class,'register'])->name('register');
 Route::post('register',[AuthenController::class,'postRegister'])->name('postRegister');
+Route::middleware(['auth'])->group(function () {
+    Route::get('account/edit', [AuthenController::class, 'editUser'])->name('account.edit');
+    Route::put('account/update', [AuthenController::class, 'updateUser'])->name('account.update');
+});
 
-Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'],function() {
+
+Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::get('/dashboard', function () {
         return view('admins.dashboard');
     })->name('dashboard');
 
 
+    // CRUD user
+    Route::get('/listUser', [UserController::class, 'listUser'])->name('admin1.users.listuser');
+    Route::get('/createUser', [UserController::class, 'addUser'])->name('admin1.users.adduser'); // Đặt tên route
+    Route::post('/createUser', [UserController::class, 'store'])->name('admin1.users.store');
+    Route::get('/editUser/{id}', [UserController::class, 'edit'])->name('admin1.users.edit');
+    Route::put('/editUser/{id}', [UserController::class, 'update'])->name('admin1.users.update');
+    Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('admin1.users.destroy');
+    Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
+
+
+    // Route::get('/chart', function () {
+    //     return view('admins.chart');
+    // })->name('chart');
+    Route::get('/chart', [ChartController::class, 'index'])->name('chart');
+    Route::get('/product_statistics', [ChartController::class, 'product_statistics'])->name('product_statistics');
+
+
+
+    Route::post('/toggleUserStatus/{id}', [UserController::class, 'toggleStatus'])->name('admin1.users.toggleStatus');
     Route::get('/chart', function () {
         return view('admins.chart');
     })->name('chart');
@@ -146,6 +193,8 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'],function() {
 
 Route::resource('admin1/category', CategoryController::class);
 Route::resource('admin1/category_post', CategoryPostController::class);
+Route::resource('admin1/post', PostController::class);
+
 Route::resource('admin1/banner', BannerController::class);
 Route::resource('admin1/contact', ContactController::class);
 Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
@@ -204,4 +253,17 @@ Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('ca
 
 
 Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
+/* -------------------------------- checkout -------------------------------- */
+Route::prefix('/checkout')->name('checkout.')->group(function () {
+    Route::get('/', [CheckoutController::class, 'index'])->name('index');
+    Route::post('/store', [CheckoutController::class, 'store'])->name('store');
+    Route::get('/success', [CheckoutController::class, 'ok'])->name('success');
+    Route::get('/list', [CheckoutController::class, 'list'])->name('list');
+    Route::get('/history', [CheckoutController::class, 'history'])->name('history');
+    Route::get('/detail/{bill_code}', [CheckoutController::class, 'detail'])->name('detail');
+    Route::get('/edit/{bill_code}', [CheckoutController::class, 'edit'])->name('edit');
+    Route::put('/edit/{bill_code}', [CheckoutController::class, 'editput'])->name('editput');
 
+});
+
+/* -------------------------------- checkout -------------------------------- */

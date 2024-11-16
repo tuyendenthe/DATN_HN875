@@ -13,6 +13,41 @@ use Illuminate\Support\Facades\Route;
 
 class AuthenController extends Controller
 {
+    public function editUser()
+    {
+        $user = Auth::user();
+        return view('clients.edit_user', compact('user'));
+    }
+    public function updateUser(Request $req)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('message', 'Bạn cần đăng nhập để cập nhật thông tin.');
+        }
+
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'name.required' => 'Tên không được để trống.',
+            'email.required' => 'Email không được để trống.',
+            'image.image' => 'File tải lên phải là hình ảnh.',
+        ]);
+
+        $user = Auth::user();
+        $user->name = $req->name;
+        $user->email = $req->email;
+
+
+        if ($req->hasFile('image')) {
+            $path = $req->file('image')->store('images/users');
+            $user->image = $path;
+        }
+
+        $user->save();
+
+        return redirect()->route('index')->with('message', 'Cập nhật tài khoản thành công');
+    }
     public function login(){
         return view('clients.login');
     }
@@ -29,23 +64,37 @@ class AuthenController extends Controller
             'password.required' => 'Password không được để trống',
         ]);
 
-        if (Auth::attempt([
-            'email' => $req->email,
-            'password' => $req->password,
-        ])) {
-            if (Auth::user()->role == '1') {
-                return redirect()->route('dashboard')->with([
-                    'message'=>'Đăng nhập thành công']);
 
-            } else {
-                return redirect()->route('index')->with([
-                    'message'=>'Đăng nhập thành công']);
+        $user = User::where('email', $req->email)->first();
+
+        if ($user) {
+
+            if ($user->status === '2') {
+                return redirect()->back()->with([
+                    'message' => 'Tài khoản của bạn đã bị ngưng hoạt động. Vui lòng liên hệ quản trị viên.',
+                ]);
             }
-        } else {
-            return redirect()->back()->with([
-                'message' => 'Email hoặc mật khẩu không đúng',
-            ]);
+
+           
+            if (Auth::attempt([
+                'email' => $req->email,
+                'password' => $req->password,
+            ])) {
+                if (Auth::user()->role == '1') {
+                    return redirect()->route('dashboard')->with([
+                        'message' => 'Đăng nhập thành công'
+                    ]);
+                } else {
+                    return redirect()->route('index')->with([
+                        'message' => 'Đăng nhập thành công'
+                    ]);
+                }
+            }
         }
+
+        return redirect()->back()->with([
+            'message' => 'Email hoặc mật khẩu không đúng',
+        ]);
     }
 
     public function logout(){
@@ -65,7 +114,7 @@ class AuthenController extends Controller
         $req->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed', // Ensure you have a password confirmation field
+            'password' => 'required|string|min:8|confirmed',
         ], [
             'name.required' => 'Tên không được để trống.',
             'name.string' => 'Tên phải là chuỗi.',
@@ -90,7 +139,7 @@ class AuthenController extends Controller
             'image' => $image,
         ];
 
-        User::create($data); // Create the user
+        User::create($data);
 
         return redirect()->route('login')->with([
             'message' => 'Đăng ký thành công',

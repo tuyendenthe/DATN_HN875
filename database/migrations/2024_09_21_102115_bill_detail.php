@@ -19,12 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Bill::class)->constrained();
             $table->string('bill_code');
             $table->integer( 'quantity');
-
-
-
-
-
-            $table->rememberToken();
+            $table->integer( 'subtotal');
             $table->timestamps();
         });
     }

@@ -15,11 +15,11 @@
     <!-- breadcrumb area start -->
     <div class="epix-breadcrumb-area mb-100">
         <div class="container">
-            <h4 class="epix-breadcrumb-title">About Page</h4>
+            <h4 class="epix-breadcrumb-title">Giới Thiệu</h4>
             <div class="epix-breadcrumb">
                 <ul>
-                    <li><a href="index-3.html">Home</a></li>
-                    <li><span>About Page</span></li>
+                    <li><a href="index-3.html">Trang chủ</a></li>
+                    <li><span>Trang giới thiệu</span></li>
                 </ul>
             </div>
         </div>
