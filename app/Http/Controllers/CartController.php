@@ -64,6 +64,7 @@ class CartController extends Controller
         $variantName2 = $variant2_name;
         $variantName3 = $variant3_name;
         $quantity = 1;
+        $image = $product -> image;
         $cartItems = session('cart', []);
 
         // Create a unique key for the product-variant combination
@@ -78,6 +79,7 @@ class CartController extends Controller
                 'variant_name' => [$variantName1, $variantName2, $variantName3],
                 'quantity' => $quantity,
                 'price' => $productPrice,
+                'image' => $image
             ];
         }
 

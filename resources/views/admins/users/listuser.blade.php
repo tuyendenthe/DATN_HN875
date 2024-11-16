@@ -50,9 +50,10 @@
                                         <th>Tên user</th>
                                         <th>Email</th>
                                         <th>Img</th>
-
-                                        <th>Password</th>
+                                        {{-- <th>Địa chỉ</th> --}}
+                                        {{-- <th>Password</th> --}}
                                         <th>Quyền</th>
+                                        <th>Trạng thái</th>
                                         <th>Hành Động</th>
                                     </tr>
                                 </thead>
@@ -66,22 +67,30 @@
                                             <td>
                                                 <img src="{{ Storage::url($value->image) }}" alt="" width="100">
                                             </td>
-                                            {{-- <td>{{ $value->content }}</td> --}}
-                                            <td>{{ $value->password }}</td>
+                                            {{-- <td>{{ $value->address }}</td> --}}
+                                            {{-- <td>{{ $value->password }}</td> --}}
                                             <td>
                                                 {{ $value->role == '1' ? 'Admin' : 'User' }}
                                             </td>
                                             <td>
+                                            <span class="badge {{ $value->status === '1' ? 'badge-success' : 'badge-danger' }}">
+                                                {{ $value->status === '1' ? 'Hoạt động' : 'Ngưng hoạt động' }}
+                                            </span>
+                                        </td>
+                                            <td>
+
                                                 <a class="btn btn-warning m-1" href="{{ route('admin1.users.edit', $value->id) }}">Sửa</a>
                                                 <a class="btn btn-info m-1" href="{{ route('admin1.users.detail', $value->id) }}">Xem chi tiết</a>
 
 
-                                                <form action="{{ route('admin1.users.destroy', $value->id) }}" method="post" style="display:inline;">
+                                                <form action="{{ route('admin1.users.toggleStatus', $value->id) }}" method="post" style="display:inline;">
                                                     @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger m-1" onclick="return confirm('Bạn có muốn xóa không?')">Xóa</button>
+                                                    <button class="btn btn-danger" onclick="return confirm('Bạn có muốn thay đổi trạng thái tài khoản này không?')">
+                                                        {{ $value->status === '1' ? 'Ngưng hoạt động' : 'Mở tài khoản' }}
+                                                    </button>
                                                 </form>
                                             </td>
+
                                         </tr>
                                         @endforeach
                                     @else

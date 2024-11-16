@@ -30,7 +30,7 @@ class BannerRequest extends FormRequest
     public function messages(): array
     {
         return [
-            
+
         ];
     }
 }
