@@ -1,160 +1,95 @@
 @extends('admins.master')
 
 @section('content')
-<div class="page-breadcrumb">
-    <div class="row">
-        <div class="col-12 d-flex no-block align-items-center">
-            <h4 class="page-title">Charts</h4>
-            <div class="ml-auto text-right">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Library</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ============================================================== -->
-<!-- End Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
-<!-- Container fluid  -->
-<!-- ============================================================== -->
-<div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <!-- Chart-1 -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Real Time Chart</h5>
-                     <div id="real-time" style="height:400px;"></div>
-                    <p>Time between updates:
-                        <input id="updateInterval" type="text" value="" style="text-align: right; width:5em"> milliseconds
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ENd chart-1 -->
-    <!-- Chart-2 -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Turning-series chart</h5>
-                    <div id="placeholder" style="height: 400px;"></div>
-                    <p id="choices" class="m-t-20"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Chart-2 -->
-    <!-- Cards -->
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card m-t-0">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="peity_line_neutral left text-center m-t-10"><span><span style="display: none;">10,15,8,14,13,10,10</span>
-                            <canvas width="50" height="24"></canvas>
-                            </span>
-                            <h6>10%</h6>
+<style>
+    
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <div class="container">
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                 
+    
+                        @php
+                            
+                            use Illuminate\Support\Carbon;
+                        @endphp
+                        <form action="{{route('chart')}}" class="row" method="get">
+                            <div class="col-md-4" style="margin-top:30px !important;">
+                                <label for="">Từ ngày</label>
+                                <input type="date" name="start" class="form-control" value="{{Carbon::parse($data_start_)->format('Y-m-d')}}">
+                            </div>
+                            <div class="col-md-4" style="margin-top:30px !important;">
+                                <label for="">Đến ngày ngày</label>
+    
+                                <input type="date" name="end" class="form-control" value="{{Carbon::parse($data_end)->format('Y-m-d')}}">
+                            </div>
+                            <div class="col-md-4" style="margin-top:30px !important;">
+                                <button class="btn btn-primary" style="margin-top:28px;"><i class="fa-solid fa-filter" style="margin-right:5px;"></i>Tìm kiếm</button>
+                            </div>
+                            
+                        </form>
+                        
+                   
+                    <div class="mt-3 ">
+                        <div style=" height:100vh;">
+                            <h5 class="text-center"> Thống kê theo biểu đồ</h5>
+                            <canvas class="mb-5" id="myChart" ></canvas>
                         </div>
-                    </div>
-                    <div class="col-md-6 border-left text-center p-t-10">
-                        <h3 class="mb-0 font-weight-bold">150</h3>
-                        <span class="text-muted">New Users</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card m-t-0">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="peity_bar_bad left text-center m-t-10"><span><span style="display: none;">3,5,6,16,8,10,6</span>
-                            <canvas width="50" height="24"></canvas>
-                            </span>
-                            <h6>-40%</h6></div>
-                    </div>
-                    <div class="col-md-6 border-left text-center p-t-10">
-                        <h3 class="mb-0 font-weight-bold">4560</h3>
-                        <span class="text-muted">Orders</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card m-t-0">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="peity_line_good left text-center m-t-10"><span><span style="display: none;">12,6,9,23,14,10,17</span>
-                            <canvas width="50" height="24"></canvas>
-                            </span>
-                            <h6>+60%</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-6 border-left text-center p-t-10">
-                        <h3 class="mb-0 ">5672</h3>
-                        <span class="text-muted">Active Users</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card m-t-0">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="peity_bar_good left text-center m-t-10"><span>12,6,9,23,14,10,13</span>
-                            <h6>+30%</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-6 border-left text-center p-t-10">
-                        <h3 class="mb-0 font-weight-bold">2560</h3>
-                        <span class="text-muted">Register</span>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End cards -->
-    <!-- Chart-3 -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Bar Chart</h5>
-                    <div class="flot-chart">
-                        <div class="flot-chart-content" id="flot-line-chart"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End chart-3 -->
-    <!-- Charts -->
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Pie Chart</h5>
-                    <div class="pie" style="height: 400px;"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Line Chart</h5>
-                    <div class="bars" style="height: 400px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    const ctx = document.getElementById('myChart');
+    
+
+    var dateArray = @json($date);
+    var countData = @json($total);
+  
+
+   
+    new Chart(ctx, {
+        type: 'line'
+        , data: {
+            labels: dateArray
+            , datasets: [{
+                label: 'Thống kê doanh thu theo ngày'
+                , data: countData
+                ,    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)'
+    ],
+        borderWidth: 1
+                    }]
+                }
+                , options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+    </script>
+
 @endsection

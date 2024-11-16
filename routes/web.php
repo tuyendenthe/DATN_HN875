@@ -23,6 +23,9 @@ use App\Http\Controllers\FlashSaleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ChartController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -151,10 +154,21 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::put('/editUser/{id}', [UserController::class, 'update'])->name('admin1.users.update');
     Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('admin1.users.destroy');
     Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
+
+
+    // Route::get('/chart', function () {
+    //     return view('admins.chart');
+    // })->name('chart');
+    Route::get('/chart', [ChartController::class, 'index'])->name('chart');
+    Route::get('/product_statistics', [ChartController::class, 'product_statistics'])->name('product_statistics');
+
+
+
     Route::post('/toggleUserStatus/{id}', [UserController::class, 'toggleStatus'])->name('admin1.users.toggleStatus');
     Route::get('/chart', function () {
         return view('admins.chart');
     })->name('chart');
+
 
     Route::get('/widgets', function () {
         return view('admins.widgets');
