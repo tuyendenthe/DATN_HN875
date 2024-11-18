@@ -22,6 +22,7 @@
         <div class="col-12">
             <h5>Tên: {{ $user->name }}</h5>
             <h5>Email: {{ $user->email }}</h5>
+            <h5>Địa chỉ: {{ $user->address }}</h5>
             <h5>Quyền: {{ $user->role == '1' ? 'Admin' : 'User' }}</h5>
             @if ($user->image)
                 <h5>Ảnh:</h5>

@@ -22,43 +22,33 @@
             @method('PUT')
             @csrf
             <div class="row">
-                <div class="col-12">
-                    Tên:
-                    <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                <div class="col-12 mb-3">
+                    <label for="name">Tên:</label>
+                    <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}">
                     @error('name')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-12">
-                    Email:
-                    <input type="text" name="email" class="form-control" value="{{ $user->email }}">
+                <div class="col-12 mb-3">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" class="form-control" value="{{ old('email', $user->email) }}">
                     @error('email')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-12">
-                    Ảnh:
+                <div class="col-12 mb-3">
+                    <label for="address">Địa chỉ:</label>
+                    <input type="text" name="address" class="form-control" value="{{ old('address', $user->address) }}">
+                    @error('address')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="image">Ảnh:</label>
                     <input type="file" name="image" class="form-control">
                     @if ($user->image)
-                        <img src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}" width="100">
+                        <img src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}" width="100" class="mt-2">
                     @endif
-                </div>
-                {{-- <div class="col-12">
-                    Mật khẩu:
-                    <input type="password" name="password" class="form-control">
-                    @error('password')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div> --}}
-                <div class="col-12">
-                    Quyền:
-                    <select name="role" class="form-control">
-                        <option value="1" {{ $user->role == '1' ? 'selected' : '' }}>Admin</option>
-                        <option value="2" {{ $user->role == '2' ? 'selected' : '' }}>User</option>
-                    </select>
-                    @error('role')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
             </div>
