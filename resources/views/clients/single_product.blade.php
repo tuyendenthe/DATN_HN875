@@ -294,7 +294,7 @@
                                 <div style="padding-left: 0px" class="container">
                                     <div class="variant-container">
                                         @foreach($products->variants as $variant)
-                                            @if ($variant->type == 1)
+                                            {{-- @if ($variant->type == 1) --}}
                                                 <div class="variant-box variant-box1 tag-list"
                                                      data-value="{{ $variant->name }}"
                                                      data-price="{{ $variant->price }}"
@@ -303,7 +303,7 @@
                                                            value="{{ $variant->id }}">
                                                     <label for="{{ $variant->id }}">{{ $variant->name }}</label>
                                                 </div>
-                                            @endif
+                                            {{-- @endif --}}
                                         @endforeach
                                     </div>
                                 </div>
