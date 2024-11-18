@@ -36,6 +36,8 @@ class ProductController extends Controller
         $data =  [
             'name' => $req->name,
             'image' => $path,
+            'price' => $req->price,
+            'content_short' => $req->content_short,
             'content' => $req->content,
             'price' => $req->price,
             'content_short' => $req->content_short,
@@ -65,7 +67,6 @@ class ProductController extends Controller
 
     public function updatePutProduct(ProductRequest $req, $id)
     {
-
         $product = Product::find($id);
         $path =  $product->image;
 
