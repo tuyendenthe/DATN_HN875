@@ -151,6 +151,7 @@
                                                 </h6>
                                                 <div class="rc__meta">
                                                     <span>October 05, 2020</span>
+                                                    
                                                 </div>
                                             </div>
                                         </li>
