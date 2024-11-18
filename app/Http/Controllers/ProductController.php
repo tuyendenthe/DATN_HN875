@@ -28,9 +28,7 @@ class ProductController extends Controller
 
         $path = null;
         if ($req->hasFile('image')) {
-            $image = $req->image;
-            $newName = $req->name . '_' . $image->hashName();
-            $path = $image->storeAs('images/products', $newName);
+           $path = $req->file('image')->store('images/products','public');
         }
 
         $data =  [

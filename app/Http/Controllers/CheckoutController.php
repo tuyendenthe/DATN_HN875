@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use App\Models\status;
 use App\Models\Bill_detail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -154,5 +155,20 @@ class CheckoutController extends Controller
 
         $list = $query->get();
         return view('admins.checkout.history', compact('list'));
+    }
+    public function status( $id){
+        // dd($id);
+           $data = Bill::find($id);
+        //    dd($data);
+        $statuses = status::where('id', '>=', $data->status)->get();
+        //    dd($statuses);
+
+        return view('admins.checkout.status', compact('data', 'statuses'));
+    }
+    public function updateStatus(Request $request, $id){
+        // dd($id);
+        Bill::where('id', $id)->update(['status' => $request->status_id]);
+
+        return redirect()->route("checkout.list")->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
 }

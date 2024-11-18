@@ -35,13 +35,13 @@
                         <span class="" style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-12">
+                {{-- <div class="col-12">
                     Giá:
                     <input type="number" name="price" class="form-control">
                     @error('price')
                         <span class="">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="col-12">
                     Ảnh:
                     <input type="file" name="image" class="form-control">

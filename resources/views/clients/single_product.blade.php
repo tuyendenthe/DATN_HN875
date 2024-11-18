@@ -1,30 +1,48 @@
 @extends('clients.master')
 @section('content')
-    <style>
-        .variant-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
+<style>
+    .variant-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+        justify-content: center;
+    }
 
-        .variant-box {
-            line-height: 30px;
-            min-width: 80px;
-            min-height: 30px;
-            padding: 0 10px;
-            text-align: center;
-            display: inline-block;
-            background-color: #fafafa;
-            text-decoration: none;
-            margin-right: 5px;
-        }
+    .variant-box {
+        padding: 10px;
+        /* Giảm padding để hộp nhỏ hơn */
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        /* Giảm kích thước chiều rộng */
+        height: 70px;
+        /* Giảm kích thước chiều cao */
+        transition: 0.3s;
+        position: relative;
+        user-select: none;
+        font-size: 12px;
+        /* Giảm kích thước chữ */
+    }
 
+    .variant-box.selected {
+        border-color: #007bff;
+        background-color: #e7f1ff;
+        color: #007bff;
+        font-weight: bold;
+    }
 
-        .variant-box input[type="radio"] {
-            display: none;
-            /* Ẩn radio button */
-        }
+    .variant-box input[type="radio"] {
+        display: none;
+        /* Ẩn radio button */
+    }
 
+    .variant-box:hover {
+        border-color: #007bff;
+    }
 
     .price-display {
         text-align: center;
@@ -32,6 +50,91 @@
         font-size: 24px;
         font-weight: bold;
     }
+
+    .page-header {
+    background-size: cover;
+    background-position: center;
+    padding: 50px 0;
+    color: #fff;
+    }
+
+.page-header .page-title {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.breadcrumb-nav {
+    margin: 20px 0;
+}
+
+.breadcrumb-nav .breadcrumb {
+    background: none;
+    padding: 0;
+}
+
+.breadcrumb-nav .breadcrumb-item a {
+    color: #007bff;
+}
+
+.breadcrumb-nav .breadcrumb-item.active {
+    color: #6c757d;
+}
+
+/* Định dạng cho phần nội dung */
+.page-content {
+    padding: 30px 0;
+}
+
+.rating {
+    direction: rtl;
+    display: inline-block;
+    font-size: 2rem;
+}
+
+.rating input[type="radio"] {
+    display: none;
+}
+
+.rating label {
+    color: #d3d3d3;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: color 0.3s;
+}
+
+.rating input[type="radio"]:checked ~ label {
+    color: #f39c12;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #f39c12;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
 </style>
 <!-- prealoder area start -->
 <div id="loading">
@@ -72,7 +175,7 @@
                                             <div class="epix-featured">
                                                 <span>featured</span>
                                             </div>
-                                            <img style="height: 400px;width: 400px;margin-left: 70px" src="{{asset($products->image)}}"
+                                            <img style="height: 400px;width: 400px;margin-left: 70px" src="{{ Storage::url($products->image) }}"
                                                  data-zoom-image="{{asset('laptop/assets/img/product/signle-product-1.jpg')}}"
                                                  class="img-fluid zoom-img-hover" alt="">
                                         </div>
@@ -442,6 +545,7 @@
                                                                 @endfor
                                                             </div>
                                                             <div class="user-name"><a href="#">{{ $review->user->name ?? 'Unknown User' }}</a></div>
+                                                            <span class="date">– {{ $review->comment }}</span>
                                                             <span class="date">– {{ $review->created_at->format('F d, Y') }}</span>
                                                         </div>
                                                         <div class="epix-comment-bottom">
@@ -458,26 +562,27 @@
                                             <form action="{{ route('post.review') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" name='product_id' value="{{$products->id}}">
-
+                                    
                                                 <div class="rating">
                                                     <input type="radio" name="star" id="star5" value="5">
                                                     <label for="star5" title="5 stars">★</label>
+                                                    
                                                     <input type="radio" name="star" id="star4" value="4">
                                                     <label for="star4" title="4 stars">★</label>
-
+                                                    
                                                     <input type="radio" name="star" id="star3" value="3">
                                                     <label for="star3" title="3 stars">★</label>
-
+                                                    
                                                     <input type="radio" name="star" id="star2" value="2">
                                                     <label for="star2" title="2 stars">★</label>
-
+                                                    
                                                     <input type="radio" name="star" id="star1" value="1">
                                                     <label for="star1" title="1 star">★</label>
                                                 </div>
                                                 <br>
                                                 <label for="comment">Comment:</label>
                                                 <textarea name="comment" id="comment"></textarea>
-
+                                            
                                                 <button type="submit">Submit</button>
                                             </form>
                                         </div>
