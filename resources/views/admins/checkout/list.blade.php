@@ -78,7 +78,7 @@
                                                 <td>{{ $value->status_name }}</td>
                                                 <td>
                                                     <a class="btn btn-danger m-1"
-                                                        href="{{ route('checkout.edit', $value->id) }}">Sửa Trạng Thái</a>
+                                                        href="{{ route('checkout.status', $value->id) }}">Sửa Trạng Thái</a>
                                                     <a class="btn btn-primary m-1"
                                                         href="{{ route('checkout.detail', $value->bill_code) }}">Chi
                                                         Tiết</a>

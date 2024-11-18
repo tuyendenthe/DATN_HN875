@@ -1,6 +1,17 @@
 @extends('clients.master')
 
 @section('content')
+    <!-- preloader area start -->
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="first_object"></div>
+                <div class="object" id="second_object"></div>
+                <div class="object" id="third_object"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader area end -->
 
     <!-- breadcrumb area start -->
     <div class="epix-breadcrumb-area mb-100">
@@ -49,7 +60,8 @@
                                     <tr>
                                         <td class="product-thumbnail">
                                             <a href="{{ route('product.details', $item['product_id']) }}">
-                                                <img width="125px" height="125px" src="{{ asset($item['image']) }}" alt="">
+                                                {{-- <img width="125px" height="125px" src="{{ asset() }}" alt=""> --}}
+                                                <img width="125px" height="125px" src="{{ Storage::url($item['image']) }}" alt="">
                                             </a>
                                         </td>
                                         <td class="cart-product-name">
@@ -78,9 +90,7 @@
                                             <div class="d-inline-block border-gray">
                                                 <div class="epix-quantity-form">
 
-                                                    <input type="number" min="1"
-                                                     {{-- max=" {{ $item['quantity_variant'] }}" --}}
-                                                     value="{{ $item['quantity'] }}" onkeydown="return false;">
+                                                    <input type="number" min="1" max="" value="{{ $item['quantity'] }}" onkeydown="return false;">
 
                                                 </div>
                                             </div>
@@ -89,7 +99,7 @@
                                             <span class="amount">{{ number_format($subtotal, 0, ',', '.') }} VNĐ</span>
                                         </td>
                                         <td class="product-remove">
-                                            <a href="{{ route('cart.remove', $item['product_id'] . '-' . $item['price'] ) }}"><i class="fa fa-times"></i></a>
+                                            <a href="{{ route('cart.remove', $key) }}"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     @endif

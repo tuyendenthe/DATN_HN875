@@ -1,10 +1,10 @@
-@extends('clients.master')
-
-@section('content')
-
+<!DOCTYPE html>
+<html class="no-js" lang="">
 
 
-{{-- <head>
+<!-- Mirrored from www.devsnews.com/template/epixx-prev/epixx/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 16:30:41 GMT -->
+
+<head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <title>Epix - Electronics eCommerce HTML Template</title>
@@ -71,11 +71,11 @@
             display: none;
         }
     </style>
-</head> --}}
+</head>
 
 <body>
 <!-- header area start -->
-{{-- @include('blocks.header') --}}
+@include('blocks.header')
 <!-- header area end -->
 
 <!-- slide-bar start -->
@@ -134,7 +134,6 @@
             <a href="index.html"><img src="assets/img/logo/logo.png" alt="logo"/></a>
         </div>
 
-
         <div class="mobile-menu"></div>
 
         <div class="contact-infos mt-30 mb-30">
@@ -171,7 +170,8 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             @foreach ($banners as $banner)
-                <div class="swiper-slide" style="background-image: url('{{ asset($banner->image) }}');">
+                {{-- <div class="swiper-slide" style="background-image: url('{{ asset($banner->image) }}');"> --}}
+                <div class="swiper-slide" style="background-image: url('{{ Storage::url($banner->image) }}');">
                     <div class="container">
                         <div class="slider-content">
                             <span class="epix-slide-subtitle">{{ $banner->title }}</span>
@@ -562,7 +562,8 @@
                                                             <a
                                                                 href="{{ route('product.details', $flashSale->product->id) }}">
                                                                 <img
-                                                                    src="{{ asset($flashSale->product->image) }}"
+                                                                    {{-- src="{{ asset($flashSale->product->image) }}" --}}
+                                                                    src="{{ Storage::url($flashSale->product->image) }}"
                                                                     class="img-fluid">
                                                             </a>
                                                             <div class="epix-action">
@@ -654,7 +655,8 @@
                                         <div class="epix-product-thumb epix-product-thumb-3">
                                             <a href="{{route('single_product',$item->id)}}">
                                                 <img style="min-height:360px; max-height: 360px"
-                                                     src="{{ asset($item->image) }}"
+                                                     {{-- src="{{ asset($item->image) }}" --}}
+                                                     src="{{ Storage::url($item->image) }} "
                                                      {{-- <img src="assets/img/product/23.jpg" --}}
                                                      class="img-fluid" alt=""></a>
                                             <div class="epix-action">
@@ -785,7 +787,7 @@
                     </div>
                 </div>
                 <div class="row mb-45">
-                    <div class="col-xxl-12">
+                    {{-- <div class="col-xxl-12">
                         <div class="epix-handpicked-banner"
                              data-background="{{asset('laptop/assets/img/banner/product-banner-2.jpg')}}">
                             <h4 class="epix-h-banner-text">Dòng thông minh 4.0
@@ -793,7 +795,7 @@
                             <a href="{{route('shop')}}" class="epix-white-btn"><span>Mua ngay<i
                                         class="fal fa-angle-right"></i></span></a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="row">
                     @foreach($products as $item)
@@ -803,7 +805,8 @@
                                     <a href="{{ route('single_product',$item -> id) }}"><img style="margin-right: 10px"
                                                                                              height="150px"
                                                                                              width="150px"
-                                                                                             src="{{asset($item -> image)}}"
+                                                                                             {{-- src="{{asset($item -> image)}}" --}}
+                                                                                             src="{{ Storage::url($item->image) }}"
                                                                                              alt=""></a>
                                 </div>
                                 <div class="epix-h-pro-content">
@@ -1054,4 +1057,6 @@
 </body>
 
 
-@endsection
+<!-- Mirrored from www.devsnews.com/template/epixx-prev/epixx/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 16:30:49 GMT -->
+
+</html>
