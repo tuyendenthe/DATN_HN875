@@ -46,11 +46,10 @@
                                     $subtotal = $item['price'] * $item['quantity'];
                                     $total += $subtotal;
                                 @endphp
-
                                     <tr>
                                         <td class="product-thumbnail">
                                             <a href="{{ route('product.details', $item['product_id']) }}">
-                                                <img src="{{ asset('laptop/assets/img/product/product-1-1.jpg') }}" alt="">
+                                                <img width="125px" height="125px" src="{{ asset($item['image']) }}" alt="">
                                             </a>
                                         </td>
                                         <td class="cart-product-name">
