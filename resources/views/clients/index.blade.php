@@ -786,9 +786,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row mb-45"> -->
-                    <!-- <div class="col-xxl-12"> -->
-                    {{-- <div class="col-xxl-12">
+                <div class="row mb-45">
+                    <class="col-xxl-12">
+                     <div class="col-xxl-12">
                         <div class="epix-handpicked-banner"
                              data-background="{{asset('laptop/assets/img/banner/product-banner-2.jpg')}}">
                             <h4 class="epix-h-banner-text">Dòng thông minh 4.0

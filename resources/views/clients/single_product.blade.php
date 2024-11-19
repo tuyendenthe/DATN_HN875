@@ -329,6 +329,44 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="epix-product-label mb-35">
+                                <a href="#" class="title">Chọn mau </a>
+                                <div style="padding-left: 0px" class="container">
+                                    <div class="variant-container">
+                                        @foreach($products->variants as $variant)
+                                            @if ($variant->type == 2)
+                                                <div class="variant-box variant-box2 tag-list"
+                                                     data-value="{{ $variant->name }}"
+                                                     data-price="{{ $variant->price }}"
+                                                     onclick="selectVariant2(this)">
+                                                    <input type="radio" name="variant_id_1" id="{{ $variant->id }}"
+                                                           value="{{ $variant->id }}">
+                                                    <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="epix-product-label mb-35">
+                                <a href="#" class="title">Chọn bo nho</a>
+                                <div style="padding-left: 0px" class="container">
+                                    <div class="variant-container">
+                                        @foreach($products->variants as $variant)
+                                            @if ($variant->type == 3)
+                                                <div class="variant-box variant-box3 tag-list"
+                                                     data-value="{{ $variant->name }}"
+                                                     data-price="{{ $variant->price }}"
+                                                     onclick="selectVariant3(this)">
+                                                    <input type="radio" name="variant_id_1" id="{{ $variant->id }}"
+                                                           value="{{ $variant->id }}">
+                                                    <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">
                                 Thêm vào giỏ hàng
                             </button>
@@ -704,13 +742,34 @@
                 variant.classList.remove('selected');
             });
 
+
+        }
+        function selectVariant2(element) {
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box2');
+        variants.forEach(function(variant) {
+            variant.style.backgroundColor = '';
+            variant.classList.remove('selected');
+        });
+
+        // Thêm class "selected" cho hộp được chọn
+        element.classList.add('selected');
+
+        // Đánh dấu radio button tương ứng
+        var radioButton = element.querySelector('input[type="radio"]');
+        radioButton.checked = true;
+
+        // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
+        var selectedPrice = element.getAttribute('data-price');
+        mausac = parseInt(selectedPrice);
+        totalPrice = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
+        let formattedPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
+            document.getElementById('product-price').innerText = formattedPrice;
             var selectedColor = element.getAttribute('data-value');
             element.classList.add('selected');
             console.log(selectedColor)
             element.style.setProperty('--selected-color', selectedColor);
-        }
-
-        document.querySelectorAll('.variant-box').forEach(function (box) {
+            document.querySelectorAll('.variant-box').forEach(function (box) {
             box.addEventListener('mouseenter', function () {
                 var color = box.getAttribute('data-value');
                 box.style.backgroundColor = color;
@@ -722,6 +781,30 @@
                 }
             });
         });
+    }
+
+    function selectVariant3(element) {
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box3');
+        variants.forEach(function(variant) {
+            variant.classList.remove('selected');
+        });
+
+        // Thêm class "selected" cho hộp được chọn
+        element.classList.add('selected');
+
+        // Đánh dấu radio button tương ứng
+        var radioButton = element.querySelector('input[type="radio"]');
+        radioButton.checked = true;
+
+        // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
+        var selectedPrice = element.getAttribute('data-price');
+        bonho = parseInt(selectedPrice);
+        totalPrice = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
+        let formattedPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
+            document.getElementById('product-price').innerText = formattedPrice;
+    }
+
     </script>
 
 
