@@ -15,7 +15,7 @@
     <!-- breadcrumb area start -->
     <div class="epix-breadcrumb-area">
         <div class="container">
-            <h4 class="epix-breadcrumb-title">Trang Tin Tức</h4>
+            <h4 class="epix-breadcrumb-title">zTrang Tin Tức</h4>
             <div class="epix-breadcrumb">
                 <ul>
                     <li><a href="index-3.html">Trang chủ</a></li>
@@ -151,6 +151,7 @@
                                                 </h6>
                                                 <div class="rc__meta">
                                                     <span>October 05, 2020</span>
+                                                    
                                                 </div>
                                             </div>
                                         </li>

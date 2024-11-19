@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function listProduct()
     {
         $listProducts = Product::all();
-       
+
         return view('admins.tables')->with([
             'listProducts' => $listProducts
         ]);
@@ -28,14 +28,14 @@ class ProductController extends Controller
 
         $path = null;
         if ($req->hasFile('image')) {
-            $image = $req->image;
-            $newName = $req->name . '_' . $image->hashName();
-            $path = $image->storeAs('images/products', $newName);
+           $path = $req->file('image')->store('images/products','public');
         }
 
         $data =  [
             'name' => $req->name,
             'image' => $path,
+            'price' => $req->price,
+            'content_short' => $req->content_short,
             'content' => $req->content,
             'price' => $req->price,
             'content_short' => $req->content_short,
@@ -65,7 +65,6 @@ class ProductController extends Controller
 
     public function updatePutProduct(ProductRequest $req, $id)
     {
-
         $product = Product::find($id);
         $path =  $product->image;
 
@@ -95,4 +94,5 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.listProduct');
     }
+
 }

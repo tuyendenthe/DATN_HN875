@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
+         
             $table->foreignIdFor(Product::class)->constrained();
             $table->string('content');
             $table->integer('star');
+            $table->integer('status');
             $table->timestamps();
         });
     }

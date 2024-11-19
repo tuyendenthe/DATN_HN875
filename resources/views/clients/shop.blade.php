@@ -39,7 +39,7 @@
                                 <div class="epix-taglist">
                                     <ul>
                                     @foreach ($categories as $item)
-                                        <li><a href="shop.html">{{$item->name}}</a></li>
+                                        <li><a href="{{ route('shopWithCategories', $item->id) }}">{{$item->name}}</a></li>
                                     @endforeach
                                     </ul>
                                 </div>
@@ -48,77 +48,60 @@
                                 <h4 class="epix-s-widget-title">GIÁ</h4>
                                 <div class="slider-range mb-40">
                                     <div id="slider-range"></div>
-                                    <p>
-                                        <label for="amount">Giá :</label>
-                                        <input type="text" id="amount" readonly>
-                                    </p>
+                                    <div class="epix-color-scheme">
+                                        <select class="nice-select form-control" id="price-range-select">
+                                            <option class="form-control" value="all">Tất cả</option>
+                                            <option class="form-control" value="<3000000">Dưới 3.000.000</option>
+                                            <option class="form-control" value="3000000-5000000">3.000.000 - 5.000.000</option>
+                                            <option class="form-control" value=">5000000">Trên 5.000.000</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+                            <br>
+                            <br>
+                            <br>
                             <div class="epix-sidebar-widget mb-40">
                                 <h4 class="epix-s-widget-title">Màu</h4>
                                 <div class="epix-color-scheme">
                                     <ul>
                                         <li>
-                                            <a href="#" class="active" data-bg-color="#D1D1D1"></a>
-                                            <a href="#" data-bg-color="#FC7C8D"></a>
-                                            <a href="#" data-bg-color="#FEE496"></a>
-                                            <a href="#" data-bg-color="#161616"></a>
-                                            <a href="#" data-bg-color="#00A651)"></a>
-                                            <a href="#" data-bg-color="#F50000"></a>
+                                            <a href="#" class="active" data-bg-color="#D1D1D1" data-color="grey"></a>
+                                            <a href="#" data-bg-color="#161616" data-color="black"></a>
+                                            <a href="#" data-bg-color="#F50000" data-color="red"></a>
+                                            <a href="#" data-bg-color="#ffffff" data-color="white"></a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="epix-sidebar-widget mb-40">
-                                <h4 class="epix-s-widget-title">TAGS</h4>
-                                <div class="tagcloud">
-                                    <a href="shop.html">Ryzen</a>
-                                    <a href="shop.html">Xeon</a>
-                                    <a href="shop.html">Athlon</a>
-                                    <a href="shop.html">Core i5</a>
-                                    <a href="shop.html">Core i7</a>
-                                    <a href="shop.html">Core i9</a>
-                                    <a href="shop.html">Celeron</a>
-                                </div>
-                            </div>
+{{--                            <div class="epix-sidebar-widget mb-40">--}}
+{{--                                <h4 class="epix-s-widget-title">TAGS</h4>--}}
+{{--                                <div class="tagcloud">--}}
+{{--                                    <a href="shop.html">Ryzen</a>--}}
+{{--                                    <a href="shop.html">Xeon</a>--}}
+{{--                                    <a href="shop.html">Athlon</a>--}}
+{{--                                    <a href="shop.html">Core i5</a>--}}
+{{--                                    <a href="shop.html">Core i7</a>--}}
+{{--                                    <a href="shop.html">Core i9</a>--}}
+{{--                                    <a href="shop.html">Celeron</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="epix-sidebar-widget mb-40">
                                 <h4 class="epix-s-widget-title">Sản Phẩm Gần Đây</h4>
+                                @foreach($newProducts as $item)
                                 <div class="epix-product-list mb-20">
                                     <div class="thumb">
-                                        <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/side-sm-img-2.jpg')}}" alt=""></a>
+                                        <a href="{{ route('single_product', $item -> id) }}"><img width="80px" height="100px" src="{{asset($item -> image)}}" alt=""></a>
                                     </div>
                                     <div class="content">
-                                        <h4 class="epix-list-product-sm-title"><a href="single-product.html">Loose Oversized</a></h4>
+                                        <h4 class="epix-list-product-sm-title"><a href="{{ route('single_product', $item -> id) }}">{{ $item -> name }}</a></h4>
                                         <div class="price-box">
-                                            <span class="price">$125.99</span>
-                                            <a href="single-product.html">+ Select Option</a>
+                                            <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                            <a href="{{ route('single_product', $item -> id) }}">+ Select Option</a>
                                           </div>
                                     </div>
                                 </div>
-                                <div class="epix-product-list mb-20">
-                                    <div class="thumb">
-                                        <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/side-sm-img-3.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="epix-list-product-sm-title"><a href="single-product.html">Loose Oversized</a></h4>
-                                        <div class="price-box">
-                                            <span class="price">$125.99</span>
-                                            <a href="single-product.html">+ Select Option</a>
-                                          </div>
-                                    </div>
-                                </div>
-                                <div class="epix-product-list mb-20">
-                                    <div class="thumb">
-                                        <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/side-sm-img-4.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="epix-list-product-sm-title"><a href="single-product.html">Loose Oversized</a></h4>
-                                        <div class="price-box">
-                                            <span class="price">$125.99</span>
-                                            <a href="single-product.html">+ Select Option</a>
-                                          </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <!-- /. sidebar area -->
@@ -135,51 +118,43 @@
                                         </div>
                                         </nav>
                                     </div>
-                                    <div class="epix-ch-right">
-                                        <div class="show-text">
-                                            <span>Hiển thị 1–12 trong 20 kết quả</span>
-                                        </div>
-                                        <div class="sort-wrapper">
-                                            <select name="select" id="select">
-                                                <option value="1">Short By New</option>
-                                                <option value="2">Short By New</option>
-                                                <option value="3">Short By New</option>
-                                                <option value="4">Short By New</option>
-                                                <option value="5">Short By New</option>
-                                            </select>
-                                        </div>
-                                    </div>
+{{--                                    <div class="epix-ch-right">--}}
+{{--                                        <div class="show-text">--}}
+{{--                                            <span>Hiển thị 1–12 trong 20 kết quả</span>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="sort-wrapper">--}}
+{{--                                            <select name="select" id="select">--}}
+{{--                                                <option value="1">Short By New</option>--}}
+{{--                                                <option value="2">Short By New</option>--}}
+{{--                                                <option value="3">Short By New</option>--}}
+{{--                                                <option value="4">Short By New</option>--}}
+{{--                                                <option value="5">Short By New</option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                                 <div class="epix-shop-product-main">
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="grid-view">
-                                            <div class="row">
+                                            <div class="row" id="product-list">
                                                 @foreach ($products as $item)
                                                 <div class="col-xxl-3 col-sm-6 col-md-4">
                                                     <div class="epix-single-product-3 mb-40 style-2 text-center swiper-slide">
                                                         <div class="epix-product-thumb-3">
                                                             <div class="epix-action">
-                                                                <a href="single-product.html" class="p-cart product-popup-toggle">
+                                                                <a href="{{ route('single_product', $item->id) }}" class="p-cart product-popup-toggle">
                                                                     <i class="fal fa-eye"></i>
                                                                     <i class="fal fa-eye"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-heart"></i>
-                                                                    <i class="fal fa-heart"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                    <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-1.png')}}" alt=""></a>
+                                                            <a href="{{ route('single_product', $item->id) }}"><img width="223px" height="396px" src="{{asset($item->image)}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
-                                                            <span class="price">${{$item->price}}</span>
-                                                            <a href="single-product.html">+ Select Option</a>
+                                                            <span class="price" style="width: 30px;">{{number_format($item->price, 0, ',', '.')}} VNĐ</span>
+                                                            <a href="{{ route('single_product', $item->id) }}">+ Select Option</a>
                                                         </div>
-                                                        <h5 class="epix-p-title epix-p-title-3"><a href="single-product.html">{{$item->name}}</a></h5>
+                                                        <h5 class="epix-p-title epix-p-title-3"><a href="{{ route('single_product', $item->id) }}">{{$item->name}}</a></h5>
                                                     </div>
                                                 </div>
                                                 @endforeach
@@ -187,241 +162,38 @@
                                         </div>
                                         <div class="tab-pane fade" id="list-view" role="tabpanel" aria-labelledby="nav-profile-tab">
                                             <div class="epix-list-product-single">
+                                                @foreach($products as $item)
                                                 <div class="row">
                                                     <div class="col-lg-4 col-xl-3">
                                                         <div class="epix-product-thumb-3 d-inline-block">
                                                             <div class="epix-action">
-                                                                <a href="single-product.html" class="p-cart product-popup-toggle">
+                                                                <a href="{{ route('single_product',$item->id)  }}" class="p-cart product-popup-toggle">
                                                                     <i class="fal fa-eye"></i>
                                                                     <i class="fal fa-eye"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-heart"></i>
-                                                                    <i class="fal fa-heart"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                    <i class="fal fa-shopping-cart"></i>
                                                                 </a>
                                                             </div>
                                                             <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-1.png')}}" alt=""></a>
+                                                            <a href="{{ route('single_product',$item->id)  }}"><img height="210px" width="210px" src="{{asset($item -> image)}}" alt=""></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-xl-9">
                                                         <div class="epix-product-content d-inline-block">
                                                             <div class="mb-15">
-                                                                <h5 class="epix-p-title"><a href="single-product.html">Multition Camer Stand</a></h5>
+                                                                <h5 class="epix-p-title"><a href="{{ route('single_product',$item->id)  }}">{{ $item -> name }}</a></h5>
                                                                 <div class="wrap">
                                                                     <span class="epix-p-subtitle">Speakers</span>
-                                                                    <div class="rating">
-                                                                        <i class="fal fa-star"></i>
-                                                                        <span>2.5</span>
-                                                                    </div>
                                                                 </div>
                                                                 <div class="price-box">
-                                                                    <span class="price">$230.00</span>
-                                                                    <a href="single-product.html">+ Select Option</a>
+                                                                    <span style="width: 30px" class="price">{{ number_format($item->price, 0, ',', '.') }}</span>
+                                                                    <a href="{{ route('single_product',$item->id)  }}">+ Select Option</a>
                                                                 </div>
                                                             </div>
-                                                                <p>intensive care to face - skin bright clear looking skin - luxury 24k gold ampoule is skin treatment effect
-                                                                    give
-                                                                    smooth
-                                                                    skin - soothing rough skin giving silky glowing skin - give elasticity from inner for silky skin</p>
-                                                            <a href="cart.html" class="epix-btn-1" tabindex="0"><span>Add To Cart<i class="fal fa-angle-right"></i></span></a>
+                                                                <p>{{ $item -> content }}</p>
+                                                            <a href="{{ route('single_product', $item -> id) }}" class="epix-btn-1" tabindex="0"><span>Show more<i class="fal fa-angle-right"></i></span></a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="epix-list-product-single">
-                                                <div class="row">
-                                                    <div class="col-lg-4 col-xl-3">
-                                                        <div class="epix-product-thumb-3 d-inline-block">
-                                                            <div class="epix-action">
-                                                                <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                    <i class="fal fa-eye"></i>
-                                                                    <i class="fal fa-eye"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-heart"></i>
-                                                                    <i class="fal fa-heart"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                </a>
-                                                            </div>
-                                                            <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-2.png')}}" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8 col-xl-9">
-                                                        <div class="epix-product-content d-inline-block">
-                                                            <div class="mb-15">
-                                                                <h5 class="epix-p-title"><a href="single-product.html">Purple NX Mini Aparat</a></h5>
-                                                                <div class="wrap">
-                                                                    <span class="epix-p-subtitle">Minicat</span>
-                                                                    <div class="rating">
-                                                                        <i class="fal fa-star"></i>
-                                                                        <span>2.5</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="price-box">
-                                                                    <span class="price">$230.00</span>
-                                                                    <a href="single-product.html">+ Select Option</a>
-                                                                </div>
-                                                            </div>
-                                                                <p>intensive care to face - skin bright clear looking skin - luxury 24k gold ampoule is skin treatment effect
-                                                                    give
-                                                                    smooth
-                                                                    skin - soothing rough skin giving silky glowing skin - give elasticity from inner for silky skin</p>
-                                                            <a href="cart.html" class="epix-btn-1" tabindex="0"><span>Add To Cart<i class="fal fa-angle-right"></i></span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="epix-list-product-single">
-                                                <div class="row">
-                                                    <div class="col-lg-4 col-xl-3">
-                                                        <div class="epix-product-thumb-3 d-inline-block">
-                                                            <div class="epix-action">
-                                                                <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                    <i class="fal fa-eye"></i>
-                                                                    <i class="fal fa-eye"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-heart"></i>
-                                                                    <i class="fal fa-heart"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                </a>
-                                                            </div>
-                                                            <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-3.png')}}" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8 col-xl-9">
-                                                        <div class="epix-product-content d-inline-block">
-                                                            <div class="mb-15">
-                                                                <h5 class="epix-p-title"><a href="single-product.html">Powerbank 11 Mh Blue</a></h5>
-                                                                <div class="wrap">
-                                                                    <span class="epix-p-subtitle">Minicat</span>
-                                                                    <div class="rating">
-                                                                        <i class="fal fa-star"></i>
-                                                                        <span>2.5</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="price-box">
-                                                                    <span class="price">$230.00</span>
-                                                                    <a href="single-product.html">+ Select Option</a>
-                                                                </div>
-                                                            </div>
-                                                                <p>intensive care to face - skin bright clear looking skin - luxury 24k gold ampoule is skin treatment effect
-                                                                    give
-                                                                    smooth
-                                                                    skin - soothing rough skin giving silky glowing skin - give elasticity from inner for silky skin</p>
-                                                            <a href="cart.html" class="epix-btn-1" tabindex="0"><span>Add To Cart<i class="fal fa-angle-right"></i></span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="epix-list-product-single">
-                                                <div class="row">
-                                                    <div class="col-lg-4 col-xl-3">
-                                                        <div class="epix-product-thumb-3 d-inline-block">
-                                                            <div class="epix-action">
-                                                                <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                    <i class="fal fa-eye"></i>
-                                                                    <i class="fal fa-eye"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-heart"></i>
-                                                                    <i class="fal fa-heart"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                </a>
-                                                            </div>
-                                                            <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-4.png')}}" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8 col-xl-9">
-                                                        <div class="epix-product-content d-inline-block">
-                                                            <div class="mb-15">
-                                                                <h5 class="epix-p-title"><a href="single-product.html">Powerbank 11 Mh Blue</a></h5>
-                                                                <div class="wrap">
-                                                                    <span class="epix-p-subtitle">Minicat</span>
-                                                                    <div class="rating">
-                                                                        <i class="fal fa-star"></i>
-                                                                        <span>2.5</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="price-box">
-                                                                    <span class="price">$230.00</span>
-                                                                    <a href="single-product.html">+ Select Option</a>
-                                                                </div>
-                                                            </div>
-                                                                    <p>intensive care to face - skin bright clear looking skin - luxury 24k gold ampoule is skin treatment
-                                                                        effect give smooth
-                                                                        skin - soothing rough skin giving silky glowing skin - give elasticity from inner for silky skin</p>
-                                                            <a href="cart.html" class="epix-btn-1" tabindex="0"><span>Add To Cart<i class="fal fa-angle-right"></i></span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="epix-list-product-single">
-                                                <div class="row">
-                                                    <div class="col-lg-4 col-xl-3">
-                                                        <div class="epix-product-thumb-3 d-inline-block">
-                                                            <div class="epix-action">
-                                                                <a href="single-product.html" class="p-cart product-popup-toggle">
-                                                                    <i class="fal fa-eye"></i>
-                                                                    <i class="fal fa-eye"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-heart"></i>
-                                                                    <i class="fal fa-heart"></i>
-                                                                </a>
-                                                                <a href="cart.html" class="p-cart">
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                    <i class="fal fa-shopping-cart"></i>
-                                                                </a>
-                                                            </div>
-                                                            <span class="sale">sale</span>
-                                                            <a href="single-product.html"><img src="{{asset('laptop/assets/img/product/appilience-5.png')}}" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8 col-xl-9">
-                                                        <div class="epix-product-content d-inline-block">
-                                                            <div class="mb-15">
-                                                                <h5 class="epix-p-title"><a href="single-product.html">Widescreen 4K SUH</a></h5>
-                                                                <div class="wrap">
-                                                                    <span class="epix-p-subtitle">Minicat</span>
-                                                                    <div class="rating">
-                                                                        <i class="fal fa-star"></i>
-                                                                        <span>2.5</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="price-box">
-                                                                    <span class="price">$134.00</span>
-                                                                    <a href="single-product.html">+ Select Option</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-xxl-10">
-                                                                    <p>The luxury 24k gold ampoule helps the skin on your face by refining luxure and fresh clean skin. Enjoy it
-                                                                        after
-                                                                        treatment or anytime you want fresh clean feeling skinluluxury </p>
-                                                                </div>
-                                                            </div>
-                                                            <a href="cart.html" class="epix-btn-1" tabindex="0"><span>Add To Cart<i class="fal fa-angle-right"></i></span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                       </div>
@@ -454,7 +226,77 @@
         </div>
         <!-- shop product area end -->
     </main>
-@endsection    
+@endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- single product area end -->
+<script>
+    $(document).ready(function () {
+        // Khi người dùng nhập từ khóa
+        $('#search-input').on('keyup', function () {
+            let query = $(this).val();
+            if (query.length > 0) {
+                $.ajax({
+                    url: '/search-products',
+                    method: 'GET',
+                    data: { keyword: query },
+                    success: function (data) {
+                        $('#search-results').html(data).removeClass('hidden');
+                    }
+                });
+            } else {
+                $('#search-results').addClass('hidden');
+            }
+        });
+
+        // Ẩn kết quả khi nhấn ra ngoài khung tìm kiếm
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest('#search-form, #search-results').length) {
+                $('#search-results').addClass('hidden');
+            }
+        });
+    });
+    $(document).ready(function() {
+        // Lắng nghe sự thay đổi của select
+        $('#price-range-select').on('change', function() {
+            var priceRange = $(this).val(); // Lấy giá trị của khoảng giá được chọn
+
+            // Gửi Ajax request
+            $.ajax({
+                url: '/shop/filter-by-price/' + priceRange,  // Route của bạn
+                method: 'GET',
+                data: { price_range: priceRange },
+                success: function(response) {
+                    // Cập nhật phần tử #product-list với HTML mới
+                    $('#product-list').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+    $(document).ready(function() {
+        // Bắt sự kiện khi người dùng nhấp vào màu sắc
+        $('.epix-color-scheme a').on('click', function(e) {
+            e.preventDefault(); // Ngừng chuyển hướng mặc định của thẻ a
+
+            var selectedColor = $(this).data('color'); // Lấy màu được chọn từ thuộc tính data-color
+            $('.epix-color-scheme a').removeClass('active'); // Xóa lớp active cũ
+            $(this).addClass('active'); // Thêm lớp active cho màu hiện tại
+
+            // Gửi yêu cầu AJAX để lọc sản phẩm theo màu
+            $.ajax({
+                url: '/shop/filter-by-color/' + selectedColor, // Địa chỉ route mà bạn sẽ tạo ở bước tiếp theo
+                type: 'GET',
+                data: { color: selectedColor }, // Gửi màu được chọn
+                success: function(response) {
+                    // Cập nhật danh sách sản phẩm trong thẻ #product-list
+                    $('#product-list').html(response);
+                }
+            });
+        });
+    });
+</script>
 @push('script')
 @endpush

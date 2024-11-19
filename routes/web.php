@@ -23,6 +23,9 @@ use App\Http\Controllers\FlashSaleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ChartController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +45,10 @@ Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name(
 
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop/{id}', [ShopController::class, 'shopWithCategories'])->name('shopWithCategories');
+Route::get('/shop/filter-by-price/{priceRange}', [ShopController::class, 'shopWithRange'])->name('shop.filterByPrice');
+Route::get('/search-products', [HomeUserController::class, 'searchProducts'])->name('search.products');
+Route::get('/shop/filter-by-color/{selectedColor}', [ShopController::class, 'shopWithColor'])->name('shop.filterByColor');
 
 
 // Route::get('/', function () {
@@ -79,12 +86,20 @@ Route::post('/book-fix', [BookFixController::class, 'sendBookFix'])->name('bookf
 
 Route::post('/search', [SearchController::class, 'search'])->name('search');
 Route::post('/search-product', [SearchController::class, 'searchProduct'])->name('search.product');
+Route::get('/search-order', [SearchController::class, 'searchCheckout'])->name('search.order');
+Route::get('/history', [CheckoutController::class, 'history'])->name('order.history');
+
 
 // Route::get('contact', function () {
 //     return view('clients.contact');
 // });
 
 Route::post('/post-review', [ReviewsController::class, 'postReview'])->name('post.review')->middleware('auth');
+Route::middleware('auth')->prefix('admin1/comment')->group(function() {
+    Route::get('/', [ReviewsController::class, 'listComment'])->name('list-comment');
+    Route::delete('/comment/{id}', [ReviewsController::class, 'deleteComment'])->name('delete-comment');
+    Route::post('/update-status', [ReviewsController::class, 'updateStatus'])->name('update-status');
+});
 
 
 
@@ -104,9 +119,10 @@ Route::get('/about', function () {
     return view('clients.about');
 })->name('about');
 
-Route::get('/single_product', function () {
-    return view('clients.single_product');
-})->name('single_product');
+//Route::get('/single_product/{id}', function () {
+//    return view('clients.single_product');
+//})->name('single_product');
+Route::get('/single_product/{id}', [HomeUserController::class, 'show'])->name('single_product');
 
 Route::get('/test', function () {
     return view('clients.review');
@@ -139,9 +155,20 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('admin1.users.destroy');
     Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
 
+
+    // Route::get('/chart', function () {
+    //     return view('admins.chart');
+    // })->name('chart');
+    Route::get('/chart', [ChartController::class, 'index'])->name('chart');
+    Route::get('/product_statistics', [ChartController::class, 'product_statistics'])->name('product_statistics');
+
+
+
+    Route::post('/toggleUserStatus/{id}', [UserController::class, 'toggleStatus'])->name('admin1.users.toggleStatus');
     Route::get('/chart', function () {
         return view('admins.chart');
     })->name('chart');
+
 
     Route::get('/widgets', function () {
         return view('admins.widgets');

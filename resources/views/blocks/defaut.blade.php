@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="{{asset('laptop/assets/css/meanmenu.css')}}" />
     <link rel="stylesheet" href="{{asset('laptop/assets/css/swipper.css')}}" />
     @stack('style')
-
 </head>
 
 <body>
@@ -64,7 +63,6 @@
     <script src="{{asset('laptop/assets/js/imagesloaded.pkgd.min.js')}}"></script>
     <script src="{{asset('laptop/assets/js/mouse-wheel.min.js')}}"></script>
     <script src="{{asset('laptop/assets/js/main.js')}}"></script>
-
 
     @static('script')
 </body>

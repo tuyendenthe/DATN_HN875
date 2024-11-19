@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Bill;
+// use App\Models\status;
 use App\Models\Bill_detail;
 use App\Models\Status;
 use Illuminate\Support\Str;
@@ -17,7 +19,7 @@ class CheckoutController extends Controller
         $cart = session()->get('cart', []);
         // dd($cart);
 
-        return view('clients.checkout', compact('request','cart'));
+        return view('clients.checkout', compact('request', 'cart'));
     }
     public function store(Request $request)
     {
@@ -25,11 +27,11 @@ class CheckoutController extends Controller
 
         // dd($cart);
 
-//         $randomString = str::upper(Str::random(5)) . Str::lower(Str::random(3)) . rand(10, 99); // Example combining letters and numbers
-// $shuffledString = Str::shuffle($randomString);
-$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-$randomString = substr(str_shuffle($characters), 0, 10);
-        $bill=[
+        //         $randomString = str::upper(Str::random(5)) . Str::lower(Str::random(3)) . rand(10, 99); // Example combining letters and numbers
+        // $shuffledString = Str::shuffle($randomString);
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $randomString = substr(str_shuffle($characters), 0, 10);
+        $bill = [
             'bill_code' => $randomString,
             'name' => $request->name,
             'phone' => $request->phone,
@@ -40,8 +42,8 @@ $randomString = substr(str_shuffle($characters), 0, 10);
             'payment_method' => $request->payment_method,
             'total' => $request->total,
             'status' => 1,
-            'created_at' =>now(),
-            'updated_at' =>now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         Bill::create($bill);
 
@@ -53,7 +55,7 @@ $randomString = substr(str_shuffle($characters), 0, 10);
         //
         foreach ($product_ids as $item => $id_product) {
             // Lấy thông tin sản phẩm từ cart
-            $product_id= $id_product;
+            $product_id = $id_product;
             $cart_item = $cart[$product_id] ?? null; // Lấy sản phẩm dựa trên id_product
             if (!$cart_item) {
                 continue; // Nếu không tìm thấy sản phẩm, bỏ qua
@@ -87,9 +89,7 @@ $randomString = substr(str_shuffle($characters), 0, 10);
 
 
 
-       return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
-
-
+        return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
     }
     public function ok(Request $request)
     {
@@ -101,21 +101,22 @@ $randomString = substr(str_shuffle($characters), 0, 10);
     public function list()
     {
 
-        $list = DB::table('bills')
-    ->join('statuses', 'bills.status', '=', 'statuses.id')
-    ->where('statuses.id', '<=', 3)
-    ->select('bills.*', 'statuses.status_name')
-    ->get();
+        $listCheckouts = DB::table('bills')
+            ->join('statuses', 'bills.status', '=', 'statuses.id')
+            ->where('statuses.id', '<=', 3)
+            ->select('bills.*', 'statuses.status_name')
+            ->get();
         // dd($list);
-        return view('admins.checkout.list',compact('list'));
+        return view('admins.checkout.list', compact('listCheckouts'));
     }
 
-       public function detail($bill_code)
-    {   $detail = DB::table('bill_details')
-        ->join('products', 'bill_details.product_id', '=', 'products.id')
+    public function detail($bill_code)
+    {
+        $detail = DB::table('bill_details')
+            ->join('products', 'bill_details.product_id', '=', 'products.id')
 
-        ->select('bill_details.*', 'products.name')
-        ->get();
+            ->select('bill_details.*', 'products.name')
+            ->get();
 
         // $detail = DB::table('bill_details')->where('bill_code', '=', $bill_code)->get();
 
@@ -123,7 +124,7 @@ $randomString = substr(str_shuffle($characters), 0, 10);
         $detail_user = DB::table('bills')->where('bill_code', '=', $bill_code)->first();
         // dd($detail);
         // dd($detail_user);
-        return view('admins.checkout.detail',compact('detail_user','detail'));
+        return view('admins.checkout.detail', compact('detail_user', 'detail'));
     }
     public function edit()
     {
@@ -139,23 +140,28 @@ $randomString = substr(str_shuffle($characters), 0, 10);
 
         return view('admins.checkout.history');
     }
-    public function history()
+    public function history(Request $request)
     {
-        $list = DB::table('bills')
-        ->join('statuses', 'bills.status', '=', 'statuses.id')
-        ->where('statuses.id', '>', 3)
-        ->select('bills.*', 'statuses.status_name')
-        ->get();
-            // dd($list);
-            return view('admins.checkout.history',compact('list'));
+        $query = DB::table('bills')
+            ->join('statuses', 'bills.status', '=', 'statuses.id')
+            ->where('statuses.id', '>', 3)
+            ->select('bills.*', 'statuses.status_name');
+        // dd($list);
+        if ($request->has('order_id') && !empty($request->order_id)) {
+            $request->validate([
+                'order_id' => 'string',
+            ]);
+            $query->where('bills.bill_code', 'like', '%' . $request->order_id . '%');
+        }
 
-
-
+        $list = $query->get();
+        return view('admins.checkout.history', compact('list'));
     }
     public function status( $id){
         // dd($id);
            $data = Bill::find($id);
         //    dd($data);
+
         $statuses = Status::where('id', '>=', $data->status)->get();
 
         return view('admins.checkout.status', compact('data', 'statuses'));
@@ -166,5 +172,6 @@ $randomString = substr(str_shuffle($characters), 0, 10);
 
         return redirect()->route("checkout.list")->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
+
 
 }

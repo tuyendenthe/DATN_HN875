@@ -17,16 +17,39 @@ class ReviewsController extends Controller
             'comment' => 'nullable|string',
         ]);
 
+        $data = [
+            'product_id' => $request->product_id,
+            'star' => $request->star,
+            'comment' =>$request->comment,
+            'status' => 1,
+        ];
         // Tạo đánh giá mới
-        $review = new Comment;
-        $review->product_id = $request->input('product_id');
-        $review->user_id = Auth::id();
-        $review->star = $request->input('star');
-        $review->content = $request->input('comment');
-        
-        $review->save();
+            // $review = new Comment;
+            // $review->product_id = $request->input('product_id');
+            // $review->user_id = Auth::id();
+            // $review->star = $request->input('star');
+            // $review->content = $request->input('comment');
+            
+            // $review->save();
+        Comment::create($data);
 
         return redirect()->back()->with('success', 'Đánh giá của bạn đã được ghi nhận!');
     }
 
+    public function listComment() {
+        $comments = Comment::all();
+        return view('admins.comment.list', compact('comments'));
+    }
+
+    public function deleteComment($id) {
+        $comments = Comment::findOrFail($id);
+        $comments->delete();
+        return redirect()->back();
+    }
+
+    public function updateStatus(Request $req) {
+        $comment = Comment::findOrFail($req->commentId);
+        $comment->status = $req->status;
+        $comment->save();
+    }
 }

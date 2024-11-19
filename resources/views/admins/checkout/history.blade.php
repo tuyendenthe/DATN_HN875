@@ -34,11 +34,12 @@
 
                         <div class="table-responsive">
                             <table id="zero_config" class="table">
-                                <div class="d-flex justify-content-between mb-3">
-
-                                    <form action="{{route('search.product')}}" method="POST">
-                                        @csrf
-                                        <input type="text" placeholder="Search anything here.." name="keyw">
+                                <div class="d-flex justify-content-end mb-3">
+                                    <form action="{{ route('order.history') }}" method="GET" class="form-inline">
+                                        <i class="bi bi-search"></i>
+                                        <input type="text" placeholder="Nhập mã đơn hàng..." name="order_id" required
+                                            class="form-control mr-2" style="width: 15%;">
+                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                                     </form>
                                 </div>
                                 <thead>
@@ -61,28 +62,30 @@
                                 <tbody>
                                     @if (isset($list) && !empty($list))
                                         @foreach ($list as $key => $value)
-                                        <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->bill_code }}</td>
-                                            <td>
-                                                {{ $value->name }}
-                                            </td>
-                                            {{-- <td>{{ $value->content }}</td> --}}
-                                            <td>{{ $value->phone }}</td>
-                                            <td>{{ $value->email }}</td>
-                                            <td>{{ $value->note }}</td>
-                                            <td>{{ $value->checkout }}</td>
-                                            <td>{{ $value->payment_method }}</td>
-                                            <td>{{ $value->total }}</td>
-                                            <td>{{ $value->created_at }}</td>
-                                            <td>{{ $value->status_name }}</td>
-                                            <td>
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $value->bill_code }}</td>
+                                                <td>
+                                                    {{ $value->name }}
+                                                </td>
+                                                {{-- <td>{{ $value->content }}</td> --}}
+                                                <td>{{ $value->phone }}</td>
+                                                <td>{{ $value->email }}</td>
+                                                <td>{{ $value->note }}</td>
+                                                <td>{{ $value->checkout }}</td>
+                                                <td>{{ $value->payment_method }}</td>
+                                                <td>{{ $value->total }}</td>
+                                                <td>{{ $value->created_at }}</td>
+                                                <td>{{ $value->status_name }}</td>
+                                                <td>
 
-                                               
-                                                <a class="btn btn-primary m-1" href="{{ route('checkout.detail', $value->bill_code) }}">Chi Tiết</a>
 
-                                            </td>
-                                        </tr>
+                                                    <a class="btn btn-primary m-1"
+                                                        href="{{ route('checkout.detail', $value->bill_code) }}">Chi
+                                                        Tiết</a>
+
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     @else
                                         <tr>
