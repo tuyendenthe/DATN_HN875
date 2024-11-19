@@ -23,6 +23,9 @@ use App\Http\Controllers\FlashSaleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ChartController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -152,9 +155,20 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('admin1.users.destroy');
     Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
 
+
+    // Route::get('/chart', function () {
+    //     return view('admins.chart');
+    // })->name('chart');
+    Route::get('/chart', [ChartController::class, 'index'])->name('chart');
+    Route::get('/product_statistics', [ChartController::class, 'product_statistics'])->name('product_statistics');
+
+
+
+    Route::post('/toggleUserStatus/{id}', [UserController::class, 'toggleStatus'])->name('admin1.users.toggleStatus');
     Route::get('/chart', function () {
         return view('admins.chart');
     })->name('chart');
+
 
     Route::get('/widgets', function () {
         return view('admins.widgets');
@@ -245,10 +259,12 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
     Route::post('/store', [CheckoutController::class, 'store'])->name('store');
     Route::get('/success', [CheckoutController::class, 'ok'])->name('success');
     Route::get('/list', [CheckoutController::class, 'list'])->name('list');
+    Route::get('/status/{id}', [CheckoutController::class, 'status'])->name('status');
     Route::get('/history', [CheckoutController::class, 'history'])->name('history');
     Route::get('/detail/{bill_code}', [CheckoutController::class, 'detail'])->name('detail');
     Route::get('/edit/{bill_code}', [CheckoutController::class, 'edit'])->name('edit');
     Route::put('/edit/{bill_code}', [CheckoutController::class, 'editput'])->name('editput');
+    Route::post('/updatestatus/{id}', [CheckoutController::class, 'updatestatus'])->name('updatestatus');
 
 });
 

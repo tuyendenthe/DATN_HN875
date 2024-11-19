@@ -64,23 +64,37 @@ class AuthenController extends Controller
             'password.required' => 'Password không được để trống',
         ]);
 
-        if (Auth::attempt([
-            'email' => $req->email,
-            'password' => $req->password,
-        ])) {
-            if (Auth::user()->role == '1') {
-                return redirect()->route('dashboard')->with([
-                    'message'=>'Đăng nhập thành công']);
 
-            } else {
-                return redirect()->route('index')->with([
-                    'message'=>'Đăng nhập thành công']);
+        $user = User::where('email', $req->email)->first();
+
+        if ($user) {
+
+            if ($user->status === '2') {
+                return redirect()->back()->with([
+                    'message' => 'Tài khoản của bạn đã bị ngưng hoạt động. Vui lòng liên hệ quản trị viên.',
+                ]);
             }
-        } else {
-            return redirect()->back()->with([
-                'message' => 'Email hoặc mật khẩu không đúng',
-            ]);
+
+           
+            if (Auth::attempt([
+                'email' => $req->email,
+                'password' => $req->password,
+            ])) {
+                if (Auth::user()->role == '1') {
+                    return redirect()->route('dashboard')->with([
+                        'message' => 'Đăng nhập thành công'
+                    ]);
+                } else {
+                    return redirect()->route('index')->with([
+                        'message' => 'Đăng nhập thành công'
+                    ]);
+                }
+            }
         }
+
+        return redirect()->back()->with([
+            'message' => 'Email hoặc mật khẩu không đúng',
+        ]);
     }
 
     public function logout(){

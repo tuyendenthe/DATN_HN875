@@ -176,6 +176,27 @@
                     <li><span>Shop Page</span></li>
                 </ul>
             </div>
+</style>
+<!-- prealoder area start -->
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="first_object"></div>
+            <div class="object" id="second_object"></div>
+            <div class="object" id="third_object"></div>
+        </div>
+    </div>
+</div>
+<!-- prealoder area end -->
+<!-- breadcrumb area start -->
+<div class="epix-breadcrumb-area mb-40">
+    <div class="container">
+        <h4 class="epix-breadcrumb-title">SHOP PAGE</h4>
+        <div class="epix-breadcrumb">
+            <ul>
+                <li><a href="index-3.html">Home</a></li>
+                <li><span>Shop Page</span></li>
+            </ul>
         </div>
     </div>
     <!-- breadcrumb area end -->
@@ -319,6 +340,7 @@
             <!-- /. single product right -->
         </div>
     </div>
+
 
     <div class="row ms-5">
         <div class="col-xxl-12">
@@ -563,6 +585,7 @@
                                                                 @endfor
                                                             </div>
                                                             <div class="user-name"><a href="#">{{ $review->user->name ?? 'Unknown User' }}</a></div>
+                                                            <span class="date">– {{ $review->comment }}</span>
                                                             <span class="date">– {{ $review->created_at->format('F d, Y') }}</span>
                                                         </div>
                                                         <div class="epix-comment-bottom">
@@ -591,6 +614,7 @@
 
                                                     <input type="radio" name="star" id="star2" value="2">
                                                     <label for="star2" title="2 stars">★</label>
+
 
                                                     <input type="radio" name="star" id="star1" value="1">
                                                     <label for="star1" title="1 star">★</label>
@@ -699,5 +723,6 @@
             });
         });
     </script>
+
 
 @endsection

@@ -11,7 +11,7 @@ class Slide extends Model
     use HasFactory,SoftDeletes;
     protected $fillable = [
         'image',
-        'remember_token',
+       
     ];
 
 }

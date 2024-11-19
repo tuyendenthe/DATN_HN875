@@ -18,7 +18,9 @@ class BookFixController extends Controller
             'fix_date' => 'required|date_format:Y-m-d', // Định dạng ngày
             'content' => 'nullable|string',
         ]);
-
+// dd(
+//     $request
+// );
         // Lưu thông tin vào database
         $BookFix = BookFix::create([
             'name' => $request->input('name'),
@@ -27,7 +29,7 @@ class BookFixController extends Controller
             'fix_date' => $request->input('fix_date'),
             'content' => $request->input('content'),
         ]);
-        
+
 
         // Thêm thông báo thành công
         return redirect()->back()->with('success', 'Thông tin đã được lưu thành công!');
@@ -35,6 +37,7 @@ class BookFixController extends Controller
     public function index()
     {
         $BookFixs = BookFix::all();
+
         return view('admins.bookfix.index', compact('BookFixs'));
     }
     public function updateSuccess(BookFix $BookFix)
@@ -43,7 +46,6 @@ class BookFixController extends Controller
         $BookFix->status_id = 2; // Trạng thái "Liên lạc thành công"
         $BookFix->save();
 
-        // Gửi email thông báo liên lạc thành công
         // Gửi email thông báo liên lạc thành công
         Mail::send('emails.BookFix_success', ['BookFix' => $BookFix], function ($message) use ($BookFix) {
             $message->to($BookFix->email) // Gửi đến email của người liên hệ
@@ -61,7 +63,6 @@ class BookFixController extends Controller
         $BookFix->status_id = 3; // Trạng thái "Không thể liên lạc"
         $BookFix->save();
 
-        // Gửi email thông báo liên lạc thất bại
         // Gửi email thông báo liên lạc thất bại
         Mail::send('emails.BookFix_failed', ['BookFix' => $BookFix], function ($message) use ($BookFix) {
             $message->to($BookFix->email) // Gửi đến email của người liên hệ

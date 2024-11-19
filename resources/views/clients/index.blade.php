@@ -171,6 +171,7 @@
         <div class="swiper-wrapper">
             @foreach ($banners as $banner)
                 <div class="swiper-slide" style="background-image: url('{{ asset($banner->image) }}');">
+
                     <div class="container">
                         <div class="slider-content">
                             <span class="epix-slide-subtitle">{{ $banner->title }}</span>
@@ -562,6 +563,7 @@
                                                                 href="{{ route('product.details', $flashSale->product->id) }}">
                                                                 <img
                                                                     src="{{ asset($flashSale->product->image) }}"
+
                                                                     class="img-fluid">
                                                             </a>
                                                             <div class="epix-action">
@@ -654,6 +656,7 @@
                                             <a href="{{route('single_product',$item->id)}}">
                                                 <img style="min-height:360px; max-height: 360px"
                                                      src="{{ asset($item->image) }}"
+
                                                      {{-- <img src="assets/img/product/23.jpg" --}}
                                                      class="img-fluid" alt=""></a>
                                             <div class="epix-action">
@@ -783,8 +786,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-45">
-                    <div class="col-xxl-12">
+                <!-- <div class="row mb-45"> -->
+                    <!-- <div class="col-xxl-12"> -->
+                    {{-- <div class="col-xxl-12">
                         <div class="epix-handpicked-banner"
                              data-background="{{asset('laptop/assets/img/banner/product-banner-2.jpg')}}">
                             <h4 class="epix-h-banner-text">Dòng thông minh 4.0
@@ -793,6 +797,7 @@
                                         class="fal fa-angle-right"></i></span></a>
                         </div>
                     </div>
+
                 </div>
                 <div class="row">
                     @foreach($products as $item)
@@ -803,6 +808,7 @@
                                                                                              height="150px"
                                                                                              width="150px"
                                                                                              src="{{asset($item -> image)}}"
+
                                                                                              alt=""></a>
                                 </div>
                                 <div class="epix-h-pro-content">

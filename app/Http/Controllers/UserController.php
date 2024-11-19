@@ -26,24 +26,23 @@ public function detail(string $id)
         return view('admins.users.createuser');
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:1,2',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
         ]);
 
         $data = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role' => $request->role,
-        ];
+            'address' => $request->address,
 
+        ];
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
@@ -55,6 +54,7 @@ public function detail(string $id)
     }
 
 
+
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
@@ -63,33 +63,34 @@ public function detail(string $id)
 
 
     public function update(Request $request, string $id)
-    {
-        $user = User::findOrFail($id);
+{
+    $user = User::findOrFail($id);
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+        'address' => 'nullable|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-            'role' => 'required|in:1,2',
-        ]);
+    $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+        'address' => $request->address,
+    ];
 
-        $data = $request->except('password', 'password_confirmation');
-
-        if ($request->filled('password')) {
-            $data['password'] = bcrypt($request->password);
-        }
-
-        // Cập nhật role
-        $data['role'] = $request->role;
-
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images', 'public');
-        }
-
-        $user->update($data);
-
-        return redirect()->route('admin1.users.listuser')->with('update_success', 'Cập nhật thành công.');
+    if ($request->filled('password')) {
+        $data['password'] = bcrypt($request->password);
     }
+
+    if ($request->hasFile('image')) {
+        $data['image'] = $request->file('image')->store('images', 'public');
+    }
+
+    $user->update($data);
+
+    return redirect()->route('admin1.users.listuser')->with('success', 'Cập nhật thành công.');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -100,4 +101,13 @@ public function detail(string $id)
         $user->delete();
         return redirect()->route('admin1.users.listuser')->with('delete_success', 'Xóa thành công.');
     }
+      public function toggleStatus(string $id)
+{
+    $user = User::findOrFail($id);
+    // Đổi trạng thái giữa 'hoạt động' và 'ngưng hoạt động'
+    $user->status = ($user->status === '1') ? '2' : '1'; // 1: Hoạt động, 2: Ngưng hoạt động
+    $user->save();
+
+    return redirect()->route('admin1.users.listuser')->with('success', 'Trạng thái tài khoản đã được cập nhật.');
+}
 }
