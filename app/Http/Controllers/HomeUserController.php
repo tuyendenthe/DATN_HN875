@@ -60,7 +60,7 @@ class HomeUserController extends Controller
     public function show(string $id)
     {
         $products = Product::with('variants')->findOrFail($id);
-
+        // dd($products);
         $reviews = Comment::where('product_id', $id)->where('status', 1)
         ->orderBy('created_at', 'desc')
         ->get();
