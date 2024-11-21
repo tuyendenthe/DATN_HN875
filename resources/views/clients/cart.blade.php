@@ -60,8 +60,7 @@
                                     <tr>
                                         <td class="product-thumbnail">
                                             <a href="{{ route('product.details', $item['product_id']) }}">
-                                                {{-- <img width="125px" height="125px" src="{{ asset() }}" alt=""> --}}
-                                                <img width="125px" height="125px" src="{{ Storage::url($item['image']) }}" alt="">
+                                                <img width="125px" height="125px" src="{{ asset($item['image']) }}" alt="">
                                             </a>
                                         </td>
                                         <td class="cart-product-name">

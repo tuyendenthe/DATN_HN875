@@ -170,8 +170,8 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             @foreach ($banners as $banner)
-                {{-- <div class="swiper-slide" style="background-image: url('{{ asset($banner->image) }}');"> --}}
-                <div class="swiper-slide" style="background-image: url('{{ Storage::url($banner->image) }}');">
+                <div class="swiper-slide" style="background-image: url('{{ asset($banner->image) }}');">
+
                     <div class="container">
                         <div class="slider-content">
                             <span class="epix-slide-subtitle">{{ $banner->title }}</span>
@@ -562,8 +562,8 @@
                                                             <a
                                                                 href="{{ route('product.details', $flashSale->product->id) }}">
                                                                 <img
-                                                                    {{-- src="{{ asset($flashSale->product->image) }}" --}}
-                                                                    src="{{ Storage::url($flashSale->product->image) }}"
+                                                                    src="{{ asset($flashSale->product->image) }}"
+
                                                                     class="img-fluid">
                                                             </a>
                                                             <div class="epix-action">
@@ -655,8 +655,8 @@
                                         <div class="epix-product-thumb epix-product-thumb-3">
                                             <a href="{{route('single_product',$item->id)}}">
                                                 <img style="min-height:360px; max-height: 360px"
-                                                     {{-- src="{{ asset($item->image) }}" --}}
-                                                     src="{{ Storage::url($item->image) }} "
+                                                     src="{{ asset($item->image) }}"
+
                                                      {{-- <img src="assets/img/product/23.jpg" --}}
                                                      class="img-fluid" alt=""></a>
                                             <div class="epix-action">
@@ -787,7 +787,8 @@
                     </div>
                 </div>
                 <div class="row mb-45">
-                    {{-- <div class="col-xxl-12">
+                    <class="col-xxl-12">
+                     <div class="col-xxl-12">
                         <div class="epix-handpicked-banner"
                              data-background="{{asset('laptop/assets/img/banner/product-banner-2.jpg')}}">
                             <h4 class="epix-h-banner-text">Dòng thông minh 4.0
@@ -795,7 +796,8 @@
                             <a href="{{route('shop')}}" class="epix-white-btn"><span>Mua ngay<i
                                         class="fal fa-angle-right"></i></span></a>
                         </div>
-                    </div> --}}
+                    </div>
+
                 </div>
                 <div class="row">
                     @foreach($products as $item)
@@ -805,8 +807,8 @@
                                     <a href="{{ route('single_product',$item -> id) }}"><img style="margin-right: 10px"
                                                                                              height="150px"
                                                                                              width="150px"
-                                                                                             {{-- src="{{asset($item -> image)}}" --}}
-                                                                                             src="{{ Storage::url($item->image) }}"
+                                                                                             src="{{asset($item -> image)}}"
+
                                                                                              alt=""></a>
                                 </div>
                                 <div class="epix-h-pro-content">
