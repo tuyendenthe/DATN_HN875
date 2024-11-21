@@ -114,16 +114,47 @@ class CartController extends Controller
         return redirect()->route('cart.view');
     }
 
+    // public function applyCoupon(Request $request)
+    // {
+    //     $voucherCode = $request->input('coupon_code');
+    //     $voucher = Voucher::where('voucher_code', $voucherCode)->first();
+
+    //     if ($voucher && $voucher->quantity > 0 ) {
+    //         $discount = $voucher->price_sale;
+    //         return response()->json(['success' => true, 'discount' => $discount]);
+    //     } else {
+    //         return response()->json(['success' => false, 'message' => 'Bạn không đủ điều kiện dùng hoặc hết hạn.']);
+    //     }
+    // }
     public function applyCoupon(Request $request)
     {
         $voucherCode = $request->input('coupon_code');
+        $originalPrice = $request->input('total');
+
+
         $voucher = Voucher::where('voucher_code', $voucherCode)->first();
 
-        if ($voucher && $voucher->quantity > 0 ) {
-            $discount = $voucher->price_sale;
-            return response()->json(['success' => true, 'discount' => $discount]);
+
+        if ($voucher && $voucher->quantity > 0 && now()->between($voucher->start_date, $voucher->end_date)) {
+
+            if ($voucher->discount_type === 'percentage') {
+                $discount = ($originalPrice * $voucher->discount_value) / 100;
+            } elseif ($voucher->discount_type === 'fixed') {
+                $discount = min($voucher->discount_value, $originalPrice);
+            } else {
+                $discount = 0;
+            }
+
+
+            $finalPrice = $originalPrice - $discount;
+
+            return response()->json([
+                'success' => true,
+                'discount' => $discount,
+                'final_price' => $finalPrice,
+            ]);
         } else {
-            return response()->json(['success' => false, 'message' => 'Bạn không đủ điều kiện dùng hoặc hết hạn.']);
+            return response()->json(['success' => false, 'message' => 'Voucher không hợp lệ hoặc hết hạn.']);
         }
     }
 

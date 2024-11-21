@@ -12,6 +12,7 @@ use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\VoucherController;
 
 
 use App\Http\Controllers\CartController;
@@ -156,6 +157,13 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
 
 
+  // CRUD voucher
+  Route::get('/vouchers', [VoucherController::class, 'index'])->name('admin1.vouchers.index');
+  Route::get('/vouchers/create', [VoucherController::class, 'create'])->name('admin1.vouchers.create');
+  Route::post('/vouchers', [VoucherController::class, 'store'])->name('admin1.vouchers.store');
+  Route::get('/vouchers/{voucher}/edit', [VoucherController::class, 'edit'])->name('admin1.vouchers.edit');
+  Route::put('/vouchers/{voucher}', [VoucherController::class, 'update'])->name('admin1.vouchers.update');
+  Route::delete('/vouchers/{voucher}', [VoucherController::class, 'destroy'])->name('admin1.vouchers.destroy');
     // Route::get('/chart', function () {
     //     return view('admins.chart');
     // })->name('chart');

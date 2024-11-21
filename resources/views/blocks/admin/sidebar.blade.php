@@ -74,6 +74,14 @@
                         <li class="sidebar-item"><a href="pages-chat.html" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Chat Option </span></a></li>
                     </ul>
                 </li>
+                 {{-- voucher --}}
+                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Voucher </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item"><a href="{{route('admin1.vouchers.index')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> List Voucher </span></a></li>
+                        <li class="sidebar-item"><a href="{{route('admin1.vouchers.create')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Add Voucher </span></a></li>
+                    </ul>
+                </li>
+                {{-- user --}}
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">User </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{{route('admin1.users.listuser')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> List User </span></a></li>
