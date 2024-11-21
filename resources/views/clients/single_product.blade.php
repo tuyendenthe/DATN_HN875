@@ -260,7 +260,7 @@ button:hover {
                     </p>
 
                     <div class="price-display">
-                        Giá: <span id="product-price" name="product-price">0,000</span> VNĐ
+                        Giá: <span id="product-price" name="product-price">{{ $products->price }}</span> VNĐ
                     </div>
 
                     <!-- Form để thêm vào giỏ hàng -->
@@ -562,27 +562,27 @@ button:hover {
                                             <form action="{{ route('post.review') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" name='product_id' value="{{$products->id}}">
-                                    
+
                                                 <div class="rating">
                                                     <input type="radio" name="star" id="star5" value="5">
                                                     <label for="star5" title="5 stars">★</label>
-                                                    
+
                                                     <input type="radio" name="star" id="star4" value="4">
                                                     <label for="star4" title="4 stars">★</label>
-                                                    
+
                                                     <input type="radio" name="star" id="star3" value="3">
                                                     <label for="star3" title="3 stars">★</label>
-                                                    
+
                                                     <input type="radio" name="star" id="star2" value="2">
                                                     <label for="star2" title="2 stars">★</label>
-                                                    
+
                                                     <input type="radio" name="star" id="star1" value="1">
                                                     <label for="star1" title="1 star">★</label>
                                                 </div>
                                                 <br>
                                                 <label for="comment">Comment:</label>
                                                 <textarea name="comment" id="comment"></textarea>
-                                            
+
                                                 <button type="submit">Submit</button>
                                             </form>
                                         </div>
@@ -602,6 +602,7 @@ button:hover {
 <!-- single product area end -->
 <script>
     function selectVariant(element) {
+
         // Xóa class "selected" khỏi tất cả các hộp
         var variants = document.querySelectorAll('.variant-box');
         variants.forEach(function(variant) {
@@ -617,7 +618,12 @@ button:hover {
 
         // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
         var selectedPrice = element.getAttribute('data-price');
+        var priceProduct = document.getElementById('product-price').textContent.trim();
+        console.log(Number(priceProduct));
+
+        selectedPrice = Number(priceProduct) + Number(selectedPrice);
         document.getElementById('product-price').innerText = selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
     }
     function updateQuantity(key, quantityChange) {
     let form = document.createElement('form');

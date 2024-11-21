@@ -1,259 +1,88 @@
 @extends('clients.master')
 
 @section('content')
-    <!-- prealoder area start -->
-    <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="object" id="first_object"></div>
-                <div class="object" id="second_object"></div>
-                <div class="object" id="third_object"></div>
-            </div>
-        </div>
-    </div>
-    <!-- prealoder area end -->
-    <!-- breadcrumb area start -->
-    <div class="epix-breadcrumb-area mb-100">
-        <div class="container">
-            <h4 class="epix-breadcrumb-title">Giới Thiệu</h4>
-            <div class="epix-breadcrumb">
-                <ul>
-                    <li><a href="index-3.html">Trang chủ</a></li>
-                    <li><span>Trang giới thiệu</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- breadcrumb area end -->
-    <!-- about area start -->
-    <div class="about-area pb-110">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                    <div class="about-img">
-                        <img src="{{asset('laptop/assets/img/about/about-2.jpg')}}" alt="big-image">
-                        <div class="about-inner-img">
-                            <img src="{{asset('laptop/assets/img/about/about-1.jpg')}}" alt="small-image">
-                        </div>
-                    </div>
-                </div>
+<body style="background-color: rgb(236, 225, 225)">
 
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mt-md-100 mt-xs-100">
-                    <div class="about-content pt-60 pt-lg-0 pt-xs-0">
-                        <h2 class="about-title">
-                            About Company </h2>
-                        <h6 class="short-desc">
-                            We Have Over 25+ Years Of Experience </h6>
-                        <p class="mb-30">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip
-                            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                            officia
-                            deserunt mollit anim id est laborum. </p>
-                        <ul class="about-list">
-                            <li>
-                                <i class="far fa-check-circle"></i>
-                                Static Typing In TypeScript
-                            </li>
-                            <li>
-                                <i class="far fa-check-circle"></i>
-                                Create An Engaging And Useful Chatbot
-                            </li>
-                            <li>
-                                <i class="far fa-check-circle"></i>
-                                Developer-Friendly React Code In Minutes
-                            </li>
-                            <li>
-                                <i class="far fa-check-circle"></i>
-                                Making Remote Work Work Usefuls
-                            </li>
-                        </ul>
-                        <a class="btn-theme home-btn btn-border btn-left-right mt-30"
-                            href="https://devsnews.com/template/epixx-prev/epixx/%c3%82%c2%a3/">Explore More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- about area end -->
-    <!-- service area start -->
-    <div class="service-area pb-130">
-        <div class="container">
-            <div class="row">
-                <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12 col-12">`
-                    <div class="asingle-feature" data-background="{{asset('laptop/assets/img/about/service-1.jpg')}}">
-                        <h2>Need Any Helps</h2>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
-                        <a class="feature-btn" href="contact.html">Contact Us</a>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12 col-12">`
-                    <div class="asingle-feature" data-background="{{asset('laptop/assets/img/about/service-2.jpg')}}">
-                        <h2>367+ Product</h2>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
-                        <a class="feature-btn" href="shop.html">Visit Our Shop</a>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12 col-12">`
-                    <div class="asingle-feature" data-background="{{asset('laptop/assets/img/about/service-3.jpg')}}">
-                        <h2>24/7 Support</h2>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
-                        <a class="feature-btn" href="shop.html">Get A Quote</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- service area end -->
-    <!-- team area start -->
-    <div class="team-area pb-100">
-        <div class="container">
-            <div class="row mb-70">
-                <div class="col-xxl-12">
-                    <div class="epix-section-title text-center">About Team</a></li>
-                        <h5 class="s-title">Our Expert Team Members</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="bt-team mb-30">
-                        <div class="team-img mb-30">
-                            <img src="{{asset('laptop/assets/img/team/team4.jpg')}}" alt="img">
-                            <div class="team-social">
-                                <div class="team-icon">
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                                <a href="#"><i class="fal fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h3>
-                                Nicolash Correia </h3>
-                            <span>
-                                CEO of Gocart </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="bt-team mb-30">
-                        <div class="team-img mb-30">
-                            <img src="{{asset('laptop/assets/img/team/team1.jpg')}}" alt="img">
-                            <div class="team-social">
-                                <div class="team-icon">
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                                <a href="#"><i class="fal fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h3>
-                                Oliveira Barros </h3>
-                            <span>
-                                Head of Innovation </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="bt-team mb-30">
-                        <div class="team-img mb-30">
-                            <img src="{{asset('laptop/assets/img/team/team2.jpg')}}" alt="img">
-                            <div class="team-social">
-                                <div class="team-icon">
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                                <a href="#"><i class="fal fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h3>
-                                Oliveira Barros </h3>
-                            <span>
-                                Director of Gocart </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="bt-team mb-30">
-                        <div class="team-img mb-30">
-                            <img src="{{asset('laptop/assets/img/team/team3.jpg')}}" alt="img">
-                            <div class="team-social">
-                                <div class="team-icon">
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                                <a href="#"><i class="fal fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h3>
-                                Oliveira Barros </h3>
-                            <span>
-                                Manager of Gocart </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- team area end -->
-    <!-- testimonial area start -->
-    <div class="testimonial-area pb-135">
-        <div class="ml-50 mr-50 testimonial-bg pt-100 pb-100">
-            <div class="container">
-                <div class="row mb-45">
-                    <div class="col-xxl-12">
-                        <div class="epix-section-title text-center">Customer Reviews</a></li>
-                            <h5 class="s-title">Our Happy Customers</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-xxl-10">
-                        <div class="testimonial-active swiper-container">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="testimonial-slide text-center">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                class="fas fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-text">
-                                            <p>But I must explain to you how all mistaken idea denouncing pleasure
-                                                and praising
-                                                pain was born
-                                                and will give
-                                                complete</p>
-                                        </div>
-                                        <div class="testimonial-author">
-                                            <div class="testimonial-author-img">
-                                                <img src="{{asset('laptop/assets/img/user/user-1.png')}}" alt="image">
-                                            </div>
-                                            <div class="testimonial-author-content">
-                                                <h3>Martha E. Smith</h3>
-                                                <span>Programer</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- testimonial area end -->
-@endsection
+<div class="container mt-4 mb-4" style="background-color: rgb(255, 255, 255)">
+    <section id="content" style="width:100%" class="box-w static-html max-height-none">
+      <h1 style="text-align: center;" class="epix-c-heading pt-5"><strong><span  class="epix-c-heading"> LaptopTechzone - Địa chỉ sửa chữa - Nâng cấp, bảo dưỡng - Làm đẹp các thiết bị công nghệ hàng đầu Hà Nội</span></strong></h1>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;y LaptopTechzone - Chuỗi trung tâm dịch vụ máy tính, laptop - là hệ thống có hơn 10 năm kinh nghiệm và đi đầu trong lĩnh vực cung cấp các dịch vụ cần thiết để chăm sóc toàn diện cho các thiết bị công nghệ, bao gồm: Dịch vụ sửa chữa, bảo dưỡng máy tính, laptop; Dịch vụ dán decal, skin làm đẹp cho laptop, điện thoại, máy ảnh,... Dịch vụ phân phối các linh kiện, phụ kiện điện tử chính hãng đến từ các thương hiệu lớn như Lenovo, Asus, Dell, Sony, Acer, Apple… Với các dịch vụ này, S88 Service có sứ mệnh mang tới một hệ sinh thái với đầy đủ các dịch vụ cần thiết, giá cả phải chăng với chất lượng phục vụ hàng đầu để chăm sóc các thiết bị laptop, máy tính, PC của Quý Khách, đảm bảo các thiết bị luôn hoạt động ở trạng thái hoàn hảo nhất. Với phương châm luôn lấy "TẬN TÂM - UY TÍN - CHUYÊN NGHIỆP" đặt lên hàng đầuy LaptopTechzone tự tin có thể khiến những bạn đến trải nghiệm dịch vụ của mình cực kỳ hài lòng. Cùng tìm hiểu kỹ hơn về chúng tôi qua nội dung bài viết dưới đây nhé!</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <h2 style="text-align: justify;"><span style="font-size: 18pt;"><strony LaptopTechzone - tiền thân là chuỗi Bệnh viện Công nghệ 88 và Skin88 với hơn 10 năm kinh nghiệm</strong></span></h2>
+  <p style="text-align: justify;"><span style="font-size: 14pt;y LaptopTechzone có tiền thân chính là 2 thương hiệu: Trung tâm dịch vụ sửa chữa thiết bị công nghệ mang tên Bệnh viện Công nghệ 88 và Chuỗi cửa hàng Skin88 - chuyên trang trí, làm đẹp, dán skin laptop, điện thoại, máy ảnh…. được thành lập bởi 88Group - Đơn vị có nhiều năm kinh nghiệm trong lĩnh vực kinh doanh sản phẩm laptop, PC, linh kiện, phụ kiện máy tính và dịch vụ sửa máy tính.</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Trải qua hơn 10 năm trong nghề, tiền thân củy LaptopTechzone - Bệnh Viện Công Nghệ 88 chính là một trong những địa chỉ UY TÍN trong lĩnh vực dịch vụ sửa chữa mà khách hàng tại địa bàn Hà Nội, TP. HCM và các khu vực lân cận tìm đến khi gặp các vấn đề với laptop, máy tính của mình: các vấn đề về phần cứng, phần mềm, laptop lỗi hỏng chậm....</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  {{-- <p><span style="font-size: 14pt;"> --}}
+    {{-- <img src="data:image/jpeg;base64,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" class="w-100" alt=""> --}}
+    {{-- <img style="display: block; margin-left: auto; margin-right: auto;" src="assets/img/about/service-3.jpg" alt=""> --}}
+    <img src="https://laptopaz.vn/media/lib/3286_LOQAMD2024laptopaz1.png" class="w-100" alt="">
+{{-- </span></p> --}}
+  <p style="text-align: justify;">&nbsp;</p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Không chỉ thế, Bệnh viện Công nghệ 88 còn là địa chỉ đáng tin cậy để khách hàng nâng cấp các thiết bị công nghệ, và tìm tới khi có nhu cầu mua linh kiện, phụ kiện (RAM, ổ cứng, màn hình, tai nghe, phím, chuột,...) chính hãng để sử dụng cho các thiết bị của mình. Về chất lượng sản phẩm linh - phụ kiện máy tính, bạn hoàn toàn có thể yên tâm 100% vì Bệnh viện Công nghệ 88 chính là một trong những đại lý ủy quyền đáng tin cậy của nhiều thương hiệu linh kiện điện tử uy tín: Lenovo, HP, Dell, Kingston, Gigabyte, Oscoo, Samsung,...</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://laptopaz.vn/media/lib/3225_432784510_7703748686354989_664393535515154715_n.jpg" alt=""></span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Skin88 được thành lập năm 2017, là chuỗi cửa hàng chuyên cung cấp các dịch vụ trang trí laptop, máy tính, máy ảnh: dán decal in hình theo yêu cầu / skin đáp ứng tất cả các dòng máy.... Với việc dán decal / skin này, chiếc laptop của bạn sẽ được bảo vệ tốt hơn cũng như đem đến một hơi thở mang đậm nét đặc trưng cá nhân của mình.</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Với hệ thống hơn 100 nhân viên bao gồm cả kỹ thuật viên, nhân viên chăm sóc và bán hàng được đào tạo bài bản về kỹ năng nghề cũng như kỹ năng giao tiếp với khách hàng, tiền thây LaptopTechzone - Bệnh viện Công nghệ 88 và Skin88 đã &amp; đang cố gắng mang lại những những trải nghiệm sử dụng dịch vụ tốt nhất tới khách hàng.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <h2 style="text-align: justify;"><span style="font-size: 18pt;"><strony LaptopTechzone cung cấp những dịch vụ gì?</strong></span></h2>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Mặc dù tiền thân là 2 thương hiệu: Trung tâm dịch vụ sửa chữa thiết bị công nghệ mang tên Bệnh viện Công nghệ 88 và Chuỗi cửa hàng Skin88 - chuyên trang trí, làm đẹp, dán skin laptop, điện thoại, máy ảnh…. đang hoạt động rất tốt cũng như nhận được sự tin tưởng rất lớn từ khách hàng. Song sự ra đời củy LaptopTechzone chính là lời khẳng định, cam kết – sẽ luôn đổi mới, phát triển tốt hơn và luôn duy trì trạng thái tốt nhất cho các thiết bị công nghệ của bạn trong suốt thời gian sử dụng.</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Cụ thể hơny LaptopTechzone được thành lập với mục tiêu đồng bộ để nâng cấp chất lượng dịch vụ / chuẩn hóa quy trình - từ đó đem đến một tổng thể không gian dịch vụ chuyên nghiệp và tối ưu hoành tráng hơn và nhờ đó đưa tới quý khách hàng sự tiện lợi nhất có thể trong quá trình sử dụng dịch vụ, sản phẩm, yên tâm gửi gắm các thiết bị công nghệ của mình.</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Là đơn vị tiên phong đi đầu trong việc đưa ra GIẢI PHÁP TOÀN DIỆN cho các thiết bị công nghệy LaptopTechzone sẽ đưa đến bạn những trải nghiệm cực kỳ phong phú, đa dạng và đầy đủ về mọi dịch vụ xoay quanh các thiết bị công nghệ bao gồm: Sửa chữa laptop, máy tính - Bảo dưỡng, nâng cấp linh phụ kiện chất lượng - Làm đẹp thiết bị công nghệ - Cung cấp những sản phẩm uy tín để build PC,...</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <h3 style="text-align: justify;"><strong><span style="font-size: 14pt;y LaptopTechzone - Giải quyết mọi “bệnh” laptop, PC trong 1 nốt nhạc &amp; bảo dưỡng, nâng cấp máy uy tín</span></strong></h3>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Với tiền thân là Bệnh viện Công nghệ hơn 10 năm kinh nghiệm trong nghề cùng đội ngũ kỹ thuật viên được đào tạo bài bản về kỹ năng nghềy LaptopTechzone cam kết có thể sửa chữa mọi loại lỗi trên laptop cũng như đưa đến bạn dịch vụ bảo dưỡng, nâng cấp máy chất lượng bao gồm:</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">- Sửa lỗi laptop mở không lên</span><br><span style="font-size: 14pt;">- Sửa lỗi wifi laptop</span><br><span style="font-size: 14pt;">- Thay pin laptop</span><br><span style="font-size: 14pt;">- Sửa micro laptop</span><br><span style="font-size: 14pt;">- Sửa lỗi máy tính bị đơ/ chậm</span><br><span style="font-size: 14pt;">- Thay main laptop</span><br><span style="font-size: 14pt;">- Sửa lỗi bluetooth</span><br><span style="font-size: 14pt;">- Sửa lỗi máy tính không nhận usb</span><br><span style="font-size: 14pt;">- Sửa touchpad</span><br><span style="font-size: 14pt;">- Sửa card màn hình</span><br><span style="font-size: 14pt;">- Thay chipset laptop</span><br><span style="font-size: 14pt;">- Sửa lỗi laptop không nhận tai nghe</span><br><span style="font-size: 14pt;">- Sửa bàn phím laptop</span><br><span style="font-size: 14pt;">- Sửa màn hình máy tính</span><br><span style="font-size: 14pt;">- Sửa loa laptop</span><br><span style="font-size: 14pt;">- Sửa bản lề laptop</span><br><span style="font-size: 14pt;">- Sửa camera laptop</span><br><span style="font-size: 14pt;">- Nâng cấp laptop</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <h3 style="text-align: justify;"><strong><span style="font-size: 14pt;">88 Services - Địa chỉ dán laptop trang trí chất lượng, đa dạng</span></strong></h3>
+  <p style="text-align: justify;"><span style="font-size: 14pt;y LaptopTechzone sẽ đưa đến bạn một giải pháp hoàn hảo để bảo vệ thiết bị khỏi trầy xước, làm thay đổi một diện mạo cũ nhàm chán và đặc biệt là giúp bạn “thổi vào máy” một hơi thở mang đậm nét đặc trưng cá nhân của bản thân qua những bộ trang trí decal / skin với vô vàn các chủ đề nội dung HOT, in theo yêu cầu,...</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;y LaptopTechzone sẽ cung cấp đến bạn không chỉ dịch vụ dán laptop, máy tính bảng chất lượng, mà còn dán skin cả điện thoại, máy ảnh (Body máy ảnh, Skin Ống kính máy ảnh, Skin Flash, Skin Flycam, Skin Gimbal, Skin Go Pro,...); cùng với đó là dán skin đồng hồ thông minh, tai nghe, vape/pod, máy chơi game,....</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Được khách hàng đánh giá là có chất lượng miếng dán tốt, nhiều mẫu mã đẹp cũng như có dịch vụ cực phong phú y LaptopTechzone tự tin có thể đáp ứng tốt các nhu cầu làm đẹp thiết bị công nghệ của bạn.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <h2 style="text-align: justify;"><strong><span style="font-size: 14pt;y LaptopTechzone: Địa chỉ cung cấp linh - phụ kiện máy tính uy tín - Build PC chất lượng, tay nghề cao</span></strong></h2>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">88Group là đơn vị có hơn 10 năm kinh nghiệm trong lĩnh vực kinh doanh sản phẩm laptop, PC, linh kiện, phụ kiện máy tính và dịch vụ sửa máy tính. Bởi xuất phát từ đây, nên những sản phẩm linh - phụ kiện my LaptopTechzone không chỉ có sự đa dạng mẫu mã, giá cả ưu đãi mà còn đều có chất lượng hàng đầu xuất phát từ các nhà phân phối chính hãng nổi tiếng như Dell, Asus, Lenovo, MSI,... hoặc đều được kiểm duyệt chất lượng kỹ càng qua hệ thống Bệnh viện Công nghệ 88.</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;y LaptopTechzone cũng tự tin là một địa chỉ lắp ráp PC chuyên nghiệp với hơn 10 năm trong lĩnh vực sửa chữa máy tính, cùng với đó là đội ngũ nhân viên tay nghề cao nhiều năm kinh nghiệm, được đào tạo bài bản, có chuyên môn tốt,...</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Tựu chung, tạy LaptopTechzone, bạn hoàn toàn có thể tự tin build PC gaming, máy văn phòng hoặc sở hữu các linh - phụ kiện máy tính chất lượng như chuột, phím, balo,... đến từ các thương hiệu uy tín, chất lượng với đủ mọi mức giá. Và trong số đó, có nhiều dòng sản phẩm được bày bán độc quyền với mức giá cực tốt.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <h2 style="text-align: justify;"><span style="font-size: 18pt;"><strong>Tại sao bạn nên chọy LaptopTechzone để trải nghiệm mọi dịch vụ liên quan đến máy tính?</strong></span></h2>
+  <h3 style="text-align: justify;"><strong><span style="font-size: 14pt;">1y LaptopTechzone luôn tự tin cam kết dịch vụ sửa chữa chất lượng, bảo hành sau sửa</span></strong></h3>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Tạy LaptopTechzone, bạn sẽ có thể hoàn toàn yên tâm trước tình trạng bị tráo linh kiện, “luộc” đồ nào xảy ra bởi trung tâm sửa chữa sẽ có biên bản kiểm kê linh kiện chi tiết, chụp ảnh linh kiện...nếu khách cần để máy “nhập viện” qua đêm.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="/media/about/0404_Banner-Bnh-vin-cng-ngh-1.jpg" alt=""></span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Bên cạnh đó là đội ngũ kỹ thuật viên tay nghề cao, được đào tạo bài bản. Nhân viên nhiệt tình, tư vấn tận tâm, đúng bệnh.</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Ngoài ry LaptopTechzone sẽ có dịch vụ bảo hành sau quá trình sửa chữa, chế độ bảo hành uy tín được cam kết rõ ràng dành cho khách hàng nhằm mang đến dịch vụ chất lượng nhất.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <h3 style="text-align: justify;"><strong><span style="font-size: 14pt;">2y LaptopTechzone có quy trình sửa chữa lỗi laptop minh bạch, rõ ràng</span></strong></h3>
+  <p style="text-align: justify;"><span style="font-size: 14pt;y LaptopTechzone xây dựng quy trình sửa chữa chuyên nghiệp - Đây được xem là quy chuẩn khi khách hàng mang laptop đến sửa, nhằm tạo cho khách hàng sự tin tưởng nhất định.</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Khi khách hàng đến khắc phục các lỗi máy tính nói chung hoặc các lỗi laptop và PC nói riêng vớy LaptopTechzone – Nhân viên kỹ thuật sẽ nhận máy, đồng thời tiến hành kiểm tra, chẩn đoán, xét nghiệm cẩn thận và kỹ càng để xác định chính xác bệnh và các nguyên nhân gây bệnh mà máy gặp phải. Mọi hoạt động nhận máy, tháo máy để kiểm tra tình trạng đều chỉ được thực hiện khi có sự đồng ý từ phía khách hàng!</span><br> <br><span style="font-size: 14pt;">Bước 1: Nhân viên tiếp nhận yêu cầu sửa chữa tình trạng laptop/ máy tính của khách hàng</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Bước 2: Nhân viên kỹ thuật tiến hành kiểm tra để xác định nguyên nhân, tình trạng lỗi của máy tính, sau đó đưa ra phương án sửa chữa hay thay thế</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Bước 3: Nhận được sự đồng ý của khách hàng, báo giá và thông báo thời gian sửa chính xác để khắc phục tình trạng laptop bị lỗi.</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Bước 4: Tiến hành sửa chữa, khách hàng có thể trực tiếp quan sát trực tiếp quá trình sửa chữa của kỹ thuật viên</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Bước 5: Khách hàng kiểm tra, xác nhận linh kiện và test máy sau khi sửa.</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Bước 6: Xuất hóa đơn và dán tem bảo hành cho sản phẩm</span></p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Với quy trình này, bạn có thể nắm bắt tình trạng máy tính của chiếc laptop cá nhân một cách minh bạch, rõ ràng và chủ động ra quyết định có sửa hay không.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <h3 style="text-align: justify;"><strong><span style="font-size: 14pt;">3. Giá sửa chữa tốt nhất, bảng giá niêm yết rõ ràng</span></strong></h3>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Về giá cảy LaptopTechzone tự tin là một trong những đơn vị có giá sửa chữa, thiết bị điện tử có giá thành tốt nhất. Mức giá sửa chữa củy LaptopTechzone luôn đi đôi với chất lượng.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s.yimg.com/os/creatr-uploaded-images/2022-10/5ed6ef20-4a40-11ed-9dd1-758fc78c1c82" alt=""></p>
+  <p style="text-align: justify;"><br> <br><span style="font-size: 14pt;">Ngoài ra, bảng giá niêm yết, rõ ràng để khách hàng có thể tham khảo, so sánh với các trung tâm khác trước khi quyết định tìm kiếm một cơ sở sửa chữa uy tín mà giá tốt.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <h3 style="text-align: justify;"><strong><span style="font-size: 14pt;">4. Linh kiện, phụ kiện thay thế chất lượng, nguồn gốc rõ ràng</span></strong></h3>
+  <p style="text-align: justify;"><span style="font-size: 14pt;y LaptopTechzone tự hào là một đại lý ủy quyền đáng tin cậy của rất nhiều các thương hiệu lớn như: Dell, Lenovo, HP, Asus, LG, Samsung, Acer, MSI, Apple,... hay các hãng linh - phụ kiện như: Gigabyte, Kingston, Lexar, Oscoo, Samsung,... Vì vậy, những sản phẩm laptop mới hay linh kiện được chúng tôi được đưa đến bạn sẽ luôn đảm bảo chất lượng tốt nhất, đa dạng lựa chọn nhất.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://th.bing.com/th/id/OIP.x3oJZJOB4z5iMWW0SzqZfQHaEc?pid=ImgDet&w=474&h=284&rs=1" alt=""></span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p style="text-align: justify;"><span style="font-size: 14pt;">Mức giá linh kiện, phụ kiện cực tốt, đủ mọi mẫu mã, đáp ứng mọi nhu cầu người dùng. Khách hàng sửa chữa, nâng cấp máy luôn có cực nhiều lựa chọn phù hợp, chất lượng.</span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://th.bing.com/th/id/OIP.H-3qLQQVr4SXKeNZRN0RRgHaEc?pid=ImgDet&w=474&h=284&rs=1" alt=""></span></p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p style="text-align: justify;">&nbsp;</p>
+  <p style="text-align: justify;"><em><span style="font-size: 14pt;">Hãy đến ngay LaptopTechzone - Trung tâm dịch vụ bảo dưỡng, sửa chữa, nâng cấp laptop, PC. Ngoài ra, nếu bạn có bất cứ thắc mắc nào trong quá trình tìm hiểu thông tin hoặc các vấn đề liên quan đến sửa máy tính hay các vấn đề liên quan khác thì đừng ngần ngại để lại tin nhắn cho chúng tôi hoặc bình luận bên dưới bài viết này để được giải đáp tốt nhất nhé!</span></em></p>
+    </section>
+  </div>
+
+</body>
+  @endsection

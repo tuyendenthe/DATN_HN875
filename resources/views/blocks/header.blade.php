@@ -12,7 +12,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('about') }}">About</a>
+                                        <a href="{{ route('about') }}">Giới thiệu</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('shop') }}">Sản phẩm</a>
@@ -107,35 +107,35 @@
                             </div>
                         </div>
                     </div>
-{{--                    <div class="col-xxl-2 col-xl-2 col-lg-3">--}}
-{{--                        <div class="epix-header-actions">--}}
-{{--                            <div class="epix-action-single">--}}
-{{--                                <a href="cart.html">--}}
-{{--                                    <div class="icon">--}}
-{{--                                        <i class="fal fa-heart"></i>--}}
-{{--                                        <span>0</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="content">--}}
-{{--                                        <span>Yêu thích</span>--}}
-{{--                                    </div>--}}
-{{--                                </a>--}}
-{{--                            </div>--}}
-{{--                            <div class="epix-action-single">--}}
-{{--                                <a href="cart.html">--}}
-{{--                                    <div class="icon">--}}
-{{--                                        <i class="fal fa-shopping-cart"></i>--}}
-{{--                                        <span>0</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="content">--}}
-{{--                                        <span> Giỏ hàng</span>--}}
-{{--                                    </div>--}}
-{{--                                </a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                   <div class="col-xxl-2 col-xl-2 col-lg-3">
+                       <div class="epix-header-actions">
+                           {{-- <div class="epix-action-single">
+                               <a href="cart.html">
+                                   <div class="icon">
+                                       <i class="fal fa-heart"></i>
+                                       <span>0</span>
+                                   </div>
+                                   <div class="content">
+                                       <span>Yêu thích</span>
+                                   </div>
+                               </a>
+                           </div> --}}
+                           <div class="epix-action-single">
+                               <a href="{{ route('cart.view') }}">
+                                   <div class="icon">
+                                       <i class="fal fa-shopping-cart"></i>
+                                       <span>0</span>
+                                   </div>
+                                   <div class="content">
+                                       <span> Giỏ hàng</span>
+                                   </div>
+                               </a>
+                           </div>
+                       </div>
                 </div>
+                {{-- </div>
             </div>
-        </div>
+        </div> --}}
 {{--        <div class="header-bottom p-rel">--}}
 {{--            <div class="container">--}}
 {{--                <div class="row align-items-center">--}}
