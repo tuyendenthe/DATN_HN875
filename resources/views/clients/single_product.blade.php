@@ -286,6 +286,9 @@
                 </div>
                 <div class="col-xxl-6 col-lg-6">
 
+
+                
+
                     <div class="epix-single-product-right">
                         {{--                    <div class="rating">--}}
                         {{--                        <i class="fas fa-star active"></i>--}}
@@ -306,6 +309,7 @@
                                        name="product-price">{{ number_format($products->price, 0, ',', '.') }}</span>
                             VNĐ
                         </div>
+
 
                         <!-- Form để thêm vào giỏ hàng -->
                         <form style="margin-top: 10px" action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
@@ -644,6 +648,7 @@
                                                 <div class="rating">
                                                     <input type="radio" name="star" id="star5" value="5">
                                                     <label for="star5" title="5 stars">★</label>
+
                                                     <input type="radio" name="star" id="star4" value="4">
                                                     <label for="star4" title="4 stars">★</label>
 
@@ -652,7 +657,6 @@
 
                                                     <input type="radio" name="star" id="star2" value="2">
                                                     <label for="star2" title="2 stars">★</label>
-
 
                                                     <input type="radio" name="star" id="star1" value="1">
                                                     <label for="star1" title="1 star">★</label>
@@ -676,6 +680,17 @@
 
     </div>
     </div>
+
+</div>
+<!-- single product area end -->
+<script>
+    function selectVariant(element) {
+
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box');
+        variants.forEach(function(variant) {
+            variant.classList.remove('selected');
+
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -705,6 +720,7 @@
                     $('#search-results').addClass('hidden');
                 }
             });
+
         });
 
     </script>
@@ -761,6 +777,14 @@
 
         // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
         var selectedPrice = element.getAttribute('data-price');
+
+        var priceProduct = document.getElementById('product-price').textContent.trim();
+        console.log(Number(priceProduct));
+
+        selectedPrice = Number(priceProduct) + Number(selectedPrice);
+        document.getElementById('product-price').innerText = selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
         mausac = parseInt(selectedPrice);
         totalPrice = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
         let formattedPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);

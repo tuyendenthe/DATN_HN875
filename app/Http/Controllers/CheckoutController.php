@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
-use App\Models\status;
+// use App\Models\status;
 use App\Models\Bill_detail;
+use App\Models\Status;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,6 +52,7 @@ class CheckoutController extends Controller
 
         // Lấy dữ liệu từ session cart
         $cart = session()->get('cart'); // Hoặc cách khác để lấy cart của bạn
+        //
 
         foreach ($product_ids as $item => $id_product) {
             // Lấy thông tin sản phẩm từ cart
@@ -61,12 +63,12 @@ class CheckoutController extends Controller
             }
 
             // Lấy variant_name
-            $variants = $cart_item['variant_name'] ?? []; // Mảng variant_name
+            // $variants = $cart_item['variant_name'] ?? []; // Mảng variant_name
 
             // Gán các variant vào biến
-            $variant = isset($variants[0]) ? $variants[0] : null;
-            $variant1 = isset($variants[1]) ? $variants[1] : null;
-            $variant2 = isset($variants[2]) ? $variants[2] : null;
+            // $variant = isset($variants[0]) ? $variants[0] : null;
+            // $variant1 = isset($variants[1]) ? $variants[1] : null;
+            // $variant2 = isset($variants[2]) ? $variants[2] : null;
 
             // Tạo dữ liệu để insert vào cơ sở dữ liệu
             $data2 = [
@@ -74,10 +76,7 @@ class CheckoutController extends Controller
                 'bill_code' => $randomString,
                 'quantity' => $request->quantity[$item],
                 'subtotal' => $request->subtotal[$item],
-                'variant' => $variant,
-                'variant1' => $variant1,
-                'variant2' => $variant2,
-                'created_at' => now(),
+
                 'updated_at' => now(),
             ];
 
@@ -160,8 +159,8 @@ class CheckoutController extends Controller
         // dd($id);
            $data = Bill::find($id);
         //    dd($data);
-        $statuses = status::where('id', '>=', $data->status)->get();
-        //    dd($statuses);
+
+        $statuses = Status::where('id', '>=', $data->status)->get();
 
         return view('admins.checkout.status', compact('data', 'statuses'));
     }
@@ -171,4 +170,6 @@ class CheckoutController extends Controller
 
         return redirect()->route("checkout.list")->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
+
+
 }
