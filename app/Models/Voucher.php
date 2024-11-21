@@ -12,9 +12,11 @@ class Voucher extends Model
     protected $fillable= [
         'voucher_code',
         'quantity',
-        'price_sale',
+        // 'price_sale',
         'start_date',
         'end_date',
+        'discount_type',
+        'discount_value',
     ];
     public function getExperyDateAttributes(){
         return Carbon::parse($this->attributes['expery_date'])->format('Y-m-d');

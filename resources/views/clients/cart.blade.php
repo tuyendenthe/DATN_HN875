@@ -182,77 +182,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Xử lý áp dụng voucher
-        $('#applyCouponForm').on('submit', function(e) {
-            e.preventDefault();
+    $('#applyCouponForm').on('submit', function(e) {
+        e.preventDefault();
 
-            var couponCode = $('#coupon_code').val();
-            var token = $('input[name="_token"]').val();
-            var total = {{ $total ?? 0 }};
-
-            $.ajax({
-                url: "{{ route('cart.applyCoupon') }}",
-                method: 'POST',
-                data: {
-                    _token: token,
-                    coupon_code: couponCode,
-                    total: total
-                },
-                success: function(response) {
-                    console.log('AJAX response:', response); // Kiểm tra dữ liệu trả về từ AJAX
-                    if (response.success) {
-                        $('#discount').text(response.discount.toLocaleString('vi-VN') + ' VNĐ');
-                        var totalAll = total - response.discount;
-                        $('#totalAll').text(totalAll.toLocaleString('vi-VN') + ' VNĐ');
-                    //    $('#totalAll').text(response.totalAll.toLocaleString('vi-VN') + ' VNĐ');
-                        alert('Đã áp dụng mã giảm giá thành công !');
-                    } else {
-                        alert(response.message);
-                    }
+        var couponCode = $('#coupon_code').val();
+        var token = $('input[name="_token"]').val();
+        var total = {{ $total ?? 0 }}; 
+        $.ajax({
+            url: "{{ route('cart.applyCoupon') }}",
+            method: 'POST',
+            data: {
+                _token: token,
+                coupon_code: couponCode,
+                total: total
+            },
+            success: function(response) {
+                console.log('AJAX response:', response);
+                if (response.success) {
+                    $('#discount').text(response.discount.toLocaleString('vi-VN') + ' VNĐ');
+                    var totalAll = total - response.discount;
+                    $('#totalAll').text(totalAll.toLocaleString('vi-VN') + ' VNĐ');
+                    alert('Đã áp dụng mã giảm giá thành công!');
+                } else {
+                    alert(response.message);
                 }
-            });
+            },
+            error: function(xhr) {
+                console.log('Có lỗi xảy ra:', xhr.responseText);
+            }
         });
-
-        // Xử lý xóa sản phẩm
-        // $('.product-remove a').on('click', function(e) {
-        //     e.preventDefault();
-
-        //     var url = $(this).attr('href');
-        //     var row = $(this).closest('tr'); // Giả sử sản phẩm nằm trong thẻ <tr>
-
-        //     $.ajax({
-        //         url: url,
-        //         method: 'DELETE',
-        //         data: {
-        //             _token: '{{ csrf_token() }}'
-        //         },
-        //         success: function(response) {
-        //             console.log('AJAX response:', response); // Kiểm tra dữ liệu trả về từ AJAX
-        //             if (response.success) {
-        //                 row.remove();
-        //                 alert('Product removed successfully!');
-        //             } else {
-        //                 alert('Failed to remove product.');
-        //             }
-        //         }
-        //     });
-        // });
-        document.getElementById('checkoutLink').addEventListener('click', function(event) {
-    event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ <a>
-
-    // Lấy giá trị discount từ thẻ span
-    var discount = parseFloat($('#discount').text().replace(/[^\d.-]/g, '')); // Chuyển đổi thành số
-    var total = {{ $total ?? 0 }};
-    var totalAll = total - discount;
-
-    // Tạo URL với query string
-    var url = "{{ route('checkout.index') }}?total=" + total + "&discount=" + discount + "&totalAll=" + totalAll;
-
-    // Chuyển hướng đến URL mới
-    window.location.href = url;
-});
-
     });
+});
 </script>
 
 
