@@ -190,15 +190,7 @@
 <!-- prealoder area end -->
 <!-- breadcrumb area start -->
 <div class="epix-breadcrumb-area mb-40">
-    <div class="container">
-        <h4 class="epix-breadcrumb-title">SHOP PAGE</h4>
-        <div class="epix-breadcrumb">
-            <ul>
-                <li><a href="index-3.html">Home</a></li>
-                <li><span>Shop Page</span></li>
-            </ul>
-        </div>
-    </div>
+    
     <!-- breadcrumb area end -->
 
     <!-- single product area start -->
