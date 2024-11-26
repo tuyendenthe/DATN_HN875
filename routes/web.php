@@ -277,3 +277,7 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 });
 
 /* -------------------------------- checkout -------------------------------- */
+/* -------------------------------- check order -------------------------------- */
+Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
+Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
+/* -------------------------------- check order -------------------------------- */

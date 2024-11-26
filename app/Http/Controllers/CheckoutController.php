@@ -186,6 +186,21 @@ class CheckoutController extends Controller
 
         return redirect()->route("checkout.list")->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
+    public function check_order(){
+        $order = null;
+
+
+        return view('clients.search_order', compact('order'));
+    }
+    public function search_order(request $request){
+        // dd($request);
+        $order = Bill::where('bill_code', $request->bill_code)->first();
+    //  dd($order->status);
+        $status = Status::where('id', $order->status)->first();
+
+
+return view('clients.search_order', compact('order', 'status'));
+    }
 
 
 }
