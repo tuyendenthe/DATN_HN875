@@ -19,7 +19,7 @@
             <h4 class="epix-breadcrumb-title">Giỏ Hàng</h4>
             <div class="epix-breadcrumb">
                 <ul>
-                    <li><a href="{{ route('index') }}">Trang chủ</a></li>
+                    {{--                    <li><a href="{{ route('index') }}">Trang chủ</a></li>--}}
                     <li><span>Giỏ Hàng</span></li>
                 </ul>
             </div>
@@ -34,34 +34,37 @@
                 <div class="table-content table-responsive">
                     <table class="table">
                         <thead>
-                            <tr>
-                                <th class="product-thumbnail">Hình Ảnh</th>
-                                <th class="cart-product-name">Sản Phẩm</th>
-                                <th class="product-variant">Loại</th>
-                                <th class="product-price">Đơn Giá</th>
-                                <th class="product-quantity">Số Lượng</th>
-                                <th class="product-subtotal">Thành Tiền</th>
-                                <th class="product-remove">Xóa</th>
-                            </tr>
+                        <tr>
+                            <th class="product-checkbox"><input type="checkbox" id="select-all"></th>
+                            <th class="product-thumbnail">Hình Ảnh</th>
+                            <th class="cart-product-name">Sản Phẩm</th>
+                            <th class="product-variant">Loại</th>
+                            <th class="product-price">Đơn Giá</th>
+                            <th class="product-quantity">Số Lượng</th>
+                            <th class="product-subtotal">Thành Tiền</th>
+                            <th class="product-remove">Xóa</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @if(session('cart') && count(session('cart')) > 0)
-                                @php
-                                    $total = 0;
-                                @endphp
-                                @foreach(session('cart') as $key => $item)
+                        @if(session('cart') && count(session('cart')) > 0)
+                            @foreach(session('cart', []) as $key => $item)
                                 @if(is_array($item))
-                                @php
-                                $discount=0;
-
-                                    $subtotal = $item['price'] * $item['quantity'];
-                                    $total += $subtotal;
-                                @endphp
+                                    @php
+                                        $subtotal = $item['price'] * $item['quantity'];
+                                    @endphp
                                     <tr>
+                                        <td class="product-remove">
+                                            <input type="checkbox" class="checkbox-cart"
+                                                   data-price="{{ $item['price'] }}"
+                                                   data-quantity="{{ $item['quantity'] }}"
+                                                   data-product-id="{{ $item['product_id'] }}"
+                                                   data-product-name="{{ $item['product_name'] }}"/>
+                                            <!-- Thêm data-product-name -->
+                                        </td>
                                         <td class="product-thumbnail">
                                             <a href="{{ route('product.details', $item['product_id']) }}">
-                                                {{-- <img width="125px" height="125px" src="{{ asset() }}" alt=""> --}}
-                                                <img width="125px" height="125px" src="{{ Storage::url($item['image']) }}" alt="">
+                                                <img width="125px" height="125px" src="{{ asset($item['image']) }}"
+                                                     alt="">
                                             </a>
                                         </td>
                                         <td class="cart-product-name">
@@ -69,15 +72,15 @@
                                         </td>
                                         <td class="product-variant">
                                             <ul>
-                                                @foreach ($item['variant_name'] as $key => $name)
+                                                @foreach ($item['variant_name'] as $variantKey => $name)
                                                     @if ($name != "")
-                                                        @if ($key == 0)
+                                                        @if ($variantKey == 0)
                                                             <li>Phiên bản: {{ $name }}</li>
                                                         @endif
-                                                        @if ($key == 1)
+                                                        @if ($variantKey == 1)
                                                             <li>Màu sắc: {{ $name }}</li>
                                                         @endif
-                                                        @if ($key == 2)
+                                                        @if ($variantKey == 2)
                                                             <li>Bộ nhớ: {{ $name }}</li>
                                                         @endif
                                                     @endif
@@ -85,13 +88,13 @@
                                             </ul>
                                         </td>
 
-                                        <td class="product-price"><span class="amount">{{ number_format($item['price'], 0, ',', '.') }} VNĐ</span></td>
+                                        <td class="product-price"><span class="amount">{{ number_format($item['price'], 0, ',', '.') }} VNĐ</span>
+                                        </td>
                                         <td>
                                             <div class="d-inline-block border-gray">
                                                 <div class="epix-quantity-form">
-
-                                                    <input type="number" min="1" max="" value="{{ $item['quantity'] }}" onkeydown="return false;">
-
+                                                    <input type="number" readonly min="1" max=""
+                                                           value="{{ $item['quantity'] }}" onkeydown="return false;">
                                                 </div>
                                             </div>
                                         </td>
@@ -102,18 +105,13 @@
                                             <a href="{{ route('cart.remove', $key) }}"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
-                                    @endif
-                                @endforeach
-                            @else
-                                <tr>
-                                    @php
-                                        $total = 0;
-                                        $discount=0;
-
-                                    @endphp
-                                    <td colspan="7" class="text-center">Giỏ hàng của bạn đang trống.</td>
-                                </tr>
-                           @endif
+                                @endif
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="8" class="text-center">Giỏ hàng của bạn đang trống.</td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>
@@ -125,10 +123,11 @@
                                 <form id="applyCouponForm" action="{{ route('cart.applyCoupon') }}" method="POST">
 
                                     @csrf
-                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Nhập Mã Giảm Giá" type="text">
-                                {{-- <input type="hidden" name="total" id="total" value="{{ $total }}"> --}}
-                                <button class="btn btn-primary" name="apply_coupon" type="submit">Áp Dụng</button>
-                            </form>
+                                    <input id="coupon_code" class="input-text" name="coupon_code" value=""
+                                           placeholder="Nhập Mã Giảm Giá" type="text">
+                                    {{-- <input type="hidden" name="total" id="total" value="{{ $total }}"> --}}
+                                    <button class="btn btn-primary" name="apply_coupon" type="submit">Áp Dụng</button>
+                                </form>
                             </div>
                             <div class="coupon2">
                                 <button class="os-btn os-btn-info" name="update_cart" type="submit">Tải Lại</button>
@@ -139,126 +138,160 @@
                 </div>
 
 
-
                 <div class="row">
                     <div class="col-md-5 ms-auto">
                         <div class="cart-page-total">
-                            @php
-                                    // dd($item);
 
 
-
+                            <h2>Tổng Tiền Giỏ Hàng</h2>
+                            <form id="checkoutForm" action="{{ route('checkout.index') }}" method="POST">
+                                @csrf
+                                <ul class="mb-20">
+                                    <li>Thành tiền <span id="totalSelected">0 VNĐ</span></li>
+                                    <li>Mã Giảm Giá <span id="discount" name="discount">{{ number_format($discount ?? 0, 0, ',', '.') }} VNĐ</span></li>
+                                    @php
+                                        $discount = 0;
+                                        $totalAll = 0;  // Giá trị ban đầu là 0
                                     @endphp
-                                    {{-- <form id="checkoutForm" action="{{ route('checkout.index') }}" method="POST">
-                                        @csrf --}}
-                            <h4>Tổng Tiền Giỏ Hàng</h2>
-                            <ul class="mb-20">
-                                <li>Thành tiền <span>{{ number_format($total ?? 0, 0, ',', '.') }} VNĐ</span></li>
-                                <li>Mã Giảm Giá <span id="discount" name="discount">{{ number_format($discount ?? 0, 0, ',', '.') }}VNĐ</span> </li>
-                                @php
-                                $sale = $discount;
-                                     $totalAll = $total - $discount;
-
-                                @endphp
-
-                                <li>Tổng Tiền <span id="totalAll" name="totalAll" >{{ number_format($totalAll ?? 0, 0, ',', '.') }} VNĐ</span></li>
-
-                            </ul>
-                            {{-- <a class="btn btn-primary"
-                            href="{{ route('checkout.index', ['total' => $total, 'discount' => $discount, 'totalAll' => $totalAll]) }}">
-                            Thanh Toán
-                         </a> --}}
-                         <a id="checkoutLink" class="btn btn-primary" href="#">Thanh Toán</a>
-
-                            {{-- <button type="submit" class="btn btn-primary">Thanh Toán</button>
-                        </form> --}}
-                            {{-- <a class="os-btn" href="{{ route('checkout') }}">Proceed to checkout</a> --}}
+                                    <li>Tổng Tiền <span id="totalAll">0 VNĐ</span></li>
+                                </ul>
+                                <!-- Các trường ẩn -->
+                                <input type="hidden" id="selectedProducts" name="selectedProducts" value="" />
+                                <input type="hidden" id="finalDiscount" name="finalDiscount" value="" />
+                                <input type="hidden" id="finalTotal" name="finalTotal" value="" />
+                                <input type="hidden" id="voucherId" name="voucherId" value="" >
+                                <button type="submit" class="btn btn-primary">Thanh Toán</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Xử lý áp dụng voucher
-        $('#applyCouponForm').on('submit', function(e) {
-            e.preventDefault();
+    <script>
+        $(document).ready(function () {
+            // Cập nhật tổng tiền và các sản phẩm được chọn
+            function updateTotal() {
+                let total = 0;
+                let selectedProducts = [];
 
-            var couponCode = $('#coupon_code').val();
-            var token = $('input[name="_token"]').val();
-            var total = {{ $total ?? 0 }};
+                // Duyệt qua các checkbox đã chọn
+                $('.checkbox-cart:checked').each(function () {
+                    const price = $(this).data('price');
+                    const quantity = $(this).data('quantity');
+                    const productId = $(this).data('product-id');
+                    const productName = $(this).data('product-name');
 
-            $.ajax({
-                url: "{{ route('cart.applyCoupon') }}",
-                method: 'POST',
-                data: {
-                    _token: token,
-                    coupon_code: couponCode,
-                    total: total
-                },
-                success: function(response) {
-                    console.log('AJAX response:', response); // Kiểm tra dữ liệu trả về từ AJAX
-                    if (response.success) {
-                        $('#discount').text(response.discount.toLocaleString('vi-VN') + ' VNĐ');
-                        var totalAll = total - response.discount;
-                        $('#totalAll').text(totalAll.toLocaleString('vi-VN') + ' VNĐ');
-                    //    $('#totalAll').text(response.totalAll.toLocaleString('vi-VN') + ' VNĐ');
-                        alert('Đã áp dụng mã giảm giá thành công !');
-                    } else {
-                        alert(response.message);
+                    if (price && quantity) {
+                        total += price * quantity;  // Cộng tổng tiền
+                        selectedProducts.push({
+                            product_id: productId,
+                            product_name: productName,
+                            price: price,
+                            quantity: quantity
+                        });
                     }
+                });
+
+                return { total, selectedProducts };
+            }
+
+            // Cập nhật thông tin khi thay đổi checkbox
+            function updateDisplay() {
+                const { total, selectedProducts } = updateTotal();
+                const discount = parseInt($('#discount').text().replace(/[^0-9]/g, '')) || 0;
+                const finalTotal = total - discount;
+
+                $('#totalSelected').text(total.toLocaleString('vi-VN') + ' VNĐ');
+                $('#totalAll').text(finalTotal.toLocaleString('vi-VN') + ' VNĐ');
+
+                // Cập nhật các trường ẩn trong form
+                $('#selectedProducts').val(JSON.stringify(selectedProducts));
+                $('#finalDiscount').val(discount);
+                $('#finalTotal').val(finalTotal);
+            }
+
+            // Cập nhật thành tiền cho mỗi sản phẩm
+            function updateSubtotal() {
+                $('.checkbox-cart').each(function () {
+                    const price = $(this).data('price');
+                    const quantity = $(this).data('quantity');
+                    const subtotal = price * quantity;
+                    const subtotalText = $(this).is(':checked') ? subtotal.toLocaleString('vi-VN') + ' VNĐ' : '0 VNĐ';
+                    $(this).closest('tr').find('.product-subtotal span').text(subtotalText);
+                });
+            }
+
+            // Khi thay đổi trạng thái checkbox, cập nhật tổng tiền và thông tin
+            $('.checkbox-cart').on('change', function () {
+                updateSubtotal();
+                updateDisplay();
+            });
+
+            // Khi chọn/deselect all, cập nhật lại trạng thái checkbox và tổng tiền
+            $('#select-all').on('change', function () {
+                $('.checkbox-cart').prop('checked', this.checked);
+                updateSubtotal();
+                updateDisplay();
+            });
+
+            // Áp dụng mã giảm giá
+            $('#applyCouponForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const couponCode = $('#coupon_code').val();
+                const token = $('input[name="_token"]').val();
+                const total = updateTotal().total;
+
+                if (total <= 0) {
+                    alert('Vui lòng chọn sản phẩm trước khi áp dụng mã giảm giá!');
+                    return;
                 }
+
+                // Gửi yêu cầu Ajax để áp dụng mã giảm giá
+                $.ajax({
+                    url: "{{ route('cart.applyCoupon') }}",
+                    method: 'POST',
+                    data: {
+                        _token: token,
+                        coupon_code: couponCode,
+                        total: total
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            const discount = response.discount;
+                            const idVoucher = response.idVoucher;
+                            $('#discount').text(discount.toLocaleString('vi-VN') + ' VNĐ');
+                            updateDisplay();
+                            $('#voucherId').val(idVoucher)
+                            alert('Đã áp dụng mã giảm giá thành công!');
+                        } else {
+                            alert(response.message);  // Thông báo lỗi nếu mã giảm giá không hợp lệ
+                        }
+                    },
+                    error: function (xhr) {
+                        console.log('Có lỗi xảy ra:', xhr.responseText);
+                    }
+                });
+            });
+
+            // Xử lý khi gửi form checkout
+            $('#checkoutForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const { total, selectedProducts } = updateTotal();
+
+                if (selectedProducts.length === 0) {
+                    alert('Vui lòng chọn sản phẩm trước khi thanh toán!');
+                    return;
+                }
+
+                // Kiểm tra và gửi thông tin sản phẩm và tổng tiền
+                updateDisplay();
+                this.submit();
             });
         });
 
-        // Xử lý xóa sản phẩm
-        // $('.product-remove a').on('click', function(e) {
-        //     e.preventDefault();
-
-        //     var url = $(this).attr('href');
-        //     var row = $(this).closest('tr'); // Giả sử sản phẩm nằm trong thẻ <tr>
-
-        //     $.ajax({
-        //         url: url,
-        //         method: 'DELETE',
-        //         data: {
-        //             _token: '{{ csrf_token() }}'
-        //         },
-        //         success: function(response) {
-        //             console.log('AJAX response:', response); // Kiểm tra dữ liệu trả về từ AJAX
-        //             if (response.success) {
-        //                 row.remove();
-        //                 alert('Product removed successfully!');
-        //             } else {
-        //                 alert('Failed to remove product.');
-        //             }
-        //         }
-        //     });
-        // });
-        document.getElementById('checkoutLink').addEventListener('click', function(event) {
-    event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ <a>
-
-    // Lấy giá trị discount từ thẻ span
-    var discount = parseFloat($('#discount').text().replace(/[^\d.-]/g, '')); // Chuyển đổi thành số
-    var total = {{ $total ?? 0 }};
-    var totalAll = total - discount;
-
-    // Tạo URL với query string
-    var url = "{{ route('checkout.index') }}?total=" + total + "&discount=" + discount + "&totalAll=" + totalAll;
-
-    // Chuyển hướng đến URL mới
-    window.location.href = url;
-});
-
-    });
-</script>
-
-
-
-
-
-
+    </script>
 @endsection

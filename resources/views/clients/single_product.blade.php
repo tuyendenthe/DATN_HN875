@@ -1,140 +1,181 @@
 @extends('clients.master')
 @section('content')
-<style>
-    .variant-container {
-        display: flex;
-        gap: 10px;
-        margin-top: 30px;
-        justify-content: center;
-    }
+    <style>
+        .variant-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
 
-    .variant-box {
-        padding: 10px;
-        /* Giảm padding để hộp nhỏ hơn */
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 70px;
-        /* Giảm kích thước chiều rộng */
-        height: 70px;
-        /* Giảm kích thước chiều cao */
-        transition: 0.3s;
-        position: relative;
-        user-select: none;
-        font-size: 12px;
-        /* Giảm kích thước chữ */
-    }
+        .variant-box {
+            line-height: 30px;
+            min-width: 80px;
+            min-height: 30px;
+            padding: 0 10px;
+            text-align: center;
+            display: inline-block;
+            background-color: #fafafa;
+            text-decoration: none;
+            margin-right: 5px;
+        }
 
-    .variant-box.selected {
-        border-color: #007bff;
-        background-color: #e7f1ff;
-        color: #007bff;
-        font-weight: bold;
-    }
 
-    .variant-box input[type="radio"] {
-        display: none;
-        /* Ẩn radio button */
-    }
+        .variant-box input[type="radio"] {
+            display: none;
+            /* Ẩn radio button */
+        }
 
-    .variant-box:hover {
-        border-color: #007bff;
-    }
 
-    .price-display {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 24px;
-        font-weight: bold;
-    }
+        .price-display {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-    .page-header {
-    background-size: cover;
-    background-position: center;
-    padding: 50px 0;
-    color: #fff;
-    }
+        .page-header {
+            background-size: cover;
+            background-position: center;
+            padding: 50px 0;
+            color: #fff;
+        }
 
-.page-header .page-title {
-    font-size: 2.5rem;
-    margin: 0;
-}
+        .page-header .page-title {
+            font-size: 2.5rem;
+            margin: 0;
+        }
 
-.breadcrumb-nav {
-    margin: 20px 0;
-}
+        .breadcrumb-nav {
+            margin: 20px 0;
+        }
 
-.breadcrumb-nav .breadcrumb {
-    background: none;
-    padding: 0;
-}
+        .breadcrumb-nav .breadcrumb {
+            background: none;
+            padding: 0;
+        }
 
-.breadcrumb-nav .breadcrumb-item a {
-    color: #007bff;
-}
+        .breadcrumb-nav .breadcrumb-item a {
+            color: #007bff;
+        }
 
-.breadcrumb-nav .breadcrumb-item.active {
-    color: #6c757d;
-}
+        .breadcrumb-nav .breadcrumb-item.active {
+            color: #6c757d;
+        }
 
-/* Định dạng cho phần nội dung */
-.page-content {
-    padding: 30px 0;
-}
+        /* Định dạng cho phần nội dung */
+        .page-content {
+            padding: 30px 0;
+        }
 
-.rating {
-    direction: rtl;
-    display: inline-block;
-    font-size: 2rem;
-}
+        .rating {
+            direction: rtl;
+            display: inline-block;
+            font-size: 2rem;
+        }
 
-.rating input[type="radio"] {
-    display: none;
-}
+        .rating input[type="radio"] {
+            display: none;
+        }
 
-.rating label {
-    color: #d3d3d3;
-    cursor: pointer;
-    font-size: 2rem;
-    transition: color 0.3s;
-}
+        .rating label {
+            color: #d3d3d3;
+            cursor: pointer;
+            font-size: 2rem;
+            transition: color 0.3s;
+        }
 
-.rating input[type="radio"]:checked ~ label {
-    color: #f39c12;
-}
+        .rating input[type="radio"]:checked ~ label {
+            color: #f39c12;
+        }
 
-.rating label:hover,
-.rating label:hover ~ label {
-    color: #f39c12;
-}
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: #f39c12;
+        }
 
-textarea {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-}
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
 
-button {
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-}
+        button {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
 
-button:hover {
-    background-color: #0056b3;
-}
+        button:hover {
+            background-color: #0056b3;
+        }
 
+        /* Khi hover vào variant, thay đổi màu nền */
+        .variant-box:hover {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Khi variant được chọn, thay đổi màu nền và chữ thành màu trắng */
+        .variant-box.selected {
+            background-color: var(--selected-color); /* Màu nền từ variant */
+            color: white; /* Đổi màu chữ thành trắng */
+        }
+
+        /* Đổi màu chữ của label khi variant-box được chọn */
+        .variant-box.selected label {
+            color: white; /* Màu chữ của label khi variant được chọn */
+        }
+
+        /* Thêm style cho radio button nhỏ lại */
+        .variant-box input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+        }
+
+        /* Thêm style cho label */
+        .variant-box label {
+            cursor: pointer;
+            transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu cho chữ */
+        }
+
+        .search-results {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .search-results .result-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .search-results .result-item:hover {
+            background-color: #f0f0f0;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <!-- breadcrumb area start -->
+    <div class="epix-breadcrumb-area mb-40">
+        <div class="container">
+            <h4 class="epix-breadcrumb-title">SHOP PAGE</h4>
+            <div class="epix-breadcrumb">
+                <ul>
+                    <li><a href="index-3.html">Home</a></li>
+                    <li><span>Shop Page</span></li>
+                </ul>
+            </div>
 </style>
 <!-- prealoder area start -->
 <div id="loading">
@@ -149,17 +190,8 @@ button:hover {
 <!-- prealoder area end -->
 <!-- breadcrumb area start -->
 <div class="epix-breadcrumb-area mb-40">
-    <div class="container">
-        <h4 class="epix-breadcrumb-title">SHOP PAGE</h4>
-        <div class="epix-breadcrumb">
-            <ul>
-                <li><a href="index-3.html">Home</a></li>
-                <li><span>Shop Page</span></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- breadcrumb area end -->
+
+    <!-- breadcrumb area end -->
 
     <!-- single product area start -->
     <div class="single-product-area mb-100">
@@ -175,7 +207,7 @@ button:hover {
                                             <div class="epix-featured">
                                                 <span>featured</span>
                                             </div>
-                                            <img style="height: 400px;width: 400px;margin-left: 70px" src="{{ Storage::url($products->image) }}"
+                                            <img style="height: 400px;width: 400px;margin-left: 70px" src="{{asset($products->image)}}"
                                                  data-zoom-image="{{asset('laptop/assets/img/product/signle-product-1.jpg')}}"
                                                  class="img-fluid zoom-img-hover" alt="">
                                         </div>
@@ -246,61 +278,103 @@ button:hover {
                 </div>
                 <div class="col-xxl-6 col-lg-6">
 
-                <div class="epix-single-product-right">
-                    <div class="rating">
-                        <i class="fas fa-star active"></i>
-                        <i class="fas fa-star active"></i>
-                        <i class="fas fa-star active"></i>
-                        <i class="fas fa-star-half"></i>
-                        <i class="fas fa-star text-gray"></i>
-                    </div>
-                    <h4 class="epix-single-product-title">{{ $products->name }}<br></h4>
-                    <p class="epix-product-details-short-description">
-                        {{ $products->content_short }}
-                    </p>
 
-                    <div class="price-display">
-                        Giá: <span id="product-price" name="product-price">{{ $products->price }}</span> VNĐ
-                    </div>
 
-                    <!-- Form để thêm vào giỏ hàng -->
-                    <form action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
-                        @csrf
-                        <div class="epix-product-label mb-35">
-                            <a href="#" class="title">Chọn màu sắc cho sản phẩm</a>
-                            <div class="container">
-                                <div class="variant-container">
-                                    @foreach($products->variants as $variant)
-                                    <div class="variant-box" data-value="{{ $variant->name }}" data-price="{{ $variant->price }}" onclick="selectVariant(this)">
-                                        <input type="radio" name="variant_id" id="{{ $variant->id }}" value="{{ $variant->id }}">
-                                        <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+
+                    <div class="epix-single-product-right">
+                        {{--                    <div class="rating">--}}
+                        {{--                        <i class="fas fa-star active"></i>--}}
+                        {{--                        <i class="fas fa-star active"></i>--}}
+                        {{--                        <i class="fas fa-star active"></i>--}}
+                        {{--                        <i class="fas fa-star-half"></i>--}}
+                        {{--                        <i class="fas fa-star text-gray"></i>--}}
+                        {{--                    </div>--}}
+                        <h4 class="epix-single-product-title">{{ $products->name }}<br></h4>
+                        <p class="epix-product-details-short-description">
+                            {{ $products->content_short }}
+                        </p>
+                        <p class="epix-product-details-short-description">
+                            {{ $products-> content }}
+                        </p>
+                        <div class="price-display">
+                            Giá: <span id="product-price"
+                                       name="product-price">{{ number_format($products->price, 0, ',', '.') }}</span>
+                            VNĐ
+                        </div>
+
+
+                        <!-- Form để thêm vào giỏ hàng -->
+                        <form style="margin-top: 10px" action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
+                            @csrf
+                            <div class="epix-product-label mb-35">
+                                <a href="#" class="title">Chọn phiên bản</a>
+                                <div style="padding-left: 0px" class="container">
+                                    <div class="variant-container">
+                                        @foreach($products->variants as $variant)
+                                            @if ($variant->type == 1)
+                                                <div class="variant-box variant-box1 tag-list"
+                                                     data-value="{{ $variant->name }}"
+                                                     data-price="{{ $variant->price }}"
+                                                     onclick="selectVariant1(this)">
+                                                    <input type="radio" name="variant_id_1" id="{{ $variant->id }}"
+                                                           value="{{ $variant->id }}">
+                                                    <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
-                                    @endforeach
                                 </div>
                             </div>
-                        </div>
-
-
-
-                        <div class="epix-quantity-validation">
-                            <div class="wrap-2 d-block d-sm-inline-block mb-15 mb-sm-0">
-                                <div class="d-inline-block border-gray mr-20">
-                                    {{-- <div class="epix-quantity-form">
-                                            <div class="cart-plus-minus"></div>
-                                            <input type="text" value="2">
-                                        </div> --}}
-
+                            <div class="epix-product-label mb-35">
+                                <a href="#" class="title">Chọn mau </a>
+                                <div style="padding-left: 0px" class="container">
+                                    <div class="variant-container">
+                                        @foreach($products->variants as $variant)
+                                            @if ($variant->type == 2)
+                                                <div class="variant-box variant-box2 tag-list"
+                                                     data-value="{{ $variant->name }}"
+                                                     data-price="{{ $variant->price }}"
+                                                     onclick="selectVariant2(this)">
+                                                    <input type="radio" name="variant_id_1" id="{{ $variant->id }}"
+                                                           value="{{ $variant->id }}">
+                                                    <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">Thêm vào giỏ hàng</button>
-                    </form>
                             </div>
-                            <a href="checkout.html" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">Buy Now</a>
-                        </div>
-                    </form>
+                            <div class="epix-product-label mb-35">
+                                <a href="#" class="title">Chọn bo nho</a>
+                                <div style="padding-left: 0px" class="container">
+                                    <div class="variant-container">
+                                        @foreach($products->variants as $variant)
+                                            @if ($variant->type == 3)
+                                                <div class="variant-box variant-box3 tag-list"
+                                                     data-value="{{ $variant->name }}"
+                                                     data-price="{{ $variant->price }}"
+                                                     onclick="selectVariant3(this)">
+                                                    <input type="radio" name="variant_id_1" id="{{ $variant->id }}"
+                                                           value="{{ $variant->id }}">
+                                                    <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">
+                                Thêm vào giỏ hàng
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <!-- /. single product right -->
+                </form>
             </div>
+            <!-- /. single product right -->
         </div>
+    </div>
+
 
     <div class="row ms-5">
         <div class="col-xxl-12">
@@ -598,6 +672,7 @@ button:hover {
 
     </div>
     </div>
+
 </div>
 <!-- single product area end -->
 <script>
@@ -607,7 +682,54 @@ button:hover {
         var variants = document.querySelectorAll('.variant-box');
         variants.forEach(function(variant) {
             variant.classList.remove('selected');
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- single product area end -->
+    <script>
+        $(document).ready(function () {
+            // Khi người dùng nhập từ khóa
+            $('#search-input').on('keyup', function () {
+                let query = $(this).val();
+                if (query.length > 0) {
+                    $.ajax({
+                        url: '/search-products',
+                        method: 'GET',
+                        data: { keyword: query },
+                        success: function (data) {
+                            $('#search-results').html(data).removeClass('hidden');
+                        }
+                    });
+                } else {
+                    $('#search-results').addClass('hidden');
+                }
+            });
+
+            // Ẩn kết quả khi nhấn ra ngoài khung tìm kiếm
+            $(document).on('click', function (event) {
+                if (!$(event.target).closest('#search-form, #search-results').length) {
+                    $('#search-results').addClass('hidden');
+                }
+            });
+
         });
+
+    </script>
+    <script>
+        var phienban = 0;
+        var mausac = 0;
+        var bonho = 0;
+        var giaban = '{{ $products->price }}';
+
+        function selectVariant1(element) {
+            giaban = '{{ $products->price }}';
+            // Xóa class "selected" khỏi tất cả các hộp
+            var variants = document.querySelectorAll('.variant-box1');
+            variants.forEach(function (variant) {
+                variant.classList.remove('selected');
+                element.style.backgroundColor = '';
+            });
 
             // Thêm class "selected" cho hộp được chọn
             element.classList.add('selected');
@@ -616,35 +738,90 @@ button:hover {
             var radioButton = element.querySelector('input[type="radio"]');
             radioButton.checked = true;
 
+            // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
+            var selectedPrice = element.getAttribute('data-price');
+            phienban = parseInt(selectedPrice);
+            let totalPrice = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
+            let formattedPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
+            document.getElementById('product-price').innerText = formattedPrice;
+            var variants = document.querySelectorAll('.variant-box');
+
+            variants.forEach(function (variant) {
+                variant.classList.remove('selected');
+            });
+
+
+        }
+        function selectVariant2(element) {
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box2');
+        variants.forEach(function(variant) {
+            variant.style.backgroundColor = '';
+            variant.classList.remove('selected');
+        });
+
+        // Thêm class "selected" cho hộp được chọn
+        element.classList.add('selected');
+
+        // Đánh dấu radio button tương ứng
+        var radioButton = element.querySelector('input[type="radio"]');
+        radioButton.checked = true;
+
         // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
         var selectedPrice = element.getAttribute('data-price');
+
         var priceProduct = document.getElementById('product-price').textContent.trim();
         console.log(Number(priceProduct));
 
         selectedPrice = Number(priceProduct) + Number(selectedPrice);
         document.getElementById('product-price').innerText = selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+
+        mausac = parseInt(selectedPrice);
+        totalPrice = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
+        let formattedPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
+            document.getElementById('product-price').innerText = formattedPrice;
+            var selectedColor = element.getAttribute('data-value');
+            element.classList.add('selected');
+            console.log(selectedColor)
+            element.style.setProperty('--selected-color', selectedColor);
+            document.querySelectorAll('.variant-box').forEach(function (box) {
+            box.addEventListener('mouseenter', function () {
+                var color = box.getAttribute('data-value');
+                box.style.backgroundColor = color;
+            });
+
+            box.addEventListener('mouseleave', function () {
+                if (!box.classList.contains('selected')) {
+                    box.style.backgroundColor = '';
+                }
+            });
+        });
     }
-    function updateQuantity(key, quantityChange) {
-    let form = document.createElement('form');
-    form.method = 'POST';
-    form.action = `/cart/update/${key}`;
 
-    let input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'quantity';
-    input.value = quantityChange;
+    function selectVariant3(element) {
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box3');
+        variants.forEach(function(variant) {
+            variant.classList.remove('selected');
+        });
 
-    let csrfInput = document.createElement('input');
-    csrfInput.type = 'hidden';
-    csrfInput.name = '_token';
-    csrfInput.value = '{{ csrf_token() }}';
+        // Thêm class "selected" cho hộp được chọn
+        element.classList.add('selected');
 
-    form.appendChild(input);
-    form.appendChild(csrfInput);
-    document.body.appendChild(form);
-    form.submit();
-}
+        // Đánh dấu radio button tương ứng
+        var radioButton = element.querySelector('input[type="radio"]');
+        radioButton.checked = true;
 
-</script>
+        // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
+        var selectedPrice = element.getAttribute('data-price');
+        bonho = parseInt(selectedPrice);
+        totalPrice = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
+        let formattedPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
+            document.getElementById('product-price').innerText = formattedPrice;
+    }
+
+    </script>
+
+
 @endsection
