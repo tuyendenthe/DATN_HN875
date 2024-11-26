@@ -189,9 +189,7 @@
 </div>
 <!-- prealoder area end -->
 <!-- breadcrumb area start -->
-<div class="epix-breadcrumb-area mb-40">
-
-    <!-- breadcrumb area end -->
+<div class="epix-breadcrumb-area mb-40">  <!-- breadcrumb area end -->
 
     <!-- single product area start -->
     <div class="single-product-area mb-100">
@@ -279,9 +277,7 @@
                 <div class="col-xxl-6 col-lg-6">
 
 
-
-
-                    <div class="epix-single-product-right">
+         <div class="epix-single-product-right">
                         {{--                    <div class="rating">--}}
                         {{--                        <i class="fas fa-star active"></i>--}}
                         {{--                        <i class="fas fa-star active"></i>--}}
