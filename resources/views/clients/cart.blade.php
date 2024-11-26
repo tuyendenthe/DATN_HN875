@@ -38,7 +38,7 @@
                             <th class="product-checkbox"><input type="checkbox" id="select-all"></th>
                             <th class="product-thumbnail">Hình Ảnh</th>
                             <th class="cart-product-name">Sản Phẩm</th>
-                            <th class="product-variant">Loại</th>
+                            {{-- <th class="product-variant">Loại</th> --}}
                             <th class="product-price">Đơn Giá</th>
                             <th class="product-quantity">Số Lượng</th>
                             <th class="product-subtotal">Thành Tiền</th>
@@ -70,8 +70,8 @@
                                         <td class="cart-product-name">
                                             <a href="{{ route('product.details', $item['product_id']) }}">{{ $item['product_name'] }}</a>
                                         </td>
-                                        <td class="product-variant">
-                                            <ul>
+                                        {{-- <td class="product-variant"> --}}
+                                            {{-- <ul>
                                                 @foreach ($item['variant_name'] as $variantKey => $name)
                                                     @if ($name != "")
                                                         @if ($variantKey == 0)
@@ -86,7 +86,7 @@
                                                     @endif
                                                 @endforeach
                                             </ul>
-                                        </td>
+                                        </td> --}}
 
                                         <td class="product-price"><span class="amount">{{ number_format($item['price'], 0, ',', '.') }} VNĐ</span>
                                         </td>
