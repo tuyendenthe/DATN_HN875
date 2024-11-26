@@ -134,17 +134,16 @@ class CartController extends Controller
 
         $voucher = Voucher::where('voucher_code', $voucherCode)->first();
 
-
         if ($voucher && $voucher->quantity > 0 && now()->between($voucher->start_date, $voucher->end_date)) {
 
-            if ($voucher->discount_type === 'percentage') {
-                $discount = ($originalPrice * $voucher->discount_value) / 100;
-            } elseif ($voucher->discount_type === 'fixed') {
-                $discount = min($voucher->discount_value, $originalPrice);
-            } else {
-                $discount = 0;
-            }
-
+//            if ($voucher->discount_type === 'percentage') {
+//                $discount = ($originalPrice * $voucher->discount_value) / 100;
+//            } elseif ($voucher->discount_type === 'fixed') {
+//                $discount = min($voucher->discount_value, $originalPrice);
+//            } else {
+//                $discount = 0;
+//            }
+            $discount = $voucher->price_sale;
 
             $finalPrice = $originalPrice - $discount;
 
@@ -152,6 +151,7 @@ class CartController extends Controller
                 'success' => true,
                 'discount' => $discount,
                 'final_price' => $finalPrice,
+                'idVoucher' => $voucher->id
             ]);
         } else {
             return response()->json(['success' => false, 'message' => 'Voucher không hợp lệ hoặc hết hạn.']);
@@ -162,10 +162,14 @@ class CartController extends Controller
     public function removeCartItem($key)
     {
         $cart = session()->get('cart');
+//        dd($cart, $key); // Kiểm tra giá trị $cart và $key
+
         if (isset($cart[$key])) {
             unset($cart[$key]);
             session()->put('cart', $cart);
+            session()->save();
         }
+//        dd($cart, $key); // Kiểm tra giá trị $cart và $key
 
         return redirect()->route('cart.view')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
     }
