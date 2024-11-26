@@ -151,9 +151,8 @@ class CartController extends Controller
                 'success' => true,
                 'discount' => $discount,
                 'final_price' => $finalPrice,
-
                 'idVoucher' => $voucher->id
-  ]);
+            ]);
         } else {
             return response()->json(['success' => false, 'message' => 'Voucher không hợp lệ hoặc hết hạn.']);
         }

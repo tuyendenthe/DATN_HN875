@@ -63,10 +63,8 @@
                                         </td>
                                         <td class="product-thumbnail">
                                             <a href="{{ route('product.details', $item['product_id']) }}">
-
                                                 <img width="125px" height="125px" src="{{ asset($item['image']) }}"
                                                      alt="">
-
                                             </a>
                                         </td>
                                         <td class="cart-product-name">
@@ -171,7 +169,6 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script>
         $(document).ready(function () {
             // Cập nhật tổng tiền và các sản phẩm được chọn
@@ -297,43 +294,4 @@
         });
 
     </script>
-
-<script>
-    $(document).ready(function() {
-    $('#applyCouponForm').on('submit', function(e) {
-        e.preventDefault();
-
-        var couponCode = $('#coupon_code').val();
-        var token = $('input[name="_token"]').val();
-        var total = {{ $total ?? 0 }};
-        $.ajax({
-            url: "{{ route('cart.applyCoupon') }}",
-            method: 'POST',
-            data: {
-                _token: token,
-                coupon_code: couponCode,
-                total: total
-            },
-            success: function(response) {
-                console.log('AJAX response:', response);
-                if (response.success) {
-                    $('#discount').text(response.discount.toLocaleString('vi-VN') + ' VNĐ');
-                    var totalAll = total - response.discount;
-                    $('#totalAll').text(totalAll.toLocaleString('vi-VN') + ' VNĐ');
-                    alert('Đã áp dụng mã giảm giá thành công!');
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function(xhr) {
-                console.log('Có lỗi xảy ra:', xhr.responseText);
-            }
-        });
-    });
-});
-</script>
-
-
-
-
 @endsection
