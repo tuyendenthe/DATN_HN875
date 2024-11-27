@@ -55,7 +55,7 @@
 {{--    </form>--}}
 <div class="cr-page-title cr-page-title-2">
     <div class="cr-breadcrumb">
-        <h5>Tạo bài viết</h5>
+        <h3 class="p-3">Tạo bài viết</h3>
     </div>
 </div>
 <div class="row">
@@ -70,14 +70,14 @@
             </div>
         @endif
         @csrf
-        <div class="cr-card card-default">
+        <div class="cr-card card-default ">
             <div class="cr-card-content">
-                <div class="row cr-product-uploads">
-                    <div class="col-lg-4 mb-991">
+                <div class="row cr-product-uploads d-flex">
+                    <div class="col-lg-6 mb-991 m-3">
                         <div class="cr-vendor-img-upload">
                             <div class="cr-vendor-main-img">
                                 <div class="avatar-upload">
-                                    <div class="avatar-edit">
+                                    <div class="avatar-edit m-2">
                                         <input type="file" id="image" class="cr-image-upload"
                                                name="image">
                                         <label><i class="ri-pencil-line"></i></label>
@@ -96,27 +96,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-5">
                         <div class="cr-vendor-upload-detail">
                                 <div class="col-md-12">
                                     <label class="form-label">Tiêu đề</label>
                                     <input type="text" id="titlePost" class="form-control slug-title" name="title">
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label">Content Short</label>
+                                    <label class="form-label mt-1">Tiêu đề ngắn</label>
                                     <div style="padding-left: 0px" class="col-12">
                                         <input id="slugPost" name="content_short" class="form-control here set-slug" type="text">
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <label class="form-label">Category</label>
+                                <div class="col-md-12 m-3">
+                                    <label class="form-label">Danh mục</label>
                                     <select class="form-control" name="category_post_id">
                                         @foreach($categories as $category)
                                         <option value="{{ $category -> id }}">{{ $category -> name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-1">
                                     <label class="form-label">Nội dung bài viết</label>
                                     <textarea name="content" id="editor1" cols="80" rows="70"></textarea>
                                 </div>
