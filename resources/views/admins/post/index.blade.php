@@ -24,7 +24,6 @@
                     <th>Title</th>
                     <th>Image</th>
                     <th>Content Short</th>
-                    <th>Content</th>
                     <th>Category</th>
                     <th>User Name</th>
                     <th>Actions</th>
@@ -43,7 +42,6 @@
                             @endif
                         </td>
                         <td>{{ $post->content_short }}</td>
-                        <td>{{ $post->content }}</td>
                         <td>{{ $post->category->name ?? 'Không có cate' }}</td>
                         <td>{{ $post->user->name ?? 'Không có user User' }}</td>
                         <td>

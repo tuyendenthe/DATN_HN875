@@ -13,7 +13,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['category', 'user'])->get();
-        return view('admins.post.index', compact('posts'));
+        $categories = Category_post::all();
+        return view('admins.post.index', compact('posts', 'categories'));
     }
 
 
@@ -25,14 +26,15 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+//        dd($request->all());
+
         $request->validate([
             'title' => 'required|string|max:255',
             'content_short' => 'required|string|max:500',
             'content' => 'required|string',
             'category_post_id' => 'required|exists:category_posts,id',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
-
         // Chỉ lấy các trường cần thiết
         $data = $request->only(['title', 'content_short', 'content', 'category_post_id']);
         $data['user_id'] = Auth::id();
@@ -105,5 +107,5 @@ class PostController extends Controller
     {
         return view('clients.single_blog', compact('post'));
     }
-    
+
 }

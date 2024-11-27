@@ -17,6 +17,12 @@ class ReviewsController extends Controller
             'comment' => 'nullable|string',
         ]);
 
+        $data = [
+            'product_id' => $request->product_id,
+            'star' => $request->star,
+            'comment' =>$request->comment,
+            'status' => 1,
+        ];
         // Tạo đánh giá mới
             // $review = new Comment;
             // $review->product_id = $request->input('product_id');
@@ -25,7 +31,7 @@ class ReviewsController extends Controller
             // $review->content = $request->input('comment');
             
             // $review->save();
-        Comment::create($request->all());
+        Comment::create($data);
 
         return redirect()->back()->with('success', 'Đánh giá của bạn đã được ghi nhận!');
     }

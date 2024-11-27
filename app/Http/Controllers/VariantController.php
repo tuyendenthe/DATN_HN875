@@ -54,7 +54,11 @@ class VariantController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
+
             'type' => $request->type,
+
+            'type' => $request->type, 
+
         ]);
 
         return redirect()->route('variants.listVariant',  $request->product_id)->with('success', 'Thêm biến thể thành công');

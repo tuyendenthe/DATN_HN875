@@ -6,12 +6,15 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeUserController;
+use App\Http\Controllers\ImageUploadController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\VoucherController;
 
 
 use App\Http\Controllers\CartController;
@@ -24,7 +27,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ChartController;
-
+use Illuminate\Support\Facades\Storage;
 
 
 /*
@@ -139,6 +142,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('account/update', [AuthenController::class, 'updateUser'])->name('account.update');
 });
 
+Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
 
 Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::get('/dashboard', function () {
@@ -156,6 +160,13 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
 
 
+  // CRUD voucher
+  Route::get('/vouchers', [VoucherController::class, 'index'])->name('admin1.vouchers.index');
+  Route::get('/vouchers/create', [VoucherController::class, 'create'])->name('admin1.vouchers.create');
+  Route::post('/vouchers', [VoucherController::class, 'store'])->name('admin1.vouchers.store');
+  Route::get('/vouchers/{voucher}/edit', [VoucherController::class, 'edit'])->name('admin1.vouchers.edit');
+  Route::put('/vouchers/{voucher}', [VoucherController::class, 'update'])->name('admin1.vouchers.update');
+  Route::delete('/vouchers/{voucher}', [VoucherController::class, 'destroy'])->name('admin1.vouchers.destroy');
     // Route::get('/chart', function () {
     //     return view('admins.chart');
     // })->name('chart');
@@ -255,15 +266,21 @@ Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('ca
 Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
 /* -------------------------------- checkout -------------------------------- */
 Route::prefix('/checkout')->name('checkout.')->group(function () {
-    Route::get('/', [CheckoutController::class, 'index'])->name('index');
+    Route::post('/', [CheckoutController::class, 'index'])->name('index');
     Route::post('/store', [CheckoutController::class, 'store'])->name('store');
     Route::get('/success', [CheckoutController::class, 'ok'])->name('success');
     Route::get('/list', [CheckoutController::class, 'list'])->name('list');
+    Route::get('/status/{id}', [CheckoutController::class, 'status'])->name('status');
     Route::get('/history', [CheckoutController::class, 'history'])->name('history');
     Route::get('/detail/{bill_code}', [CheckoutController::class, 'detail'])->name('detail');
     Route::get('/edit/{bill_code}', [CheckoutController::class, 'edit'])->name('edit');
     Route::put('/edit/{bill_code}', [CheckoutController::class, 'editput'])->name('editput');
+    Route::post('/updatestatus/{id}', [CheckoutController::class, 'updatestatus'])->name('updatestatus');
 
 });
 
 /* -------------------------------- checkout -------------------------------- */
+/* -------------------------------- check order -------------------------------- */
+Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
+Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
+/* -------------------------------- check order -------------------------------- */

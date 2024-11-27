@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\softDeletes;
+use Illuminate\Support\Carbon;
 
 class Product extends Model
 {
     use HasFactory, softDeletes;
     protected $table = 'products';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'image', 'content', 'price', 'content_short'];
+    protected $fillable = ['name', 'image','price', 'content', 'content_short'];
 
     // Product.php
 public function variants()
@@ -31,5 +32,13 @@ public function variants()
     {
         // Tính trung bình của cột 'star' chỉ với các đánh giá có status = 1
         return $this->reviews()->where('status', 1)->avg('star');
+    }
+    public function flashSale()
+    {
+        return $this->hasOne(FlashSale::class, 'product_id');
+    }
+    public function isOnFlashSale()
+    {
+        return $this->flashSale && $this->flashSale->time_end > Carbon::now();
     }
 }

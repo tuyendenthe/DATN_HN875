@@ -1,10 +1,21 @@
 @extends('clients.master')
 @section('content')
     <style>
+
+            .rounded:hover {
+    color: rgb(20, 178, 252); /* Đổi màu đỏ đậm khi hover */
+    font-weight: bold; /* Chữ đậm khi hover */
+}
+        
         .variant-container {
             display: flex;
             gap: 10px;
             margin-top: 10px;
+
+    flex-wrap: wrap; /* Cho phép các phần tử xuống dòng */
+    justify-content: center; /* Căn giữa các phần tử ngang */
+
+    width: 100%; /* Chiều rộng của container */
         }
 
         .variant-box {
@@ -91,7 +102,14 @@
         .rating label:hover ~ label {
             color: #f39c12;
         }
-
+        .variant-item {
+    flex: 0 0 calc(50% - 10px); /* Mỗi ô chiếm 50% chiều rộng, trừ khoảng cách giữa các ô */
+    box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến kích thước */
+    border: 1px solid #ccc; /* Đường viền */
+    text-align: center; /* Căn giữa nội dung trong ô */
+    padding: 10px; /* Khoảng cách bên trong ô */
+    background-color: #f9f9f9; /* Màu nền ô */
+}
         textarea {
             width: 100%;
             height: 150px;
@@ -176,8 +194,21 @@
                     <li><span>Shop Page</span></li>
                 </ul>
             </div>
+</style>
+<!-- prealoder area start -->
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="first_object"></div>
+            <div class="object" id="second_object"></div>
+            <div class="object" id="third_object"></div>
         </div>
     </div>
+</div>
+<!-- prealoder area end -->
+<!-- breadcrumb area start -->
+<div class="epix-breadcrumb-area mb-40">
+
     <!-- breadcrumb area end -->
 
     <!-- single product area start -->
@@ -265,6 +296,9 @@
                 </div>
                 <div class="col-xxl-6 col-lg-6">
 
+
+
+
                     <div class="epix-single-product-right">
                         {{--                    <div class="rating">--}}
                         {{--                        <i class="fas fa-star active"></i>--}}
@@ -286,10 +320,29 @@
                             VNĐ
                         </div>
 
+                        <div class="epix-product-label mb-35" >
+                            <a href="#" class="title">Sản phẩm cùng loại</a>
+                            <div style="padding-left: 0px" class="container">
+                                <div class="variant-container d-flex flex-wrap">
+                                    @foreach($categories as $val)
+                                        <div class="variant-item border-primary rounded" style="background-color: #fff">
+                                            <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
+                                                {{ $val->name }}
+                                            </a>
+                                            <br>
+                                            <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $val->id) }}">
+                                                {{ number_format($val->price, 0, ',', '.') }} VNĐ
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Form để thêm vào giỏ hàng -->
                         <form style="margin-top: 10px" action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
                             @csrf
-                            <div class="epix-product-label mb-35">
+                            {{-- <div class="epix-product-label mb-35">
                                 <a href="#" class="title">Chọn phiên bản</a>
                                 <div style="padding-left: 0px" class="container">
                                     <div class="variant-container">
@@ -308,6 +361,44 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="epix-product-label mb-35">
+                                <a href="#" class="title">Chọn mau </a>
+                                <div style="padding-left: 0px" class="container">
+                                    <div class="variant-container">
+                                        @foreach($products->variants as $variant)
+                                            @if ($variant->type == 2)
+                                                <div class="variant-box variant-box2 tag-list"
+                                                     data-value="{{ $variant->name }}"
+                                                     data-price="{{ $variant->price }}"
+                                                     onclick="selectVariant2(this)">
+                                                    <input type="radio" name="variant_id_1" id="{{ $variant->id }}"
+                                                           value="{{ $variant->id }}">
+                                                    <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="epix-product-label mb-35">
+                                <a href="#" class="title">Chọn bo nho</a>
+                                <div style="padding-left: 0px" class="container">
+                                    <div class="variant-container">
+                                        @foreach($products->variants as $variant)
+                                            @if ($variant->type == 3)
+                                                <div class="variant-box variant-box3 tag-list"
+                                                     data-value="{{ $variant->name }}"
+                                                     data-price="{{ $variant->price }}"
+                                                     onclick="selectVariant3(this)">
+                                                    <input type="radio" name="variant_id_1" id="{{ $variant->id }}"
+                                                           value="{{ $variant->id }}">
+                                                    <label for="{{ $variant->id }}">{{ $variant->name }}</label>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div> --}}
                             <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">
                                 Thêm vào giỏ hàng
                             </button>
@@ -319,6 +410,7 @@
             <!-- /. single product right -->
         </div>
     </div>
+
 
     <div class="row ms-5">
         <div class="col-xxl-12">
@@ -447,16 +539,23 @@
                                                     <div class="col-xxl-2 col-md-4">
                                                         <div class="epix-rating-count-number-box text-center">
                                                             <div class="epix-rating-count-number">
-                                                                <h4>4.33</h4>
+                                                                <h4>{{ number_format($averageRating, 1) }}</h4> <!-- Hiển thị trung bình số sao với 1 chữ số thập phân -->
                                                             </div>
                                                             <div class="rating">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $averageRating)
+                                                                        <!-- Hiển thị sao đầy (màu vàng) -->
+                                                                        <i class="fas fa-star" style="color: gold;"></i>
+                                                                    @elseif ($i - 1 < $averageRating && $i > $averageRating)
+                                                                        <!-- Hiển thị sao bán phần nếu giá trị trung bình có phần thập phân -->
+                                                                        <i class="fas fa-star-half-alt" style="color: gold;"></i>
+                                                                    @else
+                                                                        <!-- Hiển thị sao rỗng -->
+                                                                        <i class="fal fa-star" style="color: lightgray;"></i>
+                                                                    @endif
+                                                                @endfor
                                                             </div>
-                                                            <span class="review-subtitle">Based on 3 reviews</span>
+                                                            <span class="review-subtitle">Based on {{$totalReviews}} reviews</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-xxl-8 col-md-8">
@@ -467,13 +566,13 @@
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
-                                                                    <i class="fal fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
                                                                 </div>
                                                                 <div class="epix-rating-progress">
                                                                     <div class="progress-count" data-width="72%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>55</span>
+                                                                    <span>{{ $ratingCounts[1] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="single-progress-list">
@@ -481,21 +580,21 @@
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
-                                                                    <i class="fal fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                 </div>
                                                                 <div class="epix-rating-progress">
                                                                     <div class="progress-count" data-width="32%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>32</span>
+                                                                    <span>{{ $ratingCounts[2] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="single-progress-list">
                                                                 <div class="rating">
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
-                                                                    <i class="fal fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                 </div>
@@ -503,7 +602,7 @@
                                                                     <div class="progress-count" data-width="44%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>44</span>
+                                                                    <span>{{ $ratingCounts[3] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="single-progress-list">
@@ -518,13 +617,13 @@
                                                                     <div class="progress-count" data-width="93%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>93</span>
+                                                                    <span>{{ $ratingCounts[4] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="single-progress-list">
                                                                 <div class="rating">
                                                                     <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fal fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                     <i class="fal fa-star"></i>
@@ -533,7 +632,7 @@
                                                                     <div class="progress-count" data-width="65%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>65</span>
+                                                                    <span>{{ $ratingCounts[5] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -556,13 +655,16 @@
                                                             <div class="rating">
                                                                 @for ($i = 1; $i <= 5; $i++)
                                                                     @if ($i <= $review->star)
-                                                                        <i class="fas fa-star"></i>
+                                                                        <!-- Hiển thị sao đầy màu vàng từ trái qua phải -->
+                                                                        <i class="fas fa-star" style="color: gold;"></i>
                                                                     @else
-                                                                        <i class="fal fa-star"></i>
+                                                                        <!-- Hiển thị sao rỗng từ trái qua phải -->
+                                                                        <i class="fas fa-star" style="color: lightgray;"></i>
                                                                     @endif
                                                                 @endfor
                                                             </div>
                                                             <div class="user-name"><a href="#">{{ $review->user->name ?? 'Unknown User' }}</a></div>
+                                                            <span class="date">– {{ $review->comment }}</span>
                                                             <span class="date">– {{ $review->created_at->format('F d, Y') }}</span>
                                                         </div>
                                                         <div class="epix-comment-bottom">
@@ -583,6 +685,7 @@
                                                 <div class="rating">
                                                     <input type="radio" name="star" id="star5" value="5">
                                                     <label for="star5" title="5 stars">★</label>
+
                                                     <input type="radio" name="star" id="star4" value="4">
                                                     <label for="star4" title="4 stars">★</label>
 
@@ -614,6 +717,17 @@
 
     </div>
     </div>
+
+</div>
+<!-- single product area end -->
+<script>
+    function selectVariant(element) {
+
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box');
+        variants.forEach(function(variant) {
+            variant.classList.remove('selected');
+
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -643,6 +757,7 @@
                     $('#search-results').addClass('hidden');
                 }
             });
+
         });
 
     </script>
@@ -680,13 +795,42 @@
                 variant.classList.remove('selected');
             });
 
+
+        }
+        function selectVariant2(element) {
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box2');
+        variants.forEach(function(variant) {
+            variant.style.backgroundColor = '';
+            variant.classList.remove('selected');
+        });
+
+        // Thêm class "selected" cho hộp được chọn
+        element.classList.add('selected');
+
+        // Đánh dấu radio button tương ứng
+        var radioButton = element.querySelector('input[type="radio"]');
+        radioButton.checked = true;
+
+        // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
+        var selectedPrice = element.getAttribute('data-price');
+
+        var priceProduct = document.getElementById('product-price').textContent.trim();
+        console.log(Number(priceProduct));
+
+        selectedPrice = Number(priceProduct) + Number(selectedPrice);
+        document.getElementById('product-price').innerText = selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+        mausac = parseInt(selectedPrice);
+        totalPrice = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
+        let formattedPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
+            document.getElementById('product-price').innerText = formattedPrice;
             var selectedColor = element.getAttribute('data-value');
             element.classList.add('selected');
             console.log(selectedColor)
             element.style.setProperty('--selected-color', selectedColor);
-        }
-
-        document.querySelectorAll('.variant-box').forEach(function (box) {
+            document.querySelectorAll('.variant-box').forEach(function (box) {
             box.addEventListener('mouseenter', function () {
                 var color = box.getAttribute('data-value');
                 box.style.backgroundColor = color;
@@ -698,6 +842,31 @@
                 }
             });
         });
+    }
+
+    function selectVariant3(element) {
+        // Xóa class "selected" khỏi tất cả các hộp
+        var variants = document.querySelectorAll('.variant-box3');
+        variants.forEach(function(variant) {
+            variant.classList.remove('selected');
+        });
+
+        // Thêm class "selected" cho hộp được chọn
+        element.classList.add('selected');
+
+        // Đánh dấu radio button tương ứng
+        var radioButton = element.querySelector('input[type="radio"]');
+        radioButton.checked = true;
+
+        // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
+        var selectedPrice = element.getAttribute('data-price');
+        bonho = parseInt(selectedPrice);
+        totalPrice = parseInt(giaban) + parseInt(phienban) + parseInt(mausac) + parseInt(bonho);
+        let formattedPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
+            document.getElementById('product-price').innerText = formattedPrice;
+    }
+
     </script>
+
 
 @endsection

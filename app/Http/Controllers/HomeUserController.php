@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\FlashSale;
 use App\Models\Slide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeUserController extends Controller
 {
@@ -22,15 +23,14 @@ class HomeUserController extends Controller
     {
         // dd($cart);
         // Lấy tối đa 10 sản phẩm từ bảng products
-        $products = (Product::with('category'))->latest()->take(8)->get();
-        // dd($products);
-        // dd($products);
+        $products = (Product::with('category','flashSale'))->latest()->take(8)->get();
         $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
             ->orderBy('time_end', 'asc')
             ->limit(4)
             ->get();
+//        dd($flashSales);
         $banners = Slide::all();
 
         // Trả về view và truyền danh sách sản phẩm
@@ -60,11 +60,35 @@ class HomeUserController extends Controller
     public function show(string $id)
     {
         $products = Product::with('variants')->findOrFail($id);
-
-        $reviews = Comment::where('product_id', $id)->where('status', 1)
-        ->orderBy('created_at', 'desc')
+        $excludedId = $products['category_id'];
+        $limit = 4;
+         $categories = DB::table('products')
+        ->where('category_id', '=', $excludedId)
+        ->inRandomOrder()
+        ->limit($limit)
         ->get();
-        return view('clients.single_product', compact(['products','reviews']));
+
+// dd($categories);
+
+        // dd($products);
+
+        $reviews = Comment::with('user') // Dùng 'user' thay vì 'users'
+        ->where('product_id', $id)
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $ratingCounts = $reviews->groupBy('star')->map(function ($group) {
+            return $group->count();
+        });
+        $totalReviews = $reviews->count(); // Tổng số đánh giá
+        $averageRating = $totalReviews > 0 ? $reviews->avg('star') : 0; // Tính trung bình số sao
+        return view('clients.single_product', compact(['products','reviews', 'ratingCounts', 'totalReviews', 'averageRating']));
+
+//         $reviews = Comment::where('product_id', $id)->where('status', 1)
+//         ->orderBy('created_at', 'desc')
+//         ->get();
+//         return view('clients.single_product', compact(['products','reviews','categories']));
+
     }
 
     /**
