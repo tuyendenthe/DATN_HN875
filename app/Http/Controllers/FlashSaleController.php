@@ -62,7 +62,7 @@ class FlashSaleController extends Controller
             'updated_at' => now(),
         ]);
 
-        $product->update(attributes: ['price' => $price_sale]);
+//        $product->update(attributes: ['price' => $price_sale]);
 
         return redirect()->route('flash_sale.index')
                         ->with('success', 'Tạo sản phẩm Flash sale thành công');
@@ -103,7 +103,7 @@ class FlashSaleController extends Controller
             'updated_at' => now(),
         ]);
 
-        $product->update(attributes: ['price' => $price_sale]);
+//        $product->update(attributes: ['price' => $price_sale]);
 
         return redirect()->route('flash_sale.index')
                         ->with('success', 'Cập nhật Flash Sale sản phẩm thành công.');
