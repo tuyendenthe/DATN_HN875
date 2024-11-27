@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\FlashSale;
 use App\Models\Slide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeUserController extends Controller
 {
@@ -59,8 +60,15 @@ class HomeUserController extends Controller
     public function show(string $id)
     {
         $products = Product::with('variants')->findOrFail($id);
+        $excludedId = $products['category_id'];
+        $limit = 4;
+         $categories = DB::table('products')
+        ->where('category_id', '=', $excludedId)
+        ->inRandomOrder()
+        ->limit($limit)
+        ->get();
 
-// dd($products);
+// dd($categories);
 
         // dd($products);
 

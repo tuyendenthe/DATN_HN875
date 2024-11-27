@@ -107,6 +107,7 @@
                                     <thead>
                                     <tr>
                                         <th class="product-name">Sản Phẩm</th>
+                                        <th class="product-name">số lượng</th>
                                         <th class="product-total">Thành Tiền</th>
                                     </tr>
                                     </thead>
@@ -123,8 +124,19 @@
                                         @endphp
                                         <tr class="cart_item">
                                             <td class="product-name">
-                                                {{ $item['product_name'] }} <strong class="product-quantity">
-                                                    × {{ $item['quantity'] }}</strong>
+
+                                                    <div>{{ $item['product_name'] }}</div>
+
+
+
+                                            </td>
+                                            <td class="product-name align-items-center">
+
+
+                                                   <strong class="product-quantity align-items-center">
+                                                        × {{ $item['quantity'] }}</strong>
+
+
                                             </td>
 {{--                                            <input type="hidden" name="quantity[]" value="{{ $item['quantity'] }}">--}}
 {{--                                            <input type="hidden" name="id_product[]" value="{{ $item['product_id'] }}">--}}

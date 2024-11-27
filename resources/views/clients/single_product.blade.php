@@ -1,10 +1,21 @@
 @extends('clients.master')
 @section('content')
     <style>
+
+            .rounded:hover {
+    color: rgb(20, 178, 252); /* Đổi màu đỏ đậm khi hover */
+    font-weight: bold; /* Chữ đậm khi hover */
+}
+        
         .variant-container {
             display: flex;
             gap: 10px;
             margin-top: 10px;
+
+    flex-wrap: wrap; /* Cho phép các phần tử xuống dòng */
+    justify-content: center; /* Căn giữa các phần tử ngang */
+
+    width: 100%; /* Chiều rộng của container */
         }
 
         .variant-box {
@@ -91,7 +102,14 @@
         .rating label:hover ~ label {
             color: #f39c12;
         }
-
+        .variant-item {
+    flex: 0 0 calc(50% - 10px); /* Mỗi ô chiếm 50% chiều rộng, trừ khoảng cách giữa các ô */
+    box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến kích thước */
+    border: 1px solid #ccc; /* Đường viền */
+    text-align: center; /* Căn giữa nội dung trong ô */
+    padding: 10px; /* Khoảng cách bên trong ô */
+    background-color: #f9f9f9; /* Màu nền ô */
+}
         textarea {
             width: 100%;
             height: 150px;
@@ -302,11 +320,29 @@
                             VNĐ
                         </div>
 
+                        <div class="epix-product-label mb-35" >
+                            <a href="#" class="title">Sản phẩm cùng loại</a>
+                            <div style="padding-left: 0px" class="container">
+                                <div class="variant-container d-flex flex-wrap">
+                                    @foreach($categories as $val)
+                                        <div class="variant-item border-primary rounded" style="background-color: #fff">
+                                            <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
+                                                {{ $val->name }}
+                                            </a>
+                                            <br>
+                                            <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $val->id) }}">
+                                                {{ number_format($val->price, 0, ',', '.') }} VNĐ
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Form để thêm vào giỏ hàng -->
                         <form style="margin-top: 10px" action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
                             @csrf
-                            <div class="epix-product-label mb-35">
+                            {{-- <div class="epix-product-label mb-35">
                                 <a href="#" class="title">Chọn phiên bản</a>
                                 <div style="padding-left: 0px" class="container">
                                     <div class="variant-container">
@@ -362,7 +398,7 @@
                                         @endforeach
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">
                                 Thêm vào giỏ hàng
                             </button>
