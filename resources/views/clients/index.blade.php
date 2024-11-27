@@ -109,6 +109,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var notification = document.getElementById('notification');
 
+
             if (notification) {
                 // Show the notification
                 notification.style.display = 'block';
