@@ -83,6 +83,12 @@ class HomeUserController extends Controller
         $totalReviews = $reviews->count(); // Tổng số đánh giá
         $averageRating = $totalReviews > 0 ? $reviews->avg('star') : 0; // Tính trung bình số sao
         return view('clients.single_product', compact(['products','reviews', 'ratingCounts', 'totalReviews', 'averageRating']));
+
+//         $reviews = Comment::where('product_id', $id)->where('status', 1)
+//         ->orderBy('created_at', 'desc')
+//         ->get();
+//         return view('clients.single_product', compact(['products','reviews','categories']));
+
     }
 
     /**
