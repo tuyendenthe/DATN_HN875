@@ -14,7 +14,12 @@
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Category</span></a></li>
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category_post.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Category Post</span></a></li>
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('post.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Post</span></a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Post</span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('post.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">List Post</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('post.create')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">New Post</span></a></li>
                     </ul>
                 </li>
                 {{-- /* --------------------------------- COMMENT -------------------------------- */ --}}

@@ -124,14 +124,18 @@
                                </a>
                            </div> --}}
                            @php
+                           if (session()->get('cart')) {
                                $cart = session()->get('cart');
                                $count = count($cart);
+                           }
                            @endphp
                            <div class="epix-action-single">
                                <a href="{{ route('cart.view') }}">
                                    <div class="icon">
                                        <i class="fal fa-shopping-cart"></i>
+                                       @if(session()->get('cart'))
                                        <span>{{ $count }}</span>
+                                       @endif
                                    </div>
                                    <div class="content">
                                        <span> Giỏ hàng</span>

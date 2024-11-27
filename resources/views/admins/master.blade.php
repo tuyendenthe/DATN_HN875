@@ -14,6 +14,8 @@
     <!-- Custom CSS -->
     <link href="{{asset('admin/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link href="{{asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,11 +42,11 @@
             @yield('content')
             @include('blocks.admin.footer')
         </div>
-       
+
     </div>
 
-    
-  
+
+
     <script src="{{asset('admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('admin/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
