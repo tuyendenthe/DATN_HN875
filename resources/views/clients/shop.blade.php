@@ -96,7 +96,12 @@
                                     <div class="content">
                                         <h4 class="epix-list-product-sm-title"><a href="{{ route('single_product', $item -> id) }}">{{ $item -> name }}</a></h4>
                                         <div class="price-box">
-                                            <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                            @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                            <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                            <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
+                                            @else
+                                                <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                            @endif
                                             <a href="{{ route('single_product', $item -> id) }}">+ Select Option</a>
                                           </div>
                                     </div>
@@ -151,8 +156,13 @@
                                                             <a href="{{ route('single_product', $item->id) }}"><img width="223px" height="396px" src="{{asset($item->image)}}" alt=""></a>
                                                         </div>
                                                         <div class="price-box price-box-3">
-                                                            <span class="price" style="width: 30px;">{{number_format($item->price, 0, ',', '.')}} VNĐ</span>
-                                                            <a href="{{ route('single_product', $item->id) }}">+ Select Option</a>
+                                                            @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                            <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                                            <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
+                                                            @else
+                                                                <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                            @endif
+                                                            <a style="width: 300px" href="{{ route('single_product', $item->id) }}">+ Select Option</a>
                                                         </div>
                                                         <h5 class="epix-p-title epix-p-title-3"><a href="{{ route('single_product', $item->id) }}">{{$item->name}}</a></h5>
                                                     </div>
@@ -184,7 +194,12 @@
                                                                     <span class="epix-p-subtitle">Speakers</span>
                                                                 </div>
                                                                 <div class="price-box">
-                                                                    <span style="width: 30px" class="price">{{ number_format($item->price, 0, ',', '.') }}</span>
+                                                                    @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                                    <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                                                    <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
+                                                                    @else
+                                                                        <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                                    @endif
                                                                     <a href="{{ route('single_product',$item->id)  }}">+ Select Option</a>
                                                                 </div>
                                                             </div>
