@@ -19,14 +19,19 @@ return new class extends Migration
             $table->string('name');
             $table->integer('price');
             $table->string('image');
-            $table->string('content');
+            $table->longText('content');
+            $table->string('chip'); // thêm loại chip cho sản phẩm
+            $table->string('ram');
+            $table->string('memory'); //bộ nhớ
+            $table->string('screen');  //kích thước màn
+            $table->string('resolution'); // độ phân giải
             $table->string('content_short');
             $table->integer('role')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
     }
-    
+
 
     /**
      * Reverse the migrations.

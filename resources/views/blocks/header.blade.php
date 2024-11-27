@@ -39,6 +39,9 @@
                                     <li>
                                         <a href="{{ route('bookfix.form') }}">Đặt lịch sửa chữa</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('check_order') }}">Theo dõi đơn hàng</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -98,7 +101,7 @@
 {{--                            </div>--}}
                             <div class="epix-header-form epix-header-form-1">
                                 <form id="search-form" method="POST" autocomplete="off">
-                                    <input type="text" id="search-input" placeholder="Search anything here.." />
+                                    <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm" />
                                     <button type="submit">
                                         <i class="fal fa-search"></i>
                                     </button>
@@ -120,11 +123,15 @@
                                    </div>
                                </a>
                            </div> --}}
+                           @php
+                               $cart = session()->get('cart');
+                               $count = count($cart);
+                           @endphp
                            <div class="epix-action-single">
                                <a href="{{ route('cart.view') }}">
                                    <div class="icon">
                                        <i class="fal fa-shopping-cart"></i>
-                                       <span>0</span>
+                                       <span>{{ $count }}</span>
                                    </div>
                                    <div class="content">
                                        <span> Giỏ hàng</span>

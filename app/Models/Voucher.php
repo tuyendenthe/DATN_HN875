@@ -12,7 +12,7 @@ class Voucher extends Model
     protected $fillable= [
         'voucher_code',
         'quantity',
-        // 'price_sale',
+        'price_sale',
         'start_date',
         'end_date',
         'discount_type',

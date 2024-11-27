@@ -263,7 +263,7 @@ Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('ca
 Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
 /* -------------------------------- checkout -------------------------------- */
 Route::prefix('/checkout')->name('checkout.')->group(function () {
-    Route::get('/', [CheckoutController::class, 'index'])->name('index');
+    Route::post('/', [CheckoutController::class, 'index'])->name('index');
     Route::post('/store', [CheckoutController::class, 'store'])->name('store');
     Route::get('/success', [CheckoutController::class, 'ok'])->name('success');
     Route::get('/list', [CheckoutController::class, 'list'])->name('list');
@@ -277,3 +277,7 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 });
 
 /* -------------------------------- checkout -------------------------------- */
+/* -------------------------------- check order -------------------------------- */
+Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
+Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
+/* -------------------------------- check order -------------------------------- */
