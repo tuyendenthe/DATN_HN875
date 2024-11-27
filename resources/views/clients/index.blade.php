@@ -554,9 +554,7 @@
                             <div class="col-xxl-9 col-xl-9">
                                 <div class="deal-product-wrap pl-80">
                                     <div class="d-product-active">
-                                        <div class="swiper-container d-product-active">
                                             <div class="swiper-wrapper">
-
                                                 @foreach ($flashSales as $flashSale)
                                                     <div class="swiper-slide" style="flex-shrink: unset;">
                                                         <div class="epix-single-product epix-single-product-2">
@@ -607,7 +605,6 @@
                                                 @endforeach
 
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- /. deals product wrap -->
@@ -667,7 +664,7 @@
                                                         src="{{ asset($item->image) }}" {{-- <img src="assets/img/product/23.jpg" --}}
                                                         class="img-fluid" alt=""></a>
                                                 <div class="epix-action">
-                                                
+
                                                     <a href="{{ route('single_product', $item->id) }}"
                                                         class="p-cart product-popup-toggle">
                                                         <i class="fal fa-eye"></i>
@@ -691,9 +688,12 @@
                                                         href="{{ route('single_product', $item->id) }}">{{ $item->name }}</a>
                                                 </h5>
                                                 <div class="price-box">
-                                                    <span
-                                                        class="price">{{ number_format($item->price, 0, ',', '.') }}
-                                                        VNĐ</span>
+                                                    @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                    <span class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                                    <span class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
+                                                    @else
+                                                        <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                    @endif
                                                     <a href="{{ route('single_product', $item->id) }}">+ Select
                                                         Option</a>
                                                 </div>
@@ -804,7 +804,6 @@
                     </div>
                     <div class="row mb-45">
 
-                        <class="col-xxl-12">
                         <div class="col-xxl-12">
                             <div class="epix-handpicked-banner"
                                 data-background="{{ Storage::url('laptop/assets/img/banner/product-banner-2.jpg') }}">
@@ -833,8 +832,14 @@
                                             </h5>
 
                                             <div style="width: 200px" class="price-box mb-15">
-                                                <span class="price">{{ number_format($item->price, 0, ',', '.') }}
-                                                    VNĐ</span>
+{{--                                                <span class="price">{{ number_format($item->price, 0, ',', '.') }}--}}
+{{--                                                    VNĐ</span>--}}
+                                                @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                <span class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                                <span class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
+                                                @else
+                                                    <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                @endif
                                                 <a href="{{ route('single_product', $item->id) }}">+ Select
                                                     Option</a>
                                             </div>
