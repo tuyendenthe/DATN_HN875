@@ -80,7 +80,20 @@
     <!-- header area start -->
     @include('blocks.header')
     <!-- header area end -->
-
+    <style>
+        .notification1 {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #d4edda; /* Màu xanh nhạt */
+            color: #155724; /* Màu chữ xanh đậm */
+        }
+    </style>
     <!-- slide-bar start -->
     <div class="container">
         @if (session('message'))
@@ -88,6 +101,11 @@
                 {{ session('message') }}
             </div>
         @endif
+        @if (session('message1'))
+        <div id="notification" class="notification1 alert alert-danger" role="alert">
+            {{ session('message1') }}
+        </div>
+    @endif
 
         <!-- Other content here -->
     </div>
