@@ -36,6 +36,14 @@
                         <span class="">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class='col-12'>
+                    <label for="">Loại sản phẩm</label>
+                    <select name="category_id" class="form-control" id="" required>
+                            @foreach ($Categories as $item)
+                                <option value="{{ $item->id }}"  @if($product->category_id) selected @endif>{{ $item->name }}</option>
+                            @endforeach
+                    </select>
+                </div>
                 <div class="col-12">
                     Ảnh:
                     <input type="file" name="image" class="form-control">

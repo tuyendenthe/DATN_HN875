@@ -16,6 +16,7 @@ use App\Http\Controllers\VoucherController;
 
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CheckoutController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\SearchController;
@@ -224,6 +225,15 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::put('update-product/{id}', [ProductController::class, 'updatePutProduct'])->name('updatePutProduct');
     Route::delete('delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
 });
+
+Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
+    Route::get('index',[CategoriesController::class,'index'])->name('index');
+    Route::get('create',[CategoriesController::class,'create'])->name('create');
+    Route::post('store',[CategoriesController::class,'store'])->name('store');
+    Route::get('delete',[CategoriesController::class,'delete'])->name('delete');
+    Route::get('edit/{id}',[CategoriesController::class,'edit'])->name('edit');
+    Route::post('update',[CategoriesController::class,'update'])->name('update');
+   });
 
 /* -------------------------------- BIẾN THỂ -------------------------------- */
 Route::prefix('/variants')->name('variants.')->group(function () {

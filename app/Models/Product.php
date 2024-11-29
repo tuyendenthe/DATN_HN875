@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory, softDeletes;
     protected $table = 'products';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'image','price', 'content', 'content_short'];
+    protected $fillable = ['name', 'image','price', 'content', 'content_short','cate_id'];
 
     // Product.php
 public function variants()
@@ -31,5 +31,11 @@ public function variants()
     {
         // Tính trung bình của cột 'star' chỉ với các đánh giá có status = 1
         return $this->reviews()->where('status', 1)->avg('star');
+    }
+
+
+    public function Categories()
+    {
+        return $this->belongsTo(Categories::class, 'cate_id');
     }
 }
