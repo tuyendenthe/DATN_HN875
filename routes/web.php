@@ -6,6 +6,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeUserController;
+use App\Http\Controllers\ImageUploadController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenController;
@@ -26,7 +28,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ChartController;
-
+use Illuminate\Support\Facades\Storage;
 
 
 /*
@@ -141,6 +143,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('account/update', [AuthenController::class, 'updateUser'])->name('account.update');
 });
 
+Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
 
 Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::get('/dashboard', function () {
@@ -287,3 +290,7 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 });
 
 /* -------------------------------- checkout -------------------------------- */
+/* -------------------------------- check order -------------------------------- */
+Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
+Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
+/* -------------------------------- check order -------------------------------- */

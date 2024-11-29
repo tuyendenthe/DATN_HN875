@@ -39,6 +39,9 @@
                                     <li>
                                         <a href="{{ route('bookfix.form') }}">Đặt lịch sửa chữa</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('check_order') }}">Theo dõi đơn hàng</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -54,7 +57,7 @@
                                             <a href="#" class="dropdown-toggle"><i class="fal fa-user"></i> Xin chào, {{ Auth::user()->name }}</a>
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('account.edit') }}">Cập nhật tài khoản</a>
-                                                <a href="">Đơn hàng của bạn</a>
+                                                <a href="{{ route('check_order') }}">Đơn hàng của bạn</a>
                                                 <a href="{{ route('logout') }}">Đăng xuất</a>
                                             </div>
                                         </div>
@@ -98,7 +101,7 @@
 {{--                            </div>--}}
                             <div class="epix-header-form epix-header-form-1">
                                 <form id="search-form" method="POST" autocomplete="off">
-                                    <input type="text" id="search-input" placeholder="Search anything here.." />
+                                    <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm" />
                                     <button type="submit">
                                         <i class="fal fa-search"></i>
                                     </button>
@@ -120,11 +123,19 @@
                                    </div>
                                </a>
                            </div> --}}
+                           @php
+                           if (session()->get('cart')) {
+                               $cart = session()->get('cart');
+                               $count = count($cart);
+                           }
+                           @endphp
                            <div class="epix-action-single">
                                <a href="{{ route('cart.view') }}">
                                    <div class="icon">
                                        <i class="fal fa-shopping-cart"></i>
-                                       <span>0</span>
+                                       @if(session()->get('cart'))
+                                       <span>{{ $count }}</span>
+                                       @endif
                                    </div>
                                    <div class="content">
                                        <span> Giỏ hàng</span>

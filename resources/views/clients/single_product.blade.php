@@ -1,10 +1,21 @@
 @extends('clients.master')
 @section('content')
     <style>
+
+            .rounded:hover {
+    color: rgb(20, 178, 252); /* Đổi màu đỏ đậm khi hover */
+    font-weight: bold; /* Chữ đậm khi hover */
+}
+        
         .variant-container {
             display: flex;
             gap: 10px;
             margin-top: 10px;
+
+    flex-wrap: wrap; /* Cho phép các phần tử xuống dòng */
+    justify-content: center; /* Căn giữa các phần tử ngang */
+
+    width: 100%; /* Chiều rộng của container */
         }
 
         .variant-box {
@@ -91,7 +102,14 @@
         .rating label:hover ~ label {
             color: #f39c12;
         }
-
+        .variant-item {
+    flex: 0 0 calc(50% - 10px); /* Mỗi ô chiếm 50% chiều rộng, trừ khoảng cách giữa các ô */
+    box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến kích thước */
+    border: 1px solid #ccc; /* Đường viền */
+    text-align: center; /* Căn giữa nội dung trong ô */
+    padding: 10px; /* Khoảng cách bên trong ô */
+    background-color: #f9f9f9; /* Màu nền ô */
+}
         textarea {
             width: 100%;
             height: 150px;
@@ -302,11 +320,29 @@
                             VNĐ
                         </div>
 
+                        <div class="epix-product-label mb-35" >
+                            <a href="#" class="title">Sản phẩm cùng loại</a>
+                            <div style="padding-left: 0px" class="container">
+                                <div class="variant-container d-flex flex-wrap">
+                                    @foreach($categories as $val)
+                                        <div class="variant-item border-primary rounded" style="background-color: #fff">
+                                            <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
+                                                {{ $val->name }}
+                                            </a>
+                                            <br>
+                                            <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $val->id) }}">
+                                                {{ number_format($val->price, 0, ',', '.') }} VNĐ
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Form để thêm vào giỏ hàng -->
                         <form style="margin-top: 10px" action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
                             @csrf
-                            <div class="epix-product-label mb-35">
+                            {{-- <div class="epix-product-label mb-35">
                                 <a href="#" class="title">Chọn phiên bản</a>
                                 <div style="padding-left: 0px" class="container">
                                     <div class="variant-container">
@@ -362,7 +398,7 @@
                                         @endforeach
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">
                                 Thêm vào giỏ hàng
                             </button>
@@ -503,16 +539,23 @@
                                                     <div class="col-xxl-2 col-md-4">
                                                         <div class="epix-rating-count-number-box text-center">
                                                             <div class="epix-rating-count-number">
-                                                                <h4>4.33</h4>
+                                                                <h4>{{ number_format($averageRating, 1) }}</h4> <!-- Hiển thị trung bình số sao với 1 chữ số thập phân -->
                                                             </div>
                                                             <div class="rating">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $averageRating)
+                                                                        <!-- Hiển thị sao đầy (màu vàng) -->
+                                                                        <i class="fas fa-star" style="color: gold;"></i>
+                                                                    @elseif ($i - 1 < $averageRating && $i > $averageRating)
+                                                                        <!-- Hiển thị sao bán phần nếu giá trị trung bình có phần thập phân -->
+                                                                        <i class="fas fa-star-half-alt" style="color: gold;"></i>
+                                                                    @else
+                                                                        <!-- Hiển thị sao rỗng -->
+                                                                        <i class="fal fa-star" style="color: lightgray;"></i>
+                                                                    @endif
+                                                                @endfor
                                                             </div>
-                                                            <span class="review-subtitle">Based on 3 reviews</span>
+                                                            <span class="review-subtitle">Based on {{$totalReviews}} reviews</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-xxl-8 col-md-8">
@@ -523,13 +566,13 @@
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
-                                                                    <i class="fal fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
                                                                 </div>
                                                                 <div class="epix-rating-progress">
                                                                     <div class="progress-count" data-width="72%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>55</span>
+                                                                    <span>{{ $ratingCounts[1] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="single-progress-list">
@@ -537,21 +580,21 @@
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
-                                                                    <i class="fal fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                 </div>
                                                                 <div class="epix-rating-progress">
                                                                     <div class="progress-count" data-width="32%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>32</span>
+                                                                    <span>{{ $ratingCounts[2] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="single-progress-list">
                                                                 <div class="rating">
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
-                                                                    <i class="fal fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                 </div>
@@ -559,7 +602,7 @@
                                                                     <div class="progress-count" data-width="44%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>44</span>
+                                                                    <span>{{ $ratingCounts[3] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="single-progress-list">
@@ -574,13 +617,13 @@
                                                                     <div class="progress-count" data-width="93%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>93</span>
+                                                                    <span>{{ $ratingCounts[4] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="single-progress-list">
                                                                 <div class="rating">
                                                                     <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fal fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                     <i class="fal fa-star"></i>
                                                                     <i class="fal fa-star"></i>
@@ -589,7 +632,7 @@
                                                                     <div class="progress-count" data-width="65%"></div>
                                                                 </div>
                                                                 <div class="count">
-                                                                    <span>65</span>
+                                                                    <span>{{ $ratingCounts[5] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -612,9 +655,11 @@
                                                             <div class="rating">
                                                                 @for ($i = 1; $i <= 5; $i++)
                                                                     @if ($i <= $review->star)
-                                                                        <i class="fas fa-star"></i>
+                                                                        <!-- Hiển thị sao đầy màu vàng từ trái qua phải -->
+                                                                        <i class="fas fa-star" style="color: gold;"></i>
                                                                     @else
-                                                                        <i class="fal fa-star"></i>
+                                                                        <!-- Hiển thị sao rỗng từ trái qua phải -->
+                                                                        <i class="fas fa-star" style="color: lightgray;"></i>
                                                                     @endif
                                                                 @endfor
                                                             </div>
