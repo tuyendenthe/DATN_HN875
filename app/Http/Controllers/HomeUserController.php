@@ -80,8 +80,10 @@ class HomeUserController extends Controller
         $ratingCounts = $reviews->groupBy('star')->map(function ($group) {
             return $group->count();
         });
-        $totalReviews = $reviews->count(); // Tổng số đánh giá
-        $averageRating = $totalReviews > 0 ? $reviews->avg('star') : 0; // Tính trung bình số sao
+        $totalReviews = $reviews->where('status', 1)->count(); // Tổng số đánh giá có status = 1
+        $averageRating = $totalReviews > 0
+            ? $reviews->where('status', 1)->avg('star') // Trung bình số sao của các review có status = 1
+            : 0;
         return view('clients.single_product', compact(['products','reviews', 'categories','ratingCounts', 'totalReviews', 'averageRating']));
 
 //         $reviews = Comment::where('product_id', $id)->where('status', 1)

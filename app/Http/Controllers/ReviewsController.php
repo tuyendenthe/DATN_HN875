@@ -21,7 +21,7 @@ class ReviewsController extends Controller
             'product_id' => $request->product_id,
             'star' => $request->star,
             'comment' =>$request->comment,
-            'status' => 1,
+            'status' => 0,
         ];
         // Tạo đánh giá mới
             // $review = new Comment;
@@ -29,11 +29,19 @@ class ReviewsController extends Controller
             // $review->user_id = Auth::id();
             // $review->star = $request->input('star');
             // $review->content = $request->input('comment');
-            
-            // $review->save();
-        Comment::create($data);
 
-        return redirect()->back()->with('success', 'Đánh giá của bạn đã được ghi nhận!');
+            // $review->save();
+        $review=Comment::create($data);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Review submitted successfully!',
+            'star' => $review->star,
+            'comment' => $review->comment,
+            'user_name' => $review->user->name ?? 'Unknown User',
+            'user_avatar' => $review->user->image ?? asset('laptop/assets/img/user/user-1.png'),
+            'created_at' => $review->created_at->format('F d, Y'),
+        ]);
     }
 
     public function listComment() {

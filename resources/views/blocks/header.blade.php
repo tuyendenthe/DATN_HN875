@@ -8,7 +8,7 @@
                             <nav id="mobile-menu">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('index') }}">Trang chủ</a>
+                                        <a href="{{ route('home') }}">Trang chủ</a>
                                     </li>
 
                                     <li>

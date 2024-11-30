@@ -46,37 +46,34 @@ class CheckoutController extends Controller
     }
     public function store(Request $request)
     {
-        $idVoucher = $request->voucherId;
+        $idVoucher = $request['voucherId'];
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         $randomString = substr(str_shuffle($characters), 0, 10);
         $bill = [
             'bill_code' => $randomString,
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-
-            'checkout' => $request->checkout,
-            'note' => $request->note,
-            'payment_method' => $request->payment_method,
-            'total' => $request->total,
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'checkout' => $request['checkout'],
+            'note' => $request['note'],
+            'payment_method' => $request['payment_method'],
+            'total' => $request['total'],
             'status' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ];
         $billRecord = Bill::create($bill);
-        $bill_id = $billRecord->id; // Lấy bill_id từ bản ghi vừa tạo
+        $bill_id = $billRecord->id;
 
-        $products = json_decode($request->input('products'), true);
-
-
-        foreach ($products as $item ) {
-            // Lấy thông tin sản phẩm từ cart
+        $products = json_decode($request['products'], true);
+        foreach ($products as $item) {
             $product_id = $item['product_id'];
             $price = $item['price'];
             $quantity = $item['quantity'];
             $subtotal = $price * $quantity;
+
             $data2 = [
-                'bill_id' =>$bill_id,
+                'bill_id' => $bill_id,
                 'product_id' => $product_id,
                 'bill_code' => $randomString,
                 'quantity' => $quantity,
@@ -85,26 +82,36 @@ class CheckoutController extends Controller
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
-            // Thực hiện insert vào cơ sở dữ liệu
+
             Bill_detail::create($data2);
         }
 
         if ($idVoucher) {
-            // Lấy voucher từ cơ sở dữ liệu
             $voucher = Voucher::find($idVoucher);
 
-            // Kiểm tra xem voucher có tồn tại và còn số lượng không
             if ($voucher && $voucher->quantity > 0) {
                 $voucher->quantity -= 1;
-                $voucher->save(); // Cập nhật vào cơ sở dữ liệu
+                $voucher->save();
             } else {
                 return back()->with('error', 'Voucher không hợp lệ hoặc đã hết số lượng.');
             }
         }
+        $cart = session()->get('cart', []);
 
+        // Xóa các sản phẩm đã mua khỏi giỏ hàng
+        foreach ($products as $purchasedProduct) {
+            $product_id = $purchasedProduct['product_id'];
+            // Loại bỏ sản phẩm đã mua khỏi giỏ hàng
+            $cart = array_filter($cart, function ($item) use ($product_id) {
+                return $item['product_id'] != $product_id;
+            });
+        }
 
+        // Cập nhật lại session giỏ hàng
+        session()->put('cart', $cart);
         return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
     }
+
     public function ok(Request $request)
     {
         //  dd($request);

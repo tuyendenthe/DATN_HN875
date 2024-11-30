@@ -98,7 +98,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="product-subtotal">
+                                        <td>
                                             <span class="amount">{{ number_format($subtotal, 0, ',', '.') }} VNĐ</span>
                                         </td>
                                         <td class="product-remove">
@@ -115,7 +115,7 @@
                         </tbody>
                     </table>
                 </div>
-
+                @if(auth()->user())
                 <div class="row">
                     <div class="col-12">
                         <div class="coupon-all">
@@ -137,7 +137,7 @@
                     </div>
                 </div>
 
-
+                @endif
                 <div class="row">
                     <div class="col-md-5 ms-auto">
                         <div class="cart-page-total">
