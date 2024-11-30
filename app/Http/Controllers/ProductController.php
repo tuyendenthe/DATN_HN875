@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Facades;
 use App\Http\Requests\ProductRequest;
+use App\Models\Categories;
 
 class ProductController extends Controller
 {
     public function listProduct()
     {
-        $listProducts = Product::all();
+        $listProducts = Product::with('Categories')->get();
+     
 
         return view('admins.tables')->with([
             'listProducts' => $listProducts
@@ -20,7 +22,9 @@ class ProductController extends Controller
 
     public function addProduct()
     {
-        return view('admins.add-product');
+
+        $Categories = Categories::where('status_delete',Categories::UNDELETE)->get();
+        return view('admins.add-product',compact('Categories'));
     }
 
     public function addPostProduct(ProductRequest $req)
@@ -39,6 +43,7 @@ class ProductController extends Controller
             'content' => $req->content,
             'price' => $req->price,
             'content_short' => $req->content_short,
+            'cate_id' => $req->category_id
         ];
 
         Product::create($data);
@@ -48,7 +53,8 @@ class ProductController extends Controller
     public function updateProduct($id)
     {
         $product = Product::find($id);
-        return view('admins.update-product')->with([
+        $Categories = Categories::where('status_delete',Categories::UNDELETE)->get();
+        return view('admins.update-product',compact('Categories'))->with([
             'product' => $product
         ]);
     }
@@ -82,6 +88,8 @@ class ProductController extends Controller
             'image' => $path,
             'content' => $req->content,
             'content_short' => $req->content_short,
+            'cate_id' => $req->category_id
+
         ];
         $product->update($data);
         return redirect()->route('products.listProduct');

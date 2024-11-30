@@ -8,11 +8,11 @@
                             <nav id="mobile-menu">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('index') }}">Trang chủ</a>
+                                        <a href="{{ route('home') }}">Trang chủ</a>
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('about') }}">About</a>
+                                        <a href="{{ route('about') }}">Giới thiệu</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('shop') }}">Sản phẩm</a>
@@ -39,6 +39,9 @@
                                     <li>
                                         <a href="{{ route('bookfix.form') }}">Đặt lịch sửa chữa</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('check_order') }}">Theo dõi đơn hàng</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -54,7 +57,7 @@
                                             <a href="#" class="dropdown-toggle"><i class="fal fa-user"></i> Xin chào, {{ Auth::user()->name }}</a>
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('account.edit') }}">Cập nhật tài khoản</a>
-                                                <a href="">Đơn hàng của bạn</a>
+                                                <a href="{{ route('check_order') }}">Đơn hàng của bạn</a>
                                                 <a href="{{ route('logout') }}">Đăng xuất</a>
                                             </div>
                                         </div>
@@ -98,7 +101,7 @@
 {{--                            </div>--}}
                             <div class="epix-header-form epix-header-form-1">
                                 <form id="search-form" method="POST" autocomplete="off">
-                                    <input type="text" id="search-input" placeholder="Search anything here.." />
+                                    <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm" />
                                     <button type="submit">
                                         <i class="fal fa-search"></i>
                                     </button>
@@ -107,35 +110,43 @@
                             </div>
                         </div>
                     </div>
-{{--                    <div class="col-xxl-2 col-xl-2 col-lg-3">--}}
-{{--                        <div class="epix-header-actions">--}}
-{{--                            <div class="epix-action-single">--}}
-{{--                                <a href="cart.html">--}}
-{{--                                    <div class="icon">--}}
-{{--                                        <i class="fal fa-heart"></i>--}}
-{{--                                        <span>0</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="content">--}}
-{{--                                        <span>Yêu thích</span>--}}
-{{--                                    </div>--}}
-{{--                                </a>--}}
-{{--                            </div>--}}
-{{--                            <div class="epix-action-single">--}}
-{{--                                <a href="cart.html">--}}
-{{--                                    <div class="icon">--}}
-{{--                                        <i class="fal fa-shopping-cart"></i>--}}
-{{--                                        <span>0</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="content">--}}
-{{--                                        <span> Giỏ hàng</span>--}}
-{{--                                    </div>--}}
-{{--                                </a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                   <div class="col-xxl-2 col-xl-2 col-lg-3">
+                       <div class="epix-header-actions">
+                           {{-- <div class="epix-action-single">
+                               <a href="cart.html">
+                                   <div class="icon">
+                                       <i class="fal fa-heart"></i>
+                                       <span>0</span>
+                                   </div>
+                                   <div class="content">
+                                       <span>Yêu thích</span>
+                                   </div>
+                               </a>
+                           </div> --}}
+                           @php
+                           if (session()->get('cart')) {
+                               $cart = session()->get('cart');
+                               $count = count($cart);
+                           }
+                           @endphp
+                           <div class="epix-action-single">
+                               <a href="{{ route('cart.view') }}">
+                                   <div class="icon">
+                                       <i class="fal fa-shopping-cart"></i>
+                                       @if(session()->get('cart'))
+                                       <span>{{ $count }}</span>
+                                       @endif
+                                   </div>
+                                   <div class="content">
+                                       <span> Giỏ hàng</span>
+                                   </div>
+                               </a>
+                           </div>
+                       </div>
                 </div>
+                {{-- </div>
             </div>
-        </div>
+        </div> --}}
 {{--        <div class="header-bottom p-rel">--}}
 {{--            <div class="container">--}}
 {{--                <div class="row align-items-center">--}}

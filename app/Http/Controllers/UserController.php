@@ -40,6 +40,7 @@ public function detail(string $id)
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+
             'address' => $request->address,
 
         ];

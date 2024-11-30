@@ -24,7 +24,13 @@
             @enderror
         </div>
 
-
+        <div class="form-group">
+            <label for="address">Địa chỉ:</label>
+            <input type="text" name="address" class="form-control" value="{{ old('address', $user->address) }}" required>
+            @error('address')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
 
 
 

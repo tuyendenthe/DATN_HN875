@@ -10,9 +10,9 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $products = Product::get();
+        $products = (Product::with('category','flashSale'))->latest()->take(8)->get();
         $categories = Category::get();
-        $newProducts = Product::latest()->take(3)->get();
+        $newProducts = (Product::with('category','flashSale'))->latest()->take(3)->get();
         return view('clients.shop', compact('products', 'categories', 'newProducts'));
     }
 

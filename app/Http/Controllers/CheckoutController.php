@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
-use App\Models\status;
+// use App\Models\status;
 use App\Models\Bill_detail;
+use App\Models\Status;
+use App\Models\Voucher;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,82 +16,102 @@ class CheckoutController extends Controller
 {
     public function index(Request $request)
     {
-        // dd($request);
         $cart = session()->get('cart', []);
-        // dd($cart);
+        $voucherId = $request -> voucherId;
+        // Lấy các sản phẩm đã chọn từ form (dữ liệu JSON được gửi qua trường 'selectedProducts')
+        $selectedProducts = json_decode($request->input('selectedProducts'), true);
+        $totalProduct = 0;
+        foreach ($selectedProducts as $item) {
+            $totalProduct += $item['price'];
+        }
+        // Lấy thông tin giảm giá và tổng tiền từ form
+        $discount = $request->input('finalDiscount', 0); // Nếu không có giảm giá thì mặc định là 0
+        $total = $request->input('finalTotal', 0); // Tổng tiền sau khi giảm giá
 
-        return view('clients.checkout', compact('request', 'cart'));
+        // Kiểm tra nếu có sản phẩm được chọn, hoặc thông tin giảm giá và tổng tiền
+
+
+        // Xử lý thanh toán và các bước tiếp theo (ví dụ: lưu thông tin đơn hàng, gửi email, v.v.)
+        // Ví dụ:
+        // $order = Order::create([
+        //     'user_id' => auth()->id(),
+        //     'total' => $total,
+        //     'discount' => $discount,
+        //     'products' => $selectedProducts,
+        //     // các thông tin khác như địa chỉ, phương thức thanh toán, v.v.
+        // ]);
+
+        // Trả về view checkout với các dữ liệu cần thiết
+        return view('clients.checkout', compact('selectedProducts', 'cart', 'discount', 'total', 'totalProduct', 'voucherId'));
     }
     public function store(Request $request)
     {
-        // dd($request);
-
-        // dd($cart);
-
-        //         $randomString = str::upper(Str::random(5)) . Str::lower(Str::random(3)) . rand(10, 99); // Example combining letters and numbers
-        // $shuffledString = Str::shuffle($randomString);
+        $idVoucher = $request['voucherId'];
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         $randomString = substr(str_shuffle($characters), 0, 10);
         $bill = [
             'bill_code' => $randomString,
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-
-            'checkout' => $request->checkout,
-            'note' => $request->note,
-            'payment_method' => $request->payment_method,
-            'total' => $request->total,
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'checkout' => $request['checkout'],
+            'note' => $request['note'],
+            'payment_method' => $request['payment_method'],
+            'total' => $request['total'],
             'status' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ];
-        Bill::create($bill);
+        $billRecord = Bill::create($bill);
+        $bill_id = $billRecord->id;
 
+        $products = json_decode($request['products'], true);
+        foreach ($products as $item) {
+            $product_id = $item['product_id'];
+            $price = $item['price'];
+            $quantity = $item['quantity'];
+            $subtotal = $price * $quantity;
 
-        $product_ids = is_array($request->id_product) ? $request->id_product : [$request->id_product];
-
-        // Lấy dữ liệu từ session cart
-        $cart = session()->get('cart'); // Hoặc cách khác để lấy cart của bạn
-
-        foreach ($product_ids as $item => $id_product) {
-            // Lấy thông tin sản phẩm từ cart
-            $product_id = $id_product;
-            $cart_item = $cart[$product_id] ?? null; // Lấy sản phẩm dựa trên id_product
-            if (!$cart_item) {
-                continue; // Nếu không tìm thấy sản phẩm, bỏ qua
-            }
-
-            // Lấy variant_name
-            $variants = $cart_item['variant_name'] ?? []; // Mảng variant_name
-
-            // Gán các variant vào biến
-            $variant = isset($variants[0]) ? $variants[0] : null;
-            $variant1 = isset($variants[1]) ? $variants[1] : null;
-            $variant2 = isset($variants[2]) ? $variants[2] : null;
-
-            // Tạo dữ liệu để insert vào cơ sở dữ liệu
             $data2 = [
-                'product_id' => $id_product,
+                'bill_id' => $bill_id,
+                'product_id' => $product_id,
                 'bill_code' => $randomString,
-                'quantity' => $request->quantity[$item],
-                'subtotal' => $request->subtotal[$item],
-                'variant' => $variant,
-                'variant1' => $variant1,
-                'variant2' => $variant2,
+                'quantity' => $quantity,
+                'subtotal' => $subtotal,
+                'price' => $price,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
 
-            // Thực hiện insert vào cơ sở dữ liệu
             Bill_detail::create($data2);
         }
 
+        if ($idVoucher) {
+            $voucher = Voucher::find($idVoucher);
 
+            if ($voucher && $voucher->quantity > 0) {
+                $voucher->quantity -= 1;
+                $voucher->save();
+            } else {
+                return back()->with('error', 'Voucher không hợp lệ hoặc đã hết số lượng.');
+            }
+        }
+        $cart = session()->get('cart', []);
 
+        // Xóa các sản phẩm đã mua khỏi giỏ hàng
+        foreach ($products as $purchasedProduct) {
+            $product_id = $purchasedProduct['product_id'];
+            // Loại bỏ sản phẩm đã mua khỏi giỏ hàng
+            $cart = array_filter($cart, function ($item) use ($product_id) {
+                return $item['product_id'] != $product_id;
+            });
+        }
 
+        // Cập nhật lại session giỏ hàng
+        session()->put('cart', $cart);
         return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
     }
+
     public function ok(Request $request)
     {
         //  dd($request);
@@ -160,8 +182,8 @@ class CheckoutController extends Controller
         // dd($id);
            $data = Bill::find($id);
         //    dd($data);
-        $statuses = status::where('id', '>=', $data->status)->get();
-        //    dd($statuses);
+
+        $statuses = Status::where('id', '>=', $data->status)->get();
 
         return view('admins.checkout.status', compact('data', 'statuses'));
     }
@@ -171,4 +193,21 @@ class CheckoutController extends Controller
 
         return redirect()->route("checkout.list")->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
+    public function check_order(){
+        $order = null;
+
+
+        return view('clients.search_order', compact('order'));
+    }
+    public function search_order(request $request){
+        // dd($request);
+        $order = Bill::where('bill_code', $request->bill_code)->first();
+    //  dd($order->status);
+        $status = Status::where('id', $order->status)->first();
+
+
+return view('clients.search_order', compact('order', 'status'));
+    }
+
+
 }

@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('failed_jobs', function (Blueprint $table) {
+        Schema::create('bill_variants', function (Blueprint $table) {
             $table->id();
-            
+            $table->integer('bill_id')->nullable();
+            $table->integer('product_id')->nullable();
+            $table->string('variant')->nullable();
+            $table->string('variant2')->nullable();
+            $table->string('variant3')->nullable();
+
             $table->timestamps();
         });
     }
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('bill_variants');
     }
 };

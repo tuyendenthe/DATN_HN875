@@ -49,7 +49,7 @@
                                         <th>STT</th>
                                         <th>Tên sản phẩm</th>
                                         <th>Ảnh</th>
-                                        {{-- <th>Mô tả</th> --}}
+                                        <th>Loại</th>
                                         <th>Mô tả ngắn</th>
                                         <th>Hành Động</th>
                                     </tr>
@@ -63,7 +63,7 @@
                                             <td>
                                                 <img src="{{ Storage::url($value->image) }}" alt="" width="100">
                                             </td>
-                                            {{-- <td>{{ $value->content }}</td> --}}
+                                            <td>{{ $value->Categories ? $value->Categories->name : 'Chưa cập nhật' }}</td>
                                             <td>{{ $value->content_short }}</td>
                                             <td>
                                                 <a class="btn btn-info m-1" href="{{ route('variants.listVariant', $value->id) }}">Biến thể</a>

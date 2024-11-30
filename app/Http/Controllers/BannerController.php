@@ -45,9 +45,10 @@ class BannerController extends Controller
         //     $data['image'] = $this->upload_image($request->file('image'));
         // }
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images/banner','public');
+            $path = $request->file('image')->store('images/banners','public');
+            $data['image'] = $path;
          }
-         $data['image'] = $path;
+         
  
         Slide::create($data);
         return redirect()->route('banner.index')->with('success', 'Them thanh cong');
@@ -78,7 +79,7 @@ class BannerController extends Controller
         $data = $request->all();
         $Banner = Slide::findOrFail($id);
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images/banner','public');
+            $data['image'] = $request->file('image')->store('images/banners','public');
             // $data['image'] = $this->upload_image($request->file('image'));
             if (!empty($Banner->image) && file_exists(public_path($Banner->image))) {
                 // Xóa file cũ
