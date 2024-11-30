@@ -98,7 +98,7 @@ Route::get('/history', [CheckoutController::class, 'history'])->name('order.hist
 //     return view('clients.contact');
 // });
 
-Route::post('/post-review', [ReviewsController::class, 'postReview'])->name('post.review')->middleware('auth');
+Route::post('/post-review', [ReviewsController::class, 'postReview'])->name('post.review');
 Route::middleware('auth')->prefix('admin1/comment')->group(function() {
     Route::get('/', [ReviewsController::class, 'listComment'])->name('list-comment');
     Route::delete('/comment/{id}', [ReviewsController::class, 'deleteComment'])->name('delete-comment');

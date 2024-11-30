@@ -1,5 +1,19 @@
 @extends('clients.master')
+<style>
+    input.error {
+        border-color: red;
+    }
 
+    textarea.error {
+        border-color: red;
+    }
+
+    span.error-message {
+        font-size: 12px;
+        color: red;
+    }
+
+</style>
 @section('content')
 
     <!-- prealoder area start -->
@@ -52,7 +66,7 @@
     <!-- checkout-area start -->
     <section class="checkout-area pb-70">
         <div class="container">
-            <form action="{{ route('checkout.store')  }} " method="POST">
+            <form id="formCheckout" action="{{ route('checkout.store') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-lg-6">
@@ -65,49 +79,54 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Họ Và Tên <span class="required">*</span></label>
-                                        <input type="text" value="{{auth() -> user() ? auth() -> user() -> name : '' }}"
-                                               name="name" placeholder="Nhập tên"/>
+                                        <input type="text" id="name" name="name" placeholder="Nhập tên"/>
+                                        <span class="error-message" id="error-name"></span>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Địa Chỉ Nhận Hàng <span class="required">*</span></label>
-                                        <input type="text" name="add" placeholder="Nhập địa chỉ của bạn"/>
+                                        <input type="text" id="add" name="add" placeholder="Nhập địa chỉ của bạn"/>
+                                        <span class="error-message" id="error-add"></span>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Email <span class="required">*</span></label>
-                                        <input type="email"
-                                               value="{{auth() -> user() ? auth() -> user() -> email : '' }}"
-                                               name="email" placeholder="Nhập Email"/>
+                                        <input type="email" id="email" name="email" placeholder="Nhập Email"/>
+                                        <span class="error-message" id="error-email"></span>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Số Điện Thoại <span class="required">*</span></label>
-                                        <input type="text" name="phone" placeholder="Nhập Số Điện Thoại"/>
+                                        <input type="text" id="phone" name="phone" placeholder="Nhập Số Điện Thoại"/>
+                                        <span class="error-message" id="error-phone"></span>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="order-notes">
                                 <div class="checkout-form-list">
                                     <label>Ghi Chú </label>
-                                    <textarea id="checkout-mess" name="note" cols="30" rows="10"
-                                              placeholder="Nhập Nội Dung"></textarea>
+                                    <textarea id="checkout-mess" name="note" cols="30" rows="10" placeholder="Nhập Nội Dung"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
-                        <div class="your-order mb-30 ">
+                        <div class="your-order mb-30">
                             <h3>Thông Tin Đơn Hàng</h3>
                             <div class="your-order-table table-responsive">
                                 <table>
                                     <thead>
                                     <tr>
                                         <th class="product-name">Sản Phẩm</th>
-                                        <th class="product-name">số lượng</th>
+                                        <th class="product-name">Số Lượng</th>
                                         <th class="product-total">Thành Tiền</th>
                                     </tr>
                                     </thead>
@@ -124,75 +143,56 @@
                                         @endphp
                                         <tr class="cart_item">
                                             <td class="product-name">
-
-                                                    <div>{{ $item['product_name'] }}</div>
-
-
-
+                                                <div>{{ $item['product_name'] }}</div>
                                             </td>
                                             <td class="product-name align-items-center">
-
-
-                                                   <strong class="product-quantity align-items-center">
-                                                        × {{ $item['quantity'] }}</strong>
-
-
+                                                <strong class="product-quantity align-items-center">× {{ $item['quantity'] }}</strong>
                                             </td>
-{{--                                            <input type="hidden" name="quantity[]" value="{{ $item['quantity'] }}">--}}
-{{--                                            <input type="hidden" name="id_product[]" value="{{ $item['product_id'] }}">--}}
-{{--                                            <input type="hidden" name="price[]" value="{{ $item['price'] }}">--}}
-
                                             <td class="product-total">
-{{--                                                <input type="hidden" name="subtotal[]" value="{{ $subtotal }}">--}}
-                                                <span
-                                                    class="amount">{{ number_format($subtotal, 0, ',', '.') }}VNĐ</span>
+                                                <span class="amount">{{ number_format($subtotal, 0, ',', '.') }} VNĐ</span>
                                             </td>
                                         </tr>
                                     @endforeach
-                                    @php
-                                        @endphp
                                     </tbody>
                                     <tfoot>
                                     <tr class="cart-subtotal">
                                         <th>Tổng Cộng Giỏ Hàng</th>
-                                        <td><span class="amount">{{ number_format($totalProduct, 0, ',', '.')  }}</span>
-                                        </td>
+                                        <td><span class="amount">{{ number_format($totalProduct, 0, ',', '.') }}</span></td>
                                         <input type="hidden" name="total" value="{{ $totalProduct }}">
                                     </tr>
                                     @if(auth()->user())
-                                    <tr class="cart-voucher">
-                                        <th>Mã Giảm Giá</th>
-                                        <td><span class="amount">{{ $discount }}</span></td>
-                                    </tr>
+                                        <tr class="cart-voucher">
+                                            <th>Mã Giảm Giá</th>
+                                            <td><span class="amount">{{ $discount }}</span></td>
+                                        </tr>
                                     @endif
                                     <tr class="shipping">
                                         <th>Vận Chuyển</th>
                                         <td>
-                                            <ul>
-                                                <li>
-                                                    <input id="amount" type="radio" value="GHN" name="checkout"/>
-                                                    <label for="amount">
-                                                        Giao Hàng Nhanh <span class="amount">25,000 VNĐ</span>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <input id="shipping" type="radio" value="HT" name="checkout"/>
-                                                    <label for="shipping"> Hỏa Tốc <span
-                                                            class="amount">25,000 VNĐ</span></label>
-                                                </li>
-                                                <li></li>
-                                            </ul>
+                                            <select name="checkout">
+                                                <option value="GHN" name="checkout">Giao Hàng Nhanh</option>
+                                                <option value="HT" name="checkout">Hỏa Tốc</option>
+                                            </select>
+{{--                                            <ul>--}}
+{{--                                                <li>--}}
+{{--                                                    <input id="amount" type="radio" value="GHN" name="checkout"/>--}}
+{{--                                                    <label for="amount">Giao Hàng Nhanh <span class="amount">25,000 VNĐ</span></label>--}}
+{{--                                                </li>--}}
+{{--                                                <li>--}}
+{{--                                                    <input id="shipping" type="radio" value="HT" name="checkout"/>--}}
+{{--                                                    <label for="shipping"> Hỏa Tốc <span class="amount">25,000 VNĐ</span></label>--}}
+{{--                                                </li>--}}
+{{--                                            </ul>--}}
                                         </td>
                                     </tr>
                                     <tr class="order-total">
                                         <th>Tổng Tiền</th>
-                                        <td><strong><span class="amount">{{ number_format($total + 25000 - $discount, 0, ',', '.') }} VNĐ</span></strong>
-                                        </td>
-                                        </td>
+                                        <td><strong><span class="amount">{{ number_format($total + 25000 - $discount, 0, ',', '.') }} VNĐ</span></strong></td>
                                     </tr>
                                     </tfoot>
                                 </table>
                             </div>
+
                             <div class="payment-method">
                                 <h5>Chọn phương thức thanh toán:</h5>
                                 <label>
@@ -211,10 +211,95 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" id="voucherId" name="voucherId" value="{{$voucherId}}" >
+                <input type="hidden" id="voucherId" name="voucherId" value="{{$voucherId}}">
             </form>
+
         </div>
     </section>
     <!-- checkout area end -->
 
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("formCheckout");
+        form.addEventListener("submit", function (event) {
+            let isValid = true;
+
+            // Lấy các input
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const phone = document.getElementById("phone");
+            const add = document.getElementById("add");
+
+            // Xóa các lỗi cũ
+            clearErrors();
+
+            // Validate tên
+            if (name.value.trim() === "") {
+                showError("name", "Họ và tên không được để trống.");
+                isValid = false;
+            }
+
+            // Validate email
+            if (!validateEmail(email.value.trim())) {
+                showError("email", "Email không hợp lệ.");
+                isValid = false;
+            }
+
+            // Validate số điện thoại
+            if (!validatePhone(phone.value.trim())) {
+                showError("phone", "Số điện thoại không hợp lệ.");
+                isValid = false;
+            }
+
+            // Validate địa chỉ
+            if (add.value.trim() === "") {
+                showError("add", "Địa chỉ không được để trống.");
+                isValid = false;
+            }
+
+            // Nếu không hợp lệ, ngăn việc gửi form
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // Hàm hiển thị lỗi
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorElement = document.getElementById(`error-${inputId}`);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.color = "red";
+            }
+            if (input) {
+                input.classList.add("error");
+            }
+        }
+
+        // Hàm xóa lỗi
+        function clearErrors() {
+            const errorMessages = document.querySelectorAll(".error-message");
+            errorMessages.forEach((error) => {
+                error.textContent = "";
+            });
+            const inputs = document.querySelectorAll("input, textarea");
+            inputs.forEach((input) => {
+                input.classList.remove("error");
+            });
+        }
+
+        // Hàm kiểm tra email hợp lệ
+        function validateEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        // Hàm kiểm tra số điện thoại hợp lệ (Việt Nam)
+        function validatePhone(phone) {
+            const phonePattern = /^(03|05|07|08|09)\d{8}$/;
+            return phonePattern.test(phone);
+        }
+    });
+
+</script>

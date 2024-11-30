@@ -6,7 +6,7 @@
     color: rgb(20, 178, 252); /* Đổi màu đỏ đậm khi hover */
     font-weight: bold; /* Chữ đậm khi hover */
 }
-        
+
         .variant-container {
             display: flex;
             gap: 10px;
@@ -426,7 +426,7 @@
                                 <button data-bs-toggle="pill" data-bs-target="#tab-1-2" type="button">Additional information</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button data-bs-toggle="pill" data-bs-target="#tab-1-3" type="button">Reviews (3)</button>
+                                <button data-bs-toggle="pill" data-bs-target="#tab-1-3" type="button">Reviews ({{$totalReviews}})</button>
                             </li>
                         </ul>
                     </div>
@@ -644,7 +644,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xxl-10">
-                                        <ul class="epix-commentlist mb-50">
+                                        <ul id="commentList" class="epix-commentlist mb-50">
                                             @foreach ($reviews as $review)
                                                 <li class="epix-comment-item">
                                                     <div class="epix-comment-thumb">
@@ -652,7 +652,7 @@
                                                     </div>
                                                     <div class="epix-comment-content">
                                                         <div class="epix-comment-top">
-                                                            <div class="rating">
+                                                            <div style="margin-bottom: 15px" class="rating">
                                                                 @for ($i = 1; $i <= 5; $i++)
                                                                     @if ($i <= $review->star)
                                                                         <!-- Hiển thị sao đầy màu vàng từ trái qua phải -->
@@ -678,7 +678,7 @@
                                         </ul>
                                         <div class="epix-review-form-wrapper">
                                             <h4 class="epix-review-title">Add a review</h4>
-                                            <form action="{{ route('post.review') }}" method="POST" enctype="multipart/form-data">
+                                            <form id="reviewForm" action="{{ route('post.review') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" name='product_id' value="{{$products->id}}">
 
@@ -867,6 +867,61 @@
     }
 
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script>
+    $(document).ready(function () {
+        $('#reviewForm').on('submit', function (e) {
+            e.preventDefault(); // Ngăn chặn gửi form thông thường
+
+            let formData = new FormData(this); // Thu thập dữ liệu form
+
+            $.ajax({
+                url: $(this).attr('action'), // Lấy URL từ `action` của form
+                method: $(this).attr('method'), // Lấy method từ `method` của form
+                data: formData,
+                processData: false, // Không xử lý dữ liệu, vì ta dùng FormData
+                contentType: false, // Không đặt kiểu nội dung mặc định
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Thêm CSRF token
+                },
+                success: function (response) {
+                    let newComment = `
+                    <li class="epix-comment-item">
+                        <div class="epix-comment-thumb">
+                            <img src="${response.user_avatar || '{{ asset('laptop/assets/img/user/user-1.png') }}'}" alt="">
+                        </div>
+                        <div class="epix-comment-content">
+                            <div class="epix-comment-top">
+                                <div style="
+    margin-bottom: 15px "class="rating">
+                                    ${Array(5).fill(0).map((_, i) => i < response.star
+                        ? '<i class="fas fa-star" style="color: gold;"></i>'
+                        : '<i class="fas fa-star" style="color: lightgray;"></i>'
+                    ).join('')}
+                                </div>
+                                <div class="user-name"><a href="#">${response.user_name || 'Unknown User'}</a></div>
+                                <span class="date">– ${response.comment}</span>
+                                <span class="date">– ${response.created_at}</span>
+                            </div>
+                        </div>
+                    </li>
+                `;
+
+                    // Thêm bình luận mới vào đầu danh sách
+                    $('#commentList').prepend(newComment);
+
+                    // Xoá dữ liệu trong form
+                    $('#reviewForm')[0].reset();
+                },
+                error: function (error) {
+                    // Hiển thị thông báo lỗi
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+</script>
 
 @endsection

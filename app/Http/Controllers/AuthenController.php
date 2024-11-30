@@ -100,6 +100,7 @@ class AuthenController extends Controller
 
     public function logout(){
         Auth::logout();
+        session()->flush();
         return redirect()->route('login')->with([
             'message1' => 'Đăng xuất thành công'
         ]);
