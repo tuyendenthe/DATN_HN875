@@ -12,13 +12,27 @@ class Product extends Model
     use HasFactory, softDeletes;
     protected $table = 'products';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'image','price', 'content', 'content_short','cate_id'];
+    protected $fillable = [
+        'name',
+        'category_id',
+        'price',
+        'image',
+        'content',
+        'chip',
+        'ram',
+        'color',
+        'memory',
+        'screen',
+        'resolution',
+        'content_short',
+        'role',
+    ];
 
     // Product.php
-public function variants()
-{
-    return $this->hasMany(Variant::class);
-}
+    // public function variants()
+    // {
+    //     return $this->hasMany(Variant::class);
+    // }
 
     public function category()
     {
@@ -35,10 +49,10 @@ public function variants()
     }
 
 
-    public function Categories()
-    {
-        return $this->belongsTo(Categories::class, 'cate_id');
-    }
+    // public function Categories()
+    // {
+    //     return $this->belongsTo(Categories::class, 'cate_id');
+    // }
     public function flashSale()
     {
         return $this->hasOne(FlashSale::class, 'product_id');

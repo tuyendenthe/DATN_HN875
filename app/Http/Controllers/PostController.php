@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+
     public function index()
     {
         $posts = Post::with(['category', 'user'])->get();
