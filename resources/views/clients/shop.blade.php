@@ -1,5 +1,49 @@
 @extends('clients.master')
+<style>
+    /* Thiết kế chính cho nút */
+    .epix-sidebar-widget .epix-taglist li a#flash-sales-link {
+        display: inline-block;
+        background-color: #ff5722; /* Màu nền nổi bật */
+        color: #ffffff; /* Màu chữ trắng */
+        font-weight: bold;
+        font-size: 16px;
+        padding: 12px 20px;
+        border-radius: 30px; /* Bo góc tròn */
+        text-transform: uppercase; /* Viết hoa toàn bộ */
+        text-align: center;
+        text-decoration: none; /* Loại bỏ gạch chân */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động */
+        animation: pulse 2s infinite; /* Hiệu ứng nhịp tim */
+    }
 
+    /* Hiệu ứng hover */
+    .epix-sidebar-widget .epix-taglist li a#flash-sales-link:hover {
+        background-color: #e64a19; /* Đổi màu nền khi hover */
+        color: #ffffff; /* Đảm bảo màu chữ không đổi */
+        transform: scale(1.1); /* Phóng to nhẹ khi hover */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Tăng đổ bóng khi hover */
+    }
+
+    /* Hiệu ứng nhấp nháy */
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        50% {
+            transform: scale(1.05); /* Phóng to nhẹ */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Tăng đổ bóng */
+        }
+    }
+
+    /* Loại bỏ dấu chấm đầu dòng */
+    .epix-sidebar-widget .epix-taglist li {
+        list-style: none;
+    }
+
+
+</style>
 @push('style')
 
     @section('content')
@@ -35,15 +79,27 @@
                         <div class="col-xxl-3 col-lg-4">
                             <div class="epix-sidebar-area">
                                 <div class="epix-sidebar-widget mb-40">
-                                    <h4 class="epix-s-widget-title">MUA SẮM THEO DANH MỤC</h4>
                                     <div class="epix-taglist">
-                                        <ul>
-                                            @foreach ($categories as $item)
-                                                <li><a href="{{ route('shopWithCategories', $item->id) }}">{{$item->name}}</a></li>
-                                            @endforeach
-                                        </ul>
+                                                <li><a id="flash-sales-link" href="#">Flash Sales</a></li>
                                     </div>
                                 </div>
+                                <div class="epix-sidebar-widget">
+                                    <h4 class="epix-s-widget-title">MUA SẮM THEO DANH MỤC</h4>
+                                    <div class="slider-range mb-40">
+                                        <div id="slider-range"></div>
+                                        <div class="epix-color-scheme">
+                                            <select class="nice-select form-control" id="filter-by-category">
+                                                <option class="form-control" value="all">Tất cả</option>
+                                                @foreach ($categories as $item)
+                                                    <option class="form-control" value="{{$item->id}}"> {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
                                 <div class="epix-sidebar-widget">
                                     <h4 class="epix-s-widget-title">GIÁ</h4>
                                     <div class="slider-range mb-40">
@@ -61,19 +117,7 @@
                                 <br>
                                 <br>
                                 <br>
-                                <div class="epix-sidebar-widget mb-40">
-                                    <h4 class="epix-s-widget-title">Màu</h4>
-                                    <div class="epix-color-scheme">
-                                        <ul>
-                                            <li>
-                                                <a href="#" class="active" data-bg-color="#D1D1D1" data-color="grey"></a>
-                                                <a href="#" data-bg-color="#161616" data-color="black"></a>
-                                                <a href="#" data-bg-color="#F50000" data-color="red"></a>
-                                                <a href="#" data-bg-color="#ffffff" data-color="white"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+
                                 {{--                            <div class="epix-sidebar-widget mb-40">--}}
                                 {{--                                <h4 class="epix-s-widget-title">TAGS</h4>--}}
                                 {{--                                <div class="tagcloud">--}}
@@ -308,6 +352,51 @@
                     success: function(response) {
                         // Cập nhật danh sách sản phẩm trong thẻ #product-list
                         $('#product-list').html(response);
+                    }
+                });
+            });
+            $('#flash-sales-link').on('click', function (e) {
+                $.ajax({
+                    url: '/filter-flash-sales', // Đường dẫn tới route xử lý
+                    type: 'GET',
+                    success: function (response) {
+                        // console.log(response)
+                        $('#product-list').html(response);
+                    },
+                    error: function () {
+                        $('#product-list').html('<div class="error">Unable to load products. Please try again later.</div>');
+                    }
+                });
+            });
+            // $('#filter-by-category').on('click', function (e) {
+            //     var id = $(this).data('id');
+            //     $.ajax({
+            //         url: '/shop/' + id, // Đường dẫn tới route xử lý
+            //         type: 'GET',
+            //         success: function (response) {
+            //             // console.log(response)
+            //             $('#product-list').html(response);
+            //         },
+            //         error: function () {
+            //             $('#product-list').html('<div class="error">Unable to load products. Please try again later.</div>');
+            //         }
+            //     });
+            //
+            // });
+            $('#filter-by-category').on('change', function() {
+                var id = $(this).val(); // Lấy giá trị của khoảng giá được chọn
+
+                // Gửi Ajax request
+                $.ajax({
+                    url: '/shop/filter-by-category/' + id,  // Route của bạn
+                    method: 'GET',
+                    data: { id: id },
+                    success: function(response) {
+                        // Cập nhật phần tử #product-list với HTML mới
+                        $('#product-list').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
                     }
                 });
             });
