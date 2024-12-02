@@ -25,7 +25,7 @@ class ShopController extends Controller
 //        dd($products);
         $output = '';
         if ($products->isEmpty()) {
-            $output .= '<div class="no-products">No products found for this price range.</div>';
+            $output .= '<div class="no-products">Phiên sale đã kết thúc, vui lòng quay lại sau.</div>';
         } else {
             foreach ($products as $product) {
                 $output .= '
@@ -40,7 +40,7 @@ class ShopController extends Controller
                             </div>
                             <span class="sale">sale</span>
                             <a href="/single_product/' . $product->product->id . '">
-                                <img width="223px" height="396px" src="' . asset($product->product->image) . '" alt="' . $product->product->name . '">
+                                <img width="223px" height="396px" src="' . asset($product->product->image) . '" alt="">
                             </a>
                         </div>
                         <div class="price-box price-box-3">
@@ -194,7 +194,7 @@ class ShopController extends Controller
         ';
         }
 
-        
+
         return $output;
     }
 

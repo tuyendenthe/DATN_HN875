@@ -559,7 +559,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xxl-8 col-md-8">
-                                                        <div class="epix-count-right-progress">
+                                                        {{-- <div class="epix-count-right-progress">
                                                             <div class="single-progress-list">
                                                                 <div class="rating">
                                                                     <i class="fas fa-star"></i>
@@ -635,7 +635,7 @@
                                                                     <span>{{ $ratingCounts[5] ?? 0 }}</span>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>

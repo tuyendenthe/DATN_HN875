@@ -59,11 +59,13 @@ class HomeUserController extends Controller
 
     public function show(string $id)
     {
-        $products = Product::with('variants')->findOrFail($id);
-        $excludedId = $products['category_id'];
+        $products = Product::findOrFail($id);
+        $category_id = $products['category_id'];
+        $excludedId = $products['$id'];//id sản phẩm cần loại trừ
         $limit = 4;
          $categories = DB::table('products')
-        ->where('category_id', '=', $excludedId)
+        ->where('category_id', '=', $category_id)
+        ->where('id', '!=', $excludedId)
         ->inRandomOrder()
         ->limit($limit)
         ->get();
