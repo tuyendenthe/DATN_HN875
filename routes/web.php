@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\ImageUploadController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenController;
@@ -29,7 +30,7 @@ use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\Storage;
-
+use App\Mail\TestMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,11 +50,15 @@ Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name(
 
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
-Route::get('/shop/{id}', [ShopController::class, 'shopWithCategories'])->name('shopWithCategories');
+Route::get('/shop/filter-by-category/{id}', [ShopController::class, 'shopWithCategories'])->name('shopWithCategories');
 Route::get('/shop/filter-by-price/{priceRange}', [ShopController::class, 'shopWithRange'])->name('shop.filterByPrice');
 Route::get('/search-products', [HomeUserController::class, 'searchProducts'])->name('search.products');
 Route::get('/shop/filter-by-color/{selectedColor}', [ShopController::class, 'shopWithColor'])->name('shop.filterByColor');
-
+Route::get('/filter-flash-sales', [ShopController::class, 'flashSales'])->name('shop.flashSales');
+Route::get('/send-test-mail', function () {
+    Mail::to('phuongnam7303@gmail.com')->send(new TestMail());
+    return 'Test email sent successfully!';
+});
 
 // Route::get('/', function () {
 //     return view('clients.index');

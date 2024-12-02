@@ -11,7 +11,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Mail; // Thêm import Mail
+use App\Mail\TestMail; // Import Mailable đã tạo
 class CheckoutController extends Controller
 {
     public function index(Request $request)
@@ -109,6 +110,8 @@ class CheckoutController extends Controller
 
         // Cập nhật lại session giỏ hàng
         session()->put('cart', $cart);
+        Mail::to($request['email'])->send(new TestMail($billRecord, $products));
+
         return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
     }
 
