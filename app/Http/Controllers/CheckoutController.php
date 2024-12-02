@@ -44,67 +44,152 @@ class CheckoutController extends Controller
         // Trả về view checkout với các dữ liệu cần thiết
         return view('clients.checkout', compact('selectedProducts', 'cart', 'discount', 'total', 'totalProduct', 'voucherId'));
     }
-    public function store(Request $request)
-    {
-        $idVoucher = $request->voucherId;
-        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        $randomString = substr(str_shuffle($characters), 0, 10);
-        $bill = [
-            'bill_code' => $randomString,
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
+    // public function store(Request $request)
+    // {
+    //     $idVoucher = $request->voucherId;
+    //     $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    //     $randomString = substr(str_shuffle($characters), 0, 10);
+    //     $bill = [
+    //         'bill_code' => $randomString,
+    //         'name' => $request->name,
+    //         'phone' => $request->phone,
+    //         'email' => $request->email,
 
-            'checkout' => $request->checkout,
-            'note' => $request->note,
-            'payment_method' => $request->payment_method,
-            'total' => $request->total,
-            'status' => 1,
+    //         'checkout' => $request->checkout,
+    //         'note' => $request->note,
+    //         'payment_method' => $request->payment_method,
+    //         'total' => $request->total,
+    //         'status' => 1,
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
+    //     ];
+    //     $billRecord = Bill::create($bill);
+    //     $bill_id = $billRecord->id; // Lấy bill_id từ bản ghi vừa tạo
+
+    //     $products = json_decode($request->input('products'), true);
+
+
+    //     foreach ($products as $item ) {
+    //         // Lấy thông tin sản phẩm từ cart
+    //         $product_id = $item['product_id'];
+    //         $price = $item['price'];
+    //         $quantity = $item['quantity'];
+    //         $subtotal = $price * $quantity;
+    //         $data2 = [
+    //             'bill_id' =>$bill_id,
+    //             'product_id' => $product_id,
+    //             'bill_code' => $randomString,
+    //             'quantity' => $quantity,
+    //             'subtotal' => $subtotal,
+    //             'price' => $price,
+    //             'created_at' => now(),
+    //             'updated_at' => now(),
+    //         ];
+    //         // Thực hiện insert vào cơ sở dữ liệu
+    //         Bill_detail::create($data2);
+    //     }
+
+    //     if ($idVoucher) {
+    //         // Lấy voucher từ cơ sở dữ liệu
+    //         $voucher = Voucher::find($idVoucher);
+
+    //         // Kiểm tra xem voucher có tồn tại và còn số lượng không
+    //         if ($voucher && $voucher->quantity > 0) {
+    //             $voucher->quantity -= 1;
+    //             $voucher->save(); // Cập nhật vào cơ sở dữ liệu
+    //         } else {
+    //             return back()->with('error', 'Voucher không hợp lệ hoặc đã hết số lượng.');
+    //         }
+    //     }
+
+
+    //     return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
+    // }
+    public function store(Request $request)
+{
+    // Xác thực dữ liệu đầu vào
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'phone' => 'required|string|max:15', // Kiểm tra độ dài số điện thoại
+        'email' => 'required|email|max:255',
+        'checkout' => 'required|string|max:255',
+        'payment_method' => 'required|string|max:50',
+        'total' => 'required|integer|min:0',
+        'products' => 'required|json', // Dữ liệu sản phẩm phải là JSON
+        'voucherId' => 'nullable|integer|exists:vouchers,id' // Nếu có voucher
+    ]);
+
+    // Lấy thông tin voucher (nếu có)
+    $idVoucher = $request->voucherId;
+
+    // Tạo mã hóa đơn ngẫu nhiên
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    $randomString = substr(str_shuffle($characters), 0, 10);
+
+    // Tạo mảng dữ liệu hóa đơn
+    $bill = [
+        'bill_code' => $randomString,
+        'user_id' => auth()->id(), // Lưu ID người dùng đã đăng nhập
+        'name' => $request->name,
+        'phone' => $request->phone,
+        'email' => $request->email,
+        'checkout' => $request->checkout,
+        'note' => $request->note ?? '', // Nếu không có ghi chú thì để trống
+        'payment_method' => $request->payment_method,
+        'total' => $request->total,
+        'status' => 1, // Trạng thái ban đầu
+        'created_at' => now(),
+        'updated_at' => now(),
+    ];
+
+    // Lưu hóa đơn vào cơ sở dữ liệu
+    $billRecord = Bill::create($bill);
+    $bill_id = $billRecord->id; // Lấy ID của hóa đơn vừa tạo
+
+    // Giải mã dữ liệu sản phẩm từ JSON
+    $products = json_decode($request->input('products'), true);
+
+    // Lưu từng sản phẩm vào bảng bill_details
+    foreach ($products as $item) {
+        // Lấy thông tin sản phẩm từ cart
+        $product_id = $item['product_id'];
+        $price = $item['price'];
+        $quantity = $item['quantity'];
+        $subtotal = $price * $quantity;
+
+        // Tạo mảng dữ liệu cho bảng bill_details
+        $data2 = [
+            'bill_id' => $bill_id,
+            'product_id' => $product_id,
+            'bill_code' => $randomString,
+            'quantity' => $quantity,
+            'subtotal' => $subtotal,
+            'price' => $price,
             'created_at' => now(),
             'updated_at' => now(),
         ];
-        $billRecord = Bill::create($bill);
-        $bill_id = $billRecord->id; // Lấy bill_id từ bản ghi vừa tạo
 
-        $products = json_decode($request->input('products'), true);
-
-
-        foreach ($products as $item ) {
-            // Lấy thông tin sản phẩm từ cart
-            $product_id = $item['product_id'];
-            $price = $item['price'];
-            $quantity = $item['quantity'];
-            $subtotal = $price * $quantity;
-            $data2 = [
-                'bill_id' =>$bill_id,
-                'product_id' => $product_id,
-                'bill_code' => $randomString,
-                'quantity' => $quantity,
-                'subtotal' => $subtotal,
-                'price' => $price,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-            // Thực hiện insert vào cơ sở dữ liệu
-            Bill_detail::create($data2);
-        }
-
-        if ($idVoucher) {
-            // Lấy voucher từ cơ sở dữ liệu
-            $voucher = Voucher::find($idVoucher);
-
-            // Kiểm tra xem voucher có tồn tại và còn số lượng không
-            if ($voucher && $voucher->quantity > 0) {
-                $voucher->quantity -= 1;
-                $voucher->save(); // Cập nhật vào cơ sở dữ liệu
-            } else {
-                return back()->with('error', 'Voucher không hợp lệ hoặc đã hết số lượng.');
-            }
-        }
-
-
-        return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
+        // Thực hiện insert vào cơ sở dữ liệu
+        Bill_detail::create($data2);
     }
+
+    // Xử lý voucher (nếu có)
+    if ($idVoucher) {
+        // Lấy voucher từ cơ sở dữ liệu
+        $voucher = Voucher::find($idVoucher);
+
+        // Kiểm tra xem voucher có tồn tại và còn số lượng không
+        if ($voucher && $voucher->quantity > 0) {
+            $voucher->quantity -= 1; // Giảm số lượng voucher
+            $voucher->save(); // Cập nhật vào cơ sở dữ liệu
+        } else {
+            return back()->with('error', 'Voucher không hợp lệ hoặc đã hết số lượng.');
+        }
+    }
+
+    // Redirect đến trang thành công
+    return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
+}
     public function ok(Request $request)
     {
         //  dd($request);
@@ -201,6 +286,20 @@ class CheckoutController extends Controller
 
 return view('clients.search_order', compact('order', 'status'));
     }
+    public function myOrders()
+    {
+        // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để xem đơn hàng.');
+        }
 
+        // Lấy ID người dùng đã đăng nhập
+        $userId = auth()->id();
+
+        // Lấy danh sách đơn hàng của người dùng
+        $orders = Bill::where('user_id', $userId)->get(); // Giả sử bạn đã lưu user_id khi tạo hóa đơn
+
+        return view('clients.my_orders', compact('orders'));
+    }
 
 }

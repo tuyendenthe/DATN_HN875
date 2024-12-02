@@ -32,7 +32,7 @@ class BookFixController extends Controller
 
 
         // Thêm thông báo thành công
-        return redirect()->back()->with('success', 'Thông tin đã được lưu thành công!');
+        return redirect()->back()->with('message1', 'Thông tin đã được lưu thành công!');
     }
     public function index()
     {
@@ -54,7 +54,7 @@ class BookFixController extends Controller
         });
 
 
-        return back()->with('success', 'Đã cập nhật trạng thái và gửi email thành công.');
+        return back()->with('message1', 'Đã cập nhật trạng thái và gửi email thành công.');
     }
 
     public function updateFailed(BookFix $BookFix)
@@ -71,6 +71,6 @@ class BookFixController extends Controller
         });
 
 
-        return back()->with('success', 'Đã cập nhật trạng thái và gửi email thông báo thất bại.');
+        return back()->with('message1', 'Đã cập nhật trạng thái và gửi email thông báo thất bại.');
     }
 }
