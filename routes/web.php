@@ -278,6 +278,7 @@ Route::get('/cart/remove/{key}', [CartController::class, 'removeCartItem'])->nam
 Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('cart.add');
 
 
+
 Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
 /* -------------------------------- checkout -------------------------------- */
 Route::prefix('/checkout')->name('checkout.')->group(function () {
@@ -298,4 +299,5 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
 Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
-/* -------------------------------- check order -------------------------------- */
+
+Route::get('/my-orders', [CheckoutController::class, 'myOrders'])->name('my.orders')->middleware('auth');

@@ -27,7 +27,8 @@ class ContactController extends Controller
         ]);
 
 
-        return back()->with('success', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
+        // return back()->with('message1', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
+        return redirect()->route('index')->with('message1', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
     }
     public function index()
     {
@@ -50,6 +51,7 @@ class ContactController extends Controller
 
 
         return back()->with('success', 'Đã cập nhật trạng thái và gửi email thành công.');
+
     }
 
     public function updateFailed(Contact $contact)

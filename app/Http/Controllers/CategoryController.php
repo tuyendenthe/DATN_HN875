@@ -14,6 +14,7 @@ class CategoryController extends Controller
     {
         $category = Category::all();
         return view('admins.category.index', compact('category'));
+
     }
 
     /**
@@ -34,7 +35,8 @@ class CategoryController extends Controller
         ]);
 
         Category::create($request->all());
-        return redirect()->route('category.index')->with('success', 'Thêm thành công.');
+        // return redirect()->route('category.index')->with('success', 'Thêm thành công.');
+        return redirect()->route('category.index')->with('message1', 'Thêm danh mục thành công');
     }
 
     /**
@@ -69,7 +71,8 @@ class CategoryController extends Controller
         ]);
 
         $category->update($request->all());
-        return redirect()->route('category.index')->with('update_success', 'Sửa thành công.');
+
+        return redirect()->route('category.index')->with('message1', 'Sửa thành công.');
     }
 
     /**
@@ -79,6 +82,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->delete();
-        return redirect()->route('category.index')->with('delete_success', 'Xóa thành công.');
+
+        return redirect()->route('category.index')->with('message1', 'Xóa thành công.');
     }
 }

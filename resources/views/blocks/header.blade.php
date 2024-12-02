@@ -1,12 +1,28 @@
 <header>
+
     <div class="header-area theme-bg header-1 d-none d-lg-block">
+
         <div class="header-top">
+ {{-- <a class="navbar-brand" href="{{ route('index') }}">
+                                        <!-- Logo icon -->
+                                        <b class="logo-icon p-l-10">
+
+                                            <img style="margin-top: 20px" width="100px" src="{{asset('admin/assets/images/techzone.jpg')}}"  alt="homepage" class="light-logo" />
+                                        </b>
+
+                                    </a> --}}
             <div class="container">
+
                 <div class="row align-items-center">
+
                     <div class="col-xxl-6 col-xl-6 col-lg-6">
+
                         <div class="epix-t-left">
+
                             <nav id="mobile-menu">
+
                                 <ul>
+
                                     <li>
                                         <a href="{{ route('home') }}">Trang chủ</a>
                                     </li>
@@ -16,22 +32,11 @@
                                     </li>
                                     <li>
                                         <a href="{{ route('shop') }}">Sản phẩm</a>
-{{--                                        <ul class="sub-menu">--}}
-{{--                                            <li><a href="shop.html"><span>Shop Grid</span></a></li>--}}
-{{--                                            <li><a href="{{ route('single_product') }}">Single Product</a></li>--}}
-{{--                                        </ul>--}}
-                                    </li>
+                                   </li>
+
                                     <li>
                                         <a href="{{ route('blog') }}">Tin tức</a>
-{{--                                        <ul class="sub-menu">--}}
 
-{{--                                            <li><a href="blog.html">Danh sách tin tức</a></li>--}}
-{{--                                            <li><a href="single-blog.html">Chi tiết tin tức</a></li>--}}
-
-{{--                                            <li><a href="{{ route('blog') }}">Danh sách tin tức</a></li>--}}
-{{--                                            --}}{{-- <li><a href="{{ route('single_blog') }}">Chi tiết tin tức</a></li> --}}
-
-{{--                                        </ul>--}}
                                     </li>
                                     <li>
                                         <a href="{{ route('contact.form') }}">Liên hệ</a>
@@ -54,10 +59,10 @@
                                 <div class="user-menu">
                                     @if (Auth::check())
                                         <div class="dropdown">
-                                            <a href="#" class="dropdown-toggle"><i class="fal fa-user"></i> Xin chào, {{ Auth::user()->name }}</a>
+                                            <a href="#" class="dropdown-toggle"><i class="fal fa-user"></i>  {{ Auth::user()->name }}</a>
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('account.edit') }}">Cập nhật tài khoản</a>
-                                                <a href="{{ route('check_order') }}">Đơn hàng của bạn</a>
+                                                <a href="{{ route('my.orders') }}">Đơn hàng của bạn</a>
                                                 <a href="{{ route('logout') }}">Đăng xuất</a>
                                             </div>
                                         </div>
@@ -87,6 +92,7 @@
                         </div>
                     </div>
                     <div class="col-xxl-8 col-xl-8 col-lg-6">
+                       
                         <div class="epix-header-flex">
 {{--                            <div class="epix-side-dropdown d-none d-xl-block">--}}
 {{--                                <button class="epix-side-btn epix-side-btn-1">--}}
@@ -100,6 +106,7 @@
 {{--                                </ul>--}}
 {{--                            </div>--}}
                             <div class="epix-header-form epix-header-form-1">
+
                                 <form id="search-form" method="POST" autocomplete="off">
                                     <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm" />
                                     <button type="submit">
