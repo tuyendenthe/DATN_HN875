@@ -869,12 +869,12 @@
                                                     <span>{{ number_format($item->averageRating(), 1) }}</span>
                                                 </div>
                                             </div>
-                                            <div style="width: 200px" class="price-box mb-15">
+                                            {{-- <div style="width: 200px" class="price-box mb-15">
                                                 <span class="price">Số phiên bản:
                                                     {{ $item->variants->count() }}</span>
                                                 <a href="{{ route('single_product', $item->id) }}">+ Select
                                                     Option</a>
-                                            </div>
+                                            </div> --}}
                                             <div class="d-inline-block">
                                                 <div class="epix-action">
                                                     <a href="cart.html" class="p-cart">

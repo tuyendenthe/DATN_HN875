@@ -61,9 +61,10 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->name }}</td>
                                             <td>
-                                                <img src="{{ Storage::url($value->image) }}" alt="" width="100">
+                                                {{-- <img src="{{ Storage::url($value->image) }}" alt="" width="100"> --}}
+                                                <img  src="{{ asset($value->image) }}" alt="" width="100">
                                             </td>
-                                            <td>{{ $value->Categories ? $value->Categories->name : 'Chưa cập nhật' }}</td>
+                                            <td>{{ $value->category->name }}</td>
                                             <td>{{ $value->content_short }}</td>
                                             <td>
                                                 <a class="btn btn-info m-1" href="{{ route('variants.listVariant', $value->id) }}">Biến thể</a>

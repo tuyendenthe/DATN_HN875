@@ -27,7 +27,9 @@ return new class extends Migration
             $table->string('screen');  //kích thước màn
             $table->string('resolution'); // độ phân giải
             $table->string('content_short');
-            $table->integer('role')->nullable();
+
+            $table->integer('status')->nullable();
+             $table->integer('role')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
