@@ -59,18 +59,41 @@ class HomeUserController extends Controller
 
     public function show(string $id)
     {
-        $products = Product::findOrFail($id);
+
+
+        $products = (Product::with('category','flashSale'))->findOrFail($id);
+        // $categories = Category::all();
+        $flashSales = FlashSale::with('product')
+            ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
+            ->orderBy('time_end', 'asc')
+            ->limit(4)
+            ->get();
+        // $products = Product::findOrFail($id);
         $category_id = $products['category_id'];
+
         $excludedId = $products['$id'];//id sản phẩm cần loại trừ
         $limit = 4;
-         $categories = DB::table('products')
-        ->where('category_id', '=', $category_id)
-        ->where('id', '!=', $excludedId)
-        ->inRandomOrder()
-        ->limit($limit)
-        ->get();
+    //     $categories = DB::table('products')
+    // ->join('flash_sales', 'products.id', '=', 'flash_sales.product_id') // Join với bảng flash_sales
+    // ->where('products.category_id', '=', $category_id) // Lọc theo category_id
+    // ->where('products.id', '!=', $excludedId) // Loại trừ sản phẩm cần loại trừ
+    // ->select('products.*', 'flash_sales.*') // Lấy các cột từ cả hai bảng
+    // ->inRandomOrder() // Lấy dữ liệu ngẫu nhiên
+    // ->limit($limit) // Giới hạn số lượng bản ghi
+    // ->get();
+                     $category = (Product::with('category','flashSale'))
+                     ->where('products.category_id', '=', $category_id) // Lọc theo category_id
+                     ->where('products.id', '!=', $excludedId) // Loại trừ sản phẩm cần loại trừ
+                    //  ->select('products.*', 'flash_sales.*') // Lấy các cột từ cả hai bảng
+                     ->inRandomOrder() // Lấy dữ liệu ngẫu nhiên
+                     ->limit($limit) // Giới hạn số lượng bản ghi
+                     ->get();
+                     ;
+    //  $category = (Product::with('category','flashSale'))
+    //  ;
 
-// dd($categories);
+
+// dd($category);
 
         // dd($products);
 
@@ -86,7 +109,7 @@ class HomeUserController extends Controller
         $averageRating = $totalReviews > 0
             ? $reviews->where('status', 1)->avg('star') // Trung bình số sao của các review có status = 1
             : 0;
-        return view('clients.single_product', compact(['products','reviews', 'categories','ratingCounts', 'totalReviews', 'averageRating']));
+        return view('clients.single_product', compact(['products','flashSales','reviews', 'category','ratingCounts', 'totalReviews', 'averageRating']));
 
 //         $reviews = Comment::where('product_id', $id)->where('status', 1)
 //         ->orderBy('created_at', 'desc')

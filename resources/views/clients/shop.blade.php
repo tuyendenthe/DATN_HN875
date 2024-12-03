@@ -196,7 +196,7 @@
                                                                             <i class="fal fa-eye"></i>
                                                                         </a>
                                                                     </div>
-                                                                    <span class="sale">sale</span>
+                                                                    {{-- <span class="sale">sale</span> --}}
                                                                     <a href="{{ route('single_product', $item->id) }}"><img width="223px" height="396px" src="{{asset($item->image)}}" alt=""></a>
                                                                 </div>
                                                                 <div class="price-box price-box-3">
