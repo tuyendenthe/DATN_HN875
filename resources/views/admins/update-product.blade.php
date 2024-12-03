@@ -155,4 +155,60 @@
         <!-- End Right sidebar -->
         <!-- ============================================================== -->
     </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+    class MyUploadAdapter {
+        constructor(loader) {
+            this.loader = loader;
+        }
+
+        upload() {
+            return this.loader.file
+                .then(file => {
+                    return new Promise((resolve, reject) => {
+                        const formData = new FormData();
+                        formData.append('upload', file);
+
+                        fetch('/upload-image', {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data && data.url) {
+                                    resolve({
+                                        default: data.url, // Đường dẫn ảnh trả về
+                                    });
+                                } else {
+                                    reject(data.error || 'Upload failed.');
+                                }
+                            })
+                            .catch(error => reject(error));
+                    });
+                });
+        }
+    }
+
+    function MyCustomUploadAdapterPlugin(editor) {
+        editor.plugins.get('FileRepository').createUploadAdapter = loader => {
+            return new MyUploadAdapter(loader);
+        };
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        ClassicEditor
+            .create(document.querySelector('#editor1'), {
+                extraPlugins: [MyCustomUploadAdapterPlugin],
+            })
+            .then(editor => {
+                console.log('Editor is ready!', editor);
+            })
+            .catch(error => {
+                console.error('Error initializing CKEditor:', error);
+            });
+    });
+
+</script>
 @endsection
