@@ -605,15 +605,21 @@
                                                                     <span class="epix-p-subtitle">Đánh giá</span>
                                                                     <div class="rating">
                                                                         <i class="fal fa-star"></i>
-                                                                        <span>4.5</span>
+                                                                        {{-- <span>4.5</span> --}}
+                                                                        <span>{{ number_format($flashSale->product->averageRating(), 1) }}</span>
                                                                     </div>
                                                                 </div>
                                                                 <h5 class="epix-p-title"><a
                                                                         href="{{ route('product.details', $flashSale->product->id) }}">{{ $flashSale->product->name }}</a>
                                                                 </h5>
                                                                 <div class="price-box">
-                                                                    <span class="price"><span
-                                                                            class="active">{{ number_format($flashSale->product->price) }}đ</span></span>
+                                                                    <span class="price">
+                                                                        <span
+                                                                            class="active">{{ number_format($flashSale->price_sale) }}đ</span>
+                                                                        </span>
+                                                                        {{-- <span
+                                                                            class="active  text-muted">{{ number_format($flashSale->product->price) }}đ</span> --}}
+                                                                        </span>
                                                                     <a
                                                                         href="{{ route('product.details', $flashSale->product->id) }}">+
                                                                         Xem Thêm</a>
@@ -668,7 +674,7 @@
                                 <div class="row mb-35">
                                     <div class="col-xxl-12">
                                         <div class="epix-section-title text-center">
-                                            <h5 class="s-title">Sản phẩm Mới</h5>
+                                            <h5 class="s-title">Sản Phẩm Mới</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -713,8 +719,8 @@
                                                     @else
                                                         <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                     @endif
-                                                    <a href="{{ route('single_product', $item->id) }}">+ Select
-                                                        Option</a>
+                                                    {{-- <a href="{{ route('single_product', $item->id) }}">+ Select
+                                                        Option</a> --}}
                                                 </div>
                                             </div>
                                         </div>

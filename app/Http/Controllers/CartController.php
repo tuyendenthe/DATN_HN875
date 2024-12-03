@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\FlashSale;
 use App\Models\Variant;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
@@ -40,7 +41,9 @@ class CartController extends Controller
     // }
 
     public function addCart(Request $request, Product $product)
+
     {
+
         // $variant_id_1 = $request->input('variant_id_1');
         // $variant_id_2 = $request->input('variant_id_2');
         // $variant_id_3 = $request->input('variant_id_3');
@@ -55,11 +58,26 @@ class CartController extends Controller
         // $variant1_name = Variant::find($variant_id_1) == null ? '' : $variant1->name;
         // $variant2_name = Variant::find($variant_id_2) == null ? '' : $variant2->name;
         // $variant3_name = Variant::find($variant_id_3) == null ? '' : $variant3->name;
+        $products = (Product::with('category','flashSale'))->findOrFail($product->id);
+        // $categories = Category::all();
+        $flashSales = FlashSale::with('product')
+            ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
+            ->orderBy('time_end', 'asc')
+            ->limit(4)
+            ->get();
+
+
 
         $cart = session()->get('cart', []);
         $productId = $product->id;
         $productName = $product->name;
-        $productPrice = $product->price;
+            if ($products->isOnFlashSale()) {
+                $productPrice = $products->flashSale->price_sale;
+            } else {
+                $productPrice = $products->price;
+            }
+
+
         //  + $variant1_price + $variant2_price + $variant3_price;
         // $variantName1 = $variant1_name;
         // $variantName2 = $variant2_name;

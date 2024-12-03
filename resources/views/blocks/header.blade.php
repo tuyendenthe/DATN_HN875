@@ -62,7 +62,7 @@
                                             </div>
                                         </div>
                                     @else
-                                        <a href="{{ route('login') }}"><i class="fal fa-user"></i> Log in / Register</a>
+                                        <a href="{{ route('login') }}" style="text-decoration: none"><i class="fal fa-user"></i> Đăng Nhập / Đăng ký</a>
                                     @endif
                                 </div>
                                 {{-- <div class="epix-ht-social">
