@@ -51,21 +51,7 @@
                 @enderror
             </div>
 
-            {{-- <div class='col-12'>
-                <label for="">Loại sản phẩm</label>
-                <select name="category_id" class="form-control" id="" required>
-                    @foreach ($Categories as $item)
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
-            </div> --}}
-            {{-- <div class="col-12">
-                    Giá:
-                    <input type="number" name="price" class="form-control">
-                    @error('price')
-                        <span class="">{{ $message }}</span>
-            @enderror
-        </div> --}}
+           
         <div class="col-12">
             Ảnh:
             <input type="file" name="image" class="form-control">
