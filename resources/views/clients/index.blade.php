@@ -199,7 +199,7 @@
                                 <span class="epix-slide-subtitle">{{ $banner->title }}</span>
                                 <h2 class="epix-slide-title">{{ $banner->description }}</h2>
                                 <a href="{{ route('shop') }}" class="epix-btn-1">
-                                    <span>Purchase Now<i class="fal fa-angle-right"></i></span>
+                                    <span>Mua ngay<i class="fal fa-angle-right"></i></span>
                                 </a>
                             </div>
                         </div>
@@ -246,13 +246,16 @@
 
                     </div>
                     <div class="col-xxl-6 col-lg-6">
-                        <div class="epix-single-banner-2 mb-30 wow fadeInUp" data-wow-delay=".4s"
-                            data-background="https://th.bing.com/th/id/OIP.jnoyoTqzhiFCYCu2BJYbUAHaE3?rs=1&pid=ImgDetMain">
-                            <h3 class="epix-c-heading-2">Google Mini<br>
-                                Home Appliances<br>
-                                Nest 4.0</h3>
-                            <a href="{{ route('shop') }}" class="epix-white-btn"><span>Shop Now<i
-                                        class="fal fa-angle-right"></i></span></a>
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                @foreach ($banners as $banner)
+                                    <div class="swiper-slide" style="background-image: url('{{ Storage::url($banner->image) }}'); height: 340px;">
+                                    </div>
+                                @endforeach
+                            </div>
+                
+                            <!-- Pagination (optional) -->
+                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
                 </div>

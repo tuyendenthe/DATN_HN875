@@ -10,31 +10,31 @@
 
 
 
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Category </span></a>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Danh mục </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Category</span></a></li>
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category_post.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Category Post</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Danh mục</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category_post.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Danh mục bài viết</span></a></li>
                     </ul>
                 </li>
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Post</span></a>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Bài viết</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('post.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">List Post</span></a></li>
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('post.create')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">New Post</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('post.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Danh sách bài viết</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('post.create')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Bài viết mới</span></a></li>
                     </ul>
                 </li>
                 {{-- /* --------------------------------- COMMENT -------------------------------- */ --}}
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Comment </span></a>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Đánh giá </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('list-comment')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">List</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('list-comment')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Danh sách</span></a></li>
                     </ul>
                 </li>
                 {{-- /* --------------------------------- PRODUCT -------------------------------- */ --}}
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Product </span></a>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Sản phẩm </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.listProduct')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Products</span></a></li>
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('categories.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Products Type</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.listProduct')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Danh sách</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('categories.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Loại sản phẩm</span></a></li>
 
-                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.addProduct')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Product Post</span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.addProduct')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Thêm mới</span></a></li>
                     </ul>
                 </li>
                   {{-- /* --------------------------------- đơn hàng -------------------------------- */ --}}
@@ -45,11 +45,17 @@
                     </ul>
                 </li>
                 {{-- /* --------------------------------- Banner -------------------------------- */ --}}
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('banner.index')}}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Banner</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Banner </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('banner.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Banner chính</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('banner_cover.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Banner phụ</span></a></li>
+                    </ul>
+                </li>
+                
                 {{-- /* --------------------------------- PRODUCT -------------------------------- */ --}}
-                {{-- // --}}
+                {{-- // --}}    
 
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('contact.index')}}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Contact</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('contact.index')}}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Liên hệ</span></a></li>
 
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('bookfix.index')}}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Lịch Sửa Chữa khách Hàng</span></a></li>
 
@@ -82,17 +88,17 @@
                     </ul>
                 </li> --}}
                  {{-- voucher --}}
-                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Voucher </span></a>
+                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Mã giảm giá </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="{{route('admin1.vouchers.index')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> List Voucher </span></a></li>
-                        <li class="sidebar-item"><a href="{{route('admin1.vouchers.create')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Add Voucher </span></a></li>
+                        <li class="sidebar-item"><a href="{{route('admin1.vouchers.index')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Danh sách </span></a></li>
+                        <li class="sidebar-item"><a href="{{route('admin1.vouchers.create')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Thêm mới </span></a></li>
                     </ul>
                 </li>
                 {{-- user --}}
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">User </span></a>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Tài khoản</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="{{route('admin1.users.listuser')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> List User </span></a></li>
-                        <li class="sidebar-item"><a href="{{route('admin1.users.adduser')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Add User </span></a></li>
+                        <li class="sidebar-item"><a href="{{route('admin1.users.listuser')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Danh sách </span></a></li>
+                        <li class="sidebar-item"><a href="{{route('admin1.users.adduser')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Thêm mới </span></a></li>
                     </ul>
                 </li>
                 {{-- <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-alert"></i><span class="hide-menu">Errors </span></a>

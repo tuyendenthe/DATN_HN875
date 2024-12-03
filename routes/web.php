@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Banner_coverController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BookFixController;
 use App\Http\Controllers\CategoryController;
@@ -120,6 +121,7 @@ Route::get('checkout', function () {
 Route::get('/blog', [PostController::class, 'clientIndex'])->name('blog');
 Route::get('/single_blog/{post}', [PostController::class, 'clientShow'])->name('single_blog');
 
+
 // Route::get('/single_blog', function () {
 //     return view('clients.single_blog');
 // })->name('single_blog');
@@ -213,6 +215,8 @@ Route::resource('admin1/category_post', CategoryPostController::class);
 Route::resource('admin1/post', PostController::class);
 
 Route::resource('admin1/banner', BannerController::class);
+Route::resource('admin1/banner_cover', Banner_coverController::class);
+
 Route::resource('admin1/contact', ContactController::class);
 Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
 Route::patch('/contact/{contact}/failed', [ContactController::class, 'updateFailed'])->name('contact.failed');
