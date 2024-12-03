@@ -33,7 +33,7 @@ class VoucherController extends Controller
         ]);
 
         Voucher::create($request->all());
-        return redirect()->route('admin1.vouchers.index')->with('success', 'Voucher đã được thêm thành công.');
+        return redirect()->route('admin1.vouchers.index')->with('message1', 'Voucher đã được thêm thành công.');
     }
 
 //    update
@@ -57,13 +57,13 @@ public function update(Request $request, Voucher $voucher)
     ]);
 
     $voucher->update($request->all());
-    return redirect()->route('admin1.vouchers.index')->with('success', 'Voucher đã được cập nhật thành công.');
+    return redirect()->route('admin1.vouchers.index')->with('message1', 'Voucher đã được cập nhật thành công.');
 }
 
     // delete
     public function destroy(Voucher $voucher)
     {
         $voucher->delete();
-        return redirect()->route('admins.vouchers.index')->with('success', 'Voucher đã được xóa thành công.');
+        return redirect()->route('admins.vouchers.index')->with('message1', 'Voucher đã được xóa thành công.');
     }
 }

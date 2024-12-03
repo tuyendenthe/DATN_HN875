@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Banner_coverController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BookFixController;
 use App\Http\Controllers\CategoryController;
@@ -120,6 +121,7 @@ Route::get('checkout', function () {
 Route::get('/blog', [PostController::class, 'clientIndex'])->name('blog');
 Route::get('/single_blog/{post}', [PostController::class, 'clientShow'])->name('single_blog');
 
+
 // Route::get('/single_blog', function () {
 //     return view('clients.single_blog');
 // })->name('single_blog');
@@ -213,6 +215,8 @@ Route::resource('admin1/category_post', CategoryPostController::class);
 Route::resource('admin1/post', PostController::class);
 
 Route::resource('admin1/banner', BannerController::class);
+Route::resource('admin1/banner_cover', Banner_coverController::class);
+
 Route::resource('admin1/contact', ContactController::class);
 Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
 Route::patch('/contact/{contact}/failed', [ContactController::class, 'updateFailed'])->name('contact.failed');
@@ -278,6 +282,7 @@ Route::get('/cart/remove/{key}', [CartController::class, 'removeCartItem'])->nam
 Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('cart.add');
 
 
+
 Route::post('/cart/applyCoupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
 /* -------------------------------- checkout -------------------------------- */
 Route::prefix('/checkout')->name('checkout.')->group(function () {
@@ -298,4 +303,5 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
 Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
-/* -------------------------------- check order -------------------------------- */
+
+Route::get('/my-orders', [CheckoutController::class, 'myOrders'])->name('my.orders')->middleware('auth');
