@@ -82,10 +82,10 @@ class ProductController extends Controller
     public function updateProduct($id)
     {
         $product = Product::find($id);
-        $Categories = Categories::where('status_delete', Categories::UNDELETE)->get();
-        return view('admins.update-product', compact('Categories'))->with([
-            'product' => $product
-        ]);
+        $category = Category::get();
+
+        return view('admins.update-product', compact('category','product'))
+        ;
     }
 
     private function saveFile($file, $prefixName = '', $folder = 'public')
@@ -101,25 +101,41 @@ class ProductController extends Controller
     public function updatePutProduct(ProductRequest $req, $id)
     {
         $product = Product::find($id);
-        $path =  $product->image;
-
+        $path = $product->image;
         if ($req->hasFile('image')) {
-            $path = $this->saveFile(
-                $req->image,
-                $req->name,
-                'images/products/'
-            );
+            // $path = $req->file('image')->store('images/products', 'public');
+            $data['image'] = $this->upload_image($req->file('image'));
+            $path = $data['image'];
         }
+        // dd($req);
 
         $data =  [
             'name' => $req->name,
-            'price' => $req->price,
+            'category_id' => $req->category_id,
             'image' => $path,
-            'content' => $req->content,
+            'price' => $req->price,
             'content_short' => $req->content_short,
-            'cate_id' => $req->category_id
+            'content' => $req->content,
+
+
+
+            'chip' => $req->chip,
+
+            'ram' => $req->ram,
+
+            'color' => $req->color,
+
+            'memory' => $req->memory,
+
+            'screen' => $req->screen,
+
+            'resolution' => $req->resolution,
+            'role' => $req->role,
+
+
 
         ];
+        // dd($data);
         $product->update($data);
         return redirect()->route('products.listProduct');
     }
