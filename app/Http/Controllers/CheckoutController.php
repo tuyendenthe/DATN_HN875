@@ -295,6 +295,11 @@ class CheckoutController extends Controller
                     $idVoucher = $request['voucherId'];
                     $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                     $randomString = substr(str_shuffle($characters), 0, 10);
+                    $user_id = "";
+                    if(auth()->user()){
+                        $user_id = auth()->user()->id;
+                    }
+
                     $bill = [
                         'bill_code' => $randomString,
                         'name' => $request['name'],
@@ -302,8 +307,9 @@ class CheckoutController extends Controller
                         'email' => $request['email'],
                         'checkout' => $request['checkout'],
                         'note' => $request['note'],
-                        'payment_method' => "online",
-                        'total' => $tongtiengiohang,
+                        'user_id' => $user_id,
+                        'payment_method' => $request['payment_method'],
+                        'total' => $request['total'],
                         'status' => 1,
                         'created_at' => now(),
                         'updated_at' => now(),
