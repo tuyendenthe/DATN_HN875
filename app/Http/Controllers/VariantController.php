@@ -57,11 +57,11 @@ class VariantController extends Controller
 
             'type' => $request->type,
 
-            'type' => $request->type, 
+            'type' => $request->type,
 
         ]);
 
-        return redirect()->route('variants.listVariant',  $request->product_id)->with('success', 'Thêm biến thể thành công');
+        return redirect()->route('variants.listVariant',  $request->product_id)->with('message1', 'Thêm biến thể thành công');
     }
 
     // Trang chỉnh sửa biến thể
@@ -88,7 +88,7 @@ class VariantController extends Controller
             'quantity' => $request->quantity,
         ]);
 
-        return redirect()->route('variants.listVariant', $variant->product_id)->with('success', 'Cập nhật biến thể thành công');
+        return redirect()->route('variants.listVariant', $variant->product_id)->with('message1', 'Cập nhật biến thể thành công');
     }
 
     // Xóa biến thể
@@ -96,6 +96,6 @@ class VariantController extends Controller
     {
         $variant = Variant::findOrFail($id);
         $variant->delete();
-        return redirect()->route('variants.listVariant', $variant->product_id)->with('success', 'Xóa biến thể thành công');
+        return redirect()->route('variants.listVariant', $variant->product_id)->with('message1', 'Xóa biến thể thành công');
     }
 }

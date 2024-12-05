@@ -79,7 +79,7 @@
                                         </td>
                                             <td>
 
-                                                <a class="btn btn-warning m-1" href="{{ route('admin1.users.edit', $value->id) }}">Sửa</a>
+                                                {{-- <a class="btn btn-warning m-1" href="{{ route('admin1.users.edit', $value->id) }}">Sửa</a> --}}
                                                 <a class="btn btn-info m-1" href="{{ route('admin1.users.detail', $value->id) }}">Xem chi tiết</a>
 
 

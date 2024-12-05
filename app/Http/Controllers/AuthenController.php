@@ -32,13 +32,12 @@ class AuthenController extends Controller
             'name.required' => 'Tên không được để trống.',
             'email.required' => 'Email không được để trống.',
             'image.image' => 'File tải lên phải là hình ảnh.',
-
         ]);
 
         $user = Auth::user();
         $user->name = $req->name;
         $user->email = $req->email;
-        $user->address = $req->address;
+
 
         if ($req->hasFile('image')) {
             $path = $req->file('image')->store('images/users');
@@ -47,7 +46,7 @@ class AuthenController extends Controller
 
         $user->save();
 
-        return redirect()->route('index')->with('message1', 'Cập nhật tài khoản thành công');
+        return redirect()->route('index')->with('message', 'Cập nhật tài khoản thành công');
     }
     public function login(){
         return view('clients.login');
@@ -82,7 +81,7 @@ class AuthenController extends Controller
                 'password' => $req->password,
             ])) {
                 if (Auth::user()->role == '1') {
-                    return redirect()->route('dashboard')->with([
+                    return redirect()->route('admin1.users.listuser')->with([
                         'message1' => 'Đăng nhập thành công'
                     ]);
                 } else {

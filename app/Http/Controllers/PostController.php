@@ -46,7 +46,7 @@ class PostController extends Controller
 
         Post::create($data);
 
-        return redirect()->route('post.index')->with('success', 'Post created successfully.');
+        return redirect()->route('post.index')->with('message1', 'Thêm bài viết thành công.');
     }
 
     public function edit(Post $post)
@@ -81,7 +81,7 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return redirect()->route('post.index')->with('update_success', 'Post updated successfully.');
+        return redirect()->route('post.index')->with('message1', 'Cập nhật bài viết thành công.');
     }
 
     public function destroy(Post $post)
@@ -92,7 +92,7 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect()->route('post.index')->with('delete_success', 'Post deleted successfully.');
+        return redirect()->route('post.index')->with('message1', 'Xóa bài viết thành công.');
     }
 
 
