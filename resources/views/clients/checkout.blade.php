@@ -131,7 +131,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <input type="hidden" name="products" value="{{ json_encode($selectedProducts) }}">
+                                    <input type="hidden" name="products" id="listProducts" value="{{ json_encode($selectedProducts) }}">
 
                                     @php
                                         $total = 0;
@@ -169,7 +169,7 @@
                                     <tr class="shipping">
                                         <th>Vận Chuyển</th>
                                         <td>
-                                            <select name="checkout">
+                                            <select name="checkout" id="checkout-gh">
                                                 <option value="GHN" name="checkout">Giao Hàng Nhanh</option>
                                                 <option value="HT" name="checkout">Hỏa Tốc</option>
                                             </select>
@@ -204,6 +204,7 @@
                                     <input type="radio" name="payment_method" value="online">
                                     Thanh toán online
                                 </label>
+                                <img id="qr-code" src="https://api.vietqr.io/image/mbbank-0362978755-fTpTJka.jpg?accountName=TRAN VAN TUYEN&amount={{ $total + 25000 - $discount }}&addInfo={{ session('noidung') }}" style="display: none; margin-left: auto; margin-right: auto; width: 500px; height: 500px;">
                             </div>
                             <div class="order-button-payment mt-20">
                                 <button type="submit" class="os-btn os-btn-prymari">Thanh Toán</button>
@@ -300,6 +301,85 @@
             const phonePattern = /^(03|05|07|08|09)\d{8}$/;
             return phonePattern.test(phone);
         }
+
     });
 
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const $qrCodeImage = $('#qr-code');
+
+        $('input[name="payment_method"]').on('change', function () {
+            var name = $('#name').val();
+            var address = $('#add').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+            var note = $('#checkout-mess').val();
+            var voucherId = $('#vouvoucherId').val();
+            var products = $('#listProducts').val();
+            var checkout = $('#checkout-gh').val();
+
+            var tongtiengiohang = '{{ $total + 25000 - $discount }}';
+
+            const selectedPaymentMethod = $('input[name="payment_method"]:checked').val();
+            if (selectedPaymentMethod === 'online') {
+                // Hiện ảnh QR Code
+                $qrCodeImage.show();
+
+                let urlCheckPay = "{{ route('checkPay') }}"
+
+                let intervalId = setInterval(function(){
+                    // $.post(urlCheckPay, {
+                    //     name, address, email, phone, note, voucherId, products, tongtiengiohang, _token: $('input[name="_token"]').val(),
+                    // }, function(data){
+                    //     // if(!isNaN(data)){
+                    //     //     // window.location.href = "{{ route('checkout.success') }}"
+                    //     //     // clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng
+                    //     // }else{
+                    //     //     console.log(data)
+                    //     // }
+
+                    //     console.log(data)
+                    // });
+
+                    $.ajax({
+                        url: urlCheckPay,
+                        type: 'POST',
+                        data: {
+                            name,
+                            address,
+                            email,
+                            phone,
+                            note,
+                            voucherId,
+                            products,
+                            tongtiengiohang,
+                            checkout,
+                            _token: $('input[name="_token"]').val(),
+                        },
+                        success: function (data) {
+                            // Xử lý khi thành công
+                            if(!isNaN(data)){
+                                window.location.href = "{{ route('checkout.success') }}"
+                                clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            // Xử lý khi có lỗi
+                            console.error('Error:', {
+                                status: status,
+                                error: error,
+                                response: xhr.responseText
+                            });
+                        }
+                    });
+                }, 3000);
+            } else {
+                // Ẩn ảnh QR Code
+                $qrCodeImage.hide();
+            }
+        });
+    });
+</script>
+
