@@ -56,7 +56,7 @@ Route::get('/search-products', [HomeUserController::class, 'searchProducts'])->n
 Route::get('/shop/filter-by-color/{selectedColor}', [ShopController::class, 'shopWithColor'])->name('shop.filterByColor');
 Route::get('/filter-flash-sales', [ShopController::class, 'flashSales'])->name('shop.flashSales');
 Route::get('/send-test-mail', function () {
-    Mail::to('phuongnam7303@gmail.com')->send(new TestMail());
+    Mail::to('hvt910tranvantuyen@gmail.com')->send(new TestMail());
     return 'Test email sent successfully!';
 });
 
@@ -297,5 +297,7 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 /* -------------------------------- checkout -------------------------------- */
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
-Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
+Route::post('/search_order', [CheckoutController::class, 'search_order'])->name(name: 'search_order');
 /* -------------------------------- check order -------------------------------- */
+
+Route::post('/checkPay', [CheckoutController::class, 'checkPay'])->name(name: 'checkPay');
