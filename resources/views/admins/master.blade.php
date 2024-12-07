@@ -24,7 +24,15 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+<style>
+    .nav-link .icon-bell {
+    color: #ccc; /* Màu mặc định */
+}
 
+.nav-link.has-notification .icon-bell {
+    color: gold; /* Màu vàng khi có thông báo */
+}
+</style>
 <body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->

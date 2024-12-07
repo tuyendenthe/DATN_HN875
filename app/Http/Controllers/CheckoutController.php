@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail; // Thêm import Mail
 use App\Mail\TestMail; // Import Mailable đã tạo
 use Illuminate\Support\Facades\Session;
-
+use App\Models\Notification;
 class CheckoutController extends Controller
 {
     public function index(Request $request)
@@ -56,7 +56,7 @@ class CheckoutController extends Controller
     {
         $idVoucher = $request['voucherId'];
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        $randomString = substr(str_shuffle($characters), 0, 10);
+        $randomString = substr(str_shuffle($characters), 0, 10); // Tạo mã đơn hàng ngẫu nhiên
         $user_id = "";
         if(auth()->user()){
             $user_id = auth()->user()->id;
@@ -126,9 +126,35 @@ class CheckoutController extends Controller
         session()->put('cart', $cart);
         Mail::to($request['email'])->send(new TestMail($billRecord, $products));
 
+
+        // Tạo thông báo cho người quản lý
+        $notification = Notification::create([
+            'message' => 'Bạn có một đơn hàng mới với mã ' . $randomString,
+            'is_read' => false,
+            'created_at' => now(),
+        ]);
+
+        // Cập nhật bill_code sau khi tạo thông báo
+        $notification->bill_code = $randomString;
+        $notification->save();
+
         return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
     }
 
+    public function orderDetail($bill_code)
+    {
+        // Lấy chi tiết đơn hàng
+        $detail = DB::table('bill_details')
+            ->join('products', 'bill_details.product_id', '=', 'products.id')
+            ->where('bill_details.bill_code', $bill_code) // Sử dụng bill_code để lọc
+            ->select('bill_details.*', 'products.name')
+            ->get();
+    
+        // Truy vấn thông tin người dùng từ bảng bills
+        $detail_user = DB::table('bills')->where('bill_code', $bill_code)->first();
+
+        return view('admins.checkout.detail', compact('detail_user', 'detail'));
+    }
     public function ok(Request $request)
     {
         //  dd($request);

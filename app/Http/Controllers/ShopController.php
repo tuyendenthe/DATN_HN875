@@ -11,11 +11,13 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $products = (Product::with('category','flashSale'))->latest()->take(8)->get();
+        $perPage = 6;
+        $products = (Product::with('category','flashSale'))->latest()->take(8)->paginate($perPage);
         $categories = Category::get();
-        $newProducts = (Product::with('category','flashSale'))->latest()->take(3)->get();
+        $newProducts = (Product::with('category','flashSale'))->latest()->take(5)->get();
         return view('clients.shop', compact('products', 'categories', 'newProducts'));
     }
+
     public function flashSales()
     {
         $products = FlashSale::with('product')
@@ -59,50 +61,66 @@ class ShopController extends Controller
         return $output;
 
     }
-    public function shopWithCategories(Request $request)
-    {
-        $id = $request->input('id');
-        if ($id == 'all') {
-            $products = Product::all();
-        }else{
-            $products = Product::where('category_id', $id)->get();
+    // public function shopWithCategories(Request $request)
+    // {
+    //     $id = $request->input('id');
+    //     if ($id == 'all') {
+    //         $products = Product::all();
+    //     }else{
+    //         $products = Product::where('category_id', $id)->get();
 
-        }
-        $output = '';
-        if ($products->isEmpty()) {
-            $output .= '<div class="no-products">No products found for this price range.</div>';
-        } else {
-            foreach ($products as $product) {
-                $output .= '
-                <div class="col-xxl-3 col-sm-6 col-md-4">
-                    <div class="epix-single-product-3 mb-40 style-2 text-center swiper-slide">
-                        <div class="epix-product-thumb-3">
-                            <div class="epix-action">
-                                <a href="/single_product/' . $product->id . '" class="p-cart product-popup-toggle">
-                                    <i class="fal fa-eye"></i>
-                                    <i class="fal fa-eye"></i>
-                                </a>
-                            </div>
-                            <span class="sale">sale</span>
-                            <a href="/single_product/' . $product->id . '">
-                                <img width="223px" height="396px" src="' . asset($product->image) . '" alt="' . $product->name . '">
-                            </a>
-                        </div>
-                        <div class="price-box price-box-3">
-                            <span class="price flash-sale-price">'. number_format($product->price, 0, ',', '.') . ' VNĐ</span>
-                            <a href="/single_product/' . $product->id . '">+ Select Option</a>
-                        </div>
-                        <h5 class="epix-p-title epix-p-title-3">
-                            <a href="/single_product/' . $product->id . '">' . $product->name . '</a>
-                        </h5>
-                    </div>
-                </div>
-            ';
-            }
-        }
-        return $output;
+    //     }
+    //     $output = '';
+    //     if ($products->isEmpty()) {
+    //         $output .= '<div class="no-products">No products found for this price range.</div>';
+    //     } else {
+    //         foreach ($products as $product) {
+    //             $output .= '
+    //             <div class="col-xxl-3 col-sm-6 col-md-4">
+    //                 <div class="epix-single-product-3 mb-40 style-2 text-center swiper-slide">
+    //                     <div class="epix-product-thumb-3">
+    //                         <div class="epix-action">
+    //                             <a href="/single_product/' . $product->id . '" class="p-cart product-popup-toggle">
+    //                                 <i class="fal fa-eye"></i>
+    //                                 <i class="fal fa-eye"></i>
+    //                             </a>
+    //                         </div>
+    //                         <span class="sale">sale</span>
+    //                         <a href="/single_product/' . $product->id . '">
+    //                             <img width="223px" height="396px" src="' . asset($product->image) . '" alt="' . $product->name . '">
+    //                         </a>
+    //                     </div>
+    //                     <div class="price-box price-box-3">
+    //                         <span class="price flash-sale-price">'. number_format($product->price, 0, ',', '.') . ' VNĐ</span>
+    //                         <a href="/single_product/' . $product->id . '">+ Select Option</a>
+    //                     </div>
+    //                     <h5 class="epix-p-title epix-p-title-3">
+    //                         <a href="/single_product/' . $product->id . '">' . $product->name . '</a>
+    //                     </h5>
+    //                 </div>
+    //             </div>
+    //         ';
+    //         }
+    //     }
+    //     return $output;
+    // }
+
+    public function shopWithCategories($id)
+{
+    $perPage = 6; // Số sản phẩm mỗi trang
+    $products = Product::with('category', 'flashSale');
+
+    if ($id == 'all') {
+        $products = $products->latest()->paginate($perPage);
+    } else {
+        $products = $products->where('category_id', $id)->latest()->paginate($perPage);
     }
 
+    $categories = Category::get();
+    $newProducts = Product::with('category', 'flashSale')->latest()->take(5)->get();
+
+    return view('clients.shop', compact('products', 'categories', 'newProducts'));
+}
     public function shopWithRange(Request $request)
     {
         $range = $request->input('price_range');
