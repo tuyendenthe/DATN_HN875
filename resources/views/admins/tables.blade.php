@@ -4,12 +4,12 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Tables</h4>
+                <h4 class="page-title">Sản phẩm</h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"></li>
                         </ol>
                     </nav>
                 </div>
@@ -30,7 +30,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Basic Datatable</h5>
+                        <h5 class="card-title">Danh sách sản phẩm</h5>
 
                         <div class="table-responsive">
                             <table id="zero_config" class="table">
@@ -67,7 +67,7 @@
                                             <td>{{ $value->category->name }}</td>
                                             <td>{{ $value->content_short }}</td>
                                             <td>
-                                                <a class="btn btn-info m-1" href="{{ route('variants.listVariant', $value->id) }}">Biến thể</a>
+                                                {{-- <a class="btn btn-info m-1" href="{{ route('variants.listVariant', $value->id) }}">Biến thể</a> --}}
                                                 <a class="btn btn-primary m-1" href="{{ route('products.updateProduct', $value->id) }}">Sửa</a>
                                                 <form action="{{ route('products.deleteProduct', $value->id) }}" method="post" style="display:inline;">
                                                     @csrf

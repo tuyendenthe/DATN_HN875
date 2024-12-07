@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -46,7 +46,7 @@ class AuthenController extends Controller
 
         $user->save();
 
-        return redirect()->route('index')->with('message', 'Cập nhật tài khoản thành công');
+        return redirect()->route('index')->with('message1', 'Cập nhật tài khoản thành công');
     }
     public function login(){
         return view('clients.login');
@@ -150,7 +150,21 @@ class AuthenController extends Controller
         return view('admin.dashboard');
     }
 
+//     // public function notifications()
+//     // {
+//     //     $notifications = Notification::where('is_read', false)->get();
+//     //     return view('admins.notifications', compact('notifications'));
+//     // }
+// //     public function markAsRead($id)
+// // {
+// //     $notification = Notification::find($id);
+// //     if ($notification) {
+// //         $notification->is_read = true;
+// //         $notification->save();
+// //     }
 
+//     // return redirect()->back()->with('success', 'Thông báo đã được đánh dấu là đã đọc.');
+// }
     public function backupDB(){
         // Cấu hình cơ sở dữ liệu
         $databaseName = env('DB_DATABASE');

@@ -51,7 +51,7 @@ public function detail(string $id)
 
         User::create($data);
 
-        return redirect()->route('admin1.users.listuser')->with('success', 'Thêm thành công.');
+        return redirect()->route('admin1.users.listuser')->with('message1', 'Thêm thành công.');
     }
 
 
@@ -90,7 +90,7 @@ public function detail(string $id)
 
     $user->update($data);
 
-    return redirect()->route('admin1.users.listuser')->with('success', 'Cập nhật thành công.');
+    return redirect()->route('admin1.users.listuser')->with('message1', 'Cập nhật thành công.');
 }
 
     /**
@@ -100,7 +100,7 @@ public function detail(string $id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('admin1.users.listuser')->with('delete_success', 'Xóa thành công.');
+        return redirect()->route('admin1.users.listuser')->with('message1', 'Xóa thành công.');
     }
       public function toggleStatus(string $id)
 {
@@ -109,6 +109,6 @@ public function detail(string $id)
     $user->status = ($user->status === '1') ? '2' : '1'; // 1: Hoạt động, 2: Ngưng hoạt động
     $user->save();
 
-    return redirect()->route('admin1.users.listuser')->with('success', 'Trạng thái tài khoản đã được cập nhật.');
+    return redirect()->route('admin1.users.listuser')->with('message1', 'Trạng thái tài khoản đã được cập nhật.');
 }
 }
