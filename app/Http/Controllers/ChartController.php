@@ -26,10 +26,9 @@ class ChartController extends Controller
         }
         $data_start_str = $data_start->format('Y-m-d H:i:s');
         $data_end_str = $data_end->format('Y-m-d H:i:s');
-        $orders = Bill::whereBetween('created_at', [$data_start_str, $data_end_str])
-            ->where('status', 4)
-
-            ->get();
+        $orders = Bill::where('status', 4)
+        ->whereDate('created_at', '>=', $data_start_str)->whereDate('created_at', '<=', $data_end_str)
+        ->get();
         $revenueByDay = [];
 
         $orders->each(function ($order) use (&$revenueByDay) {

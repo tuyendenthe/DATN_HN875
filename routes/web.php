@@ -186,9 +186,9 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
 
 
     Route::post('/toggleUserStatus/{id}', [UserController::class, 'toggleStatus'])->name('admin1.users.toggleStatus');
-    Route::get('/chart', function () {
-        return view('admins.chart');
-    })->name('chart');
+    // Route::get('/chart', function () {
+    //     return view('admins.chart');
+    // })->name('chart');
 
 
     Route::get('/widgets', function () {
@@ -307,6 +307,7 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
 
+
 Route::post('/search_order', [CheckoutController::class, 'search_order'])->name(name: 'search_order');
 /* -------------------------------- check order -------------------------------- */
 
@@ -319,3 +320,8 @@ Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 
 // Lọc sản phẩm theo danh mục
 Route::get('/shop/filter-by-category/{id}', [ShopController::class, 'shopWithCategories'])->name('shopWithCategories');
+
+Route::post('/checkPay', [CheckoutController::class, 'checkPay'])->name(name: 'checkPay');
+Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
+
+Route::get('/my-orders', [CheckoutController::class, 'myOrders'])->name('my.orders')->middleware('auth');
