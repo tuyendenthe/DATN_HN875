@@ -17,7 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\VoucherController;
-
+use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
@@ -151,12 +151,14 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
-
+// Route::get('/admin/notifications', [AdminController::class, 'notifications'])->name('notifications.index');
+// Route::get('/admin/notifications/read/{id}', [AdminController::class, 'markAsRead'])->name('notifications.read');
 Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::get('/dashboard', function () {
         return view('admins.dashboard');
     })->name('dashboard');
-
+    Route::get('/notifications', [AdminController::class, 'notifications'])->name('notifications.index');
+    Route::get('/notifications/read/{id}', [AdminController::class, 'markAsRead'])->name('notifications.read');
 
     // CRUD user
     Route::get('/listUser', [UserController::class, 'listUser'])->name('admin1.users.listuser');
@@ -184,9 +186,9 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
 
 
     Route::post('/toggleUserStatus/{id}', [UserController::class, 'toggleStatus'])->name('admin1.users.toggleStatus');
-    Route::get('/chart', function () {
-        return view('admins.chart');
-    })->name('chart');
+    // Route::get('/chart', function () {
+    //     return view('admins.chart');
+    // })->name('chart');
 
 
     Route::get('/widgets', function () {
@@ -299,9 +301,27 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 
 });
 
+
+
 /* -------------------------------- checkout -------------------------------- */
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
+
+
+Route::post('/search_order', [CheckoutController::class, 'search_order'])->name(name: 'search_order');
+/* -------------------------------- check order -------------------------------- */
+
+Route::post('/checkPay', [CheckoutController::class, 'checkPay'])->name(name: 'checkPay');
+
+Route::get('/orders/detail/{bill_code}', [CheckoutController::class, 'orderDetail'])->name('orders.detail');
+
+// Hiển thị danh sách sản phẩm
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+
+// Lọc sản phẩm theo danh mục
+Route::get('/shop/filter-by-category/{id}', [ShopController::class, 'shopWithCategories'])->name('shopWithCategories');
+
+Route::post('/checkPay', [CheckoutController::class, 'checkPay'])->name(name: 'checkPay');
 Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
 
 Route::get('/my-orders', [CheckoutController::class, 'myOrders'])->name('my.orders')->middleware('auth');

@@ -125,7 +125,7 @@
                                     @csrf
                                     <input id="coupon_code" class="input-text" name="coupon_code" value=""
                                            placeholder="Nhập Mã Giảm Giá" type="text">
-                                    {{-- <input type="hidden" name="total" id="total" value="{{ $total }}"> --}}
+                                    <input type="hidden" name="id" id="id" value="{{auth()->user()->id }}">
                                     <button class="btn btn-primary" name="apply_coupon" type="submit">Áp Dụng</button>
                                 </form>
                             </div>

@@ -83,7 +83,7 @@
                                                 <li><a id="flash-sales-link" href="#">Flash Sales</a></li>
                                     </div>
                                 </div>
-                                <div class="epix-sidebar-widget">
+                                {{-- <div class="epix-sidebar-widget">
                                     <h4 class="epix-s-widget-title">MUA SẮM THEO DANH MỤC</h4>
                                     <div class="slider-range mb-40">
                                         <div id="slider-range"></div>
@@ -96,7 +96,28 @@
                                             </select>
                                         </div>
                                     </div>
+                                </div> --}}
+                                <div class="epix-sidebar-widget">
+                                    <h4 class="epix-s-widget-title">MUA SẮM THEO DANH MỤC</h4>
+                                    <div class="slider-range mb-40">
+                                        <div id="slider-range"></div>
+                                        <div class="epix-color-scheme">
+                                            <select class="nice-select form-control" id="filter-by-category" onchange="filterByCategory(this.value)">
+                                                <option class="form-control" value="all">Tất cả</option>
+                                                @foreach ($categories as $item)
+                                                    <option class="form-control" value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <script>
+                                    function filterByCategory(categoryId) {
+                                        const url = categoryId === 'all' ? '{{ route('shop') }}' : '{{ url('/shop/filter-by-category') }}' + '/' + categoryId;
+                                        window.location.href = url;
+                                    }
+                                </script>
                                 <br>
                                 <br>
                                 <br>
@@ -154,7 +175,9 @@
                                                     @else
                                                         <span style="width: 150px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                     @endif
+
                                                     <a href="{{ route('single_product', $item -> id) }}">Chi tiết sản phẩm</a>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -175,20 +198,7 @@
                                                 </div>
                                             </nav>
                                         </div>
-                                        {{--                                    <div class="epix-ch-right">--}}
-                                        {{--                                        <div class="show-text">--}}
-                                        {{--                                            <span>Hiển thị 1–12 trong 20 kết quả</span>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="sort-wrapper">--}}
-                                        {{--                                            <select name="select" id="select">--}}
-                                        {{--                                                <option value="1">Short By New</option>--}}
-                                        {{--                                                <option value="2">Short By New</option>--}}
-                                        {{--                                                <option value="3">Short By New</option>--}}
-                                        {{--                                                <option value="4">Short By New</option>--}}
-                                        {{--                                                <option value="5">Short By New</option>--}}
-                                        {{--                                            </select>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                    </div>--}}
+
                                     </div>
                                     <div class="epix-shop-product-main">
                                         <div class="tab-content" id="nav-tabContent">
@@ -274,15 +284,25 @@
                             <div class="epix-pagination pagination-area mt-40 mb-70">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center justify-xl-content-left">
-                                        <li class="page-item disabled">
-                                            <a class="page-link prev" href="shop.html" tabindex="-1"><i class="fal fa-angle-left"></i> Trước</a>
+                                        <!-- Nút "Trước" -->
+                                        <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
+                                            <a class="page-link prev" href="{{ $products->previousPageUrl() }}" tabindex="-1">
+                                                <i class="fal fa-angle-left"></i> Trước
+                                            </a>
                                         </li>
-                                        <li class="page-item"><a class="page-link" href="shop.html">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="shop.html">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="shop.html">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="shop.html">4</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link next" href="shop.html">Sau <i class="fal fa-angle-right"></i></a>
+
+                                        <!-- Các số trang -->
+                                        @for ($i = 1; $i <= $products->lastPage(); $i++)
+                                            <li class="page-item {{ $i == $products->currentPage() ? 'active' : '' }}">
+                                                <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+
+                                        <!-- Nút "Sau" -->
+                                        <li class="page-item {{ $products->hasMorePages() ? '' : 'disabled' }}">
+                                            <a class="page-link next" href="{{ $products->nextPageUrl() }}">
+                                                Sau <i class="fal fa-angle-right"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </nav>

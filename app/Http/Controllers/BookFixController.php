@@ -36,7 +36,7 @@ class BookFixController extends Controller
     }
     public function index()
     {
-        $BookFixs = BookFix::all();
+        $BookFixs = BookFix::latest()->get();
 
         return view('admins.bookfix.index', compact('BookFixs'));
     }
