@@ -243,20 +243,20 @@
                                                                     <div class="mb-15">
                                                                         <h5 class="epix-p-title"><a href="{{ route('single_product',$item->id)  }}">{{ $item -> name }}</a></h5>
                                                                         <div class="wrap">
-                                                                            <span class="epix-p-subtitle">Speakers</span>
+                                                                            <span class="epix-p-subtitle"></span>
                                                                         </div>
-                                                                        <div class="price-box">
+                                                                        <div class="">
                                                                             @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
                                                                             <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
                                                                             <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
                                                                             @else
                                                                                 <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                                             @endif
-                                                                            <a href="{{ route('single_product',$item->id)  }}">+ Select Option</a>
+                                                                            <!-- <a href="{{ route('single_product',parameters: $item->id)  }}">+ Select Option</a> -->
                                                                         </div>
                                                                     </div>
-                                                                    <p>{{ $item -> content }}</p>
-                                                                    <a href="{{ route('single_product', $item -> id) }}" class="epix-btn-1" tabindex="0"><span>Show more<i class="fal fa-angle-right"></i></span></a>
+                                                                    <p>{{ $item -> content_short }}</p>
+                                                                    <a href="{{ route('single_product', $item -> id) }}" class="epix-btn-1" tabindex="0"><span>Chi tiết sản phẩm<i class="fal fa-angle-right"></i></span></a>
                                                                 </div>
                                                             </div>
                                                         </div>
