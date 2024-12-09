@@ -91,6 +91,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xxl-2 col-xl-2 col-lg-3">
+
                         <a class="navbar-brand" href="{{ route('index') }}">
                             <!-- Logo icon -->
                             <b class="logo-icon">
@@ -99,6 +100,7 @@
                             </b>
 
                         </a>
+
                     </div>
                     <div class="col-xxl-8 col-xl-8 col-lg-6">
 

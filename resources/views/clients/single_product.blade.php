@@ -695,9 +695,10 @@
                                                 @endfor
                                         </div>
                                         <div class="user-name"><a href="#">{{ $review->user->name ?? 'Unknown User' }}</a></div>
-                                        <span class="date">– {{ $review->comment }}</span>
                                         <span class="date">– {{ $review->created_at->format('F d, Y') }}</span>
                                     </div>
+                                    <span class="date"> {{ $review->comment }}</span>
+
                                     <div class="epix-comment-bottom">
                                         <p>{{ $review->content }}</p>
                                     </div>
@@ -734,6 +735,9 @@
                                 <textarea name="comment" id="comment"></textarea>
 
                                 <button type="submit " >Đánh giá</button>
+
+
+
                             </form>
                         </div>
                     </div>
@@ -750,6 +754,88 @@
 </div>
 
 </div>
+
+
+<!-- Placeholder for success message -->
+<!-- Placeholder for success message -->
+<div id="successMessage" style="display: none;
+    position: fixed; top: 75%; left: 50%; transform: translate(-50%, -50%);
+    background-color: green; color: white; padding: 15px 30px; border-radius: 5px;
+    text-align: center; font-size: 18px; z-index: 9999;">
+    Đánh giá của bạn đã được gửi thành công, quản trị viên sẽ xem sét và phê duyệt thông báo của bạn.
+</div>
+
+<!-- Add jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $('#reviewForm').submit(function(event) {
+        event.preventDefault();  // Ngăn form submit mặc định
+
+        // Kiểm tra nếu chưa chọn sao hoặc để trống nội dung
+        const star = $('input[name="star"]:checked').val();
+        const comment = $('#comment').val().trim();
+
+        if (!star) {
+            alert('Bạn phải chọn số sao đánh giá.');
+            return;
+        }
+
+        if (!comment) {
+            alert('Nội dung đánh giá không được để trống.');
+            return;
+        }
+
+        // Sử dụng AJAX để gửi form mà không tải lại trang
+        $.ajax({
+            url: '{{ route("post.review") }}',  // Đảm bảo URL chính xác
+            type: 'POST',
+            data: new FormData(this),  // Gửi dữ liệu form
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.success) {
+                    // Hiển thị thông báo thành công ở giữa trang
+                    $('#successMessage').fadeIn().delay(2000).fadeOut();
+                    $('#reviewForm')[0].reset();  // Reset form sau khi gửi
+                }
+            },
+            error: function() {
+                alert('Có lỗi xảy ra khi gửi đánh giá. Vui lòng thử lại.');
+            }
+        });
+    });
+</script>
+
+
+<!-- <script>
+    document.getElementById('reviewForm').addEventListener('submit', function(event) {
+        const star = document.querySelector('input[name="star"]:checked');
+        const comment = document.getElementById('comment').value.trim();
+
+        // Kiểm tra nếu chưa chọn số sao
+        if (!star) {
+            alert('Bạn phải chọn số sao đánh giá.');
+            event.preventDefault(); // Ngăn không cho form được gửi
+            return;
+        }
+
+        // Kiểm tra nếu phần nội dung đánh giá bị để trống
+        if (!comment) {
+            alert('Nội dung đánh giá không được để trống.');
+            event.preventDefault(); // Ngăn không cho form được gửi
+            return;
+        }
+
+        // Kiểm tra độ dài nội dung
+        if (comment.length < 5) {
+            alert('Nội dung đánh giá phải có ít nhất 5 ký tự.');
+            event.preventDefault(); // Ngăn không cho form được gửi
+            return;
+        }
+    });
+</script> -->
+
 <!-- single product area end -->
 <script>
     function selectVariant(element) {
