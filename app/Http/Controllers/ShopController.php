@@ -109,14 +109,52 @@ class ShopController extends Controller
         $products = Product::query();
 
         // Lọc sản phẩm theo giá
+        // if ($range === '<3000000') {
+        //     $products = $products->where('price', '<', 3000000);
+        // } elseif ($range === '3000000-5000000') {
+        //     $products = $products->whereBetween('price', [3000000, 4000000]);
+        // } elseif ($range === '>5000000') {
+        //     $products = $products->where('price', '>', 4000000);
+        // }else{
+        //     $products = Product::query();
+        // }
+
         if ($range === '<3000000') {
+            // Lọc sản phẩm có giá dưới 3 triệu
             $products = $products->where('price', '<', 3000000);
         } elseif ($range === '3000000-5000000') {
-            $products = $products->whereBetween('price', [3000000, 4000000]);
-        } elseif ($range === '>5000000') {
-            $products = $products->where('price', '>', 4000000);
-        }else{
-            $products = Product::query();
+            // Lọc sản phẩm có giá từ 3 triệu đến 5 triệu
+            $products = $products->whereBetween('price', [3000000, 5000000]);
+        } elseif ($range === '5000000-10000000') {
+            // Lọc sản phẩm có giá từ 5 triệu đến 10 triệu
+            $products = $products->whereBetween('price', [5000000, 10000000]);
+        } elseif ($range === '10000000-15000000') {
+            // Lọc sản phẩm có giá từ 10 triệu đến 15 triệu
+            $products = $products->whereBetween('price', [10000000, 15000000]);
+        } elseif ($range === '15000000-20000000') {
+            // Lọc sản phẩm có giá từ 15 triệu đến 20 triệu
+            $products = $products->whereBetween('price', [15000000, 20000000]);
+        } elseif ($range === '20000000-25000000') {
+            // Lọc sản phẩm có giá từ 20 triệu đến 25 triệu
+            $products = $products->whereBetween('price', [20000000, 25000000]);
+        } elseif ($range === '25000000-30000000') {
+            // Lọc sản phẩm có giá từ 25 triệu đến 30 triệu
+            $products = $products->whereBetween('price', [25000000, 30000000]);
+        } elseif ($range === '30000000-35000000') {
+            // Lọc sản phẩm có giá từ 30 triệu đến 35 triệu
+            $products = $products->whereBetween('price', [30000000, 35000000]);
+        } elseif ($range === '35000000-40000000') {
+            // Lọc sản phẩm có giá từ 35 triệu đến 40 triệu
+            $products = $products->whereBetween('price', [35000000, 40000000]);
+        } elseif ($range === '40000000-50000000') {
+            // Lọc sản phẩm có giá từ 40 triệu đến 50 triệu
+            $products = $products->whereBetween('price', [40000000, 50000000]);
+        } elseif ($range === '>50000000') {
+            // Lọc sản phẩm có giá trên 50 triệu
+            $products = $products->where('price', '>', 50000000);
+        } else {
+            // Nếu không có lựa chọn nào, lấy tất cả sản phẩm
+            $products = Product::all();
         }
 
         // Lấy tất cả sản phẩm theo điều kiện đã lọc
