@@ -48,7 +48,7 @@
                                         <a href="{{ route('check_order') }}">Theo dõi đơn hàng</a>
                                     </li>
                                 </ul>
-                                
+
                             </nav>
                         </div>
                         <!-- /. header left -->
@@ -92,7 +92,8 @@
                 <div class="row align-items-center">
                     <div class="col-xxl-2 col-xl-2 col-lg-3">
                         <div class="epix-header-logo">
-                            <a href="index.html"><img src="assets/img/logo/logo-white.png" alt="" /></a>
+                            <a href="index.html"><img src="{{ asset('assets/img/logo/logo1122.jpg') }}" alt="" />
+                            </a>
                         </div>
                     </div>
                     <div class="col-xxl-8 col-xl-8 col-lg-6">

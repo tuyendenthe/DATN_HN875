@@ -109,7 +109,15 @@
                                                 <option class="form-control" value="all">Tất cả</option>
                                                 <option class="form-control" value="<3000000">Dưới 3.000.000</option>
                                                 <option class="form-control" value="3000000-5000000">3.000.000 - 5.000.000</option>
-                                                <option class="form-control" value=">5000000">Trên 5.000.000</option>
+                                                <option class="form-control" value="5000000-10000000">5.000.000 - 10.000.000</option>
+                                                <option class="form-control" value="10000000-15000000">10.000.000 - 15.000.000</option>
+                                                <option class="form-control" value="15000000-20000000">15.000.000 - 20.000.000</option>
+                                                <option class="form-control" value="20000000-25000000">20.000.000 - 25.000.000</option>
+                                                <option class="form-control" value="25000000-30000000">25.000.000 - 30.000.000</option>
+                                                <option class="form-control" value="30000000-35000000">30.000.000 - 35.000.000</option>
+                                                <option class="form-control" value="35000000-40000000">35.000.000 - 40.000.000</option>
+                                                <option class="form-control" value="40000000-50000000">40.000.000 - 50.000.000</option>
+                                                <option class="form-control" value=">50000000">Trên 50.000.000</option>
                                             </select>
                                         </div>
                                     </div>
@@ -144,9 +152,9 @@
                                                     <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
                                                     <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
                                                     @else
-                                                        <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                        <span style="width: 150px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                     @endif
-                                                    <a href="{{ route('single_product', $item -> id) }}">+ Select Option</a>
+                                                    <a href="{{ route('single_product', $item -> id) }}">Chi tiết sản phẩm</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -206,7 +214,7 @@
                                                                     @else
                                                                         <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                                     @endif
-                                                                    <a style="width: 300px" href="{{ route('single_product', $item->id) }}">+ Select Option</a>
+                                                                    <a style="width: 300px" href="{{ route('single_product', $item->id) }}">Chi tiết sản phẩm</a>
                                                                 </div>
                                                                 <h5 class="epix-p-title epix-p-title-3"><a href="{{ route('single_product', $item->id) }}">{{$item->name}}</a></h5>
                                                             </div>
