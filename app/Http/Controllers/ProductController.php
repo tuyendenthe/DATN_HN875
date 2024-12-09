@@ -13,6 +13,7 @@ class ProductController extends Controller
 {
     public function listProduct()
     {
+        session()->forget('new_order'); // Xóa thông báo đơn hàng mới
         $listProducts = Product::with('category')->get();
         // dd($listProducts);
 
