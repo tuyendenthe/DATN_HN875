@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Epix - Electronics eCommerce HTML Template</title>
+    <title>Laptop TechZone</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -123,9 +123,9 @@
         }
     </style>
 
-    +
+  
 
-    
+
     <div class="fix">
         <div class="side-info d-lg-none">
             <button class="side-info-close"><i class="fal fa-times"></i></button>
