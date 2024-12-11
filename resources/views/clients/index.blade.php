@@ -941,9 +941,9 @@
                     <div class="col-xxl-3 col-xl-3 footer-col-1 col-sm-6 col-md-8 col-lg-8">
                         <div class="footer-widget widget mb-30 widget-about">
                             <div class="widget-about">
-                                <h4 class="epix-footer-title">Tải ứng dụng</h4>
-                                <p><a href="index.html">Epixx</a> Ứng dụng hiện đã có trên Google<br>
-                                    Play & App Store. Nhận nó ngay bây giờ.</p>
+                                <h4 class="epix-footer-title">TECHZONE</h4>
+                                <p><a href="index.html"></a> <br>
+                                    TECHZONE lựa chọn số 1 Laptop</p>
                                 <div class="logo-list logo-list-1">
                                     <a href="#"><img src="assets/img/icon/icon-app-store.png"
                                             alt=""></a>
