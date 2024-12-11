@@ -15,8 +15,7 @@ class ShopController extends Controller
         $categories = Category::get();
         $newProducts = (Product::with('category','flashSale'))->latest()->take(3)->get();
         return view('clients.shop', compact('products', 'categories', 'newProducts'));
-    }
-    public function flashSales()
+    }    public function flashSales()
     {
         $products = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
