@@ -86,6 +86,7 @@ Route::get('/contact', function () {
 
 Route::post('/contact', [ContactController::class, 'sendContact'])->name('contact.send');
 
+
 Route::get('/book-fix', function () {
     return view('clients.bookfix');
 })->name('bookfix.form');
@@ -222,6 +223,9 @@ Route::resource('admin1/banner_cover', Banner_coverController::class);
 Route::resource('admin1/contact', ContactController::class);
 Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
 Route::patch('/contact/{contact}/failed', [ContactController::class, 'updateFailed'])->name('contact.failed');
+// Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
+Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
+
 
 Route::resource('admin1/bookfix', BookFixController::class);
 Route::patch('/bookfix/{bookfix}/success', [BookFixController::class, 'updateSuccess'])->name('bookfix.success');

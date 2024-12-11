@@ -11,13 +11,11 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $perPage = 6;
-        $products = (Product::with('category','flashSale'))->latest()->take(8)->paginate($perPage);
+        $products = (Product::with('category','flashSale'))->latest()->take(8)->get();
         $categories = Category::get();
-        $newProducts = (Product::with('category','flashSale'))->latest()->take(5)->get();
+        $newProducts = (Product::with('category','flashSale'))->latest()->take(3)->get();
         return view('clients.shop', compact('products', 'categories', 'newProducts'));
     }
-
     public function flashSales()
     {
         $products = FlashSale::with('product')
@@ -61,81 +59,103 @@ class ShopController extends Controller
         return $output;
 
     }
-    // public function shopWithCategories(Request $request)
-    // {
-    //     $id = $request->input('id');
-    //     if ($id == 'all') {
-    //         $products = Product::all();
-    //     }else{
-    //         $products = Product::where('category_id', $id)->get();
+    public function shopWithCategories(Request $request)
+    {
+        $id = $request->input('id');
+        if ($id == 'all') {
+            $products = Product::all();
+        }else{
+            $products = Product::where('category_id', $id)->get();
 
-    //     }
-    //     $output = '';
-    //     if ($products->isEmpty()) {
-    //         $output .= '<div class="no-products">No products found for this price range.</div>';
-    //     } else {
-    //         foreach ($products as $product) {
-    //             $output .= '
-    //             <div class="col-xxl-3 col-sm-6 col-md-4">
-    //                 <div class="epix-single-product-3 mb-40 style-2 text-center swiper-slide">
-    //                     <div class="epix-product-thumb-3">
-    //                         <div class="epix-action">
-    //                             <a href="/single_product/' . $product->id . '" class="p-cart product-popup-toggle">
-    //                                 <i class="fal fa-eye"></i>
-    //                                 <i class="fal fa-eye"></i>
-    //                             </a>
-    //                         </div>
-    //                         <span class="sale">sale</span>
-    //                         <a href="/single_product/' . $product->id . '">
-    //                             <img width="223px" height="396px" src="' . asset($product->image) . '" alt="' . $product->name . '">
-    //                         </a>
-    //                     </div>
-    //                     <div class="price-box price-box-3">
-    //                         <span class="price flash-sale-price">'. number_format($product->price, 0, ',', '.') . ' VNĐ</span>
-    //                         <a href="/single_product/' . $product->id . '">+ Select Option</a>
-    //                     </div>
-    //                     <h5 class="epix-p-title epix-p-title-3">
-    //                         <a href="/single_product/' . $product->id . '">' . $product->name . '</a>
-    //                     </h5>
-    //                 </div>
-    //             </div>
-    //         ';
-    //         }
-    //     }
-    //     return $output;
-    // }
-
-    public function shopWithCategories($id)
-{
-    $perPage = 6; // Số sản phẩm mỗi trang
-    $products = Product::with('category', 'flashSale');
-
-    if ($id == 'all') {
-        $products = $products->latest()->paginate($perPage);
-    } else {
-        $products = $products->where('category_id', $id)->latest()->paginate($perPage);
+        }
+        $output = '';
+        if ($products->isEmpty()) {
+            $output .= '<div class="no-products">No products found for this price range.</div>';
+        } else {
+            foreach ($products as $product) {
+                $output .= '
+                <div class="col-xxl-3 col-sm-6 col-md-4">
+                    <div class="epix-single-product-3 mb-40 style-2 text-center swiper-slide">
+                        <div class="epix-product-thumb-3">
+                            <div class="epix-action">
+                                <a href="/single_product/' . $product->id . '" class="p-cart product-popup-toggle">
+                                    <i class="fal fa-eye"></i>
+                                    <i class="fal fa-eye"></i>
+                                </a>
+                            </div>
+                            <span class="sale">sale</span>
+                            <a href="/single_product/' . $product->id . '">
+                                <img width="223px" height="396px" src="' . asset($product->image) . '" alt="' . $product->name . '">
+                            </a>
+                        </div>
+                        <div class="price-box price-box-3">
+                            <span class="price flash-sale-price">'. number_format($product->price, 0, ',', '.') . ' VNĐ</span>
+                            <a href="/single_product/' . $product->id . '">+ Select Option</a>
+                        </div>
+                        <h5 class="epix-p-title epix-p-title-3">
+                            <a href="/single_product/' . $product->id . '">' . $product->name . '</a>
+                        </h5>
+                    </div>
+                </div>
+            ';
+            }
+        }
+        return $output;
     }
 
-    $categories = Category::get();
-    $newProducts = Product::with('category', 'flashSale')->latest()->take(5)->get();
-
-    return view('clients.shop', compact('products', 'categories', 'newProducts'));
-}
     public function shopWithRange(Request $request)
     {
         $range = $request->input('price_range');
         $products = Product::query();
 
         // Lọc sản phẩm theo giá
+        // if ($range === '<3000000') {
+        //     $products = $products->where('price', '<', 3000000);
+        // } elseif ($range === '3000000-5000000') {
+        //     $products = $products->whereBetween('price', [3000000, 4000000]);
+        // } elseif ($range === '>5000000') {
+        //     $products = $products->where('price', '>', 4000000);
+        // }else{
+        //     $products = Product::query();
+        // }
         if ($range === '<3000000') {
+            // Lọc sản phẩm có giá dưới 3 triệu
             $products = $products->where('price', '<', 3000000);
         } elseif ($range === '3000000-5000000') {
-            $products = $products->whereBetween('price', [3000000, 4000000]);
-        } elseif ($range === '>5000000') {
-            $products = $products->where('price', '>', 4000000);
-        }else{
+            // Lọc sản phẩm có giá từ 3 triệu đến 5 triệu
+            $products = $products->whereBetween('price', [3000000, 5000000]);
+        } elseif ($range === '5000000-10000000') {
+            // Lọc sản phẩm có giá từ 5 triệu đến 10 triệu
+            $products = $products->whereBetween('price', [5000000, 10000000]);
+        } elseif ($range === '10000000-15000000') {
+            // Lọc sản phẩm có giá từ 10 triệu đến 15 triệu
+            $products = $products->whereBetween('price', [10000000, 15000000]);
+        } elseif ($range === '15000000-20000000') {
+            // Lọc sản phẩm có giá từ 15 triệu đến 20 triệu
+            $products = $products->whereBetween('price', [15000000, 20000000]);
+        } elseif ($range === '20000000-25000000') {
+            // Lọc sản phẩm có giá từ 20 triệu đến 25 triệu
+            $products = $products->whereBetween('price', [20000000, 25000000]);
+        } elseif ($range === '25000000-30000000') {
+            // Lọc sản phẩm có giá từ 25 triệu đến 30 triệu
+            $products = $products->whereBetween('price', [25000000, 30000000]);
+        } elseif ($range === '30000000-35000000') {
+            // Lọc sản phẩm có giá từ 30 triệu đến 35 triệu
+            $products = $products->whereBetween('price', [30000000, 35000000]);
+        } elseif ($range === '35000000-40000000') {
+            // Lọc sản phẩm có giá từ 35 triệu đến 40 triệu
+            $products = $products->whereBetween('price', [35000000, 40000000]);
+        } elseif ($range === '40000000-50000000') {
+            // Lọc sản phẩm có giá từ 40 triệu đến 50 triệu
+            $products = $products->whereBetween('price', [40000000, 50000000]);
+        } elseif ($range === '>50000000') {
+            // Lọc sản phẩm có giá trên 50 triệu
+            $products = $products->where('price', '>', 50000000);
+        } else {
+            // Nếu không có lựa chọn nào, lấy tất cả sản phẩm
             $products = Product::query();
         }
+
 
         // Lấy tất cả sản phẩm theo điều kiện đã lọc
         $products = $products->get();
