@@ -124,8 +124,6 @@
     </style>
 
 
-
-
     <div class="fix">
         <div class="side-info d-lg-none">
             <button class="side-info-close"><i class="fal fa-times"></i></button>
