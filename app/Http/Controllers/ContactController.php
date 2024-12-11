@@ -44,12 +44,7 @@ class ContactController extends Controller
         $contact->status_id = 2; // Trạng thái "Liên lạc thành công"
         $contact->save();
 
-        // Gửi email thông báo liên lạc thành công
-        // Gửi email thông báo liên lạc thành công
-
-
-
-        return back()->with('success', 'Đã cập nhật trạng thái và gửi email thành công.');
+        return back()->with('success', 'Đã cập nhật trạng thái ');
     }
 
     public function updateFailed(Contact $contact)
@@ -57,11 +52,6 @@ class ContactController extends Controller
         // Cập nhật trạng thái liên lạc thất bại
         $contact->status_id = 3; // Trạng thái "Không thể liên lạc"
         $contact->save();
-
-        // Gửi email thông báo liên lạc thất bại
-        // Gửi email thông báo liên lạc thất bại
-
-
 
         return back()->with('success', 'Đã cập nhật trạng thái .');
     }
