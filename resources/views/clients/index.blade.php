@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Epix - Electronics eCommerce HTML Template</title>
+    <title>Laptop TechZone</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -123,9 +123,9 @@
         }
     </style>
 
-    +
 
-    
+
+
     <div class="fix">
         <div class="side-info d-lg-none">
             <button class="side-info-close"><i class="fal fa-times"></i></button>
@@ -639,14 +639,15 @@
                             <h4 class="epix-sidebar-title">Danh mục</h4>
                             <ul class="epix-um-list">
                                 @foreach ($categories as $category)
-                                    <li class="has-arrow"><a
-                                            href="{{ route('shopWithCategories', $category->id) }}"><i
-                                                class="fal fa-desktop"></i><span>{{ $category->name }}</span></a>
+                                    <li class="has-arrow">
+                                        <a href="{{ route('shopWithCategories', $category->id) }}">
+                                            <i class="fal fa-desktop"></i>
+                                            <span>{{ $category->name }}</span>
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>
-                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i
-                                    class="fal fa-angle-right"></i></a>
+                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -854,8 +855,7 @@
 
                                                     <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                 @endif
-                                                <a href="{{ route('single_product', $item->id) }}">+ Select
-                                                    Option</a>
+                                                <a href="{{ route('single_product', $item->id) }}">Xem chi tiết</a>
                                             </div>
                                             <div class="wrap">
                                                 <span class="epix-p-subtitle">Đánh giá</span>
@@ -872,10 +872,10 @@
                                             </div> --}}
                                             <div class="d-inline-block">
                                                 <div class="epix-action">
-                                                    <a href="cart.html" class="p-cart">
+                                                    {{-- <a href="cart.html" class="p-cart">
                                                         <i class="fal fa-shopping-cart"></i>
                                                         <i class="fal fa-shopping-cart"></i>
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                             </div>
                                         </div>

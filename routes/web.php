@@ -56,10 +56,10 @@ Route::get('/shop/filter-by-price/{priceRange}', [ShopController::class, 'shopWi
 Route::get('/search-products', [HomeUserController::class, 'searchProducts'])->name('search.products');
 Route::get('/shop/filter-by-color/{selectedColor}', [ShopController::class, 'shopWithColor'])->name('shop.filterByColor');
 Route::get('/filter-flash-sales', [ShopController::class, 'flashSales'])->name('shop.flashSales');
-Route::get('/send-test-mail', function () {
-    Mail::to('phuongnam7303@gmail.com')->send(new TestMail());
-    return 'Test email sent successfully!';
-});
+// Route::get('/send-test-mail', function () {
+//     Mail::to('hvt910tranvantuyen@gmail.com')->send(new TestMail());
+//     return 'Test email sent successfully!';
+// });
 
 // Route::get('/', function () {
 //     return view('clients.index');
@@ -223,13 +223,14 @@ Route::resource('admin1/banner_cover', Banner_coverController::class);
 Route::resource('admin1/contact', ContactController::class);
 Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
 Route::patch('/contact/{contact}/failed', [ContactController::class, 'updateFailed'])->name('contact.failed');
-// Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
 Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
 
 
 Route::resource('admin1/bookfix', BookFixController::class);
-Route::patch('/bookfix/{bookfix}/success', [BookFixController::class, 'updateSuccess'])->name('bookfix.success');
-Route::patch('/bookfix/{bookfix}/failed', [BookFixController::class, 'updateFailed'])->name('bookfix.failed');
+Route::patch('/bookfix/{BookFixs}/success', [BookFixController::class, 'updateSuccess'])->name('bookfix.success');
+Route::patch('/bookfix/{BookFixs}/failed', [BookFixController::class, 'updateFailed'])->name('bookfix.failed');
+Route::patch('/bookfix/{bookfix}/schedule', [BookFixController::class, 'updateSchedule'])->name('bookfix.schedule');
+Route::patch('bookfix/success/{contact}', [BookFixController::class, 'markAsScheduled'])->name('bookfix.success');
 
 
 
@@ -308,6 +309,12 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 
 
 /* -------------------------------- checkout -------------------------------- */
+/* -------------------------------- bill -------------------------------- */
+Route::prefix('/bill')->name('bill.')->group(function () {
+    Route::get('/', [CheckoutController::class, 'bills_client'])->name('bills_client');
+    Route::get('/bills_details/{bill_code}', [CheckoutController::class, 'bills_details'])->name('bills_details');
+});
+/* -------------------------------- end_bill -------------------------------- */
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
 

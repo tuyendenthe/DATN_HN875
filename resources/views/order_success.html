@@ -1,37 +1,137 @@
+<!doctype html>
 <html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-	<link href='https://fonts.googleapis.com/css?family=Lato:300,400|Montserrat:700' rel='stylesheet' type='text/css'>
-	<style>
-		@import url(//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css);
-		@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
-        .ok {
-            /* margin-left: 80%; */
-            /* text-align: center; */
-        }
-	</style>
-	<link rel="stylesheet" href="https://2-22-4-dot-lead-pages.appspot.com/static/lp918/min/default_thank_you.css">
-	<script src="https://2-22-4-dot-lead-pages.appspot.com/static/lp918/min/jquery-1.9.1.min.js"></script>
-	<script src="https://2-22-4-dot-lead-pages.appspot.com/static/lp918/min/html5shiv.js"></script>
-</head>
-<body>
-	<header class="site-header" id="header">
-		<h1 class="site-header__title" data-lead-id="site-header-title">THANK YOU!</h1>
-	</header>
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
 
-	<div class="main-content">
-		<i class="fa fa-check main-content__checkmark" id="checkmark"></i>
-		<p class="main-content__body" data-lead-id="main-content-body">Cảm ơn bạn đã đặt hàng </p>
-	</div>
-        <div class="main-content ok">
-            <h3>Mã Đơn Hàng : dcd45c444 </h3>
-            
-        </div>
-	<footer class="site-footer" id="footer">
-		<p class="site-footer__fineprint" id="fineprint">Công Ty Cổ Phần Công Nghệ TechZone</p>
-	</footer>
-</body>
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+    </head>
+
+    <body>
+        <div class=" m-3" style="background-color: rgb(230, 230, 230);">
+        <header>
+            <h3 class="text-center">Chi Tiết Đơn Hàng</h3>
+        </header>
+        <main>
+            <div class="border bg-light  m-3">
+                <div class="m-3 border p-3">
+                <h5>#1.Thông Tin Đơn Hàng</h5>
+                <div class="my-2">
+                <label for="">Mã Đơn Hàng</label> <br>
+                <input type="text" name="code_bill" class="form-control" id="" value="dfnsdjnsd" disabled>
+
+                 </div>
+                <div class="my-2">
+                <label for="">Trạng Thái</label> <br>
+
+                    <select name="status" class="form-control" id="" disabled>
+                        <option value="">trạng thái</option>
+                    </select>
+                    <button type="submit" class="btn btn-danger mt-2"> Hủy Đơn Hàng</button>
+                 </div>
+                 <hr>
+                 <div class="my-2">
+                    <label for="">Tên Khách Hàng</label> <br>
+                    <input type="text" name="code_bill" id="" class="form-control" value="trần văn tuyền" disabled>
+
+                     </div>
+                 <div class="my-2">
+                    <label for="">Số Điện Thoại</label> <br>
+                    <input type="text" name="code_bill" id="" class="form-control" value="0362978755" disabled>
+
+                     </div>
+                 <div class="my-2">
+                    <label for="">Địa Chỉ</label> <br>
+                    <input type="text" name="code_bill" id="" class="form-control" value="nam định" disabled>
+
+                     </div>
+                 <div class="my-2">
+                    <label for="">Ngày Đặt Hàng</label> <br>
+                    <input type="date" name="code_bill" id="" class="form-control" value="" disabled>
+
+                     </div>
+
+            </div>
+            <div class="border   m-3" >
+                <div class="m-3">
+                    <h5>#2.Thông Tin Sản Phẩm</h5>
+                    <table class="table my-2  " >
+                        <thead>
+                            <tr>
+                                <td>STT</td>
+                                <td>Tên Sản Phẩm</td>
+                                <td>Ảnh</td>
+                                <td>Giá</td>
+                                <td>Số Lượng</td>
+                                <td>Thành Tiền</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>[New 100%] Laptop ASUS Gaming Vivobook 16X K3605ZF-RP634W [Pro] - Intel Core i5-12500H | RTX 2050 | 16GB | 16 Inch WUXGA 144Hz</td>
+                                <td> <img src="https://laptopaz.vn/media/product/2946_dell_gaming_g15_5530_laptopaz_3_min.png" alt="" width="100px"></td>
+                                <td>18.000.000 VNĐ</td>
+                                <td>2</td>
+                                <td>36.000.000 VNĐ</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td >[New 100%] Laptop ASUS Gaming Vivobook 16X K3605ZF-RP634W [Pro] - Intel Core i5-12500H | RTX 2050 | 16GB | 16 Inch WUXGA 144Hz</td>
+                                <td> <img src="https://laptopaz.vn/media/product/2946_dell_gaming_g15_5530_laptopaz_3_min.png" alt="" width="100px"></td>
+                                <td>18.000.000 VNĐ</td>
+                                <td>2</td>
+                                <td>36.000.000 VNĐ</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>[New 100%] Laptop ASUS Gaming Vivobook 16X K3605ZF-RP634W [Pro] - Intel Core i5-12500H | RTX 2050 | 16GB | 16 Inch WUXGA 144Hz</td>
+                                <td> <img src="https://laptopaz.vn/media/product/2946_dell_gaming_g15_5530_laptopaz_3_min.png" alt="" width="100px"></td>
+                                <td>18.000.000 VNĐ</td>
+                                <td>2</td>
+                                <td>36.000.000 VNĐ</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>[New 100%] Laptop ASUS Gaming Vivobook 16X K3605ZF-RP634W [Pro] - Intel Core i5-12500H | RTX 2050 | 16GB | 16 Inch WUXGA 144Hz</td>
+                                <td> <img src="https://laptopaz.vn/media/product/2946_dell_gaming_g15_5530_laptopaz_3_min.png" alt="" width="100px"></td>
+                                <td>18.000.000 VNĐ</td>
+                                <td>2</td>
+                                <td>36.000.000 VNĐ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </main>
+    </div>
+        <footer>
+            <!-- place footer here -->
+        </footer>
+        <!-- Bootstrap JavaScript Libraries -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>
+

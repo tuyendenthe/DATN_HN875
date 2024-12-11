@@ -87,8 +87,8 @@
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Địa Chỉ Nhận Hàng <span class="required">*</span></label>
-                                        <input type="text" id="add" name="add" placeholder="Nhập địa chỉ của bạn"/>
-                                        <span class="error-message" id="error-add"></span>
+                                        <input type="text" id="address" name="address" placeholder="Nhập địa chỉ của bạn"/>
+                                        <span class="error-message" id="error-address"></span>
                                     </div>
                                 </div>
 
@@ -157,8 +157,8 @@
                                     <tfoot>
                                     <tr class="cart-subtotal">
                                         <th>Tổng Cộng Giỏ Hàng</th>
-                                        <td><span class="amount">{{ number_format($totalProduct, 0, ',', '.') }}</span></td>
-                                        <input type="hidden" name="total" value="{{ $totalProduct }}">
+                                        <td><span class="amount">{{ number_format($total, 0, ',', '.') }}</span></td>
+                                        <input type="hidden" name="total" value="{{ $total }}">
                                     </tr>
                                     @if(auth()->user())
                                         <tr class="cart-voucher">
@@ -186,8 +186,13 @@
                                         </td>
                                     </tr>
                                     <tr class="order-total">
+                                        @php
+                                        $subtotall = $total+25000 - $discount
+                                                                             @endphp
                                         <th>Tổng Tiền</th>
-                                        <td><strong><span class="amount">{{ number_format($total + 25000 - $discount, 0, ',', '.') }} VNĐ</span></strong></td>
+                                        <input type="hidden" name="subtotall" value="{{ $subtotall }}">
+                                        <td><strong><span class="amount">{{ number_format($subtotall , 0, ',', '.') }} VNĐ</span></strong></td>
+
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -230,7 +235,7 @@
             const name = document.getElementById("name");
             const email = document.getElementById("email");
             const phone = document.getElementById("phone");
-            const add = document.getElementById("add");
+            const address = document.getElementById("address");
 
             // Xóa các lỗi cũ
             clearErrors();
@@ -254,8 +259,8 @@
             }
 
             // Validate địa chỉ
-            if (add.value.trim() === "") {
-                showError("add", "Địa chỉ không được để trống.");
+            if (address.value.trim() === "") {
+                showError("address", "Địa chỉ không được để trống.");
                 isValid = false;
             }
 
@@ -315,6 +320,7 @@
             var address = $('#add').val();
             var email = $('#email').val();
             var phone = $('#phone').val();
+            var address = $('#address').val();
             var note = $('#checkout-mess').val();
             var voucherId = $('#vouvoucherId').val();
             var products = $('#listProducts').val();
@@ -351,6 +357,7 @@
                             address,
                             email,
                             phone,
+                            // address,
                             note,
                             voucherId,
                             products,
