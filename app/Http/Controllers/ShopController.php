@@ -9,14 +9,22 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = (Product::with('category','flashSale'))->latest()->take(8)->get();
+
+        $perPage = 6;
+
+        // Lấy sản phẩm với phân trang
+        $products = Product::with('category', 'flashSale')->latest()->paginate($perPage);
+
+        // Lấy danh sách các danh mục
         $categories = Category::get();
-        $newProducts = (Product::with('category','flashSale'))->latest()->take(3)->get();
+
+        // Lấy sản phẩm mới nhất (không cần phân trang)
+        $newProducts = Product::with('category', 'flashSale')->latest()->take(3)->get();
+
         return view('clients.shop', compact('products', 'categories', 'newProducts'));
-    }
-    public function flashSales()
+    }   public function flashSales()
     {
         $products = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -59,48 +67,21 @@ class ShopController extends Controller
         return $output;
 
     }
-    public function shopWithCategories(Request $request)
+    public function shopWithCategories($id)
     {
-        $id = $request->input('id');
-        if ($id == 'all') {
-            $products = Product::all();
-        }else{
-            $products = Product::where('category_id', $id)->get();
+        $perPage = 6; // Số sản phẩm mỗi trang
+        $products = Product::with('category', 'flashSale');
 
-        }
-        $output = '';
-        if ($products->isEmpty()) {
-            $output .= '<div class="no-products">No products found for this price range.</div>';
+        if ($id == 'all') {
+            $products = $products->latest()->paginate($perPage);
         } else {
-            foreach ($products as $product) {
-                $output .= '
-                <div class="col-xxl-3 col-sm-6 col-md-4">
-                    <div class="epix-single-product-3 mb-40 style-2 text-center swiper-slide">
-                        <div class="epix-product-thumb-3">
-                            <div class="epix-action">
-                                <a href="/single_product/' . $product->id . '" class="p-cart product-popup-toggle">
-                                    <i class="fal fa-eye"></i>
-                                    <i class="fal fa-eye"></i>
-                                </a>
-                            </div>
-                            <span class="sale">sale</span>
-                            <a href="/single_product/' . $product->id . '">
-                                <img width="223px" height="396px" src="' . asset($product->image) . '" alt="' . $product->name . '">
-                            </a>
-                        </div>
-                        <div class="price-box price-box-3">
-                            <span class="price flash-sale-price">'. number_format($product->price, 0, ',', '.') . ' VNĐ</span>
-                            <a href="/single_product/' . $product->id . '">+ Select Option</a>
-                        </div>
-                        <h5 class="epix-p-title epix-p-title-3">
-                            <a href="/single_product/' . $product->id . '">' . $product->name . '</a>
-                        </h5>
-                    </div>
-                </div>
-            ';
-            }
+            $products = $products->where('category_id', $id)->latest()->paginate($perPage);
         }
-        return $output;
+
+        $categories = Category::get();
+        $newProducts = Product::with('category', 'flashSale')->latest()->take(5)->get();
+
+        return view('clients.shop', compact('products', 'categories', 'newProducts'));
     }
 
     public function shopWithRange(Request $request)

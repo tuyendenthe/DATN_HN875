@@ -123,8 +123,6 @@
         }
     </style>
 
-  
-
 
     <div class="fix">
         <div class="side-info d-lg-none">
@@ -639,14 +637,15 @@
                             <h4 class="epix-sidebar-title">Danh mục</h4>
                             <ul class="epix-um-list">
                                 @foreach ($categories as $category)
-                                    <li class="has-arrow"><a
-                                            href="{{ route('shopWithCategories', $category->id) }}"><i
-                                                class="fal fa-desktop"></i><span>{{ $category->name }}</span></a>
+                                    <li class="has-arrow">
+                                        <a href="{{ route('shopWithCategories', $category->id) }}">
+                                            <i class="fal fa-desktop"></i>
+                                            <span>{{ $category->name }}</span>
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>
-                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i
-                                    class="fal fa-angle-right"></i></a>
+                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -854,8 +853,7 @@
 
                                                     <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                 @endif
-                                                <a href="{{ route('single_product', $item->id) }}">+ Select
-                                                    Option</a>
+                                                <a href="{{ route('single_product', $item->id) }}">Xem chi tiết</a>
                                             </div>
                                             <div class="wrap">
                                                 <span class="epix-p-subtitle">Đánh giá</span>
@@ -872,10 +870,10 @@
                                             </div> --}}
                                             <div class="d-inline-block">
                                                 <div class="epix-action">
-                                                    <a href="cart.html" class="p-cart">
+                                                    {{-- <a href="cart.html" class="p-cart">
                                                         <i class="fal fa-shopping-cart"></i>
                                                         <i class="fal fa-shopping-cart"></i>
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -941,9 +939,9 @@
                     <div class="col-xxl-3 col-xl-3 footer-col-1 col-sm-6 col-md-8 col-lg-8">
                         <div class="footer-widget widget mb-30 widget-about">
                             <div class="widget-about">
-                                <h4 class="epix-footer-title">Tải ứng dụng</h4>
-                                <p><a href="index.html">Epixx</a> Ứng dụng hiện đã có trên Google<br>
-                                    Play & App Store. Nhận nó ngay bây giờ.</p>
+                                <h4 class="epix-footer-title">TECHZONE</h4>
+                                <p><a href="index.html"></a> <br>
+                                    TECHZONE lựa chọn số 1 Laptop</p>
                                 <div class="logo-list logo-list-1">
                                     <a href="#"><img src="assets/img/icon/icon-app-store.png"
                                             alt=""></a>

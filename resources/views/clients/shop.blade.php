@@ -88,15 +88,21 @@
                                     <div class="slider-range mb-40">
                                         <div id="slider-range"></div>
                                         <div class="epix-color-scheme">
-                                            <select class="nice-select form-control" id="filter-by-category">
+                                            <select class="nice-select form-control" id="filter-by-category" onchange="filterByCategory(this.value)">
                                                 <option class="form-control" value="all">Tất cả</option>
                                                 @foreach ($categories as $item)
-                                                    <option class="form-control" value="{{$item->id}}"> {{ $item->name }}</option>
+                                                    <option class="form-control" value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+                                <script>
+                                    function filterByCategory(categoryId) {
+                                        const url = categoryId === 'all' ? '{{ route('shop') }}' : '{{ url('/shop/filter-by-category') }}' + '/' + categoryId;
+                                        window.location.href = url;
+                                    }
+                                </script>
                                 <br>
                                 <br>
                                 <br>
@@ -109,15 +115,7 @@
                                                 <option class="form-control" value="all">Tất cả</option>
                                                 <option class="form-control" value="<3000000">Dưới 3.000.000</option>
                                                 <option class="form-control" value="3000000-5000000">3.000.000 - 5.000.000</option>
-                                                <option class="form-control" value="5000000-10000000">5.000.000 - 10.000.000</option>
-                                                <option class="form-control" value="10000000-15000000">10.000.000 - 15.000.000</option>
-                                                <option class="form-control" value="15000000-20000000">15.000.000 - 20.000.000</option>
-                                                <option class="form-control" value="20000000-25000000">20.000.000 - 25.000.000</option>
-                                                <option class="form-control" value="25000000-30000000">25.000.000 - 30.000.000</option>
-                                                <option class="form-control" value="30000000-35000000">30.000.000 - 35.000.000</option>
-                                                <option class="form-control" value="35000000-40000000">35.000.000 - 40.000.000</option>
-                                                <option class="form-control" value="40000000-50000000">40.000.000 - 50.000.000</option>
-                                                <option class="form-control" value=">50000000">Trên 50.000.000</option>
+                                                <option class="form-control" value=">5000000">Trên 5.000.000</option>
                                             </select>
                                         </div>
                                     </div>
@@ -152,9 +150,9 @@
                                                     <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
                                                     <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
                                                     @else
-                                                        <span style="width: 150px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                        <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                     @endif
-                                                    <a href="{{ route('single_product', $item -> id) }}">Chi tiết sản phẩm</a>
+                                                    <a href="{{ route('single_product', $item -> id) }}">+ Select Option</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -214,7 +212,7 @@
                                                                     @else
                                                                         <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                                     @endif
-                                                                    <a style="width: 300px" href="{{ route('single_product', $item->id) }}">Chi tiết sản phẩm</a>
+                                                                    <a style="width: 300px" href="{{ route('single_product', $item->id) }}">+ Select Option</a>
                                                                 </div>
                                                                 <h5 class="epix-p-title epix-p-title-3"><a href="{{ route('single_product', $item->id) }}">{{$item->name}}</a></h5>
                                                             </div>
@@ -243,20 +241,20 @@
                                                                     <div class="mb-15">
                                                                         <h5 class="epix-p-title"><a href="{{ route('single_product',$item->id)  }}">{{ $item -> name }}</a></h5>
                                                                         <div class="wrap">
-                                                                            <span class="epix-p-subtitle"></span>
+                                                                            <span class="epix-p-subtitle">Speakers</span>
                                                                         </div>
-                                                                        <div class="">
+                                                                        <div class="price-box">
                                                                             @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
                                                                             <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
                                                                             <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
                                                                             @else
                                                                                 <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                                             @endif
-                                                                            <!-- <a href="{{ route('single_product',parameters: $item->id)  }}">+ Select Option</a> -->
+                                                                            <a href="{{ route('single_product',$item->id)  }}">+ Select Option</a>
                                                                         </div>
                                                                     </div>
-                                                                    <p>{{ $item -> content_ }}</p>
-                                                                    <a href="{{ route('single_product', $item -> id) }}" class="epix-btn-1" tabindex="0"><span>Chi tiết sản phẩm<i class="fal fa-angle-right"></i></span></a>
+                                                                    <p>{{ $item -> content }}</p>
+                                                                    <a href="{{ route('single_product', $item -> id) }}" class="epix-btn-1" tabindex="0"><span>Show more<i class="fal fa-angle-right"></i></span></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -274,15 +272,25 @@
                             <div class="epix-pagination pagination-area mt-40 mb-70">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center justify-xl-content-left">
-                                        <li class="page-item disabled">
-                                            <a class="page-link prev" href="shop.html" tabindex="-1"><i class="fal fa-angle-left"></i> Trước</a>
+                                        <!-- Nút "Trước" -->
+                                        <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
+                                            <a class="page-link prev" href="{{ $products->previousPageUrl() }}" tabindex="-1">
+                                                <i class="fal fa-angle-left"></i> Trước
+                                            </a>
                                         </li>
-                                        <li class="page-item"><a class="page-link" href="shop.html">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="shop.html">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="shop.html">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="shop.html">4</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link next" href="shop.html">Sau <i class="fal fa-angle-right"></i></a>
+
+                                        <!-- Các số trang -->
+                                        @for ($i = 1; $i <= $products->lastPage(); $i++)
+                                            <li class="page-item {{ $i == $products->currentPage() ? 'active' : '' }}">
+                                                <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+
+                                        <!-- Nút "Sau" -->
+                                        <li class="page-item {{ $products->hasMorePages() ? '' : 'disabled' }}">
+                                            <a class="page-link next" href="{{ $products->nextPageUrl() }}">
+                                                Sau <i class="fal fa-angle-right"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </nav>
