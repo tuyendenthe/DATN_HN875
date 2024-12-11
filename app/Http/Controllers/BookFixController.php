@@ -32,12 +32,26 @@ class BookFixController extends Controller
         return redirect()->route('index')->with('message1', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
 
     }
-    public function index()
-    {
-        $BookFixs = BookFix::all();
+    // public function index()
+    // {
+    //     $BookFixs = BookFix::all();
 
-        return view('admins.bookfix.index', compact('BookFixs'));
+    //     return view('admins.bookfix.index', compact('BookFixs'));
+    // }
+    public function index(Request $request)
+{
+    $query = BookFix::query();
+
+    // Lọc theo trạng thái nếu có
+    if ($request->has('status') && $request->status != '') {
+        $query->where('status_id', $request->status);
     }
+
+    $BookFixs = $query->get();
+
+    return view('admins.bookfix.index', compact('BookFixs'));
+}
+
     public function updateSuccess(BookFix $BookFixs)
     {
         // Cập nhật trạng thái liên lạc thành công

@@ -1,9 +1,60 @@
 @extends('admins.master')
 
 @section('content')
+<style>
+        /* Cải thiện giao diện của dropdown lọc */
+        .filter-container {
+            margin-bottom: 20px; /* Khoảng cách dưới */
+            text-align: left;
+        }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+        .filter-container select {
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            color: #333;
+            width: 200px;
+            transition: background-color 0.3s ease;
+        }
+
+        .filter-container select:focus {
+            background-color: #e8f0fe;
+            border-color: #5b9bd5;
+            outline: none;
+        }
+
+        .filter-container select option {
+            font-size: 14px;
+            padding: 5px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .filter-container h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+    </style>
+
+<div class="mb-3">
     <h2>Danh Sách Khách Hàng Đặt Lịch</h2>
+</div>
+
+<!-- Thanh lọc bên trái -->
+<div class="filter-container">
+    <form method="GET" action="{{ route('bookfix.index') }}">
+        <select name="status" class="form-control" onchange="this.form.submit()">
+            <option value="">Tất cả trạng thái</option>
+            <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Đang chờ</option>
+            <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Đã lên lịch</option>
+            <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Hủy</option>
+        </select>
+    </form>
 </div>
 
 @if ($BookFixs->count()) <!-- Kiểm tra xem có liên hệ nào không -->
@@ -33,18 +84,17 @@
             </td>
             <td>
                 @if ($contact->status_id == 1)
-                Đang chờ
+                Đang chờ
                 @elseif ($contact->status_id == 2)
-                Đã lên lịch
+                Đã lên lịch
                 @elseif ($contact->status_id == 3)
-                Hủy
+                Hủy
                 @else
                 Chưa xác định
                 @endif
             </td>
             <td>
                 @if ($contact->status_id == 1)
-
                 <form action="{{ route('bookfix.schedule', $contact) }}" method="POST" class="d-inline schedule-form" id="schedule-form-{{ $contact->id }}">
                     @csrf
                     @method('PATCH')
@@ -62,13 +112,13 @@
                 <form action="{{ route('bookfix.success', $contact) }}" method="POST" class="d-inline">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="btn btn-sm btn-success">Đã lên lịch</button>
+                    <button type="submit" class="btn btn-sm btn-success">Đã lên lịch</button>
                 </form>
 
                 <form action="{{ route('bookfix.failed', $contact) }}" method="POST" class="d-inline">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="btn btn-sm btn-danger">Hủy</button>
+                    <button type="submit" class="btn btn-sm btn-danger">Hủy</button>
                 </form>
                 @endif
             </td>
@@ -77,32 +127,10 @@
     </tbody>
 </table>
 
-<!-- Đảm bảo rằng script ở dưới cùng -->
-<script>
-    function toggleScheduleForm(contactId) {
-        var form = document.getElementById('schedule-form-' + contactId);
-        // Toggling lớp active để hiển thị/ẩn form
-        form.classList.toggle('active');
-    }
-</script>
-
 @else
 <p>Không có liên hệ nào.</p>
 @endif
 
 @endsection
 
-<!-- Thêm phần CSS cho việc ẩn/hiện form -->
-@section('styles')
-    <style>
-        /* Ẩn form mặc định */
-        .schedule-form {
-            display: none;
-        }
 
-        /* Khi form được hiển thị */
-        .schedule-form.active {
-            display: block;
-        }
-    </style>
-@endsection
