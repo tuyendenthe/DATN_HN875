@@ -16,14 +16,17 @@ class Bill extends Model
         'email',
         'note',
         'checkout',
+        'address',
+        'user_id',
         'payment_method',
         'total',
+        // 'created_at',
 
         'status',
     ];
 
-    // public function status()
-    // {
-    //     return $this->belongsTo(Status::class);
-    // }
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }

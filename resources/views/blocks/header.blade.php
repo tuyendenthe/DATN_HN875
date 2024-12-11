@@ -64,7 +64,7 @@
                                                 {{ Auth::user()->name }}</a>
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('account.edit') }}">Cập nhật tài khoản</a>
-                                                <a href="">Đơn hàng của bạn</a>
+                                                <a href="{{ route('bill.bills_client') }}">Đơn hàng của bạn</a>
                                                 <a href="{{ route('logout') }}">Đăng xuất</a>
                                             </div>
                                         </div>

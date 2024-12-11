@@ -56,10 +56,10 @@ Route::get('/shop/filter-by-price/{priceRange}', [ShopController::class, 'shopWi
 Route::get('/search-products', [HomeUserController::class, 'searchProducts'])->name('search.products');
 Route::get('/shop/filter-by-color/{selectedColor}', [ShopController::class, 'shopWithColor'])->name('shop.filterByColor');
 Route::get('/filter-flash-sales', [ShopController::class, 'flashSales'])->name('shop.flashSales');
-Route::get('/send-test-mail', function () {
-    Mail::to('phuongnam7303@gmail.com')->send(new TestMail());
-    return 'Test email sent successfully!';
-});
+// Route::get('/send-test-mail', function () {
+//     Mail::to('hvt910tranvantuyen@gmail.com')->send(new TestMail());
+//     return 'Test email sent successfully!';
+// });
 
 // Route::get('/', function () {
 //     return view('clients.index');
@@ -308,6 +308,12 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 
 
 /* -------------------------------- checkout -------------------------------- */
+/* -------------------------------- bill -------------------------------- */
+Route::prefix('/bill')->name('bill.')->group(function () {
+    Route::get('/', [CheckoutController::class, 'bills_client'])->name('bills_client');
+    Route::get('/bills_details/{bill_code}', [CheckoutController::class, 'bills_details'])->name('bills_details');
+});
+/* -------------------------------- end_bill -------------------------------- */
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
 
