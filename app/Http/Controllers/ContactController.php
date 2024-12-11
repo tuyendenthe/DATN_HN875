@@ -33,23 +33,36 @@ class ContactController extends Controller
         // return back()->with('message1', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
         return redirect()->route('index')->with('message1', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
     }
-    public function index()
-    {
+    // public function index()
+    // {
+    //     $contacts = Contact::all();
+    //     return view('admins.contact.index', compact('contacts'));
+    // }
+
+    public function index(Request $request)
+{
+    // Kiểm tra trạng thái nếu có trong request
+    $status = $request->input('status');
+
+    // Nếu có trạng thái, lọc theo trạng thái đó
+    if ($status) {
+        $contacts = Contact::where('status_id', $status)->get();
+    } else {
+        // Nếu không có lọc, lấy tất cả các liên hệ
         $contacts = Contact::all();
-        return view('admins.contact.index', compact('contacts'));
     }
+
+    // Trả về view với các liên hệ đã lọc
+    return view('admins.contact.index', compact('contacts'));
+}
+
     public function updateSuccess(Contact $contact)
     {
         // Cập nhật trạng thái liên lạc thành công
         $contact->status_id = 2; // Trạng thái "Liên lạc thành công"
         $contact->save();
 
-        // Gửi email thông báo liên lạc thành công
-        // Gửi email thông báo liên lạc thành công
-
-
-
-        return back()->with('success', 'Đã cập nhật trạng thái và gửi email thành công.');
+        return back()->with('success', 'Đã cập nhật trạng thái ');
     }
 
     public function updateFailed(Contact $contact)
@@ -57,11 +70,6 @@ class ContactController extends Controller
         // Cập nhật trạng thái liên lạc thất bại
         $contact->status_id = 3; // Trạng thái "Không thể liên lạc"
         $contact->save();
-
-        // Gửi email thông báo liên lạc thất bại
-        // Gửi email thông báo liên lạc thất bại
-
-
 
         return back()->with('success', 'Đã cập nhật trạng thái .');
     }

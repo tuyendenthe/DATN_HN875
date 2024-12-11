@@ -68,10 +68,51 @@
     #emailModal .cancel-button:hover {
         background-color: #d32f2f;
     }
+
+    /* Thanh lọc */
+    .filter-container {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .filter-container select {
+        padding: 8px 15px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        color: #333;
+        width: 200px;
+        transition: background-color 0.3s ease;
+    }
+
+    .filter-container select:focus {
+        background-color: #e8f0fe;
+        border-color: #5b9bd5;
+        outline: none;
+    }
+
+    .filter-container select option {
+        font-size: 14px;
+        padding: 5px;
+    }
+
 </style>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Danh Sách Liên Hệ</h2>
+</div>
+
+<!-- Thanh lọc trạng thái -->
+<div class="filter-container">
+    <form method="GET" action="{{ route('contact.index') }}">
+        <select name="status" class="form-control" onchange="this.form.submit()">
+            <option value="">Tất cả trạng thái</option>
+            <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Chờ liên lạc</option>
+            <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Liên lạc thành công</option>
+            <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Liên lạc thất bại</option>
+        </select>
+    </form>
 </div>
 
 @if ($contacts->count()) <!-- Kiểm tra xem có liên hệ nào không -->
@@ -123,10 +164,12 @@
                 function openEmailModal(contactId) {
                     document.getElementById('contact_id').value = contactId;
                     document.getElementById('emailModal').style.display = 'block';
+                    document.getElementById('overlay').style.display = 'block';
                 }
 
                 function closeEmailModal() {
                     document.getElementById('emailModal').style.display = 'none';
+                    document.getElementById('overlay').style.display = 'none';
                 }
             </script>
 

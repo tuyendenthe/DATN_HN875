@@ -223,13 +223,14 @@ Route::resource('admin1/banner_cover', Banner_coverController::class);
 Route::resource('admin1/contact', ContactController::class);
 Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
 Route::patch('/contact/{contact}/failed', [ContactController::class, 'updateFailed'])->name('contact.failed');
-// Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
 Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
 
 
 Route::resource('admin1/bookfix', BookFixController::class);
-Route::patch('/bookfix/{bookfix}/success', [BookFixController::class, 'updateSuccess'])->name('bookfix.success');
-Route::patch('/bookfix/{bookfix}/failed', [BookFixController::class, 'updateFailed'])->name('bookfix.failed');
+Route::patch('/bookfix/{BookFixs}/success', [BookFixController::class, 'updateSuccess'])->name('bookfix.success');
+Route::patch('/bookfix/{BookFixs}/failed', [BookFixController::class, 'updateFailed'])->name('bookfix.failed');
+Route::patch('/bookfix/{bookfix}/schedule', [BookFixController::class, 'updateSchedule'])->name('bookfix.schedule');
+Route::patch('bookfix/success/{contact}', [BookFixController::class, 'markAsScheduled'])->name('bookfix.success');
 
 
 
