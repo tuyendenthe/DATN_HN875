@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
+// use Illuminate\Support\Facades\Mail;
+
 
 class ContactController extends Controller
 {
@@ -43,15 +46,10 @@ class ContactController extends Controller
 
         // Gửi email thông báo liên lạc thành công
         // Gửi email thông báo liên lạc thành công
-        Mail::send('emails.contact_success', ['contact' => $contact], function ($message) use ($contact) {
-            $message->to($contact->email) // Gửi đến email của người liên hệ
-                ->subject('Thông báo: Liên lạc thành công')
-                ->from('vietpqph31806@fpt.edu.vn', 'Your Name'); // Thêm địa chỉ email người gửi và tên
-        });
+
 
 
         return back()->with('success', 'Đã cập nhật trạng thái và gửi email thành công.');
-
     }
 
     public function updateFailed(Contact $contact)
@@ -62,13 +60,32 @@ class ContactController extends Controller
 
         // Gửi email thông báo liên lạc thất bại
         // Gửi email thông báo liên lạc thất bại
-        Mail::send('emails.contact_failed', ['contact' => $contact], function ($message) use ($contact) {
-            $message->to($contact->email) // Gửi đến email của người liên hệ
-                ->subject('Thông báo: Liên lạc thất bại')
-                ->from('vietpqph31806@fpt.edu.vn', 'Your Name'); // Thêm địa chỉ email người gửi và tên
-        });
 
 
-        return back()->with('success', 'Đã cập nhật trạng thái và gửi email thông báo thất bại.');
+
+        return back()->with('success', 'Đã cập nhật trạng thái .');
     }
+
+    public function sendEmail(Request $request)
+    {
+        $request->validate([
+            'contact_id' => 'required|exists:contacts,id',
+            'subject' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $contact = Contact::findOrFail($request->contact_id);
+
+        // Gửi email với nội dung tùy chỉnh
+        Mail::to($contact->email)->send(new ContactMail($contact, $request->subject, $request->content));
+
+        return redirect()->back()->with('success', 'Email đã được gửi thành công!');
+    }
+
+
+
+
+
+
+
 }
