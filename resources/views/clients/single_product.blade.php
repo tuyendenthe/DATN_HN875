@@ -202,6 +202,44 @@
     .hidden {
         display: none;
     }
+    .same-product .row {
+    display: flex;
+    flex-wrap: wrap; /* Đảm bảo các sản phẩm tự động xuống hàng */
+    gap: 19px; /* Khoảng cách giữa các sản phẩm */
+    justify-content: space-between; /* Cân đối các sản phẩm trong hàng */
+}
+
+.same-product .col-xxl-3 {
+    flex: 0 0 calc(25% - 20px); /* Mỗi sản phẩm chiếm 25% chiều rộng hàng */
+    max-width: calc(25% - 20px); /* Giới hạn chiều rộng tối đa */
+    box-sizing: border-box;
+}
+
+.epix-single-product-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.same-product .row {
+    display: flex;
+    flex-wrap: wrap; /* Tự động xuống hàng nếu vượt quá số cột */
+    gap: 20px; /* Khoảng cách giữa các cột */
+}
+
+.same-product .col-xxl-3 {
+    flex: 0 0 calc(25% - 20px); /* Đảm bảo chiếm 1/4 hàng */
+    max-width: calc(25% - 20px);
+    box-sizing: border-box;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    height: 50px; /* Đặt chiều cao nếu cần */
+}
+
 
 </style>
 <!-- breadcrumb area start -->
@@ -358,8 +396,8 @@
                                                 <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $val->id) }}">
                                                     @if($val->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
                                                     <span style="width: 100px" class="price flash-sale-price">{{ number_format($val->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
-                                                        {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
-                                                        @else
+                                                    {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
+                                                    @else
                                                     {{ number_format($val->price, 0, ',', '.') }} VNĐ
                                                     @endif
 
@@ -450,10 +488,10 @@
                 <div class="epix-single-product-description-tab">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="active" data-bs-toggle="pill" data-bs-target="#tab-1-1" type="button">Thông Số Sản Phẩm</button>
+                            <button class="active" data-bs-toggle="pill" data-bs-target="#tab-1-1" type="button">Mô Tả Sản Phẩm</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button data-bs-toggle="pill" data-bs-target="#tab-1-2" type="button">Thông Tin Thêm</button>
+                            <button data-bs-toggle="pill" data-bs-target="#tab-1-2" type="button">Thông Tin Cơ Bản</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button data-bs-toggle="pill" data-bs-target="#tab-1-3" type="button">Đánh giá ({{$totalReviews}})</button>
@@ -467,13 +505,13 @@
                                 {{-- {{ $products->content }} --}}
 
                                 @php
-                                    echo $products->content;
+                                echo $products->content;
                                 @endphp
                                 <div class="row">
                                     <div class="col-xxl-7">
                                         <div class="epix-featured-list">
-                                            <h4 class="epix-featured-list-title">Thông Số Chi Tiết</h4>
-                                            <ul>
+                                            <!-- <h4 class="epix-featured-list-title">Thông Số Chi Tiết</h4> -->
+                                            <!-- <ul>
                                                 <li>
                                                     <span>Device Length :</span>
                                                     <span>Dimensions 2024*3068</span>
@@ -522,7 +560,7 @@
                                                     <span>Processor Count :</span>
                                                     <span>30 Days Warenty</span>
                                                 </li>
-                                            </ul>
+                                            </ul> -->
                                         </div>
                                     </div>
                                 </div>
@@ -534,28 +572,40 @@
                                     <table class="table table-striped">
                                         <tbody>
                                             <tr>
-                                                <th>Color</th>
+                                                <th>Màu</th>
                                                 <td>
-                                                    <a href="shop.html">Yellow</a>
-                                                    <a href="shop.html">Red</a>
+                                                    <a href="">{{ $products->color }}</a>
+
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Dimention</th>
+                                                <th>Bộ nhớ ngoài</th>
                                                 <td>
-                                                    <a href="shop.html"><span>1200 * 500px</span></a>
+                                                    <a href=""><span>{{ $products->ram }}</span></a>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>BRAND</th>
+                                                <th>CPU</th>
                                                 <td>
-                                                    <a href="shop.html">MANGO</a>
+                                                    <a href="">{{ $products->chip }}</a>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>LOOK AFTER ME</th>
+                                                <th>Bộ nhớ ngoài</th>
                                                 <td>
-                                                    <a href="shop.html">Wipe clean only</a>
+                                                    <a href="">{{ $products->memory }}</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Kích thước màn hình</th>
+                                                <td>
+                                                    <a href="l">{{ $products->screen }}</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Độ phân giải</th>
+                                                <td>
+                                                    <a href="">{{ $products->resolution }}</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -734,7 +784,7 @@
                                 <label for="comment">Nội Dung:</label>
                                 <textarea name="comment" id="comment"></textarea>
 
-                                <button type="submit " >Đánh giá</button>
+                                <button type="submit ">Đánh giá</button>
 
 
 
@@ -750,7 +800,49 @@
 </div>
 </div>
 
+<div class="row ms-5">
+    <div class="col-xxl-12">
+        <div class="same-product">
+        <div class="title-container">
+    <h3>SẢN PHẨM TƯƠNG TỰ</h3>
 </div>
+            <div class="row">
+                @foreach($category as $val)
+                <div class="col-xxl-3 col-sm-6 col-md-4">
+                    <div class="epix-single-product-3 mb-40 style-2 text-center swiper-slide">
+                        <div class="epix-product-thumb-3">
+                            <div class="epix-action">
+                                <a href="{{ route('single_product', $val->id) }}" class="p-cart product-popup-toggle">
+                                    <i class="fal fa-eye"></i>
+                                    <i class="fal fa-eye"></i>
+                                </a>
+                            </div>
+                            <a href="{{ route('single_product', $val->id) }}">
+                                <img width="223px" height="376px" src="{{asset($val->image)}}" alt="">
+                            </a>
+                        </div>
+                        <div class="price-box price-box-3">
+                            @if($val->isOnFlashSale())
+                            <span style="width: 100px" class="price flash-sale-price">{{ number_format($val->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                            <span style="width: 100px" class="price original-price text-muted">
+                                <del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del>
+                            </span>
+                            @else
+                            <span style="width: 120px" class="price">{{ number_format($val->price, 0, ',', '.') }} VNĐ</span>
+                            @endif
+                            <a style="width: 300px" href="{{ route('single_product', $val->id) }}">Chi tiết sản phẩm</a>
+                        </div>
+                        <h5 class="epix-p-title epix-p-title-3">
+                            <a href="{{ route('single_product', $val->id) }}">{{$val->name}}</a>
+                        </h5>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 
 </div>
@@ -770,7 +862,7 @@
 
 <script>
     $('#reviewForm').submit(function(event) {
-        event.preventDefault();  // Ngăn form submit mặc định
+        event.preventDefault(); // Ngăn form submit mặc định
 
         // Kiểm tra nếu chưa chọn sao hoặc để trống nội dung
         const star = $('input[name="star"]:checked').val();
@@ -788,16 +880,16 @@
 
         // Sử dụng AJAX để gửi form mà không tải lại trang
         $.ajax({
-            url: '{{ route("post.review") }}',  // Đảm bảo URL chính xác
+            url: '{{ route("post.review") }}', // Đảm bảo URL chính xác
             type: 'POST',
-            data: new FormData(this),  // Gửi dữ liệu form
+            data: new FormData(this), // Gửi dữ liệu form
             processData: false,
             contentType: false,
             success: function(response) {
                 if (response.success) {
                     // Hiển thị thông báo thành công ở giữa trang
                     $('#successMessage').fadeIn().delay(2000).fadeOut();
-                    $('#reviewForm')[0].reset();  // Reset form sau khi gửi
+                    $('#reviewForm')[0].reset(); // Reset form sau khi gửi
                 }
             },
             error: function() {
@@ -843,11 +935,13 @@
         // Xóa class "selected" khỏi tất cả các hộp
         var variants = document.querySelectorAll('.variant-box');
         variants.forEach(function(variant)) {
-                    variant.classList.remove('selected');
+            variant.classList.remove('selected');
 
-                    </div> <
-                    script src = "https://code.jquery.com/jquery-3.6.0.min.js" >
-                }}
+            <
+            /div> <
+            script src = "https://code.jquery.com/jquery-3.6.0.min.js" >
+        }
+    }
 </script>
 
 <!-- single product area end -->
@@ -858,12 +952,12 @@
             let query = $(this).val();
             if (query.length > 0) {
                 $.ajax({
-                    url: '/search-products'
-                    , method: 'GET'
-                    , data: {
+                    url: '/search-products',
+                    method: 'GET',
+                    data: {
                         keyword: query
-                    }
-                    , success: function(data) {
+                    },
+                    success: function(data) {
                         $('#search-results').html(data).removeClass('hidden');
                     }
                 });
@@ -880,7 +974,6 @@
         });
 
     });
-
 </script>
 <script>
     var phienban = 0;
@@ -987,7 +1080,6 @@
         let formattedPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
         document.getElementById('product-price').innerText = formattedPrice;
     }
-
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -1001,13 +1093,13 @@
             $.ajax({
                 url: $(this).attr('action'), // Lấy URL từ `action` của form
                 method: $(this).attr('method'), // Lấy method từ `method` của form
-                data: formData
-                , processData: false, // Không xử lý dữ liệu, vì ta dùng FormData
+                data: formData,
+                processData: false, // Không xử lý dữ liệu, vì ta dùng FormData
                 contentType: false, // Không đặt kiểu nội dung mặc định
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Thêm CSRF token
-                }
-                , success: function(response) {
+                },
+                success: function(response) {
                     let newComment = `
                     <li class="epix-comment-item">
                         <div class="epix-comment-thumb">
@@ -1035,15 +1127,14 @@
 
                     // Xoá dữ liệu trong form
                     $('#reviewForm')[0].reset();
-                }
-                , error: function(error) {
+                },
+                error: function(error) {
                     // Hiển thị thông báo lỗi
                     console.error(error);
                 }
             });
         });
     });
-
 </script>
 
 @endsection
