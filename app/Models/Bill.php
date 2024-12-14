@@ -26,4 +26,7 @@ class Bill extends Model
     // {
     //     return $this->belongsTo(Status::class);
     // }
+    public function Bill_detail(){
+        return $this->hasMany(Bill_detail::class,'bill_id');
+    }
 }

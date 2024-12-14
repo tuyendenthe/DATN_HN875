@@ -43,6 +43,16 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="col-12">
+                    Quyền tài khoản:
+                    <select name="role" id="" class="form-control">
+                        <option value="1" {{ $user->role == 1 ? 'selected' : '' }}>Admin</option>
+                        <option value="2" {{ $user->role == 2 ? 'selected' : '' }}>User</option>
+                    </select>
+                    @error('role')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
                 <div class="col-12 mb-3">
                     <label for="image">Ảnh:</label>
                     <input type="file" name="image" class="form-control">

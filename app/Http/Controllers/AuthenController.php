@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Slide;
+
+
+use App\Models\FlashSale;
+
 
 class AuthenController extends Controller
 {
@@ -55,6 +62,7 @@ class AuthenController extends Controller
 
     public function postLogin(Request $req)
     {
+       
         $req->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -66,28 +74,36 @@ class AuthenController extends Controller
 
 
         $user = User::where('email', $req->email)->first();
-
+    
         if ($user) {
-
             if ($user->status === '2') {
                 return redirect()->back()->with([
                     'message' => 'Tài khoản của bạn đã bị ngưng hoạt động. Vui lòng liên hệ quản trị viên.',
                 ]);
             }
 
-
+           
             if (Auth::attempt([
                 'email' => $req->email,
                 'password' => $req->password,
             ])) {
+                session(['user_password' => $req->password]);
+           
                 if (Auth::user()->role == '1') {
-                    return redirect()->route('admin1.users.listuser')->with([
-                        'message1' => 'Đăng nhập thành công'
-                    ]);
+                    return view('admins.dashboard')->with([ 'message' => 'Đăng nhập thành công']);
                 } else {
-                    return redirect()->route('index')->with([
-                        'message1' => 'Đăng nhập thành công'
+                    $products = (Product::with('category'))->latest()->take(8)->get();
+                    $categories = Category::all();
+                    $flashSales = FlashSale::with('product')
+                        ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
+                        ->orderBy('time_end', 'asc')
+                        ->limit(4)
+                        ->get();
+                    $banners = Slide::all();
+                    return view('clients.index', compact('products', 'flashSales', 'banners','categories'))->with([
+                        'message' => 'Đăng nhập thành công'
                     ]);
+                    // return redirect()->route('index');
                 }
             }
         }
