@@ -17,7 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\VoucherController;
-
+use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
@@ -56,10 +56,10 @@ Route::get('/shop/filter-by-price/{priceRange}', [ShopController::class, 'shopWi
 Route::get('/search-products', [HomeUserController::class, 'searchProducts'])->name('search.products');
 Route::get('/shop/filter-by-color/{selectedColor}', [ShopController::class, 'shopWithColor'])->name('shop.filterByColor');
 Route::get('/filter-flash-sales', [ShopController::class, 'flashSales'])->name('shop.flashSales');
-Route::get('/send-test-mail', function () {
-    Mail::to('hvt910tranvantuyen@gmail.com')->send(new TestMail());
-    return 'Test email sent successfully!';
-});
+// Route::get('/send-test-mail', function () {
+//     Mail::to('hvt910tranvantuyen@gmail.com')->send(new TestMail());
+//     return 'Test email sent successfully!';
+// });
 
 // Route::get('/', function () {
 //     return view('clients.index');
@@ -85,6 +85,7 @@ Route::get('/contact', function () {
 })->name('contact.form');
 
 Route::post('/contact', [ContactController::class, 'sendContact'])->name('contact.send');
+
 
 Route::get('/book-fix', function () {
     return view('clients.bookfix');
@@ -151,12 +152,14 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
-
+// Route::get('/admin/notifications', [AdminController::class, 'notifications'])->name('notifications.index');
+// Route::get('/admin/notifications/read/{id}', [AdminController::class, 'markAsRead'])->name('notifications.read');
 Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::get('/dashboard', function () {
         return view('admins.dashboard');
     })->name('dashboard');
-
+    Route::get('/notifications', [AdminController::class, 'notifications'])->name('notifications.index');
+    Route::get('/notifications/read/{id}', [AdminController::class, 'markAsRead'])->name('notifications.read');
 
     // CRUD user
     Route::get('/listUser', [UserController::class, 'listUser'])->name('admin1.users.listuser');
@@ -220,10 +223,14 @@ Route::resource('admin1/banner_cover', Banner_coverController::class);
 Route::resource('admin1/contact', ContactController::class);
 Route::patch('/contact/{contact}/success', [ContactController::class, 'updateSuccess'])->name('contact.success');
 Route::patch('/contact/{contact}/failed', [ContactController::class, 'updateFailed'])->name('contact.failed');
+Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
+
 
 Route::resource('admin1/bookfix', BookFixController::class);
-Route::patch('/bookfix/{bookfix}/success', [BookFixController::class, 'updateSuccess'])->name('bookfix.success');
-Route::patch('/bookfix/{bookfix}/failed', [BookFixController::class, 'updateFailed'])->name('bookfix.failed');
+Route::patch('/bookfix/{BookFixs}/success', [BookFixController::class, 'updateSuccess'])->name('bookfix.success');
+Route::patch('/bookfix/{BookFixs}/failed', [BookFixController::class, 'updateFailed'])->name('bookfix.failed');
+Route::patch('/bookfix/{bookfix}/schedule', [BookFixController::class, 'updateSchedule'])->name('bookfix.schedule');
+Route::patch('bookfix/success/{contact}', [BookFixController::class, 'markAsScheduled'])->name('bookfix.success');
 
 
 
@@ -299,9 +306,32 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 
 });
 
+
+
 /* -------------------------------- checkout -------------------------------- */
+/* -------------------------------- bill -------------------------------- */
+Route::prefix('/bill')->name('bill.')->group(function () {
+    Route::get('/', [CheckoutController::class, 'bills_client'])->name('bills_client');
+    Route::get('/bills_details/{bill_code}', [CheckoutController::class, 'bills_details'])->name('bills_details');
+});
+/* -------------------------------- end_bill -------------------------------- */
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
+
+
+Route::post('/search_order', [CheckoutController::class, 'search_order'])->name(name: 'search_order');
+/* -------------------------------- check order -------------------------------- */
+
+Route::post('/checkPay', [CheckoutController::class, 'checkPay'])->name(name: 'checkPay');
+
+Route::get('/orders/detail/{bill_code}', [CheckoutController::class, 'orderDetail'])->name('orders.detail');
+
+// Hiển thị danh sách sản phẩm
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+
+// Lọc sản phẩm theo danh mục
+Route::get('/shop/filter-by-category/{id}', [ShopController::class, 'shopWithCategories'])->name('shopWithCategories');
+
 Route::post('/checkPay', [CheckoutController::class, 'checkPay'])->name(name: 'checkPay');
 Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
 

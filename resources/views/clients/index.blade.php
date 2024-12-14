@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Epix - Electronics eCommerce HTML Template</title>
+    <title>Laptop TechZone</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -329,31 +329,7 @@
         }
     </style>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var notification = document.getElementById('notification');
 
-
-            if (notification) {
-                // Show the notification
-                notification.style.display = 'block';
-
-                // Hide the notification after 5 seconds
-                setTimeout(function() {
-                    notification.style.display = 'none';
-                }, 7000);
-
-                // Optional: Add hover effect to keep it visible
-                notification.addEventListener('mouseenter', function() {
-                    notification.style.display = 'block';
-                });
-
-                notification.addEventListener('mouseleave', function() {
-                    notification.style.display = 'none';
-                });
-            }
-        });
-    </script>
     <div class="fix">
         <div class="side-info d-lg-none">
             <button class="side-info-close"><i class="fal fa-times"></i></button>
@@ -432,7 +408,7 @@
                         <div class="epix-single-banner mb-30 wow fadeInUp" data-wow-delay=".2s"
                             data-background="assets/img/banner/banner-1.jpg">
                             <div class="epix-collection-box">
-                                <h3 class="epix-c-heading">Bộ sưu tập năm 2021</h3>
+                                <h3 class="epix-c-heading">Bộ sưu tập năm 2024</h3>
                                 <div class="epix-c-list">
                                     <ul>
                                         <li><a href="{{ route('shop') }}">Galaxy Tabs & Ides</a></li>
@@ -459,7 +435,7 @@
                                     </div>
                                 @endforeach
                             </div>
-                
+
                             <!-- Pagination (optional) -->
                             <div class="swiper-pagination"></div>
                         </div>
@@ -467,148 +443,148 @@
                 </div>
             </div>
         </section>
-        {{--        <!-- banner area end --> --}}
-        {{--        <!-- new arrival area start --> --}}
-        {{--        --}}{{-- <section class="new-arrival pt-65 pb-95"> --}}
-        {{--      <div class="container"> --}}
-        {{--        <div class="row mb-45"> --}}
-        {{--          <div class="col-xxl-12"> --}}
-        {{--            <div class="epix-section-title text-center"> --}}
-        {{--              <h5 class="s-title">Newest Arrivals Of This Month</h5> --}}
-        {{--            </div> --}}
-        {{--          </div> --}}
-        {{--        </div> --}}
-        {{--        <div class="row"> --}}
-        {{--          <div class="col-xxl-5 col-xl-5 arrival-col-1"> --}}
-        {{--            <div class="banner-3 wow fadeInUp" data-wow-delay=".2s"> --}}
-        {{--              <div class="thumb"> --}}
-        {{--                <img src="assets/img/banner/banner-3.jpg" class="w-100" alt=""> --}}
-        {{--              </div> --}}
-        {{--              <div class="content"> --}}
-        {{--                <span class="shipping text-uppercase">*Free shipping</span> --}}
-        {{--                <h3>Watches</h3> --}}
-        {{--                <a href="{{route('shop)}}" class="epix-btn-2"><span>Explore Now<i class="fal fa-angle-right"></i></span></a> --}}
-        {{--              </div> --}}
-        {{--            </div> --}}
-        {{--          </div> --}}
-        {{--          <div class="col-xxl-7 col-xl-7 product-col-space arrival-col-2"> --}}
-        {{--            <div class="row g-0"> --}}
-        {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4"> --}}
-        {{--                <div class="epix-single-product wow fadeInUp" data-wow-delay=".2s"> --}}
-        {{--                  <div class="epix-product-thumb"> --}}
-        {{--                    <a href="single-product.html"><img src="assets/img/product/23.jpg" class="img-fluid" alt=""></a> --}}
-        {{--                    <div class="epix-action"> --}}
-        {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
-        {{--                        <i class="fal fa-eye"></i> --}}
-        {{--                        <i class="fal fa-eye"></i> --}}
-        {{--                      </a> --}}
-        {{--                      <a href="cart.html" class="p-cart"> --}}
-        {{--                        <i class="fal fa-heart"></i> --}}
-        {{--                        <i class="fal fa-heart"></i> --}}
-        {{--                      </a> --}}
-        {{--                      <a href="cart.html" class="p-cart"> --}}
-        {{--                        <i class="fal fa-shopping-cart"></i> --}}
-        {{--                        <i class="fal fa-shopping-cart"></i> --}}
-        {{--                      </a> --}}
-        {{--                    </div> --}}
-        {{--                  </div> --}}
-        {{--                  <div class="epix-product-content"> --}}
-        {{--                    <div class="wrap"> --}}
-        {{--                      <span class="epix-p-subtitle">Speakers</span> --}}
-        {{--                      <div class="rating"> --}}
-        {{--                        <i class="fal fa-star"></i> --}}
-        {{--                        <span>2.5</span> --}}
-        {{--                      </div> --}}
-        {{--                    </div> --}}
-        {{--                    <h5 class="epix-p-title"><a href="single-product.html">Originals Win Camera</a></h5> --}}
-        {{--                    <div class="price-box"> --}}
-        {{--                      <span class="price">$150.99</span> --}}
-        {{--                      <a href="single-product.html">+ Select Option</a> --}}
-        {{--                    </div> --}}
-        {{--                  </div> --}}
-        {{--                </div> --}}
-        {{--              </div> --}}
-        {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".4s"> --}}
-        {{--                <div class="epix-single-product"> --}}
-        {{--                  <div class="epix-product-thumb"> --}}
-        {{--                    <a href="single-product.html"><img src="assets/img/product/6.jpg" class="img-fluid" alt=""></a> --}}
-        {{--                    <div class="epix-action"> --}}
-        {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
-        {{--                        <i class="fal fa-eye"></i> --}}
-        {{--                        <i class="fal fa-eye"></i> --}}
-        {{--                      </a> --}}
-        {{--                      <a href="cart.html" class="p-cart"> --}}
-        {{--                        <i class="fal fa-heart"></i> --}}
-        {{--                        <i class="fal fa-heart"></i> --}}
-        {{--                      </a> --}}
-        {{--                      <a href="cart.html" class="p-cart"> --}}
-        {{--                        <i class="fal fa-shopping-cart"></i> --}}
-        {{--                        <i class="fal fa-shopping-cart"></i> --}}
-        {{--                      </a> --}}
-        {{--                    </div> --}}
-        {{--                  </div> --}}
-        {{--                  <div class="epix-product-content"> --}}
-        {{--                    <div class="wrap"> --}}
-        {{--                      <span class="epix-p-subtitle">Cameras</span> --}}
-        {{--                      <div class="rating"> --}}
-        {{--                        <i class="fal fa-star"></i> --}}
-        {{--                        <span>4.5</span> --}}
-        {{--                      </div> --}}
-        {{--                    </div> --}}
-        {{--                    <h5 class="epix-p-title"><a href="single-product.html">Sodales Par Iaculis</a></h5> --}}
-        {{--                    <div class="price-box"> --}}
-        {{--                      <span class="price">$125.99</span> --}}
-        {{--                      <a href="single-product.html">+ Select Option</a> --}}
-        {{--                    </div> --}}
-        {{--                  </div> --}}
-        {{--                </div> --}}
-        {{--              </div> --}}
-        {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".6s"> --}}
-        {{--                <div class="epix-single-product"> --}}
-        {{--                  <div class="epix-product-thumb"> --}}
-        {{--                    <span class="sale">sale</span> --}}
-        {{--                    <a href="single-product.html"><img src="assets/img/product/2.jpg" class="img-fluid" alt=""></a> --}}
-        {{--                    <div class="epix-action"> --}}
-        {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
-        {{--                        <i class="fal fa-eye"></i> --}}
-        {{--                        <i class="fal fa-eye"></i> --}}
-        {{--                      </a> --}}
-        {{--                      <a href="cart.html" class="p-cart"> --}}
-        {{--                        <i class="fal fa-heart"></i> --}}
-        {{--                        <i class="fal fa-heart"></i> --}}
-        {{--                      </a> --}}
-        {{--                      <a href="cart.html" class="p-cart"> --}}
-        {{--                        <i class="fal fa-shopping-cart"></i> --}}
-        {{--                        <i class="fal fa-shopping-cart"></i> --}}
-        {{--                      </a> --}}
-        {{--                    </div> --}}
-        {{--                  </div> --}}
-        {{--                  <div class="epix-product-content"> --}}
-        {{--                    <div class="wrap"> --}}
-        {{--                      <span class="epix-p-subtitle">Cameras</span> --}}
-        {{--                      <div class="rating"> --}}
-        {{--                        <i class="fal fa-star"></i> --}}
-        {{--                        <span>3.3</span> --}}
-        {{--                      </div> --}}
-        {{--                    </div> --}}
-        {{--                    <h5 class="epix-p-title"><a href="single-product.html">Sceleris Quie Nostra</a></h5> --}}
-        {{--                    <div class="price-box"> --}}
-        {{--                      <span class="price">$32.99</span> --}}
-        {{--                      <a href="single-product.html">+ Select Option</a> --}}
-        {{--                    </div> --}}
-        {{--                  </div> --}}
-        {{--                </div> --}}
-        {{--              </div> --}}
-        {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".8s"> --}}
-        {{--                <div class="epix-single-product"> --}}
-        {{--                  <div class="epix-product-thumb"> --}}
-        {{--                    <a href="single-product.html"><img src="assets/img/product/14.jpg" class="img-fluid" alt=""></a> --}}
-        {{--                    <div class="epix-action"> --}}
-        {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
-        {{--                        <i class="fal fa-eye"></i> --}}
-        {{--                        <i class="fal fa-eye"></i> --}}
-        {{--                      </a> --}}
-        {{--                      <a href="cart.html" class="p-cart"> --}}
+            {{--        <!-- banner area end --> --}}
+            {{--        <!-- new arrival area start --> --}}
+            {{--        --}}{{-- <section class="new-arrival pt-65 pb-95"> --}}
+            {{--      <div class="container"> --}}
+            {{--        <div class="row mb-45"> --}}
+            {{--          <div class="col-xxl-12"> --}}
+            {{--            <div class="epix-section-title text-center"> --}}
+            {{--              <h5 class="s-title">Newest Arrivals Of This Month</h5> --}}
+            {{--            </div> --}}
+            {{--          </div> --}}
+            {{--        </div> --}}
+            {{--        <div class="row"> --}}
+            {{--          <div class="col-xxl-5 col-xl-5 arrival-col-1"> --}}
+            {{--            <div class="banner-3 wow fadeInUp" data-wow-delay=".2s"> --}}
+            {{--              <div class="thumb"> --}}
+            {{--                <img src="assets/img/banner/banner-3.jpg" class="w-100" alt=""> --}}
+            {{--              </div> --}}
+            {{--              <div class="content"> --}}
+            {{--                <span class="shipping text-uppercase">*Free shipping</span> --}}
+            {{--                <h3>Watches</h3> --}}
+            {{--                <a href="{{route('shop)}}" class="epix-btn-2"><span>Explore Now<i class="fal fa-angle-right"></i></span></a> --}}
+            {{--              </div> --}}
+            {{--            </div> --}}
+            {{--          </div> --}}
+            {{--          <div class="col-xxl-7 col-xl-7 product-col-space arrival-col-2"> --}}
+            {{--            <div class="row g-0"> --}}
+            {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4"> --}}
+            {{--                <div class="epix-single-product wow fadeInUp" data-wow-delay=".2s"> --}}
+            {{--                  <div class="epix-product-thumb"> --}}
+            {{--                    <a href="single-product.html"><img src="assets/img/product/23.jpg" class="img-fluid" alt=""></a> --}}
+            {{--                    <div class="epix-action"> --}}
+            {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
+            {{--                        <i class="fal fa-eye"></i> --}}
+            {{--                        <i class="fal fa-eye"></i> --}}
+            {{--                      </a> --}}
+            {{--                      <a href="cart.html" class="p-cart"> --}}
+            {{--                        <i class="fal fa-heart"></i> --}}
+            {{--                        <i class="fal fa-heart"></i> --}}
+            {{--                      </a> --}}
+            {{--                      <a href="cart.html" class="p-cart"> --}}
+            {{--                        <i class="fal fa-shopping-cart"></i> --}}
+            {{--                        <i class="fal fa-shopping-cart"></i> --}}
+            {{--                      </a> --}}
+            {{--                    </div> --}}
+            {{--                  </div> --}}
+            {{--                  <div class="epix-product-content"> --}}
+            {{--                    <div class="wrap"> --}}
+            {{--                      <span class="epix-p-subtitle">Speakers</span> --}}
+            {{--                      <div class="rating"> --}}
+            {{--                        <i class="fal fa-star"></i> --}}
+            {{--                        <span>2.5</span> --}}
+            {{--                      </div> --}}
+            {{--                    </div> --}}
+            {{--                    <h5 class="epix-p-title"><a href="single-product.html">Originals Win Camera</a></h5> --}}
+            {{--                    <div class="price-box"> --}}
+            {{--                      <span class="price">$150.99</span> --}}
+            {{--                      <a href="single-product.html">+ Select Option</a> --}}
+            {{--                    </div> --}}
+            {{--                  </div> --}}
+            {{--                </div> --}}
+            {{--              </div> --}}
+            {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".4s"> --}}
+            {{--                <div class="epix-single-product"> --}}
+            {{--                  <div class="epix-product-thumb"> --}}
+            {{--                    <a href="single-product.html"><img src="assets/img/product/6.jpg" class="img-fluid" alt=""></a> --}}
+            {{--                    <div class="epix-action"> --}}
+            {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
+            {{--                        <i class="fal fa-eye"></i> --}}
+            {{--                        <i class="fal fa-eye"></i> --}}
+            {{--                      </a> --}}
+            {{--                      <a href="cart.html" class="p-cart"> --}}
+            {{--                        <i class="fal fa-heart"></i> --}}
+            {{--                        <i class="fal fa-heart"></i> --}}
+            {{--                      </a> --}}
+            {{--                      <a href="cart.html" class="p-cart"> --}}
+            {{--                        <i class="fal fa-shopping-cart"></i> --}}
+            {{--                        <i class="fal fa-shopping-cart"></i> --}}
+            {{--                      </a> --}}
+            {{--                    </div> --}}
+            {{--                  </div> --}}
+            {{--                  <div class="epix-product-content"> --}}
+            {{--                    <div class="wrap"> --}}
+            {{--                      <span class="epix-p-subtitle">Cameras</span> --}}
+            {{--                      <div class="rating"> --}}
+            {{--                        <i class="fal fa-star"></i> --}}
+            {{--                        <span>4.5</span> --}}
+            {{--                      </div> --}}
+            {{--                    </div> --}}
+            {{--                    <h5 class="epix-p-title"><a href="single-product.html">Sodales Par Iaculis</a></h5> --}}
+            {{--                    <div class="price-box"> --}}
+            {{--                      <span class="price">$125.99</span> --}}
+            {{--                      <a href="single-product.html">+ Select Option</a> --}}
+            {{--                    </div> --}}
+            {{--                  </div> --}}
+            {{--                </div> --}}
+            {{--              </div> --}}
+            {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".6s"> --}}
+            {{--                <div class="epix-single-product"> --}}
+            {{--                  <div class="epix-product-thumb"> --}}
+            {{--                    <span class="sale">sale</span> --}}
+            {{--                    <a href="single-product.html"><img src="assets/img/product/2.jpg" class="img-fluid" alt=""></a> --}}
+            {{--                    <div class="epix-action"> --}}
+            {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
+            {{--                        <i class="fal fa-eye"></i> --}}
+            {{--                        <i class="fal fa-eye"></i> --}}
+            {{--                      </a> --}}
+            {{--                      <a href="cart.html" class="p-cart"> --}}
+            {{--                        <i class="fal fa-heart"></i> --}}
+            {{--                        <i class="fal fa-heart"></i> --}}
+            {{--                      </a> --}}
+            {{--                      <a href="cart.html" class="p-cart"> --}}
+            {{--                        <i class="fal fa-shopping-cart"></i> --}}
+            {{--                        <i class="fal fa-shopping-cart"></i> --}}
+            {{--                      </a> --}}
+            {{--                    </div> --}}
+            {{--                  </div> --}}
+            {{--                  <div class="epix-product-content"> --}}
+            {{--                    <div class="wrap"> --}}
+            {{--                      <span class="epix-p-subtitle">Cameras</span> --}}
+            {{--                      <div class="rating"> --}}
+            {{--                        <i class="fal fa-star"></i> --}}
+            {{--                        <span>3.3</span> --}}
+            {{--                      </div> --}}
+            {{--                    </div> --}}
+            {{--                    <h5 class="epix-p-title"><a href="single-product.html">Sceleris Quie Nostra</a></h5> --}}
+            {{--                    <div class="price-box"> --}}
+            {{--                      <span class="price">$32.99</span> --}}
+            {{--                      <a href="single-product.html">+ Select Option</a> --}}
+            {{--                    </div> --}}
+            {{--                  </div> --}}
+            {{--                </div> --}}
+            {{--              </div> --}}
+            {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".8s"> --}}
+            {{--                <div class="epix-single-product"> --}}
+            {{--                  <div class="epix-product-thumb"> --}}
+            {{--                    <a href="single-product.html"><img src="assets/img/product/14.jpg" class="img-fluid" alt=""></a> --}}
+            {{--                    <div class="epix-action"> --}}
+            {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
+            {{--                        <i class="fal fa-eye"></i> --}}
+            {{--                        <i class="fal fa-eye"></i> --}}
+            {{--                      </a> --}}
+            {{--                      <a href="cart.html" class="p-cart"> --}}
         {{--                        <i class="fal fa-heart"></i> --}}
         {{--                        <i class="fal fa-heart"></i> --}}
         {{--                      </a> --}}
@@ -761,7 +737,7 @@
                         <div class="row  align-items-center">
                             <div class="col-xxl-3 col-xl-3">
                                 <div class="deal-product-left">
-                                    <h3 class="deals-title">Siêu<br>
+                                    <h3 class="deals-title"><br>
                                         Flash Sale</h3>
                                     <div class="deals-countdown mb-25">
 
@@ -794,19 +770,19 @@
                                                                         class="img-fluid">
                                                                 </a>
                                                                 <div class="epix-action">
-                                                                    <a href="{{ route('product.details', $flashSale->product->id) }}"
+                                                                    {{-- <a href="{{ route('product.details', $flashSale->product->id) }}"
                                                                         class="p-cart product-popup-toggle">
                                                                         <i class="fal fa-eye"></i>
                                                                         <i class="fal fa-eye"></i>
-                                                                    </a>
-                                                                    <a href="cart.html" class="p-cart">
+                                                                    </a> --}}
+                                                                    {{-- <a href="cart.html" class="p-cart">
                                                                         <i class="fal fa-heart"></i>
                                                                         <i class="fal fa-heart"></i>
                                                                     </a>
                                                                     <a href="cart.html" class="p-cart">
                                                                         <i class="fal fa-shopping-cart"></i>
                                                                         <i class="fal fa-shopping-cart"></i>
-                                                                    </a>
+                                                                    </a> --}}
                                                                 </div>
                                                             </div>
                                                             <div class="epix-product-content">
@@ -831,7 +807,7 @@
                                                                         </span>
                                                                     <a
                                                                         href="{{ route('product.details', $flashSale->product->id) }}">+
-                                                                        Xem Thêm</a>
+                                                                        Xem chi tiết</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -867,16 +843,24 @@
                             <h4 class="epix-sidebar-title">Danh mục</h4>
                             <ul class="epix-um-list">
                                 @foreach ($categories as $category)
-                                    <li class="has-arrow"><a
-                                            href="{{ route('shopWithCategories', $category->id) }}"><i
-                                                class="fal fa-desktop"></i><span>{{ $category->name }}</span></a>
+                                    <li class="has-arrow">
+                                        <a href="{{ route('shopWithCategories', $category->id) }}">
+                                            <i class="fal fa-desktop"></i>
+                                            <span>{{ $category->name }}</span>
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>
-                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i
-                                    class="fal fa-angle-right"></i></a>
+                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
+
+<script>
+    function filterByCategory(categoryId) {
+        const url = categoryId === 'all' ? '{{ route('shop') }}' : '{{ url('/shop/filter-by-category') }}' + '/' + categoryId;
+        window.location.href = url;
+    }
+</script>
                     <div class="col-xxl-9 col-xl-9 unmissed-col-2">
                         <div class="product-col-space-2">
                             <div class="row g-0">
@@ -899,11 +883,11 @@
                                                         class="img-fluid" alt=""></a>
                                                 <div class="epix-action">
 
-                                                    <a href="{{ route('single_product', $item->id) }}"
+                                                    {{-- <a href="{{ route('single_product', $item->id) }}"
                                                         class="p-cart product-popup-toggle">
                                                         <i class="fal fa-eye"></i>
                                                         <i class="fal fa-eye"></i>
-                                                    </a>
+                                                    </a> --}}
                                                     {{--                                                    <a href="cart.html" class="p-cart"> --}}
                                                     {{--                                                        <i class="fal fa-shopping-cart"></i> --}}
                                                     {{--                                                        <i class="fal fa-shopping-cart"></i> --}}
@@ -928,8 +912,8 @@
                                                     @else
                                                         <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                     @endif
-                                                    {{-- <a href="{{ route('single_product', $item->id) }}">+ Select
-                                                        Option</a> --}}
+                                                    <a href="{{ route('single_product', $item->id) }}">Xem chi tiết
+                                                        </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -945,11 +929,11 @@
         <!-- sub banner area start -->
         <section class="sub-banner-area pb-100">
             <div class="container">
-                <div class="banner-inner pt-95 pb-80 pl-95 pr-95"
-                    data-background="{{ asset('laptop/assets/img/banner/offer-banner-2.jpg') }}">
+                <div style="height: 100%; width: 100%" class="banner-inner pt-95 pb-80 pl-95 pr-95"
+                    data-background="{{ asset('laptop/assets/img/banner/bannersa.png') }}">
                     <div class="text-center d-inline-block">
-                        <h5 class="epix-s-banner-subtitle">45% Flate On</h5>
-                        <h3 class="epix-s-banner-title">Tiện ích</h3>
+                        <h5 class="epix-s-banner-subtitle">--</h5>
+                        <h3 class="epix-s-banner-title">-</h3>
                         <a href="{{ route('shop') }}" class="epix-btn-1" tabindex="0"><span>Khám phá ngay<i
                                     class="fal fa-angle-right"></i></span></a>
                     </div>
@@ -1008,7 +992,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xxl-4 col-xl-6 wow fadeInUp" data-wow-delay="1s">
+                    {{-- <div class="col-xxl-4 col-xl-6 wow fadeInUp" data-wow-delay="1s">
                         <div class="epix-newsletter-form pl-50">
                             <h4 class="epix-newsletter-title">Đăng ký nhận bản tin</h4>
                             <form action="#">
@@ -1019,7 +1003,7 @@
                             </form>
                         </div>
                         <!-- /. service newsletter -->
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -1036,7 +1020,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-45">
+                    {{-- <div class="row mb-45">
 
                         <div class="col-xxl-12">
                             <div class="epix-handpicked-banner"
@@ -1047,7 +1031,7 @@
                                             class="fal fa-angle-right"></i></span></a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row">
 
                         @foreach ($products as $item)
@@ -1059,23 +1043,23 @@
                                                 src="{{ asset($item->image) }}" alt=""></a>
                                     </div>
                                     <div class="epix-h-pro-content">
+
                                         <div class="epix-product-content pe-0 ps-0 pt-0 pb-0">
 
-                                            <h5 class="epix-p-title"><a
-                                                    href="{{ route('single_product', $item->id) }}">{{ $item->name }}</a>
-                                            </h5>
 
+                                            <h5 style="width: 200px" class="epix-p-title"><a
+                                                href="{{ route('single_product', $item->id) }}">{{ $item->name }}</a>
+                                        </h5>
                                             <div style="width: 200px" class="price-box mb-15">
-{{--                                                <span class="price">{{ number_format($item->price, 0, ',', '.') }}--}}
-{{--                                                    VNĐ</span>--}}
+
                                                 @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
                                                 <span class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
                                                 <span class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
                                                 @else
+
                                                     <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                 @endif
-                                                <a href="{{ route('single_product', $item->id) }}">+ Select
-                                                    Option</a>
+                                                <a href="{{ route('single_product', $item->id) }}">Xem chi tiết</a>
                                             </div>
                                             <div class="wrap">
                                                 <span class="epix-p-subtitle">Đánh giá</span>
@@ -1092,10 +1076,10 @@
                                             </div> --}}
                                             <div class="d-inline-block">
                                                 <div class="epix-action">
-                                                    <a href="cart.html" class="p-cart">
+                                                    {{-- <a href="cart.html" class="p-cart">
                                                         <i class="fal fa-shopping-cart"></i>
                                                         <i class="fal fa-shopping-cart"></i>
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -1176,9 +1160,9 @@
                     <div class="col-xxl-3 col-xl-3 footer-col-1 col-sm-6 col-md-8 col-lg-8">
                         <div class="footer-widget widget mb-30 widget-about">
                             <div class="widget-about">
-                                <h4 class="epix-footer-title">Tải ứng dụng</h4>
-                                <p><a href="index.html">Epixx</a> Ứng dụng hiện đã có trên Google<br>
-                                    Play & App Store. Nhận nó ngay bây giờ.</p>
+                                <h4 class="epix-footer-title">TECHZONE</h4>
+                                <p><a href="index.html"></a> <br>
+                                    TECHZONE lựa chọn số 1 Laptop</p>
                                 <div class="logo-list logo-list-1">
                                     <a href="#"><img src="assets/img/icon/icon-app-store.png"
                                             alt=""></a>

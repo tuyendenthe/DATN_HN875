@@ -4,73 +4,104 @@ namespace App\Http\Controllers;
 
 use App\Models\BookFix;
 use Illuminate\Http\Request;
+use App\Mail\ScheduledFixEmail;
+
 use Illuminate\Support\Facades\Mail;
 
 class BookFixController extends Controller
 {
     public function sendBookFix(Request $request)
     {
-        // Validate dữ liệu từ form
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'phone' => 'required|regex:/^[0-9]+$/|max:15', // Chỉ cho phép chữ số
-            'fix_date' => 'required|date_format:Y-m-d', // Định dạng ngày
+            'phone' => 'required',
             'content' => 'nullable|string',
         ]);
-// dd(
-//     $request
-// );
-        // Lưu thông tin vào database
-        $BookFix = BookFix::create([
+
+        // Lưu thông tin liên hệ vào database
+        $BookFixs = BookFix::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
-            'fix_date' => $request->input('fix_date'),
             'content' => $request->input('content'),
         ]);
 
 
-        // Thêm thông báo thành công
-        return redirect()->back()->with('message1', 'Thông tin đã được lưu thành công!');
-    }
-    public function index()
-    {
-        $BookFixs = BookFix::all();
+        // return back()->with('message1', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
+        return redirect()->route('index')->with('message1', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
 
-        return view('admins.bookfix.index', compact('BookFixs'));
     }
-    public function updateSuccess(BookFix $BookFix)
+    // public function index()
+    // {
+    //     $BookFixs = BookFix::all();
+
+    //     return view('admins.bookfix.index', compact('BookFixs'));
+    // }
+    public function index(Request $request)
+{
+    $query = BookFix::query();
+
+    // Lọc theo trạng thái nếu có
+    if ($request->has('status') && $request->status != '') {
+        $query->where('status_id', $request->status);
+    }
+
+    $BookFixs = $query->get();
+
+    return view('admins.bookfix.index', compact('BookFixs'));
+}
+
+    public function updateSuccess(BookFix $BookFixs)
     {
         // Cập nhật trạng thái liên lạc thành công
-        $BookFix->status_id = 2; // Trạng thái "Liên lạc thành công"
-        $BookFix->save();
+        $BookFixs->status_id = 2; // Trạng thái "Liên lạc thành công"
+        $BookFixs->save();
 
-        // Gửi email thông báo liên lạc thành công
-        Mail::send('emails.BookFix_success', ['BookFix' => $BookFix], function ($message) use ($BookFix) {
-            $message->to($BookFix->email) // Gửi đến email của người liên hệ
-                ->subject('Thông báo: Liên lạc thành công')
-                ->from('vietpqph31806@fpt.edu.vn', 'Your Name'); // Thêm địa chỉ email người gửi và tên
-        });
-
-
-        return back()->with('message1', 'Đã cập nhật trạng thái và gửi email thành công.');
+        return back()->with('success', 'Đã cập nhật trạng thái ');
     }
 
-    public function updateFailed(BookFix $BookFix)
+    public function updateFailed(BookFix $BookFixs)
     {
         // Cập nhật trạng thái liên lạc thất bại
-        $BookFix->status_id = 3; // Trạng thái "Không thể liên lạc"
-        $BookFix->save();
+        $BookFixs->status_id = 3; // Trạng thái "Không thể liên lạc"
+        $BookFixs->save();
 
-        // Gửi email thông báo liên lạc thất bại
-        Mail::send('emails.BookFix_failed', ['BookFix' => $BookFix], function ($message) use ($BookFix) {
-            $message->to($BookFix->email) // Gửi đến email của người liên hệ
-                ->subject('Thông báo: Liên lạc thất bại')
-                ->from('vietpqph31806@fpt.edu.vn', 'Your Name'); // Thêm địa chỉ email người gửi và tên
-        });
-
-
-        return back()->with('message1', 'Đã cập nhật trạng thái và gửi email thông báo thất bại.');
+        return back()->with('success', 'Đã cập nhật trạng thái .');
     }
+
+    public function updateSchedule(Request $request, BookFix $bookfix)
+{
+    // Lấy ngày hôm nay
+    $today = now()->toDateString();
+
+    // Kiểm tra validation
+    $request->validate([
+        'fix_date' => 'required|date|after_or_equal:' . $today,
+    ], [
+        'fix_date.after_or_equal' => 'Ngày sửa chữa không thể trước ngày hôm nay.',
+    ]);
+
+    // Cập nhật ngày sửa chữa
+    $bookfix->update([
+        'fix_date' => $request->fix_date,
+    ]);
+
+    return redirect()->route('bookfix.index')->with('success', 'Ngày sửa chữa đã được cập nhật.');
+}
+public function markAsScheduled(BookFix $contact)
+{
+    // Cập nhật trạng thái lịch sửa chữa
+    $contact->status_id = 2; // Đã lên lịch
+    $contact->save();
+
+    // Gửi email cho khách hàng
+    Mail::to($contact->email)->send(new ScheduledFixEmail($contact));
+
+    // Redirect hoặc trả về phản hồi
+    return redirect()->route('bookfix.index')->with('success', 'Lịch sửa chữa đã được lên lịch và thông báo đã được gửi.');
+}
+
+
+
 }

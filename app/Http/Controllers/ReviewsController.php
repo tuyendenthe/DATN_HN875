@@ -15,7 +15,11 @@ class ReviewsController extends Controller
             'product_id' => 'required|exists:products,id',
             'star' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string',
-        ]);
+        ],
+        [
+            'star.required' => 'Bạn phải chọn số sao đánh giá.',
+            'comment.required' => 'Nội dung đánh giá không được để trống.',
+        ]);;
 
         $data = [
             'product_id' => $request->product_id,
@@ -33,6 +37,7 @@ class ReviewsController extends Controller
             // $review->save();
         $review=Comment::create($data);
 
+
         return response()->json([
             'success' => true,
             'message' => 'Review submitted successfully!',
@@ -42,7 +47,10 @@ class ReviewsController extends Controller
             'user_avatar' => $review->user->image ?? asset('laptop/assets/img/user/user-1.png'),
             'created_at' => $review->created_at->format('F d, Y'),
         ]);
+
+
     }
+
 
     public function listComment() {
         $comments = Comment::all();

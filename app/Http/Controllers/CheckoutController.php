@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail; // Thêm import Mail
 use App\Mail\TestMail; // Import Mailable đã tạo
 use Illuminate\Support\Facades\Session;
-
+use App\Models\Notification;
 class CheckoutController extends Controller
 {
     public function index(Request $request)
@@ -56,7 +56,7 @@ class CheckoutController extends Controller
     {
         $idVoucher = $request['voucherId'];
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        $randomString = substr(str_shuffle($characters), 0, 10);
+        $randomString = substr(str_shuffle($characters), 0, 10); // Tạo mã đơn hàng ngẫu nhiên
         $user_id = "";
         if(auth()->user()){
             $user_id = auth()->user()->id;
@@ -69,13 +69,15 @@ class CheckoutController extends Controller
             'email' => $request['email'],
             'checkout' => $request['checkout'],
             'note' => $request['note'],
+            'address' => $request['address'],
             'user_id' => $user_id,
             'payment_method' => $request['payment_method'],
-            'total' => $request['total'],
+            'total' => $request['subtotall'],
             'status' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ];
+
         // dd($bill);
         $billRecord = Bill::create($bill);
         $bill_id = $billRecord->id;
@@ -126,15 +128,67 @@ class CheckoutController extends Controller
         session()->put('cart', $cart);
         Mail::to($request['email'])->send(new TestMail($billRecord, $products));
 
+
+        // Tạo thông báo cho người quản lý
+        $notification = Notification::create([
+            'message' => 'Bạn có một đơn hàng mới với mã ' . $randomString,
+            'is_read' => false,
+            'created_at' => now(),
+        ]);
+
+        // Cập nhật bill_code sau khi tạo thông báo
+        $notification->bill_code = $randomString;
+        $notification->save();
+
         return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
     }
 
+    public function orderDetail($bill_code)
+    {
+        // Lấy chi tiết đơn hàng
+        $detail = DB::table('bill_details')
+            ->join('products', 'bill_details.product_id', '=', 'products.id')
+            ->where('bill_details.bill_code', $bill_code) // Sử dụng bill_code để lọc
+            ->select('bill_details.*', 'products.name')
+            ->get();
+
+        // Truy vấn thông tin người dùng từ bảng bills
+        $detail_user = DB::table('bills')->where('bill_code', $bill_code)->first();
+
+        return view('admins.checkout.detail', compact('detail_user', 'detail'));
+    }
     public function ok(Request $request)
     {
         //  dd($request);
 
 
         return view('clients.Order_Success');
+    }
+    public function bills_client(){
+        // dd(auth()->user()->id);
+        $data = Bill::join('statuses', 'bills.status', '=', 'statuses.id')
+        ->where('user_id', '=', auth()->user()->id)
+        ->orderBy('bills.id', 'desc')
+        ->select('bills.*', 'statuses.status_name as status_name') // Chỉ lấy cột `name` từ `statuses`
+        ->get();
+        // dd($data);
+        return view('clients.bill_client', compact('data'));
+    }
+    public function bills_details(String $bill_code){
+        // dd($bill_code);
+        $data = Bill::join('statuses', 'bills.status', '=', 'statuses.id')
+        ->where('user_id', '=', auth()->user()->id)
+        ->where('bill_code', '=',$bill_code)
+        ->select('bills.*', 'statuses.status_name as status_name') // Chỉ lấy cột `name` từ `statuses`
+        ->first();
+        // $data2 = Bill_detail::where('bill_code','=',$bill_code)->get();
+        $detail = DB::table('bill_details')
+        ->join('products', 'bill_details.product_id', '=', 'products.id')
+        ->where('bill_details.bill_code', $bill_code) // Sử dụng bill_code để lọc
+        ->select('bill_details.*', 'products.name','products.image')
+        ->get();
+        // dd(vars: $data);
+        return view('clients.bill_details',compact('detail','data'));
     }
     public function list()
     {
@@ -150,19 +204,33 @@ class CheckoutController extends Controller
 
     public function detail($bill_code)
     {
-        $detail = DB::table('bill_details')
-            ->join('products', 'bill_details.product_id', '=', 'products.id')
+        // $detail = DB::table('bill_details')
+        //     ->join('products', 'bill_details.product_id', '=', 'products.id')
 
-            ->select('bill_details.*', 'products.name')
-            ->get();
+        //     ->select('bill_details.*', 'products.name')
+        //     ->get();
 
         // $detail = DB::table('bill_details')->where('bill_code', '=', $bill_code)->get();
 
         // Truy vấn thông tin người dùng từ bảng bills
-        $detail_user = DB::table('bills')->where('bill_code', '=', $bill_code)->first();
+        // $detail_user = DB::table('bills')->where('bill_code', '=', $bill_code)->first();
         // dd($detail);
         // dd($detail_user);
-        return view('admins.checkout.detail', compact('detail_user', 'detail'));
+        // dd($bill_code);
+        $data = Bill::join('statuses', 'bills.status', '=', 'statuses.id')
+        // ->where('user_id', '=', auth()->user()->id)
+        ->where('bill_code', '=',$bill_code)
+        ->select('bills.*', 'statuses.status_name as status_name') // Chỉ lấy cột `name` từ `statuses`
+        ->first();
+        // dd($data);
+        // $data2 = Bill_detail::where('bill_code','=',$bill_code)->get();
+        $detail = DB::table('bill_details')
+        ->join('products', 'bill_details.product_id', '=', 'products.id')
+        ->where('bill_details.bill_code', $bill_code) // Sử dụng bill_code để lọc
+        ->select('bill_details.*', 'products.name','products.image')
+        ->get();
+        // dd(vars: $data);
+        return view('admins.checkout.detail', compact('data', 'detail'));
     }
     public function edit()
     {
@@ -307,13 +375,15 @@ class CheckoutController extends Controller
                         'email' => $request['email'],
                         'checkout' => $request['checkout'],
                         'note' => $request['note'],
+                        'address' => $request['address'],
                         'user_id' => $user_id,
                         'payment_method' => $request['payment_method'],
-                        'total' => $request['total'],
+                        'total' => $request['subtotall'],
                         'status' => 1,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
+                    // dd($bill);
                     $billRecord = Bill::create($bill);
                     $bill_id = $billRecord->id;
 

@@ -49,7 +49,7 @@
                                         <a href="{{ route('check_order') }}">Theo dõi đơn hàng</a>
                                     </li>
                                 </ul>
-                                
+
                             </nav>
                         </div>
                         <!-- /. header left -->
@@ -65,7 +65,7 @@
                                                 {{ Auth::user()->name }}</a>
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('account.edit') }}">Cập nhật tài khoản</a>
-                                                <a href="{{ route('my.orders') }}">Đơn hàng của bạn</a>
+                                                <a href="{{ route('bill.bills_client') }}">Đơn hàng của bạn</a>
                                                 <a href="{{ route('logout') }}">Đăng xuất</a>
                                             </div>
                                         </div>
@@ -92,9 +92,16 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xxl-2 col-xl-2 col-lg-3">
-                        <div class="epix-header-logo">
-                            <a href="index.html"><img src="assets/img/logo/logo-white.png" alt="" /></a>
-                        </div>
+
+                        <a class="navbar-brand" href="{{ route('index') }}">
+                            <!-- Logo icon -->
+                            <b class="logo-icon">
+
+                                <img  width="150px" src="{{asset('laptop/assets/img/banner/logot-removebg-preview.png')}}"  alt="homepage" class="light-logo" />
+                            </b>
+
+                        </a>
+
                     </div>
                     <div class="col-xxl-8 col-xl-8 col-lg-6">
 
@@ -452,6 +459,7 @@
                     {{--            </div> --}}
                     {{--        </div> --}}
                 </div>
+
                 <!-- /. pc header -->
                 <div class="mobile-header d-lg-none">
                     <div class="container">
