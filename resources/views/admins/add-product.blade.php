@@ -21,9 +21,25 @@
     <form action="{{ route('products.addPostProduct') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
+            <div class="col-12 d-flex align-items-center">
+                Là sản phảm thuộc tính
+                <input class="ml-2" type="checkbox" name="is_attributes" value="1" id="isAttributesCheckbox">
+            </div>
+
+            <div class="col-12 mt-2 d-none" id="parentProductDiv">
+                Sản phẩm cha
+                <select class="form-control" name="product_parent" id="parentProductSelect">
+                    <option value="">Chọn cha sản phẩm</option>
+                    @foreach ($products as $product)
+                        <option value="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category_id }}" data-role ="{{ $product->role }}">{{ $product->name }}</option>
+                    @endforeach
+                    
+                </select>
+            </div>
+
             <div class="col-12">
                 Tên:
-                <input type="text" name="name" value="{{ old('name') }}" class="form-control">
+                <input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name_product">
                 @error('name')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
@@ -32,7 +48,7 @@
                 Danh mục:
                 {{-- <input type="text" name="name" value="{{ old('name') }}" class="form-control"> --}}
 
-                <select name="category_id" class="form-control">
+                <select name="category_id" class="form-control" id="categorySelect">
                     @foreach ($data as $value)
 
 
@@ -120,7 +136,7 @@
 
             Loại Sản Phẩm:
             {{-- <label for="trang_thai">Trạng thái</label> --}}
-            <select name="role" class="form-control">
+            <select name="role" class="form-control" id="roleSelected">
                 <option value="1">Sản Phẩm Thường</option>
                 <option value="2">Sản Phẩm Nổi Bật</option>
             </select>
@@ -146,7 +162,44 @@
 <!-- ============================================================== -->
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
+    $('#isAttributesCheckbox').change(function () {
+        if ($(this).is(':checked')) {
+            $('#categorySelect').attr('disabled', true);
+            $('#roleSelected').attr('disabled', true);
+
+            
+            $('#parentProductDiv').removeClass('d-none').addClass('d-block');
+        } else {
+            $('#categorySelect').attr('disabled', false);
+            $('#roleSelected').attr('disabled', false);
+            $('#parentProductDiv').removeClass('d-block').addClass('d-none');
+        }
+    });
+    document.getElementById('parentProductSelect').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const dataAttributes = {};
+        for (const attr of selectedOption.attributes) {
+            if (attr.name.startsWith('data-')) {
+                dataAttributes[attr.name] = attr.value;
+            }
+        }
+        $('#name_product').val(dataAttributes['data-name']);
+       
+
+        const categorySelect = document.getElementById('categorySelect');
+        const roleSelected = document.getElementById('roleSelected');
+
+        categorySelect.value = dataAttributes['data-category'];
+        roleSelected.value = dataAttributes['data-role'];
+    });
+
+</script>
+<script>
+
+    
     class MyUploadAdapter {
         constructor(loader) {
             this.loader = loader;

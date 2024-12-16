@@ -59,7 +59,7 @@
                                         @foreach ($listProducts as $key => $value)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->name }}</td>
+                                            <td>{{ $value->name }} - ({{ $value->is_attributes == 1 ? 'Sản phẩm con' : 'Sản phẩm cha ' }})</td>
                                             <td>
                                                 {{-- <img src="{{ Storage::url($value->image) }}" alt="" width="100"> --}}
                                                 <img  src="{{ asset($value->image) }}" alt="" width="100">

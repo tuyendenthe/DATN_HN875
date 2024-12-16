@@ -15,13 +15,13 @@ class ShopController extends Controller
         $perPage = 6;
 
         // Lấy sản phẩm với phân trang
-        $products = Product::with('category', 'flashSale')->latest()->paginate($perPage);
+        $products = Product::with('category', 'flashSale')->where('is_attributes',2)->latest()->paginate($perPage);
 
         // Lấy danh sách các danh mục
         $categories = Category::get();
 
         // Lấy sản phẩm mới nhất (không cần phân trang)
-        $newProducts = Product::with('category', 'flashSale')->latest()->take(3)->get();
+        $newProducts = Product::with('category', 'flashSale')->where('is_attributes',2)->latest()->take(3)->get();
 
         return view('clients.shop', compact('products', 'categories', 'newProducts'));
     }   public function flashSales()
@@ -70,7 +70,7 @@ class ShopController extends Controller
     public function shopWithCategories($id)
     {
         $perPage = 6; // Số sản phẩm mỗi trang
-        $products = Product::with('category', 'flashSale');
+        $products = Product::with('category', 'flashSale')->where('is_attributes',2);
 
         if ($id == 'all') {
             $products = $products->latest()->paginate($perPage);
@@ -79,7 +79,7 @@ class ShopController extends Controller
         }
 
         $categories = Category::get();
-        $newProducts = Product::with('category', 'flashSale')->latest()->take(5)->get();
+        $newProducts = Product::with('category', 'flashSale')->where('is_attributes',2)->latest()->take(5)->get();
 
         return view('clients.shop', compact('products', 'categories', 'newProducts'));
     }
@@ -87,7 +87,7 @@ class ShopController extends Controller
     public function shopWithRange(Request $request)
     {
         $range = $request->input('price_range');
-        $products = Product::query();
+        $products = Product::query()->where('is_attributes',2);
 
         // Lọc sản phẩm theo giá
         // if ($range === '<3000000') {
