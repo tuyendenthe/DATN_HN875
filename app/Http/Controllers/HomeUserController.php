@@ -23,7 +23,7 @@ class HomeUserController extends Controller
     {
         // dd($cart);
         // Lấy tối đa 10 sản phẩm từ bảng products
-        $products = (Product::with('category','flashSale'))->latest()->take(8)->get();
+        $products = (Product::with('category','flashSale'))->where('is_attributes',2)->latest()->take(8)->get();
         $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -68,36 +68,14 @@ class HomeUserController extends Controller
             ->orderBy('time_end', 'asc')
             ->limit(4)
             ->get();
-        // $products = Product::findOrFail($id);
         $category_id = $products['category_id'];
 
-        $excludedId = $products['$id'];//id sản phẩm cần loại trừ
+        $excludedId = $products['$id'];
         $limit = 4;
-    //     $categories = DB::table('products')
-    // ->join('flash_sales', 'products.id', '=', 'flash_sales.product_id') // Join với bảng flash_sales
-    // ->where('products.category_id', '=', $category_id) // Lọc theo category_id
-    // ->where('products.id', '!=', $excludedId) // Loại trừ sản phẩm cần loại trừ
-    // ->select('products.*', 'flash_sales.*') // Lấy các cột từ cả hai bảng
-    // ->inRandomOrder() // Lấy dữ liệu ngẫu nhiên
-    // ->limit($limit) // Giới hạn số lượng bản ghi
-    // ->get();
-                     $category = (Product::with('category','flashSale'))
-                     ->where('products.category_id', '=', $category_id) // Lọc theo category_id
-                     ->where('products.id', '!=', $excludedId) // Loại trừ sản phẩm cần loại trừ
-                    //  ->select('products.*', 'flash_sales.*') // Lấy các cột từ cả hai bảng
-                     ->inRandomOrder() // Lấy dữ liệu ngẫu nhiên
-                     ->limit($limit) // Giới hạn số lượng bản ghi
-                     ->get();
-                     ;
-    //  $category = (Product::with('category','flashSale'))
-    //  ;
+        
 
-
-// dd($category);
-
-        // dd($products);
-
-        $reviews = Comment::with('user') // Dùng 'user' thay vì 'users'
+        $category =  Product::where('product_parent',$id)->get();
+        $reviews = Comment::with('user') 
         ->where('product_id', $id)
             ->where('status', 1)
             ->orderBy('created_at', 'desc')

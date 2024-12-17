@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\FlashSale;
 use App\Models\Variant;
 use App\Models\Voucher;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -58,6 +59,9 @@ class CartController extends Controller
         // $variant1_name = Variant::find($variant_id_1) == null ? '' : $variant1->name;
         // $variant2_name = Variant::find($variant_id_2) == null ? '' : $variant2->name;
         // $variant3_name = Variant::find($variant_id_3) == null ? '' : $variant3->name;
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('message', 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
+        }
         $products = (Product::with('category','flashSale'))->findOrFail($product->id);
         // $categories = Category::all();
         $flashSales = FlashSale::with('product')

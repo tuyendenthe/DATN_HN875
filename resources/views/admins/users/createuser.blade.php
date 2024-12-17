@@ -54,6 +54,16 @@
                     <input type="password" name="password_confirmation" class="form-control">
                 </div>
                 <div class="col-12">
+                    Quyền tài khoản:
+                    <select name="role" id="" class="form-control">
+                        <option value="1">Admin</option>
+                        <option value="2" selected>User</option>
+                    </select>
+                    @error('role')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-12">
                     Địa chỉ:
                     <input type="text" name="address" class="form-control" value="{{ old('address') }}">
                     @error('address')

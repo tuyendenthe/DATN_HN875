@@ -22,6 +22,24 @@
             @method('PUT')
             @csrf
             <div class="row">
+                <div class="col-12 d-flex align-items-center">
+                    Là sản phảm thuộc tính
+                    <input class="ml-2" type="checkbox" name="is_attributes" value="1" id="isAttributesCheckbox" {{ $product->is_attributes == 1 ? 'checked' : '' }}>
+                </div>
+    
+                <div class="col-12 mt-2 {{ $product->is_attributes == 1 ? ' d-block' : 'd-none' }}" id="parentProductDiv">
+                    Sản phẩm cha
+                    <select class="form-control" name="product_parent" id="parentProductSelect">
+                        <option value="">Chọn cha sản phẩm</option>
+                        @foreach ($products as $product1)
+                            <option value="{{ $product1->id }}" data-name="{{ $product1->name }}" 
+                            data-category="{{ $product1->category_id }}" data-role ="{{ $product1->role }}"
+                            {{ $product->product_parent == $product1->id ? ' selected="selected"' : '' }}
+                            >{{ $product1->name }}</option>
+                        @endforeach
+                        
+                    </select>
+                </div>
                 <div class="col-12">
                     Tên:
                     <input type="text" name="name" value="{{ $product->name }}" class="form-control">
@@ -40,7 +58,9 @@
                         <option value="{{ $value->id }}">{{ $value->name }}</option>
                         @endforeach
                     </select> --}}
-                    <select name="category_id" value="{{ $product->category_id }}"  class="form-control">
+                    <select name="category_id" value="{{ $product->category_id }}"
+                        
+                        class="form-control" id="categorySelect" {{ $product->is_attributes == 1 ? 'disabled' : '' }}>
                         @foreach ($category as $val)
                             <option value="{{ $val->id }}" {{ $product->category_id == $val->id ? 'selected' : '' }}>
                                 {{ $val->name }}
@@ -120,7 +140,7 @@
             <div class="col-12">
                 Mô Tả: <br>
                 {{-- <input type="text" name="content" value="{{ old('content') }}" class="form-control"> --}}
-                <textarea name="content" class="form-control" id="editor1" value="{{$product->content }}" cols="152" rows="20"></textarea>
+                <textarea name="content" class="form-control" id="editor1" value="{{$product->content }}" cols="152" rows="20">{{$product->content }}</textarea>
                 {{-- @error('content')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror --}}
@@ -129,7 +149,7 @@
 
                 Loại Sản Phẩm:
                 {{-- <label for="trang_thai">Trạng thái</label> --}}
-                <select name="role" class="form-control">
+                <select name="role" class="form-control" id="roleSelected" {{ $product->is_attributes == 1 ? 'disabled' : '' }}>
                     <option value="1" {{ $product->role == 1 ? 'selected' : '' }}>Sản Phẩm Thường</option>
                     <option value="2" {{ $product->role == 2 ? 'selected' : '' }}>Sản Phẩm Nổi Bật</option>
                 </select>
@@ -156,6 +176,41 @@
         <!-- ============================================================== -->
     </div>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $('#isAttributesCheckbox').change(function () {
+        if ($(this).is(':checked')) {
+            $('#categorySelect').attr('disabled', true);
+            $('#roleSelected').attr('disabled', true);
+
+            
+            $('#parentProductDiv').removeClass('d-none').addClass('d-block');
+        } else {
+            $('#categorySelect').attr('disabled', false);
+            $('#roleSelected').attr('disabled', false);
+            $('#parentProductDiv').removeClass('d-block').addClass('d-none');
+        }
+    });
+    document.getElementById('parentProductSelect').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const dataAttributes = {};
+        for (const attr of selectedOption.attributes) {
+            if (attr.name.startsWith('data-')) {
+                dataAttributes[attr.name] = attr.value;
+            }
+        }
+        $('#name_product').val(dataAttributes['data-name']);
+       
+
+        const categorySelect = document.getElementById('categorySelect');
+        const roleSelected = document.getElementById('roleSelected');
+
+        categorySelect.value = dataAttributes['data-category'];
+        roleSelected.value = dataAttributes['data-role'];
+    });
+
+</script>
 <script>
     class MyUploadAdapter {
         constructor(loader) {

@@ -204,19 +204,33 @@ class CheckoutController extends Controller
 
     public function detail($bill_code)
     {
-        $detail = DB::table('bill_details')
-            ->join('products', 'bill_details.product_id', '=', 'products.id')
+        // $detail = DB::table('bill_details')
+        //     ->join('products', 'bill_details.product_id', '=', 'products.id')
 
-            ->select('bill_details.*', 'products.name')
-            ->get();
+        //     ->select('bill_details.*', 'products.name')
+        //     ->get();
 
         // $detail = DB::table('bill_details')->where('bill_code', '=', $bill_code)->get();
 
         // Truy vấn thông tin người dùng từ bảng bills
-        $detail_user = DB::table('bills')->where('bill_code', '=', $bill_code)->first();
+        // $detail_user = DB::table('bills')->where('bill_code', '=', $bill_code)->first();
         // dd($detail);
         // dd($detail_user);
-        return view('admins.checkout.detail', compact('detail_user', 'detail'));
+        // dd($bill_code);
+        $data = Bill::join('statuses', 'bills.status', '=', 'statuses.id')
+        // ->where('user_id', '=', auth()->user()->id)
+        ->where('bill_code', '=',$bill_code)
+        ->select('bills.*', 'statuses.status_name as status_name') // Chỉ lấy cột `name` từ `statuses`
+        ->first();
+        // dd($data);
+        // $data2 = Bill_detail::where('bill_code','=',$bill_code)->get();
+        $detail = DB::table('bill_details')
+        ->join('products', 'bill_details.product_id', '=', 'products.id')
+        ->where('bill_details.bill_code', $bill_code) // Sử dụng bill_code để lọc
+        ->select('bill_details.*', 'products.name','products.image')
+        ->get();
+        // dd(vars: $data);
+        return view('admins.checkout.detail', compact('data', 'detail'));
     }
     public function edit()
     {

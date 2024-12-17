@@ -26,6 +26,8 @@ class Product extends Model
         'resolution',
         'content_short',
         'role',
+        'is_attributes',
+        'product_parent',
     ];
 
     // Product.php

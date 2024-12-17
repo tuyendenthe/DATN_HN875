@@ -25,8 +25,11 @@ class Bill extends Model
         'status',
     ];
 
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
+    // public function status()
+    // {
+    //     return $this->belongsTo(Status::class);
+    // }
+    public function Bill_detail(){
+        return $this->hasMany(Bill_detail::class,'bill_id');
     }
 }

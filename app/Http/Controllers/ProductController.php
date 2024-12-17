@@ -25,8 +25,9 @@ class ProductController extends Controller
     public function addProduct()
     {
         $data = Category::get();
+        $products = Product::where('is_attributes',2)->get();
         // $Categories = Categories::where('status_delete', Categories::UNDELETE)->get();
-        return view('admins.add-product', compact('data'));
+        return view('admins.add-product', compact('data','products'));
     }
     public function upload_image($imageFile)
     {
@@ -40,7 +41,6 @@ class ProductController extends Controller
     public function addPostProduct(ProductRequest $req)
     {
             // dd($req);
-
         $path = null;
         if ($req->hasFile('image')) {
             // $path = $req->file('image')->store('images/products', 'public');
@@ -48,10 +48,9 @@ class ProductController extends Controller
             $path = $data['image'];
         }
         // dd($data['image']);
-
         $data =  [
             'name' => $req->name,
-            'category_id' => $req->category_id,
+            
             'image' => $path,
             'price' => $req->price,
             'content_short' => $req->content_short,
@@ -70,22 +69,35 @@ class ProductController extends Controller
             'screen' => $req->screen,
 
             'resolution' => $req->resolution,
-            'role' => $req->role,
-
+          
+            'is_attributes' => $req->is_attributes ?? 2,
+            'product_parent' => $req->product_parent,
 
 
         ];
+        if($req->is_attributes == 1){
+            $productParent = Product::find($req->product_parent);
+            $data['category_id'] = $productParent->category_id;
+            $data['role'] = $productParent->role;
+        }else{
+            $data['category_id'] = $req->category_id;
+            $data['role'] = $req->role;
+        }
+       
 
         Product::create($data);
-        return redirect()->route('products.listProduct');
+    
+
+        // return redirect()->route('products.listProduct');
     }
 
     public function updateProduct($id)
     {
         $product = Product::find($id);
         $category = Category::get();
+        $products = Product::get();
 
-        return view('admins.update-product', compact('category','product'))
+        return view('admins.update-product', compact('category','product','products'))
         ;
     }
 
@@ -101,6 +113,7 @@ class ProductController extends Controller
 
     public function updatePutProduct(ProductRequest $req, $id)
     {
+       
         $product = Product::find($id);
         $path = $product->image;
         if ($req->hasFile('image')) {
@@ -108,18 +121,13 @@ class ProductController extends Controller
             $data['image'] = $this->upload_image($req->file('image'));
             $path = $data['image'];
         }
-        // dd($req);
-
         $data =  [
             'name' => $req->name,
-            'category_id' => $req->category_id,
+            
             'image' => $path,
             'price' => $req->price,
             'content_short' => $req->content_short,
             'content' => $req->content,
-
-
-
             'chip' => $req->chip,
 
             'ram' => $req->ram,
@@ -131,13 +139,35 @@ class ProductController extends Controller
             'screen' => $req->screen,
 
             'resolution' => $req->resolution,
-            'role' => $req->role,
-
+          
+            'is_attributes' => $req->is_attributes ?? 2,
+            'product_parent' => $req->product_parent,
 
 
         ];
-        // dd($data);
+        if($req->is_attributes == 1){
+          
+            $productParent = Product::find($req->product_parent);
+      
+            $data['category_id'] = $productParent->category_id;
+            $data['role'] = $productParent->role;
+        }else{
+            $data['category_id'] = $req->category_id;
+            $data['role'] = $req->role;
+        }
+   
         $product->update($data);
+
+        if($product->is_attributes == 2 ) {
+            $product_child = Product::where('product_parent', $id)->get();
+            foreach($product_child as $child) {
+               $product_child_update = Product::find($child->id);
+               $product_child_update->update([
+                    'role' => $req->role,
+                    'category_id' => $req->category_id
+               ]);
+            }
+        }
         return redirect()->route('products.listProduct');
     }
 

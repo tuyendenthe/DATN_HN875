@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
             'content' => 'required',
             'content_short' => 'required',
            
-            'image' => 'required',
+            // 'image' => 'required',
         ];
     }
 
@@ -37,7 +37,7 @@ class ProductRequest extends FormRequest
             'content.required' => 'Nội dung sản phẩm không được để trống.',
             'content_short.required' => 'Nội dung ngắn sản phẩm không được để trống.',
 
-            'image.required' => 'Ảnh sản phẩm không được để trống.',
+            // 'image.required' => 'Ảnh sản phẩm không được để trống.',
         ];
     }
 }

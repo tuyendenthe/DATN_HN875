@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -33,25 +35,38 @@ public function detail(string $id)
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'role' => 'required',
 
         ]);
-
-        $data = [
+        $check = User::where('email',$request->email)->first();
+        if($check){
+            return redirect()->route('admin1.users.adduser')->with('error', 'Email đã tồn tại.');
+        }
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-
             'address' => $request->address,
-
-        ];
-
+            'role' => $request->role ?? 2,
+        ]);
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images', 'public');
+            $data_images = $request->file('image')->store('images', 'public');
+            $user->update(['image'=>$data_images]);
+        }
+        
+        if($request->role == 1){
+            Admin::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'status' => 1,
+                'username' => $request->name,
+            ]);
         }
 
-        User::create($data);
-
-        return redirect()->route('admin1.users.listuser')->with('message1', 'Thêm thành công.');
+      
+      
+        return redirect()->route('admin1.users.listuser')->with('success', 'Thêm thành công.');
     }
 
 
@@ -72,12 +87,14 @@ public function detail(string $id)
         'email' => 'required|string|email|max:255|unique:users,email,' . $id,
         'address' => 'nullable|string|max:255',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'role' => 'required',
     ]);
-
+  
     $data = [
         'name' => $request->name,
         'email' => $request->email,
         'address' => $request->address,
+        'role' =>1,
     ];
 
     if ($request->filled('password')) {
@@ -87,8 +104,26 @@ public function detail(string $id)
     if ($request->hasFile('image')) {
         $data['image'] = $request->file('image')->store('images', 'public');
     }
-
+   
     $user->update($data);
+    $check_admin = Admin::where('email', $request->email)->first();
+
+    if($check_admin){
+        
+        $check_admin->delete();
+    }
+
+    if($request->role == 1){
+        $check = User::find($id);
+        
+        Admin::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $check->password,
+            'status' => 1,
+            'username' => $request->name,
+        ]);
+    }
 
     return redirect()->route('admin1.users.listuser')->with('message1', 'Cập nhật thành công.');
 }
