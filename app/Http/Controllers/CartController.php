@@ -59,9 +59,77 @@ class CartController extends Controller
         // $variant1_name = Variant::find($variant_id_1) == null ? '' : $variant1->name;
         // $variant2_name = Variant::find($variant_id_2) == null ? '' : $variant2->name;
         // $variant3_name = Variant::find($variant_id_3) == null ? '' : $variant3->name;
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('message', 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
+
+        $products = (Product::with('category','flashSale'))->findOrFail($product->id);
+        // $categories = Category::all();
+        $flashSales = FlashSale::with('product')
+            ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
+            ->orderBy('time_end', 'asc')
+            ->limit(4)
+            ->get();
+
+
+
+        $cart = session()->get('cart', []);
+        $productId = $product->id;
+        $productName = $product->name;
+            if ($products->isOnFlashSale()) {
+                $productPrice = $products->flashSale->price_sale;
+            } else {
+                $productPrice = $products->price;
+            }
+
+
+        //  + $variant1_price + $variant2_price + $variant3_price;
+        // $variantName1 = $variant1_name;
+        // $variantName2 = $variant2_name;
+        // $variantName3 = $variant3_name;
+        $quantity = 1;
+        $image = $product -> image;
+        $cartItems = session('cart', []);
+
+        // Create a unique key for the product-variant combination
+        $cartKey = $productId . '-' . $productPrice;
+
+        if (isset($cartItems[$cartKey])) {
+            $cartItems[$cartKey]['quantity'] += 1;
+        } else {
+            $cartItems[$cartKey] = [
+                'product_id' => $productId,
+                'product_name' => $productName,
+                // 'variant_name' => [$variantName1, $variantName2, $variantName3],
+                'quantity' => $quantity,
+                'price' => $productPrice,
+                'image' => $image
+            ];
         }
+
+        session(['cart' => $cartItems]);
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Sản phẩm đã được thêm vào giỏ hàng!']);
+        }
+
+        return redirect()->route('cart.view')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng');
+    }
+    public function addCart1(Request $request, Product $product)
+
+    {
+
+        // $variant_id_1 = $request->input('variant_id_1');
+        // $variant_id_2 = $request->input('variant_id_2');
+        // $variant_id_3 = $request->input('variant_id_3');
+        // $variant1 = Variant::find($variant_id_1);
+        // $variant2 = Variant::find($variant_id_2);
+        // $variant3 = Variant::find($variant_id_3);
+
+        // $variant1_price = Variant::find($variant_id_1) == null ? 0 : $variant1->price;
+        // $variant2_price = Variant::find($variant_id_2) == null ? 0 : $variant2->price;
+        // $variant3_price = Variant::find($variant_id_3) == null ? 0 : $variant3->price;
+
+        // $variant1_name = Variant::find($variant_id_1) == null ? '' : $variant1->name;
+        // $variant2_name = Variant::find($variant_id_2) == null ? '' : $variant2->name;
+        // $variant3_name = Variant::find($variant_id_3) == null ? '' : $variant3->name;
+
         $products = (Product::with('category','flashSale'))->findOrFail($product->id);
         // $categories = Category::all();
         $flashSales = FlashSale::with('product')
@@ -108,7 +176,8 @@ class CartController extends Controller
 
         session(['cart' => $cartItems]);
 
-        return redirect()->route('cart.view')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng');
+
+        return back()->with('message1', 'Sản phẩm đã được thêm vào giỏ hàng');
     }
 
 

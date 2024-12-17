@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Product;
 use App\Models\FlashSale;
 use App\Models\Slide;
+use App\Models\slide_cover;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,9 @@ class HomeUserController extends Controller
     {
         // dd($cart);
         // Lấy tối đa 10 sản phẩm từ bảng products
+        $banner_covers = slide_cover::all();
         $products = (Product::with('category','flashSale'))->where('is_attributes',2)->latest()->take(8)->get();
+        $products_2 = (Product::with('category','flashSale'))->where('role','=',2)->latest()->take(8)->get();
         $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -34,7 +37,7 @@ class HomeUserController extends Controller
         $banners = Slide::all();
 
         // Trả về view và truyền danh sách sản phẩm
-        return view('clients.index', compact('products', 'flashSales', 'banners','categories'));
+        return view('clients.index', compact('products','products_2', 'flashSales', 'banners','banner_covers','categories'));
     }
 
     /**
@@ -72,10 +75,10 @@ class HomeUserController extends Controller
 
         $excludedId = $products['$id'];
         $limit = 4;
-        
+
 
         $category =  Product::where('product_parent',$id)->get();
-        $reviews = Comment::with('user') 
+        $reviews = Comment::with('user')
         ->where('product_id', $id)
             ->where('status', 1)
             ->orderBy('created_at', 'desc')

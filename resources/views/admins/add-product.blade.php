@@ -33,7 +33,7 @@
                     @foreach ($products as $product)
                         <option value="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category_id }}" data-role ="{{ $product->role }}">{{ $product->name }}</option>
                     @endforeach
-                    
+
                 </select>
             </div>
 
@@ -41,6 +41,13 @@
                 Tên:
                 <input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name_product">
                 @error('name')
+                <span class="" style="color: red">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="col-12">
+                Số Lượng:
+                <input type="text" name="quantity" value="{{ old('quantity') }}" class="form-control" id="quantity">
+                @error('quantity ')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
             </div>
@@ -67,7 +74,7 @@
                 @enderror
             </div>
 
-           
+
         <div class="col-12">
             Ảnh:
             <input type="file" name="image" class="form-control">
@@ -170,7 +177,7 @@
             $('#categorySelect').attr('disabled', true);
             $('#roleSelected').attr('disabled', true);
 
-            
+
             $('#parentProductDiv').removeClass('d-none').addClass('d-block');
         } else {
             $('#categorySelect').attr('disabled', false);
@@ -187,7 +194,7 @@
             }
         }
         $('#name_product').val(dataAttributes['data-name']);
-       
+
 
         const categorySelect = document.getElementById('categorySelect');
         const roleSelected = document.getElementById('roleSelected');
@@ -199,7 +206,7 @@
 </script>
 <script>
 
-    
+
     class MyUploadAdapter {
         constructor(loader) {
             this.loader = loader;

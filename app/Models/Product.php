@@ -22,6 +22,7 @@ class Product extends Model
         'ram',
         'color',
         'memory',
+        'quantity',
         'screen',
         'resolution',
         'content_short',

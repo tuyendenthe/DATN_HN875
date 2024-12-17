@@ -48,9 +48,10 @@ class ProductController extends Controller
             $path = $data['image'];
         }
         // dd($data['image']);
+        // dd($req);
         $data =  [
             'name' => $req->name,
-            
+            'quantity' => $req->quantity,
             'image' => $path,
             'price' => $req->price,
             'content_short' => $req->content_short,
@@ -64,12 +65,13 @@ class ProductController extends Controller
 
             'color' => $req->color,
 
+
             'memory' => $req->memory,
 
             'screen' => $req->screen,
 
             'resolution' => $req->resolution,
-          
+
             'is_attributes' => $req->is_attributes ?? 2,
             'product_parent' => $req->product_parent,
 
@@ -83,10 +85,10 @@ class ProductController extends Controller
             $data['category_id'] = $req->category_id;
             $data['role'] = $req->role;
         }
-       
+
 
         Product::create($data);
-    
+
 
         // return redirect()->route('products.listProduct');
     }
@@ -113,7 +115,7 @@ class ProductController extends Controller
 
     public function updatePutProduct(ProductRequest $req, $id)
     {
-       
+
         $product = Product::find($id);
         $path = $product->image;
         if ($req->hasFile('image')) {
@@ -123,7 +125,7 @@ class ProductController extends Controller
         }
         $data =  [
             'name' => $req->name,
-            
+
             'image' => $path,
             'price' => $req->price,
             'content_short' => $req->content_short,
@@ -133,29 +135,30 @@ class ProductController extends Controller
             'ram' => $req->ram,
 
             'color' => $req->color,
+            'quantity ' => $req->quantity_,
 
             'memory' => $req->memory,
 
             'screen' => $req->screen,
 
             'resolution' => $req->resolution,
-          
+
             'is_attributes' => $req->is_attributes ?? 2,
             'product_parent' => $req->product_parent,
 
 
         ];
         if($req->is_attributes == 1){
-          
+
             $productParent = Product::find($req->product_parent);
-      
+
             $data['category_id'] = $productParent->category_id;
             $data['role'] = $productParent->role;
         }else{
             $data['category_id'] = $req->category_id;
             $data['role'] = $req->role;
         }
-   
+
         $product->update($data);
 
         if($product->is_attributes == 2 ) {

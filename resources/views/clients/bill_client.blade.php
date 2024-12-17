@@ -141,8 +141,9 @@
                         <td>{{  number_format($value->total, 0, ',', '.')}} </td>
                          <td>{{ $value->status_name }}
                             @if ($value->status==1)
-                                <form action="#">
+                                <form action="{{ route('bill.bill_cancel',$value->bill_code) }}" method="POST">
                                     @csrf
+                                    @method('POST')
                                     <button type="submit" class="btn btn-danger"> Hủy Đơn Hàng</button>
                                 </form>
 
