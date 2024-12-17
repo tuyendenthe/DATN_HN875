@@ -227,8 +227,11 @@ input[type=number] {
 
                 @if ($data->status==1)
 
-
-                <button type="submit" class="btn btn-danger mt-2"> Hủy Đơn Hàng</button>
+                <form action="{{ route('bill.bill_cancel',$data->bill_code) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="btn btn-danger"> Hủy Đơn Hàng</button>
+                </form>
                 @endif
              </div>
              <hr>

@@ -26,23 +26,30 @@
                     Là sản phảm thuộc tính
                     <input class="ml-2" type="checkbox" name="is_attributes" value="1" id="isAttributesCheckbox" {{ $product->is_attributes == 1 ? 'checked' : '' }}>
                 </div>
-    
+
                 <div class="col-12 mt-2 {{ $product->is_attributes == 1 ? ' d-block' : 'd-none' }}" id="parentProductDiv">
                     Sản phẩm cha
                     <select class="form-control" name="product_parent" id="parentProductSelect">
                         <option value="">Chọn cha sản phẩm</option>
                         @foreach ($products as $product1)
-                            <option value="{{ $product1->id }}" data-name="{{ $product1->name }}" 
+                            <option value="{{ $product1->id }}" data-name="{{ $product1->name }}"
                             data-category="{{ $product1->category_id }}" data-role ="{{ $product1->role }}"
                             {{ $product->product_parent == $product1->id ? ' selected="selected"' : '' }}
                             >{{ $product1->name }}</option>
                         @endforeach
-                        
+
                     </select>
                 </div>
                 <div class="col-12">
                     Tên:
                     <input type="text" name="name" value="{{ $product->name }}" class="form-control">
+                    {{-- @error('name')
+                    <span class="" style="color: red">{{ $message }}</span>
+                    @enderror --}}
+                </div>
+                <div class="col-12">
+                    Số Lượng:
+                    <input type="text" name="quantity " value="{{ $product->quantity  }}" class="form-control">
                     {{-- @error('name')
                     <span class="" style="color: red">{{ $message }}</span>
                     @enderror --}}
@@ -59,7 +66,7 @@
                         @endforeach
                     </select> --}}
                     <select name="category_id" value="{{ $product->category_id }}"
-                        
+
                         class="form-control" id="categorySelect" {{ $product->is_attributes == 1 ? 'disabled' : '' }}>
                         @foreach ($category as $val)
                             <option value="{{ $val->id }}" {{ $product->category_id == $val->id ? 'selected' : '' }}>
@@ -184,7 +191,7 @@
             $('#categorySelect').attr('disabled', true);
             $('#roleSelected').attr('disabled', true);
 
-            
+
             $('#parentProductDiv').removeClass('d-none').addClass('d-block');
         } else {
             $('#categorySelect').attr('disabled', false);
@@ -201,7 +208,7 @@
             }
         }
         $('#name_product').val(dataAttributes['data-name']);
-       
+
 
         const categorySelect = document.getElementById('categorySelect');
         const roleSelected = document.getElementById('roleSelected');

@@ -141,7 +141,7 @@
                                     @foreach($newProducts as $item)
                                         <div class="epix-product-list mb-20">
                                             <div class="thumb">
-                                                <a href="{{ route('single_product', $item -> id) }}"><img width="80px" height="100px" src="{{asset($item -> image)}}" alt=""></a>
+                                                {{-- <a href="{{ route('single_product', $item -> id) }}"><img width="80px" height="100px" src="{{asset($item -> image)}}" alt=""></a> --}}
                                             </div>
                                             <div class="content">
                                                 <h4 class="epix-list-product-sm-title"><a href="{{ route('single_product', $item -> id) }}">{{ $item -> name }}</a></h4>
@@ -152,7 +152,7 @@
                                                     @else
                                                         <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                     @endif
-                                                    <a href="{{ route('single_product', $item -> id) }}">+ Select Option</a>
+                                                    <a href="{{ route('single_product', $item -> id) }}">Chi Tiết Sản Phầm</a>
                                                 </div>
                                             </div>
                                         </div>

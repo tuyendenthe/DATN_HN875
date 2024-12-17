@@ -430,8 +430,8 @@
                     <div class="col-xxl-6 col-lg-6">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                @foreach ($banners as $banner)
-                                    <div class="swiper-slide" style="background-image: url('{{ Storage::url($banner->image) }}'); height: 340px;">
+                                @foreach ($banner_covers as $bannerss)
+                                    <div class="swiper-slide" style="background-image: url('{{ Storage::url($bannerss->image) }}'); height: 340px;">
                                     </div>
                                 @endforeach
                             </div>
@@ -1034,7 +1034,7 @@
                     </div> --}}
                     <div class="row">
 
-                        @foreach ($products as $item)
+                        @foreach ($products_2 as $item)
                             <div class="col-xxl-4 col-sm-6 col-md-4">
                                 <div class="epix-handpicked-product mb-50">
                                     <div class="epix-h-pro-thumb mr-35">
@@ -1147,7 +1147,7 @@
             <div class="kmacb-circle-fill"></div>
             <div class="kmacb-img-circle"></div>
             </button>
-       
+
         </form>
         </div>
     @endif

@@ -1,5 +1,74 @@
 @extends('clients.master')
 @section('content')
+<div class="container">
+    @if (session('message'))
+        <div id="notification" class="notification alert alert-danger" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
+    @if (session('message1'))
+    <div id="notification" class="notification1 alert alert-danger" role="alert">
+        {{ session('message1') }}
+    </div>
+@endif
+
+    <!-- Other content here -->
+</div>
+
+    <style>
+        .notification1 {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #d4edda;
+            /* Màu xanh nhạt */
+            color: #155724;
+            /* Màu chữ xanh đậm */
+        }
+    </style>
+    <style>
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var notification = document.getElementById('notification');
+
+            if (notification) {
+                // Show the notification
+                notification.style.display = 'block';
+
+                // Hide the notification after 5 seconds
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 8000);
+
+                // Optional: Add hover effect to keep it visible
+                notification.addEventListener('mouseenter', function() {
+                    notification.style.display = 'block';
+                });
+
+                notification.addEventListener('mouseleave', function() {
+                    notification.style.display = 'none';
+                });
+            }
+        });
+    </script>
+
 <style>
     .rounded:hover {
         color: rgb(20, 178, 252);
@@ -116,7 +185,7 @@
         /* Đường viền */
         text-align: center;
         /* Căn giữa nội dung trong ô */
-        padding: 10px;
+        /* padding: 10px; */
         /* Khoảng cách bên trong ô */
         background-color: #f9f9f9;
         /* Màu nền ô */
@@ -249,7 +318,7 @@ use App\Models\Product;
 $product_parent = Product::where('product_parent', $products->product_parent)
     ->with(['category', 'flashSale'])
     ->get();
-  
+
 $product_parent_1 = Product::where('id',$products->product_parent)->with(['category', 'flashSale'])->first();
 
 @endphp
@@ -297,7 +366,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                         <span class="sale">sale</span>
                                                         @endif <br>
                                                     </div>
-                                                    <img style="height: 400px;width: 400px;margin-left: 70px" src="{{asset($products->image)}}" data-zoom-image="{{asset('laptop/assets/img/product/signle-product-1.jpg')}}" class="img-fluid zoom-img-hover" alt="">
+                                                    <img style="height: 400px;width: 400px; " class="mb-2" src="{{asset($products->image)}}" data-zoom-image="{{asset('laptop/assets/img/product/signle-product-1.jpg')}}" class="img-fluid zoom-img-hover" alt="">
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="epix-single-2">
@@ -393,10 +462,10 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
 
                                 <div class="epix-product-label mb-35">
                                     <a href="#" class="title">Sản phẩm cùng loại</a>
-                                    @if($products->is_attributes == 2)                           
+                                    @if($products->is_attributes == 2)
                                         <div style="padding-left: 0px" class="container">
                                             <div class="variant-container d-flex flex-wrap">
-                                            
+
                                                 @foreach($category as $val)
 
                                                 @if($products->id != $val->id)
@@ -405,10 +474,10 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                         <span class="sale">sale</span>
                                                         @endif <br>
                                                         <div>
-                                                            <img src="{{asset($val->image)}}" alt="" style="width:50px; height:50px;">
+                                                            {{-- <img src="{{asset($val->image)}}" alt="" style="width:50px; height:50px;"> --}}
                                                             <div>
                                                                 <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
-                                                        
+
                                                                     {{ $val->name }}
                                                                 </a>
                                                                 <br>
@@ -419,11 +488,11 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                                         @else
                                                                     {{ number_format($val->price, 0, ',', '.') }} VNĐ
                                                                     @endif
-                
+
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                    
+
 
                                                      </div>
                                                     @endif
@@ -437,8 +506,8 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
 
                                             @if($product_parent_1)
                                             <div class="variant-item border-primary rounded" style="background-color: #fff">
-                                                
-                                                
+
+
                                                 @if ($product_parent_1->isOnFlashSale())
                                                 <span class="sale">sale</span>
                                                 @endif <br>
@@ -459,7 +528,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                     <img src="{{asset($product_parent_1->image)}}" alt="" style="width:50px; height:50px;">
                                                     <div>
                                                         <a style="text-decoration: none; " href="{{ route('single_product', $product_parent_1->id) }}">
-                                                
+
                                                             {{ $product_parent_1->name }}
                                                         </a>
                                                         <br>
@@ -470,21 +539,21 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                                 @else
                                                             {{ number_format($product_parent_1->price, 0, ',', '.') }} VNĐ
                                                             @endif
-        
+
                                                         </a>
                                                     </div>
                                                 </div>
-                                        
+
 
 
                                                 </div>
                                             @endif
-                                              
+
                                                 @foreach($product_parent as $pro)
                                                     @if($pro->id != $products->id)
                                                     <div class="variant-item border-primary rounded" style="background-color: #fff">
-                                                    
-                                                    
+
+
                                                             @if ($pro->isOnFlashSale())
                                                             <span class="sale">sale</span>
                                                             @endif <br>
@@ -492,7 +561,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                                 <img src="{{asset($pro->image)}}" alt="" style="width:50px; height:50px;">
                                                                 <div>
                                                                     <a style="text-decoration: none; " href="{{ route('single_product', $pro->id) }}">
-                                                            
+
                                                                         {{ $pro->name }}
                                                                     </a>
                                                                     <br>
@@ -503,11 +572,11 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                                             @else
                                                                         {{ number_format($pro->price, 0, ',', '.') }} VNĐ
                                                                         @endif
-                    
+
                                                                     </a>
                                                                 </div>
                                                             </div>
-                                                    
+
 
                                                     </div>
                                                 @endif
@@ -515,75 +584,49 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                         </div>
                                     </div>
 
-                                    
-                                        
+
+
 
                                     @endif
                                 </div>
 
                                 <!-- Form để thêm vào giỏ hàng -->
-                                <form style="margin-top: 10px" action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
-                                    @csrf
-                                    @if($products->isOnFlashSale())
-                                    <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
-                                    {{-- <span style="width: 100px" class="price flash-sale-price">{{ number_format($products->flashSale->price_sale, 0, ',', '.') }} VNĐ</span> --}}
-                                    <input type="hidden" name="price" value="{{ $products->flashSale->price_sale }}">
-                                    {{-- <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($products->price, 0, ',', '.') }} VNĐ</del></span> --}}
-                                    @else
-                                    <input type="hidden" name="price" value="{{ $products->price }}">
-                                    @endif
-                                    {{-- <div class="epix-product-label mb-35">
-                                <a href="#" class="title">Chọn phiên bản</a>
-                                <div style="padding-left: 0px" class="container">
-                                    <div class="variant-container">
-                                        @foreach($products->variants as $variant)
-                                            @if ($variant->type == 1)
-                                                <div class="variant-box variant-box1 tag-list"
-                                                     data-value="{{ $variant->name }}"
-                                    data-price="{{ $variant->price }}"
-                                    onclick="selectVariant1(this)">
-                                    <input type="radio" name="variant_id_1" id="{{ $variant->id }}" value="{{ $variant->id }}">
-                                    <label for="{{ $variant->id }}">{{ $variant->name }}</label>
-                            </div>
-                            @endif
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                <div class="epix-product-label mb-35">
-                    <a href="#" class="title">Chọn mau </a>
-                    <div style="padding-left: 0px" class="container">
-                        <div class="variant-container">
-                            @foreach($products->variants as $variant)
-                            @if ($variant->type == 2)
-                            <div class="variant-box variant-box2 tag-list" data-value="{{ $variant->name }}" data-price="{{ $variant->price }}" onclick="selectVariant2(this)">
-                                <input type="radio" name="variant_id_1" id="{{ $variant->id }}" value="{{ $variant->id }}">
-                                <label for="{{ $variant->id }}">{{ $variant->name }}</label>
-                            </div>
-                            @endif
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                <div class="epix-product-label mb-35">
-                    <a href="#" class="title">Chọn bo nho</a>
-                    <div style="padding-left: 0px" class="container">
-                        <div class="variant-container">
-                            @foreach($products->variants as $variant)
-                            @if ($variant->type == 3)
-                            <div class="variant-box variant-box3 tag-list" data-value="{{ $variant->name }}" data-price="{{ $variant->price }}" onclick="selectVariant3(this)">
-                                <input type="radio" name="variant_id_1" id="{{ $variant->id }}" value="{{ $variant->id }}">
-                                <label for="{{ $variant->id }}">{{ $variant->name }}</label>
-                            </div>
-                            @endif
-                            @endforeach
-                        </div>
-                    </div>
-                </div> --}}
-                <button type="submit" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">
-                    Thêm vào giỏ hàng
-                </button>
-                </form>
+                                @if ($products->quantity <1)
+                                <button id="hethang">Hết Hàng</button>
+                                @else
+                                    <div class="d-flex">
+                                        <form style="margin-top: 10px" class="me-3" action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
+                                                            @csrf
+                                                            @if($products->isOnFlashSale())
+                                                            <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                            {{-- <span style="width: 100px" class="price flash-sale-price">{{ number_format($products->flashSale->price_sale, 0, ',', '.') }} VNĐ</span> --}}
+                                                            <input type="hidden" name="price" value="{{ $products->flashSale->price_sale }}">
+                                                            {{-- <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($products->price, 0, ',', '.') }} VNĐ</del></span> --}}
+                                                            @else
+                                                            <input type="hidden" name="price" value="{{ $products->price }}">
+                                                            @endif
+
+                                                <button type="submit" class="btn-primary d-block d-sm-inline-block text-center text-sm-left">
+                                                Mua Ngay
+                                                </button>
+                                            </form>
+
+
+                                        <form id="addToCartForm" style="margin-top: 10px" action="{{ route('cart.add1', $products->id) }}" method="POST" class="epix-cart-variation">
+                                            @csrf
+                                            @if($products->isOnFlashSale())
+                                                <input type="hidden" name="price" value="{{ $products->flashSale->price_sale }}">
+                                            @else
+                                                <input type="hidden" name="price" value="{{ $products->price }}">
+                                            @endif
+
+                                            <button type="submit" class="btn-success d-block d-sm-inline-block text-center text-sm-left">
+                                                Thêm vào giỏ hàng
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+
             </div>
         </div>
         </form>
@@ -1196,6 +1239,36 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+    document.getElementById('hethang').addEventListener('click', function(event) {
+            event.preventDefault(); // Ngăn trang không load lại
+            alert("Sản phẩm đã hết hàng, vui lòng chọn sản phẩm khác");
+        });
+        $(document).ready(function () {
+        $('#addToCartForm').on('submit', function (e) {
+            e.preventDefault(); // Ngăn form submit và tải lại trang
+
+            // Lấy URL và dữ liệu từ form
+            var form = $(this);
+            var actionUrl = form.attr('action');
+            var formData = form.serialize();
+
+            // Gửi AJAX request
+            $.ajax({
+                url: actionUrl,
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    // Xử lý khi request thành công
+                    alert("Sản phẩm đã được thêm vào giỏ hàng!");
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý khi request thất bại
+                    alert("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại!");
+                    console.error(error);
+                }
+            });
+        });
+    });
     $(document).ready(function() {
         $('#reviewForm').on('submit', function(e) {
             e.preventDefault(); // Ngăn chặn gửi form thông thường

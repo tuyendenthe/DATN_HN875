@@ -287,6 +287,7 @@ Route::post('/cart/update/{key}', [CartController::class, 'updateQuantity'])->na
 Route::get('/cart/remove/{key}', [CartController::class, 'removeCartItem'])->name('cart.remove');
 // Thêm sản phẩm vào giỏ hàng
 Route::post('/cart/add/{product}', [CartController::class, 'addCart'])->name('cart.add');
+Route::post('/cart/add1/{product}', [CartController::class, 'addCart1'])->name('cart.add1');
 
 
 
@@ -313,7 +314,9 @@ Route::prefix('/checkout')->name('checkout.')->group(function () {
 Route::prefix('/bill')->name('bill.')->group(function () {
     Route::get('/', [CheckoutController::class, 'bills_client'])->name('bills_client');
     Route::get('/bills_details/{bill_code}', [CheckoutController::class, 'bills_details'])->name('bills_details');
+    Route::post('/bill_cancel/{bill_code}', [CheckoutController::class, 'cancel'])->name('bill_cancel');
 });
+
 /* -------------------------------- end_bill -------------------------------- */
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');

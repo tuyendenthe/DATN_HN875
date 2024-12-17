@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Mail; // Thêm import Mail
 use App\Mail\TestMail; // Import Mailable đã tạo
 use Illuminate\Support\Facades\Session;
 use App\Models\Notification;
+use App\Models\Product;
+
 class CheckoutController extends Controller
 {
     public function index(Request $request)
@@ -61,7 +63,7 @@ class CheckoutController extends Controller
         if(auth()->user()){
             $user_id = auth()->user()->id;
         }
-
+        // dd($request);
         $bill = [
             'bill_code' => $randomString,
             'name' => $request['name'],
@@ -83,12 +85,20 @@ class CheckoutController extends Controller
         $bill_id = $billRecord->id;
 
         $products = json_decode($request['products'], true);
+        // dd($products);
+
+
+        // Product::update()
+
         foreach ($products as $item) {
             $product_id = $item['product_id'];
             $price = $item['price'];
             $quantity = $item['quantity'];
             $subtotal = $price * $quantity;
-
+            $cc =Product::findOrFail($item['product_id']);
+            // dd($cc);
+            $quantity1 = $cc['quantity']- $quantity;
+            DB::table('products')->where('id','=',$cc['id'])->update(['quantity' => $quantity1]);
             $data2 = [
                 'bill_id' => $bill_id,
                 'product_id' => $product_id,
@@ -250,7 +260,7 @@ class CheckoutController extends Controller
     {
         $query = DB::table('bills')
             ->join('statuses', 'bills.status', '=', 'statuses.id')
-            ->where('statuses.id', '>', 3)
+            ->where('bills.status', '>', 3)
             ->select('bills.*', 'statuses.status_name');
         // dd($list);
         if ($request->has('order_id') && !empty($request->order_id)) {
@@ -274,8 +284,21 @@ class CheckoutController extends Controller
     }
     public function updateStatus(Request $request, $id){
         // dd($id);
-        Bill::where('id', $id)->update(['status' => $request->status_id]);
+        $stt= $request->status_id;
+         Bill::where('id', $id)->update(['status' => $request->status_id]);
+         $data = Bill::findOrFail($id);
+         $bill_code = $data['bill_code'];
+        if($request->$stt = 5){
+            $data2 = Bill_detail::where('bill_code','=',$bill_code)->get();
 
+            foreach($data2 as $value){
+                $product = Product::findOrFail($value->product_id);
+
+                $quantyti = $product->quantity + $value->quantity;
+                 DB::table('products')->where('id','=',$value->product_id)->update(['quantity'=> $quantyti]);
+            };
+
+        }
         return redirect()->route("checkout.list")->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
     public function check_order(){
@@ -343,6 +366,20 @@ class CheckoutController extends Controller
 
 	    return $response['data']['records'];
 	}
+    public function cancel(String $bill_code){
+
+        // $data = Bill::where('bill_code','=',$bill_code)->get();
+        DB::table('bills')->where('bill_code','=',$bill_code)->update(['status'=> 5]);
+        $data = Bill_detail::where('bill_code','=',$bill_code)->get();
+        // dd($data);
+        foreach($data as $value){
+            $product = Product::findOrFail($value->product_id);
+
+            $quantyti = $product->quantity + $value->quantity;
+             DB::table('products')->where('id','=',$value->product_id)->update(['quantity'=> $quantyti]);
+        };
+        return back()->with('message1', 'Đã Hủy Đơn Hàng');
+    }
 
     public function checkPay(Request $request)
 	{
