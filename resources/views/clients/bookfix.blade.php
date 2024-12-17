@@ -1,6 +1,12 @@
 @extends('clients.master')
 @section('content')
-
+<style>
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
 <main>
     <!-- prealoder area start -->
     <div id="loading">
@@ -31,7 +37,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 col-lg-6">
-                <div class="contact__info">
+                    <div class="contact__info">
                         <h3>Tìm chúng tôi ở đây.</h3>
                         <ul class="mb-55">
                             <li class="d-flex mb-35">
@@ -76,63 +82,68 @@
                         </ul>
 
 
-                            <div class="contact__social">
+                        <div class="contact__social">
 
+                        </div>
                     </div>
-                </div>
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="contact__form">
                         <h3>Đặt lịch sửa chữa</h3>
                         <form action="{{ route('bookfix.send') }}" method="POST" id="bookfix-form" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="contact__input">
-                                        <label>Tên <span class="required">*</span></label>
-                                        <input type="text" name="name" value="{{ old('name') }}">
-                                        @error('name')
-                                        <div class="error">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="contact__input">
-                                        <label>Email <span class="required">*</span></label>
-                                        <input type="email" name="email" value="{{ old('email') }}">
-                                        @error('email')
-                                        <div class="error">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="contact__input">
-                                        <label>Số điện thoại(Ưu tiên sử dụng zalo) <span class="required">*</span></label>
-                                        <input type="text" name="phone" value="{{ old('phone') }}">
-                                        @error('phone')
-                                        <div class="error">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="contact__input">
-                                        <label>Ghi chú (thông tin bạn muốn gửi)</label>
-                                        <textarea name="content" cols="30" rows="10">{{ old('content') }}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="contact__submit">
-                                        <button type="submit" class="os-btn os-btn-black">Gửi tin nhắn</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+    @csrf
+    <div class="row">
+        <div class="col-xl-6 col-lg-6">
+            <div class="contact__input">
+                <label>Tên <span class="required">*</span></label>
+                <input type="text" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                @error('name')
+                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-6">
+            <div class="contact__input">
+                <label>Email <span class="required">*</span></label>
+                <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                @error('email')
+                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="contact__input">
+                <label>Số điện thoại (Ưu tiên sử dụng Zalo) <span class="required">*</span></label>
+                <input type="text" name="phone" value="{{ old('phone') }}" class="form-control @error('phone') is-invalid @enderror">
+                @error('phone')
+                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="contact__input">
+                <label>Ghi chú (thông tin bạn muốn gửi)</label>
+                <textarea name="content" cols="30" rows="10" class="form-control @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
+                @error('content')
+                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="contact__submit">
+                <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
                         @if(session('success'))
                         <p class="ajax-response">{{ session('success') }}</p>
                         @endif

@@ -390,3 +390,95 @@
     });
 </script>
 
+<script>
+    // JavaScript Validation for the Form
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".checkbox-form");
+
+    // Input fields
+    const nameField = document.getElementById("name");
+    const addressField = document.getElementById("address");
+    const emailField = document.getElementById("email");
+    const phoneField = document.getElementById("phone");
+
+    // Error spans
+    const nameError = document.getElementById("error-name");
+    const addressError = document.getElementById("error-address");
+    const emailError = document.getElementById("error-email");
+    const phoneError = document.getElementById("error-phone");
+
+    // Utility functions for validation
+    function isEmailValid(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function isPhoneValid(phone) {
+        const phoneRegex = /^\d{10,11}$/; // Adjust for your specific needs
+        return phoneRegex.test(phone);
+    }
+
+    function isAddressDetailed(address) {
+        // Ensure address contains at least one number (e.g., house number) and letters (e.g., street name)
+        const hasNumber = /\d/.test(address);
+        const hasStreetName = /[a-zA-Z]/.test(address);
+        const isLongEnough = address.length >= 10;
+        return hasNumber && hasStreetName && isLongEnough;
+    }
+
+    function validateInput() {
+        let isValid = true;
+
+        // Validate Name
+        if (nameField.value.trim() === "") {
+            nameError.textContent = "Họ và Tên không được để trống.";
+            isValid = false;
+        } else {
+            nameError.textContent = "";
+        }
+
+        // Validate Address
+        if (addressField.value.trim() === "") {
+            addressError.textContent = "Địa chỉ không được để trống.";
+            isValid = false;
+        } else if (!isAddressDetailed(addressField.value.trim())) {
+            addressError.textContent = "Địa chỉ phải rõ ràng, bao gồm số nhà và tên đường, và ít nhất 10 ký tự.";
+            isValid = false;
+        } else {
+            addressError.textContent = "";
+        }
+
+        // Validate Email
+        if (emailField.value.trim() === "") {
+            emailError.textContent = "Email không được để trống.";
+            isValid = false;
+        } else if (!isEmailValid(emailField.value.trim())) {
+            emailError.textContent = "Email không hợp lệ.";
+            isValid = false;
+        } else {
+            emailError.textContent = "";
+        }
+
+        // Validate Phone
+        if (phoneField.value.trim() === "") {
+            phoneError.textContent = "Số điện thoại không được để trống.";
+            isValid = false;
+        } else if (!isPhoneValid(phoneField.value.trim())) {
+            phoneError.textContent = "Số điện thoại không hợp lệ. Phải có 10-11 chữ số.";
+            isValid = false;
+        } else {
+            phoneError.textContent = "";
+        }
+
+        return isValid;
+    }
+
+    // Add event listener for form submission
+    form.addEventListener("submit", function (event) {
+        if (!validateInput()) {
+            event.preventDefault();
+        }
+    });
+});
+
+</script>
