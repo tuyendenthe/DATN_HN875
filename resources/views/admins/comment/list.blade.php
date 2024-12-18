@@ -17,7 +17,7 @@
             @foreach ($comments as $comment)
                 <tr>
                     <td>{{ $comment->id }}</td>
-                    <td>{{ $comment->content }}</td>
+                    <td>{{ $comment->comment }}</td>
                     <td>{{ $comment->star }}</td>
                     <td>{{ $comment->user?->name }}</td>
                     <td>{{ $comment->product->name }}</td>
@@ -43,7 +43,7 @@
     $(document).on('change', '.status-checkbox', function() {
         var commentId = $(this).data('comment-id');
         var status = $(this).is(':checked') ? 1 : 0; // lấy trạng thái của checkbox
-        
+
         $.ajax({
             url: "{{ route('update-status') }}",
             method: "POST",
