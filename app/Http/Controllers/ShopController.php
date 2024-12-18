@@ -92,7 +92,7 @@ class ShopController extends Controller
         // Lọc sản phẩm theo giá
         // if ($range === '<3000000') {
         //     $products = $products->where('price', '<', 3000000);
-        // } elseif ($range === '3000000-5000000') {
+        // } elseif ($range === '3000000-5000000') {    
         //     $products = $products->whereBetween('price', [3000000, 4000000]);
         // } elseif ($range === '>5000000') {
         //     $products = $products->where('price', '>', 4000000);
@@ -120,12 +120,9 @@ class ShopController extends Controller
         } elseif ($range === '25000000-30000000') {
             // Lọc sản phẩm có giá từ 25 triệu đến 30 triệu
             $products = $products->whereBetween('price', [25000000, 30000000]);
-        } elseif ($range === '30000000-35000000') {
+        } elseif ($range === '30000000-40000000') {
             // Lọc sản phẩm có giá từ 30 triệu đến 35 triệu
-            $products = $products->whereBetween('price', [30000000, 35000000]);
-        } elseif ($range === '35000000-40000000') {
-            // Lọc sản phẩm có giá từ 35 triệu đến 40 triệu
-            $products = $products->whereBetween('price', [35000000, 40000000]);
+            $products = $products->whereBetween('price', [30000000, 40000000]);
         } elseif ($range === '40000000-50000000') {
             // Lọc sản phẩm có giá từ 40 triệu đến 50 triệu
             $products = $products->whereBetween('price', [40000000, 50000000]);
@@ -144,7 +141,7 @@ class ShopController extends Controller
         // Tạo output HTML để trả về
         $output = '';
         if ($products->isEmpty()) {
-            $output .= '<div class="no-products">No products found for this price range.</div>';
+            $output .= '<div class="no-products">Không có sản phẩm nào trong khoảng giá trên.</div>';
         } else {
             foreach ($products as $product) {
                 $output .= '
