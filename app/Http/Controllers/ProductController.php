@@ -90,7 +90,7 @@ class ProductController extends Controller
         Product::create($data);
 
 
-        // return redirect()->route('products.listProduct');
+        return redirect()->route('products.listProduct');
     }
 
     public function updateProduct($id)
