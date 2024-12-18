@@ -34,6 +34,7 @@ class AuthenController extends Controller
         $req->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            'address' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'name.required' => 'Tên không được để trống.',
@@ -44,16 +45,19 @@ class AuthenController extends Controller
         $user = Auth::user();
         $user->name = $req->name;
         $user->email = $req->email;
-
+        $user->address = $req->address;
 
         if ($req->hasFile('image')) {
-            $path = $req->file('image')->store('images/users');
+
+            $path = $req->file('image')->store('images/users', 'public');
             $user->image = $path;
         }
+
 
         $user->save();
 
         return redirect()->route('index')->with('message1', 'Cập nhật tài khoản thành công');
+        // return redirect()->route('index')->with('message1', 'Sản phẩm đã được thêm vào giỏ hàng');
     }
     public function login(){
         return view('clients.login');
@@ -62,7 +66,7 @@ class AuthenController extends Controller
 
     public function postLogin(Request $req)
     {
-       
+
         $req->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -74,7 +78,7 @@ class AuthenController extends Controller
 
 
         $user = User::where('email', $req->email)->first();
-    
+
         if ($user) {
             if ($user->status === '2') {
                 return redirect()->back()->with([
@@ -82,13 +86,13 @@ class AuthenController extends Controller
                 ]);
             }
 
-           
+
             if (Auth::attempt([
                 'email' => $req->email,
                 'password' => $req->password,
             ])) {
                 session(['user_password' => $req->password]);
-           
+
                 if (Auth::user()->role == '1') {
                     return view('admins.dashboard')->with([ 'message' => 'Đăng nhập thành công']);
                 } else {
@@ -100,10 +104,11 @@ class AuthenController extends Controller
                         ->limit(4)
                         ->get();
                     $banners = Slide::all();
-                    return view('clients.index', compact('products', 'flashSales', 'banners','categories'))->with([
-                        'message' => 'Đăng nhập thành công'
-                    ]);
-                    // return redirect()->route('index');
+                    // return view('clients.index', compact('products', 'flashSales', 'banners','categories'))->with([
+                    //     'message' => 'Đăng nhập thành công'
+                    // ]);
+
+                    return redirect()->route('index')->with(['message1' => 'Đăng nhập thành công']);
                 }
             }
         }
