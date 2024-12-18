@@ -28,13 +28,13 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-12">
+                {{-- <div class="col-12">
                     Ảnh:
                     <input type="file" name="image" class="form-control">
                     @error('image')
                         <span class="" style="color: red">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="col-12">
                     Email:
                     <input type="text" name="email" class="form-control" value="{{ old('email') }}">

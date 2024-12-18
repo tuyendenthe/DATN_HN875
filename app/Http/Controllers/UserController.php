@@ -12,10 +12,10 @@ class UserController extends Controller
 
 
     public function listUser()
-{
-    $listUser = User::all();
-    return view('admins.users.listuser', compact('listUser'));
-}
+    {
+        $listUser = User::paginate(10); // Thay đổi từ all() sang paginate()
+        return view('admins.users.listuser', compact('listUser'));
+    }
 public function detail(string $id)
 {
     $user = User::findOrFail($id);
@@ -53,7 +53,7 @@ public function detail(string $id)
             $data_images = $request->file('image')->store('images', 'public');
             $user->update(['image'=>$data_images]);
         }
-        
+
         if($request->role == 1){
             Admin::create([
                 'name' => $request->name,
@@ -64,8 +64,8 @@ public function detail(string $id)
             ]);
         }
 
-      
-      
+
+
         return redirect()->route('admin1.users.listuser')->with('success', 'Thêm thành công.');
     }
 
@@ -89,7 +89,7 @@ public function detail(string $id)
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'role' => 'required',
     ]);
-  
+
     $data = [
         'name' => $request->name,
         'email' => $request->email,
@@ -104,18 +104,18 @@ public function detail(string $id)
     if ($request->hasFile('image')) {
         $data['image'] = $request->file('image')->store('images', 'public');
     }
-   
+
     $user->update($data);
     $check_admin = Admin::where('email', $request->email)->first();
 
     if($check_admin){
-        
+
         $check_admin->delete();
     }
 
     if($request->role == 1){
         $check = User::find($id);
-        
+
         Admin::create([
             'name' => $request->name,
             'email' => $request->email,
