@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
 
     <link rel="manifest" href="https://devsnews.com/template/epixx-prev/epixx/site.webmanifest/" />
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/techzone.jpg')}}" />
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->

@@ -91,11 +91,13 @@ class CheckoutController extends Controller
         // Product::update()
 
         foreach ($products as $item) {
+            $cc =Product::findOrFail($item['product_id']);
             $product_id = $item['product_id'];
             $price = $item['price'];
             $quantity = $item['quantity'];
+            $product_name = $cc['name'];
             $subtotal = $price * $quantity;
-            $cc =Product::findOrFail($item['product_id']);
+
             // dd($cc);
             $quantity1 = $cc['quantity']- $quantity;
             DB::table('products')->where('id','=',$cc['id'])->update(['quantity' => $quantity1]);
@@ -104,6 +106,7 @@ class CheckoutController extends Controller
                 'product_id' => $product_id,
                 'bill_code' => $randomString,
                 'quantity' => $quantity,
+                'product_name' => $product_name,
                 'subtotal' => $subtotal,
                 'price' => $price,
                 'created_at' => now(),
@@ -425,17 +428,28 @@ class CheckoutController extends Controller
                     $bill_id = $billRecord->id;
 
                     $products = json_decode($request['products'], true);
+                    // dd($products);
+
+
+                    // Product::update()
+
                     foreach ($products as $item) {
+                        $cc =Product::findOrFail($item['product_id']);
                         $product_id = $item['product_id'];
                         $price = $item['price'];
                         $quantity = $item['quantity'];
+                        $product_name = $cc['name'];
                         $subtotal = $price * $quantity;
 
+                        // dd($cc);
+                        $quantity1 = $cc['quantity']- $quantity;
+                        DB::table('products')->where('id','=',$cc['id'])->update(['quantity' => $quantity1]);
                         $data2 = [
                             'bill_id' => $bill_id,
                             'product_id' => $product_id,
                             'bill_code' => $randomString,
                             'quantity' => $quantity,
+                            'product_name' => $product_name,
                             'subtotal' => $subtotal,
                             'price' => $price,
                             'created_at' => now(),
@@ -444,7 +458,6 @@ class CheckoutController extends Controller
 
                         Bill_detail::create($data2);
                     }
-
                     if ($idVoucher) {
                         $voucher = Voucher::find($idVoucher);
 
