@@ -59,7 +59,7 @@ class CheckoutController extends Controller
         $idVoucher = $request['voucherId'];
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         $randomString = substr(str_shuffle($characters), 0, 10); // Tạo mã đơn hàng ngẫu nhiên
-        $user_id = "";
+        $user_id = null;
         if(auth()->user()){
             $user_id = auth()->user()->id;
         }
@@ -400,7 +400,7 @@ class CheckoutController extends Controller
                     $idVoucher = $request['voucherId'];
                     $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                     $randomString = substr(str_shuffle($characters), 0, 10);
-                    $user_id = "";
+                    $user_id = null;
                     if(auth()->user()){
                         $user_id = auth()->user()->id;
                     }

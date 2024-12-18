@@ -109,7 +109,8 @@
                         <div class="cr-blog-classic" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
                             <div class="cr-blog-classic-content">
                                 <div class="cr-comment">
-                                    <span>Bởi {{$post->user->name}} <code> / {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</code></span>
+                                    <span>Bởi {{$post->user->name}} <code> / {{ \Carbon\Carbon::parse($post->created_at)->locale('vi')->diffForHumans() }}
+                                    </code></span>
                                 </div>
                                 <h4>{{$post->title}}</h4>
                                 <p style="display: -webkit-box;
