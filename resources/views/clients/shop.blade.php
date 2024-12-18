@@ -113,9 +113,9 @@
                                         <div class="epix-color-scheme">
                                             <select class="nice-select form-control" id="price-range-select">
                                                 <option class="form-control" value="all">Tất cả</option>
-                                                <option class="form-control" value="<3000000">Dưới 3.000.000</option>
-                                                <option class="form-control" value="3000000-5000000">3.000.000 - 5.000.000</option>
-                                                <option class="form-control" value=">5000000">Trên 5.000.000</option>
+                                                <option class="form-control" value="<10000000">Dưới 10.000.000</option>
+                                                <option class="form-control" value="10000000-15000000">10.000.000-15.000.000</option>
+                                                <option class="form-control" value=">15000000">Trên 15.000.000</option>
                                             </select>
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@
                                                                         </a>
                                                                     </div>
                                                                     {{-- <span class="sale">sale</span> --}}
-                                                                    <a href="{{ route('single_product', $item->id) }}"><img width="223px" height="396px" src="{{asset($item->image)}}" alt=""></a>
+                                                                    <a href="{{ route('single_product', $item->id) }}"><img width="151px" height="150px" src="{{asset($item->image)}}" alt=""></a>
                                                                 </div>
                                                                 <div class="price-box price-box-3">
                                                                     @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
@@ -253,7 +253,7 @@
                                                                             <a href="{{ route('single_product',$item->id)  }}">+ Select Option</a>
                                                                         </div>
                                                                     </div>
-                                                                    <p>{{ $item -> content }}</p>
+                                                                    <p>{{ $item->content }}</p>
                                                                     <a href="{{ route('single_product', $item -> id) }}" class="epix-btn-1" tabindex="0"><span>Show more<i class="fal fa-angle-right"></i></span></a>
                                                                 </div>
                                                             </div>
@@ -305,6 +305,34 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- single product area end -->
+    <script>
+        document.getElementById('price-range-select').addEventListener('change', function() {
+            const selectedValue = this.value;
+            const products = document.querySelectorAll('.product');
+    
+            products.forEach(product => {
+                const price = parseInt(product.getAttribute('data-price'), 10);
+                let shouldDisplay = false;
+    
+                switch (selectedValue) {
+                    case 'all':
+                        shouldDisplay = true;
+                        break;
+                    case '<10000000':
+                        shouldDisplay = price < 10000000;
+                        break;
+                    case '10000000-15000000':
+                        shouldDisplay = price >= 10000000 && price <= 15000000;
+                        break;
+                    case '>15000000':
+                        shouldDisplay = price > 15000000;
+                        break;
+                }
+    
+                product.style.display = shouldDisplay ? 'block' : 'none';
+            });
+        });
+    </script>
     <script>
         $(document).ready(function () {
             // Khi người dùng nhập từ khóa

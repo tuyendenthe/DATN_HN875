@@ -12,7 +12,7 @@ class ShopController extends Controller
     public function index(Request $request)
     {
 
-        $perPage = 6;
+        $perPage = 20;
 
         // Lấy sản phẩm với phân trang
         $products = Product::with('category', 'flashSale')->where('is_attributes',2)->latest()->paginate($perPage);

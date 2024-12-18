@@ -35,6 +35,12 @@
             /* Thay đổi chiều cao theo nhu cầu */
         }
 
+        .swiper-container1 {
+            width: 100%;
+            overflow: hidden;
+            /* Thay đổi chiều cao theo nhu cầu */
+        }
+
         .swiper-slide {
             display: flex;
             align-items: center;
@@ -75,45 +81,49 @@
         }
     </style>
     <style>
-            #kmacb {
-        position: fixed;
-        bottom: 40px;
-        right: 20px;
-        width: 160px;
-        height: 160px;
-        margin: auto;
-        transition: visibility 0.5s ease 0s;
-        z-index: 200000 !important;
-    }
-    #kmacb a {
-        text-decoration: none;
-    }
-    #kmacb .kmacb-img-circle {
-        animation: 1s ease-in-out 0s normal none infinite running kmacb-circle-img-anim;
-        background: #5aaade url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAA8CAMAAADIULPRAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABs1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAAAPKcAvAAAAj3RSTlMATksXN+N4FifeiTABxPV+DCj9xy2kSQnl1y8iwA13/qruG/yN5hx6ZGq8WPAm9CmU+lAYtVQLTb1jBDGzhQW6q09EHhLqDhP52a4CYM/yD8o5bgPYHxH4nsapQge4V4ZzPAjtJMzCOBCvnzZVpyHzQ4Ta36xBuetRmI6jBoPxYXvTLHXvmYvbgJfWvoc0GTlTyOIAAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAB8UlEQVRIx43W91cTQRAH8AWResRwQCAGjKGEmkRQQDkMVhIQC4QWCMUAErtYqEoNCqLsv8yDl3e7e3uzk+9vd/d58+Z2Zy8hBE5O7hWSXfIopVfzC7KhhfQyRcUlKNVKaSaOa07ElunUTHmF2lZSLkUuFa2q5i11X1dYDxVTUwvbGxbrvQlbH7WmDlzcesk2QNYlUdroB2yTbOubAdsiW9oK2DYb267Z24Au22DI3mq3ZNvRCTRx+46Mu6BV6+65a7X34K3rNfpEe58oEjb6+XdsI8o4HzCqP1RbYnB1HyGWcPYxQp88NalvALGRqGkHsRYCrIWhZ4gd9pp2GKv73KQvuhH6kp27V1jZEdbuKEJjY+wI+RE7zsahFGthiLXQjNAJRicRqrUyO6WpbYhRRwSpG2d2GqEz3Dh61DThYHTWMja1c/MLr5NsGxa507Mk0sLli7tvVlKZ67dcB+9E+j6Yue/+EL5Yro8cdSQE+ukze1Te9aWlkf8urAo0+ZXC+dYr2O8KSssE+kNF18TdVdF1cQ2mVFYc8ZAXlvqGWHZTUXXLsvEK2meZAyMK0u2flrJO0DbJZ+GXvdzZtRnU2J7P5tds/wCY68O0lR6lAEo0z+8d5ib/HIN/Fi4TCZzEo2m6/vf033+SRQbOwv6Y4vk50nYdHuLvx/IAAAAASUVORK5CYII=") no-repeat scroll center center;
-        border: 2px solid transparent;
-        border-radius: 100%;
-        height: 80px;
-        left: 40px;
-        opacity: 0.8;
-        position: absolute;
-        top: 40px;
-        transform-origin: 50% 50% 0;
-        width: 80px;
-    }
-    #kmacb .kmacb-circle-fill {
-        animation: 2.3s ease-in-out 0s normal none infinite running kmacb-circle-fill-anim !important;
-        background: #5aaade none repeat scroll 0 0;
-        border: 2px solid transparent;
-        border-radius: 100%;
-        height: 110px;
-        left: 25px;
-        opacity: 0.24;
-        position: absolute;
-        top: 25px;
-        width: 110px;
-    }
-    /* #kmacb .kmacb-circle {
+        #kmacb {
+            position: fixed;
+            bottom: 40px;
+            right: 20px;
+            width: 160px;
+            height: 160px;
+            margin: auto;
+            transition: visibility 0.5s ease 0s;
+            z-index: 200000 !important;
+        }
+
+        #kmacb a {
+            text-decoration: none;
+        }
+
+        #kmacb .kmacb-img-circle {
+            animation: 1s ease-in-out 0s normal none infinite running kmacb-circle-img-anim;
+            background: #5aaade url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAA8CAMAAADIULPRAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABs1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAAAPKcAvAAAAj3RSTlMATksXN+N4FifeiTABxPV+DCj9xy2kSQnl1y8iwA13/qruG/yN5hx6ZGq8WPAm9CmU+lAYtVQLTb1jBDGzhQW6q09EHhLqDhP52a4CYM/yD8o5bgPYHxH4nsapQge4V4ZzPAjtJMzCOBCvnzZVpyHzQ4Ta36xBuetRmI6jBoPxYXvTLHXvmYvbgJfWvoc0GTlTyOIAAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAB8UlEQVRIx43W91cTQRAH8AWResRwQCAGjKGEmkRQQDkMVhIQC4QWCMUAErtYqEoNCqLsv8yDl3e7e3uzk+9vd/d58+Z2Zy8hBE5O7hWSXfIopVfzC7KhhfQyRcUlKNVKaSaOa07ElunUTHmF2lZSLkUuFa2q5i11X1dYDxVTUwvbGxbrvQlbH7WmDlzcesk2QNYlUdroB2yTbOubAdsiW9oK2DYb267Z24Au22DI3mq3ZNvRCTRx+46Mu6BV6+65a7X34K3rNfpEe58oEjb6+XdsI8o4HzCqP1RbYnB1HyGWcPYxQp88NalvALGRqGkHsRYCrIWhZ4gd9pp2GKv73KQvuhH6kp27V1jZEdbuKEJjY+wI+RE7zsahFGthiLXQjNAJRicRqrUyO6WpbYhRRwSpG2d2GqEz3Dh61DThYHTWMja1c/MLr5NsGxa507Mk0sLli7tvVlKZ67dcB+9E+j6Yue/+EL5Yro8cdSQE+ukze1Te9aWlkf8urAo0+ZXC+dYr2O8KSssE+kNF18TdVdF1cQ2mVFYc8ZAXlvqGWHZTUXXLsvEK2meZAyMK0u2flrJO0DbJZ+GXvdzZtRnU2J7P5tds/wCY68O0lR6lAEo0z+8d5ib/HIN/Fi4TCZzEo2m6/vf033+SRQbOwv6Y4vk50nYdHuLvx/IAAAAASUVORK5CYII=") no-repeat scroll center center;
+            border: 2px solid transparent;
+            border-radius: 100%;
+            height: 80px;
+            left: 40px;
+            opacity: 0.8;
+            position: absolute;
+            top: 40px;
+            transform-origin: 50% 50% 0;
+            width: 80px;
+        }
+
+        #kmacb .kmacb-circle-fill {
+            animation: 2.3s ease-in-out 0s normal none infinite running kmacb-circle-fill-anim !important;
+            background: #5aaade none repeat scroll 0 0;
+            border: 2px solid transparent;
+            border-radius: 100%;
+            height: 110px;
+            left: 25px;
+            opacity: 0.24;
+            position: absolute;
+            top: 25px;
+            width: 110px;
+        }
+
+        /* #kmacb .kmacb-circle {
         animation: 2.2s ease-in-out 0s normal none infinite running kmacb-circle-anim !important;
         background-color: transparent;
         border: 2px solid #5aaade;
@@ -123,162 +133,205 @@
         position: absolute;
         width: 100%;
     } */
-    #kmacb:hover .kmacb-img-circle, #kmacb:hover .kmacb-circle-fill {
-        background-color: #72d582;
-    }
-    #kmacb:hover .kmacb-circle {
-        border-color: #72d582;
-    }
-    #kmacb:hover .kmacb-img-circle {
-        animation: 1s ease-in-out 0s normal none infinite running kmacb-circle-img-anim-hover;
-    }
-    @keyframes kmacb-circle-anim {
-    0% {
-        opacity: 0.1;
-        transform: rotate(0deg) scale(0.5) skew(1deg);
-    }
-    30% {
-        opacity: 0.5;
-        transform: rotate(0deg) scale(0.7) skew(1deg);
-    }
-    100% {
-        opacity: 0.6;
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    }
-    @keyframes kmacb-circle-anim {
-    0% {
-        opacity: 0.1;
-        transform: rotate(0deg) scale(0.5) skew(1deg);
-    }
-    30% {
-        opacity: 0.5;
-        transform: rotate(0deg) scale(0.7) skew(1deg);
-    }
-    100% {
-        opacity: 0.1;
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    }
-    @keyframes kmacb-circle-fill-anim {
-    0% {
-        opacity: 0.2;
-        transform: rotate(0deg) scale(0.7) skew(1deg);
-    }
-    50% {
-        opacity: 0.2;
-    }
-    100% {
-        opacity: 0.2;
-        transform: rotate(0deg) scale(0.7) skew(1deg);
-    }
-    }
-    @keyframes kmacb-circle-fill-anim {
-    0% {
-        opacity: 0.2;
-        transform: rotate(0deg) scale(0.7) skew(1deg);
-    }
-    50% {
-        opacity: 0.2;
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    100% {
-        opacity: 0.2;
-        transform: rotate(0deg) scale(0.7) skew(1deg);
-    }
-    }
-    @keyframes kmacb-circle-img-anim {
-    0% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    10% {
-        transform: rotate(-25deg) scale(1) skew(1deg);
-    }
-    20% {
-        transform: rotate(25deg) scale(1) skew(1deg);
-    }
-    30% {
-        transform: rotate(-25deg) scale(1) skew(1deg);
-    }
-    40% {
-        transform: rotate(25deg) scale(1) skew(1deg);
-    }
-    50% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    100% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    }
-    @keyframes kmacb-circle-img-anim {
-    0% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    10% {
-        transform: rotate(-25deg) scale(1) skew(1deg);
-    }
-    20% {
-        transform: rotate(25deg) scale(1) skew(1deg);
-    }
-    30% {
-        transform: rotate(-25deg) scale(1) skew(1deg);
-    }
-    40% {
-        transform: rotate(25deg) scale(1) skew(1deg);
-    }
-    50% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    100% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    }
-    @keyframes kmacb-circle-img-anim-hover {
-    0% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    10% {
-        transform: rotate(-35deg) scale(1) skew(1deg);
-    }
-    20% {
-        transform: rotate(35deg) scale(1) skew(1deg);
-    }
-    30% {
-        transform: rotate(-35deg) scale(1) skew(1deg);
-    }
-    40% {
-        transform: rotate(35deg) scale(1) skew(1deg);
-    }
-    50% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    100% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    }
-    @keyframes kmacb-circle-img-anim-hover {
-    0% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    10% {
-        transform: rotate(-35deg) scale(1) skew(1deg);
-    }
-    20% {
-        transform: rotate(35deg) scale(1) skew(1deg);
-    }
-    30% {
-        transform: rotate(-35deg) scale(1) skew(1deg);
-    }
-    40% {
-        transform: rotate(35deg) scale(1) skew(1deg);
-    }
-    50% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    100% {
-        transform: rotate(0deg) scale(1) skew(1deg);
-    }
-    }
+        #kmacb:hover .kmacb-img-circle,
+        #kmacb:hover .kmacb-circle-fill {
+            background-color: #72d582;
+        }
+
+        #kmacb:hover .kmacb-circle {
+            border-color: #72d582;
+        }
+
+        #kmacb:hover .kmacb-img-circle {
+            animation: 1s ease-in-out 0s normal none infinite running kmacb-circle-img-anim-hover;
+        }
+
+        @keyframes kmacb-circle-anim {
+            0% {
+                opacity: 0.1;
+                transform: rotate(0deg) scale(0.5) skew(1deg);
+            }
+
+            30% {
+                opacity: 0.5;
+                transform: rotate(0deg) scale(0.7) skew(1deg);
+            }
+
+            100% {
+                opacity: 0.6;
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+        }
+
+        @keyframes kmacb-circle-anim {
+            0% {
+                opacity: 0.1;
+                transform: rotate(0deg) scale(0.5) skew(1deg);
+            }
+
+            30% {
+                opacity: 0.5;
+                transform: rotate(0deg) scale(0.7) skew(1deg);
+            }
+
+            100% {
+                opacity: 0.1;
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+        }
+
+        @keyframes kmacb-circle-fill-anim {
+            0% {
+                opacity: 0.2;
+                transform: rotate(0deg) scale(0.7) skew(1deg);
+            }
+
+            50% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 0.2;
+                transform: rotate(0deg) scale(0.7) skew(1deg);
+            }
+        }
+
+        @keyframes kmacb-circle-fill-anim {
+            0% {
+                opacity: 0.2;
+                transform: rotate(0deg) scale(0.7) skew(1deg);
+            }
+
+            50% {
+                opacity: 0.2;
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            100% {
+                opacity: 0.2;
+                transform: rotate(0deg) scale(0.7) skew(1deg);
+            }
+        }
+
+        @keyframes kmacb-circle-img-anim {
+            0% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            10% {
+                transform: rotate(-25deg) scale(1) skew(1deg);
+            }
+
+            20% {
+                transform: rotate(25deg) scale(1) skew(1deg);
+            }
+
+            30% {
+                transform: rotate(-25deg) scale(1) skew(1deg);
+            }
+
+            40% {
+                transform: rotate(25deg) scale(1) skew(1deg);
+            }
+
+            50% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            100% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+        }
+
+        @keyframes kmacb-circle-img-anim {
+            0% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            10% {
+                transform: rotate(-25deg) scale(1) skew(1deg);
+            }
+
+            20% {
+                transform: rotate(25deg) scale(1) skew(1deg);
+            }
+
+            30% {
+                transform: rotate(-25deg) scale(1) skew(1deg);
+            }
+
+            40% {
+                transform: rotate(25deg) scale(1) skew(1deg);
+            }
+
+            50% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            100% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+        }
+
+        @keyframes kmacb-circle-img-anim-hover {
+            0% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            10% {
+                transform: rotate(-35deg) scale(1) skew(1deg);
+            }
+
+            20% {
+                transform: rotate(35deg) scale(1) skew(1deg);
+            }
+
+            30% {
+                transform: rotate(-35deg) scale(1) skew(1deg);
+            }
+
+            40% {
+                transform: rotate(35deg) scale(1) skew(1deg);
+            }
+
+            50% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            100% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+        }
+
+        @keyframes kmacb-circle-img-anim-hover {
+            0% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            10% {
+                transform: rotate(-35deg) scale(1) skew(1deg);
+            }
+
+            20% {
+                transform: rotate(35deg) scale(1) skew(1deg);
+            }
+
+            30% {
+                transform: rotate(-35deg) scale(1) skew(1deg);
+            }
+
+            40% {
+                transform: rotate(35deg) scale(1) skew(1deg);
+            }
+
+            50% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            100% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+        }
     </style>
 </head>
 
@@ -296,8 +349,10 @@
             padding: 15px;
             border-radius: 5px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            background-color: #d4edda; /* Màu xanh nhạt */
-            color: #155724; /* Màu chữ xanh đậm */
+            background-color: #d4edda;
+            /* Màu xanh nhạt */
+            color: #155724;
+            /* Màu chữ xanh đậm */
         }
     </style>
     <!-- slide-bar start -->
@@ -308,10 +363,10 @@
             </div>
         @endif
         @if (session('message1'))
-        <div id="notification" class="notification1 alert alert-danger" role="alert">
-            {{ session('message1') }}
-        </div>
-    @endif
+            <div id="notification" class="notification1 alert alert-danger" role="alert">
+                {{ session('message1') }}
+            </div>
+        @endif
 
         <!-- Other content here -->
     </div>
@@ -374,18 +429,9 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 @foreach ($banners as $banner)
-                    <div class="swiper-slide" style="background-image: url('{{ Storage::url($banner->image) }}');">
-
-                        <div class="container">
-                            <div class="slider-content">
-                                <span class="epix-slide-subtitle">{{ $banner->title }}</span>
-                                <h2 class="epix-slide-title">{{ $banner->description }}</h2>
-                                <a href="{{ route('shop') }}" class="epix-btn-1">
-                                    <span>Mua ngay<i class="fal fa-angle-right"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="{{ route('shop') }}" class="swiper-slide"
+                        style="background-image: url('{{ Storage::url($banner->image) }}');">
+                    </a>
                 @endforeach
             </div>
 
@@ -428,10 +474,11 @@
 
                     </div>
                     <div class="col-xxl-6 col-lg-6">
-                        <div class="swiper-container">
+                        <div class="swiper-container1">
                             <div class="swiper-wrapper">
                                 @foreach ($banner_covers as $bannerss)
-                                    <div class="swiper-slide" style="background-image: url('{{ Storage::url($bannerss->image) }}'); height: 340px;">
+                                    <div class="swiper-slide"
+                                        style="background-image: url('{{ Storage::url($bannerss->image) }}'); height: 340px;">
                                     </div>
                                 @endforeach
                             </div>
@@ -443,148 +490,148 @@
                 </div>
             </div>
         </section>
-            {{--        <!-- banner area end --> --}}
-            {{--        <!-- new arrival area start --> --}}
-            {{--        --}}{{-- <section class="new-arrival pt-65 pb-95"> --}}
-            {{--      <div class="container"> --}}
-            {{--        <div class="row mb-45"> --}}
-            {{--          <div class="col-xxl-12"> --}}
-            {{--            <div class="epix-section-title text-center"> --}}
-            {{--              <h5 class="s-title">Newest Arrivals Of This Month</h5> --}}
-            {{--            </div> --}}
-            {{--          </div> --}}
-            {{--        </div> --}}
-            {{--        <div class="row"> --}}
-            {{--          <div class="col-xxl-5 col-xl-5 arrival-col-1"> --}}
-            {{--            <div class="banner-3 wow fadeInUp" data-wow-delay=".2s"> --}}
-            {{--              <div class="thumb"> --}}
-            {{--                <img src="assets/img/banner/banner-3.jpg" class="w-100" alt=""> --}}
-            {{--              </div> --}}
-            {{--              <div class="content"> --}}
-            {{--                <span class="shipping text-uppercase">*Free shipping</span> --}}
-            {{--                <h3>Watches</h3> --}}
-            {{--                <a href="{{route('shop)}}" class="epix-btn-2"><span>Explore Now<i class="fal fa-angle-right"></i></span></a> --}}
-            {{--              </div> --}}
-            {{--            </div> --}}
-            {{--          </div> --}}
-            {{--          <div class="col-xxl-7 col-xl-7 product-col-space arrival-col-2"> --}}
-            {{--            <div class="row g-0"> --}}
-            {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4"> --}}
-            {{--                <div class="epix-single-product wow fadeInUp" data-wow-delay=".2s"> --}}
-            {{--                  <div class="epix-product-thumb"> --}}
-            {{--                    <a href="single-product.html"><img src="assets/img/product/23.jpg" class="img-fluid" alt=""></a> --}}
-            {{--                    <div class="epix-action"> --}}
-            {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
-            {{--                        <i class="fal fa-eye"></i> --}}
-            {{--                        <i class="fal fa-eye"></i> --}}
-            {{--                      </a> --}}
-            {{--                      <a href="cart.html" class="p-cart"> --}}
-            {{--                        <i class="fal fa-heart"></i> --}}
-            {{--                        <i class="fal fa-heart"></i> --}}
-            {{--                      </a> --}}
-            {{--                      <a href="cart.html" class="p-cart"> --}}
-            {{--                        <i class="fal fa-shopping-cart"></i> --}}
-            {{--                        <i class="fal fa-shopping-cart"></i> --}}
-            {{--                      </a> --}}
-            {{--                    </div> --}}
-            {{--                  </div> --}}
-            {{--                  <div class="epix-product-content"> --}}
-            {{--                    <div class="wrap"> --}}
-            {{--                      <span class="epix-p-subtitle">Speakers</span> --}}
-            {{--                      <div class="rating"> --}}
-            {{--                        <i class="fal fa-star"></i> --}}
-            {{--                        <span>2.5</span> --}}
-            {{--                      </div> --}}
-            {{--                    </div> --}}
-            {{--                    <h5 class="epix-p-title"><a href="single-product.html">Originals Win Camera</a></h5> --}}
-            {{--                    <div class="price-box"> --}}
-            {{--                      <span class="price">$150.99</span> --}}
-            {{--                      <a href="single-product.html">+ Select Option</a> --}}
-            {{--                    </div> --}}
-            {{--                  </div> --}}
-            {{--                </div> --}}
-            {{--              </div> --}}
-            {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".4s"> --}}
-            {{--                <div class="epix-single-product"> --}}
-            {{--                  <div class="epix-product-thumb"> --}}
-            {{--                    <a href="single-product.html"><img src="assets/img/product/6.jpg" class="img-fluid" alt=""></a> --}}
-            {{--                    <div class="epix-action"> --}}
-            {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
-            {{--                        <i class="fal fa-eye"></i> --}}
-            {{--                        <i class="fal fa-eye"></i> --}}
-            {{--                      </a> --}}
-            {{--                      <a href="cart.html" class="p-cart"> --}}
-            {{--                        <i class="fal fa-heart"></i> --}}
-            {{--                        <i class="fal fa-heart"></i> --}}
-            {{--                      </a> --}}
-            {{--                      <a href="cart.html" class="p-cart"> --}}
-            {{--                        <i class="fal fa-shopping-cart"></i> --}}
-            {{--                        <i class="fal fa-shopping-cart"></i> --}}
-            {{--                      </a> --}}
-            {{--                    </div> --}}
-            {{--                  </div> --}}
-            {{--                  <div class="epix-product-content"> --}}
-            {{--                    <div class="wrap"> --}}
-            {{--                      <span class="epix-p-subtitle">Cameras</span> --}}
-            {{--                      <div class="rating"> --}}
-            {{--                        <i class="fal fa-star"></i> --}}
-            {{--                        <span>4.5</span> --}}
-            {{--                      </div> --}}
-            {{--                    </div> --}}
-            {{--                    <h5 class="epix-p-title"><a href="single-product.html">Sodales Par Iaculis</a></h5> --}}
-            {{--                    <div class="price-box"> --}}
-            {{--                      <span class="price">$125.99</span> --}}
-            {{--                      <a href="single-product.html">+ Select Option</a> --}}
-            {{--                    </div> --}}
-            {{--                  </div> --}}
-            {{--                </div> --}}
-            {{--              </div> --}}
-            {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".6s"> --}}
-            {{--                <div class="epix-single-product"> --}}
-            {{--                  <div class="epix-product-thumb"> --}}
-            {{--                    <span class="sale">sale</span> --}}
-            {{--                    <a href="single-product.html"><img src="assets/img/product/2.jpg" class="img-fluid" alt=""></a> --}}
-            {{--                    <div class="epix-action"> --}}
-            {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
-            {{--                        <i class="fal fa-eye"></i> --}}
-            {{--                        <i class="fal fa-eye"></i> --}}
-            {{--                      </a> --}}
-            {{--                      <a href="cart.html" class="p-cart"> --}}
-            {{--                        <i class="fal fa-heart"></i> --}}
-            {{--                        <i class="fal fa-heart"></i> --}}
-            {{--                      </a> --}}
-            {{--                      <a href="cart.html" class="p-cart"> --}}
-            {{--                        <i class="fal fa-shopping-cart"></i> --}}
-            {{--                        <i class="fal fa-shopping-cart"></i> --}}
-            {{--                      </a> --}}
-            {{--                    </div> --}}
-            {{--                  </div> --}}
-            {{--                  <div class="epix-product-content"> --}}
-            {{--                    <div class="wrap"> --}}
-            {{--                      <span class="epix-p-subtitle">Cameras</span> --}}
-            {{--                      <div class="rating"> --}}
-            {{--                        <i class="fal fa-star"></i> --}}
-            {{--                        <span>3.3</span> --}}
-            {{--                      </div> --}}
-            {{--                    </div> --}}
-            {{--                    <h5 class="epix-p-title"><a href="single-product.html">Sceleris Quie Nostra</a></h5> --}}
-            {{--                    <div class="price-box"> --}}
-            {{--                      <span class="price">$32.99</span> --}}
-            {{--                      <a href="single-product.html">+ Select Option</a> --}}
-            {{--                    </div> --}}
-            {{--                  </div> --}}
-            {{--                </div> --}}
-            {{--              </div> --}}
-            {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".8s"> --}}
-            {{--                <div class="epix-single-product"> --}}
-            {{--                  <div class="epix-product-thumb"> --}}
-            {{--                    <a href="single-product.html"><img src="assets/img/product/14.jpg" class="img-fluid" alt=""></a> --}}
-            {{--                    <div class="epix-action"> --}}
-            {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
-            {{--                        <i class="fal fa-eye"></i> --}}
-            {{--                        <i class="fal fa-eye"></i> --}}
-            {{--                      </a> --}}
-            {{--                      <a href="cart.html" class="p-cart"> --}}
+        {{--        <!-- banner area end --> --}}
+        {{--        <!-- new arrival area start --> --}}
+        {{--        --}}{{-- <section class="new-arrival pt-65 pb-95"> --}}
+        {{--      <div class="container"> --}}
+        {{--        <div class="row mb-45"> --}}
+        {{--          <div class="col-xxl-12"> --}}
+        {{--            <div class="epix-section-title text-center"> --}}
+        {{--              <h5 class="s-title">Newest Arrivals Of This Month</h5> --}}
+        {{--            </div> --}}
+        {{--          </div> --}}
+        {{--        </div> --}}
+        {{--        <div class="row"> --}}
+        {{--          <div class="col-xxl-5 col-xl-5 arrival-col-1"> --}}
+        {{--            <div class="banner-3 wow fadeInUp" data-wow-delay=".2s"> --}}
+        {{--              <div class="thumb"> --}}
+        {{--                <img src="assets/img/banner/banner-3.jpg" class="w-100" alt=""> --}}
+        {{--              </div> --}}
+        {{--              <div class="content"> --}}
+        {{--                <span class="shipping text-uppercase">*Free shipping</span> --}}
+        {{--                <h3>Watches</h3> --}}
+        {{--                <a href="{{route('shop)}}" class="epix-btn-2"><span>Explore Now<i class="fal fa-angle-right"></i></span></a> --}}
+        {{--              </div> --}}
+        {{--            </div> --}}
+        {{--          </div> --}}
+        {{--          <div class="col-xxl-7 col-xl-7 product-col-space arrival-col-2"> --}}
+        {{--            <div class="row g-0"> --}}
+        {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4"> --}}
+        {{--                <div class="epix-single-product wow fadeInUp" data-wow-delay=".2s"> --}}
+        {{--                  <div class="epix-product-thumb"> --}}
+        {{--                    <a href="single-product.html"><img src="assets/img/product/23.jpg" class="img-fluid" alt=""></a> --}}
+        {{--                    <div class="epix-action"> --}}
+        {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
+        {{--                        <i class="fal fa-eye"></i> --}}
+        {{--                        <i class="fal fa-eye"></i> --}}
+        {{--                      </a> --}}
+        {{--                      <a href="cart.html" class="p-cart"> --}}
+        {{--                        <i class="fal fa-heart"></i> --}}
+        {{--                        <i class="fal fa-heart"></i> --}}
+        {{--                      </a> --}}
+        {{--                      <a href="cart.html" class="p-cart"> --}}
+        {{--                        <i class="fal fa-shopping-cart"></i> --}}
+        {{--                        <i class="fal fa-shopping-cart"></i> --}}
+        {{--                      </a> --}}
+        {{--                    </div> --}}
+        {{--                  </div> --}}
+        {{--                  <div class="epix-product-content"> --}}
+        {{--                    <div class="wrap"> --}}
+        {{--                      <span class="epix-p-subtitle">Speakers</span> --}}
+        {{--                      <div class="rating"> --}}
+        {{--                        <i class="fal fa-star"></i> --}}
+        {{--                        <span>2.5</span> --}}
+        {{--                      </div> --}}
+        {{--                    </div> --}}
+        {{--                    <h5 class="epix-p-title"><a href="single-product.html">Originals Win Camera</a></h5> --}}
+        {{--                    <div class="price-box"> --}}
+        {{--                      <span class="price">$150.99</span> --}}
+        {{--                      <a href="single-product.html">+ Select Option</a> --}}
+        {{--                    </div> --}}
+        {{--                  </div> --}}
+        {{--                </div> --}}
+        {{--              </div> --}}
+        {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".4s"> --}}
+        {{--                <div class="epix-single-product"> --}}
+        {{--                  <div class="epix-product-thumb"> --}}
+        {{--                    <a href="single-product.html"><img src="assets/img/product/6.jpg" class="img-fluid" alt=""></a> --}}
+        {{--                    <div class="epix-action"> --}}
+        {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
+        {{--                        <i class="fal fa-eye"></i> --}}
+        {{--                        <i class="fal fa-eye"></i> --}}
+        {{--                      </a> --}}
+        {{--                      <a href="cart.html" class="p-cart"> --}}
+        {{--                        <i class="fal fa-heart"></i> --}}
+        {{--                        <i class="fal fa-heart"></i> --}}
+        {{--                      </a> --}}
+        {{--                      <a href="cart.html" class="p-cart"> --}}
+        {{--                        <i class="fal fa-shopping-cart"></i> --}}
+        {{--                        <i class="fal fa-shopping-cart"></i> --}}
+        {{--                      </a> --}}
+        {{--                    </div> --}}
+        {{--                  </div> --}}
+        {{--                  <div class="epix-product-content"> --}}
+        {{--                    <div class="wrap"> --}}
+        {{--                      <span class="epix-p-subtitle">Cameras</span> --}}
+        {{--                      <div class="rating"> --}}
+        {{--                        <i class="fal fa-star"></i> --}}
+        {{--                        <span>4.5</span> --}}
+        {{--                      </div> --}}
+        {{--                    </div> --}}
+        {{--                    <h5 class="epix-p-title"><a href="single-product.html">Sodales Par Iaculis</a></h5> --}}
+        {{--                    <div class="price-box"> --}}
+        {{--                      <span class="price">$125.99</span> --}}
+        {{--                      <a href="single-product.html">+ Select Option</a> --}}
+        {{--                    </div> --}}
+        {{--                  </div> --}}
+        {{--                </div> --}}
+        {{--              </div> --}}
+        {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".6s"> --}}
+        {{--                <div class="epix-single-product"> --}}
+        {{--                  <div class="epix-product-thumb"> --}}
+        {{--                    <span class="sale">sale</span> --}}
+        {{--                    <a href="single-product.html"><img src="assets/img/product/2.jpg" class="img-fluid" alt=""></a> --}}
+        {{--                    <div class="epix-action"> --}}
+        {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
+        {{--                        <i class="fal fa-eye"></i> --}}
+        {{--                        <i class="fal fa-eye"></i> --}}
+        {{--                      </a> --}}
+        {{--                      <a href="cart.html" class="p-cart"> --}}
+        {{--                        <i class="fal fa-heart"></i> --}}
+        {{--                        <i class="fal fa-heart"></i> --}}
+        {{--                      </a> --}}
+        {{--                      <a href="cart.html" class="p-cart"> --}}
+        {{--                        <i class="fal fa-shopping-cart"></i> --}}
+        {{--                        <i class="fal fa-shopping-cart"></i> --}}
+        {{--                      </a> --}}
+        {{--                    </div> --}}
+        {{--                  </div> --}}
+        {{--                  <div class="epix-product-content"> --}}
+        {{--                    <div class="wrap"> --}}
+        {{--                      <span class="epix-p-subtitle">Cameras</span> --}}
+        {{--                      <div class="rating"> --}}
+        {{--                        <i class="fal fa-star"></i> --}}
+        {{--                        <span>3.3</span> --}}
+        {{--                      </div> --}}
+        {{--                    </div> --}}
+        {{--                    <h5 class="epix-p-title"><a href="single-product.html">Sceleris Quie Nostra</a></h5> --}}
+        {{--                    <div class="price-box"> --}}
+        {{--                      <span class="price">$32.99</span> --}}
+        {{--                      <a href="single-product.html">+ Select Option</a> --}}
+        {{--                    </div> --}}
+        {{--                  </div> --}}
+        {{--                </div> --}}
+        {{--              </div> --}}
+        {{--              <div class="col-xxl-4 col-sm-6 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".8s"> --}}
+        {{--                <div class="epix-single-product"> --}}
+        {{--                  <div class="epix-product-thumb"> --}}
+        {{--                    <a href="single-product.html"><img src="assets/img/product/14.jpg" class="img-fluid" alt=""></a> --}}
+        {{--                    <div class="epix-action"> --}}
+        {{--                      <a href="single-product.html" class="p-cart product-popup-toggle"> --}}
+        {{--                        <i class="fal fa-eye"></i> --}}
+        {{--                        <i class="fal fa-eye"></i> --}}
+        {{--                      </a> --}}
+        {{--                      <a href="cart.html" class="p-cart"> --}}
         {{--                        <i class="fal fa-heart"></i> --}}
         {{--                        <i class="fal fa-heart"></i> --}}
         {{--                      </a> --}}
@@ -758,24 +805,24 @@
                             <div class="col-xxl-9 col-xl-9">
                                 <div class="deal-product-wrap pl-80">
                                     <div class="d-product-active">
-                                            <div class="swiper-wrapper">
-                                                @foreach ($flashSales as $flashSale)
-                                                    <div class="swiper-slide" style="flex-shrink: unset;">
-                                                        <div class="epix-single-product epix-single-product-2">
-                                                            <div class="epix-product-thumb epix-product-thumb-2">
-                                                                <span class="sale">sale</span>
-                                                                <a
-                                                                    href="{{ route('product.details', $flashSale->product->id) }}">
-                                                                    <img src="{{ asset($flashSale->product->image) }}"
-                                                                        class="img-fluid">
-                                                                </a>
-                                                                <div class="epix-action">
-                                                                    {{-- <a href="{{ route('product.details', $flashSale->product->id) }}"
+                                        <div class="swiper-wrapper">
+                                            @foreach ($flashSales as $flashSale)
+                                                <div class="swiper-slide" style="flex-shrink: unset;">
+                                                    <div class="epix-single-product epix-single-product-2">
+                                                        <div class="epix-product-thumb epix-product-thumb-2">
+                                                            <span class="sale">sale</span>
+                                                            <a
+                                                                href="{{ route('product.details', $flashSale->product->id) }}">
+                                                                <img src="{{ asset($flashSale->product->image) }}"
+                                                                    class="img-fluid">
+                                                            </a>
+                                                            <div class="epix-action">
+                                                                {{-- <a href="{{ route('product.details', $flashSale->product->id) }}"
                                                                         class="p-cart product-popup-toggle">
                                                                         <i class="fal fa-eye"></i>
                                                                         <i class="fal fa-eye"></i>
                                                                     </a> --}}
-                                                                    {{-- <a href="cart.html" class="p-cart">
+                                                                {{-- <a href="cart.html" class="p-cart">
                                                                         <i class="fal fa-heart"></i>
                                                                         <i class="fal fa-heart"></i>
                                                                     </a>
@@ -783,38 +830,38 @@
                                                                         <i class="fal fa-shopping-cart"></i>
                                                                         <i class="fal fa-shopping-cart"></i>
                                                                     </a> --}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="epix-product-content">
+                                                            <div class="wrap">
+                                                                <span class="epix-p-subtitle">Đánh giá</span>
+                                                                <div class="rating">
+                                                                    <i class="fal fa-star"></i>
+                                                                    {{-- <span>4.5</span> --}}
+                                                                    <span>{{ number_format($flashSale->product->averageRating(), 1) }}</span>
                                                                 </div>
                                                             </div>
-                                                            <div class="epix-product-content">
-                                                                <div class="wrap">
-                                                                    <span class="epix-p-subtitle">Đánh giá</span>
-                                                                    <div class="rating">
-                                                                        <i class="fal fa-star"></i>
-                                                                        {{-- <span>4.5</span> --}}
-                                                                        <span>{{ number_format($flashSale->product->averageRating(), 1) }}</span>
-                                                                    </div>
-                                                                </div>
-                                                                <h5 class="epix-p-title"><a
-                                                                        href="{{ route('product.details', $flashSale->product->id) }}">{{ $flashSale->product->name }}</a>
-                                                                </h5>
-                                                                <div class="price-box">
-                                                                    <span class="price">
-                                                                        <span
-                                                                            class="active">{{ number_format($flashSale->price_sale) }}đ</span>
-                                                                        </span>
-                                                                        {{-- <span
+                                                            <h5 class="epix-p-title"><a
+                                                                    href="{{ route('product.details', $flashSale->product->id) }}">{{ $flashSale->product->name }}</a>
+                                                            </h5>
+                                                            <div class="price-box">
+                                                                <span class="price">
+                                                                    <span
+                                                                        class="active">{{ number_format($flashSale->price_sale) }}đ</span>
+                                                                </span>
+                                                                {{-- <span
                                                                             class="active  text-muted">{{ number_format($flashSale->product->price) }}đ</span> --}}
-                                                                        </span>
-                                                                    <a
-                                                                        href="{{ route('product.details', $flashSale->product->id) }}">+
-                                                                        Xem chi tiết</a>
-                                                                </div>
+                                                                </span>
+                                                                <a
+                                                                    href="{{ route('product.details', $flashSale->product->id) }}">+
+                                                                    Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endforeach
+                                                </div>
+                                            @endforeach
 
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /. deals product wrap -->
@@ -851,16 +898,18 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i class="fal fa-angle-right"></i></a>
+                            <a href="{{ route('shop') }}" class="link-details">Xem tất cả sản phẩm<i
+                                    class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
-<script>
-    function filterByCategory(categoryId) {
-        const url = categoryId === 'all' ? '{{ route('shop') }}' : '{{ url('/shop/filter-by-category') }}' + '/' + categoryId;
-        window.location.href = url;
-    }
-</script>
+                    <script>
+                        function filterByCategory(categoryId) {
+                            const url = categoryId === 'all' ? '{{ route('shop') }}' : '{{ url('/shop/filter-by-category') }}' + '/' +
+                                categoryId;
+                            window.location.href = url;
+                        }
+                    </script>
                     <div class="col-xxl-9 col-xl-9 unmissed-col-2">
                         <div class="product-col-space-2">
                             <div class="row g-0">
@@ -878,7 +927,7 @@
 
                                             <div class="epix-product-thumb epix-product-thumb-3">
                                                 <a href="{{ route('single_product', $item->id) }}">
-                                                    <img style="min-height:360px; max-height: 360px"
+                                                    <img style="min-height:150px; max-height: 150px"
                                                         src="{{ asset($item->image) }}" {{-- <img src="assets/img/product/23.jpg" --}}
                                                         class="img-fluid" alt=""></a>
                                                 <div class="epix-action">
@@ -906,14 +955,20 @@
                                                         href="{{ route('single_product', $item->id) }}">{{ $item->name }}</a>
                                                 </h5>
                                                 <div class="price-box">
-                                                    @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
-                                                    <span class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
-                                                    <span class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
+                                                    @if ($item->isOnFlashSale())
+                                                        <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                        <span
+                                                            class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }}
+                                                            VNĐ</span>
+                                                        <span class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }}
+                                                                VNĐ</del></span>
                                                     @else
-                                                        <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                        <span
+                                                            class="price">{{ number_format($item->price, 0, ',', '.') }}
+                                                            VNĐ</span>
                                                     @endif
                                                     <a href="{{ route('single_product', $item->id) }}">Xem chi tiết
-                                                        </a>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1048,16 +1103,21 @@
 
 
                                             <h5 style="width: 200px" class="epix-p-title"><a
-                                                href="{{ route('single_product', $item->id) }}">{{ $item->name }}</a>
-                                        </h5>
+                                                    href="{{ route('single_product', $item->id) }}">{{ $item->name }}</a>
+                                            </h5>
                                             <div style="width: 200px" class="price-box mb-15">
 
-                                                @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
-                                                <span class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
-                                                <span class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
+                                                @if ($item->isOnFlashSale())
+                                                    <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                    <span
+                                                        class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }}
+                                                        VNĐ</span>
+                                                    <span class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }}
+                                                            VNĐ</del></span>
                                                 @else
-
-                                                    <span class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                    <span
+                                                        class="price">{{ number_format($item->price, 0, ',', '.') }}
+                                                        VNĐ</span>
                                                 @endif
                                                 <a href="{{ route('single_product', $item->id) }}">Xem chi tiết</a>
                                             </div>
@@ -1136,19 +1196,20 @@
             </div>
         </div>
     </main>
-    @if(auth()->user())
+    @if (auth()->user())
         <div id="kmacb">
-        <form method="GET" action="http://localhost:1111/user/check">
-            @csrf
-            <input type="hidden" name="email" value="{{ auth()->user()->email }}">
-            <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
-            <button modal="kmacb-form" type="submit" title="Перезвонить Вам" style="border:none !important; background:none !important;">
-            <div class="kmacb-circle"></div>
-            <div class="kmacb-circle-fill"></div>
-            <div class="kmacb-img-circle"></div>
-            </button>
+            <form method="GET" action="http://localhost:1111/user/check">
+                @csrf
+                <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+                <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
+                <button modal="kmacb-form" type="submit" title="Перезвонить Вам"
+                    style="border:none !important; background:none !important;">
+                    <div class="kmacb-circle"></div>
+                    <div class="kmacb-circle-fill"></div>
+                    <div class="kmacb-img-circle"></div>
+                </button>
 
-        </form>
+            </form>
         </div>
     @endif
 
@@ -1269,6 +1330,13 @@
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
+            },
+        });
+        var swiper = new Swiper('.swiper-container1', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
             },
         });
     </script>
