@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReviewsController extends Controller
 {
@@ -20,9 +21,13 @@ class ReviewsController extends Controller
             'star.required' => 'Bạn phải chọn số sao đánh giá.',
             'comment.required' => 'Nội dung đánh giá không được để trống.',
         ]);;
-
+        $user_name = 'ẩn danh';
+        if(auth()->user()){
+            $user_name = auth()->user()->name;
+    }
         $data = [
             'product_id' => $request->product_id,
+            'users_name' =>  $user_name,
             'star' => $request->star,
             'comment' =>$request->comment,
             'status' => 0,
@@ -52,10 +57,19 @@ class ReviewsController extends Controller
     }
 
 
-    public function listComment() {
-        $comments = Comment::all();
-        return view('admins.comment.list', compact('comments'));
-    }
+    public function listComment()
+{   
+   // $comments = Comment::with('product')->get(); // Lấy danh sách comment và sản phẩm liên quan
+   $comments = DB::table('comments')
+   ->join('products', 'comments.product_id', '=', 'products.id')
+//    ->join('users', 'comments.users_id', '=', 'users.id') // Kiểm tra xem cột này có đúng không
+   ->select('comments.*', 'products.name as product_name')
+   ->get();
+
+//    dd($comments);
+    return view('admins.comment.list', compact('comments'));
+}
+    
 
     public function deleteComment($id) {
         $comments = Comment::findOrFail($id);

@@ -111,7 +111,7 @@
 
 
     .price-display {
-        margin-top: 20px;
+margin-top: 20px;
         font-size: 24px;
         font-weight: bold;
     }
@@ -245,7 +245,7 @@
     /* Thêm style cho label */
     .variant-box label {
         cursor: pointer;
-        transition: color 0.3s ease;
+transition: color 0.3s ease;
         /* Thêm hiệu ứng chuyển màu cho chữ */
     }
 
@@ -350,7 +350,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
             <!-- breadcrumb area end -->
 
             <!-- single product area start -->
-            <div class="single-product-area mb-100">
+<div class="single-product-area mb-100">
                 <div class="container">
                     <div class="row mb-40">
                         <div class="col-xxl-6 col-lg-6">
@@ -384,7 +384,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                     </div>
                                                     <img src="{{asset('laptop/assets/img/product/signle-product-3.jpg')}}" data-zoom-image="{{asset('laptop/assets/img/product/signle-product-3.jpg')}}" class="img-fluid zoom-img-hover" alt="">
                                                 </div>
-                                            </div>
+</div>
                                             <div class="tab-pane fade" id="epix-single-4">
                                                 <div class="epix-single-product-thumb-4">
                                                     <div class="epix-featured">
@@ -423,7 +423,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                 {{-- </button>--}}
                                 {{-- </li>--}}
                                 {{-- </ul>--}}
-                                {{-- </div>--}}
+{{-- </div>--}}
                             </div>
                             <!-- /. single product left -->
                         </div>
@@ -471,7 +471,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                 @if($products->id != $val->id)
                                                     <div class="variant-item border-primary rounded" style="background-color: #fff">
                                                         @if ($val->isOnFlashSale())
-                                                        <span class="sale">sale</span>
+<span class="sale">sale</span>
                                                         @endif <br>
                                                         <div>
                                                             {{-- <img src="{{asset($val->image)}}" alt="" style="width:50px; height:50px;"> --}}
@@ -511,8 +511,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                 @if ($product_parent_1->isOnFlashSale())
                                                 <span class="sale">sale</span>
                                                 @endif <br>
-
-                                                <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
+<a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
                                                     {{ $val->name }}
                                                 </a>
                                                 <br>
@@ -543,10 +542,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                         </a>
                                                     </div>
                                                 </div>
-
-
-
-                                                </div>
+</div>
                                             @endif
 
                                                 @foreach($product_parent as $pro)
@@ -591,7 +587,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                 </div>
 
                                 <!-- Form để thêm vào giỏ hàng -->
-                                @if ($products->quantity <1)
+@if ($products->quantity <1)
                                 <button id="hethang">Hết Hàng</button>
                                 @else
                                     <div class="d-flex">
@@ -634,8 +630,6 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
     <!-- /. single product right -->
 </div>
 </div>
-
-
 <div class="row ms-5">
     <div class="col-xxl-12">
         <div class="epix-single-product-description">
@@ -682,7 +676,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                 <li>
                                                     <span>USB:</span>
                                                     <span>Type-C fast charge</span>
-                                                </li>
+</li>
                                                 <li>
                                                     <span>Warranty :</span>
                                                     <span>30 Days Warenty</span>
@@ -729,7 +723,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                             <tr>
                                                 <th>Màu</th>
                                                 <td>
-                                                    <a href="">{{ $products->color }}</a>
+<a href="">{{ $products->color }}</a>
 
                                                 </td>
                                             </tr>
@@ -777,7 +771,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                             <div class="row g-0">
                                                 <div class="col-xxl-2 col-md-4">
                                                     <div class="epix-rating-count-number-box text-center">
-                                                        <div class="epix-rating-count-number">
+<div class="epix-rating-count-number">
                                                             <h4>{{ number_format($averageRating, 1) }}</h4> <!-- Hiển thị trung bình số sao với 1 chữ số thập phân -->
                                                         </div>
                                                         <div class="rating">
@@ -807,7 +801,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                                 </div>
                                                                 <div class="epix-rating-progress">
                                                                     <div class="progress-count" data-width="72%"></div>
-                                                                </div>
+</div>
                                                                 <div class="count">
                                                                     <span>{{ $ratingCounts[1] ?? 0 }}</span>
                                                 </div>
@@ -847,7 +841,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
                                                     <i class="fal fa-star"></i>
-                                                    <i class="fal fa-star"></i>
+<i class="fal fa-star"></i>
                                                     <i class="fal fa-star"></i>
                                                 </div>
                                                 <div class="epix-rating-progress">
@@ -891,7 +885,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                     <div class="epix-comment-top">
                                         <div style="margin-bottom: 15px" class="rating">
                                             @for ($i = 1; $i <= 5; $i++) @if ($i <=$review->star)
-                                                <!-- Hiển thị sao đầy màu vàng từ trái qua phải -->
+<!-- Hiển thị sao đầy màu vàng từ trái qua phải -->
                                                 <i class="fas fa-star" style="color: gold;"></i>
                                                 @else
                                                 <!-- Hiển thị sao rỗng từ trái qua phải -->
@@ -899,8 +893,8 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                 @endif
                                                 @endfor
                                         </div>
-                                        <div class="user-name"><a href="#">{{ $review->user->name ?? 'Unknown User' }}</a></div>
-                                        <span class="date">– {{ $review->created_at->format('F d, Y') }}</span>
+                                        <div class="user-name"><a href="#">{{ $review->users_name?? 'Unknown User' }}</a></div>
+                                        <span class="date"> {{ $review->created_at->format('d-m-Y') }}</span>
                                     </div>
                                     <span class="date"> {{ $review->comment }}</span>
 
@@ -940,10 +934,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                 <textarea name="comment" id="comment"></textarea>
 
                                 <button type="submit ">Đánh giá</button>
-
-
-
-                            </form>
+</form>
                         </div>
                     </div>
                 </div>
@@ -1011,7 +1002,6 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
     text-align: center; font-size: 18px; z-index: 9999;">
     Đánh giá của bạn đã được gửi thành công, quản trị viên sẽ xem sét và phê duyệt thông báo của bạn.
 </div>
-
 <!-- Add jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -1102,7 +1092,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
 <!-- single product area end -->
 <script>
     $(document).ready(function() {
-        // Khi người dùng nhập từ khóa
+// Khi người dùng nhập từ khóa
         $('#search-input').on('keyup', function() {
             let query = $(this).val();
             if (query.length > 0) {
@@ -1183,7 +1173,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
         radioButton.checked = true;
 
         // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
-        var selectedPrice = element.getAttribute('data-price');
+var selectedPrice = element.getAttribute('data-price');
 
         var priceProduct = document.getElementById('product-price').textContent.trim();
         console.log(Number(priceProduct));
@@ -1249,7 +1239,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
 
             // Lấy URL và dữ liệu từ form
             var form = $(this);
-            var actionUrl = form.attr('action');
+var actionUrl = form.attr('action');
             var formData = form.serialize();
 
             // Gửi AJAX request
@@ -1311,7 +1301,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                     $('#commentList').prepend(newComment);
 
                     // Xoá dữ liệu trong form
-                    $('#reviewForm')[0].reset();
+$('#reviewForm')[0].reset();
                 },
                 error: function(error) {
                     // Hiển thị thông báo lỗi
