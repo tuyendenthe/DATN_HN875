@@ -25,6 +25,7 @@ class ProductController extends Controller
     public function addProduct()
     {
         $data = Category::get();
+        // dd($data);
         $products = Product::where('is_attributes',2)->get();
         // $Categories = Categories::where('status_delete', Categories::UNDELETE)->get();
         return view('admins.add-product', compact('data','products'));
