@@ -26,6 +26,25 @@ class CheckoutController extends Controller
         // Lấy các sản phẩm đã chọn từ form (dữ liệu JSON được gửi qua trường 'selectedProducts')
         $selectedProducts = json_decode($request->input('selectedProducts'), true);
         $totalProduct = 0;
+        foreach ($selectedProducts as $value) {
+            $product_id = $value['product_id']; // Lấy product_id từ mảng
+            $check = Product::findOrFail($product_id);
+            if ($check->quantity < $value['quantity']) {
+                return redirect()->route("cart.view")->with('message', 'Số Lượng Sản Phẩm Bạn Chọn Mua Hiện Chúng Tôi Không Có Đủ, Vui Lòng Quay Lại Sau.');
+            }
+
+            }
+//         foreach ($selectedProducts as $value) {
+//            dd($value);
+//             $product_id = $value['product_id']; // Lấy product_id từ mảng
+//             $check2 = Product::withTrashed()->find($product_id);
+// dd($check2);
+//                 // if ($check2 && $check2->trashed()) {
+
+//                 // return redirect()->route("cart.view")->with('message', 'Số Lượng Sản Phẩm Bạn Chọn Mua Hiện Chúng Tôi Không Có Đủ, Vui Lòng Quay Lại Sau.');
+//             // }
+
+//             }
         foreach ($selectedProducts as $item) {
             $totalProduct += $item['price'];
         }
@@ -80,7 +99,36 @@ class CheckoutController extends Controller
             'updated_at' => now(),
         ];
 
-        // dd($bill);
+    //    dd($request['products']);
+  // Kiểm tra và giải mã JSON nếu cần
+                            $products = is_string($request['products'])
+                            ? json_decode($request['products'], true) // Chuyển JSON thành mảng
+                            : $request['products'];
+
+                            // Kiểm tra nếu dữ liệu không phải là mảng hợp lệ
+                            if (!is_array($products)) {
+                            return redirect()->route("cart.view")->with('message', 'Dữ liệu sản phẩm không hợp lệ.');
+                            }
+
+                            // Lặp qua từng sản phẩm và xử lý
+                            foreach ($products as $value) {
+                            $product_id = $value['product_id']; // Lấy product_id từ mảng
+                            $check = Product::findOrFail($product_id);
+                            if ($check->quantity < $value['quantity']) {
+                                return redirect()->route("cart.view")->with('message', 'Số Lượng Sản Phẩm Bạn Chọn Mua Hiện Chúng Tôi Không Có Đủ, Vui Lòng Quay Lại Sau.');
+                            }
+
+                            }
+                            // foreach ($products as $value) {
+                            // $product_id = $value['product_id']; // Lấy product_id từ mảng
+                            // $check = Product::findOrFail($product_id);
+                            // dd($check->deleted_at);
+                            // if (is_null($check->deleted_at)) {
+                            //     return redirect()->route("cart.view")->with('message', 'Sản Phẩm Bạn Lựa Chọn Hiện Không Còn Bán.');
+                            // }
+
+                            // }
+
         $billRecord = Bill::create($bill);
         $bill_id = $billRecord->id;
 
@@ -123,7 +171,7 @@ class CheckoutController extends Controller
                 $voucher->quantity -= 1;
                 $voucher->save();
             } else {
-                return back()->with('error', 'Voucher không hợp lệ hoặc đã hết số lượng.');
+                return redirect()->route("cart.view")->with('message', 'Voucher không hợp lệ hoặc đã hết số lượng.');
             }
         }
         $cart = session()->get('cart', []);
@@ -387,7 +435,7 @@ class CheckoutController extends Controller
     public function checkPay(Request $request)
 	{
         $sotaikhoan = "0362978755";
-        $apikey = "AK_CS.4fcbe970b2f511efb4a007d866790e61.WHonvI0xVPUtehq19YXlgyEjOqmMDwZVSL3SjIazXmpajTbGafxetFziqocEmHBkfRpQhA9X";
+        $apikey = "AK_CS.bf6ed390bd4111ef9cf3ed0b3d7702f1.fRsxcBmDNRzpzSs65eatAEnLm0brm5UpflFhPVqL9QH0KwRO2NTGMkZdnDyN0ZTv7VJbrqtP";
 
         $noidung = Session::get('noidung');
         $tongtiengiohang = $request['tongtiengiohang'];
@@ -417,8 +465,8 @@ class CheckoutController extends Controller
                         'note' => $request['note'],
                         'address' => $request['address'],
                         'user_id' => $user_id,
-                        'payment_method' => $request['payment_method'],
-                        'total' => $request['subtotall'],
+                        'payment_method' => 'online',
+                        'total' => $request['tongtiengiohang'],
                         'status' => 1,
                         'created_at' => now(),
                         'updated_at' => now(),
