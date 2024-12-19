@@ -12,9 +12,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
+        // $category = Category::all();
+        // return view('admins.category.index', compact('category'));
+        $category = Category::withTrashed()->get();
         return view('admins.category.index', compact('category'));
-
     }
 
     /**
@@ -78,11 +79,49 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // public function destroy(string $id)
+    // {
+    //     $category = Category::find($id);
+    //     $category->delete();
+
+    //     return redirect()->route('category.index')->with('message1', 'Xóa thành công.');
+    // }
+    public function destroy(Category $category)
     {
-        $category = Category::find($id);
+        // Xóa mềm tất cả sản phẩm thuộc danh mục
+        $category->products()->delete();
+
+        // Xóa mềm danh mục
         $category->delete();
 
-        return redirect()->route('category.index')->with('message1', 'Xóa thành công.');
+        return redirect()->route('category.index')->with('message1', 'Xóa danh mục và sản phẩm liên quan thành công.');
+    }
+
+
+    // public function restore(string $id)
+    // {
+    //     $category = Category::withTrashed()->findOrFail($id);
+
+    //     // Khôi phục danh mục
+    //     $category->restore();
+
+    //     // Khôi phục tất cả sản phẩm thuộc danh mục
+    //     $category->products()->withTrashed()->restore();
+
+    //     return redirect()->route('category.index')->with('message1', 'Khôi phục danh mục và sản phẩm liên quan thành công.');
+    // }
+
+    public function restore(string $id)
+    {
+        // Tìm danh mục đã bị xóa mềm, nếu không tìm thấy sẽ báo lỗi
+        $category = Category::withTrashed()->findOrFail($id);
+
+        // Khôi phục danh mục
+        $category->restore();
+
+        // Khôi phục tất cả sản phẩm thuộc danh mục đã bị xóa mềm
+        $category->products()->withTrashed()->restore();
+
+        return redirect()->route('category.index')->with('message1', 'Khôi phục danh mục và sản phẩm liên quan thành công.');
     }
 }

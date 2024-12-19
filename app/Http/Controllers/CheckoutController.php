@@ -269,17 +269,28 @@ class CheckoutController extends Controller
         // dd(vars: $data);
         return view('clients.bill_details',compact('detail','data'));
     }
-    public function list()
-    {
+    public function list(Request $request)
+{
+    // Start the query
+    $query = DB::table('bills')
+        ->join('statuses', 'bills.status', '=', 'statuses.id')
+        ->where('statuses.id', '<=', 3)
+        ->select('bills.*', 'statuses.status_name');
 
-        $listCheckouts = DB::table('bills')
-            ->join('statuses', 'bills.status', '=', 'statuses.id')
-            ->where('statuses.id', '<=', 3)
-            ->select('bills.*', 'statuses.status_name')
-            ->get();
-        // dd($list);
-        return view('admins.checkout.list', compact('listCheckouts'));
+    // Check for search input
+    if ($request->has('order_id') && !empty($request->order_id)) {
+        $request->validate([
+            'order_id' => 'string|max:255', // Validate the order_id
+        ]);
+        // Search for the order_id
+        $query->where('bills.bill_code', 'like', '%' . $request->order_id . '%');
     }
+
+    // Paginate results
+    $listCheckouts = $query->paginate(10); // Change the number of items per page if needed
+
+    return view('admins.checkout.list', compact('listCheckouts'));
+}
 
     // public function detail($bill_code)
     // {
@@ -351,7 +362,8 @@ class CheckoutController extends Controller
             ->join('statuses', 'bills.status', '=', 'statuses.id')
             ->where('bills.status', '>', 3)
             ->select('bills.*', 'statuses.status_name');
-        // dd($list);
+
+        // Kiểm tra nếu có tìm kiếm theo mã đơn hàng
         if ($request->has('order_id') && !empty($request->order_id)) {
             $request->validate([
                 'order_id' => 'string',
@@ -359,7 +371,9 @@ class CheckoutController extends Controller
             $query->where('bills.bill_code', 'like', '%' . $request->order_id . '%');
         }
 
-        $list = $query->get();
+        // Sử dụng paginate thay vì get
+        $list = $query->paginate(10); // Thay đổi số lượng đơn hàng trên mỗi trang nếu cần
+
         return view('admins.checkout.history', compact('list'));
     }
     public function status( $id){

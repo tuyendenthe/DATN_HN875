@@ -719,7 +719,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                 </li>
                                                 <li>
                                                     <span>USB:</span>
-                                                    <span>Type-C fast charge</span>
+                                                    <span>Type-C fast charge</span>epix-product-thumb-3
                                                 </li>
                                                 <li>
                                                     <span>Warranty :</span>

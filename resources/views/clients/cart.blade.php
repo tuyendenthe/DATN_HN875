@@ -293,7 +293,7 @@
                             let formattedValue = parseInt(formatCurrency(totalSelected)); // Ví dụ response.amount là '270.000 VNĐ'
                             
                             if(discount > formattedValue){
-                                alert('Mã giảm giá không vượt quá tổng tiềnlên!');
+                                alert('Mã giảm giá không vượt quá tổng tiền!');
                                 return;
                             }
                             // console.log(discount);
