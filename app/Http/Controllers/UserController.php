@@ -12,10 +12,10 @@ class UserController extends Controller
 
 
     public function listUser()
-{
-    $listUser = User::all();
-    return view('admins.users.listuser', compact('listUser'));
-}
+    {
+        $listUser = User::paginate(10); // Thay đổi từ all() sang paginate()
+        return view('admins.users.listuser', compact('listUser'));
+    }
 public function detail(string $id)
 {
     $user = User::findOrFail($id);
@@ -35,26 +35,32 @@ public function detail(string $id)
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'role' => 'required',
-
+            'role' => 'required|in:1,2,3', // Chỉ cho phép các giá trị cụ thể cho role
         ]);
-        $check = User::where('email',$request->email)->first();
-        if($check){
+
+        // Kiểm tra xem email đã tồn tại chưa
+        $check = User::where('email', $request->email)->first();
+        if ($check) {
             return redirect()->route('admin1.users.adduser')->with('error', 'Email đã tồn tại.');
         }
+
+        // Tạo người dùng mới
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'address' => $request->address,
-            'role' => $request->role ?? 2,
+            'role' => $request->role, // Sử dụng trực tiếp giá trị role từ request
         ]);
+
+        // Lưu ảnh nếu có
         if ($request->hasFile('image')) {
             $data_images = $request->file('image')->store('images', 'public');
-            $user->update(['image'=>$data_images]);
+            $user->update(['image' => $data_images]);
         }
-        
-        if($request->role == 1){
+
+        // Nếu vai trò là Admin (role = 1)
+        if ($request->role == 1) {
             Admin::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -64,8 +70,18 @@ public function detail(string $id)
             ]);
         }
 
-      
-      
+        // Nếu vai trò là Admin phụ (role = 3)
+        if ($request->role == 3) {
+            Admin::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'status' => 1,
+                'username' => $request->name,
+                // Thêm các thuộc tính cần thiết cho Admin phụ nếu có
+            ]);
+        }
+
         return redirect()->route('admin1.users.listuser')->with('success', 'Thêm thành công.');
     }
 
@@ -89,7 +105,7 @@ public function detail(string $id)
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'role' => 'required',
     ]);
-  
+
     $data = [
         'name' => $request->name,
         'email' => $request->email,
@@ -104,18 +120,18 @@ public function detail(string $id)
     if ($request->hasFile('image')) {
         $data['image'] = $request->file('image')->store('images', 'public');
     }
-   
+
     $user->update($data);
     $check_admin = Admin::where('email', $request->email)->first();
 
     if($check_admin){
-        
+
         $check_admin->delete();
     }
 
     if($request->role == 1){
         $check = User::find($id);
-        
+
         Admin::create([
             'name' => $request->name,
             'email' => $request->email,

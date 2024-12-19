@@ -66,7 +66,6 @@ class AuthenController extends Controller
 
     public function postLogin(Request $req)
     {
-
         $req->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -75,7 +74,6 @@ class AuthenController extends Controller
             'email.email' => 'Email không đúng định dạng',
             'password.required' => 'Password không được để trống',
         ]);
-
 
         $user = User::where('email', $req->email)->first();
 
@@ -86,15 +84,15 @@ class AuthenController extends Controller
                 ]);
             }
 
-
             if (Auth::attempt([
                 'email' => $req->email,
                 'password' => $req->password,
             ])) {
                 session(['user_password' => $req->password]);
 
-                if (Auth::user()->role == '1') {
-                    return view('admins.dashboard')->with([ 'message' => 'Đăng nhập thành công']);
+                // Xử lý cho cả Admin và Admin phụ
+                if (Auth::user()->role == '1' || Auth::user()->role == '3') {
+                    return view('admins.dashboard')->with(['message' => 'Đăng nhập thành công']);
                 } else {
                     $products = (Product::with('category'))->latest()->take(8)->get();
                     $categories = Category::all();
@@ -104,9 +102,6 @@ class AuthenController extends Controller
                         ->limit(4)
                         ->get();
                     $banners = Slide::all();
-                    // return view('clients.index', compact('products', 'flashSales', 'banners','categories'))->with([
-                    //     'message' => 'Đăng nhập thành công'
-                    // ]);
 
                     return redirect()->route('index')->with(['message1' => 'Đăng nhập thành công']);
                 }

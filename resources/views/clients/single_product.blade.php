@@ -2,72 +2,72 @@
 @section('content')
 <div class="container">
     @if (session('message'))
-        <div id="notification" class="notification alert alert-danger" role="alert">
-            {{ session('message') }}
-        </div>
+    <div id="notification" class="notification alert alert-danger" role="alert">
+        {{ session('message') }}
+    </div>
     @endif
     @if (session('message1'))
     <div id="notification" class="notification1 alert alert-danger" role="alert">
         {{ session('message1') }}
     </div>
-@endif
+    @endif
 
     <!-- Other content here -->
 </div>
 
-    <style>
-        .notification1 {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            background-color: #d4edda;
-            /* Màu xanh nhạt */
-            color: #155724;
-            /* Màu chữ xanh đậm */
-        }
-    </style>
-    <style>
-        .notification {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+<style>
+    .notification1 {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: #d4edda;
+        /* Màu xanh nhạt */
+        color: #155724;
+        /* Màu chữ xanh đậm */
+    }
+</style>
+<style>
+    .notification {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var notification = document.getElementById('notification');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var notification = document.getElementById('notification');
 
-            if (notification) {
-                // Show the notification
+        if (notification) {
+            // Show the notification
+            notification.style.display = 'block';
+
+            // Hide the notification after 5 seconds
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 8000);
+
+            // Optional: Add hover effect to keep it visible
+            notification.addEventListener('mouseenter', function() {
                 notification.style.display = 'block';
+            });
 
-                // Hide the notification after 5 seconds
-                setTimeout(function() {
-                    notification.style.display = 'none';
-                }, 8000);
-
-                // Optional: Add hover effect to keep it visible
-                notification.addEventListener('mouseenter', function() {
-                    notification.style.display = 'block';
-                });
-
-                notification.addEventListener('mouseleave', function() {
-                    notification.style.display = 'none';
-                });
-            }
-        });
-    </script>
+            notification.addEventListener('mouseleave', function() {
+                notification.style.display = 'none';
+            });
+        }
+    });
+</script>
 
 <style>
     .rounded:hover {
@@ -111,7 +111,7 @@
 
 
     .price-display {
-margin-top: 20px;
+        margin-top: 20px;
         font-size: 24px;
         font-weight: bold;
     }
@@ -245,7 +245,7 @@ margin-top: 20px;
     /* Thêm style cho label */
     .variant-box label {
         cursor: pointer;
-transition: color 0.3s ease;
+        transition: color 0.3s ease;
         /* Thêm hiệu ứng chuyển màu cho chữ */
     }
 
@@ -271,53 +271,64 @@ transition: color 0.3s ease;
     .hidden {
         display: none;
     }
+
     .same-product .row {
-    display: flex;
-    flex-wrap: wrap; /* Đảm bảo các sản phẩm tự động xuống hàng */
-    gap: 19px; /* Khoảng cách giữa các sản phẩm */
-    justify-content: space-between; /* Cân đối các sản phẩm trong hàng */
-}
+        display: flex;
+        flex-wrap: wrap;
+        /* Đảm bảo các sản phẩm tự động xuống hàng */
+        gap: 19px;
+        /* Khoảng cách giữa các sản phẩm */
+        justify-content: space-between;
+        /* Cân đối các sản phẩm trong hàng */
+    }
 
-.same-product .col-xxl-3 {
-    flex: 0 0 calc(25% - 20px); /* Mỗi sản phẩm chiếm 25% chiều rộng hàng */
-    max-width: calc(25% - 20px); /* Giới hạn chiều rộng tối đa */
-    box-sizing: border-box;
-}
+    .same-product .col-xxl-3 {
+        flex: 0 0 calc(25% - 20px);
+        /* Mỗi sản phẩm chiếm 25% chiều rộng hàng */
+        max-width: calc(25% - 20px);
+        /* Giới hạn chiều rộng tối đa */
+        box-sizing: border-box;
+    }
 
-.epix-single-product-3 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-.same-product .row {
-    display: flex;
-    flex-wrap: wrap; /* Tự động xuống hàng nếu vượt quá số cột */
-    gap: 20px; /* Khoảng cách giữa các cột */
-}
+    .epix-single-product-3 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-.same-product .col-xxl-3 {
-    flex: 0 0 calc(25% - 20px); /* Đảm bảo chiếm 1/4 hàng */
-    max-width: calc(25% - 20px);
-    box-sizing: border-box;
-}
+    .same-product .row {
+        display: flex;
+        flex-wrap: wrap;
+        /* Tự động xuống hàng nếu vượt quá số cột */
+        gap: 20px;
+        /* Khoảng cách giữa các cột */
+    }
 
-.title-container {
-    display: flex;
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    height: 50px; /* Đặt chiều cao nếu cần */
-}
+    .same-product .col-xxl-3 {
+        flex: 0 0 calc(25% - 20px);
+        /* Đảm bảo chiếm 1/4 hàng */
+        max-width: calc(25% - 20px);
+        box-sizing: border-box;
+    }
 
-
+    .title-container {
+        display: flex;
+        justify-content: center;
+        /* Căn giữa theo chiều ngang */
+        align-items: center;
+        /* Căn giữa theo chiều dọc */
+        height: 50px;
+        /* Đặt chiều cao nếu cần */
+    }
 </style>
 
 @php
 use App\Models\Product;
 
 $product_parent = Product::where('product_parent', $products->product_parent)
-    ->with(['category', 'flashSale'])
-    ->get();
+->with(['category', 'flashSale'])
+->get();
 
 $product_parent_1 = Product::where('id',$products->product_parent)->with(['category', 'flashSale'])->first();
 
@@ -350,7 +361,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
             <!-- breadcrumb area end -->
 
             <!-- single product area start -->
-<div class="single-product-area mb-100">
+            <div class="single-product-area mb-100">
                 <div class="container">
                     <div class="row mb-40">
                         <div class="col-xxl-6 col-lg-6">
@@ -384,7 +395,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                     </div>
                                                     <img src="{{asset('laptop/assets/img/product/signle-product-3.jpg')}}" data-zoom-image="{{asset('laptop/assets/img/product/signle-product-3.jpg')}}" class="img-fluid zoom-img-hover" alt="">
                                                 </div>
-</div>
+                                            </div>
                                             <div class="tab-pane fade" id="epix-single-4">
                                                 <div class="epix-single-product-thumb-4">
                                                     <div class="epix-featured">
@@ -423,7 +434,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                 {{-- </button>--}}
                                 {{-- </li>--}}
                                 {{-- </ul>--}}
-{{-- </div>--}}
+                                {{-- </div>--}}
                             </div>
                             <!-- /. single product left -->
                         </div>
@@ -463,119 +474,128 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                 <div class="epix-product-label mb-35">
                                     <a href="#" class="title">Sản phẩm cùng loại</a>
                                     @if($products->is_attributes == 2)
-                                        <div style="padding-left: 0px" class="container">
-                                            <div class="variant-container d-flex flex-wrap">
-
-                                                @foreach($category as $val)
-
-                                                @if($products->id != $val->id)
-                                                    <div class="variant-item border-primary rounded" style="background-color: #fff">
-                                                        @if ($val->isOnFlashSale())
-<span class="sale">sale</span>
-                                                        @endif <br>
-                                                        <div>
-                                                            {{-- <img src="{{asset($val->image)}}" alt="" style="width:50px; height:50px;"> --}}
-                                                            <div>
-                                                                <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
-
-                                                                    {{ $val->name }}
-                                                                </a>
-                                                                <br>
-                                                                <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $val->id) }}">
-                                                                    @if($val->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
-                                                                    <span style="width: 100px" class="price flash-sale-price">{{ number_format($val->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
-                                                                        {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
-                                                                        @else
-                                                                    {{ number_format($val->price, 0, ',', '.') }} VNĐ
-                                                                    @endif
-
-                                                                </a>
-                                                            </div>
-                                                        </div>
-
-
-                                                     </div>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-
-                                    @else
                                     <div style="padding-left: 0px" class="container">
                                         <div class="variant-container d-flex flex-wrap">
 
-                                            @if(empty($product_parent_1) )
+                                            @foreach($category as $val)
+
+                                            @if($products->id != $val->id)
                                             <div class="variant-item border-primary rounded" style="background-color: #fff">
-
-
-                                                @if ($product_parent_1->isOnFlashSale())
+                                                @if ($val->isOnFlashSale())
                                                 <span class="sale">sale</span>
                                                 @endif <br>
-<a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
-                                                    {{ $val->name }}
-                                                </a>
-                                                <br>
-                                                <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $val->id) }}">
-                                                    @if($val->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
-                                                    <span style="width: 100px" class="price flash-sale-price">{{ number_format($val->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
-                                                    {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
-                                                    @else
-                                                    {{ number_format($val->price, 0, ',', '.') }} VNĐ
-                                                    @endif
-
                                                 <div>
-                                                    <img src="{{asset($product_parent_1->image)}}" alt="" style="width:50px; height:50px;">
+                                                    {{-- <img src="{{asset($val->image)}}" alt="" style="width:50px; height:50px;"> --}}
                                                     <div>
-                                                        <a style="text-decoration: none; " href="{{ route('single_product', $product_parent_1->id) }}">
+                                                        <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
 
-                                                            {{ $product_parent_1->name }}
+                                                            {{ $val->name }}
                                                         </a>
                                                         <br>
-                                                        <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $product_parent_1->id) }}">
-                                                            @if($product_parent_1->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
-                                                            <span style="width: 100px" class="price flash-sale-price">{{ number_format($product_parent_1->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
-                                                                {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
-                                                                @else
-                                                            {{ number_format($product_parent_1->price, 0, ',', '.') }} VNĐ
+                                                        <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $val->id) }}">
+                                                            @if($val->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                            <span style="width: 100px" class="price flash-sale-price">{{ number_format($val->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                                            {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
+                                                            @else
+                                                            {{ number_format($val->price, 0, ',', '.') }} VNĐ
                                                             @endif
 
                                                         </a>
                                                     </div>
                                                 </div>
-</div>
+
+
+                                            </div>
+                                            @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    @else
+                                    <div style="padding-left: 0px" class="container">
+                                        <div class="variant-container d-flex flex-wrap">
+
+
+                                            @if(empty($product_parent_1) )
+                                            {{-- @if($product_parent_1) --}}
+
+                                            <div class="variant-item border-primary rounded" style="background-color: #fff">
+
+
+                                                @if ($product_parent_1->isOnFlashSale())
+                                                <span class="sale">sale</span>
+
+
+
+                                                @endif
+                                                <br>
+                                                <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
+
+                                                    {{ $val->name }}
+
+                                                </a>
+                                                <br>
+                                                <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $product_parent_1->id) }}">
+                                                    @if($product_parent_1->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                    <span style="width: 100px" class="price flash-sale-price">{{ number_format($product_parent_1->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                                    {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
+                                                    @else
+                                                    {{ number_format($product_parent_1->price, 0, ',', '.') }} VNĐ
+                                                    @endif
+
+                                                    <div>
+                                                        {{-- <img src="{{asset($product_parent_1->image)}}" alt="" style="width:50px; height:50px;"> --}}
+                                                        <div>
+                                                            <a style="text-decoration: none; " href="{{ route('single_product', $product_parent_1->id) }}">
+
+                                                                {{ $product_parent_1->name }}
+                                                            </a>
+                                                            <br>
+                                                            <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $product_parent_1->id) }}">
+                                                                @if($product_parent_1->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                                <span style="width: 100px" class="price flash-sale-price">{{ number_format($product_parent_1->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                                                {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
+                                                                @else
+                                                                {{ number_format($product_parent_1->price, 0, ',', '.') }} VNĐ
+                                                                @endif
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                            </div>
                                             @endif
 
-                                                @foreach($product_parent as $pro)
-                                                    @if($pro->id != $products->id)
-                                                    <div class="variant-item border-primary rounded" style="background-color: #fff">
+                                            @foreach($product_parent as $pro)
+                                            @if($pro->id != $products->id)
+                                            <div class="variant-item border-primary rounded" style="background-color: #fff">
 
 
-                                                            @if ($pro->isOnFlashSale())
-                                                            <span class="sale">sale</span>
-                                                            @endif <br>
-                                                            <div>
-                                                                {{-- <img src="{{asset($pro->image)}}" alt="" style="width:50px; height:50px;"> --}}
-                                                                <div>
-                                                                    <a style="text-decoration: none; " href="{{ route('single_product', $pro->id) }}">
+                                                @if ($pro->isOnFlashSale())
+                                                <span class="sale">sale</span>
+                                                @endif <br>
+                                                <div>
+                                                    {{-- <img src="{{asset($pro->image)}}" alt="" style="width:50px; height:50px;"> --}}
+                                                    <div>
+                                                        <a style="text-decoration: none; " href="{{ route('single_product', $pro->id) }}">
 
-                                                                        {{ $pro->name }}
-                                                                    </a>
-                                                                    <br>
-                                                                    <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $pro->id) }}">
-                                                                        @if($pro->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
-                                                                        <span style="width: 100px" class="price flash-sale-price">{{ number_format($pro->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
-                                                                            {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
-                                                                            @else
-                                                                        {{ number_format($pro->price, 0, ',', '.') }} VNĐ
-                                                                        @endif
+                                                            {{ $pro->name }}
+                                                        </a>
+                                                        <br>
+                                                        <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $pro->id) }}">
+                                                            @if($pro->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                            <span style="width: 100px" class="price flash-sale-price">{{ number_format($pro->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                                            {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
+                                                            @else
+                                                            {{ number_format($pro->price, 0, ',', '.') }} VNĐ
+                                                            @endif
 
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-
-
+                                                        </a>
                                                     </div>
-                                                @endif
+                                                </div>
+
+
+                                            </div>
+                                            @endif
                                             @endforeach
                                         </div>
                                     </div>
@@ -587,33 +607,33 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                 </div>
 
                                 <!-- Form để thêm vào giỏ hàng -->
-@if ($products->quantity <1)
-                                <button id="hethang">Hết Hàng</button>
-                                @else
+                                @if ($products->quantity <1)
+                                    <button id="hethang">Hết Hàng</button>
+                                    @else
                                     <div class="d-flex">
                                         <form style="margin-top: 10px" class="me-3" action="{{ route('cart.add', $products->id) }}" method="POST" class="epix-cart-variation">
-                                                            @csrf
-                                                            @if($products->isOnFlashSale())
-                                                            <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
-                                                            {{-- <span style="width: 100px" class="price flash-sale-price">{{ number_format($products->flashSale->price_sale, 0, ',', '.') }} VNĐ</span> --}}
-                                                            <input type="hidden" name="price" value="{{ $products->flashSale->price_sale }}">
-                                                            {{-- <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($products->price, 0, ',', '.') }} VNĐ</del></span> --}}
-                                                            @else
-                                                            <input type="hidden" name="price" value="{{ $products->price }}">
-                                                            @endif
+                                            @csrf
+                                            @if($products->isOnFlashSale())
+                                            <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                            {{-- <span style="width: 100px" class="price flash-sale-price">{{ number_format($products->flashSale->price_sale, 0, ',', '.') }} VNĐ</span> --}}
+                                            <input type="hidden" name="price" value="{{ $products->flashSale->price_sale }}">
+                                            {{-- <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($products->price, 0, ',', '.') }} VNĐ</del></span> --}}
+                                            @else
+                                            <input type="hidden" name="price" value="{{ $products->price }}">
+                                            @endif
 
-                                                <button type="submit" class="btn-primary d-block d-sm-inline-block text-center text-sm-left">
+                                            <button type="submit" class="btn-primary d-block d-sm-inline-block text-center text-sm-left">
                                                 Mua Ngay
-                                                </button>
-                                            </form>
+                                            </button>
+                                        </form>
 
 
                                         <form id="addToCartForm" style="margin-top: 10px" action="{{ route('cart.add1', $products->id) }}" method="POST" class="epix-cart-variation">
                                             @csrf
                                             @if($products->isOnFlashSale())
-                                                <input type="hidden" name="price" value="{{ $products->flashSale->price_sale }}">
+                                            <input type="hidden" name="price" value="{{ $products->flashSale->price_sale }}">
                                             @else
-                                                <input type="hidden" name="price" value="{{ $products->price }}">
+                                            <input type="hidden" name="price" value="{{ $products->price }}">
                                             @endif
 
                                             <button type="submit" class="btn-success d-block d-sm-inline-block text-center text-sm-left">
@@ -621,46 +641,46 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                             </button>
                                         </form>
                                     </div>
-                                @endif
+                                    @endif
 
-            </div>
-        </div>
-        </form>
-    </div>
-    <!-- /. single product right -->
-</div>
-</div>
-<div class="row ms-5">
-    <div class="col-xxl-12">
-        <div class="epix-single-product-description">
-            <div class="epix-single-product-description-tabs-wrap mb-20">
-                <div class="epix-single-product-description-tab">
-                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="active" data-bs-toggle="pill" data-bs-target="#tab-1-1" type="button">Mô Tả Sản Phẩm</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button data-bs-toggle="pill" data-bs-target="#tab-1-2" type="button">Thông Tin Cơ Bản</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button data-bs-toggle="pill" data-bs-target="#tab-1-3" type="button">Đánh giá ({{$totalReviews}})</button>
-                        </li>
-                    </ul>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- /. single product right -->
                 </div>
-                <div class="epix-single-product-description-content-wrap">
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="tab-1-1" role="tabpanel">
-                            <div class="epix-single-product-content">
-                                {{-- {{ $products->content }} --}}
+            </div>
+            <div class="row ms-5">
+                <div class="col-xxl-12">
+                    <div class="epix-single-product-description">
+                        <div class="epix-single-product-description-tabs-wrap mb-20">
+                            <div class="epix-single-product-description-tab">
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="active" data-bs-toggle="pill" data-bs-target="#tab-1-1" type="button">Mô Tả Sản Phẩm</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button data-bs-toggle="pill" data-bs-target="#tab-1-2" type="button">Thông Tin Cơ Bản</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button data-bs-toggle="pill" data-bs-target="#tab-1-3" type="button">Đánh giá ({{$totalReviews}})</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="epix-single-product-description-content-wrap">
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="tab-1-1" role="tabpanel">
+                                        <div class="epix-single-product-content">
+                                            {{-- {{ $products->content }} --}}
 
-                                @php
-                                echo $products->content;
-                                @endphp
-                                <div class="row">
-                                    <div class="col-xxl-7">
-                                        <div class="epix-featured-list">
-                                            <!-- <h4 class="epix-featured-list-title">Thông Số Chi Tiết</h4> -->
-                                            <!-- <ul>
+                                            @php
+                                            echo $products->content;
+                                            @endphp
+                                            <div class="row">
+                                                <div class="col-xxl-7">
+                                                    <div class="epix-featured-list">
+                                                        <!-- <h4 class="epix-featured-list-title">Thông Số Chi Tiết</h4> -->
+                                                        <!-- <ul>
                                                 <li>
                                                     <span>Device Length :</span>
                                                     <span>Dimensions 2024*3068</span>
@@ -710,87 +730,87 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                     <span>30 Days Warenty</span>
                                                 </li>
                                             </ul> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tab-1-2" role="tabpanel">
-                            <div class="epix-additional-product-information">
-                                <div class="epix-product-table">
-                                    <table class="table table-striped">
-                                        <tbody>
-                                            <tr>
-                                                <th>Màu</th>
-                                                <td>
-<a href="">{{ $products->color }}</a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bộ nhớ ngoài</th>
-                                                <td>
-                                                    <a href=""><span>{{ $products->ram }}</span></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>CPU</th>
-                                                <td>
-                                                    <a href="">{{ $products->chip }}</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bộ nhớ ngoài</th>
-                                                <td>
-                                                    <a href="">{{ $products->memory }}</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Kích thước màn hình</th>
-                                                <td>
-                                                    <a href="l">{{ $products->screen }}</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Độ phân giải</th>
-                                                <td>
-                                                    <a href="">{{ $products->resolution }}</a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tab-1-3" role="tabpanel">
-                            <div class="epix-review-content mb-40">
-                                <div class="epix-rating-count-wrap">
-                                    <div class="epix-rating-count-left-content">
-                                        <h5>Đánh Giá Của Người Dùng</h5>
-                                        <div class="epix-rating-flex-wrap">
-                                            <div class="row g-0">
-                                                <div class="col-xxl-2 col-md-4">
-                                                    <div class="epix-rating-count-number-box text-center">
-<div class="epix-rating-count-number">
-                                                            <h4>{{ number_format($averageRating, 1) }}</h4> <!-- Hiển thị trung bình số sao với 1 chữ số thập phân -->
-                                                        </div>
-                                                        <div class="rating">
-                                                            @for ($i = 1; $i <= 5; $i++) @if ($i <=$averageRating) <!-- Hiển thị sao đầy (màu vàng) -->
-                                                                <i class="fas fa-star" style="color: gold;"></i>
-                                                                @elseif ($i - 1 < $averageRating && $i> $averageRating)
-                                                                    <!-- Hiển thị sao bán phần nếu giá trị trung bình có phần thập phân -->
-                                                                    <i class="fas fa-star-half-alt" style="color: gold;"></i>
-                                                                    @else
-                                                                    <!-- Hiển thị sao rỗng -->
-                                                                    <i class="fal fa-star" style="color: lightgray;"></i>
-                                                                    @endif
-                                                                    @endfor
-                                                        </div>
-                                                        <span class="review-subtitle">Đã Có {{$totalReviews}} Lượt Đánh Giá</span>
                                                     </div>
                                                 </div>
-                                                <div class="col-xxl-8 col-md-8">
-                                                    {{-- <div class="epix-count-right-progress">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab-1-2" role="tabpanel">
+                                        <div class="epix-additional-product-information">
+                                            <div class="epix-product-table">
+                                                <table class="table table-striped">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Màu</th>
+                                                            <td>
+                                                                <a href="">{{ $products->color }}</a>
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Bộ nhớ ngoài</th>
+                                                            <td>
+                                                                <a href=""><span>{{ $products->ram }}</span></a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>CPU</th>
+                                                            <td>
+                                                                <a href="">{{ $products->chip }}</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Bộ nhớ ngoài</th>
+                                                            <td>
+                                                                <a href="">{{ $products->memory }}</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Kích thước màn hình</th>
+                                                            <td>
+                                                                <a href="l">{{ $products->screen }}</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Độ phân giải</th>
+                                                            <td>
+                                                                <a href="">{{ $products->resolution }}</a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab-1-3" role="tabpanel">
+                                        <div class="epix-review-content mb-40">
+                                            <div class="epix-rating-count-wrap">
+                                                <div class="epix-rating-count-left-content">
+                                                    <h5>Đánh Giá Của Người Dùng</h5>
+                                                    <div class="epix-rating-flex-wrap">
+                                                        <div class="row g-0">
+                                                            <div class="col-xxl-2 col-md-4">
+                                                                <div class="epix-rating-count-number-box text-center">
+                                                                    <div class="epix-rating-count-number">
+                                                                        <h4>{{ number_format($averageRating, 1) }}</h4> <!-- Hiển thị trung bình số sao với 1 chữ số thập phân -->
+                                                                    </div>
+                                                                    <div class="rating">
+                                                                        @for ($i = 1; $i <= 5; $i++) @if ($i <=$averageRating) <!-- Hiển thị sao đầy (màu vàng) -->
+                                                                            <i class="fas fa-star" style="color: gold;"></i>
+                                                                            @elseif ($i - 1 < $averageRating && $i> $averageRating)
+                                                                                <!-- Hiển thị sao bán phần nếu giá trị trung bình có phần thập phân -->
+                                                                                <i class="fas fa-star-half-alt" style="color: gold;"></i>
+                                                                                @else
+                                                                                <!-- Hiển thị sao rỗng -->
+                                                                                <i class="fal fa-star" style="color: lightgray;"></i>
+                                                                                @endif
+                                                                                @endfor
+                                                                    </div>
+                                                                    <span class="review-subtitle">Đã Có {{$totalReviews}} Lượt Đánh Giá</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xxl-8 col-md-8">
+                                                                {{-- <div class="epix-count-right-progress">
                                                             <div class="single-progress-list">
                                                                 <div class="rating">
                                                                     <i class="fas fa-star"></i>
@@ -804,137 +824,140 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
 </div>
                                                                 <div class="count">
                                                                     <span>{{ $ratingCounts[1] ?? 0 }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-progress-list">
+                                                            <div class="rating">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                            </div>
+                                                            <div class="epix-rating-progress">
+                                                                <div class="progress-count" data-width="32%"></div>
+                                                            </div>
+                                                            <div class="count">
+                                                                <span>{{ $ratingCounts[2] ?? 0 }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-progress-list">
+                                                            <div class="rating">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                            </div>
+                                                            <div class="epix-rating-progress">
+                                                                <div class="progress-count" data-width="44%"></div>
+                                                            </div>
+                                                            <div class="count">
+                                                                <span>{{ $ratingCounts[3] ?? 0 }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-progress-list">
+                                                            <div class="rating">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                            </div>
+                                                            <div class="epix-rating-progress">
+                                                                <div class="progress-count" data-width="93%"></div>
+                                                            </div>
+                                                            <div class="count">
+                                                                <span>{{ $ratingCounts[4] ?? 0 }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-progress-list">
+                                                            <div class="rating">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                                <i class="fal fa-star"></i>
+                                                            </div>
+                                                            <div class="epix-rating-progress">
+                                                                <div class="progress-count" data-width="65%"></div>
+                                                            </div>
+                                                            <div class="count">
+                                                                <span>{{ $ratingCounts[5] ?? 0 }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
-                                            <div class="single-progress-list">
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                </div>
-                                                <div class="epix-rating-progress">
-                                                    <div class="progress-count" data-width="32%"></div>
-                                                </div>
-                                                <div class="count">
-                                                    <span>{{ $ratingCounts[2] ?? 0 }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="single-progress-list">
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                </div>
-                                                <div class="epix-rating-progress">
-                                                    <div class="progress-count" data-width="44%"></div>
-                                                </div>
-                                                <div class="count">
-                                                    <span>{{ $ratingCounts[3] ?? 0 }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="single-progress-list">
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-<i class="fal fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                </div>
-                                                <div class="epix-rating-progress">
-                                                    <div class="progress-count" data-width="93%"></div>
-                                                </div>
-                                                <div class="count">
-                                                    <span>{{ $ratingCounts[4] ?? 0 }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="single-progress-list">
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                </div>
-                                                <div class="epix-rating-progress">
-                                                    <div class="progress-count" data-width="65%"></div>
-                                                </div>
-                                                <div class="count">
-                                                    <span>{{ $ratingCounts[5] ?? 0 }}</span>
-                                                </div>
-                                            </div>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-10">
-                        <ul id="commentList" class="epix-commentlist mb-50">
-                            @foreach ($reviews as $review)
-                            <li class="epix-comment-item">
-                                <div class="epix-comment-thumb">
-                                    <img src="{{ asset('laptop/assets/img/user/user-1.png') }}" alt="">
-                                </div>
-                                <div class="epix-comment-content">
-                                    <div class="epix-comment-top">
-                                        <div style="margin-bottom: 15px" class="rating">
-                                            @for ($i = 1; $i <= 5; $i++) @if ($i <=$review->star)
-<!-- Hiển thị sao đầy màu vàng từ trái qua phải -->
-                                                <i class="fas fa-star" style="color: gold;"></i>
-                                                @else
-                                                <!-- Hiển thị sao rỗng từ trái qua phải -->
-                                                <i class="fas fa-star" style="color: lightgray;"></i>
-                                                @endif
-                                                @endfor
-                                        </div>
-                                        <div class="user-name"><a href="#">{{ $review->users_name?? 'Unknown User' }}</a></div>
-                                        <span class="date"> {{ $review->created_at->format('d-m-Y') }}</span>
+                            <div class="row">
+                                <div class="col-xxl-10">
+                                    <ul id="commentList" class="epix-commentlist mb-50">
+                                        @foreach ($reviews as $review)
+                                        <li class="epix-comment-item">
+                                            <div class="epix-comment-thumb">
+                                                <img src="{{ asset('laptop/assets/img/user/user-1.png') }}" alt="">
+                                            </div>
+                                            <div class="epix-comment-content">
+                                                <div class="epix-comment-top">
+                                                    <div style="margin-bottom: 15px" class="rating">
+                                                        @for ($i = 1; $i <= 5; $i++) @if ($i <=$review->star)
+                                                            <!-- Hiển thị sao đầy màu vàng từ trái qua phải -->
+                                                            <i class="fas fa-star" style="color: gold;"></i>
+                                                            @else
+                                                            <!-- Hiển thị sao rỗng từ trái qua phải -->
+                                                            <i class="fas fa-star" style="color: lightgray;"></i>
+                                                            @endif
+                                                            @endfor
+                                                    </div>
+                                                    <div class="user-name"><a href="#">{{ $review->users_name?? 'Unknown User' }}</a></div>
+                                                    <span class="date"> {{ $review->created_at->format('d-m-Y') }}</span>
+                                                </div>
+                                                <span class="date"> {{ $review->comment }}</span>
+
+                                                <div class="epix-comment-bottom">
+                                                    <p>{{ $review->content }}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        @endforeach
+
+
+                                    </ul>
+                                    <div class="epix-review-form-wrapper">
+                                        <h4 class="epix-review-title">Thêm Đánh Giá</h4>
+                                        <form id="reviewForm" action="{{ route('post.review') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" name='product_id' value="{{$products->id}}">
+
+                                            <div class="rating">
+                                                <input type="radio" name="star" id="star5" value="5">
+                                                <label for="star5" title="5 stars">★</label>
+
+                                                <input type="radio" name="star" id="star4" value="4">
+                                                <label for="star4" title="4 stars">★</label>
+
+                                                <input type="radio" name="star" id="star3" value="3">
+                                                <label for="star3" title="3 stars">★</label>
+
+                                                <input type="radio" name="star" id="star2" value="2">
+                                                <label for="star2" title="2 stars">★</label>
+
+                                                <input type="radio" name="star" id="star1" value="1">
+                                                <label for="star1" title="1 star">★</label>
+                                            </div>
+                                            <br>
+                                            <label for="comment">Nội Dung:</label>
+                                            <textarea name="comment" id="comment"></textarea>
+
+                                            <button type="submit ">Đánh giá</button>
+                                        </form>
                                     </div>
-                                    <span class="date"> {{ $review->comment }}</span>
-
-                                    <div class="epix-comment-bottom">
-                                        <p>{{ $review->content }}</p>
-                                    </div>
                                 </div>
-                            </li>
-                            @endforeach
-
-
-                        </ul>
-                        <div class="epix-review-form-wrapper">
-                            <h4 class="epix-review-title">Thêm Đánh Giá</h4>
-                            <form id="reviewForm" action="{{ route('post.review') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name='product_id' value="{{$products->id}}">
-
-                                <div class="rating">
-                                    <input type="radio" name="star" id="star5" value="5">
-                                    <label for="star5" title="5 stars">★</label>
-
-                                    <input type="radio" name="star" id="star4" value="4">
-                                    <label for="star4" title="4 stars">★</label>
-
-                                    <input type="radio" name="star" id="star3" value="3">
-                                    <label for="star3" title="3 stars">★</label>
-
-                                    <input type="radio" name="star" id="star2" value="2">
-                                    <label for="star2" title="2 stars">★</label>
-
-                                    <input type="radio" name="star" id="star1" value="1">
-                                    <label for="star1" title="1 star">★</label>
-                                </div>
-                                <br>
-                                <label for="comment">Nội Dung:</label>
-                                <textarea name="comment" id="comment"></textarea>
-
-                                <button type="submit ">Đánh giá</button>
-</form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -942,16 +965,13 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
         </div>
     </div>
 </div>
-</div>
-</div>
-</div>
 
 <div class="row ms-5">
     <div class="col-xxl-12">
         <div class="same-product">
-        <div class="title-container">
-    <h3>SẢN PHẨM TƯƠNG TỰ</h3>
-</div>
+            <div class="title-container">
+                <h3>SẢN PHẨM TƯƠNG TỰ</h3>
+            </div>
             <div class="row">
                 @foreach($category as $val)
                 <div class="col-xxl-3 col-sm-6 col-md-4">
@@ -1092,7 +1112,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
 <!-- single product area end -->
 <script>
     $(document).ready(function() {
-// Khi người dùng nhập từ khóa
+        // Khi người dùng nhập từ khóa
         $('#search-input').on('keyup', function() {
             let query = $(this).val();
             if (query.length > 0) {
@@ -1173,7 +1193,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
         radioButton.checked = true;
 
         // Lấy giá từ thuộc tính data-price và cập nhật giá sản phẩm
-var selectedPrice = element.getAttribute('data-price');
+        var selectedPrice = element.getAttribute('data-price');
 
         var priceProduct = document.getElementById('product-price').textContent.trim();
         console.log(Number(priceProduct));
@@ -1230,16 +1250,16 @@ var selectedPrice = element.getAttribute('data-price');
 
 <script>
     document.getElementById('hethang').addEventListener('click', function(event) {
-            event.preventDefault(); // Ngăn trang không load lại
-            alert("Sản phẩm đã hết hàng, vui lòng chọn sản phẩm khác");
-        });
-        $(document).ready(function () {
-        $('#addToCartForm').on('submit', function (e) {
+        event.preventDefault(); // Ngăn trang không load lại
+        alert("Sản phẩm đã hết hàng, vui lòng chọn sản phẩm khác");
+    });
+    $(document).ready(function() {
+        $('#addToCartForm').on('submit', function(e) {
             e.preventDefault(); // Ngăn form submit và tải lại trang
 
             // Lấy URL và dữ liệu từ form
             var form = $(this);
-var actionUrl = form.attr('action');
+            var actionUrl = form.attr('action');
             var formData = form.serialize();
 
             // Gửi AJAX request
@@ -1247,11 +1267,11 @@ var actionUrl = form.attr('action');
                 url: actionUrl,
                 type: 'POST',
                 data: formData,
-                success: function (response) {
+                success: function(response) {
                     // Xử lý khi request thành công
                     alert("Sản phẩm đã được thêm vào giỏ hàng!");
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     // Xử lý khi request thất bại
                     alert("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại!");
                     console.error(error);
@@ -1301,7 +1321,7 @@ var actionUrl = form.attr('action');
                     $('#commentList').prepend(newComment);
 
                     // Xoá dữ liệu trong form
-$('#reviewForm')[0].reset();
+                    $('#reviewForm')[0].reset();
                 },
                 error: function(error) {
                     // Hiển thị thông báo lỗi

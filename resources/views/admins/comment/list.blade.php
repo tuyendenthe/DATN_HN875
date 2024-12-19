@@ -44,7 +44,7 @@
     $(document).on('change', '.status-checkbox', function() {
         var commentId = $(this).data('comment-id');
         var status = $(this).is(':checked') ? 1 : 0; // lấy trạng thái của checkbox
-        
+
         $.ajax({
             url: "{{ route('update-status') }}",
             method: "POST",
