@@ -474,19 +474,23 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xxl-6 col-lg-6">
-
                         <div class="epix-single-banner mb-50 wow fadeInUp" data-wow-delay=".2s">
                             <div class="epix-collection-box">
                                 <h4 class="epix-c-heading">Bộ sưu tập Voucher</h4>
                                 <div class="epix-c-list d-flex flex-column">
-                                    @foreach ($vouchers as $vou)
-                                        <span style="font-size: 13px; width: 550px  ;">Nhập mã <h6 class="mb-0" style="display: inline;">{{$vou->voucher_code}}</h6> giảm {{$vou->price_sale}} cho đơn hàng từ {{$vou->condition}}</span>
-                                        <br>
-                                    @endforeach
+                                    @if(Auth::check())
+                                        @foreach ($vouchers as $vou)
+                                            <span style="font-size: 13px; width: 550px;">
+                                                Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{$vou->price_sale}} cho đơn hàng từ {{$vou->condition}}
+                                            </span>
+                                            <br>
+                                        @endforeach
+                                    @else
+                                        <span style="font-size: 13px;">Vui lòng <a style="color: blue" href="{{ route('login') }}">Đăng Nhập</a> để nhận voucher.</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-xxl-6 col-lg-6">
                         <div class="swiper-container1">
