@@ -514,9 +514,12 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                 @if ($product_parent_1->isOnFlashSale())
                                                 <span class="sale">sale</span>
 
+   
+
                                                 @endif
                                                 <br>
                         <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
+
                                                     {{ $val->name }}
 
                                                 </a>

@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('address')->nullable();
 
             $table->string('password');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('add')->nullable();
             $table->integer('rank')->nullable();
             $table->integer('poin')->nullable();
 
             $table->enum('status', ['1', '2'])->default('1')->comment('1  hoạt động | ngưng 2 hoạt động'); // 1 hoạt động | 2 ngưng hoạt động
-            $table->enum('role', ['1', '2'])->default('2')->comment('1 admin | 2 user'); // 1 admin | 2 user
+            $table->enum('role', ['1', '2','3'])->default('2')->comment('1 Admin | 2 User | 3 Admin phụ'); // 1 admin | 2 user | 3 admin phụ
 
             $table->timestamps();
         });
