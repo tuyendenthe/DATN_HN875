@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-12">
                     Số Lượng:
-                    <input type="text" name="quantity " value="{{ $product->quantity  }}" class="form-control">
+                    <input type="text" name="quantity" value="{{ $product->quantity  }}" class="form-control">
                     {{-- @error('name')
                     <span class="" style="color: red">{{ $message }}</span>
                     @enderror --}}
