@@ -14,11 +14,13 @@
             <tr>
                 <th>ID</th>
                 <th>Mã voucher</th>
-                <th>Loại</th>
-                <th>Số lượng</th>
                 <th>Giá giảm</th>
+               <th>Điều kiện</th>
+                <th>Số lượng</th>
+                
                 <th>Ngày bắt đầu</th>
                 <th>Ngày kết thúc</th>
+               
                 <th>Hành động</th>
             </tr>
         </thead>
@@ -28,19 +30,14 @@
                 <td>{{ $voucher->id }}</td>
 
                 <td>{{ $voucher->voucher_code }}</td>
-        <td>
-            @if ($voucher->discount_type === 'percentage')
-                Phần Trăm
-            @elseif ($voucher->discount_type === 'fixed')
-              Cố Định
-            @else
-                Không xác định
-            @endif
-        </td>
+                <td>{{ $voucher->price_sale }}</td>
+       <td>{{ $voucher->condition}}</td>
                 <td>{{ $voucher->quantity }}</td>
-                <td>{{ $voucher->discount_value }}</td>
+                
+                
                 <td>{{ $voucher->start_date }}</td>
                 <td>{{ $voucher->end_date }}</td>
+                
                 <td>
                     <a href="{{ route('admin1.vouchers.edit', $voucher->id) }}" class="btn btn-warning">Sửa</a>
                     <form action="{{ route('admin1.vouchers.destroy', $voucher->id) }}" method="POST" style="display:inline;">

@@ -1,6 +1,32 @@
 @extends('clients.master')
 
 @section('content')
+<style>
+    .notification1 {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: #d4edda; /* Màu xanh nhạt */
+        color: #155724; /* Màu chữ xanh đậm */
+    }
+</style>
+<!-- slide-bar start -->
+<div class="container">
+    @if (session('message'))
+        <div id="notification" class="notification alert alert-danger" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
+    @if (session('message1'))
+    <div id="notification" class="notification1 alert alert-danger" role="alert">
+        {{ session('message1') }}
+    </div>
+@endif
     <!-- preloader area start -->
     <div id="loading">
         <div id="loading-center">
@@ -121,7 +147,7 @@
                         <div class="coupon-all">
                             <div class="coupon">
                                 <form id="applyCouponForm" action="{{ route('cart.applyCoupon') }}" method="POST">
-
+                                       
                                     @csrf
                                     <input id="coupon_code" class="input-text" name="coupon_code" value=""
                                            placeholder="Nhập Mã Giảm Giá" type="text">
