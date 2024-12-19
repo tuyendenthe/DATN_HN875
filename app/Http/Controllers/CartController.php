@@ -220,13 +220,25 @@ class CartController extends Controller
     // }
     public function applyCoupon(Request $request)
     {
+    //    dd($request->all());
         $voucherCode = $request->input('coupon_code');
         $originalPrice = $request->input('total');
+        // dd($originalPrice);
+        // $totalSelected = $request->input('totalSelected');
+        // $checkvoucher = Voucher::where('voucher_code','=',$request->coupon_code)->first();
+        // dd($totalSelected);
+        // dd($checkvoucher->condition);
+       
+        //  dd($check);
+        
 
-
+        
         $voucher = Voucher::where('voucher_code', $voucherCode)->first();
-
-        if ($voucher && $voucher->quantity > 0 && now()->between($voucher->start_date, $voucher->end_date)) {
+        $check =  $voucher->condition;
+//   dd($check);
+        
+       
+        if ($voucher && $voucher->quantity > 0 && now()->between($voucher->start_date, $voucher->end_date) ) {
 
 //            if ($voucher->discount_type === 'percentage') {
 //                $discount = ($originalPrice * $voucher->discount_value) / 100;
@@ -242,12 +254,15 @@ class CartController extends Controller
             return response()->json([
                 'success' => true,
                 'discount' => $discount,
+              
                 'final_price' => $finalPrice,
                 'idVoucher' => $voucher->id
             ]);
         } else {
+        
             return response()->json(['success' => false, 'message' => 'Voucher không hợp lệ hoặc hết hạn.']);
         }
+    
     }
 
 
