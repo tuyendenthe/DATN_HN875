@@ -20,12 +20,19 @@ use App\Models\Product;
 class CheckoutController extends Controller
 {
     public function index(Request $request)
-    {
+    {   
+        // dd($request->all());
+        $check = $request->totalSelected;
         $cart = session()->get('cart', []);
         $voucherId = $request -> voucherId;
         // Lấy các sản phẩm đã chọn từ form (dữ liệu JSON được gửi qua trường 'selectedProducts')
         $selectedProducts = json_decode($request->input('selectedProducts'), true);
         $totalProduct = 0;
+        $voucher = Voucher::where('id', $voucherId)->first();
+        // dd($voucher->condition);   
+        if($check <= $voucher->condition ){
+            return back()->with('message', 'Đơn hàng không đủ điều kiện áp dụng mã giảm giá.');
+        }
         foreach ($selectedProducts as $value) {
             $product_id = $value['product_id']; // Lấy product_id từ mảng
             $check = Product::findOrFail($product_id);
