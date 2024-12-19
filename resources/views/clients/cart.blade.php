@@ -285,8 +285,18 @@
                         total: total
                     },
                     success: function (response) {
+                    
                         if (response.success) {
+                           
                             const discount = response.discount;
+                            var totalSelected = $('#totalSelected').text();
+                            let formattedValue = parseInt(formatCurrency(totalSelected)); // Ví dụ response.amount là '270.000 VNĐ'
+                            
+                            if(discount > formattedValue){
+                                alert('Mã giảm giá không vượt quá tổng tiền!');
+                                return;
+                            }
+                            // console.log(discount);
                             const idVoucher = response.idVoucher;
                             $('#discount').text(discount.toLocaleString('vi-VN') + ' VNĐ');
                             updateDisplay();
@@ -302,6 +312,10 @@
                 });
             });
 
+            function formatCurrency(value) {
+            
+                return value.replace(/\./g, '').replace(/ VNĐ/g, '').trim();
+            }
             // Xử lý khi gửi form checkout
             $('#checkoutForm').on('submit', function (e) {
                 e.preventDefault();
