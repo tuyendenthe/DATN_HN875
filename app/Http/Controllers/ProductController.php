@@ -86,8 +86,8 @@ class ProductController extends Controller
             $data['role'] = $req->role;
         }
 
-
         Product::create($data);
+        return redirect()->route('products.listProduct')->with('message1', 'Thêm thành công');
 
 
         return redirect()->route('products.listProduct');

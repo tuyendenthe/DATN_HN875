@@ -15,8 +15,8 @@ class Voucher extends Model
         'price_sale',
         'start_date',
         'end_date',
-        'discount_type',
-        'discount_value',
+        'condition',
+        
     ];
     public function getExperyDateAttributes(){
         return Carbon::parse($this->attributes['expery_date'])->format('Y-m-d');
