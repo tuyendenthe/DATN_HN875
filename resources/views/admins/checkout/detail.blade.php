@@ -277,7 +277,7 @@ input[type=number] {
 
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td>{{ $value->name }}</td>
+                            <td>{{ $value->product_name }}</td>
                             <td> <img  src="{{ asset($value->image) }}"  alt="" width="100px"></td>
                             <td>{{ number_format($value->price, 0, ',', '.') }} VNĐ</td>
                             <td>{{ $value->quantity }}</td>
