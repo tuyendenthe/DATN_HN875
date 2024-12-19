@@ -504,13 +504,15 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                     <div style="padding-left: 0px" class="container">
                                         <div class="variant-container d-flex flex-wrap">
 
-                                            @if($product_parent_1)
+                                            @if(empty($product_parent_1) )
+                                            {{-- @if($product_parent_1) --}}
                                             <div class="variant-item border-primary rounded" style="background-color: #fff">
 
 
                                                 @if ($product_parent_1->isOnFlashSale())
                                                 <span class="sale">sale</span>
-                                                @endif <br>
+                                                @endif
+                                                <br>
 <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
                                                     {{ $val->name }}
                                                 </a>
@@ -554,7 +556,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                             <span class="sale">sale</span>
                                                             @endif <br>
                                                             <div>
-                                                                <img src="{{asset($pro->image)}}" alt="" style="width:50px; height:50px;">
+                                                                {{-- <img src="{{asset($pro->image)}}" alt="" style="width:50px; height:50px;"> --}}
                                                                 <div>
                                                                     <a style="text-decoration: none; " href="{{ route('single_product', $pro->id) }}">
 

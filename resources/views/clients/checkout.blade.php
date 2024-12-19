@@ -15,7 +15,32 @@
 
 </style>
 @section('content')
-
+<style>
+    .notification1 {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: #d4edda; /* Màu xanh nhạt */
+        color: #155724; /* Màu chữ xanh đậm */
+    }
+</style>
+<!-- slide-bar start -->
+<div class="container">
+    @if (session('message'))
+        <div id="notification" class="notification alert alert-danger" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
+    @if (session('message1'))
+    <div id="notification" class="notification1 alert alert-danger" role="alert">
+        {{ session('message1') }}
+    </div>
+@endif
     <!-- prealoder area start -->
     <div id="loading">
         <div id="loading-center">
@@ -33,7 +58,7 @@
             <h4 class="epix-breadcrumb-title">Thanh Toán</h4>
             <div class="epix-breadcrumb">
                 <ul>
-                    <li><a href="/">TGiỏ hàng</a></li>
+                    <li><a href="/">Giỏ hàng</a></li>
                     <li><span>Thanh Toán</span></li>
                 </ul>
             </div>
@@ -212,7 +237,7 @@
                                 <img id="qr-code" src="https://api.vietqr.io/image/mbbank-0362978755-fTpTJka.jpg?accountName=TRAN VAN TUYEN&amount={{ $total + 25000 - $discount }}&addInfo={{ session('noidung') }}" style="display: none; margin-left: auto; margin-right: auto; width: 500px; height: 500px;">
                             </div>
                             <div class="order-button-payment mt-20">
-                                <button type="submit" class="os-btn os-btn-prymari">Thanh Toán</button>
+                                <button id="submit-button"  type="submit" class="os-btn os-btn-prymari">Thanh Toán</button>
                             </div>
                         </div>
                     </div>
@@ -225,6 +250,10 @@
     <!-- checkout area end -->
 
 @endsection
+<script>
+    // Lấy tất cả radio buttons với name="payment_method"
+
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("formCheckout");
@@ -316,6 +345,8 @@
         const $qrCodeImage = $('#qr-code');
 
         $('input[name="payment_method"]').on('change', function () {
+
+
             var name = $('#name').val();
             var address = $('#add').val();
             var email = $('#email').val();
@@ -336,18 +367,18 @@
                 let urlCheckPay = "{{ route('checkPay') }}"
 
                 let intervalId = setInterval(function(){
-                    // $.post(urlCheckPay, {
-                    //     name, address, email, phone, note, voucherId, products, tongtiengiohang, _token: $('input[name="_token"]').val(),
-                    // }, function(data){
-                    //     // if(!isNaN(data)){
-                    //     //     // window.location.href = "{{ route('checkout.success') }}"
-                    //     //     // clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng
-                    //     // }else{
-                    //     //     console.log(data)
-                    //     // }
+                    $.post(urlCheckPay, {
+                        name, address, email, phone, note, voucherId, products, tongtiengiohang, _token: $('input[name="_token"]').val(),
+                    }, function(data){
+                        if(!isNaN(data)){
+                            window.location.href = "{{ route('checkout.success') }}"
+                            clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng
+                        }else{
+                            console.log(data)
+                        }
 
-                    //     console.log(data)
-                    // });
+                        console.log(data)
+                    });
 
                     $.ajax({
                         url: urlCheckPay,

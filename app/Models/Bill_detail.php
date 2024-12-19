@@ -12,6 +12,7 @@ class Bill_detail extends Model
     'bill_id',
     'bill_code',
     'quantity',
+    'product_name',
     'subtotal','price'
 ];
     }
