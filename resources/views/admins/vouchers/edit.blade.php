@@ -15,20 +15,15 @@
             <label for="quantity">Số lượng</label>
             <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $voucher->quantity }}" required>
         </div>
-        <div class="form-group">
-            <label for="discount_type">Loại giảm giá</label>
-            <select class="form-control" id="discount_type" name="discount_type" required>
-                <option value="percentage" {{ $voucher->discount_type == 'percentage' ? 'selected' : '' }}>Phần trăm</option>
-                <option value="fixed" {{ $voucher->discount_type == 'fixed' ? 'selected' : '' }}>Cố định</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="discount_value">Giá trị giảm giá</label>
-            <input type="number" step="0.01" class="form-control" id="discount_value" name="discount_value" value="{{ $voucher->discount_value }}" required>
-        </div>
+       
+        
         <div class="form-group">
             <label for="price_sale">Giá giảm</label>
             <input type="number" class="form-control" id="price_sale" name="price_sale" value="{{ $voucher->price_sale }}" required>
+        </div>
+        <div class="form-group">
+            <label for="price_sale">Điều kiện giảm giá</label>
+            <input type="number" class="form-control" id="condition" name="condition" value="{{ $voucher->condition }}" required>
         </div>
         <div class="form-group">
             <label for="start_date">Ngày bắt đầu</label>
