@@ -53,9 +53,11 @@
                 <div class="col-12">
                     Quyền tài khoản:
                     <select name="role" class="form-control">
-                        <option value="1">Admin</option>
+                        @if(auth()->user()->role == 1) <!-- Chỉ Admin tổng mới có thể chọn tất cả -->
+                            <option value="1">Admin</option>
+                        @endif
                         <option value="2" selected>User</option>
-                        <option value="3">Admin phụ</option> <!-- Thêm Admin phụ nếu cần -->
+                        <option value="3">Admin phụ</option>
                     </select>
                     @error('role')
                         <span class="text-danger">{{ $message }}</span>

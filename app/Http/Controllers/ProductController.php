@@ -11,14 +11,26 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
-    public function listProduct()
+    public function listProduct(Request $request)
     {
         session()->forget('new_order'); // Xóa thông báo đơn hàng mới
-        $listProducts = Product::with('category')->get();
-        // dd($listProducts);
+
+        // Khởi tạo truy vấn
+        $query = Product::with('category');
+
+        // Nếu có tìm kiếm theo tên sản phẩm
+        if ($request->has('name') && !empty($request->name)) {
+            $request->validate([
+                'name' => 'string',
+            ]);
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        // Phân trang sản phẩm
+        $listProducts = $query->paginate(10); // Số lượng sản phẩm trên mỗi trang
 
         return view('admins.tables')->with([
-            'listProducts' => $listProducts
+            'listProducts' => $listProducts,
         ]);
     }
 
@@ -91,7 +103,7 @@ class ProductController extends Controller
         return redirect()->route('products.listProduct')->with('message1', 'Thêm thành công');
 
 
-        return redirect()->route('products.listProduct');
+        // return redirect()->route('products.listProduct');
     }
 
     public function updateProduct($id)

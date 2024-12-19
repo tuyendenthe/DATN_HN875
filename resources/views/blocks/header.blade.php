@@ -63,11 +63,20 @@
                                         <div class="dropdown">
                                             <a href="#" class="dropdown-toggle"><i class="fal fa-user"></i>
                                                 {{ Auth::user()->name }}</a>
-                                            <div class="dropdown-menu">
-                                                <a href="{{ route('account.edit') }}">Cập nhật tài khoản</a>
-                                                <a href="{{ route('bill.bills_client') }}">Đơn hàng của bạn</a>
-                                                <a href="{{ route('logout') }}">Đăng xuất</a>
-                                            </div>
+                                                <div class="dropdown-menu">
+                                                    <a href="{{ route('account.edit') }}">
+                                                        <i class="fas fa-user-edit"></i> Cập nhật tài khoản
+                                                    </a>
+                                                    <a href="{{ route('bill.bills_client') }}">
+                                                        <i class="fas fa-shopping-cart"></i> Đơn hàng của bạn
+                                                    </a>
+                                                    <a href="{{ route('client.change.password.form') }}">
+                                                        <i class="fas fa-lock"></i> Đổi mật khẩu
+                                                    </a>
+                                                    <a href="{{ route('logout') }}">
+                                                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                                                    </a>
+                                                </div>
                                         </div>
                                     @else
 

@@ -14,7 +14,7 @@
                     <form action="{{route('categories.store')}}" method="POST">
                         @csrf
                         <div class="col-md-12 mt-3">
-                            <label for="">Nhập tên sản phâm</label>
+                            <label for="">Nhập tên sản phẩm</label>
                             <input type="text" name="name" class="form-control" required>
                         </div>
                         <div class="col-md-12 mt-3">

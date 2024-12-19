@@ -12,6 +12,7 @@ class ReviewsController extends Controller
     //thêm đánh giá
     public function postReview(Request $request){
          // Validate dữ liệu đầu vào
+        //  dd($request);   
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'star' => 'required|integer|min:1|max:5',

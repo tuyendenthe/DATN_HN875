@@ -31,8 +31,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Image</th>
-                    <th>Actions</th>
+                    <th>Ảnh</th>
+                    <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>

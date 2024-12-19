@@ -18,4 +18,5 @@ class Categories extends Model
         'created_at','updated_at','name','description','status_delete','idstaff','uuid'
      
     ];
+    
 }
