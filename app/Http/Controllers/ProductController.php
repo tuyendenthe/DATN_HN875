@@ -126,7 +126,7 @@ class ProductController extends Controller
         return $file->storeAs($folder, $fileName);
     }
 
-    public function updatePutProduct(ProductRequest $req, $id)
+    public function updatePutProduct(Request $req, $id)
     {
 
         $product = Product::find($id);
@@ -140,6 +140,7 @@ class ProductController extends Controller
             'name' => $req->name,
 
             'image' => $path,
+
             'price' => $req->price,
             'content_short' => $req->content_short,
             'content' => $req->content,
@@ -188,10 +189,25 @@ class ProductController extends Controller
     }
 
 
+    // public function deleteProduct($id)
+    // {
+    //     $product = Product::find($id);
+    //     $product->delete();
+    //     return redirect()->route('products.listProduct');
+    // }
     public function deleteProduct($id)
-    {
-        $product = Product::find($id);
+{
+    $product = Product::find($id);
+
+    if ($product) {
+        // Xoá các bản ghi liên quan trong bảng flash_sales
+        $product->flashSales()->delete();
+
+        // Xoá sản phẩm
         $product->delete();
-        return redirect()->route('products.listProduct');
     }
+
+    return redirect()->route('products.listProduct')->with('success', 'Sản phẩm và các Flash Sales liên quan đã được xoá!');
+}
+
 }
