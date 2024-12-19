@@ -25,6 +25,7 @@ class ProductController extends Controller
     public function addProduct()
     {
         $data = Category::get();
+        // dd($data);
         $products = Product::where('is_attributes',2)->get();
         // $Categories = Categories::where('status_delete', Categories::UNDELETE)->get();
         return view('admins.add-product', compact('data','products'));
@@ -86,8 +87,8 @@ class ProductController extends Controller
             $data['role'] = $req->role;
         }
 
-
         Product::create($data);
+        return redirect()->route('products.listProduct')->with('message1', 'Thêm thành công');
 
 
         return redirect()->route('products.listProduct');

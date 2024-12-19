@@ -56,6 +56,42 @@
                 @endforeach
             </tbody>
         </table>
+                        <!-- Phân trang -->
+{{-- <nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        @if ($listUser->onFirstPage())
+            <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+            </li>
+        @else
+            <li class="page-item">
+                <a class="page-link" href="{{ $listUser->previousPageUrl() }}">Sau</a>
+            </li>
+        @endif
+
+        @for ($i = 1; $i <= $listUser->lastPage(); $i++)
+            @if ($i == $listUser->currentPage())
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link">{{ $i }}</a>
+                </li>
+            @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $listUser->url($i) }}">{{ $i }}</a>
+                </li>
+            @endif
+        @endfor
+
+        @if ($listUser->hasMorePages())
+            <li class="page-item">
+                <a class="page-link" href="{{ $listUser->nextPageUrl() }}">Trước</a>
+            </li>
+        @else
+            <li class="page-item disabled">
+                <a class="page-link">Next</a>
+            </li>
+        @endif
+    </ul>
+</nav> --}}
     @else
         <p>No posts available.</p>
     @endif
