@@ -20,7 +20,7 @@
                 <!-- Logo text -->
                 <span class="logo-text">
                     <!-- dark Logo text -->
-                    <img style="margin-top: 15px" src="{{asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="light-logo" />
+                    {{-- <img style="margin-top: 15px" src="{{asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="light-logo" /> --}}
 
                 </span>
                 <!-- Logo icon -->

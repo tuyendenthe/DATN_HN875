@@ -115,7 +115,14 @@
                                                 <option class="form-control" value="all">Tất cả</option>
                                                 <option class="form-control" value="<3000000">Dưới 3.000.000</option>
                                                 <option class="form-control" value="3000000-5000000">3.000.000 - 5.000.000</option>
-                                                <option class="form-control" value=">5000000">Trên 5.000.000</option>
+                                                <option class="form-control" value="5000000-10000000">5.000.000-10.000.000</option>
+                                                <option class="form-control" value="10000000-15000000">10.000.000-15.000.000</option>
+                                                <option class="form-control" value="15000000-20000000">15.000.000-20.000.000</option>
+                                                <option class="form-control" value="20000000-25000000">20.000.00-25.000.000</option>
+                                                <option class="form-control" value="25000000-30000000">25.000.000-30.000.000</option>
+                                                <option class="form-control" value="30000000-40000000">30.000.000-40.000.000</option>
+                                                <option class="form-control" value="40000000-50000000">40.000.000-50.000.000</option>
+                                                <option class="form-control" value=">50000000">50.000.000</option>
                                             </select>
                                         </div>
                                     </div>
@@ -202,8 +209,10 @@
                                                                             <i class="fal fa-eye"></i>
                                                                         </a>
                                                                     </div>
-                                                                    {{-- <span class="sale">sale</span> --}}
-                                                                    <a href="{{ route('single_product', $item->id) }}"><img width="223px" height="396px" src="{{asset($item->image)}}" alt=""></a>
+                                                                    @if($item->isOnFlashSale())
+                                                                    <span class="sale">sale</span>
+                                                                    @endif
+                                                                    <a href="{{ route('single_product', $item->id) }}"><img width="151px" height="150px" src="{{asset($item->image)}}" alt=""></a>
                                                                 </div>
                                                                 <div class="price-box price-box-3">
                                                                     @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
@@ -212,7 +221,7 @@
                                                                     @else
                                                                         <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                                     @endif
-                                                                    <a style="width: 300px" href="{{ route('single_product', $item->id) }}">+ Select Option</a>
+                                                                    {{-- <a style="width: 300px" href="{{ route('single_product', $item->id) }}">+ Select Option</a> --}}
                                                                 </div>
                                                                 <h5 class="epix-p-title epix-p-title-3"><a href="{{ route('single_product', $item->id) }}">{{$item->name}}</a></h5>
                                                             </div>
@@ -232,7 +241,11 @@
                                                                             <i class="fal fa-eye"></i>
                                                                         </a>
                                                                     </div>
+                                                                    
+                                                                        
+                                                                    @if($item->isOnFlashSale())
                                                                     <span class="sale">sale</span>
+                                                                    @endif
                                                                     <a href="{{ route('single_product',$item->id)  }}"><img height="210px" width="210px" src="{{asset($item -> image)}}" alt=""></a>
                                                                 </div>
                                                             </div>
@@ -241,7 +254,7 @@
                                                                     <div class="mb-15">
                                                                         <h5 class="epix-p-title"><a href="{{ route('single_product',$item->id)  }}">{{ $item -> name }}</a></h5>
                                                                         <div class="wrap">
-                                                                            <span class="epix-p-subtitle">Speakers</span>
+                                                                            {{-- <span class="epix-p-subtitle">Speakers</span> --}}
                                                                         </div>
                                                                         <div class="price-box">
                                                                             @if($item->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
@@ -250,11 +263,13 @@
                                                                             @else
                                                                                 <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
                                                                             @endif
-                                                                            <a href="{{ route('single_product',$item->id)  }}">+ Select Option</a>
+                                                                            {{-- <a href="{{ route('single_product',$item->id)  }}">+ Select Option</a> --}}
                                                                         </div>
                                                                     </div>
-                                                                    <p>{{ $item -> content }}</p>
-                                                                    <a href="{{ route('single_product', $item -> id) }}" class="epix-btn-1" tabindex="0"><span>Show more<i class="fal fa-angle-right"></i></span></a>
+                                                                    <p>@php
+                                                                      echo   $item->content_short ;
+                                                                    @endphp</p>
+                                                                    <a href="{{ route('single_product', $item -> id) }}" class="epix-btn-1" tabindex="0"><span>Chi Tiết Sản Phẩm <i class="fal fa-angle-right"></i></span></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -305,6 +320,34 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- single product area end -->
+    <script>
+        document.getElementById('price-range-select').addEventListener('change', function() {
+            const selectedValue = this.value;
+            const products = document.querySelectorAll('.product');
+    
+            products.forEach(product => {
+                const price = parseInt(product.getAttribute('data-price'), 10);
+                let shouldDisplay = false;
+    
+                switch (selectedValue) {
+                    case 'all':
+                        shouldDisplay = true;
+                        break;
+                    case '<10000000':
+                        shouldDisplay = price < 10000000;
+                        break;
+                    case '10000000-15000000':
+                        shouldDisplay = price >= 10000000 && price <= 15000000;
+                        break;
+                    case '>15000000':
+                        shouldDisplay = price > 15000000;
+                        break;
+                }
+    
+                product.style.display = shouldDisplay ? 'block' : 'none';
+            });
+        });
+    </script>
     <script>
         $(document).ready(function () {
             // Khi người dùng nhập từ khóa

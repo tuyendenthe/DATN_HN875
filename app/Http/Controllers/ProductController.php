@@ -90,7 +90,7 @@ class ProductController extends Controller
         return redirect()->route('products.listProduct')->with('message1', 'Thêm thành công');
 
 
-        // return redirect()->route('products.listProduct');
+        return redirect()->route('products.listProduct');
     }
 
     public function updateProduct($id)
