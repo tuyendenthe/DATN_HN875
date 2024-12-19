@@ -214,6 +214,8 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
 });
 
 Route::resource('admin1/category', CategoryController::class);
+Route::patch('admin1/category/{id}/restore', [CategoryController::class, 'restore'])->name('category.restore');
+
 Route::resource('admin1/category_post', CategoryPostController::class);
 Route::resource('admin1/post', PostController::class);
 
