@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Categories</h2>
+        <h2>Danh mục</h2>
         <a href="{{ route('category.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
     </div>
 
@@ -31,8 +31,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
+                    <th>Tên</th>
+                    <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>

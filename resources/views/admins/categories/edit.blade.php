@@ -14,7 +14,7 @@
                         @csrf
                         <input type="hidden" name="uuid" value="{{ $Categories->uuid }}">
                         <div class="col-md-12 mt-3">
-                            <label for="">Nhập tên sản phâm</label>
+                            <label for="">Nhập tên sản phẩm</label>
                             <input type="text" name="name" class="form-control" value="{{ $Categories->name }}" required>
                         </div>
                         <div class="col-md-12 mt-3">

@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Category Posts</h2>
-        <a href="{{ route('category_post.create') }}" class="btn btn-primary">Thêm mới Category Post</a>
+        <h2>Danh mục bài viết</h2>
+        <a href="{{ route('category_post.create') }}" class="btn btn-primary">Thêm mới danh mục bài viết</a>
     </div>
 
     @if ($categoryPosts->count())
@@ -13,7 +13,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-             
+
             {{-- sửa thành công --}}
             @if (session('update_success'))
                 <div class="alert alert-warning">
@@ -31,9 +31,9 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Detail</th>
-                    <th>Actions</th>
+                    <th>Tên</th>
+                    <th>Chi tiết</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +49,7 @@
                                 class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
                             </form>
                         </td>
                     </tr>
@@ -57,6 +57,6 @@
             </tbody>
         </table>
     @else
-        <p>Không có cate post nào.</p>
+        <p>Không có cate bài viết nào.</p>
     @endif
 @endsection
