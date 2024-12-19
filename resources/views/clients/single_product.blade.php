@@ -504,29 +504,33 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                     <div style="padding-left: 0px" class="container">
                                         <div class="variant-container d-flex flex-wrap">
 
+
                                             @if(empty($product_parent_1) )
                                             {{-- @if($product_parent_1) --}}
+
                                             <div class="variant-item border-primary rounded" style="background-color: #fff">
 
 
                                                 @if ($product_parent_1->isOnFlashSale())
                                                 <span class="sale">sale</span>
+
                                                 @endif
                                                 <br>
-<a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
+                        <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
                                                     {{ $val->name }}
+
                                                 </a>
                                                 <br>
-                                                <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $val->id) }}">
-                                                    @if($val->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
-                                                    <span style="width: 100px" class="price flash-sale-price">{{ number_format($val->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
+                                                <a class="text-danger text-decoration-none fs-5" href="{{ route('single_product', $product_parent_1->id) }}">
+                                                    @if($product_parent_1->isOnFlashSale()) <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                    <span style="width: 100px" class="price flash-sale-price">{{ number_format($product_parent_1->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
                                                     {{-- <span style="width: 100px" class="price original-price text-muted"><del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del></span> --}}
                                                     @else
-                                                    {{ number_format($val->price, 0, ',', '.') }} VNĐ
+                                                    {{ number_format($product_parent_1->price, 0, ',', '.') }} VNĐ
                                                     @endif
 
                                                 <div>
-                                                    <img src="{{asset($product_parent_1->image)}}" alt="" style="width:50px; height:50px;">
+                                                    {{-- <img src="{{asset($product_parent_1->image)}}" alt="" style="width:50px; height:50px;"> --}}
                                                     <div>
                                                         <a style="text-decoration: none; " href="{{ route('single_product', $product_parent_1->id) }}">
 

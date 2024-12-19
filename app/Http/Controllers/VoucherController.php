@@ -28,8 +28,8 @@ class VoucherController extends Controller
             'price_sale' => 'required|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
-            'discount_type' => 'required|string|in:percentage,fixed',
-            'discount_value' => 'required|numeric|min:0',
+            'condition' => 'nullable',
+            
         ]);
 
         Voucher::create($request->all());
@@ -52,8 +52,8 @@ public function update(Request $request, Voucher $voucher)
         'price_sale' => 'required|numeric',
         'start_date' => 'required|date',
         'end_date' => 'required|date|after_or_equal:start_date',
-        'discount_type' => 'required|string|in:percentage,fixed',
-        'discount_value' => 'required|numeric|min:0',
+        'condition' => 'nullable',
+       
     ]);
 
     $voucher->update($request->all());
@@ -64,6 +64,6 @@ public function update(Request $request, Voucher $voucher)
     public function destroy(Voucher $voucher)
     {
         $voucher->delete();
-        return redirect()->route('admins.vouchers.index')->with('message1', 'Voucher đã được xóa thành công.');
+        return redirect()->route('admin1.vouchers.index')->with('message1', 'Voucher đã được xóa thành công.');
     }
 }
