@@ -304,7 +304,7 @@
                         return;
                     }
 
-                    // Gửi yêu cầu Ajax để áp dụng mã giảm giá
+                   // Gửi yêu cầu Ajax để áp dụng mã giảm giá
                     $.ajax({
                         url: "{{ route('cart.applyCoupon') }}",
                         method: 'POST',
@@ -333,6 +333,7 @@
                             } else {
                                 alert(response
                                 .message); // Thông báo lỗi nếu mã giảm giá không hợp lệ
+
                             }
                         },
                         error: function(xhr) {

@@ -13,7 +13,7 @@
 
     <link rel="manifest" href="https://devsnews.com/template/epixx-prev/epixx/site.webmanifest/" />
     {{-- <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" /> --}}
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/techzone.jpg')}}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin/assets/images/techzone.jpg') }}" />
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
@@ -474,28 +474,23 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xxl-6 col-lg-6">
-
-                        <div class="epix-single-banner mb-30 wow fadeInUp" data-wow-delay=".2s"
-                            data-background="assets/img/banner/banner-1.jpg">
+                        <div class="epix-single-banner mb-50 wow fadeInUp" data-wow-delay=".2s">
                             <div class="epix-collection-box">
-                                <h3 class="epix-c-heading">Bộ sưu tập năm 2024</h3>
-                                <div class="epix-c-list">
-                                    <ul>
-                                        <li><a href="{{ route('shop') }}">Galaxy Tabs & Ides</a></li>
-                                        <li><a href="{{ route('shop') }}">Phụ kiện</a></li>
-                                        <li><a href="{{ route('shop') }}">MacBook</a></li>
-                                        <li><a href="{{ route('shop') }}">Laptop Acer</a></li>
-                                        <li><a href="{{ route('shop') }}">Laptop Asus</a></li>
-                                        <li><a href="{{ route('shop') }}">Laptop Dell</a></li>
-                                        <li><a href="{{ route('shop') }}">Laptop MSI</a></li>
-                                        <li><a href="{{ route('shop') }}">Laptop Lenovo</a></li>
-                                        <li><a href="{{ route('shop') }}">Laptop HP</a></li>
-                                        <li><a href="{{ route('shop') }}">Ổ cứng</a></li>
-                                    </ul>
+                                <h4 class="epix-c-heading">Bộ sưu tập Voucher</h4>
+                                <div class="epix-c-list d-flex flex-column">
+                                    @if(Auth::check())
+                                        @foreach ($vouchers as $vou)
+                                            <span style="font-size: 13px; width: 550px;">
+                                                Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{$vou->price_sale}} cho đơn hàng từ {{$vou->condition}}
+                                            </span>
+                                            <br>
+                                        @endforeach
+                                    @else
+                                        <span style="font-size: 13px;">Vui lòng <a style="color: blue" href="{{ route('login') }}">Đăng Nhập</a> để nhận voucher.</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-xxl-6 col-lg-6">
                         <div class="swiper-container1">

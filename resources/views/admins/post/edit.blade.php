@@ -107,13 +107,13 @@
                                     <input type="text" id="titlePost" class="form-control slug-title" value="{{ $post -> title }}" name="title">
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label">Content Short</label>
+                                    <label class="form-label">Bài viết ngắn</label>
                                     <div style="padding-left: 0px" class="col-12">
                                         <input id="slugPost" value="{{ $post -> content_short }}" name="content_short" class="form-control here set-slug" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label">Category</label>
+                                    <label class="form-label">Danh mục</label>
                                     <select class="form-control" name="category_post_id">
                                         @foreach($categories as $category)
                                         <option class="form-control" value="{{ $category -> id }}" <?= $category->id == $post->category_post_id ? "selected" : '' ?>>{{ $category->name }}</option>

@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\FlashSale;
 use App\Models\Slide;
 use App\Models\slide_cover;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,19 +26,20 @@ class HomeUserController extends Controller
         // dd($cart);
         // Lấy tối đa 10 sản phẩm từ bảng products
         $banner_covers = slide_cover::all();
-        $products = (Product::with('category','flashSale'))->where('is_attributes',2)->latest()->take(8)->get();
-        $products_2 = (Product::with('category','flashSale'))->where('role','=',2)->latest()->take(8)->get();
+        $vouchers = Voucher::latest()->take(4)->get();
+        $products = (Product::with('category', 'flashSale'))->where('is_attributes', 2)->latest()->take(8)->get();
+        $products_2 = (Product::with('category', 'flashSale'))->where('role', '=', 2)->latest()->take(8)->get();
         $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
             ->orderBy('time_end', 'asc')
             ->limit(4)
             ->get();
-//        dd($flashSales);
+        //        dd($flashSales);
         $banners = Slide::all();
 
         // Trả về view và truyền danh sách sản phẩm
-        return view('clients.index', compact('products','products_2', 'flashSales', 'banners','banner_covers','categories'));
+        return view('clients.index', compact('products', 'products_2', 'flashSales', 'banners', 'banner_covers', 'categories', 'vouchers'));
     }
 
     /**
@@ -64,7 +66,7 @@ class HomeUserController extends Controller
     {
 
 
-        $products = (Product::with('category','flashSale'))->findOrFail($id);
+        $products = (Product::with('category', 'flashSale'))->findOrFail($id);
         // $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -77,9 +79,9 @@ class HomeUserController extends Controller
         $limit = 4;
 
 
-        $category =  Product::where('product_parent',$id)->get();
+        $category =  Product::where('product_parent', $id)->get();
         $reviews = Comment::with('user')
-        ->where('product_id', $id)
+            ->where('product_id', $id)
             ->where('status', 1)
             ->orderBy('created_at', 'desc')
             ->get();
@@ -90,12 +92,12 @@ class HomeUserController extends Controller
         $averageRating = $totalReviews > 0
             ? $reviews->where('status', 1)->avg('star') // Trung bình số sao của các review có status = 1
             : 0;
-        return view('clients.single_product', compact(['products','flashSales','reviews', 'category','ratingCounts', 'totalReviews', 'averageRating']));
+        return view('clients.single_product', compact(['products', 'flashSales', 'reviews', 'category', 'ratingCounts', 'totalReviews', 'averageRating']));
 
-//         $reviews = Comment::where('product_id', $id)->where('status', 1)
-//         ->orderBy('created_at', 'desc')
-//         ->get();
-//         return view('clients.single_product', compact(['products','reviews','categories']));
+        //         $reviews = Comment::where('product_id', $id)->where('status', 1)
+        //         ->orderBy('created_at', 'desc')
+        //         ->get();
+        //         return view('clients.single_product', compact(['products','reviews','categories']));
 
     }
 

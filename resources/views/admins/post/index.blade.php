@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Posts</h2>
-        <a href="{{ route('post.create') }}" class="btn btn-primary">Add New Post</a>
+        <h2>Bài Viết</h2>
+        <a href="{{ route('post.create') }}" class="btn btn-primary">Thêm bài viết mới</a>
     </div>
 
     @if (session('success'))
@@ -21,12 +21,12 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Title</th>
-                    <th>Image</th>
-                    <th>Content Short</th>
-                    <th>Category</th>
-                    <th>User Name</th>
-                    <th>Actions</th>
+                    <th>Tên</th>
+                    <th>Ảnh</th>
+                    <th>Mô tả ngắn</th>
+                    <th>Danh mục</th>
+                    <th>Tên bài viết</th>
+                    <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,11 +45,11 @@
                         <td>{{ $post->category->name ?? 'Không có cate' }}</td>
                         <td>{{ $post->user->name ?? 'Không có user User' }}</td>
                         <td>
-                            <a href="{{ route('post.edit', $post->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{{ route('post.edit', $post->id) }}" class="btn btn-sm btn-warning">Sửa</a>
                             <form action="{{ route('post.destroy', $post->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
                             </form>
                         </td>
                     </tr>

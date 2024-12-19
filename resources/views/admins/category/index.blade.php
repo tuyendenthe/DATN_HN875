@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Categories</h2>
+        <h2>Danh mục</h2>
         <a href="{{ route('category.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
     </div>
 
@@ -27,12 +27,19 @@
                 {{ session('delete_success') }}
             </div>
         @endif
+        {{-- Khôi phục thành công --}}
+        @if (session('restore_success'))
+            <div class="alert alert-info">
+                {{ session('restore_success') }}
+            </div>
+        @endif
+
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
+                    <th>Tên</th>
+                    <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,13 +48,33 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>
-                            <a href="{{ route('category.edit', $category) }}" class="btn btn-sm btn-warning">Sửa</a>
-                            <form action="{{ route('category.destroy', $category) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
-                            </form>
+                            @if ($category->trashed())
+                                <!-- Nút khôi phục -->
+                                <form action="{{ route('category.restore', $category->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-sm btn-success"
+                                        onclick="return confirm('Bạn có chắc chắn muốn khôi phục danh mục này?')">
+                                        Khôi phục
+                                    </button>
+                                </form>
+                            @else
+                                <!-- Nút sửa -->
+                                <a href="{{ route('category.edit', $category) }}" class="btn btn-sm btn-warning">Sửa</a>
+
+                                <!-- Nút xóa -->
+                                <form action="{{ route('category.destroy', $category->id) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')">
+                                        Xóa
+                                    </button>
+                                </form>
+                            @endif
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>

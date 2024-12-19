@@ -59,6 +59,36 @@ class AuthenController extends Controller
         return redirect()->route('index')->with('message1', 'Cập nhật tài khoản thành công');
         // return redirect()->route('index')->with('message1', 'Sản phẩm đã được thêm vào giỏ hàng');
     }
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|string|min:8',
+            'new_password' => 'required|string|min:8|confirmed',
+        ], [
+            'current_password.required' => 'Mật khẩu hiện tại là bắt buộc.',
+            'current_password.min' => 'Mật khẩu hiện tại phải có ít nhất 8 ký tự.',
+            'new_password.required' => 'Mật khẩu mới là bắt buộc.',
+            'new_password.min' => 'Mật khẩu mới phải có ít nhất 8 ký tự.',
+            'new_password.confirmed' => 'Mật khẩu mới không khớp.',
+        ]);
+
+        $user = auth()->user();
+
+        // Kiểm tra mật khẩu hiện tại
+        if (!password_verify($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không chính xác.']);
+        }
+
+        // Cập nhật mật khẩu mới
+        $user->password = bcrypt($request->new_password);
+        $user->save();
+
+        return back()->with('message1', 'Đổi mật khẩu thành công.');
+    }
+public function showChangePasswordForm()
+{
+    return view('clients.change_password'); // Đường dẫn đến view riêng cho client
+}
     public function login(){
         return view('clients.login');
     }

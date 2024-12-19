@@ -140,6 +140,11 @@ Route::get('/test', function () {
     return view('clients.review');
 });
 
+// // Route cho client
+// // Route cho client
+// Route::middleware('auth')->group(function () {
+
+// });
 
 Route::get('login',[AuthenController::class,'login'])->name('login');
 Route::post('login',[AuthenController::class,'postLogin'])->name('postLogin');
@@ -149,6 +154,8 @@ Route::post('register',[AuthenController::class,'postRegister'])->name('postRegi
 Route::middleware(['auth'])->group(function () {
     Route::get('account/edit', [AuthenController::class, 'editUser'])->name('account.edit');
     Route::put('account/update', [AuthenController::class, 'updateUser'])->name('account.update');
+    Route::get('client/change-password', [AuthenController::class, 'showChangePasswordForm'])->name('client.change.password.form');
+    Route::post('client/change-password', [AuthenController::class, 'changePassword'])->name('client.change.password');
 });
 
 Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
@@ -160,7 +167,7 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     })->name('dashboard');
     Route::get('/notifications', [AdminController::class, 'notifications'])->name('notifications.index');
     Route::get('/notifications/read/{id}', [AdminController::class, 'markAsRead'])->name('notifications.read');
-
+    Route::get('/search-user', [UserController::class, 'searchUser'])->name('search.user');
     // CRUD user
     Route::get('/listUser', [UserController::class, 'listUser'])->name('admin1.users.listuser');
     Route::get('/createUser', [UserController::class, 'addUser'])->name('admin1.users.adduser'); // Đặt tên route
@@ -170,7 +177,10 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('admin1.users.destroy');
     Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
 
-
+    Route::get('user/change-password', [UserController::class, 'showChangePasswordForm'])->name('user.change.password.form');
+    Route::post('user/change-password', [UserController::class, 'changePassword'])->name('user.change.password');
+    Route::get('/admin/users/edit/{id}', [UserController::class, 'editUser'])->name('admin.users.edit');
+Route::post('/admin/users/update/{id}', [UserController::class, 'updateUser'])->name('admin.users.update');
   // CRUD voucher
   Route::get('/vouchers', [VoucherController::class, 'index'])->name('admin1.vouchers.index');
   Route::get('/vouchers/create', [VoucherController::class, 'create'])->name('admin1.vouchers.create');
@@ -214,6 +224,8 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
 });
 
 Route::resource('admin1/category', CategoryController::class);
+Route::patch('admin1/category/{id}/restore', [CategoryController::class, 'restore'])->name('category.restore');
+
 Route::resource('admin1/category_post', CategoryPostController::class);
 Route::resource('admin1/post', PostController::class);
 
