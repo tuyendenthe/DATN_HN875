@@ -55,9 +55,12 @@
                     <select name="role" class="form-control">
                         @if(auth()->user()->role == 1) <!-- Chỉ Admin tổng mới có thể chọn tất cả -->
                             <option value="1">Admin</option>
+                            <option value="3">Nhân Viên</option>
+
                         @endif
-                        <option value="2" selected>User</option>
-                        <option value="3">Admin phụ</option>
+
+                        <option value="2" selected>Người dùng</option>
+
                     </select>
                     @error('role')
                         <span class="text-danger">{{ $message }}</span>

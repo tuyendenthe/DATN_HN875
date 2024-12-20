@@ -177,8 +177,8 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('admin1.users.destroy');
     Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
 
-    Route::get('user/change-password', [UserController::class, 'showChangePasswordForm'])->name('user.change.password.form');
-    Route::post('user/change-password', [UserController::class, 'changePassword'])->name('user.change.password');
+    Route::get('admin/change-password', [UserController::class, 'showChangePasswordForm'])->name('admin.change.password.form');
+    Route::post('admin/change-password', [UserController::class, 'changePassword'])->name('admin.change.password');
     Route::get('/admin/users/edit/{id}', [UserController::class, 'editUser'])->name('admin.users.edit');
 Route::post('/admin/users/update/{id}', [UserController::class, 'updateUser'])->name('admin.users.update');
   // CRUD voucher

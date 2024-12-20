@@ -252,7 +252,7 @@
                 <a class="dropdown-item" href="{{ route('admin.users.edit', Auth::user()->id) }}">
                     <i class="fas fa-lock m-r-5 m-l-5"></i> Cập nhật tài khoản
                 </a>
-                <a class="dropdown-item" href="{{ route('client.change.password.form') }}">
+                <a class="dropdown-item" href="{{ route('admin.change.password.form') }}">
                     <i class="fas fa-lock m-r-5 m-l-5"></i> Đổi Mật Khẩu
                 </a>
                 <a class="dropdown-item" href="{{ route('logout') }}">
