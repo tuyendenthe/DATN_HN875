@@ -103,7 +103,7 @@ class ProductController extends Controller
 
         Product::create($data);
         return redirect()->route('products.listProduct')->with('message1', 'Thêm thành công');
-
+        
 
         // return redirect()->route('products.listProduct');
     }
@@ -186,7 +186,8 @@ class ProductController extends Controller
                ]);
             }
         }
-        return redirect()->route('products.listProduct');
+        // return redirect()->route('products.listProduct');
+        return redirect()->route('products.listProduct')->with('message1', 'Cập nhật thành công.');
     }
 
 
@@ -194,10 +195,14 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
+
         $fls = FlashSale::where('product_id','=',$id)->first()->get();
         if(!empty($fls)){
         DB::table('flash_sales')->where('product_id', $id)->delete();
     }
-        return redirect()->route('products.listProduct');
+        
+        // return redirect()->route('products.listProduct');
+        return redirect()->route('products.listProduct')->with('message1', 'Xóa thành công.');
+
     }
 }
