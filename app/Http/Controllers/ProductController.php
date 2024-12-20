@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Facades;
 use App\Http\Requests\ProductRequest;
 use App\Models\Categories;
 use App\Models\Category;
+use App\Models\FlashSale;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -193,7 +195,14 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
+
+        $fls = FlashSale::where('product_id','=',$id)->first()->get();
+        if(!empty($fls)){
+        DB::table('flash_sales')->where('product_id', $id)->delete();
+    }
+        
         // return redirect()->route('products.listProduct');
         return redirect()->route('products.listProduct')->with('message1', 'Xóa thành công.');
+
     }
 }

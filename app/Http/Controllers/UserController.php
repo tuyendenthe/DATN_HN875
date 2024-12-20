@@ -37,6 +37,7 @@ public function detail(string $id)
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
             'role' => 'required|in:2', // Default to User role
         ];
 
@@ -44,6 +45,7 @@ public function detail(string $id)
         if (auth()->user()->role == 1) {
             $rules['role'] = 'required|in:1,2,3'; // Admin can create Admins, Users, and Employees
         }
+
 
         // Define custom validation messages
         $messages = [
@@ -92,14 +94,17 @@ public function detail(string $id)
             $user->update(['image' => $data_images]);
         }
 
+
         // If the new user is an Admin (role = 1), create an entry in the Admin table
-        if ($request->role == 1) {
+        if ($request->role == 1 || $request->role == 3) {
+
             Admin::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password), // Save password securely
                 'status' => 1,
                 'username' => $request->name,
+
             ]);
         }
 

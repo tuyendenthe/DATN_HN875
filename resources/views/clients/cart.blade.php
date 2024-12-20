@@ -30,7 +30,7 @@
             </div>
         @endif
         <!-- preloader area start -->
-        <div id="loading">
+        {{-- <div id="loading">
             <div id="loading-center">
                 <div id="loading-center-absolute">
                     <div class="object" id="first_object"></div>
@@ -38,7 +38,7 @@
                     <div class="object" id="third_object"></div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- preloader area end -->
 
         <!-- breadcrumb area start -->
@@ -154,7 +154,7 @@
                                 <div class="coupon-all">
                                     <div class="coupon">
                                         <form id="applyCouponForm" action="{{ route('cart.applyCoupon') }}" method="POST">
-                                            
+
                                             @csrf
                                             <input id="coupon_code" class="input-text" name="coupon_code" value=""
                                                 placeholder="Nhập Mã Giảm Giá" type="text">
@@ -289,7 +289,7 @@
 
                     const couponCode = $('#coupon_code').val();
                     const token = $('input[name="_token"]').val();
-                  
+
                     // Lấy giá trị từ thẻ <span> và chuyển thành số
                     let totalSelected = $('#totalSelected').text(); // "0 VNĐ"
                     totalSelected = parseInt(totalSelected.replace(/\D/g,

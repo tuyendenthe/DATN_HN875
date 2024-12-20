@@ -20,7 +20,7 @@ use App\Models\Product;
 class CheckoutController extends Controller
 {
     public function index(Request $request)
-    {   
+    {
         // dd($request->all());
         $check = $request->totalSelected;
         $cart = session()->get('cart', []);
@@ -28,11 +28,13 @@ class CheckoutController extends Controller
         // Lấy các sản phẩm đã chọn từ form (dữ liệu JSON được gửi qua trường 'selectedProducts')
         $selectedProducts = json_decode($request->input('selectedProducts'), true);
         $totalProduct = 0;
+
         $voucher = Voucher::where('id', $voucherId)->first();
-        // dd($voucher->condition);   
+        if (!empty($voucher)) {
         if($check <= $voucher->condition ){
             return back()->with('message', 'Đơn hàng không đủ điều kiện áp dụng mã giảm giá.');
         }
+    }
         foreach ($selectedProducts as $value) {
             $product_id = $value['product_id']; // Lấy product_id từ mảng
             $check = Product::findOrFail($product_id);
@@ -282,7 +284,7 @@ class CheckoutController extends Controller
     $query = DB::table('bills')
         ->join('statuses', 'bills.status', '=', 'statuses.id')
         ->where('statuses.id', '<=', 3)
-        ->select('bills.*', 'statuses.status_name');
+        ->select('bills.*', 'statuses.status_name')->latest();
 
     // Check for search input
     if ($request->has('order_id') && !empty($request->order_id)) {
@@ -480,6 +482,10 @@ class CheckoutController extends Controller
     public function cancel(String $bill_code){
 
         // $data = Bill::where('bill_code','=',$bill_code)->get();
+        $check =DB::table('bills')->where('bill_code','=',$bill_code)->first();
+        if($check->status >=2){
+            return back()->with('message', 'Không Thể Hủy Do Đơn Hàng Đã Cập Nhật Trạng Thái Trước Đó');
+        }
         DB::table('bills')->where('bill_code','=',$bill_code)->update(['status'=> 5]);
         $data = Bill_detail::where('bill_code','=',$bill_code)->get();
         // dd($data);

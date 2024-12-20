@@ -198,16 +198,7 @@
                                                 <option value="GHN" name="checkout">Giao Hàng Nhanh</option>
                                                 <option value="HT" name="checkout">Hỏa Tốc</option>
                                             </select>
-{{--                                            <ul>--}}
-{{--                                                <li>--}}
-{{--                                                    <input id="amount" type="radio" value="GHN" name="checkout"/>--}}
-{{--                                                    <label for="amount">Giao Hàng Nhanh <span class="amount">25,000 VNĐ</span></label>--}}
-{{--                                                </li>--}}
-{{--                                                <li>--}}
-{{--                                                    <input id="shipping" type="radio" value="HT" name="checkout"/>--}}
-{{--                                                    <label for="shipping"> Hỏa Tốc <span class="amount">25,000 VNĐ</span></label>--}}
-{{--                                                </li>--}}
-{{--                                            </ul>--}}
+
                                         </td>
                                     </tr>
                                     <tr class="order-total">
@@ -231,7 +222,7 @@
                                 </label>
                                 <br>
                                 <label>
-                                    <input type="radio" name="payment_method" value="online">
+                                    <input type="radio" name="payment_method" id="online" value="online">
                                     Thanh toán online
                                 </label>
                                 <img id="qr-code" src="https://api.vietqr.io/image/mbbank-0362978755-fTpTJka.jpg?accountName=TRAN VAN TUYEN&amount={{ $total + 25000 - $discount }}&addInfo={{ session('noidung') }}" style="display: none; margin-left: auto; margin-right: auto; width: 500px; height: 500px;">
@@ -251,8 +242,21 @@
 
 @endsection
 <script>
-    // Lấy tất cả radio buttons với name="payment_method"
+    document.addEventListener("DOMContentLoaded", function () {
+        const onlineRadio = document.getElementById("online");
+        const submitButton = document.getElementById("submit-button");
 
+        // Bắt sự kiện khi người dùng thay đổi lựa chọn radio
+        document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+            radio.addEventListener("change", function () {
+                if (onlineRadio.checked) {
+                    submitButton.style.display = "none"; // Ẩn nút
+                } else {
+                    submitButton.style.display = "block"; // Hiện nút
+                }
+            });
+        });
+    });
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
