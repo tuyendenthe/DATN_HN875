@@ -35,7 +35,7 @@ public function detail(string $id)
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'role' => 'required|in:2,3', // Chỉ cho phép User và Admin phụ
+            'role' => 'required|in:2,3',
         ]);
 
         // Kiểm tra xem email đã tồn tại chưa
@@ -59,15 +59,14 @@ public function detail(string $id)
             $user->update(['image' => $data_images]);
         }
 
-        // Nếu vai trò là Admin phụ (role = 3)
-        if ($request->role == 3) {
+        if ($request->role == 3 ) {
             Admin::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'status' => 1,
                 'username' => $request->name,
-                // Thêm các thuộc tính cần thiết cho Admin phụ nếu có
+
             ]);
         }
 

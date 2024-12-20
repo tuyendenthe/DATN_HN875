@@ -241,8 +241,8 @@
                                                                             <i class="fal fa-eye"></i>
                                                                         </a>
                                                                     </div>
-                                                                    
-                                                                        
+
+
                                                                     @if($item->isOnFlashSale())
                                                                     <span class="sale">sale</span>
                                                                     @endif
@@ -324,11 +324,11 @@
         document.getElementById('price-range-select').addEventListener('change', function() {
             const selectedValue = this.value;
             const products = document.querySelectorAll('.product');
-    
+
             products.forEach(product => {
                 const price = parseInt(product.getAttribute('data-price'), 10);
                 let shouldDisplay = false;
-    
+
                 switch (selectedValue) {
                     case 'all':
                         shouldDisplay = true;
@@ -343,7 +343,7 @@
                         shouldDisplay = price > 15000000;
                         break;
                 }
-    
+
                 product.style.display = shouldDisplay ? 'block' : 'none';
             });
         });

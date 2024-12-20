@@ -428,7 +428,7 @@
                         <li><i class="fal fa-envelope-open"></i><a
                                 href="https://www.devsnews.com/cdn-cgi/l/email-protection#c2a3a6afabac82a5afa3abaeeca1adaf"><span
                                     class="__cf_email__"
-                                    data-cfemail="8aebeee7e3e4caede7ebe3e6a4e9e5e7">[email&#160;protected]</span></a>
+                                    data-cfemail="8aebeee7e3e4caede7ebe3e6a4e9e5e7">[hvt910tranvantuyen@gmail.com]</span></a>
                         </li>
                     </ul>
                     <div class="sidebar__menu--social">
@@ -481,7 +481,7 @@
                                     @if(Auth::check())
                                         @foreach ($vouchers as $vou)
                                             <span style="font-size: 13px; width: 550px;">
-                                                Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{$vou->price_sale}} cho đơn hàng từ {{$vou->condition}}
+                                                Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{number_format($vou->price_sale)}}VNĐ cho đơn hàng từ {{number_format($vou->condition)}} VNĐ
                                             </span>
                                             <br>
                                         @endforeach
@@ -866,7 +866,7 @@
                                                             <div class="price-box">
                                                                 <span class="price">
                                                                     <span
-                                                                        class="active">{{ number_format($flashSale->price_sale) }}đ</span>
+                                                                        class="active">{{ number_format($flashSale->price_sale) }}VNĐ</span>
                                                                 </span>
                                                                 {{-- <span
                                                                             class="active  text-muted">{{ number_format($flashSale->product->price) }}đ</span> --}}
