@@ -126,7 +126,7 @@ class ProductController extends Controller
         return $file->storeAs($folder, $fileName);
     }
 
-    public function updatePutProduct(ProductRequest $req, $id)
+    public function updatePutProduct(Request $req, $id)
     {
 
         $product = Product::find($id);

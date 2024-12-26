@@ -32,7 +32,7 @@
     <style>
         .swiper-container {
             width: 100%;
-            height: 600px;
+            height: 850px;
             /* Thay đổi chiều cao theo nhu cầu */
         }
 
@@ -480,7 +480,7 @@
                                 <div class="epix-c-list d-flex flex-column">
                                     @if(Auth::check())
                                         @foreach ($vouchers as $vou)
-                                            <span style="font-size: 13px; width: 550px;">
+                                            <span style="font-size: 16px; width: 550px;">
                                                 Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{$vou->price_sale}} cho đơn hàng từ {{$vou->condition}}
                                             </span>
                                             <br>
@@ -497,7 +497,7 @@
                             <div class="swiper-wrapper">
                                 @foreach ($banner_covers as $bannerss)
                                     <div class="swiper-slide"
-                                        style="background-image: url('{{ Storage::url($bannerss->image) }}'); height: 340px;">
+                                        style="background-image: url('{{ Storage::url($bannerss->image) }}'); height: 500px;">
                                     </div>
                                 @endforeach
                             </div>
