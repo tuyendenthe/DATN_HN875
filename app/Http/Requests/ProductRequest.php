@@ -31,9 +31,9 @@ class ProductRequest extends FormRequest
         'content_short' => 'required|string',
         'content' => 'required|string',
         'chip' => 'required|string',
-        'ram' => 'required|string',
+        'ram_id' => 'required',
         'color' => 'required|string',
-        'memory' => 'required|string',
+        'memory_id' => 'required',
         'screen' => 'required|string',
         'resolution' => 'required|string',
     ];

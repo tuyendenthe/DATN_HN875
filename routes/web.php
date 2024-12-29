@@ -8,6 +8,10 @@ use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\MemoryController;
+use App\Http\Controllers\RamController;
+use App\Models\Memory;
+use App\Models\Ram;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -193,6 +197,7 @@ Route::post('/admin/users/update/{id}', [UserController::class, 'updateUser'])->
     // })->name('chart');
     Route::get('/chart', [ChartController::class, 'index'])->name('chart');
     Route::get('/product_statistics', [ChartController::class, 'product_statistics'])->name('product_statistics');
+//    Route::resource('admin1/memories', MemoryC::class);
 
 
 
@@ -222,6 +227,8 @@ Route::post('/admin/users/update/{id}', [UserController::class, 'updateUser'])->
         return view('admins.form-wizard');
     })->name('form-wizard');
 });
+Route::resource('admin1/rams', RamController::class);
+Route::resource('admin1/memories', MemoryController::class);
 
 Route::resource('admin1/category', CategoryController::class);
 Route::patch('admin1/category/{id}/restore', [CategoryController::class, 'restore'])->name('category.restore');
