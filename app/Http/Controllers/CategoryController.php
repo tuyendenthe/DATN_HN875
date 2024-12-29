@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -88,6 +89,8 @@ class CategoryController extends Controller
     // }
     public function destroy(Category $category)
     {
+        Product::where('category_id', $category->id)->update(['category_id' => 1]);
+
         // Xóa mềm tất cả sản phẩm thuộc danh mục
         $category->products()->delete();
 

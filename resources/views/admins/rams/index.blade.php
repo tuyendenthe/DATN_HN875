@@ -3,10 +3,10 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Danh mục</h2>
-        <a href="{{ route('category.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
+        <a href="{{ route('rams.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
     </div>
 
-    @if ($category->count())
+    @if ($rams->count())
         {{-- thêm thành công --}}
         @if (session('success'))
             <div class="alert alert-success">
@@ -43,34 +43,23 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($category as $category)
+                @foreach ($rams as $ram)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ $ram->id }}</td>
+                        <td>{{ $ram->name }}</td>
                         <td>
-                            @if ($category->trashed())
-                                <!-- Nút khôi phục -->
-                                <form action="{{ route('category.restore', $category->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="btn btn-sm btn-success"
-                                        onclick="return confirm('Bạn có chắc chắn muốn khôi phục danh mục này?')">
-                                        Khôi phục
-                                    </button>
-                                </form>
-                            @else
-                                @if ($category->id === 1)
-                                    <!-- Nút sửa (disabled) -->
-                                    <button class="btn btn-sm btn-warning" disabled>Sửa</button>
+                            @if ($ram->id === 1)
+                                <!-- Nút sửa (disabled) -->
+                                <button class="btn btn-sm btn-warning" disabled>Sửa</button>
 
-                                    <!-- Nút xóa (disabled) -->
-                                    <button class="btn btn-sm btn-danger" disabled>Xóa</button>
-                                @else
+                                <!-- Nút xóa (disabled) -->
+                                <button class="btn btn-sm btn-danger" disabled>Xóa</button>
+                            @else
                                 <!-- Nút sửa -->
-                                <a href="{{ route('category.edit', $category) }}" class="btn btn-sm btn-warning">Sửa</a>
+                                <a href="{{ route('rams.edit', $ram) }}" class="btn btn-sm btn-warning">Sửa</a>
 
                                 <!-- Nút xóa -->
-                                <form action="{{ route('category.destroy', $category->id) }}" method="POST"
+                                <form action="{{ route('rams.destroy', $ram->id) }}" method="POST"
                                     class="d-inline">
                                     @csrf
                                     @method('DELETE')
@@ -79,7 +68,6 @@
                                         Xóa
                                     </button>
                                 </form>
-                                @endif
                             @endif
                         </td>
 
