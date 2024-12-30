@@ -8,16 +8,16 @@
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('chart')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê doanh thu</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('product_statistics')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê số lượng - giá tiền</span></a></li>
                 <li class="sidebar-item">
-                    <form method="GET" action="http://localhost:1111/admin/check">
+                    <form method="GET" action="{{ route('admin1.check123') }}">
                         @csrf
                         <input type="hidden" name="email" value="{{ auth()->user()->email }}">
                         <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
                         <button modal="kmacb-form" type="submit" title="Перезвонить Вам" style="border:none !important; background:none !important;">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
-                                <i class="mdi mdi-chart-bar"></i>
-                                <span class="hide-menu">Chăm sóc khách hàng</span></a>
+                                <i class="mdi mdi-chart-bar"></i> 
+                                <span class="hide-menu">Chăm sóc khách hàng</span>
+                            </a>
                         </button>
-
                     </form>
                 </li>
 

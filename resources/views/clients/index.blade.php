@@ -1216,21 +1216,21 @@
         </div>
     </main>
     @if (auth()->user())
-        <div id="kmacb">
-            <form method="GET" action="http://localhost:1111/user/check">
-                @csrf
-                <input type="hidden" name="email" value="{{ auth()->user()->email }}">
-                <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
-                <button modal="kmacb-form" type="submit" title="Перезвонить Вам"
-                    style="border:none !important; background:none !important;">
-                    <div class="kmacb-circle"></div>
-                    <div class="kmacb-circle-fill"></div>
-                    <div class="kmacb-img-circle"></div>
-                </button>
+    <div id="kmacb">
+        <form method="GET" action="./user/check">
+            @csrf
+            <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+            <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
+            <button modal="kmacb-form" type="submit" title="Перезвонить Вам"
+                style="border:none !important; background:none !important;">
+                <div class="kmacb-circle"></div>
+                <div class="kmacb-circle-fill"></div>
+                <div class="kmacb-img-circle"></div>
+            </button>
 
-            </form>
-        </div>
-    @endif
+        </form>
+    </div>
+@endif
 
     <!-- footer area start -->
     <footer class="footer-area footer-1 bg-black  pt-85">

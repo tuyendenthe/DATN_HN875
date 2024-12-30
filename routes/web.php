@@ -22,6 +22,10 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserNewController;
+use App\Http\Controllers\AdminsController;
+use App\Http\Controllers\ChatsController;
+
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
@@ -358,3 +362,39 @@ Route::post('/checkPay', [CheckoutController::class, 'checkPay'])->name(name: 'c
 Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
 
 Route::get('/my-orders', [CheckoutController::class, 'myOrders'])->name('my.orders')->middleware('auth');
+
+
+Route::post('/user/save', [UserNewController::class, 'save'])->name('user.save');
+Route::get('/user/check', [UserNewController::class, 'check'])->name('user.check');
+Route::get('/user/logout', [UserNewController::class, 'logout'])->name('user.logout');
+Route::get('/user/profile', [UserNewController::class, 'profile'])->name('user.profile');
+Route::get('/user/login', [UserNewController::class, 'login'])->name('user.login');
+Route::get('/user/profile', [UserNewController::class, 'profile'])->name('user.profile');
+Route::get('/user/register', [UserNewController::class, 'register'])->name('user.register');
+Route::get('/user/profileview', [UserNewController::class, 'profile'])->name('user.profileview');
+Route::get('/user/profileedit', [UserNewController::class, 'edit'])->name('user.profileedit');
+Route::get('/user/chats', [UserNewController::class, 'chats'])->name('user.chats');
+Route::put('/user/updateProfile', [UserNewController::class, 'updateProfile'])->name('user.updateProfile');
+Route::get('/user/dashboard', [UserNewController::class, 'dashboard'])->name('user.dashboard');
+
+
+
+
+Route::post('/admin/save', [AdminsController::class, 'save'])->name('admin.save');
+Route::get('/admin1/check123', [AdminsController::class, 'check'])->name('admin1.check123');
+Route::get('/admin/logout', [AdminsController::class, 'logout'])->name('admin.logout');
+Route::get('/admin/profileview', [AdminsController::class, 'profile'])->name('admin.profileview');
+Route::get('/admin/profileedit', [AdminsController::class, 'edit'])->name('admin.profileedit');
+Route::get('/admin/login', [AdminsController::class, 'login'])->name('admin.login');
+Route::get('/admin/profile', [AdminsController::class, 'profile'])->name('admin.profile');
+Route::get('/admin/register', [AdminsController::class, 'register'])->name('admin.register');
+Route::get('/admin1/chats_123', [AdminsController::class, 'chats'])->name('admin.chats_123');
+Route::get('/admin1/dashboard_123', [AdminsController::class, 'dashboard'])->name('admin.dashboard_123');
+Route::put('/admin/updateProfile', [AdminsController::class, 'updateProfile'])->name('admin.updateProfile');
+
+
+
+Route::get('/admin1/fetch-messages', [ChatsController::class, 'fetchMessages'])->name('admin.fetchMessages_123');
+Route::post('/admin1/send-message', [ChatsController::class, 'sendMessage'])->name('admin.sendMessage_123');
+Route::get('/fetch-messages', [ChatsController::class, 'fetchMessagesFromUserToAdmin'])->name('fetch.messagesFromSellerToAdmin');
+Route::post('/send-message', [ChatsController::class, 'sendMessageFromUserToAdmin'])->name('send.Messageofsellertoadmin');
