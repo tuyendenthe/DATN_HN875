@@ -31,9 +31,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Image</th>
-                    <th>Token</th>
-                    <th>Actions</th>
+                    <th>Ảnh</th>
+                    <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,7 +41,6 @@
                         <td>{{ $banner->id }}</td>
                         {{-- <td><img src="{{ asset($banner->image) }}" alt="" width="150px"></td> --}}
                         <td><img src="{{ Storage::url($banner->image) }}" alt="" width="150px"></td>
-                        <td>{{ $banner->remember_token }}</td>
                         <td>
                             <a href="{{ route('banner.edit', $banner) }}" class="btn btn-sm btn-warning">Sửa</a>
                             <form action="{{ route('banner.destroy', $banner) }}" method="POST" class="d-inline">

@@ -39,6 +39,8 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Tên Sản Phẩm</th>
+                                        <th>Giá niêm yết</th>
+                                        <th>Giá sale</th>
                                         <th>Kết Thúc</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -49,6 +51,8 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $flashSale->product->name }}</td>
+                                                <td>{{ number_format($flashSale->product->price, 0, ',', '.') }} đ</td>
+                                                <td>{{ number_format($flashSale->price_sale, 0, ',', '.') }} đ</td>
                                                 <td>{{ $flashSale->time_end }}</td>
                                                 <td>
                                                     <a href="{{ route('flash_sale.show', $flashSale->id) }}" class="btn btn-info">Sửa</a>

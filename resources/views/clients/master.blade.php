@@ -7,12 +7,13 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Epix - Electronics eCommerce HTML Template</title>
+    <title>Laptop TechZone</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="manifest" href="https://devsnews.com/template/epixx-prev/epixx/site.webmanifest/" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('laptop/assets/css/img/favicon.ico')}}" />
+    {{-- <link rel="shortcut icon" type="image/x-icon" href="{{asset('laptop/assets/css/img/favicon.ico')}}" /> --}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/techzone.jpg')}}" />
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->

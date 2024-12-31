@@ -23,7 +23,6 @@ class BannerRequest extends FormRequest
     {
         return [
             'image' => 'required',
-            'remember_token' => 'required',
         ];
     }
 

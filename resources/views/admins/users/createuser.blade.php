@@ -28,13 +28,7 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-12">
-                    Ảnh:
-                    <input type="file" name="image" class="form-control">
-                    @error('image')
-                        <span class="" style="color: red">{{ $message }}</span>
-                    @enderror
-                </div>
+
                 <div class="col-12">
                     Email:
                     <input type="text" name="email" class="form-control" value="{{ old('email') }}">
@@ -42,6 +36,7 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+
                 <div class="col-12">
                     Mật khẩu:
                     <input type="password" name="password" class="form-control">
@@ -49,10 +44,29 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+
                 <div class="col-12">
                     Xác nhận mật khẩu:
                     <input type="password" name="password_confirmation" class="form-control">
                 </div>
+
+                <div class="col-12">
+                    Quyền tài khoản:
+                    <select name="role" class="form-control">
+                        @if(auth()->user()->role == 1) <!-- Chỉ Admin tổng mới có thể chọn tất cả -->
+                            <option value="1">Admin</option>
+                            <option value="3">Nhân Viên</option>
+
+                        @endif
+
+                        <option value="2" selected>Người dùng</option>
+
+                    </select>
+                    @error('role')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
                 <div class="col-12">
                     Địa chỉ:
                     <input type="text" name="address" class="form-control" value="{{ old('address') }}">
@@ -60,6 +74,7 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+
                 <button type="submit" class="btn btn-primary">Thêm người dùng</button>
             </div>
         </form>

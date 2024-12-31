@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('bill_code');
             $table->integer( 'quantity');
             $table->integer( 'subtotal');
+            $table->integer( 'price');
             $table->timestamps();
         });
     }

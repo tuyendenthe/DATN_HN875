@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+
     public function index()
     {
         $posts = Post::with(['category', 'user'])->get();
-        return view('admins.post.index', compact('posts'));
+        $categories = Category_post::all();
+        return view('admins.post.index', compact('posts', 'categories'));
     }
 
 
@@ -25,14 +27,15 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+//        dd($request->all());
+
         $request->validate([
             'title' => 'required|string|max:255',
             'content_short' => 'required|string|max:500',
             'content' => 'required|string',
             'category_post_id' => 'required|exists:category_posts,id',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
-
         // Chỉ lấy các trường cần thiết
         $data = $request->only(['title', 'content_short', 'content', 'category_post_id']);
         $data['user_id'] = Auth::id();
@@ -43,7 +46,7 @@ class PostController extends Controller
 
         Post::create($data);
 
-        return redirect()->route('post.index')->with('success', 'Post created successfully.');
+        return redirect()->route('post.index')->with('message1', 'Thêm bài viết thành công.');
     }
 
     public function edit(Post $post)
@@ -78,7 +81,7 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return redirect()->route('post.index')->with('update_success', 'Post updated successfully.');
+        return redirect()->route('post.index')->with('message1', 'Cập nhật bài viết thành công.');
     }
 
     public function destroy(Post $post)
@@ -89,7 +92,7 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect()->route('post.index')->with('delete_success', 'Post deleted successfully.');
+        return redirect()->route('post.index')->with('message1', 'Xóa bài viết thành công.');
     }
 
 
@@ -105,5 +108,5 @@ class PostController extends Controller
     {
         return view('clients.single_blog', compact('post'));
     }
-    
+
 }

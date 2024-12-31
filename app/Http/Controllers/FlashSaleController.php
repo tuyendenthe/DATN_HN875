@@ -45,7 +45,7 @@ class FlashSaleController extends Controller
 
         if (!$product) {
             return redirect()->route('flash_sale.index')
-                            ->with('error', 'Sản phẩm không tồn tại.');
+                            ->with('message1', 'Sản phẩm không tồn tại.');
         }
 
         // Tính toán giá gốc và giá sale
@@ -62,10 +62,11 @@ class FlashSaleController extends Controller
             'updated_at' => now(),
         ]);
 
-        $product->update(attributes: ['price' => $price_sale]);
+//        $product->update(attributes: ['price' => $price_sale]);
 
         return redirect()->route('flash_sale.index')
-                        ->with('success', 'Tạo sản phẩm Flash sale thành công');
+                        ->with('message1', 'Tạo sản phẩm Flash sale thành công');
+
     }
 
 
@@ -87,7 +88,7 @@ class FlashSaleController extends Controller
 
         if (!$product) {
             return redirect()->route('flash_sale.index')
-                            ->with('error', 'Sản phẩm không tồn tại.');
+                            ->with('message', 'Sản phẩm không tồn tại.');
         }
 
         // Tính toán lại giá gốc và giá sale
@@ -103,10 +104,10 @@ class FlashSaleController extends Controller
             'updated_at' => now(),
         ]);
 
-        $product->update(attributes: ['price' => $price_sale]);
+//        $product->update(attributes: ['price' => $price_sale]);
 
         return redirect()->route('flash_sale.index')
-                        ->with('success', 'Cập nhật Flash Sale sản phẩm thành công.');
+                        ->with('message1', 'Cập nhật Flash Sale sản phẩm thành công.');
     }
 
     // Xóa FlashSale theo ID
@@ -121,6 +122,6 @@ class FlashSaleController extends Controller
         $flashSale->delete();
 
         return redirect()->route('flash_sale.index')
-                         ->with('success', 'Flash sale deleted successfully.');
+                         ->with('message1', 'Xóa flash sale thành công.');
     }
 }

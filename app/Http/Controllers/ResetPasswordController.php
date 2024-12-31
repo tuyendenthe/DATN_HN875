@@ -38,7 +38,7 @@ public function reset(Request $request)
 
     return $resetStatus === Password::PASSWORD_RESET
         ? redirect()->route('login')->with([
-            'message' => 'Mật khẩu đã được khôi phục!'])
+            'message1' => 'Mật khẩu đã được khôi phục!'])
         : back()->withErrors(['email' => 'Đã xảy ra lỗi.']);
 }
 }

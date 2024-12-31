@@ -16,8 +16,11 @@ class Bill extends Model
         'email',
         'note',
         'checkout',
+        'address',
+        'user_id',
         'payment_method',
         'total',
+        // 'created_at',
 
         'status',
     ];
@@ -26,4 +29,7 @@ class Bill extends Model
     // {
     //     return $this->belongsTo(Status::class);
     // }
+    public function Bill_detail(){
+        return $this->hasMany(Bill_detail::class,'bill_id');
+    }
 }

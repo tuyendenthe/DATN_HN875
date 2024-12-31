@@ -1,3 +1,5 @@
+
+</style>
 <header class="topbar" data-navbarbg="skin5">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header" data-logobg="skin5">
@@ -6,19 +8,19 @@
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ route('index') }}">
                 <!-- Logo icon -->
                 <b class="logo-icon p-l-10">
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                    <img src="{{asset('admin/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo" />
-
+                    {{-- <img src="{{asset('admin/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo" /> --}}
+                    <img style="margin-top: 15px" width="46px" src="{{asset('admin/assets/images/techzone.jpg')}}"  alt="homepage" class="light-logo" />
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span class="logo-text">
                     <!-- dark Logo text -->
-                    <img src="{{asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="light-logo" />
+                    {{-- <img style="margin-top: 15px" src="{{asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="light-logo" /> --}}
 
                 </span>
                 <!-- Logo icon -->
@@ -50,7 +52,7 @@
                 <!-- ============================================================== -->
                 <!-- create new -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="d-none d-md-block">Create New <i class="fa fa-angle-down"></i></span>
                     <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
@@ -61,15 +63,15 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </li>
+                </li> --}}
                 <!-- ============================================================== -->
                 <!-- Search -->
                 <!-- ============================================================== -->
-                <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+                {{-- <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
                     <form class="app-search position-absolute">
                         <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
                     </form>
-                </li>
+                </li> --}}
             </ul>
             <!-- ============================================================== -->
             <!-- Right side toggle and nav items -->
@@ -78,23 +80,46 @@
                 <!-- ============================================================== -->
                 <!-- Comment -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
+                {{-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-bell font-24"></i>
+                        @if(session('new_order')) <!-- Kiểm tra nếu có đơn hàng mới -->
+                            <span class="badge badge-danger">New!</span> <!-- Hiển thị badge thông báo -->
+                        @endif
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @if(session('new_order'))
+                            <a class="dropdown-item" href="#">Có một đơn hàng mới!</a>
+                            <div class="dropdown-divider"></div>
+                        @endif
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </li>
+                </li> --}}
+                {{-- <li class="nav-item">
+                    <a class="nav-link {{ $notifications->count() > 0 ? 'has-notification' : '' }}" href="{{ route('notifications.index') }}">
+                        <i class="mdi mdi-bell font-24 icon-bell"></i> Thông Báo
+                    </a>
+                </li> --}}
+                <li class="nav-item">
+
+                    <a class="nav-link" href="{{ route('notifications.index') }}">
+
+                    <i class="mdi mdi-bell font-24"></i>
+
+                    </a>
+
+                    </li>
+
                 <!-- ============================================================== -->
                 <!-- End Comment -->
                 <!-- ============================================================== -->
                 <!-- ============================================================== -->
                 <!-- Messages -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
@@ -145,7 +170,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
                 <!-- ============================================================== -->
                 <!-- End Messages -->
                 <!-- ============================================================== -->
@@ -159,10 +184,29 @@
                             {{ session('message') }}
                         </div>
                     @endif
+                    @if (session('message1'))
+                    <div id="notification" class="notification1 alert alert-danger" role="alert">
+                        {{ session('message1') }}
+                    </div>
+                @endif
 
                     <!-- Other content here -->
                 </div>
 
+                <style>
+                    .notification1 {
+                        display: none;
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        z-index: 1000;
+                        padding: 15px;
+                        border-radius: 5px;
+                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                        background-color: #d4edda; /* Màu xanh nhạt */
+                        color: #155724; /* Màu chữ xanh đậm */
+                    }
+                </style>
                 <style>
                     .notification {
                         display: none;
@@ -200,20 +244,22 @@
                         }
                     });
                 </script>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('admin/assets/images/users/1.jpg')}}" alt="user" class="rounded-circle" width="31"></a>
-                    <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{route('logout')}}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                        <div class="dropdown-divider"></div>
-                        <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
-                    </div>
-                </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{{ Auth::user()->image ? Storage::url(Auth::user()->image) : asset('admin/assets/images/users/default.jpg') }}" alt="user" class="rounded-circle" width="31">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                <a class="dropdown-item" href="{{ route('admin.users.edit', Auth::user()->id) }}">
+                    <i class="fas fa-lock m-r-5 m-l-5"></i> Cập nhật tài khoản
+                </a>
+                <a class="dropdown-item" href="{{ route('admin.change.password.form') }}">
+                    <i class="fas fa-lock m-r-5 m-l-5"></i> Đổi Mật Khẩu
+                </a>
+                <a class="dropdown-item" href="{{ route('logout') }}">
+                    <i class="fas fa-sign-out-alt m-r-5 m-l-5"></i> Đăng Xuất
+                </a>
+            </div>
+        </li>
                 <!-- ============================================================== -->
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
@@ -221,3 +267,4 @@
         </div>
     </nav>
 </header>
+

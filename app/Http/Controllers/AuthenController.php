@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Slide;
+
+
+use App\Models\FlashSale;
+
 
 class AuthenController extends Controller
 {
@@ -27,6 +34,7 @@ class AuthenController extends Controller
         $req->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            'address' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'name.required' => 'Tên không được để trống.',
@@ -37,17 +45,50 @@ class AuthenController extends Controller
         $user = Auth::user();
         $user->name = $req->name;
         $user->email = $req->email;
-
+        $user->address = $req->address;
 
         if ($req->hasFile('image')) {
-            $path = $req->file('image')->store('images/users');
+
+            $path = $req->file('image')->store('images/users', 'public');
             $user->image = $path;
         }
 
+
         $user->save();
 
-        return redirect()->route('index')->with('message', 'Cập nhật tài khoản thành công');
+        return redirect()->route('index')->with('message1', 'Cập nhật tài khoản thành công');
+        // return redirect()->route('index')->with('message1', 'Sản phẩm đã được thêm vào giỏ hàng');
     }
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|string|min:8',
+            'new_password' => 'required|string|min:8|confirmed',
+        ], [
+            'current_password.required' => 'Mật khẩu hiện tại là bắt buộc.',
+            'current_password.min' => 'Mật khẩu hiện tại phải có ít nhất 8 ký tự.',
+            'new_password.required' => 'Mật khẩu mới là bắt buộc.',
+            'new_password.min' => 'Mật khẩu mới phải có ít nhất 8 ký tự.',
+            'new_password.confirmed' => 'Mật khẩu mới không khớp.',
+        ]);
+
+        $user = auth()->user();
+
+        // Kiểm tra mật khẩu hiện tại
+        if (!password_verify($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không chính xác.']);
+        }
+
+        // Cập nhật mật khẩu mới
+        $user->password = bcrypt($request->new_password);
+        $user->save();
+
+        return back()->with('message1', 'Đổi mật khẩu thành công.');
+    }
+public function showChangePasswordForm()
+{
+    return view('clients.change_password'); // Đường dẫn đến view riêng cho client
+}
     public function login(){
         return view('clients.login');
     }
@@ -64,30 +105,35 @@ class AuthenController extends Controller
             'password.required' => 'Password không được để trống',
         ]);
 
-
         $user = User::where('email', $req->email)->first();
 
         if ($user) {
-
             if ($user->status === '2') {
                 return redirect()->back()->with([
                     'message' => 'Tài khoản của bạn đã bị ngưng hoạt động. Vui lòng liên hệ quản trị viên.',
                 ]);
             }
 
-           
             if (Auth::attempt([
                 'email' => $req->email,
                 'password' => $req->password,
             ])) {
-                if (Auth::user()->role == '1') {
-                    return redirect()->route('dashboard')->with([
-                        'message' => 'Đăng nhập thành công'
-                    ]);
+                session(['user_password' => $req->password]);
+
+                // Xử lý cho cả Admin và Admin phụ
+                if (Auth::user()->role == '1' || Auth::user()->role == '3') {
+                    return view('admins.dashboard')->with(['message1' => 'Đăng nhập thành công']);
                 } else {
-                    return redirect()->route('index')->with([
-                        'message' => 'Đăng nhập thành công'
-                    ]);
+                    $products = (Product::with('category'))->latest()->take(8)->get();
+                    $categories = Category::all();
+                    $flashSales = FlashSale::with('product')
+                        ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
+                        ->orderBy('time_end', 'asc')
+                        ->limit(4)
+                        ->get();
+                    $banners = Slide::all();
+
+                    return redirect()->route('index')->with(['message1' => 'Đăng nhập thành công']);
                 }
             }
         }
@@ -99,8 +145,9 @@ class AuthenController extends Controller
 
     public function logout(){
         Auth::logout();
+        session()->flush();
         return redirect()->route('login')->with([
-            'message' => 'Đăng xuất thành công'
+            'message1' => 'Đăng xuất thành công'
         ]);
     }
 
@@ -142,14 +189,28 @@ class AuthenController extends Controller
         User::create($data);
 
         return redirect()->route('login')->with([
-            'message' => 'Đăng ký thành công',
+            'message1' => 'Đăng ký thành công',
         ]);
     }
     public function dashboard(){
         return view('admin.dashboard');
     }
 
+//     // public function notifications()
+//     // {
+//     //     $notifications = Notification::where('is_read', false)->get();
+//     //     return view('admins.notifications', compact('notifications'));
+//     // }
+// //     public function markAsRead($id)
+// // {
+// //     $notification = Notification::find($id);
+// //     if ($notification) {
+// //         $notification->is_read = true;
+// //         $notification->save();
+// //     }
 
+//     // return redirect()->back()->with('success', 'Thông báo đã được đánh dấu là đã đọc.');
+// }
     public function backupDB(){
         // Cấu hình cơ sở dữ liệu
         $databaseName = env('DB_DATABASE');

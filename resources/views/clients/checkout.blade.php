@@ -1,7 +1,46 @@
 @extends('clients.master')
+<style>
+    input.error {
+        border-color: red;
+    }
 
+    textarea.error {
+        border-color: red;
+    }
+
+    span.error-message {
+        font-size: 12px;
+        color: red;
+    }
+
+</style>
 @section('content')
-
+<style>
+    .notification1 {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: #d4edda; /* Màu xanh nhạt */
+        color: #155724; /* Màu chữ xanh đậm */
+    }
+</style>
+<!-- slide-bar start -->
+<div class="container">
+    @if (session('message'))
+        <div id="notification" class="notification alert alert-danger" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
+    @if (session('message1'))
+    <div id="notification" class="notification1 alert alert-danger" role="alert">
+        {{ session('message1') }}
+    </div>
+@endif
     <!-- prealoder area start -->
     <div id="loading">
         <div id="loading-center">
@@ -19,7 +58,7 @@
             <h4 class="epix-breadcrumb-title">Thanh Toán</h4>
             <div class="epix-breadcrumb">
                 <ul>
-                    <li><a href="/">TGiỏ hàng</a></li>
+                    <li><a href="/">Giỏ hàng</a></li>
                     <li><span>Thanh Toán</span></li>
                 </ul>
             </div>
@@ -37,49 +76,13 @@
                         {{-- <h3>Returning customer? <span id="showlogin">Click here to login</span></h3> --}}
                         <div id="checkout-login" class="coupon-content">
                             <div class="coupon-info">
-                                {{-- <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est
-                                    sit amet ipsum luctus.</p> --}}
-                                {{-- <form action="#">
-                                    <p class="form-row-first">
-                                        <label>Username or email <span class="required">*</span></label>
-                                        <input type="text" />
-                                    </p>
-                                    <p class="form-row-last">
-                                        <label>Password <span class="required">*</span></label>
-                                        <input type="text" />
-                                    </p>
-                                    <p class="form-row">
-                                        <button class="os-btn os-btn-black" type="submit">Login</button>
-                                        <label>
-                                            <input type="checkbox" />
-                                            Remember me
-                                        </label>
-                                    </p>
-                                    <p class="lost-password">
-                                        <a href="register.html">Lost your password?</a>
-                                    </p>
-                                </form>
-                            </div> --}}
-                        </div>
-                        <!-- ACCORDION END -->
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    {{-- <div class="coupon-accordion">
-                        <!-- ACCORDION START -->
-                        <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
-                        <div id="checkout_coupon" class="coupon-checkout-content">
-                            <div class="coupon-info">
-                                <form action="#">
-                                    <p class="checkout-coupon">
-                                        <input type="text" placeholder="Coupon Code" />
-                                        <button class="os-btn os-btn-black" type="submit">Apply Coupon</button>
-                                    </p>
-                                </form>
+
                             </div>
+                            <!-- ACCORDION END -->
                         </div>
-                        <!-- ACCORDION END -->
-                    </div> --}}
+                    </div>
+                    <div class="col-md-6">
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,7 +91,7 @@
     <!-- checkout-area start -->
     <section class="checkout-area pb-70">
         <div class="container">
-            <form action="{{ route('checkout.store')  }} " method="POST">
+            <form id="formCheckout" action="{{ route('checkout.store') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-lg-6">
@@ -96,340 +99,421 @@
                             <h3>Thông Tin Thanh Toán</h3>
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{-- <div class="country-select">
-                                        <label>Country <span class="required">*</span></label>
-                                        <select>
-                                            <option value="volvo">bangladesh</option>
-                                            <option value="saab">Algeria</option>
-                                            <option value="mercedes">Afghanistan</option>
-                                            <option value="audi">Ghana</option>
-                                            <option value="audi2">Albania</option>
-                                            <option value="audi3">Bahrain</option>
-                                            <option value="audi4">Colombia</option>
-                                            <option value="audi5">Dominican Republic</option>
-                                        </select>
-                                    </div> --}}
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Họ Và Tên <span class="required">*</span></label>
-                                        <input type="text" name="name" placeholder="Nhập tên" />
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label>Company Name</label>
-                                        <input type="text" placeholder="" />
-                                    </div>
-                                </div> --}}
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label>Địa Chỉ Nhận Hàng <span class="required">*</span></label>
-                                        <input type="text" name="add" placeholder="Nhập địa chỉ của bạn" />
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label>Town / City <span class="required">*</span></label>
-                                        <input type="text" placeholder="Town / City" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>State / County <span class="required">*</span></label>
-                                        <input type="text" placeholder="" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Postcode / Zip <span class="required">*</span></label>
-                                        <input type="text" placeholder="Postcode / Zip" />
-                                    </div>
-                                </div> --}}
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Email  <span class="required">*</span></label>
-                                        <input type="email" name="email" placeholder="Nhập Email" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Số Điện Thoại <span class="required">*</span></label>
-                                        <input type="text" name="phone" placeholder="Nhập Số Điện Thoại" />
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-12">
-                                    <div class="checkout-form-list create-acc">
-                                        <input id="cbox" type="checkbox" />
-                                        <label for="cbox">Create an account?</label>
-                                    </div>
-                                    <div id="cbox_info" class="checkout-form-list create-account">
-                                        <p>Create an account by entering the information below. If you are a returning
-                                            customer please login at the top of the page.</p>
-                                        <label>Account password <span class="required">*</span></label>
-                                        <input type="password" placeholder="password" />
-                                    </div>
-                                </div> --}}
-                            </div>
-                            {{-- <div class="different-address">
-                                <div class="ship-different-title">
-                                    <h3>
-                                        <label>Ship to a different address?</label>
-                                        <input id="ship-box" type="checkbox" />
-                                    </h3>
-                                </div>
-                                <div id="ship-box-info">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="country-select">
-                                                <label>Country <span class="required">*</span></label>
-                                                <select>
-                                                    <option value="volvo">bangladesh</option>
-                                                    <option value="saab">Algeria</option>
-                                                    <option value="mercedes">Afghanistan</option>
-                                                    <option value="audi">Ghana</option>
-                                                    <option value="audi2">Albania</option>
-                                                    <option value="audi3">Bahrain</option>
-                                                    <option value="audi4">Colombia</option>
-                                                    <option value="audi5">Dominican Republic</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label>
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Last Name <span class="required">*</span></label>
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Company Name</label>
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Address <span class="required">*</span></label>
-                                                <input type="text" placeholder="Street address" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Town / City <span class="required">*</span></label>
-                                                <input type="text" placeholder="Town / City" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>State / County <span class="required">*</span></label>
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Postcode / Zip <span class="required">*</span></label>
-                                                <input type="text" placeholder="Postcode / Zip" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Email Address <span class="required">*</span></label>
-                                                <input type="email" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Phone <span class="required">*</span></label>
-                                                <input type="text" placeholder="Postcode / Zip" />
-                                            </div>
-                                        </div>
+                                        <input type="text" id="name" name="name" placeholder="Nhập tên"/>
+                                        <span class="error-message" id="error-name"></span>
                                     </div>
                                 </div>
 
-                            </div> --}}
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Địa Chỉ Nhận Hàng <span class="required">*</span></label>
+                                        <input type="text" id="address" name="address" placeholder="Nhập địa chỉ của bạn"/>
+                                        <span class="error-message" id="error-address"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="checkout-form-list">
+                                        <label>Email <span class="required">*</span></label>
+                                        <input type="email" id="email" name="email" placeholder="Nhập Email"/>
+                                        <span class="error-message" id="error-email"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="checkout-form-list">
+                                        <label>Số Điện Thoại <span class="required">*</span></label>
+                                        <input type="text" id="phone" name="phone" placeholder="Nhập Số Điện Thoại"/>
+                                        <span class="error-message" id="error-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="order-notes">
                                 <div class="checkout-form-list">
                                     <label>Ghi Chú </label>
-                                    <textarea id="checkout-mess" name="note" cols="30" rows="10"
-                                        placeholder="Nhập Nội Dung"></textarea>
+                                    <textarea id="checkout-mess" name="note" cols="30" rows="10" placeholder="Nhập Nội Dung"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
-                        <div class="your-order mb-30 ">
+                        <div class="your-order mb-30">
                             <h3>Thông Tin Đơn Hàng</h3>
                             <div class="your-order-table table-responsive">
                                 <table>
                                     <thead>
-                                        <tr>
-                                            <th class="product-name">Sản Phẩm</th>
-                                            <th class="product-total">Thành Tiền</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="product-name">Sản Phẩm</th>
+                                        <th class="product-name">Số Lượng</th>
+                                        <th class="product-total">Thành Tiền</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        @php
-                                        $total = 0;
-                                    @endphp
-                                    @foreach(session('cart') as $key => $item)
+                                    <input type="hidden" name="products" id="listProducts" value="{{ json_encode($selectedProducts) }}">
 
                                     @php
-
-
-                                        $subtotal = $item['price'] * $item['quantity'];
-                                        $total += $subtotal;
+                                        $total = 0;
                                     @endphp
+                                    @foreach($selectedProducts as $key => $item)
+                                        @php
+                                            $subtotal = $item['price'] * $item['quantity'];
+                                            $total += $subtotal;
+                                        @endphp
                                         <tr class="cart_item">
-
                                             <td class="product-name">
-                                                {{ $item['product_name'] }} <strong class="product-quantity"> × {{ $item['quantity'] }}</strong>
+                                                <div>{{ $item['product_name'] }}</div>
                                             </td>
-                                            <input type="hidden" name="quantity[]" value="{{ $item['quantity'] }}">
-                                            <input type="hidden" name="id_product[]" value="{{ $item['product_id'] }}">
+                                            <td class="product-name align-items-center">
+                                                <strong class="product-quantity align-items-center">× {{ $item['quantity'] }}</strong>
+                                            </td>
                                             <td class="product-total">
-                                                <input type="hidden" name="subtotal[]" value="{{ $subtotal }}">
-                                                <span class="amount">{{$subtotal  }} VNĐ</span>
+                                                <span class="amount">{{ number_format($subtotal, 0, ',', '.') }} VNĐ</span>
                                             </td>
                                         </tr>
-                                        @endforeach
-                                        @php
-
-
-
-                                       @endphp
+                                    @endforeach
                                     </tbody>
                                     <tfoot>
-                                        <tr class="cart-subtotal">
-                                            <th>Tổng Cộng Giỏ Hàng</th>
-                                            <td><span class="amount">{{ $request->total }}</span></td>
-                                            <input type="hidden" name="total" value="{{ $request->total }}">
-                                        </tr>
+                                    <tr class="cart-subtotal">
+                                        <th>Tổng Cộng Giỏ Hàng</th>
+                                        <td><span class="amount">{{ number_format($total, 0, ',', '.') }}</span></td>
+                                        <input type="hidden" name="total" value="{{ $total }}">
+                                    </tr>
+                                    @if(auth()->user())
                                         <tr class="cart-voucher">
                                             <th>Mã Giảm Giá</th>
-                                            <td><span class="amount">{{ $request->discount }}</span></td>
+                                            <td><span class="amount">{{ $discount }}</span></td>
                                         </tr>
-                                        <tr class="shipping">
-                                            <th>Vận Chuyển</th>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <input id="amount" type="radio" value="GHN" name="checkout" />
-                                                        <label for="amount">
-                                                            Giao Hàng Nhanh <span class="amount" >25,000 VNĐ</span>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="shipping" type="radio" value="HT" name="checkout" />
-                                                        <label for="shipping"> Hỏa Tốc <span class="amount">25,000 VNĐ</span></label>
-                                                    </li>
-                                                    <li></li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr class="order-total">
-                                            <th>Tổng Tiền</th>
-                                            <td><strong><span class="amount">{{ $request->totalAll }} VNĐ</span></strong>
-                                            </td>
-                                        </tr>
+                                    @endif
+                                    <tr class="shipping">
+                                        <th>Vận Chuyển</th>
+                                        <td>
+                                            <select name="checkout" id="checkout-gh">
+                                                <option value="GHN" name="checkout">Giao Hàng Nhanh</option>
+                                                <option value="HT" name="checkout">Hỏa Tốc</option>
+                                            </select>
+
+                                        </td>
+                                    </tr>
+                                    <tr class="order-total">
+                                        @php
+                                        $subtotall = $total+25000 - $discount
+                                                                             @endphp
+                                        <th>Tổng Tiền</th>
+                                        <input type="hidden" name="subtotall" value="{{ $subtotall }}">
+                                        <td><strong><span class="amount">{{ number_format($subtotall , 0, ',', '.') }} VNĐ</span></strong></td>
+
+                                    </tr>
                                     </tfoot>
                                 </table>
                             </div>
-{{--
+
                             <div class="payment-method">
-                                <div class="" id="accordionExample">
-                                    <div class="card ">
-                                        <div class="" id="headingOne">
-
-                                        </div> --}}
-
-                                        {{-- <div id="collapseOne" class="collapse accordion-collapse show" aria-labelledby="headingOne"
-                                            data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                Make your payment directly into our bank account. Please use your Order ID
-                                                as the payment
-                                                reference. Your order won’t be
-                                                shipped until the funds have cleared in our account.
-                                            </div>
-                                        </div> --}}
-                                    {{-- </div> --}}
-                                    {{-- <div class="card accordion-item">
-                                        <div class="card-header" id="headingTwo">
-                                            <h5 class="mb-0 accordion-header">
-                                                <button class="btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false">
-                                                    Cheque Payment
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseTwo" class="collapse accordion-collapse" aria-labelledby="headingTwo"
-                                            data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                Please send your cheque to Store Name, Store Street, Store Town, Store
-                                                State / County, Store
-                                                Postcode.
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                    {{-- <div class="card accordion-item">
-                                        <div class="card-header" id="headingThree">
-                                            <h5 class="mb-0 accordion-header">
-                                                <button class="btn-link" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseThree" aria-expanded="false" >
-                                                    PayPal
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseThree" class="collapse accordion-collapse" aria-labelledby="headingThree"
-                                            data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                Pay via PayPal; you can pay with your credit card if you don’t have a
-                                                PayPal account.
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                {{-- </div> --}}
-
-                                {{-- <div class="m-3"> --}}
-
-                                {{-- </div> --}}
-                                <div class="payment-method">
-                                    <h5>Chọn phương thức thanh toán:</h5>
-                                    <label>
-                                        <input type="radio" name="payment_method" value="cod" checked>
-                                        Thanh toán khi nhận hàng
-                                    </label>
-                                    <br>
-                                    <label>
-                                        <input type="radio" name="payment_method" value="online">
-                                        Thanh toán online
-                                    </label>
-                                </div>
-                                <div class="order-button-payment mt-20">
-                                    <button type="submit" class="os-btn os-btn-prymari">Thanh Toán</button>
-                                </div>
+                                <h5>Chọn phương thức thanh toán:</h5>
+                                <label>
+                                    <input type="radio" name="payment_method" value="cod" checked>
+                                    Thanh toán khi nhận hàng
+                                </label>
+                                <br>
+                                <label>
+                                    <input type="radio" name="payment_method" id="online" value="online">
+                                    Thanh toán online
+                                </label>
+                                <img id="qr-code" src="https://api.vietqr.io/image/mbbank-0362978755-fTpTJka.jpg?accountName=TRAN VAN TUYEN&amount={{ $total + 25000 - $discount }}&addInfo={{ session('noidung') }}" style="display: none; margin-left: auto; margin-right: auto; width: 500px; height: 500px;">
+                            </div>
+                            <div class="order-button-payment mt-20">
+                                <button id="submit-button"  type="submit" class="os-btn os-btn-prymari">Thanh Toán</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <input type="hidden" id="voucherId" name="voucherId" value="{{$voucherId}}">
             </form>
+
         </div>
     </section>
     <!-- checkout area end -->
 
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const onlineRadio = document.getElementById("online");
+        const submitButton = document.getElementById("submit-button");
+
+        // Bắt sự kiện khi người dùng thay đổi lựa chọn radio
+        document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+            radio.addEventListener("change", function () {
+                if (onlineRadio.checked) {
+                    submitButton.style.display = "none"; // Ẩn nút
+                } else {
+                    submitButton.style.display = "block"; // Hiện nút
+                }
+            });
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("formCheckout");
+        form.addEventListener("submit", function (event) {
+            let isValid = true;
+
+            // Lấy các input
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const phone = document.getElementById("phone");
+            const address = document.getElementById("address");
+
+            // Xóa các lỗi cũ
+            clearErrors();
+
+            // Validate tên
+            if (name.value.trim() === "") {
+                showError("name", "Họ và tên không được để trống.");
+                isValid = false;
+            }
+
+            // Validate email
+            if (!validateEmail(email.value.trim())) {
+                showError("email", "Email không hợp lệ.");
+                isValid = false;
+            }
+
+            // Validate số điện thoại
+            if (!validatePhone(phone.value.trim())) {
+                showError("phone", "Số điện thoại không hợp lệ.");
+                isValid = false;
+            }
+
+            // Validate địa chỉ
+            if (address.value.trim() === "") {
+                showError("address", "Địa chỉ không được để trống.");
+                isValid = false;
+            }
+
+            // Nếu không hợp lệ, ngăn việc gửi form
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // Hàm hiển thị lỗi
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorElement = document.getElementById(`error-${inputId}`);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.color = "red";
+            }
+            if (input) {
+                input.classList.add("error");
+            }
+        }
+
+        // Hàm xóa lỗi
+        function clearErrors() {
+            const errorMessages = document.querySelectorAll(".error-message");
+            errorMessages.forEach((error) => {
+                error.textContent = "";
+            });
+            const inputs = document.querySelectorAll("input, textarea");
+            inputs.forEach((input) => {
+                input.classList.remove("error");
+            });
+        }
+
+        // Hàm kiểm tra email hợp lệ
+        function validateEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        // Hàm kiểm tra số điện thoại hợp lệ (Việt Nam)
+        function validatePhone(phone) {
+            const phonePattern = /^(03|05|07|08|09)\d{8}$/;
+            return phonePattern.test(phone);
+        }
+
+    });
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const $qrCodeImage = $('#qr-code');
+
+        $('input[name="payment_method"]').on('change', function () {
+
+
+            var name = $('#name').val();
+            var address = $('#add').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+            var address = $('#address').val();
+            var note = $('#checkout-mess').val();
+            var voucherId = $('#vouvoucherId').val();
+            var products = $('#listProducts').val();
+            var checkout = $('#checkout-gh').val();
+
+            var tongtiengiohang = '{{ $total + 25000 - $discount }}';
+
+            const selectedPaymentMethod = $('input[name="payment_method"]:checked').val();
+            if (selectedPaymentMethod === 'online') {
+                // Hiện ảnh QR Code
+                $qrCodeImage.show();
+
+                let urlCheckPay = "{{ route('checkPay') }}"
+
+                let intervalId = setInterval(function(){
+                    $.post(urlCheckPay, {
+                        name, address, email, phone, note, voucherId, products, tongtiengiohang, _token: $('input[name="_token"]').val(),
+                    }, function(data){
+                        if(!isNaN(data)){
+                            window.location.href = "{{ route('checkout.success') }}"
+                            clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng
+                        }else{
+                            console.log(data)
+                        }
+
+                        console.log(data)
+                    });
+
+                    $.ajax({
+                        url: urlCheckPay,
+                        type: 'POST',
+                        data: {
+                            name,
+                            address,
+                            email,
+                            phone,
+                            // address,
+                            note,
+                            voucherId,
+                            products,
+                            tongtiengiohang,
+                            checkout,
+                            _token: $('input[name="_token"]').val(),
+                        },
+                        success: function (data) {
+                            // Xử lý khi thành công
+                            if(!isNaN(data)){
+                                window.location.href = "{{ route('checkout.success') }}"
+                                clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            // Xử lý khi có lỗi
+                            console.error('Error:', {
+                                status: status,
+                                error: error,
+                                response: xhr.responseText
+                            });
+                        }
+                    });
+                }, 3000);
+            } else {
+                // Ẩn ảnh QR Code
+                $qrCodeImage.hide();
+            }
+        });
+    });
+</script>
+
+<script>
+    // JavaScript Validation for the Form
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".checkbox-form");
+
+    // Input fields
+    const nameField = document.getElementById("name");
+    const addressField = document.getElementById("address");
+    const emailField = document.getElementById("email");
+    const phoneField = document.getElementById("phone");
+
+    // Error spans
+    const nameError = document.getElementById("error-name");
+    const addressError = document.getElementById("error-address");
+    const emailError = document.getElementById("error-email");
+    const phoneError = document.getElementById("error-phone");
+
+    // Utility functions for validation
+    function isEmailValid(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function isPhoneValid(phone) {
+        const phoneRegex = /^\d{10,11}$/; // Adjust for your specific needs
+        return phoneRegex.test(phone);
+    }
+
+    function isAddressDetailed(address) {
+        // Ensure address contains at least one number (e.g., house number) and letters (e.g., street name)
+        const hasNumber = /\d/.test(address);
+        const hasStreetName = /[a-zA-Z]/.test(address);
+        const isLongEnough = address.length >= 10;
+        return hasNumber && hasStreetName && isLongEnough;
+    }
+
+    function validateInput() {
+        let isValid = true;
+
+        // Validate Name
+        if (nameField.value.trim() === "") {
+            nameError.textContent = "Họ và Tên không được để trống.";
+            isValid = false;
+        } else {
+            nameError.textContent = "";
+        }
+
+        // Validate Address
+        if (addressField.value.trim() === "") {
+            addressError.textContent = "Địa chỉ không được để trống.";
+            isValid = false;
+        } else if (!isAddressDetailed(addressField.value.trim())) {
+            addressError.textContent = "Địa chỉ phải rõ ràng, bao gồm số nhà và tên đường, và ít nhất 10 ký tự.";
+            isValid = false;
+        } else {
+            addressError.textContent = "";
+        }
+
+        // Validate Email
+        if (emailField.value.trim() === "") {
+            emailError.textContent = "Email không được để trống.";
+            isValid = false;
+        } else if (!isEmailValid(emailField.value.trim())) {
+            emailError.textContent = "Email không hợp lệ.";
+            isValid = false;
+        } else {
+            emailError.textContent = "";
+        }
+
+        // Validate Phone
+        if (phoneField.value.trim() === "") {
+            phoneError.textContent = "Số điện thoại không được để trống.";
+            isValid = false;
+        } else if (!isPhoneValid(phoneField.value.trim())) {
+            phoneError.textContent = "Số điện thoại không hợp lệ. Phải có 10-11 chữ số.";
+            isValid = false;
+        } else {
+            phoneError.textContent = "";
+        }
+
+        return isValid;
+    }
+
+    // Add event listener for form submission
+    form.addEventListener("submit", function (event) {
+        if (!validateInput()) {
+            event.preventDefault();
+        }
+    });
+});
+
+</script>
