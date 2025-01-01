@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\MemoryController;
 use App\Http\Controllers\RamController;
+use App\Http\Controllers\VnPayController;
 use App\Models\Memory;
 use App\Models\Ram;
 use Illuminate\Http\Request;
@@ -362,6 +363,8 @@ Route::post('/checkPay', [CheckoutController::class, 'checkPay'])->name(name: 'c
 Route::post('/search_order', [CheckoutController::class, 'search_order'])->name('search_order');
 
 Route::get('/my-orders', [CheckoutController::class, 'myOrders'])->name('my.orders')->middleware('auth');
+Route::get('/payment', [VnPayController::class, 'createPayment'])->name('payment.create');
+Route::get('/vnpay-return', [VnPayController::class, 'vnpayReturn'])->name('vnpay.return');
 
 
 Route::post('/user/save', [UserNewController::class, 'save'])->name('user.save');
