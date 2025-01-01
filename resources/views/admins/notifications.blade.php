@@ -6,17 +6,22 @@
         {{ session('success') }}
     </div>
 @endif
+@if (session('error'))
+    <div id="notification" class="notification alert alert-danger" role="alert">
+        {{ session('error') }}
+    </div>
+@endif
 
-@forelse($notifications as $notification)
-    <li class="list-group-item">
-        {{ $notification->message }}
-        @if ($notification->bill_code)
-        <a href="{{ route('orders.detail', $notification->bill_code) }}" class="btn btn-link">Đọc</a>
-    @else
-        <span>(Mã đơn hàng không khả dụng)</span>
-    @endif
-    </li>
-@empty
-    <li class="list-group-item">Không có thông báo nào.</li>
-@endforelse
+<ul class="list-group">
+    @foreach($notifications->sortByDesc('created_at') as $notification)
+        <li class="list-group-item">
+            {{ $notification->message }}
+            @if ($notification->bill_code)
+                {{-- <a href="{{ route('orders.detail', $notification->bill_code) }}" class="btn btn-link">Xem Chi Tiết</a> --}}
+            @else
+                <span>(Mã đơn hàng không khả dụng)</span>
+            @endif
+        </li>
+    @endforeach
+</ul>
 @endsection

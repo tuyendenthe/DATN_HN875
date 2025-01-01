@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Categories</h2>
+        <h2>Danh mục</h2>
         <a href="{{ route('category.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
     </div>
 
@@ -38,8 +38,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
+                    <th>Tên</th>
+                    <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,6 +59,13 @@
                                     </button>
                                 </form>
                             @else
+                                @if ($category->id === 1)
+                                    <!-- Nút sửa (disabled) -->
+                                    <button class="btn btn-sm btn-warning" disabled>Sửa</button>
+
+                                    <!-- Nút xóa (disabled) -->
+                                    <button class="btn btn-sm btn-danger" disabled>Xóa</button>
+                                @else
                                 <!-- Nút sửa -->
                                 <a href="{{ route('category.edit', $category) }}" class="btn btn-sm btn-warning">Sửa</a>
 
@@ -72,6 +79,7 @@
                                         Xóa
                                     </button>
                                 </form>
+                                @endif
                             @endif
                         </td>
 

@@ -26,6 +26,14 @@
 
                         <div class="table-responsive">
                             <table id="zero_config" class="table">
+                                <div class="d-flex justify-content-end mb-3">
+                                    <form action="{{ route('search.user') }}" method="GET" class="form-inline">
+                                        <i class="bi bi-search"></i>
+                                        <input type="text" placeholder="Tìm kiếm theo tên..." name="name" required class="form-control mr-2" style="width: 15%;">
+                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                    </form>
+                                    {{-- <a href="{{ route('admins.users.listuser') }}" class="btn btn-secondary ml-2">Reset Danh Sách</a> --}}
+                                </div>
                                 <div class="d-flex justify-content-between mb-3">
                                     <div>
                                         <a href="{{ route('admin1.users.adduser') }}" class="btn btn-primary">Thêm mới</a>
@@ -53,7 +61,7 @@
                                                 <img src="{{ Storage::url($value->image) }}" alt="" width="100">
                                             </td>
                                             <td>
-                                                {{ $value->role == '1' ? 'Admin tổng' : ($value->role == '2' ? 'User' : 'Admin phụ') }}
+                                                {{ $value->role == '1' ? 'Admin' : ($value->role == '2' ? 'Người dùng' : 'Nhân Viên') }}
                                             </td>
                                             <td>
                                                 <span class="badge {{ $value->status === '1' ? 'badge-success' : 'badge-danger' }}">

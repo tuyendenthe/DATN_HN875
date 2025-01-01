@@ -16,7 +16,9 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
+
             <h4 class="page-title">Thêm mới sản phẩm</h4>
+
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -108,8 +110,12 @@
             </div>
             <div class="col-12">
                 RAM:
-                <input type="text" name="ram" value="{{ old('ram') }}" class="form-control">
-                @error('ram')
+                <select name="ram_id" class="form-control" id="ramSelect">
+                    @foreach ($rams as $val)
+                        <option value="{{ $val->id }}">{{ $val->name }}</option>
+                    @endforeach
+                </select>
+                @error('ram_id')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
             </div>
@@ -122,8 +128,12 @@
             </div>
             <div class="col-12">
                 Bộ Nhớ:
-                <input type="text" name="memory" value="{{ old('memory') }}" class="form-control">
-                @error('memory')
+                <select name="memory_id" class="form-control" id="memorySelect">
+                    @foreach ($memories as $val)
+                        <option value="{{ $val->id }}">{{ $val->name }}</option>
+                    @endforeach
+                </select>
+                @error('memory_id')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
             </div>

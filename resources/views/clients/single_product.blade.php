@@ -522,12 +522,12 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                             <div class="variant-item border-primary rounded" style="background-color: #fff">
 
 
-                                                @if ($product_parent_1->isOnFlashSale())
+                                                {{-- @if ($product_parent_1->isOnFlashSale())
                                                 <span class="sale">sale</span>
 
 
 
-                                                @endif
+                                                @endif --}}
                                                 <br>
                                                 <a style="text-decoration: none; " href="{{ route('single_product', $val->id) }}">
 
@@ -748,9 +748,9 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <th>Bộ nhớ ngoài</th>
+                                                            <th>RAM</th>
                                                             <td>
-                                                                <a href=""><span>{{ $products->ram }}</span></a>
+                                                                <a href=""><span>{{ $products->rams->name }}</span></a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -762,7 +762,7 @@ $product_parent_1 = Product::where('id',$products->product_parent)->with(['categ
                                                         <tr>
                                                             <th>Bộ nhớ ngoài</th>
                                                             <td>
-                                                                <a href="">{{ $products->memory }}</a>
+                                                                <a href="">{{ $products->memories->name }}</a>
                                                             </td>
                                                         </tr>
                                                         <tr>

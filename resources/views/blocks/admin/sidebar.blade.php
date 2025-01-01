@@ -7,17 +7,17 @@
                 {{-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li> --}}
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('chart')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê doanh thu</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('product_statistics')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê số lượng - giá tiền</span></a></li>
-                <li class="sidebar-item"> 
-                    <form method="GET" action="http://localhost:1111/admin/check">
+                <li class="sidebar-item">
+                    <form method="GET" action="{{ route('admin1.check123') }}">
                         @csrf
                         <input type="hidden" name="email" value="{{ auth()->user()->email }}">
                         <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
                         <button modal="kmacb-form" type="submit" title="Перезвонить Вам" style="border:none !important; background:none !important;">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
-                                <i class="mdi mdi-chart-bar"></i>
-                                <span class="hide-menu">Chăm sóc khách hàng</span></a>
+                                <i class="mdi mdi-chart-bar"></i> 
+                                <span class="hide-menu">Chăm sóc khách hàng</span>
+                            </a>
                         </button>
-                    
                     </form>
                 </li>
 
@@ -32,6 +32,13 @@
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('post.index')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Danh sách bài viết</span></a></li>
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('post.create')}}" aria-expanded="false"><i class="fa-solid fa-bars"></i><span class="hide-menu">Bài viết mới</span></a></li>
+                    </ul>
+                </li>
+                {{-- user --}}
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Tài khoản</span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item"><a href="{{route('admin1.users.listuser')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Danh sách </span></a></li>
+                        <li class="sidebar-item"><a href="{{route('admin1.users.adduser')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Thêm mới </span></a></li>
                     </ul>
                 </li>
                 {{-- /* --------------------------------- COMMENT -------------------------------- */ --}}
@@ -107,12 +114,7 @@
                     </ul>
                 </li>
                 {{-- user --}}
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Tài khoản</span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="{{route('admin1.users.listuser')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Danh sách </span></a></li>
-                        <li class="sidebar-item"><a href="{{route('admin1.users.adduser')}}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Thêm mới </span></a></li>
-                    </ul>
-                </li>
+
                 {{-- <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-alert"></i><span class="hide-menu">Errors </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="error-403.html" class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Error 403 </span></a></li>

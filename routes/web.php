@@ -23,6 +23,10 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserNewController;
+use App\Http\Controllers\AdminsController;
+use App\Http\Controllers\ChatsController;
+
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
@@ -145,6 +149,11 @@ Route::get('/test', function () {
     return view('clients.review');
 });
 
+// // Route cho client
+// // Route cho client
+// Route::middleware('auth')->group(function () {
+
+// });
 
 Route::get('login',[AuthenController::class,'login'])->name('login');
 Route::post('login',[AuthenController::class,'postLogin'])->name('postLogin');
@@ -154,6 +163,8 @@ Route::post('register',[AuthenController::class,'postRegister'])->name('postRegi
 Route::middleware(['auth'])->group(function () {
     Route::get('account/edit', [AuthenController::class, 'editUser'])->name('account.edit');
     Route::put('account/update', [AuthenController::class, 'updateUser'])->name('account.update');
+    Route::get('client/change-password', [AuthenController::class, 'showChangePasswordForm'])->name('client.change.password.form');
+    Route::post('client/change-password', [AuthenController::class, 'changePassword'])->name('client.change.password');
 });
 
 Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
@@ -165,7 +176,7 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     })->name('dashboard');
     Route::get('/notifications', [AdminController::class, 'notifications'])->name('notifications.index');
     Route::get('/notifications/read/{id}', [AdminController::class, 'markAsRead'])->name('notifications.read');
-
+    Route::get('/search-user', [UserController::class, 'searchUser'])->name('search.user');
     // CRUD user
     Route::get('/listUser', [UserController::class, 'listUser'])->name('admin1.users.listuser');
     Route::get('/createUser', [UserController::class, 'addUser'])->name('admin1.users.adduser'); // Đặt tên route
@@ -175,7 +186,10 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('admin1.users.destroy');
     Route::get('/detailUser/{id}', [UserController::class, 'detail'])->name('admin1.users.detail');
 
-
+    Route::get('admin/change-password', [UserController::class, 'showChangePasswordForm'])->name('admin.change.password.form');
+    Route::post('admin/change-password', [UserController::class, 'changePassword'])->name('admin.change.password');
+    Route::get('/admin/users/edit/{id}', [UserController::class, 'editUser'])->name('admin.users.edit');
+Route::post('/admin/users/update/{id}', [UserController::class, 'updateUser'])->name('admin.users.update');
   // CRUD voucher
   Route::get('/vouchers', [VoucherController::class, 'index'])->name('admin1.vouchers.index');
   Route::get('/vouchers/create', [VoucherController::class, 'create'])->name('admin1.vouchers.create');
@@ -188,6 +202,7 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
     // })->name('chart');
     Route::get('/chart', [ChartController::class, 'index'])->name('chart');
     Route::get('/product_statistics', [ChartController::class, 'product_statistics'])->name('product_statistics');
+//    Route::resource('admin1/memories', MemoryC::class);
 
 
 
@@ -217,6 +232,8 @@ Route::group(['prefix' => 'admin1', 'middleware' => 'checkAdmin'], function() {
         return view('admins.form-wizard');
     })->name('form-wizard');
 });
+Route::resource('admin1/rams', RamController::class);
+Route::resource('admin1/memories', MemoryController::class);
 
 Route::resource('admin1/category', CategoryController::class);
 Route::patch('admin1/category/{id}/restore', [CategoryController::class, 'restore'])->name('category.restore');
@@ -348,3 +365,39 @@ Route::post('/search_order', [CheckoutController::class, 'search_order'])->name(
 Route::get('/my-orders', [CheckoutController::class, 'myOrders'])->name('my.orders')->middleware('auth');
 Route::get('/payment', [VnPayController::class, 'createPayment'])->name('payment.create');
 Route::get('/vnpay-return', [VnPayController::class, 'vnpayReturn'])->name('vnpay.return');
+
+
+Route::post('/user/save', [UserNewController::class, 'save'])->name('user.save');
+Route::get('/user/check', [UserNewController::class, 'check'])->name('user.check');
+Route::get('/user/logout', [UserNewController::class, 'logout'])->name('user.logout');
+Route::get('/user/profile', [UserNewController::class, 'profile'])->name('user.profile');
+Route::get('/user/login', [UserNewController::class, 'login'])->name('user.login');
+Route::get('/user/profile', [UserNewController::class, 'profile'])->name('user.profile');
+Route::get('/user/register', [UserNewController::class, 'register'])->name('user.register');
+Route::get('/user/profileview', [UserNewController::class, 'profile'])->name('user.profileview');
+Route::get('/user/profileedit', [UserNewController::class, 'edit'])->name('user.profileedit');
+Route::get('/user/chats', [UserNewController::class, 'chats'])->name('user.chats');
+Route::put('/user/updateProfile', [UserNewController::class, 'updateProfile'])->name('user.updateProfile');
+Route::get('/user/dashboard', [UserNewController::class, 'dashboard'])->name('user.dashboard');
+
+
+
+
+Route::post('/admin/save', [AdminsController::class, 'save'])->name('admin.save');
+Route::get('/admin1/check123', [AdminsController::class, 'check'])->name('admin1.check123');
+Route::get('/admin/logout', [AdminsController::class, 'logout'])->name('admin.logout');
+Route::get('/admin/profileview', [AdminsController::class, 'profile'])->name('admin.profileview');
+Route::get('/admin/profileedit', [AdminsController::class, 'edit'])->name('admin.profileedit');
+Route::get('/admin/login', [AdminsController::class, 'login'])->name('admin.login');
+Route::get('/admin/profile', [AdminsController::class, 'profile'])->name('admin.profile');
+Route::get('/admin/register', [AdminsController::class, 'register'])->name('admin.register');
+Route::get('/admin1/chats_123', [AdminsController::class, 'chats'])->name('admin.chats_123');
+Route::get('/admin1/dashboard_123', [AdminsController::class, 'dashboard'])->name('admin.dashboard_123');
+Route::put('/admin/updateProfile', [AdminsController::class, 'updateProfile'])->name('admin.updateProfile');
+
+
+
+Route::get('/admin1/fetch-messages', [ChatsController::class, 'fetchMessages'])->name('admin.fetchMessages_123');
+Route::post('/admin1/send-message', [ChatsController::class, 'sendMessage'])->name('admin.sendMessage_123');
+Route::get('/fetch-messages', [ChatsController::class, 'fetchMessagesFromUserToAdmin'])->name('fetch.messagesFromSellerToAdmin');
+Route::post('/send-message', [ChatsController::class, 'sendMessageFromUserToAdmin'])->name('send.Messageofsellertoadmin');
