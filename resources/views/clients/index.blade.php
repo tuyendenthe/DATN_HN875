@@ -428,7 +428,7 @@
                         <li><i class="fal fa-envelope-open"></i><a
                                 href="https://www.devsnews.com/cdn-cgi/l/email-protection#c2a3a6afabac82a5afa3abaeeca1adaf"><span
                                     class="__cf_email__"
-                                    data-cfemail="8aebeee7e3e4caede7ebe3e6a4e9e5e7">[email&#160;protected]</span></a>
+                                    data-cfemail="8aebeee7e3e4caede7ebe3e6a4e9e5e7">[hvt910tranvantuyen@gmail.com]</span></a>
                         </li>
                     </ul>
                     <div class="sidebar__menu--social">
@@ -480,8 +480,10 @@
                                 <div class="epix-c-list d-flex flex-column">
                                     @if(Auth::check())
                                         @foreach ($vouchers as $vou)
-                                            <span style="font-size: 16px; width: 550px;">
-                                                Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{$vou->price_sale}} cho đơn hàng từ {{$vou->condition}}
+
+                                            <span style="font-size: 13px; width: 550px;">
+                                                Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{number_format($vou->price_sale)}}VNĐ cho đơn hàng từ {{number_format($vou->condition)}} VNĐ
+
                                             </span>
                                             <br>
                                         @endforeach
@@ -866,7 +868,7 @@
                                                             <div class="price-box">
                                                                 <span class="price">
                                                                     <span
-                                                                        class="active">{{ number_format($flashSale->price_sale) }}đ</span>
+                                                                        class="active">{{ number_format($flashSale->price_sale) }}VNĐ</span>
                                                                 </span>
                                                                 {{-- <span
                                                                             class="active  text-muted">{{ number_format($flashSale->product->price) }}đ</span> --}}
@@ -1216,21 +1218,21 @@
         </div>
     </main>
     @if (auth()->user())
-        <div id="kmacb">
-            <form method="GET" action="http://localhost:1111/user/check">
-                @csrf
-                <input type="hidden" name="email" value="{{ auth()->user()->email }}">
-                <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
-                <button modal="kmacb-form" type="submit" title="Перезвонить Вам"
-                    style="border:none !important; background:none !important;">
-                    <div class="kmacb-circle"></div>
-                    <div class="kmacb-circle-fill"></div>
-                    <div class="kmacb-img-circle"></div>
-                </button>
+    <div id="kmacb">
+        <form method="GET" action="./user/check">
+            @csrf
+            <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+            <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
+            <button modal="kmacb-form" type="submit" title="Перезвонить Вам"
+                style="border:none !important; background:none !important;">
+                <div class="kmacb-circle"></div>
+                <div class="kmacb-circle-fill"></div>
+                <div class="kmacb-img-circle"></div>
+            </button>
 
-            </form>
-        </div>
-    @endif
+        </form>
+    </div>
+@endif
 
     <!-- footer area start -->
     <footer class="footer-area footer-1 bg-black  pt-85">

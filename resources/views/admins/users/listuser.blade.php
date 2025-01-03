@@ -61,7 +61,7 @@
                                                 <img src="{{ Storage::url($value->image) }}" alt="" width="100">
                                             </td>
                                             <td>
-                                                {{ $value->role == '1' ? 'Admin tổng' : ($value->role == '2' ? 'User' : 'Admin phụ') }}
+                                                {{ $value->role == '1' ? 'Admin' : ($value->role == '2' ? 'Người dùng' : 'Nhân Viên') }}
                                             </td>
                                             <td>
                                                 <span class="badge {{ $value->status === '1' ? 'badge-success' : 'badge-danger' }}">

@@ -122,7 +122,7 @@ public function showChangePasswordForm()
 
                 // Xử lý cho cả Admin và Admin phụ
                 if (Auth::user()->role == '1' || Auth::user()->role == '3') {
-                    return view('admins.dashboard')->with(['message' => 'Đăng nhập thành công']);
+                    return view('admins.dashboard')->with(['message1' => 'Đăng nhập thành công']);
                 } else {
                     $products = (Product::with('category'))->latest()->take(8)->get();
                     $categories = Category::all();

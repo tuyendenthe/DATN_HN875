@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-12">
                     Số Lượng:
-                    <input type="text" name="quantity " value="{{ $product->quantity  }}" class="form-control">
+                    <input type="text" name="quantity" value="{{ $product->quantity  }}" class="form-control">
                     {{-- @error('name')
                     <span class="" style="color: red">{{ $message }}</span>
                     @enderror --}}
@@ -104,10 +104,21 @@
             </div>
             <div class="col-12">
                Ram :
-                <input type="text" name="ram" value="{{ $product->ram }}" class="form-control">
                 {{-- @error('ram')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror --}}
+                <select name="ram_id" value="{{ $product->ram_id }}"
+
+                        class="form-control" id="ramSelect" {{ $product->is_attributes == 1 ? 'disabled' : '' }}>
+                    @foreach ($rams as $val)
+                        <option value="{{ $val->id }}" {{ $product->ram_id == $val->id ? 'selected' : '' }}>
+                            {{ $val->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+
+
             </div>
             <div class="col-12">
                 Màu Sắc :
@@ -118,10 +129,18 @@
             </div>
             <div class="col-12">
                 Bộ Nhớ:
-                <input type="text" name="memory" value="{{ $product->memory }}" class="form-control">
                 {{-- @error('memory')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror --}}
+                <select name="memory_id" value="{{ $product->memory_id }}"
+
+                        class="form-control" id="ramSelect" {{ $product->is_attributes == 1 ? 'disabled' : '' }}>
+                    @foreach ($memories as $val)
+                        <option value="{{ $val->id }}" {{ $product->memory_id == $val->id ? 'selected' : '' }}>
+                            {{ $val->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-12">
                 Kích Thước Màn Hình:

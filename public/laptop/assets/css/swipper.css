@@ -406,12 +406,12 @@
     cursor: move;
   }
   /* Preloader */
-  :root {
+  /* :root {
     /*
     --swiper-preloader-color: var(--swiper-theme-color);
     */
-  }
-  .swiper-lazy-preloader {
+  /* } */ */
+  /* .swiper-lazy-preloader {
     width: 42px;
     height: 42px;
     position: absolute;
@@ -437,7 +437,7 @@
     100% {
       transform: rotate(360deg);
     }
-  }
+  } */
   /* a11y */
   .swiper-container .swiper-notification {
     position: absolute;

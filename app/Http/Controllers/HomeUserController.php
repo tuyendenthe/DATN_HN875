@@ -79,7 +79,7 @@ class HomeUserController extends Controller
         $limit = 4;
 
 
-        $category =  Product::where('product_parent', $id)->get();
+        $category =  Product::where('category_id', $products['category_id'])->limit(4)->get();
         $reviews = Comment::with('user')
             ->where('product_id', $id)
             ->where('status', 1)

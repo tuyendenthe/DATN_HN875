@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Memory;
+use App\Models\Ram;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Facades;
 use App\Http\Requests\ProductRequest;
 use App\Models\Categories;
 use App\Models\Category;
+use App\Models\FlashSale;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -37,10 +41,12 @@ class ProductController extends Controller
     public function addProduct()
     {
         $data = Category::get();
+        $memories = Memory::all();
+        $rams = Ram::all();
         // dd($data);
         $products = Product::where('is_attributes',2)->get();
         // $Categories = Categories::where('status_delete', Categories::UNDELETE)->get();
-        return view('admins.add-product', compact('data','products'));
+        return view('admins.add-product', compact('data','products', 'memories', 'rams'));
     }
     public function upload_image($imageFile)
     {
@@ -74,12 +80,12 @@ class ProductController extends Controller
 
             'chip' => $req->chip,
 
-            'ram' => $req->ram,
+            'ram_id' => $req->ram_id,
 
             'color' => $req->color,
 
 
-            'memory' => $req->memory,
+            'memory_id' => $req->memory_id,
 
             'screen' => $req->screen,
 
@@ -111,8 +117,10 @@ class ProductController extends Controller
         $product = Product::find($id);
         $category = Category::get();
         $products = Product::get();
+        $memories = Memory::all();
+        $rams = Ram::all();
 
-        return view('admins.update-product', compact('category','product','products'))
+        return view('admins.update-product', compact('category','product','products', 'rams', 'memories'))
         ;
     }
 
@@ -128,7 +136,7 @@ class ProductController extends Controller
 
     public function updatePutProduct(Request $req, $id)
     {
-
+        // dd($req);
         $product = Product::find($id);
         $path = $product->image;
         if ($req->hasFile('image')) {
@@ -145,12 +153,12 @@ class ProductController extends Controller
             'content' => $req->content,
             'chip' => $req->chip,
 
-            'ram' => $req->ram,
+            'ram_id' => $req->ram_id,
 
             'color' => $req->color,
-            'quantity ' => $req->quantity_,
+            'quantity' => $req->quantity,
 
-            'memory' => $req->memory,
+            'memory_id' => $req->memory_id,
 
             'screen' => $req->screen,
 
@@ -184,7 +192,8 @@ class ProductController extends Controller
                ]);
             }
         }
-        return redirect()->route('products.listProduct');
+        // return redirect()->route('products.listProduct');
+        return redirect()->route('products.listProduct')->with('message1', 'Cập nhật thành công.');
     }
 
 
@@ -192,6 +201,14 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect()->route('products.listProduct');
+
+        $fls = FlashSale::where('product_id','=',$id)->first()->get();
+        if(!empty($fls)){
+        DB::table('flash_sales')->where('product_id', $id)->delete();
+    }
+
+        // return redirect()->route('products.listProduct');
+        return redirect()->route('products.listProduct')->with('message1', 'Xóa thành công.');
+
     }
 }

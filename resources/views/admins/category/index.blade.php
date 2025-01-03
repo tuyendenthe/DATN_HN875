@@ -59,6 +59,13 @@
                                     </button>
                                 </form>
                             @else
+                                @if ($category->id === 1)
+                                    <!-- Nút sửa (disabled) -->
+                                    <button class="btn btn-sm btn-warning" disabled>Sửa</button>
+
+                                    <!-- Nút xóa (disabled) -->
+                                    <button class="btn btn-sm btn-danger" disabled>Xóa</button>
+                                @else
                                 <!-- Nút sửa -->
                                 <a href="{{ route('category.edit', $category) }}" class="btn btn-sm btn-warning">Sửa</a>
 
@@ -72,6 +79,7 @@
                                         Xóa
                                     </button>
                                 </form>
+                                @endif
                             @endif
                         </td>
 
