@@ -198,16 +198,7 @@
                                                 <option value="GHN" name="checkout">Giao Hàng Nhanh</option>
                                                 <option value="HT" name="checkout">Hỏa Tốc</option>
                                             </select>
-{{--                                            <ul>--}}
-{{--                                                <li>--}}
-{{--                                                    <input id="amount" type="radio" value="GHN" name="checkout"/>--}}
-{{--                                                    <label for="amount">Giao Hàng Nhanh <span class="amount">25,000 VNĐ</span></label>--}}
-{{--                                                </li>--}}
-{{--                                                <li>--}}
-{{--                                                    <input id="shipping" type="radio" value="HT" name="checkout"/>--}}
-{{--                                                    <label for="shipping"> Hỏa Tốc <span class="amount">25,000 VNĐ</span></label>--}}
-{{--                                                </li>--}}
-{{--                                            </ul>--}}
+
                                         </td>
                                     </tr>
                                     <tr class="order-total">
@@ -231,10 +222,10 @@
                                 </label>
                                 <br>
                                 <label>
-                                    <input type="radio" name="payment_method" value="online">
+                                    <input type="radio" name="payment_method" id="online" value="online">
                                     Thanh toán online
                                 </label>
-                                <img id="qr-code" src="https://api.vietqr.io/image/mbbank-0362978755-fTpTJka.jpg?accountName=TRAN VAN TUYEN&amount={{ $total + 25000 - $discount }}&addInfo={{ session('noidung') }}" style="display: none; margin-left: auto; margin-right: auto; width: 500px; height: 500px;">
+{{--                                <img id="qr-code" src="https://api.vietqr.io/image/mbbank-0362978755-fTpTJka.jpg?accountName=TRAN VAN TUYEN&amount={{ $total + 25000 - $discount }}&addInfo={{ session('noidung') }}" style="display: none; margin-left: auto; margin-right: auto; width: 500px; height: 500px;">--}}
                             </div>
                             <div class="order-button-payment mt-20">
                                 <button id="submit-button"  type="submit" class="os-btn os-btn-prymari">Thanh Toán</button>
@@ -252,6 +243,22 @@
 @endsection
 <script>
     // Lấy tất cả radio buttons với name="payment_method"
+
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     const onlineRadio = document.getElementById("online");
+    //     const submitButton = document.getElementById("submit-button");
+    //
+    //     // Bắt sự kiện khi người dùng thay đổi lựa chọn radio
+    //     document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+    //         radio.addEventListener("change", function () {
+    //             if (onlineRadio.checked) {
+    //                 submitButton.style.display = "none"; // Ẩn nút
+    //             } else {
+    //                 submitButton.style.display = "block"; // Hiện nút
+    //             }
+    //         });
+    //     });
+    // });
 
 </script>
 <script>
@@ -341,84 +348,85 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-        const $qrCodeImage = $('#qr-code');
+    {{--$(document).ready(function () {--}}
+    {{--    const $qrCodeImage = $('#qr-code');--}}
 
-        $('input[name="payment_method"]').on('change', function () {
+    {{--    $('input[name="payment_method"]').on('change', function () {--}}
 
 
-            var name = $('#name').val();
-            var address = $('#add').val();
-            var email = $('#email').val();
-            var phone = $('#phone').val();
-            var address = $('#address').val();
-            var note = $('#checkout-mess').val();
-            var voucherId = $('#vouvoucherId').val();
-            var products = $('#listProducts').val();
-            var checkout = $('#checkout-gh').val();
+    {{--        var name = $('#name').val();--}}
+    {{--        var address = $('#add').val();--}}
+    {{--        var email = $('#email').val();--}}
+    {{--        var phone = $('#phone').val();--}}
+    {{--        var address = $('#address').val();--}}
+    {{--        var note = $('#checkout-mess').val();--}}
+    {{--        var voucherId = $('#vouvoucherId').val();--}}
+    {{--        var products = $('#listProducts').val();--}}
+    {{--        var checkout = $('#checkout-gh').val();--}}
 
-            var tongtiengiohang = '{{ $total + 25000 - $discount }}';
+    {{--        var tongtiengiohang = '{{ $total + 25000 - $discount }}';--}}
 
-            const selectedPaymentMethod = $('input[name="payment_method"]:checked').val();
-            if (selectedPaymentMethod === 'online') {
-                // Hiện ảnh QR Code
-                $qrCodeImage.show();
+    {{--        const selectedPaymentMethod = $('input[name="payment_method"]:checked').val();--}}
+    {{--        if (selectedPaymentMethod === 'online') {--}}
+    {{--            // Hiện ảnh QR Code--}}
+    {{--            $qrCodeImage.show();--}}
 
-                let urlCheckPay = "{{ route('checkPay') }}"
+    {{--            let urlCheckPay = "{{ route('checkPay') }}"--}}
 
-                let intervalId = setInterval(function(){
-                    $.post(urlCheckPay, {
-                        name, address, email, phone, note, voucherId, products, tongtiengiohang, _token: $('input[name="_token"]').val(),
-                    }, function(data){
-                        if(!isNaN(data)){
-                            window.location.href = "{{ route('checkout.success') }}"
-                            clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng
-                        }else{
-                            console.log(data)
-                        }
+    {{--            let intervalId = setInterval(function(){--}}
+    {{--                $.post(urlCheckPay, {--}}
+    {{--                    name, address, email, phone, note, voucherId, products, tongtiengiohang, _token: $('input[name="_token"]').val(),--}}
+    {{--                }, function(data){--}}
+    {{--                    if(!isNaN(data)){--}}
+    {{--                        window.location.href = "{{ route('checkout.success') }}"--}}
+    {{--                        clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng--}}
+    {{--                    }else{--}}
+    {{--                        console.log(data)--}}
+    {{--                    }--}}
 
-                        console.log(data)
-                    });
+    {{--                    console.log(data)--}}
+    {{--                });--}}
 
-                    $.ajax({
-                        url: urlCheckPay,
-                        type: 'POST',
-                        data: {
-                            name,
-                            address,
-                            email,
-                            phone,
-                            // address,
-                            note,
-                            voucherId,
-                            products,
-                            tongtiengiohang,
-                            checkout,
-                            _token: $('input[name="_token"]').val(),
-                        },
-                        success: function (data) {
-                            // Xử lý khi thành công
-                            if(!isNaN(data)){
-                                window.location.href = "{{ route('checkout.success') }}"
-                                clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            // Xử lý khi có lỗi
-                            console.error('Error:', {
-                                status: status,
-                                error: error,
-                                response: xhr.responseText
-                            });
-                        }
-                    });
-                }, 3000);
-            } else {
-                // Ẩn ảnh QR Code
-                $qrCodeImage.hide();
-            }
-        });
-    });
+    {{--                $.ajax({--}}
+    {{--                    url: urlCheckPay,--}}
+    {{--                    type: 'POST',--}}
+    {{--                    data: {--}}
+    {{--                        name,--}}
+    {{--                        address,--}}
+    {{--                        email,--}}
+    {{--                        phone,--}}
+    {{--                        // address,--}}
+    {{--                        note,--}}
+    {{--                        voucherId,--}}
+    {{--                        products,--}}
+    {{--                        tongtiengiohang,--}}
+    {{--                        checkout,--}}
+    {{--                        _token: $('input[name="_token"]').val(),--}}
+    {{--                    },--}}
+    {{--                    success: function (data) {--}}
+    {{--                        // Xử lý khi thành công--}}
+    {{--                        if(!isNaN(data)){--}}
+    {{--                            window.location.href = "{{ route('checkout.success') }}"--}}
+    {{--                            clearInterval(intervalId); // Ngừng setInterval khi data trả về là mã đơn hàng--}}
+    {{--                        }--}}
+    {{--                    },--}}
+    {{--                    error: function (xhr, status, error) {--}}
+    {{--                        // Xử lý khi có lỗi--}}
+    {{--                        console.error('Error:', {--}}
+    {{--                            status: status,--}}
+    {{--                            error: error,--}}
+    {{--                            response: xhr.responseText--}}
+    {{--                        });--}}
+    {{--                    }--}}
+    {{--                });--}}
+    {{--            }, 3000);--}}
+    {{--        } else {--}}
+    {{--            // Ẩn ảnh QR Code--}}
+    {{--            $qrCodeImage.hide();--}}
+    {{--        }--}}
+    {{--    });--}}
+    {{--});--}}
+
 </script>
 
 <script>

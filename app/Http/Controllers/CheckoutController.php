@@ -20,7 +20,7 @@ use App\Models\Product;
 class CheckoutController extends Controller
 {
     public function index(Request $request)
-    {   
+    {
         // dd($request->all());
         $check = $request->totalSelected;
         $cart = session()->get('cart', []);
@@ -28,11 +28,13 @@ class CheckoutController extends Controller
         // Lấy các sản phẩm đã chọn từ form (dữ liệu JSON được gửi qua trường 'selectedProducts')
         $selectedProducts = json_decode($request->input('selectedProducts'), true);
         $totalProduct = 0;
+
         $voucher = Voucher::where('id', $voucherId)->first();
-        // dd($voucher->condition);   
+        if (!empty($voucher)) {
         if($check <= $voucher->condition ){
             return back()->with('message', 'Đơn hàng không đủ điều kiện áp dụng mã giảm giá.');
         }
+    }
         foreach ($selectedProducts as $value) {
             $product_id = $value['product_id']; // Lấy product_id từ mảng
             $check = Product::findOrFail($product_id);
@@ -82,14 +84,142 @@ class CheckoutController extends Controller
     }
     public function store(Request $request)
     {
+//        dd($request);
+//        $idVoucher = $request['voucherId'];
+//        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//        $randomString = substr(str_shuffle($characters), 0, 10); // Tạo mã đơn hàng ngẫu nhiên
+//        $user_id = null;
+//        if(auth()->user()){
+//            $user_id = auth()->user()->id;
+//        }
+//        // dd($request);
+//        $bill = [
+//            'bill_code' => $randomString,
+//            'name' => $request['name'],
+//            'phone' => $request['phone'],
+//            'email' => $request['email'],
+//            'checkout' => $request['checkout'],
+//            'note' => $request['note'],
+//            'address' => $request['address'],
+//            'user_id' => $user_id,
+//            'payment_method' => $request['payment_method'],
+//            'total' => $request['subtotall'],
+//            'status' => 1,
+//            'created_at' => now(),
+//            'updated_at' => now(),
+//        ];
+//
+//                            $products = is_string($request['products'])
+//                            ? json_decode($request['products'], true) // Chuyển JSON thành mảng
+//                            : $request['products'];
+//
+//                            // Kiểm tra nếu dữ liệu không phải là mảng hợp lệ
+//                            if (!is_array($products)) {
+//                            return redirect()->route("cart.view")->with('message', 'Dữ liệu sản phẩm không hợp lệ.');
+//                            }
+//
+//                            // Lặp qua từng sản phẩm và xử lý
+//                            foreach ($products as $value) {
+//                            $product_id = $value['product_id']; // Lấy product_id từ mảng
+//                            $check = Product::findOrFail($product_id);
+//                            if ($check->quantity < $value['quantity']) {
+//                                return redirect()->route("cart.view")->with('message', 'Số Lượng Sản Phẩm Bạn Chọn Mua Hiện Chúng Tôi Không Có Đủ, Vui Lòng Quay Lại Sau.');
+//                            }
+//
+//                            }
+//
+//        $billRecord = Bill::create($bill);
+//        $bill_id = $billRecord->id;
+//
+//        $products = json_decode($request['products'], true);
+//
+//
+//
+//        foreach ($products as $item) {
+//            $cc =Product::findOrFail($item['product_id']);
+//            $product_id = $item['product_id'];
+//            $price = $item['price'];
+//            $quantity = $item['quantity'];
+//            $product_name = $cc['name'];
+//            $subtotal = $price * $quantity;
+//
+//            $quantity1 = $cc['quantity']- $quantity;
+//            DB::table('products')->where('id','=',$cc['id'])->update(['quantity' => $quantity1]);
+//            $data2 = [
+//                'bill_id' => $bill_id,
+//                'product_id' => $product_id,
+//                'bill_code' => $randomString,
+//                'quantity' => $quantity,
+//                'product_name' => $product_name,
+//                'subtotal' => $subtotal,
+//                'price' => $price,
+//                'created_at' => now(),
+//                'updated_at' => now(),
+//            ];
+//
+//            Bill_detail::create($data2);
+//        }
+//
+//        if ($idVoucher) {
+//            $voucher = Voucher::find($idVoucher);
+//
+//            if ($voucher && $voucher->quantity > 0) {
+//                $voucher->quantity -= 1;
+//                $voucher->save();
+//            } else {
+//                return redirect()->route("cart.view")->with('message', 'Voucher không hợp lệ hoặc đã hết số lượng.');
+//            }
+//        }
+//        $cart = session()->get('cart', []);
+//
+//        // Xóa các sản phẩm đã mua khỏi giỏ hàng
+//        foreach ($products as $purchasedProduct) {
+//            $product_id = $purchasedProduct['product_id'];
+//            // Loại bỏ sản phẩm đã mua khỏi giỏ hàng
+//            $cart = array_filter($cart, function ($item) use ($product_id) {
+//                return $item['product_id'] != $product_id;
+//            });
+//        }
+//
+//        // Cập nhật lại session giỏ hàng
+//        session()->put('cart', $cart);
+//        Mail::to($request['email'])->send(new TestMail($billRecord, $products));
+//
+//
+//        // Tạo thông báo cho người quản lý
+//        $notification = Notification::create([
+//            'message' => 'Bạn có một đơn hàng mới với mã ' . $randomString,
+//            'is_read' => false,
+//            'created_at' => now(),
+//        ]);
+//
+//        // Cập nhật bill_code sau khi tạo thông báo
+//        $notification->bill_code = $randomString;
+//        $notification->save();
+//
+//        return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
+        $paymentMethod = $request['payment_method'];
+
+        // Kiểm tra phương thức thanh toán
+        if ($paymentMethod === 'cod') {
+            // Thanh toán COD
+            return $this->processBill($request); // Gọi hàm xử lý bill trực tiếp
+        } elseif ($paymentMethod === 'online') {
+            // Thanh toán Online qua VNPay
+            return app(VnPayController::class)->createPayment($request); // Chuyển hướng đến VNPay
+        } else {
+            return redirect()->route('cart.view')->with('message', 'Phương thức thanh toán không hợp lệ.');
+        }
+
+    }
+    public function processBill(Request $request)
+    {
+//        dd($request);
         $idVoucher = $request['voucherId'];
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         $randomString = substr(str_shuffle($characters), 0, 10); // Tạo mã đơn hàng ngẫu nhiên
-        $user_id = null;
-        if(auth()->user()){
-            $user_id = auth()->user()->id;
-        }
-        // dd($request);
+        $user_id = auth()->check() ? auth()->user()->id : null;
+
         $bill = [
             'bill_code' => $randomString,
             'name' => $request['name'],
@@ -106,109 +236,65 @@ class CheckoutController extends Controller
             'updated_at' => now(),
         ];
 
-    //    dd($request['products']);
-  // Kiểm tra và giải mã JSON nếu cần
-                            $products = is_string($request['products'])
-                            ? json_decode($request['products'], true) // Chuyển JSON thành mảng
-                            : $request['products'];
+        // Xử lý sản phẩm trong hóa đơn
+        $products = is_string($request['products'])
+            ? json_decode($request['products'], true)
+            : $request['products'];
 
-                            // Kiểm tra nếu dữ liệu không phải là mảng hợp lệ
-                            if (!is_array($products)) {
-                            return redirect()->route("cart.view")->with('message', 'Dữ liệu sản phẩm không hợp lệ.');
-                            }
+        foreach ($products as $value) {
+            $product = Product::findOrFail($value['product_id']);
+            if ($product->quantity < $value['quantity']) {
+                return redirect()->route("cart.view")->with('message', 'Số lượng sản phẩm không đủ.');
+            }
+            $product->update(['quantity' => $product->quantity - $value['quantity']]);
+        }
 
-                            // Lặp qua từng sản phẩm và xử lý
-                            foreach ($products as $value) {
-                            $product_id = $value['product_id']; // Lấy product_id từ mảng
-                            $check = Product::findOrFail($product_id);
-                            if ($check->quantity < $value['quantity']) {
-                                return redirect()->route("cart.view")->with('message', 'Số Lượng Sản Phẩm Bạn Chọn Mua Hiện Chúng Tôi Không Có Đủ, Vui Lòng Quay Lại Sau.');
-                            }
-
-                            }
-                            // foreach ($products as $value) {
-                            // $product_id = $value['product_id']; // Lấy product_id từ mảng
-                            // $check = Product::findOrFail($product_id);
-                            // dd($check->deleted_at);
-                            // if (is_null($check->deleted_at)) {
-                            //     return redirect()->route("cart.view")->with('message', 'Sản Phẩm Bạn Lựa Chọn Hiện Không Còn Bán.');
-                            // }
-
-                            // }
-
+        // Lưu hóa đơn và chi tiết hóa đơn
         $billRecord = Bill::create($bill);
-        $bill_id = $billRecord->id;
-
-        $products = json_decode($request['products'], true);
-        // dd($products);
-
-
-        // Product::update()
-
         foreach ($products as $item) {
-            $cc =Product::findOrFail($item['product_id']);
-            $product_id = $item['product_id'];
-            $price = $item['price'];
-            $quantity = $item['quantity'];
-            $product_name = $cc['name'];
-            $subtotal = $price * $quantity;
-
-            // dd($cc);
-            $quantity1 = $cc['quantity']- $quantity;
-            DB::table('products')->where('id','=',$cc['id'])->update(['quantity' => $quantity1]);
-            $data2 = [
-                'bill_id' => $bill_id,
-                'product_id' => $product_id,
+            Bill_detail::create([
+                'bill_id' => $billRecord->id,
+                'product_id' => $item['product_id'],
                 'bill_code' => $randomString,
-                'quantity' => $quantity,
-                'product_name' => $product_name,
-                'subtotal' => $subtotal,
-                'price' => $price,
+                'quantity' => $item['quantity'],
+                'product_name' => Product::find($item['product_id'])->name,
+                'subtotal' => $item['price'] * $item['quantity'],
+                'price' => $item['price'],
                 'created_at' => now(),
                 'updated_at' => now(),
-            ];
-
-            Bill_detail::create($data2);
+            ]);
         }
 
+        // Xử lý voucher nếu có
         if ($idVoucher) {
             $voucher = Voucher::find($idVoucher);
-
             if ($voucher && $voucher->quantity > 0) {
-                $voucher->quantity -= 1;
-                $voucher->save();
+                $voucher->decrement('quantity');
             } else {
-                return redirect()->route("cart.view")->with('message', 'Voucher không hợp lệ hoặc đã hết số lượng.');
+                return redirect()->route("cart.view")->with('message', 'Voucher không hợp lệ.');
             }
         }
-        $cart = session()->get('cart', []);
 
-        // Xóa các sản phẩm đã mua khỏi giỏ hàng
-        foreach ($products as $purchasedProduct) {
-            $product_id = $purchasedProduct['product_id'];
-            // Loại bỏ sản phẩm đã mua khỏi giỏ hàng
-            $cart = array_filter($cart, function ($item) use ($product_id) {
-                return $item['product_id'] != $product_id;
-            });
-        }
+        // Gửi email xác nhận
+//        Mail::to($request['email'])->send(new TestMail($billRecord, $products));
 
-        // Cập nhật lại session giỏ hàng
-        session()->put('cart', $cart);
-        Mail::to($request['email'])->send(new TestMail($billRecord, $products));
-
-
-        // Tạo thông báo cho người quản lý
-        $notification = Notification::create([
+        // Thông báo quản trị viên
+        Notification::create([
             'message' => 'Bạn có một đơn hàng mới với mã ' . $randomString,
             'is_read' => false,
             'created_at' => now(),
         ]);
 
-        // Cập nhật bill_code sau khi tạo thông báo
-        $notification->bill_code = $randomString;
-        $notification->save();
+        // Cập nhật giỏ hàng
+        $cart = session()->get('cart', []);
+        foreach ($products as $purchasedProduct) {
+            $cart = array_filter($cart, function ($item) use ($purchasedProduct) {
+                return $item['product_id'] != $purchasedProduct['product_id'];
+            });
+        }
+        session()->put('cart', $cart);
 
-        return redirect()->route("checkout.success")->with('success', 'Mua Hàng Thành Công');
+        return redirect()->route("checkout.success")->with('success', 'Mua hàng thành công.');
     }
 
 
@@ -282,7 +368,7 @@ class CheckoutController extends Controller
     $query = DB::table('bills')
         ->join('statuses', 'bills.status', '=', 'statuses.id')
         ->where('statuses.id', '<=', 3)
-        ->select('bills.*', 'statuses.status_name');
+        ->select('bills.*', 'statuses.status_name')->latest();
 
     // Check for search input
     if ($request->has('order_id') && !empty($request->order_id)) {
@@ -454,32 +540,63 @@ class CheckoutController extends Controller
 	    curl_close($curl);
 	}
 
-	private function historyBank($apikey){
-		$curl = curl_init();
 
-	    curl_setopt_array($curl, array(
-	      CURLOPT_URL => "https://oauth.casso.vn/v2/transactions?fromDate=2024-04-01&page=1&pageSize=20&sort=DESC",
-	      CURLOPT_RETURNTRANSFER => true,
-	      CURLOPT_TIMEOUT => 30,
-	      CURLOPT_CUSTOMREQUEST => "GET",
-	      CURLOPT_HTTPHEADER => array(
-	        "Authorization: Apikey ".$apikey,
-	        "Content-Type: application/json"
-	      ),
-	    ));
-
-	    $response = curl_exec($curl);
-	    $err = curl_error($curl);
-
-	    $response = json_decode($response, true);
-
-	    curl_close($curl);
-
-	    return $response['data']['records'];
-	}
+//    private function syncBank($apikey,$sotaikhoan){
+//		$curl = curl_init();
+//	    $data = array(
+//	    	'bank_acc_id' => $sotaikhoan,
+//	    );
+//	    $postdata = json_encode($data);
+//
+//	    curl_setopt_array($curl, array(
+//	        CURLOPT_URL => "https://oauth.casso.vn/v2/sync",
+//	        CURLOPT_RETURNTRANSFER => true,
+//	        CURLOPT_TIMEOUT => 30,
+//	        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//	        CURLOPT_CUSTOMREQUEST => "POST",
+//	        CURLOPT_POSTFIELDS => $postdata,
+//	        CURLOPT_HTTPHEADER => array(
+//	            "Authorization: Apikey ".$apikey,
+//	            "Content-Type: application/json"
+//	        ),
+//	    ));
+//
+//	    $response = curl_exec($curl);
+//	    $err = curl_error($curl);
+//
+//	    curl_close($curl);
+//	}
+//
+//	private function historyBank($apikey){
+//		$curl = curl_init();
+//
+//	    curl_setopt_array($curl, array(
+//	      CURLOPT_URL => "https://oauth.casso.vn/v2/transactions?fromDate=2024-04-01&page=1&pageSize=20&sort=DESC",
+//	      CURLOPT_RETURNTRANSFER => true,
+//	      CURLOPT_TIMEOUT => 30,
+//	      CURLOPT_CUSTOMREQUEST => "GET",
+//	      CURLOPT_HTTPHEADER => array(
+//	        "Authorization: Apikey ".$apikey,
+//	        "Content-Type: application/json"
+//	      ),
+//	    ));
+//
+//	    $response = curl_exec($curl);
+//	    $err = curl_error($curl);
+//
+//	    $response = json_decode($response, true);
+//
+//	    curl_close($curl);
+//
+//	    return $response['data']['records'];
+//	}
     public function cancel(String $bill_code){
 
         // $data = Bill::where('bill_code','=',$bill_code)->get();
+        $check =DB::table('bills')->where('bill_code','=',$bill_code)->first();
+        if($check->status >=2){
+            return back()->with('message', 'Không Thể Hủy Do Đơn Hàng Đã Cập Nhật Trạng Thái Trước Đó');
+        }
         DB::table('bills')->where('bill_code','=',$bill_code)->update(['status'=> 5]);
         $data = Bill_detail::where('bill_code','=',$bill_code)->get();
         // dd($data);
@@ -494,117 +611,118 @@ class CheckoutController extends Controller
 
     public function checkPay(Request $request)
 	{
-        $sotaikhoan = "0362978755";
-        $apikey = "AK_CS.bf6ed390bd4111ef9cf3ed0b3d7702f1.fRsxcBmDNRzpzSs65eatAEnLm0brm5UpflFhPVqL9QH0KwRO2NTGMkZdnDyN0ZTv7VJbrqtP";
-
-        $noidung = Session::get('noidung');
-        $tongtiengiohang = $request['tongtiengiohang'];
-
-        $thanhtoan = 0;
-        $this->syncBank($apikey,$sotaikhoan);
-        foreach ($this->historyBank($apikey) as $item) {
-            if (strpos($item['description'], $noidung) !== false){
-                if($item['amount'] < $tongtiengiohang){
-                    echo "Số tiền chuyển nhỏ hơn giá trị thanh toán!";
-                    return;
-                }else{
-                    $idVoucher = $request['voucherId'];
-                    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                    $randomString = substr(str_shuffle($characters), 0, 10);
-                    $user_id = null;
-                    if(auth()->user()){
-                        $user_id = auth()->user()->id;
-                    }
-
-                    $bill = [
-                        'bill_code' => $randomString,
-                        'name' => $request['name'],
-                        'phone' => $request['phone'],
-                        'email' => $request['email'],
-                        'checkout' => $request['checkout'],
-                        'note' => $request['note'],
-                        'address' => $request['address'],
-                        'user_id' => $user_id,
-                        'payment_method' => 'online',
-                        'total' => $request['tongtiengiohang'],
-                        'status' => 1,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ];
-                    // dd($bill);
-                    $billRecord = Bill::create($bill);
-                    $bill_id = $billRecord->id;
-
-                    $products = json_decode($request['products'], true);
-                    // dd($products);
-
-
-                    // Product::update()
-
-                    foreach ($products as $item) {
-                        $cc =Product::findOrFail($item['product_id']);
-                        $product_id = $item['product_id'];
-                        $price = $item['price'];
-                        $quantity = $item['quantity'];
-                        $product_name = $cc['name'];
-                        $subtotal = $price * $quantity;
-
-                        // dd($cc);
-                        $quantity1 = $cc['quantity']- $quantity;
-                        DB::table('products')->where('id','=',$cc['id'])->update(['quantity' => $quantity1]);
-                        $data2 = [
-                            'bill_id' => $bill_id,
-                            'product_id' => $product_id,
-                            'bill_code' => $randomString,
-                            'quantity' => $quantity,
-                            'product_name' => $product_name,
-                            'subtotal' => $subtotal,
-                            'price' => $price,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ];
-
-                        Bill_detail::create($data2);
-                    }
-                    if ($idVoucher) {
-                        $voucher = Voucher::find($idVoucher);
-
-                        if ($voucher && $voucher->quantity > 0) {
-                            $voucher->quantity -= 1;
-                            $voucher->save();
-                        } else {
-                            return back()->with('error', 'Voucher không hợp lệ hoặc đã hết số lượng.');
-                        }
-                    }
-                    $cart = session()->get('cart', []);
-
-                    // Xóa các sản phẩm đã mua khỏi giỏ hàng
-                    foreach ($products as $purchasedProduct) {
-                        $product_id = $purchasedProduct['product_id'];
-                        // Loại bỏ sản phẩm đã mua khỏi giỏ hàng
-                        $cart = array_filter($cart, function ($item) use ($product_id) {
-                            return $item['product_id'] != $product_id;
-                        });
-                    }
-
-                    // Cập nhật lại session giỏ hàng
-                    session()->put('cart', $cart);
-                    Mail::to($request['email'])->send(new TestMail($billRecord, $products));
-
-                    $thanhtoan = 1;
-                }
-                break;
-            }
-        }
-
-        if($thanhtoan == 1){
-            Session::forget('noidung');
-            Session::forget('tongtiengiohang');
-            echo 11;
-            return;
-        }else{
-            echo "Hệ thống chưa nhận được tiền, vui lòng gặp nhân viên để được hỗ trợ!";
-            return;
-        }
+//        $sotaikhoan = "0362978755";
+//        $apikey = "AK_CS.bf6ed390bd4111ef9cf3ed0b3d7702f1.fRsxcBmDNRzpzSs65eatAEnLm0brm5UpflFhPVqL9QH0KwRO2NTGMkZdnDyN0ZTv7VJbrqtP";
+//
+//        $noidung = Session::get('noidung');
+//        $tongtiengiohang = $request['tongtiengiohang'];
+//
+//        $thanhtoan = 0;
+//        $this->syncBank($apikey,$sotaikhoan);
+//        foreach ($this->historyBank($apikey) as $item) {
+//            if (strpos($item['description'], $noidung) !== false){
+//                if($item['amount'] < $tongtiengiohang){
+//                    echo "Số tiền chuyển nhỏ hơn giá trị thanh toán!";
+//                    return;
+//                }else{
+//                    $idVoucher = $request['voucherId'];
+//                    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//                    $randomString = substr(str_shuffle($characters), 0, 10);
+//                    $user_id = null;
+//                    if(auth()->user()){
+//                        $user_id = auth()->user()->id;
+//                    }
+//
+//                    $bill = [
+//                        'bill_code' => $randomString,
+//                        'name' => $request['name'],
+//                        'phone' => $request['phone'],
+//                        'email' => $request['email'],
+//                        'checkout' => $request['checkout'],
+//                        'note' => $request['note'],
+//                        'address' => $request['address'],
+//                        'user_id' => $user_id,
+//                        'payment_method' => 'online',
+//                        'total' => $request['tongtiengiohang'],
+//                        'status' => 1,
+//                        'created_at' => now(),
+//                        'updated_at' => now(),
+//                    ];
+//                    // dd($bill);
+//                    $billRecord = Bill::create($bill);
+//                    $bill_id = $billRecord->id;
+//
+//                    $products = json_decode($request['products'], true);
+//                    // dd($products);
+//
+//
+//                    // Product::update()
+//
+//                    foreach ($products as $item) {
+//                        $cc =Product::findOrFail($item['product_id']);
+//                        $product_id = $item['product_id'];
+//                        $price = $item['price'];
+//                        $quantity = $item['quantity'];
+//                        $product_name = $cc['name'];
+//                        $subtotal = $price * $quantity;
+//
+//                        // dd($cc);
+//                        $quantity1 = $cc['quantity']- $quantity;
+//                        DB::table('products')->where('id','=',$cc['id'])->update(['quantity' => $quantity1]);
+//                        $data2 = [
+//                            'bill_id' => $bill_id,
+//                            'product_id' => $product_id,
+//                            'bill_code' => $randomString,
+//                            'quantity' => $quantity,
+//                            'product_name' => $product_name,
+//                            'subtotal' => $subtotal,
+//                            'price' => $price,
+//                            'created_at' => now(),
+//                            'updated_at' => now(),
+//                        ];
+//
+//                        Bill_detail::create($data2);
+//                    }
+//                    if ($idVoucher) {
+//                        $voucher = Voucher::find($idVoucher);
+//
+//                        if ($voucher && $voucher->quantity > 0) {
+//                            $voucher->quantity -= 1;
+//                            $voucher->save();
+//                        } else {
+//                            return back()->with('error', 'Voucher không hợp lệ hoặc đã hết số lượng.');
+//                        }
+//                    }
+//                    $cart = session()->get('cart', []);
+//
+//                    // Xóa các sản phẩm đã mua khỏi giỏ hàng
+//                    foreach ($products as $purchasedProduct) {
+//                        $product_id = $purchasedProduct['product_id'];
+//                        // Loại bỏ sản phẩm đã mua khỏi giỏ hàng
+//                        $cart = array_filter($cart, function ($item) use ($product_id) {
+//                            return $item['product_id'] != $product_id;
+//                        });
+//                    }
+//
+//                    // Cập nhật lại session giỏ hàng
+//                    session()->put('cart', $cart);
+//                    Mail::to($request['email'])->send(new TestMail($billRecord, $products));
+//
+//                    $thanhtoan = 1;
+//                }
+//                break;
+//            }
+//        }
+//
+//        if($thanhtoan == 1){
+//            Session::forget('noidung');
+//            Session::forget('tongtiengiohang');
+//            echo 11;
+//            return;
+//        }else{
+//            echo "Hệ thống chưa nhận được tiền, vui lòng gặp nhân viên để được hỗ trợ!";
+//            return;
+//        }
+        dd($request);
 	}
 }

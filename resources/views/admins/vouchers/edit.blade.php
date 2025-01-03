@@ -13,17 +13,17 @@
         </div>
         <div class="form-group">
             <label for="quantity">Số lượng</label>
-            <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $voucher->quantity }}" required>
+            <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $voucher->quantity }}" required max="99">
         </div>
        
         
         <div class="form-group">
             <label for="price_sale">Giá giảm</label>
-            <input type="number" class="form-control" id="price_sale" name="price_sale" value="{{ $voucher->price_sale }}" required>
+            <input type="number" class="form-control" id="price_sale" name="price_sale" value="{{ $voucher->price_sale }}" required max="99999999">
         </div>
         <div class="form-group">
             <label for="price_sale">Điều kiện giảm giá</label>
-            <input type="number" class="form-control" id="condition" name="condition" value="{{ $voucher->condition }}" required>
+            <input type="number" class="form-control" id="condition" name="condition" value="{{ $voucher->condition }}" required max="99999999">
         </div>
         <div class="form-group">
             <label for="start_date">Ngày bắt đầu</label>
@@ -36,4 +36,13 @@
         <button type="submit" class="btn btn-primary">Cập nhật Voucher</button>
     </form>
 </div>
+<script>
+    // Lấy ngày hiện tại và định dạng cho input date
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('start_date').setAttribute('min', today);
+    
+    document.getElementById('start_date').addEventListener('change', function() {
+        document.getElementById('end_date').setAttribute('min', this.value);
+    });
+    </script>
 @endsection

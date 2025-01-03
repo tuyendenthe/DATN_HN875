@@ -19,9 +19,9 @@ class Product extends Model
         'image',
         'content',
         'chip',
-        'ram',
+        'ram_id',
         'color',
-        'memory',
+        'memory_id',
         'quantity',
         'screen',
         'resolution',
@@ -64,8 +64,16 @@ class Product extends Model
     {
         return $this->flashSale && $this->flashSale->time_end > Carbon::now();
     }
+
     public function flashSales()
     {
         return $this->hasMany(FlashSale::class, 'product_id', 'id'); // Giả sử 'product_id' là khoá ngoại
+
+//     public function rams() {
+//         return $this->belongsTo(Ram::class, 'ram_id');
+//     }
+//     public function memories() {
+//         return $this->belongsTo(Memory::class, 'memory_id');
+
     }
 }
