@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\FlashSale;
+use App\Models\ProductVariants;
 use App\Models\Variant;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\Auth;
@@ -111,26 +112,14 @@ class CartController extends Controller
 
         return redirect()->route('cart.view')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng');
     }
-    public function addCart1(Request $request, Product $product)
+    public function addCart1(Request $request)
 
     {
-
-        // $variant_id_1 = $request->input('variant_id_1');
-        // $variant_id_2 = $request->input('variant_id_2');
-        // $variant_id_3 = $request->input('variant_id_3');
-        // $variant1 = Variant::find($variant_id_1);
-        // $variant2 = Variant::find($variant_id_2);
-        // $variant3 = Variant::find($variant_id_3);
-
-        // $variant1_price = Variant::find($variant_id_1) == null ? 0 : $variant1->price;
-        // $variant2_price = Variant::find($variant_id_2) == null ? 0 : $variant2->price;
-        // $variant3_price = Variant::find($variant_id_3) == null ? 0 : $variant3->price;
-
-        // $variant1_name = Variant::find($variant_id_1) == null ? '' : $variant1->name;
-        // $variant2_name = Variant::find($variant_id_2) == null ? '' : $variant2->name;
-        // $variant3_name = Variant::find($variant_id_3) == null ? '' : $variant3->name;
-
-        $products = (Product::with('category','flashSale'))->findOrFail($product->id);
+        $id = $request->product_variants;
+        $productVariants = ProductVariants::query()->findOrFail($id);
+        $ram = $productVariants->ram;
+        $memory = $productVariants->memory;
+        $product = (Product::with('category','flashSale'))->findOrFail($productVariants->product_id);
         // $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -141,36 +130,34 @@ class CartController extends Controller
 
 
         $cart = session()->get('cart', []);
-        $productId = $product->id;
+        $productVariantsId = $id;
         $productName = $product->name;
-            if ($products->isOnFlashSale()) {
-                $productPrice = $products->flashSale->price_sale;
+            if ($product->isOnFlashSale()) {
+                $productPrice = $product->flashSale->price_sale;
             } else {
-                $productPrice = $products->price;
+                $productPrice = $productVariants->price;
             }
 
 
-        //  + $variant1_price + $variant2_price + $variant3_price;
-        // $variantName1 = $variant1_name;
-        // $variantName2 = $variant2_name;
-        // $variantName3 = $variant3_name;
         $quantity = 1;
         $image = $product -> image;
         $cartItems = session('cart', []);
 
         // Create a unique key for the product-variant combination
-        $cartKey = $productId . '-' . $productPrice;
+        $cartKey = $productVariantsId . '-' . $productPrice;
 
         if (isset($cartItems[$cartKey])) {
             $cartItems[$cartKey]['quantity'] += 1;
         } else {
             $cartItems[$cartKey] = [
-                'product_id' => $productId,
+                'product_id' => $productVariantsId,
                 'product_name' => $productName,
                 // 'variant_name' => [$variantName1, $variantName2, $variantName3],
                 'quantity' => $quantity,
                 'price' => $productPrice,
-                'image' => $image
+                'image' => $image,
+                'ram' => $ram ,
+                'memory' => $memory
             ];
         }
 
@@ -228,16 +215,16 @@ class CartController extends Controller
         // $checkvoucher = Voucher::where('voucher_code','=',$request->coupon_code)->first();
         // dd($totalSelected);
         // dd($checkvoucher->condition);
-       
-        //  dd($check);
-        
 
-        
+        //  dd($check);
+
+
+
         $voucher = Voucher::where('voucher_code', $voucherCode)->first();
         $check =  $voucher->condition;
 //   dd($check);
-        
-       
+
+
         if ($voucher && $voucher->quantity > 0 && now()->between($voucher->start_date, $voucher->end_date) ) {
 
 //            if ($voucher->discount_type === 'percentage') {
@@ -254,15 +241,15 @@ class CartController extends Controller
             return response()->json([
                 'success' => true,
                 'discount' => $discount,
-              
+
                 'final_price' => $finalPrice,
                 'idVoucher' => $voucher->id
             ]);
         } else {
-        
+
             return response()->json(['success' => false, 'message' => 'Voucher không hợp lệ hoặc hết hạn.']);
         }
-    
+
     }
 
 

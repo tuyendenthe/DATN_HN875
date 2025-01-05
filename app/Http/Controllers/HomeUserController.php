@@ -27,8 +27,8 @@ class HomeUserController extends Controller
         // Lấy tối đa 10 sản phẩm từ bảng products
         $banner_covers = slide_cover::all();
         $vouchers = Voucher::latest()->take(4)->get();
-        $products = (Product::with('category', 'flashSale'))->where('is_attributes', 2)->latest()->take(8)->get();
-        $products_2 = (Product::with('category', 'flashSale'))->where('role', '=', 2)->latest()->take(8)->get();
+        $products = (Product::with('category', 'flashSale','variants'))->where('is_attributes', 2)->latest()->take(8)->get();
+        $products_2 = (Product::with('category', 'flashSale','variants'))->where('role', '=', 2)->latest()->take(8)->get();
         $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -66,7 +66,7 @@ class HomeUserController extends Controller
     {
 
 
-        $products = (Product::with('category', 'flashSale'))->findOrFail($id);
+        $products = (Product::with('category', 'flashSale', 'variants'))->findOrFail($id);
         // $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -127,7 +127,7 @@ class HomeUserController extends Controller
     public function searchProducts(Request $request)
     {
         $keyword = $request->input('keyword');
-        $products = Product::where('name', 'LIKE', "%$keyword%")
+        $products = Product::with('variants')->where('name', 'LIKE', "%$keyword%")
             ->take(10)
             ->get();
 
@@ -144,7 +144,7 @@ class HomeUserController extends Controller
                         <img style="margin-right: 10px;border-radius: 5px;" width="40px" height="40px" src="' . asset($product->image) . '" alt="' . $product->name . '" />
                         <div class="product-info" style="display: flex;flex-direction: column;">
                             <span class="product-name">' . $product->name . '</span>
-                            <span class="product-price">' . number_format($product->price, 0, ',', '.') . ' đ</span>
+                            <span class="product-price">' . number_format($product->variants->min('price'), 0, ',', '.') . ' đ</span>
                         </div>
                     </a>
                 ';
