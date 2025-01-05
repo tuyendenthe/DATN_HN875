@@ -1,3 +1,4 @@
+<?php //dd($selectedProducts) ?><!---->
 @extends('clients.master')
 <style>
     input.error {
@@ -151,6 +152,7 @@
                                     <thead>
                                     <tr>
                                         <th class="product-name">Sản Phẩm</th>
+                                        <th class="product-name">Thông số</th>
                                         <th class="product-name">Số Lượng</th>
                                         <th class="product-total">Thành Tiền</th>
                                     </tr>
@@ -169,6 +171,9 @@
                                         <tr class="cart_item">
                                             <td class="product-name">
                                                 <div>{{ $item['product_name'] }}</div>
+                                            </td>
+                                            <td>
+                                                <div>{{$item['product_ram']}}GB - {{$item['product_memory']}}GB</div>
                                             </td>
                                             <td class="product-name align-items-center">
                                                 <strong class="product-quantity align-items-center">× {{ $item['quantity'] }}</strong>
@@ -242,6 +247,7 @@
 
 @endsection
 <script>
+
     // Lấy tất cả radio buttons với name="payment_method"
 
     // document.addEventListener("DOMContentLoaded", function () {

@@ -47,13 +47,7 @@
                     <span class="" style="color: red">{{ $message }}</span>
                     @enderror --}}
                 </div>
-                <div class="col-12">
-                    Số Lượng:
-                    <input type="text" name="quantity" value="{{ $product->quantity  }}" class="form-control">
-                    {{-- @error('name')
-                    <span class="" style="color: red">{{ $message }}</span>
-                    @enderror --}}
-                </div>
+
                 <div class="col-12">
                     Danh mục:
                     {{-- <input type="text" name="name" value="{{ old('name') }}" class="form-control"> --}}
@@ -78,13 +72,6 @@
                             <span class="" style="color: red">{{ $message }}</span>
                     @enderror --}}
                 </div>
-                <div class='col-12'>
-                    <label for="">Giá</label>
-                    <input type="number" name='price' class='form-control' value="{{$product->price }}">
-                    {{-- @error('price')
-                    <span class="" style="color: red">{{ $message }}</span>
-                    @enderror --}}
-                </div>
 
 
             <div class="col-12">
@@ -102,45 +89,13 @@
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror --}}
             </div>
-            <div class="col-12">
-               Ram :
-                {{-- @error('ram')
-                <span class="" style="color: red">{{ $message }}</span>
-                @enderror --}}
-                <select name="ram_id" value="{{ $product->ram_id }}"
 
-                        class="form-control" id="ramSelect" {{ $product->is_attributes == 1 ? 'disabled' : '' }}>
-                    @foreach ($rams as $val)
-                        <option value="{{ $val->id }}" {{ $product->ram_id == $val->id ? 'selected' : '' }}>
-                            {{ $val->name }}
-                        </option>
-                    @endforeach
-                </select>
-
-
-
-            </div>
             <div class="col-12">
                 Màu Sắc :
                 <input type="text" name="color" value="{{ $product->color }}" class="form-control">
                 {{-- @error('color')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror --}}
-            </div>
-            <div class="col-12">
-                Bộ Nhớ:
-                {{-- @error('memory')
-                <span class="" style="color: red">{{ $message }}</span>
-                @enderror --}}
-                <select name="memory_id" value="{{ $product->memory_id }}"
-
-                        class="form-control" id="ramSelect" {{ $product->is_attributes == 1 ? 'disabled' : '' }}>
-                    @foreach ($memories as $val)
-                        <option value="{{ $val->id }}" {{ $product->memory_id == $val->id ? 'selected' : '' }}>
-                            {{ $val->name }}
-                        </option>
-                    @endforeach
-                </select>
             </div>
             <div class="col-12">
                 Kích Thước Màn Hình:
