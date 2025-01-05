@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="no-js" lang="">
 
@@ -985,7 +986,7 @@
                                                                 VNĐ</del></span>
                                                     @else
                                                         <span
-                                                            class="price">{{ number_format($item->price, 0, ',', '.') }}
+                                                            class="price">{{ number_format($item->variants->min('price'), 0, ',', '.') }}
                                                             VNĐ</span>
                                                     @endif
                                                     <a href="{{ route('single_product', $item->id) }}">Xem chi tiết
@@ -1137,7 +1138,7 @@
                                                             VNĐ</del></span>
                                                 @else
                                                     <span
-                                                        class="price">{{ number_format($item->price, 0, ',', '.') }}
+                                                        class="price">{{ number_format($item->variants->min('price'), 0, ',', '.') }}
                                                         VNĐ</span>
                                                 @endif
                                                 <a href="{{ route('single_product', $item->id) }}">Xem chi tiết</a>

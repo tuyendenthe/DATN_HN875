@@ -50,6 +50,7 @@
                                     <th>Loại</th>
                                     <th>Mô tả ngắn</th>
                                     <th>Hành Động</th>
+                                    <th>Thuộc tính</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,6 +71,9 @@
                                                     @method('delete')
                                                     <button class="btn btn-danger m-1" onclick="return confirm('Bạn có muốn xóa không?')">Xóa</button>
                                                 </form>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-default m-1" href="{{ route('products.variants.index', $value->id) }}">Xem</a>
                                             </td>
                                         </tr>
                                     @endforeach

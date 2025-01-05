@@ -66,7 +66,7 @@
                                     <th class="product-checkbox"><input type="checkbox" id="select-all"></th>
                                     <th class="product-thumbnail">Hình Ảnh</th>
                                     <th class="cart-product-name">Sản Phẩm</th>
-                                    {{-- <th class="product-variant">Loại</th> --}}
+                                    <th class="product-variant">Thông số</th>
                                     <th class="product-price">Đơn Giá</th>
                                     <th class="product-quantity">Số Lượng</th>
                                     <th class="product-subtotal">Thành Tiền</th>
@@ -85,8 +85,11 @@
                                                     <input type="checkbox" class="checkbox-cart"
                                                         data-price="{{ $item['price'] }}"
                                                         data-quantity="{{ $item['quantity'] }}"
-                                                        data-product-id="{{ $item['product_id'] }}"
-                                                        data-product-name="{{ $item['product_name'] }}" />
+                                                        data-productvariants-id="{{ $item['product_id'] }}"
+                                                        data-product-name="{{ $item['product_name'] }}"
+                                                        data-product-ram="{{ $item['ram'] }}"
+                                                        data-product-memory="{{ $item['memory'] }}"
+                                                        />
                                                     <!-- Thêm data-product-name -->
                                                 </td>
                                                 <td class="product-thumbnail">
@@ -98,6 +101,9 @@
                                                 <td class="cart-product-name">
                                                     <a
                                                         href="{{ route('product.details', $item['product_id']) }}">{{ $item['product_name'] }}</a>
+                                                </td>
+                                                <td class="cart-product-variants">
+                                                    <span>RAM:{{$item['ram']}}GB - MEMORY:{{ $item['memory'] }}GB</span>
                                                 </td>
                                                 {{-- <td class="product-variant"> --}}
                                                 {{-- <ul>
@@ -221,14 +227,18 @@
                     $('.checkbox-cart:checked').each(function() {
                         const price = $(this).data('price');
                         const quantity = $(this).data('quantity');
-                        const productId = $(this).data('product-id');
+                        const productVariantsId = $(this).data('productvariants-id');
                         const productName = $(this).data('product-name');
+                        const productRam = $(this).data('product-ram');
+                        const productMemory = $(this).data('product-memory');
 
                         if (price && quantity) {
                             total += price * quantity; // Cộng tổng tiền
                             selectedProducts.push({
-                                product_id: productId,
+                                productvariants_id: productVariantsId,
                                 product_name: productName,
+                                product_ram: productRam,
+                                product_memory: productMemory,
                                 price: price,
                                 quantity: quantity
                             });

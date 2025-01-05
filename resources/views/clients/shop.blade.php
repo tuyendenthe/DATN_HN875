@@ -157,7 +157,7 @@
                                                     <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
                                                     <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
                                                     @else
-                                                        <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                        <span style="width: 120px" class="price">{{ number_format($item->variants->min('price'), 0, ',', '.') }} VNĐ</span>
                                                     @endif
                                                     <a href="{{ route('single_product', $item -> id) }}">Chi Tiết Sản Phầm</a>
                                                 </div>
@@ -219,7 +219,7 @@
                                                                     <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
                                                                     <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
                                                                     @else
-                                                                        <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                                        <span style="width: 120px" class="price">{{ number_format($item->variants->min('price'), 0, ',', '.') }} VNĐ</span>
                                                                     @endif
                                                                     {{-- <a style="width: 300px" href="{{ route('single_product', $item->id) }}">+ Select Option</a> --}}
                                                                 </div>
@@ -261,7 +261,7 @@
                                                                             <span style="width: 100px" class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
                                                                             <span  style="width: 100px" class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }} VNĐ</del></span>
                                                                             @else
-                                                                                <span style="width: 120px" class="price">{{ number_format($item->price, 0, ',', '.') }} VNĐ</span>
+                                                                                <span style="width: 120px" class="price">{{ number_format($item->variants->min('price'), 0, ',', '.') }} VNĐ</span>
                                                                             @endif
                                                                             {{-- <a href="{{ route('single_product',$item->id)  }}">+ Select Option</a> --}}
                                                                         </div>

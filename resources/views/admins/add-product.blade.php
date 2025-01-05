@@ -69,13 +69,7 @@
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="col-12">
-                Số Lượng:
-                <input type="text" name="quantity" value="{{ old('quantity') }}" class="form-control" id="quantity">
-                @error('quantity')
-                <span class="" style="color: red">{{ $message }}</span>
-                @enderror
-            </div>
+
             <div class="col-12">
                 Danh mục:
                 <select name="category_id" class="form-control" id="categorySelect">
@@ -87,13 +81,7 @@
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
             </div>
-            <div class='col-12'>
-                <label for="">Giá</label>
-                <input type="number" name='price' class='form-control' value="{{ old('price') }}">
-                @error('price')
-                <span class="" style="color: red">{{ $message }}</span>
-                @enderror
-            </div>
+
             <div class="col-12">
                 Ảnh:
                 <input type="file" name="image" class="form-control">
@@ -108,17 +96,7 @@
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="col-12">
-                RAM:
-                <select name="ram_id" class="form-control" id="ramSelect">
-                    @foreach ($rams as $val)
-                        <option value="{{ $val->id }}">{{ $val->name }}</option>
-                    @endforeach
-                </select>
-                @error('ram_id')
-                <span class="" style="color: red">{{ $message }}</span>
-                @enderror
-            </div>
+
             <div class="col-12">
                 Màu Sắc:
                 <input type="text" name="color" value="{{ old('color') }}" class="form-control">
@@ -126,17 +104,7 @@
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="col-12">
-                Bộ Nhớ:
-                <select name="memory_id" class="form-control" id="memorySelect">
-                    @foreach ($memories as $val)
-                        <option value="{{ $val->id }}">{{ $val->name }}</option>
-                    @endforeach
-                </select>
-                @error('memory_id')
-                <span class="" style="color: red">{{ $message }}</span>
-                @enderror
-            </div>
+
             <div class="col-12">
                 Kích Thước Màn Hình:
                 <input type="text" name="screen" value="{{ old('screen') }}" class="form-control">

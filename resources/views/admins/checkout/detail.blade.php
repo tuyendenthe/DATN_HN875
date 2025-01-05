@@ -1,3 +1,4 @@
+<?php //dd($detail) ?><!---->
 @extends('admins.master')
 
 @section('content')
@@ -60,7 +61,7 @@
                                 @foreach ($detail as $key => $value)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $value->product->name }}</td> <!-- Sử dụng quan hệ nếu có -->
+                                        <td>{{ $value->name }}</td> <!-- Sử dụng quan hệ nếu có -->
                                         <td><img src="{{ asset($value->image) }}" alt="" width="100px"></td>
                                         <td>{{ number_format($value->price, 0, ',', '.') }} VNĐ</td>
                                         <td>{{ $value->quantity }}</td>
