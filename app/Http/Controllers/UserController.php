@@ -6,7 +6,7 @@ use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Requests\UpdateAdminRequest;
 class UserController extends Controller
 {
 
@@ -66,8 +66,8 @@ public function detail(string $id)
             'image.image' => 'Tệp tải lên phải là hình ảnh.',
             'image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif.',
             'image.max' => 'Hình ảnh không được lớn hơn 2MB.',
-            'role.required' => 'Quyền tài khoản là bắt buộc.',
-            'role.in' => 'Quyền tài khoản không hợp lệ.',
+            // 'role.required' => 'Quyền tài khoản là bắt buộc.',
+            // 'role.in' => 'Quyền tài khoản không hợp lệ.',
         ];
 
         // Validate the request with custom messages
@@ -225,59 +225,7 @@ public function editUser($id)
     return view('admins.users.edit_user', compact('user'));
 }
 
-//     public function update(Request $request, string $id)
-// {
-//     $user = User::findOrFail($id);
 
-//     $request->validate([
-//         'name' => 'required|string|max:255',
-//         'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-//         'address' => 'nullable|string|max:255',
-//         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-//         'role' => 'required',
-//     ]);
-
-//     $data = [
-//         'name' => $request->name,
-//         'email' => $request->email,
-//         'address' => $request->address,
-//         'role' =>1,
-//     ];
-
-//     if ($request->filled('password')) {
-//         $data['password'] = bcrypt($request->password);
-//     }
-
-//     if ($request->hasFile('image')) {
-//         $data['image'] = $request->file('image')->store('images', 'public');
-//     }
-
-//     $user->update($data);
-//     $check_admin = Admin::where('email', $request->email)->first();
-
-//     if($check_admin){
-
-//         $check_admin->delete();
-//     }
-
-//     if($request->role == 1){
-//         $check = User::find($id);
-
-//         Admin::create([
-//             'name' => $request->name,
-//             'email' => $request->email,
-//             'password' => $check->password,
-//             'status' => 1,
-//             'username' => $request->name,
-//         ]);
-//     }
-
-//     return redirect()->route('admin1.users.listuser')->with('message1', 'Cập nhật thành công.');
-// }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
@@ -293,35 +241,61 @@ public function editUser($id)
 
     return redirect()->route('admin1.users.listuser')->with('message1', 'Trạng thái tài khoản đã được cập nhật.');
 }
-public function update(Request $request, string $id)
+// public function update(Request $request, string $id)
+// {
+//     $user = User::findOrFail($id);
+
+//     $request->validate([
+//         'name' => 'required|string|max:255',
+//         'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+//         'address' => 'nullable|string|max:255',
+//         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+//         'role' => 'required',
+//     ]);
+
+//     $data = [
+//         'name' => $request->name,
+//         'email' => $request->email,
+//         'address' => $request->address,
+//         'role' => $request->role, // Cập nhật vai trò từ request
+//     ];
+
+//     if ($request->filled('password')) {
+//         $data['password'] = bcrypt($request->password);
+//     }
+
+//     if ($request->hasFile('image')) {
+//         $data['image'] = $request->file('image')->store('images', 'public');
+//     }
+
+//     $user->update($data);
+
+//     return redirect()->route('admin1.users.listuser')->with('message1', 'Cập nhật thành công.');
+// }
+
+
+
+
+
+public function update(UpdateAdminRequest $request, string $id)
 {
     $user = User::findOrFail($id);
 
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-        'address' => 'nullable|string|max:255',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'role' => 'required',
-    ]);
+    // Update user details
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->address = $request->address;
+    $user->role = $request->role;
 
-    $data = [
-        'name' => $request->name,
-        'email' => $request->email,
-        'address' => $request->address,
-        'role' => $request->role, // Cập nhật vai trò từ request
-    ];
-
-    if ($request->filled('password')) {
-        $data['password'] = bcrypt($request->password);
-    }
-
+    // Handle image upload if it exists
     if ($request->hasFile('image')) {
-        $data['image'] = $request->file('image')->store('images', 'public');
+        $path = $request->file('image')->store('images/users', 'public');
+        $user->image = $path;
     }
 
-    $user->update($data);
+    $user->save();
 
     return redirect()->route('admin1.users.listuser')->with('message1', 'Cập nhật thành công.');
 }
+
 }

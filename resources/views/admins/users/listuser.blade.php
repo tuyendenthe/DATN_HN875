@@ -34,11 +34,11 @@
                                     </form>
                                     {{-- <a href="{{ route('admins.users.listuser') }}" class="btn btn-secondary ml-2">Reset Danh Sách</a> --}}
                                 </div>
-                                <div class="d-flex justify-content-between mb-3">
+                                {{-- <div class="d-flex justify-content-between mb-3">
                                     <div>
                                         <a href="{{ route('admin1.users.adduser') }}" class="btn btn-primary">Thêm mới</a>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <thead>
                                     <tr>
                                         <th>STT</th>
@@ -98,15 +98,15 @@
 
                                                 <a class="btn btn-info m-1" href="{{ route('admin1.users.detail', $value->id) }}">Xem chi tiết</a>
 
-                                                @if(auth()->user()->role == '1' && $value->role == '3')
+                                                {{-- @if(auth()->user()->role == '1' && $value->role == '3')
                                                     <form action="{{ route('admin1.users.destroy', $value->id) }}" method="post" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa Admin phụ này không?')">Xóa</button>
                                                     </form>
                                                 @else
-                                                    {{-- Không thể xóa người dùng khác --}}
-                                                @endif
+                                                    Không thể xóa người dùng khác
+                                                @endif --}}
                                             </td>
                                         </tr>
                                         @endforeach
