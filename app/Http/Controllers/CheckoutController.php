@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bill;
 // use App\Models\status;
 use App\Models\Bill_detail;
+use App\Models\ProductVariants;
 use App\Models\Status;
 use App\Models\Voucher;
 use Illuminate\Support\Str;
@@ -21,7 +22,7 @@ class CheckoutController extends Controller
 {
     public function index(Request $request)
     {
-        // dd($request->all());
+//         dd($request->all());
         $check = $request->totalSelected;
         $cart = session()->get('cart', []);
         $voucherId = $request -> voucherId;
@@ -36,8 +37,9 @@ class CheckoutController extends Controller
         }
     }
         foreach ($selectedProducts as $value) {
-            $product_id = $value['product_id']; // Lấy product_id từ mảng
-            $check = Product::findOrFail($product_id);
+            $product_id = $value['productvariants_id']; // Lấy product_id từ mảng
+
+            $check = ProductVariants::findOrFail($product_id);
             if ($check->quantity < $value['quantity']) {
                 return redirect()->route("cart.view")->with('message', 'Số Lượng Sản Phẩm Bạn Chọn Mua Hiện Chúng Tôi Không Có Đủ, Vui Lòng Quay Lại Sau.');
             }
@@ -219,7 +221,6 @@ class CheckoutController extends Controller
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         $randomString = substr(str_shuffle($characters), 0, 10); // Tạo mã đơn hàng ngẫu nhiên
         $user_id = auth()->check() ? auth()->user()->id : null;
-
         $bill = [
             'bill_code' => $randomString,
             'name' => $request['name'],
@@ -240,9 +241,9 @@ class CheckoutController extends Controller
         $products = is_string($request['products'])
             ? json_decode($request['products'], true)
             : $request['products'];
-
+//dd(session()->get('cart'));
         foreach ($products as $value) {
-            $product = Product::findOrFail($value['product_id']);
+            $product = ProductVariants::with('product') ->findOrFail($value['productvariants_id']);
             if ($product->quantity < $value['quantity']) {
                 return redirect()->route("cart.view")->with('message', 'Số lượng sản phẩm không đủ.');
             }
@@ -254,10 +255,10 @@ class CheckoutController extends Controller
         foreach ($products as $item) {
             Bill_detail::create([
                 'bill_id' => $billRecord->id,
-                'product_id' => $item['product_id'],
+                'product_id' => $item['productvariants_id'],
                 'bill_code' => $randomString,
                 'quantity' => $item['quantity'],
-                'product_name' => Product::find($item['product_id'])->name,
+                'product_name' => ProductVariants::with('product')->find($item['productvariants_id'])->product->name,
                 'subtotal' => $item['price'] * $item['quantity'],
                 'price' => $item['price'],
                 'created_at' => now(),
@@ -289,14 +290,13 @@ class CheckoutController extends Controller
         $cart = session()->get('cart', []);
         foreach ($products as $purchasedProduct) {
             $cart = array_filter($cart, function ($item) use ($purchasedProduct) {
-                return $item['product_id'] != $purchasedProduct['product_id'];
+                return $item['product_id'] != $purchasedProduct['productvariants_id'];
             });
         }
         session()->put('cart', $cart);
 
         return redirect()->route("checkout.success")->with('success', 'Mua hàng thành công.');
     }
-
 
     public function orderDetail($bill_code)
 {
@@ -428,10 +428,19 @@ class CheckoutController extends Controller
     }
 
     $detail = DB::table('bill_details')
-        ->join('products', 'bill_details.product_id', '=', 'products.id')
-        ->where('bill_details.bill_code', $bill_code)
-        ->select('bill_details.*', 'products.name', 'products.image')
+        ->join('product_variants', 'bill_details.product_id', '=', 'product_variants.id') // Liên kết với bảng product_variants
+        ->join('products', 'product_variants.product_id', '=', 'products.id') // Liên kết với bảng products
+        ->where('bill_details.bill_code', $bill_code) // Điều kiện bill_code
+        ->select(
+            'bill_details.*',
+            'products.name',
+            'products.image',
+            'product_variants.ram',
+            'product_variants.memory',
+            'product_variants.price'
+        ) // Chọn thêm các trường cần thiết từ product_variants
         ->get();
+
 
     return view('admins.checkout.detail', compact('data', 'detail'));
 }
@@ -512,6 +521,7 @@ class CheckoutController extends Controller
 
         return view('clients.search_order', compact('order', 'status'));
     }
+
 
 
     private function syncBank($apikey,$sotaikhoan){

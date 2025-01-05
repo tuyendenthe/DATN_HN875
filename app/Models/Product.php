@@ -19,10 +19,7 @@ class Product extends Model
         'image',
         'content',
         'chip',
-        'ram_id',
         'color',
-        'memory_id',
-        'quantity',
         'screen',
         'resolution',
         'content_short',
@@ -76,4 +73,9 @@ class Product extends Model
 //         return $this->belongsTo(Memory::class, 'memory_id');
 
     }
+    public function variants()
+    {
+        return $this->hasMany(ProductVariants::class, 'product_id');
+    }
+
 }

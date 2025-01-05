@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Memory;
-use App\Models\Ram;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Facades;
@@ -41,12 +39,10 @@ class ProductController extends Controller
     public function addProduct()
     {
         $data = Category::get();
-        $memories = Memory::all();
-        $rams = Ram::all();
         // dd($data);
         $products = Product::where('is_attributes',2)->get();
         // $Categories = Categories::where('status_delete', Categories::UNDELETE)->get();
-        return view('admins.add-product', compact('data','products', 'memories', 'rams'));
+        return view('admins.add-product', compact('data','products'));
     }
     public function upload_image($imageFile)
     {
@@ -70,9 +66,7 @@ class ProductController extends Controller
         // dd($req);
         $data =  [
             'name' => $req->name,
-            'quantity' => $req->quantity,
             'image' => $path,
-            'price' => $req->price,
             'content_short' => $req->content_short,
             'content' => $req->content,
 
@@ -80,12 +74,10 @@ class ProductController extends Controller
 
             'chip' => $req->chip,
 
-            'ram_id' => $req->ram_id,
 
             'color' => $req->color,
 
 
-            'memory_id' => $req->memory_id,
 
             'screen' => $req->screen,
 
@@ -117,10 +109,8 @@ class ProductController extends Controller
         $product = Product::find($id);
         $category = Category::get();
         $products = Product::get();
-        $memories = Memory::all();
-        $rams = Ram::all();
 
-        return view('admins.update-product', compact('category','product','products', 'rams', 'memories'))
+        return view('admins.update-product', compact('category','product','products'))
         ;
     }
 
@@ -149,17 +139,13 @@ class ProductController extends Controller
 
             'image' => $path,
 
-            'price' => $req->price,
             'content_short' => $req->content_short,
             'content' => $req->content,
             'chip' => $req->chip,
 
-            'ram_id' => $req->ram_id,
 
             'color' => $req->color,
-            'quantity' => $req->quantity,
 
-            'memory_id' => $req->memory_id,
 
             'screen' => $req->screen,
 
