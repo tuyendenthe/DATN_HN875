@@ -32,14 +32,12 @@ class updateVariants extends FormRequest
     protected function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            // Lấy thông tin từ request
             $productId = $this->input('product_id');
-//            $this->dd($productId);
             $ram = $this->input('ram');
             $memory = $this->input('memory');
-            $currentVariantId = $this->route('variant'); // Lấy ID của biến thể đang cập nhật từ route
 
-            // Kiểm tra xem có biến thể khác trùng với RAM và MEMORY đã tồn tại cho sản phẩm này
+            // Lấy ID của biến thể đang sửa, nếu có
+            $currentVariantId = $this->route('id'); // Lấy ID từ route (chắc chắn rằng route có chứa thông tin này)
             $isDuplicate = ProductVariants::where('product_id', $productId)
                 ->where('ram', $ram)
                 ->where('memory', $memory)
@@ -47,7 +45,7 @@ class updateVariants extends FormRequest
                 ->exists();
 
             if ($isDuplicate) {
-                $validator->errors()->add('ram', 'Biến thể với RAM và Dung lượng bộ nhớ này đã tồn tại cho sản phẩm này.');
+                $validator->errors()->add('ram', 'Biến thể với RAM và Dung lượng bộ nhớ này đã tồn tại.');
             }
         });
     }

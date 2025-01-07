@@ -23,6 +23,7 @@ class addVariants extends FormRequest
     public function rules(): array
     {
         return [
+            'product_id' => 'required',
             'ram' => 'required|string|max:50|regex:/^\d+$/',
             'memory' => 'required|string|max:50|regex:/^\d+$/',
             'quantity' => 'required|integer|min:1|max:10000',
