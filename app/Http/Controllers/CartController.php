@@ -115,6 +115,7 @@ class CartController extends Controller
     public function addCart1(Request $request)
 
     {
+
         $id = $request->product_variants;
         $productVariants = ProductVariants::query()->findOrFail($id);
         $ram = $productVariants->ram;
