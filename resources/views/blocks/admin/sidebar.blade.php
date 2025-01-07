@@ -7,7 +7,7 @@
                 {{-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li> --}}
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('chart')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê doanh thu</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('product_statistics')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê số lượng - giá tiền</span></a></li>
-                {{-- <li class="sidebar-item">
+                <li class="sidebar-item">
                     @if(auth()->check())
                         <form method="GET" action="{{ route('admin1.check123') }}">
                             @csrf
@@ -28,7 +28,7 @@
                             //  window.location.href = "{{ route('login', ['message' => 'Bạn không có quyền. Vui lòng đăng nhập trước!']) }}";
                         </script>
                     @endif
-                </li> --}}
+                </li>
 
 
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Danh mục </span></a>

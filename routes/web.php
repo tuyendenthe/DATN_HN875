@@ -268,7 +268,8 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::post('add-product', [ProductController::class, 'addPostProduct'])->name('addPostProduct');
     Route::get('update-product/{id}', [ProductController::class, 'updateProduct'])->name('updateProduct');
     Route::put('update-product/{id}', [ProductController::class, 'updatePutProduct'])->name('updatePutProduct');
-    Route::delete('delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
+    Route::post('delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
+    Route::post('cancel-delete-product/{id}', [ProductController::class, 'cancedeleteProduct'])->name('cancedeleteProduct');
     Route::get('variants/view/{id}', [ProductVariantsController::class, 'index'])->name('variants.index');
     Route::get('variants/create/{id}', [ProductVariantsController::class, 'create'])->name('variants.create');
     Route::get('variants/edit/{id}', [ProductVariantsController::class, 'edit'])->name('variants.edit');

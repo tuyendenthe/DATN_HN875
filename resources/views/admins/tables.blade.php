@@ -58,7 +58,7 @@
                                     @foreach ($listProducts as $key => $value)
                                         <tr>
                                             <td>{{ $listProducts->firstItem() + $key }}</td>
-                                            <td>{{ $value->name }} - ({{ $value->is_attributes == 1 ? 'Sản phẩm con' : 'Sản phẩm cha' }})</td>
+                                            <td>{{ $value->name }} </td>
                                             <td>
                                                 <img src="{{ asset($value->image) }}" alt="" width="100">
                                             </td>
@@ -66,11 +66,20 @@
                                             <td>{{ $value->content_short }}</td>
                                             <td>
                                                 <a class="btn btn-primary m-1" href="{{ route('products.updateProduct', $value->id) }}">Sửa</a>
+                                                @if ($value->status == 1)
                                                 <form action="{{ route('products.deleteProduct', $value->id) }}" method="post" style="display:inline;">
                                                     @csrf
-                                                    @method('delete')
+                                                    @method('POST')
                                                     <button class="btn btn-danger m-1" onclick="return confirm('Bạn có muốn xóa không?')">Xóa</button>
                                                 </form>
+                                                @else
+                                                <form action="{{ route('products.cancedeleteProduct', $value->id) }}" method="post" style="display:inline;">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button class="btn btn-danger m-1" onclick="return confirm('Bạn có muốn xóa không?')">Khôi Phục</button>
+                                                </form>
+                                                @endif
+
                                             </td>
                                             <td>
                                                 <a class="btn btn-default m-1" href="{{ route('products.variants.index', $value->id) }}">Xem</a>

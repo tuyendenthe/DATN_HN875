@@ -46,12 +46,12 @@
 
 
         <div class="row">
-            <div class="col-12 d-flex align-items-center">
+            {{-- <div class="col-12 d-flex align-items-center">
                 Là sản phảm thuộc tính
                 <input class="ml-2" type="checkbox" name="is_attributes" value="1" id="isAttributesCheckbox">
-            </div>
+            </div> --}}
 
-            <div class="col-12 mt-2 d-none" id="parentProductDiv">
+            {{-- <div class="col-12 mt-2 d-none" id="parentProductDiv">
                 Sản phẩm cha
                 <select class="form-control" name="product_parent" id="parentProductSelect">
                     <option value="">Chọn cha sản phẩm</option>
@@ -60,7 +60,7 @@
                     @endforeach
 
                 </select>
-            </div>
+            </div> --}}
 
             <div class="col-12">
                 Tên:
