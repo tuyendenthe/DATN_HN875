@@ -13,17 +13,17 @@
         </div>
         <div class="form-group">
             <label for="quantity">Số lượng</label>
-            <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $voucher->quantity }}" required max="99">
+            <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $voucher->quantity }}" required min="0" max="99">
         </div>
        
         
         <div class="form-group">
             <label for="price_sale">Giá giảm</label>
-            <input type="number" class="form-control" id="price_sale" name="price_sale" value="{{ $voucher->price_sale }}" required max="99999999">
+            <input type="number" class="form-control" id="price_sale" name="price_sale" value="{{ $voucher->price_sale }}" required min="0" max="99999999">
         </div>
         <div class="form-group">
             <label for="price_sale">Điều kiện giảm giá</label>
-            <input type="number" class="form-control" id="condition" name="condition" value="{{ $voucher->condition }}" required max="99999999">
+            <input type="number" class="form-control" id="condition" name="condition" value="{{ $voucher->condition }}" required min="0" max="99999999">
         </div>
         <div class="form-group">
             <label for="start_date">Ngày bắt đầu</label>

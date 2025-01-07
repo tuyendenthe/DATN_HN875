@@ -245,13 +245,28 @@
                     });
                 </script>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="{{ Auth::user()->image ? Storage::url(Auth::user()->image) : asset('admin/assets/images/users/default.jpg') }}" alt="user" class="rounded-circle" width="31">
-            </a>
+            {{-- <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @if(Auth::check())
+                    <img src="{{ Auth::user()->image ? Storage::url(Auth::user()->image) : asset('admin/assets/images/users/default.jpg') }}" alt="user" class="rounded-circle" width="31">
+                @else
+                    <script>
+                    //  alert('Bạn không có quyền. Vui lòng đăng nhập trước!');
+                     window.location.href = "{{ route('login') }}";
+                    </script>
+
+                @endif
+            </a> --}}
             <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                {{-- @if(Auth::check())
                 <a class="dropdown-item" href="{{ route('admin.users.edit', Auth::user()->id) }}">
                     <i class="fas fa-lock m-r-5 m-l-5"></i> Cập nhật tài khoản
                 </a>
+            @else
+                <script>
+                //    alert('Bạn không có quyền. Vui lòng đăng nhập trước!');
+                   window.location.href = "{{ route('login') }}";
+                </script>
+            @endif --}}
                 <a class="dropdown-item" href="{{ route('admin.change.password.form') }}">
                     <i class="fas fa-lock m-r-5 m-l-5"></i> Đổi Mật Khẩu
                 </a>

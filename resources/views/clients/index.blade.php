@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="no-js" lang="">
 
@@ -32,7 +33,7 @@
     <style>
         .swiper-container {
             width: 100%;
-            height: 600px;
+            height: 850px;
             /* Thay đổi chiều cao theo nhu cầu */
         }
 
@@ -480,8 +481,10 @@
                                 <div class="epix-c-list d-flex flex-column">
                                     @if(Auth::check())
                                         @foreach ($vouchers as $vou)
+
                                             <span style="font-size: 13px; width: 550px;">
                                                 Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{number_format($vou->price_sale)}}VNĐ cho đơn hàng từ {{number_format($vou->condition)}} VNĐ
+
                                             </span>
                                             <br>
                                         @endforeach
@@ -497,7 +500,7 @@
                             <div class="swiper-wrapper">
                                 @foreach ($banner_covers as $bannerss)
                                     <div class="swiper-slide"
-                                        style="background-image: url('{{ Storage::url($bannerss->image) }}'); height: 340px;">
+                                        style="background-image: url('{{ Storage::url($bannerss->image) }}'); height: 500px;">
                                     </div>
                                 @endforeach
                             </div>
@@ -983,7 +986,7 @@
                                                                 VNĐ</del></span>
                                                     @else
                                                         <span
-                                                            class="price">{{ number_format($item->price, 0, ',', '.') }}
+                                                            class="price">{{ number_format($item->variants->min('price'), 0, ',', '.') }}
                                                             VNĐ</span>
                                                     @endif
                                                     <a href="{{ route('single_product', $item->id) }}">Xem chi tiết
@@ -1135,7 +1138,7 @@
                                                             VNĐ</del></span>
                                                 @else
                                                     <span
-                                                        class="price">{{ number_format($item->price, 0, ',', '.') }}
+                                                        class="price">{{ number_format($item->variants->min('price'), 0, ',', '.') }}
                                                         VNĐ</span>
                                                 @endif
                                                 <a href="{{ route('single_product', $item->id) }}">Xem chi tiết</a>
@@ -1216,21 +1219,21 @@
         </div>
     </main>
     @if (auth()->user())
-        <div id="kmacb">
-            <form method="GET" action="http://localhost:1111/user/check">
-                @csrf
-                <input type="hidden" name="email" value="{{ auth()->user()->email }}">
-                <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
-                <button modal="kmacb-form" type="submit" title="Перезвонить Вам"
-                    style="border:none !important; background:none !important;">
-                    <div class="kmacb-circle"></div>
-                    <div class="kmacb-circle-fill"></div>
-                    <div class="kmacb-img-circle"></div>
-                </button>
+    <div id="kmacb">
+        <form method="GET" action="./user/check">
+            @csrf
+            <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+            <input type="hidden" name="password" id="hiddenPassword" value="{{ session('user_password') }}">
+            <button modal="kmacb-form" type="submit" title="Перезвонить Вам"
+                style="border:none !important; background:none !important;">
+                <div class="kmacb-circle"></div>
+                <div class="kmacb-circle-fill"></div>
+                <div class="kmacb-img-circle"></div>
+            </button>
 
-            </form>
-        </div>
-    @endif
+        </form>
+    </div>
+@endif
 
     <!-- footer area start -->
     <footer class="footer-area footer-1 bg-black  pt-85">
