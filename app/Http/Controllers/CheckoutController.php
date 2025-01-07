@@ -404,10 +404,10 @@ class CheckoutController extends Controller
             $data2 = Bill_detail::where('bill_code','=',$bill_code)->get();
 
             foreach($data2 as $value){
-                $product = Product::findOrFail($value->product_id);
+                $product = ProductVariants::findOrFail($value->product_id);
 
                 $quantyti = $product->quantity + $value->quantity;
-                 DB::table('products')->where('id','=',$value->product_id)->update(['quantity'=> $quantyti]);
+                 DB::table('product_variants')->where('id','=',$value->product_id)->update(['quantity'=> $quantyti]);
             };
 
         }

@@ -131,6 +131,14 @@ class CartController extends Controller
         // $variant3_name = Variant::find($variant_id_3) == null ? '' : $variant3->name;
 
         $products = (Product::with('category','flashSale'))->findOrFail($product->id);
+        if($request->product_variants == null) {
+            return back()->with('message1', 'Vui lòng chọn biến thể');
+        };
+        $id = $request->product_variants;
+        $productVariants = ProductVariants::query()->findOrFail($id);
+        $ram = $productVariants->ram;
+        $memory = $productVariants->memory;
+        $product = (Product::with('category','flashSale'))->findOrFail($productVariants->product_id);
         // $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
