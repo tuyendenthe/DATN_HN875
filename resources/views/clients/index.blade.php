@@ -483,7 +483,11 @@
                                         @foreach ($vouchers as $vou)
 
                                             <span style="font-size: 13px; width: 550px;">
-                                                Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{number_format($vou->price_sale)}}VNĐ cho đơn hàng từ {{number_format($vou->condition)}} VNĐ
+                                                Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{number_format($vou->price_sale)}}VNĐ cho đơn hàng từ {{number_format($vou->condition)}} VNĐ @if ($vou->quantity == 0)
+                                                    (Đã hết) 
+                                                 @else
+                                                    
+                                                @endif
 
                                             </span>
                                             <br>

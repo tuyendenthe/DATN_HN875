@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\variants\addVariants;
+use App\Http\Requests\variants\updateVariants;
 use App\Models\ProductVariants;
 use Illuminate\Http\Request;
 
@@ -32,15 +34,9 @@ class ProductVariantsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(addVariants $request)
     {
-        $validatedData = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'ram' => 'required|string|max:50',
-            'memory' => 'required|string|max:50',
-            'quantity' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:0',
-        ]);
+        $validatedData = $request->validated();
 
         // Lưu dữ liệu vào bảng product_variants
         ProductVariants::create($validatedData);
@@ -73,14 +69,9 @@ class ProductVariantsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(updateVariants $request, string $id)
     {
-        $validatedData = $request->validate([
-            'ram' => 'required|string|max:50',
-            'memory' => 'required|string|max:50',
-            'quantity' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:0',
-        ]);
+        $validatedData = $request->validated();
 
         // Tìm và cập nhật dữ liệu
         $variant = ProductVariants::findOrFail($id);
