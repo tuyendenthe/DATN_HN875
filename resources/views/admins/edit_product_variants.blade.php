@@ -48,6 +48,7 @@
 
 
             <div class="row">
+                <input type="hidden" name="product_id" value="{{$variant->product_id}}">
                 <div class="col-12">
                     RAM:
                     <input type="text" name="ram" value="{{ $variant->ram }}" class="form-control" id="ram_product">
