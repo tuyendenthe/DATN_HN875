@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Bill;
 use App\Models\Bill_detail;
 use App\Models\Product;
+use App\Models\ProductVariants;
 use Illuminate\Support\Facades\DB;
 
 class ChartController extends Controller
@@ -95,10 +96,10 @@ class ChartController extends Controller
         $product_quantity = [];
         $line_data = [];
         foreach ($productDetails as $productId => $productDetail) {
-            $product = Product::find($productDetail['detail']->product_id);
-           
+            $product = ProductVariants::with('product')->find($productDetail['detail']->product_id);
+         
           
-            $product_name[] = $product->name;
+            $product_name[] = $product->product->name;
             $line_data[] =  $productDetail['quantity']*$product->price;
             $product_quantity[] = $productDetail['quantity'];
         }
@@ -143,15 +144,15 @@ class ChartController extends Controller
         $product_name = [];
         $product_quantity = [];
         foreach ($productQuantities as $productId => $quantity) {
-            $result[] = ['product_id' => Product::find($productId), 'quantity' => $quantity];
+            $result[] = ['product_id' => ProductVariants::with('product')->find($productId), 'quantity' => $quantity];
         }
         usort($result, function($a, $b) {
             return $b['quantity'] - $a['quantity'];
             });
-            
+          
         foreach($result as $re){
-            
-            $product_name[] = $re['product_id']->name;
+        
+            $product_name[] = $re['product_id']->product->name;
             $product_quantity[] = $re['quantity'];  
         }
         return view('admins.best_selling',compact('product_name','product_quantity','data_start_','data_end'));
@@ -159,12 +160,22 @@ class ChartController extends Controller
     }
 
     public function inventory_product(Request $request){
-        $products = Product::get();
+        $products = Product::with('variants')->get();
         $name_product = [];
         $quantity = [];
         foreach($products as $product){ 
-            $name_product[] = $product->name;
-            $quantity[] = $product->quantity;
+            if($product->variants->count() > 0){
+                $a  = 0;
+                foreach($product->variants as $variant){
+                    $a = $a + $variant->quantity;
+                };
+                $name_product[] = $product->name;
+                $quantity[] = $a;
+            }else{
+                $name_product[] = $product->name;
+                $quantity[] = $product->quantity;
+            }
+            
         }
         return view('admins.inventory_product',compact('name_product','quantity'));
     }
