@@ -4,12 +4,12 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Tables</h4>
+                <h4 class="page-title">Sửa sản phẩm</h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Sửa sản phẩm</li>
                         </ol>
                     </nav>
                 </div>
@@ -22,24 +22,7 @@
             @method('PUT')
             @csrf
             <div class="row">
-                <div class="col-12 d-flex align-items-center">
-                    Là sản phảm thuộc tính
-                    <input class="ml-2" type="checkbox" name="is_attributes" value="1" id="isAttributesCheckbox" {{ $product->is_attributes == 1 ? 'checked' : '' }}>
-                </div>
 
-                <div class="col-12 mt-2 {{ $product->is_attributes == 1 ? ' d-block' : 'd-none' }}" id="parentProductDiv">
-                    Sản phẩm cha
-                    <select class="form-control" name="product_parent" id="parentProductSelect">
-                        <option value="">Chọn cha sản phẩm</option>
-                        @foreach ($products as $product1)
-                            <option value="{{ $product1->id }}" data-name="{{ $product1->name }}"
-                            data-category="{{ $product1->category_id }}" data-role ="{{ $product1->role }}"
-                            {{ $product->product_parent == $product1->id ? ' selected="selected"' : '' }}
-                            >{{ $product1->name }}</option>
-                        @endforeach
-
-                    </select>
-                </div>
                 <div class="col-12">
                     Tên:
                     <input type="text" name="name" value="{{ $product->name }}" class="form-control">
@@ -141,7 +124,7 @@
                 @enderror --}}
             </div>
             <div class="col-12">
-            <button  class="btn btn-primary form-control mt-4">Thêm mới</button>
+            <button  class="btn btn-primary form-control mt-4">Sửa</button>
             </div>
             </div>
         </form>

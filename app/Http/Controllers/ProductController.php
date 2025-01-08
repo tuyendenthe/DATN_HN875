@@ -73,7 +73,7 @@ class ProductController extends Controller
 
 
             'chip' => $req->chip,
-
+            'status'=> 1,
 
             'color' => $req->color,
 
@@ -83,19 +83,11 @@ class ProductController extends Controller
 
             'resolution' => $req->resolution,
 
-            'is_attributes' => $req->is_attributes ?? 2,
-            'product_parent' => $req->product_parent,
+
 
 
         ];
-        if($req->is_attributes == 1){
-            $productParent = Product::find($req->product_parent);
-            $data['category_id'] = $productParent->category_id;
-            $data['role'] = $productParent->role;
-        }else{
-            $data['category_id'] = $req->category_id;
-            $data['role'] = $req->role;
-        }
+
 
         Product::create($data);
         return redirect()->route('products.listProduct')->with('message1', 'Thêm thành công');
@@ -151,34 +143,15 @@ class ProductController extends Controller
 
             'resolution' => $req->resolution,
 
-            'is_attributes' => $req->is_attributes ?? 2,
-            'product_parent' => $req->product_parent,
+
 
 
         ];
-        if($req->is_attributes == 1){
 
-            $productParent = Product::find($req->product_parent);
-
-            $data['category_id'] = $productParent->category_id;
-            $data['role'] = $productParent->role;
-        }else{
-            $data['category_id'] = $req->category_id;
-            $data['role'] = $req->role;
-        }
 
         $product->update($data);
 
-        if($product->is_attributes == 2 ) {
-            $product_child = Product::where('product_parent', $id)->get();
-            foreach($product_child as $child) {
-               $product_child_update = Product::find($child->id);
-               $product_child_update->update([
-                    'role' => $req->role,
-                    'category_id' => $req->category_id
-               ]);
-            }
-        }
+
         // return redirect()->route('products.listProduct');
         return redirect()->route('products.listProduct')->with('message1', 'Cập nhật thành công.');
     }
@@ -199,7 +172,36 @@ class ProductController extends Controller
         $product->flashSales()->delete();
 
         // Xoá sản phẩm
-        $product->delete();
+        $data=2;
+        // $product->update($data);
+        DB::table('products')->where('id','=', $id)->update(['status' => $data]);
+
+
+    //     $fls = FlashSale::where('product_id','=',$id)->first()->get();
+    //     if(!empty($fls)){
+    //     DB::table('flash_sales')->where('product_id', $id)->delete();
+    // }
+
+//         // return redirect()->route('products.listProduct');
+        // return redirect()->route('products.listProduct')->with('message1', 'Xóa thành công.');
+
+
+    }
+
+    return redirect()->route('products.listProduct')->with('message1', 'Sản phẩm và các Flash Sales liên quan đã được xoá!');
+}
+    public function cancedeleteProduct($id)
+{
+    $product = Product::find($id);
+
+    if ($product) {
+        // Xoá các bản ghi liên quan trong bảng flash_sales
+        // $product->flashSales()->delete();
+
+        // Xoá sản phẩm
+        $data=1;
+        // $product->update($data);
+        DB::table('products')->where('id','=', $id)->update(['status' => $data]);
 
 
 //         $fls = FlashSale::where('product_id','=',$id)->first()->get();
@@ -208,12 +210,12 @@ class ProductController extends Controller
 //     }
 
 //         // return redirect()->route('products.listProduct');
-//         return redirect()->route('products.listProduct')->with('message1', 'Xóa thành công.');
+        // return redirect()->route('products.listProduct')->with('message1', 'Kho thành công.');
 
 
     }
 
-    return redirect()->route('products.listProduct')->with('success', 'Sản phẩm và các Flash Sales liên quan đã được xoá!');
+    return redirect()->route('products.listProduct')->with('message1', 'Sản phẩm đã được Khôi phục');
 }
 
 }

@@ -436,7 +436,7 @@
 
     </style>
 
-    @php
+    {{-- @php
         use App\Models\Product;
 
         $product_parent = Product::where('product_parent', $products->product_parent)
@@ -445,7 +445,7 @@
 
         $product_parent_1 = Product::where('id',$products->product_parent)->with(['category', 'flashSale'])->first();
 
-    @endphp
+    @endphp --}}
         <!-- breadcrumb area start -->
     <div class="epix-breadcrumb-area mb-40">
         <div class="container">
