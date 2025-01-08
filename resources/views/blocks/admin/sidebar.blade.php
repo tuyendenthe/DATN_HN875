@@ -4,9 +4,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav" class="p-t-30">
-                {{-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li> --}}
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('chart')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê doanh thu</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('product_statistics')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê số lượng - giá tiền</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                 <li class="sidebar-item">
                     @if(auth()->check())
                         <form method="GET" action="{{ route('admin1.check123') }}">
@@ -22,13 +20,22 @@
                         </form>
                     @else
                         <script>
-                            //  alert('Bạn không có quyền. Vui lòng đăng nhập trước!');
                              window.location.href = "{{ route('login') }}";
-                            // alert('Vui lòng đăng nhập để tiếp tục.');
-                            //  window.location.href = "{{ route('login', ['message' => 'Bạn không có quyền. Vui lòng đăng nhập trước!']) }}";
                         </script>
                     @endif
                 </li>
+                <li class="sidebar-item"> 
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-receipt"></i><span class="hide-menu">Thống kê </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('chart')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê doanh thu</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('product_statistics')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê số lượng - giá tiền</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('best_selling')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê sản phẩm bán chạy</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('inventory_product')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Thống kê tồn kho</span></a></li>
+
+                    </ul>
+                </li>
+               
 
 
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Danh mục </span></a>

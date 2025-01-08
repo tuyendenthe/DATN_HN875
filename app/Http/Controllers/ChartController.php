@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Bill;
+use App\Models\Bill_detail;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ChartController extends Controller
 {
@@ -46,6 +48,7 @@ class ChartController extends Controller
             $date[] = Carbon::parse($key)->format('d-m-Y');
             $total[] = $value;
         }
+      
         return view('admins.chart', compact('date', 'total', 'data_start_', 'data_end'));
     }
 
@@ -101,5 +104,68 @@ class ChartController extends Controller
         }
   
         return view('admins.product_statistics',compact('product_name','product_quantity','line_data','data_start_','data_end'));
+    }
+
+    public function best_selling(Request $request){
+        if ($request->start) {
+            $data_start = Carbon::createFromFormat('Y-m-d', $request->start)->startOfDay();
+            $data_end = Carbon::createFromFormat('Y-m-d', $request->end)->endOfDay();
+        } else {
+            $data_start = Carbon::today('Asia/Ho_Chi_Minh')->startOfDay();
+            $data_end = Carbon::today('Asia/Ho_Chi_Minh')->endOfDay();
+        }
+   
+        if ($request->start) {
+            $data_start_ = Carbon::createFromFormat('Y-m-d', $request->start)->startOfDay();
+        } else {
+            $data_start_ = Carbon::today()->startOfDay();
+        }
+
+        $data_start_str = $data_start->format('Y-m-d H:i:s');
+
+        $data_end_str = $data_end->format('Y-m-d H:i:s');
+        
+        $orderDetails = Bill_detail::where('created_at', '>=', Carbon::now()->subMonth())->get();
+        $productQuantities = [];
+
+        foreach ($orderDetails as $orderDetail) {
+            $productId = $orderDetail->product_id;
+            $quantity = $orderDetail->quantity;
+        
+            if (!isset($productQuantities[$productId])) {
+                $productQuantities[$productId] = 0;
+            }
+        
+            $productQuantities[$productId] += $quantity;
+        }
+
+        $result = [];
+        $product_name = [];
+        $product_quantity = [];
+        foreach ($productQuantities as $productId => $quantity) {
+            $result[] = ['product_id' => Product::find($productId), 'quantity' => $quantity];
+        }
+        usort($result, function($a, $b) {
+            return $b['quantity'] - $a['quantity'];
+            });
+            
+        foreach($result as $re){
+            
+            $product_name[] = $re['product_id']->name;
+            $product_quantity[] = $re['quantity'];  
+        }
+        return view('admins.best_selling',compact('product_name','product_quantity','data_start_','data_end'));
+       
+    }
+
+    public function inventory_product(Request $request){
+        $products = Product::get();
+        $name_product = [];
+        $quantity = [];
+        foreach($products as $product){ 
+            $name_product[] = $product->name;
+            $quantity[] = $product->quantity;
+        }
+        return view('admins.inventory_product',compact('name_product','quantity'));
     }
 }
