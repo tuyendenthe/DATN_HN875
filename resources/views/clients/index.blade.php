@@ -484,9 +484,9 @@
 
                                             <span style="font-size: 13px; width: 550px;">
                                                 Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{number_format($vou->price_sale)}}VNĐ cho đơn hàng từ {{number_format($vou->condition)}} VNĐ @if ($vou->quantity == 0)
-                                                    (Đã hết) 
+                                                    (Đã hết)
                                                  @else
-                                                    
+
                                                 @endif
 
                                             </span>
@@ -838,8 +838,8 @@
                                                         <div class="epix-product-thumb epix-product-thumb-2">
                                                             <span class="sale">sale</span>
                                                             <a
-                                                                href="{{ route('product.details', $flashSale->product->id) }}">
-                                                                <img src="{{ asset($flashSale->product->image) }}"
+                                                                href="{{ route('product.details', $flashSale->productVariants->product->id) }}">
+                                                                <img src="{{ asset($flashSale->productVariants->product->image) }}"
                                                                     class="img-fluid">
                                                             </a>
                                                             <div class="epix-action">
@@ -864,11 +864,11 @@
                                                                 <div class="rating">
                                                                     <i class="fal fa-star"></i>
                                                                     {{-- <span>4.5</span> --}}
-                                                                    <span>{{ number_format($flashSale->product->averageRating(), 1) }}</span>
+                                                                    <span>{{ number_format($flashSale->productVariants->product->averageRating(), 1) }}</span>
                                                                 </div>
                                                             </div>
                                                             <h5 class="epix-p-title"><a
-                                                                    href="{{ route('product.details', $flashSale->product->id) }}">{{ $flashSale->product->name }}</a>
+                                                                    href="{{ route('product.details', $flashSale->productVariants->product->id) }}">{{ $flashSale->productVariants->product->name }}</a>
                                                             </h5>
                                                             <div class="price-box">
                                                                 <span class="price">
@@ -879,7 +879,7 @@
                                                                             class="active  text-muted">{{ number_format($flashSale->product->price) }}đ</span> --}}
                                                                 </span>
                                                                 <a
-                                                                    href="{{ route('product.details', $flashSale->product->id) }}">+
+                                                                    href="{{ route('product.details', $flashSale->productVariants->product->id) }}">+
                                                                     Xem chi tiết</a>
                                                             </div>
                                                         </div>
