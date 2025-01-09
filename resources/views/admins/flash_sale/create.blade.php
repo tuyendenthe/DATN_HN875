@@ -35,8 +35,10 @@
                             <div class="form-group">
                                 <label for="name">Chọn Sản Phẩm</label>
                                 <select class="form-control" name="product_id" required>
-                                    @foreach ($products as $product)
-                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    @foreach ($productVariants as $product)
+                                        <option value="{{ $product->id }}">{{ $product->product->name }}
+                                        | {{ $product->ram }}GB - {{ $product->memory }}GB
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('product_id')

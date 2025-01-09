@@ -204,6 +204,8 @@ Route::post('/admin/users/update/{id}', [UserController::class, 'updateUser'])->
     // })->name('chart');
     Route::get('/chart', [ChartController::class, 'index'])->name('chart');
     Route::get('/product_statistics', [ChartController::class, 'product_statistics'])->name('product_statistics');
+    Route::get('/best_selling', [ChartController::class, 'best_selling'])->name('best_selling');
+    Route::get('/inventory_product', [ChartController::class, 'inventory_product'])->name('inventory_product');
 //    Route::resource('admin1/memories', MemoryC::class);
 
 
@@ -306,6 +308,7 @@ Route::prefix('/flash-sale')->name('flash_sale.')->group(function () {
     Route::post('/store', [FlashSaleController::class, 'store'])->name('store');
     Route::put('/update/{id}', [FlashSaleController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [FlashSaleController::class, 'delete'])->name('delete');
+
 });
 /* -------------------------------- FLASH SALE -------------------------------- */
 

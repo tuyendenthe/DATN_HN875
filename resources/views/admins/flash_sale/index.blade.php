@@ -39,6 +39,7 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Tên Sản Phẩm</th>
+                                        <th>Thuộc tính</th>
                                         <th>Giá niêm yết</th>
                                         <th>Giá sale</th>
                                         <th>Kết Thúc</th>
@@ -50,8 +51,9 @@
                                         @foreach ($flashSales as $key => $flashSale)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $flashSale->product->name }}</td>
-                                                <td>{{ number_format($flashSale->product->price, 0, ',', '.') }} đ</td>
+                                                <td>{{ $flashSale->productVariants->product->name }}</td>
+                                                <td>{{ $flashSale->productVariants->ram }}GB - {{ $flashSale->productVariants->memory }}GB</td>
+                                                <td>{{ number_format($flashSale->productVariants->price, 0, ',', '.') }} đ</td>
                                                 <td>{{ number_format($flashSale->price_sale, 0, ',', '.') }} đ</td>
                                                 <td>{{ $flashSale->time_end }}</td>
                                                 <td>

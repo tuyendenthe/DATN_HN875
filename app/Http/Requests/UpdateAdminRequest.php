@@ -8,15 +8,15 @@ class UpdateAdminRequest extends FormRequest
 {
     public function authorize()
     {
-        return true; // Change as necessary for your authorization logic
+        return true; // Thay đổi nếu cần thiết cho logic phân quyền của bạn
     }
 
     public function rules()
     {
-        $userId = $this->route('id'); // Get user ID from the route
+        $userId = $this->route('id'); // Lấy ID người dùng từ route
 
         return [
-            'name' => 'required|string|max:50|min:3',
+            'name' => 'required|string|max:50|min:3|unique:users,name,' . $userId, // Thêm kiểm tra duy nhất cho name
             'email' => 'required|string|email|max:50|unique:users,email,' . $userId,
             'address' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -30,7 +30,8 @@ class UpdateAdminRequest extends FormRequest
             'name.required' => 'Tên là bắt buộc.',
             'name.string' => 'Tên phải là một chuỗi.',
             'name.min' => 'Tên phải có ít nhất 3 ký tự.',
-            'name.max' => 'Tên không được vượt quá 25 ký tự.',
+            'name.max' => 'Tên không được vượt quá 50 ký tự.',
+            'name.unique' => 'Tên đã tồn tại.', // Thông báo khi tên trùng
             'email.required' => 'Email là bắt buộc.',
             'email.email' => 'Email không hợp lệ.',
             'email.max' => 'Email không được vượt quá 50 ký tự.',

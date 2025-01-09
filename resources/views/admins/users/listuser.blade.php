@@ -4,7 +4,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Bảng</h4>
+                <h4 class="page-title"></h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -34,11 +34,13 @@
                                     </form>
                                     {{-- <a href="{{ route('admins.users.listuser') }}" class="btn btn-secondary ml-2">Reset Danh Sách</a> --}}
                                 </div>
-                                {{-- <div class="d-flex justify-content-between mb-3">
+                                <div class="d-flex justify-content-between mb-3">
                                     <div>
-                                        <a href="{{ route('admin1.users.adduser') }}" class="btn btn-primary">Thêm mới</a>
+                                        {{-- @if(auth()->user()->role == '1') <!-- Kiểm tra nếu người dùng là Admin --> --}}
+                                            <a href="{{ route('admin1.users.adduser') }}" class="btn btn-primary">Thêm tài khoản</a>
+                                        {{-- @endif --}}
                                     </div>
-                                </div> --}}
+                                </div>
                                 <thead>
                                     <tr>
                                         <th>STT</th>

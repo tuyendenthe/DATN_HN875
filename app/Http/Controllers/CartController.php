@@ -117,32 +117,37 @@ class CartController extends Controller
     {
 
         $id = $request->product_variants;
-        $productVariants = ProductVariants::query()->findOrFail($id);
+        $productVariants = ProductVariants::with('product','flashSales')->findOrFail($id);
+//        dd($productVariants);
         $ram = $productVariants->ram;
         $memory = $productVariants->memory;
-        $product = (Product::with('category','flashSale'))->findOrFail($productVariants->product_id);
+       $product = (Product::with('category','flashSale'))->findOrFail($productVariants->product_id);
         // $categories = Category::all();
-        $flashSales = FlashSale::with('product')
+        $flashSales = FlashSale::with('productVariants.product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
             ->orderBy('time_end', 'asc')
             ->limit(4)
             ->get();
-
+        $priceSale = FlashSale::query()->where('product_id', $id)->first();
 
 
         $cart = session()->get('cart', []);
         $productVariantsId = $id;
-        $productName = $product->name;
-            if ($product->isOnFlashSale()) {
-                $productPrice = $product->flashSale->price_sale;
+        $productName = $productVariants->product->name;
+            if ($productVariants->isInFlashSale()) {
+                $productPrice = $priceSale->price_sale;
             } else {
                 $productPrice = $productVariants->price;
             }
 
 
         $quantity = 1;
+
         $image = $product -> image;
         $id_products=$product -> id;
+
+//         $image = $productVariants->product -> image;
+
         $cartItems = session('cart', []);
 
         // Create a unique key for the product-variant combination
