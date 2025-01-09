@@ -27,10 +27,11 @@ class HomeUserController extends Controller
         // Lấy tối đa 10 sản phẩm từ bảng products
         $banner_covers = slide_cover::all();
         $vouchers = Voucher::latest()->take(4)->get();
-        $products = (Product::with('category', 'flashSale','variants'))->where('status', '=', 1)->latest()->take(8)->get();
-        $products_2 = (Product::with('category', 'flashSale','variants'))->where('role', '=', 2)->where('role', '=', 1)->latest()->take(8)->get();
+        $products = (Product::with('category','variants'))->where('status', '=', 1)->latest()->take(8)->get();
+        $products_2 = (Product::with('category','variants'))->where('role', '=', 1)->latest()->take(8)->get();
+//        dd($products_2);
         $categories = Category::all();
-        $flashSales = FlashSale::with('product')
+        $flashSales = FlashSale::with('productVariants.product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
             ->orderBy('time_end', 'asc')
             ->limit(4)
@@ -68,7 +69,7 @@ class HomeUserController extends Controller
 
         $products = (Product::with('category', 'flashSale', 'variants'))->findOrFail($id);
         // $categories = Category::all();
-        $flashSales = FlashSale::with('product')
+        $flashSales = FlashSale::with('productVariants.product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
             ->orderBy('time_end', 'asc')
             ->limit(4)

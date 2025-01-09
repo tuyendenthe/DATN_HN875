@@ -308,6 +308,7 @@ Route::prefix('/flash-sale')->name('flash_sale.')->group(function () {
     Route::post('/store', [FlashSaleController::class, 'store'])->name('store');
     Route::put('/update/{id}', [FlashSaleController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [FlashSaleController::class, 'delete'])->name('delete');
+
 });
 /* -------------------------------- FLASH SALE -------------------------------- */
 

@@ -12,7 +12,7 @@ class ReviewsController extends Controller
     //thêm đánh giá
     public function postReview(Request $request){
          // Validate dữ liệu đầu vào
-        //  dd($request);   
+        //  dd($request);
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'star' => 'required|integer|min:1|max:5',
@@ -23,13 +23,15 @@ class ReviewsController extends Controller
             'comment.required' => 'Nội dung đánh giá không được để trống.',
         ]);;
         $user_name = 'ẩn danh';
+        $reviewStar = 5;
         if(auth()->user()){
             $user_name = auth()->user()->name;
+            $reviewStar = $request->star;
     }
         $data = [
             'product_id' => $request->product_id,
             'users_name' =>  $user_name,
-            'star' => $request->star,
+            'star' => $reviewStar,
             'comment' =>$request->comment,
             'status' => 0,
         ];
@@ -59,7 +61,7 @@ class ReviewsController extends Controller
 
 
     public function listComment()
-{   
+{
    // $comments = Comment::with('product')->get(); // Lấy danh sách comment và sản phẩm liên quan
    $comments = DB::table('comments')
    ->join('products', 'comments.product_id', '=', 'products.id')
@@ -70,7 +72,7 @@ class ReviewsController extends Controller
 //    dd($comments);
     return view('admins.comment.list', compact('comments'));
 }
-    
+
 
     public function deleteComment($id) {
         $comments = Comment::findOrFail($id);
