@@ -64,16 +64,16 @@
 
 
                 <div class="col-12">
-                    Quantity:
-                    <input type="text" name="quantity" value="{{ old('quantity') }}" class="form-control">
+                    Số Lượng:
+                    <input type="text" name="quantity" value="{{ old('quantity') }}" min="1" maxlength="6" class="form-control">
                     @error('quantity')
                     <span class="" style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="col-12">
-                    Price:
-                    <input type="text" name="price" value="{{ old('price') }}" class="form-control">
+                    Giá:
+                    <input type="text" name="price" value="{{ old('price') }}" min="1" maxlength="10" class="form-control">
                     @error('price')
                     <span class="" style="color: red">{{ $message }}</span>
                     @enderror

@@ -57,7 +57,7 @@ class VariantController extends Controller
 
             'type' => $request->type,
 
-            'type' => $request->type,
+            // 'type' => $request->type,
 
         ]);
 

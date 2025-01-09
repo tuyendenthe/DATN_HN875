@@ -15,13 +15,13 @@ class ShopController extends Controller
         $perPage = 20;
 
         // Lấy sản phẩm với phân trang
-        $products = Product::with('category', 'flashSale','variants')->where('is_attributes',2)->latest()->paginate($perPage);
+        $products = Product::with('category', 'flashSale','variants')->where('status',1)->latest()->paginate($perPage);
 
         // Lấy danh sách các danh mục
         $categories = Category::get();
 
         // Lấy sản phẩm mới nhất (không cần phân trang)
-        $newProducts = Product::with('category', 'flashSale','variants')->where('is_attributes',2)->latest()->take(3)->get();
+        $newProducts = Product::with('category', 'flashSale','variants')->where('status',1)->latest()->take(3)->get();
 
         return view('clients.shop', compact('products', 'categories', 'newProducts'));
     }   public function flashSales()
@@ -70,7 +70,7 @@ class ShopController extends Controller
     public function shopWithCategories($id)
     {
         $perPage = 20; // Số sản phẩm mỗi trang
-        $products = Product::with('category', 'flashSale')->where('is_attributes',2);
+        $products = Product::with('category', 'flashSale')->where('status',1);
 
         if ($id == 'all') {
             $products = $products->latest()->paginate($perPage);
@@ -79,7 +79,7 @@ class ShopController extends Controller
         }
 
         $categories = Category::get();
-        $newProducts = Product::with('category', 'flashSale')->where('is_attributes',2)->latest()->take(5)->get();
+        $newProducts = Product::with('category', 'flashSale')->where('status',1)->latest()->take(5)->get();
 
         return view('clients.shop', compact('products', 'categories', 'newProducts'));
     }
@@ -89,7 +89,7 @@ class ShopController extends Controller
         $range = $request->input('price_range');
         $products = Product::query()
             ->join('product_variants', 'products.id', '=', 'product_variants.product_id') // Kết hợp với bảng product_variants
-            ->where('is_attributes', 2)
+            ->where('status', 1)
             ->select('products.*', \DB::raw('MIN(product_variants.price) as min_price'), \DB::raw('MAX(product_variants.price) as max_price')) // Lấy giá min và max của sản phẩm
             ->groupBy('products.id'); // Nhóm theo sản phẩm
 

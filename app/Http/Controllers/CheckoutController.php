@@ -43,6 +43,24 @@ class CheckoutController extends Controller
             if ($check->quantity < $value['quantity']) {
                 return redirect()->route("cart.view")->with('message', 'Số Lượng Sản Phẩm Bạn Chọn Mua Hiện Chúng Tôi Không Có Đủ, Vui Lòng Quay Lại Sau.');
             }
+            // $productVariant = ProductVariants::with('product')->findOrFail($value['productvariants_id']);
+            // Tìm Product
+            $product = Product::where('id', $check->product_id)
+            ->where('status', '=', '1')
+            ->first();
+
+        if (is_null($product)) {
+
+
+            return redirect()->route("cart.view")
+                ->with('message', 'Một số sản phẩm bạn vừa thanh toán đang không tồn tại.');
+        }
+            // Kiểm tra số lượng
+            // if ($productVariant->quantity < $value['quantity']) {
+
+            //     return redirect()->route("cart.view")
+            //         ->with('message', 'Số lượng sản phẩm không đủ.');
+            // }
         }
         //         foreach ($selectedProducts as $value) {
         //            dd($value);
@@ -214,11 +232,18 @@ class CheckoutController extends Controller
     }
     public function processBill(Request $request)
     {
-        //        dd($request);
+            //    dd($request);
+            // dd(session()->get('cart'));
         $idVoucher = $request['voucherId'];
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         $randomString = substr(str_shuffle($characters), 0, 10); // Tạo mã đơn hàng ngẫu nhiên
         $user_id = auth()->check() ? auth()->user()->id : null;
+        $name_order = "không có thông tin";
+        $mail_order = "không có thông tin";
+        if(auth()->user()){
+            $name_order = auth()->user()->name;
+            $mail_order = auth()->user()->email;
+        }
         $bill = [
             'bill_code' => $randomString,
             'name' => $request['name'],
@@ -228,6 +253,8 @@ class CheckoutController extends Controller
             'note' => $request['note'],
             'address' => $request['address'],
             'user_id' => $user_id,
+            'name_order' => $name_order,
+            'mail_order' => $mail_order,
             'payment_method' => $request['payment_method'],
             'total' => $request['subtotall'],
             'status' => 1,
@@ -237,34 +264,64 @@ class CheckoutController extends Controller
 
         // Xử lý sản phẩm trong hóa đơn
         $products = is_string($request['products'])
-            ? json_decode($request['products'], true)
-            : $request['products'];
-        //dd(session()->get('cart'));
-        foreach ($products as $value) {
-            $product = ProductVariants::with('product')->findOrFail($value['productvariants_id']);
-            if ($product->quantity < $value['quantity']) {
-                return redirect()->route("cart.view")->with('message', 'Số lượng sản phẩm không đủ.');
-            }
-            $product->update(['quantity' => $product->quantity - $value['quantity']]);
+        ? json_decode($request['products'], true)
+        : $request['products'];
+
+    $cart = session()->get('cart'); // Lấy giỏ hàng từ session
+
+    foreach ($products as $key => $value) {
+
+            // Tìm ProductVariant
+            $productVariant = ProductVariants::with('product')->findOrFail($value['productvariants_id']);
+            // Tìm Product
+            $product = Product::where('id', $productVariant->product_id)
+            ->where('status', '=', '1')
+            ->first();
+
+        if (is_null($product)) {
+
+
+            return redirect()->route("cart.view")
+                ->with('message', 'Một số sản phẩm bạn vừa thanh toán đang không tồn tại.');
         }
+            // Kiểm tra số lượng
+            if ($productVariant->quantity < $value['quantity']) {
+
+                return redirect()->route("cart.view")
+                    ->with('message', 'Số lượng sản phẩm không đủ.');
+            }
+        }
+
+            // Cập nhật số lượng còn lại
+            $productVariant->update(['quantity' => $productVariant->quantity - $value['quantity']]);
+
+            // Nếu không tìm thấy sản phẩm hoặc biến thể sản phẩm, xóa khỏi giỏ hàng
+
+
+
 
         // Lưu hóa đơn và chi tiết hóa đơn
         $billRecord = Bill::create($bill);
         foreach ($products as $item) {
-            Bill_detail::create([
+            $variants= ProductVariants::find($item['productvariants_id']);
+            // DB::table('product_variants')->where('id', '=', $variants->id)->update(['quantity' => $quantyti]);
+           Bill_detail::create([
+
                 'bill_id' => $billRecord->id,
                 'product_id' => $item['productvariants_id'],
                 'bill_code' => $randomString,
                 'quantity' => $item['quantity'],
                 'product_name' => ProductVariants::with('product')->find($item['productvariants_id'])->product->name,
+                'image' => ProductVariants::with('product')->find($item['productvariants_id'])->product->image,
+                'variant_name' => $variants->ram."G và ".$variants->memory."G",
                 'subtotal' => $item['price'] * $item['quantity'],
                 'price' => $item['price'],
+                'variant_id' => $variants->id,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
 
-        // Xử lý voucher nếu có
         if ($idVoucher) {
             $voucher = Voucher::find($idVoucher);
             if ($voucher && $voucher->quantity > 0) {
@@ -355,11 +412,11 @@ class CheckoutController extends Controller
             ->first();
         // $data2 = Bill_detail::where('bill_code','=',$bill_code)->get();
         $detail = DB::table('bill_details')
-            ->join('products', 'bill_details.product_id', '=', 'products.id')
+
             ->where('bill_details.bill_code', $bill_code) // Sử dụng bill_code để lọc
-            ->select('bill_details.*', 'products.name', 'products.image')
+            // ->select('bill_details.*',  'products.image')
             ->get();
-        // dd(vars: $data);
+        // dd(vars: $detail);
         return view('clients.bill_details', compact('detail', 'data'));
     }
     public function list(Request $request)
@@ -379,7 +436,7 @@ class CheckoutController extends Controller
             // Search for the order_id
             $query->where('bills.bill_code', 'like', '%' . $request->order_id . '%');
         }
-        
+
 
         // Paginate results
         $listCheckouts = $query->paginate(10); // Change the number of items per page if needed
@@ -497,16 +554,16 @@ class CheckoutController extends Controller
         Bill::where('id', $id)->update(['status' => $request->status_id]);
         $data = Bill::findOrFail($id);
         $bill_code = $data['bill_code'];
-        if ($request->$stt = 5) {
-            $data2 = Bill_detail::where('bill_code', '=', $bill_code)->get();
+        // if ($request->$stt = 5) {
+        //     $data2 = Bill_detail::where('bill_code', '=', $bill_code)->get();
 
-            foreach ($data2 as $value) {
-                $product = ProductVariants::findOrFail($value->product_id);
+        //     foreach ($data2 as $value) {
+        //         $product = ProductVariants::findOrFail($value->product_id);
 
-                $quantyti = $product->quantity + $value->quantity;
-                DB::table('product_variants')->where('id', '=', $value->product_id)->update(['quantity' => $quantyti]);
-            };
-        }
+        //         $quantyti = $product->quantity + $value->quantity;
+        //         DB::table('product_variants')->where('id', '=', $value->product_id)->update(['quantity' => $quantyti]);
+        //     };
+        // }
         return redirect()->route("checkout.list")->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
     public function check_order()
@@ -618,10 +675,10 @@ class CheckoutController extends Controller
         $data = Bill_detail::where('bill_code', '=', $bill_code)->get();
         // dd($data);
         foreach ($data as $value) {
-            $product = Product::findOrFail($value->product_id);
+            $variants = ProductVariants::findOrFail($value->variant_id);
 
-            $quantyti = $product->quantity + $value->quantity;
-            DB::table('products')->where('id', '=', $value->product_id)->update(['quantity' => $quantyti]);
+            $quantyti = $variants->quantity + $value->quantity;
+            DB::table('product_variants')->where('id', '=', $value->product_id)->update(['quantity' => $quantyti]);
         };
         return back()->with('message1', 'Đã Hủy Đơn Hàng');
     }

@@ -20,6 +20,8 @@ class Bill extends Model
         'user_id',
         'payment_method',
         'total',
+        'name_order',
+    'mail_order',
         // 'created_at',
 
         'status',

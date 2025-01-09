@@ -69,10 +69,10 @@ class CartController extends Controller
             ->limit(4)
             ->get();
 
-
+        // dd($product);
 
         $cart = session()->get('cart', []);
-        $productId = $product->id;
+        $productId = $product->id;// tuyền sửa thử
         $productName = $product->name;
             if ($products->isOnFlashSale()) {
                 $productPrice = $products->flashSale->price_sale;
@@ -121,7 +121,7 @@ class CartController extends Controller
 //        dd($productVariants);
         $ram = $productVariants->ram;
         $memory = $productVariants->memory;
-//        $product = (Product::with('category','flashSale'))->findOrFail($productVariants->product_id);
+       $product = (Product::with('category','flashSale'))->findOrFail($productVariants->product_id);
         // $categories = Category::all();
         $flashSales = FlashSale::with('productVariants.product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -142,7 +142,12 @@ class CartController extends Controller
 
 
         $quantity = 1;
-        $image = $productVariants->product -> image;
+
+        $image = $product -> image;
+        $id_products=$product -> id;
+
+//         $image = $productVariants->product -> image;
+
         $cartItems = session('cart', []);
 
         // Create a unique key for the product-variant combination
@@ -154,6 +159,7 @@ class CartController extends Controller
             $cartItems[$cartKey] = [
                 'product_id' => $productVariantsId,
                 'product_name' => $productName,
+                'id_products' => $id_products,
                 // 'variant_name' => [$variantName1, $variantName2, $variantName3],
                 'quantity' => $quantity,
                 'price' => $productPrice,

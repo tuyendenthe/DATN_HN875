@@ -18,14 +18,14 @@ class Product extends Model
         'price',
         'image',
         'content',
+        'status',
         'chip',
         'color',
         'screen',
         'resolution',
         'content_short',
         'role',
-        'is_attributes',
-        'product_parent',
+
     ];
 
     // Product.php

@@ -18,7 +18,7 @@ class ProductController extends Controller
         session()->forget('new_order'); // Xóa thông báo đơn hàng mới
 
         // Khởi tạo truy vấn
-        $query = Product::with('category');
+        $query = Product::with('category')->latest();
 
         // Nếu có tìm kiếm theo tên sản phẩm
         if ($request->has('name') && !empty($request->name)) {
@@ -40,9 +40,9 @@ class ProductController extends Controller
     {
         $data = Category::get();
         // dd($data);
-        $products = Product::where('is_attributes',2)->get();
+        // $products = Product::where('is_attributes',2)->get();
         // $Categories = Categories::where('status_delete', Categories::UNDELETE)->get();
-        return view('admins.add-product', compact('data','products'));
+        return view('admins.add-product', compact('data',));
     }
     public function upload_image($imageFile)
     {
@@ -67,6 +67,7 @@ class ProductController extends Controller
         $data =  [
             'name' => $req->name,
             'image' => $path,
+            'category_id' => $req->category_id,
             'content_short' => $req->content_short,
             'content' => $req->content,
 
@@ -74,6 +75,7 @@ class ProductController extends Controller
 
             'chip' => $req->chip,
             'status'=> 1,
+            'role'=> $req->role,
 
             'color' => $req->color,
 
@@ -121,6 +123,7 @@ class ProductController extends Controller
         // dd($req);
         $product = Product::find($id);
         $path = $product->image;
+        // dd($path);
         if ($req->hasFile('image')) {
             // $path = $req->file('image')->store('images/products', 'public');
             $data['image'] = $this->upload_image($req->file('image'));

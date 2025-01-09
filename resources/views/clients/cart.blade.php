@@ -93,14 +93,14 @@
                                                     <!-- Thêm data-product-name -->
                                                 </td>
                                                 <td class="product-thumbnail">
-                                                    <a href="{{ route('product.details', $item['product_id']) }}">
+                                                    <a href="{{ route('product.details', $item['id_products']) }}">
                                                         <img width="125px" height="125px" src="{{ asset($item['image']) }}"
                                                             alt="">
                                                     </a>
                                                 </td>
                                                 <td class="cart-product-name">
                                                     <a
-                                                        href="{{ route('product.details', $item['product_id']) }}">{{ $item['product_name'] }}</a>
+                                                        href="{{ route('product.details', $item['id_products']) }}">{{ $item['product_name'] }}</a>
                                                 </td>
                                                 <td class="cart-product-variants">
                                                     <span>RAM:{{$item['ram']}}GB - MEMORY:{{ $item['memory'] }}GB</span>
