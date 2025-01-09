@@ -28,7 +28,7 @@ class HomeUserController extends Controller
         $banner_covers = slide_cover::all();
         $vouchers = Voucher::latest()->take(4)->get();
         $products = (Product::with('category', 'flashSale','variants'))->where('status', '=', 1)->latest()->take(8)->get();
-        $products_2 = (Product::with('category', 'flashSale','variants'))->where('role', '=', 2)->where('role', '=', 1)->latest()->take(8)->get();
+        $products_2 = (Product::with('category', 'flashSale','variants'))->where('role', '=', 2)->where('status', '=', 1)->latest()->take(8)->get();
         $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))

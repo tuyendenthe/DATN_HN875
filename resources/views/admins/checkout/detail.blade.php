@@ -21,26 +21,69 @@
                             <form action="{{ route('bill.bill_cancel', $data->bill_code) }}" method="POST">
                                 @csrf
                                 @method('POST')
-                                <button type="submit" class="btn btn-danger">Hủy Đơn Hàng</button>
+                                <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-danger mt-3">Hủy Đơn Hàng</button>
+                                </div>
                             </form>
                         @endif
                     </div>
-                    <hr>
-                    <div class="my-2">
-                        <label for="">Tên Khách Hàng</label> <br>
-                        <input type="text" class="form-control" value="{{ $data->name }}" disabled>
-                    </div>
-                    <div class="my-2">
-                        <label for="">Số Điện Thoại</label> <br>
-                        <input type="text" class="form-control" value="{{ $data->phone }}" disabled>
-                    </div>
-                    <div class="my-2">
-                        <label for="">Địa Chỉ</label> <br>
-                        <input type="text" class="form-control" value="{{ $data->address }}" disabled>
-                    </div>
-                    <div class="my-2">
-                        <label for="">Ngày Đặt Hàng</label> <br>
-                        <input type="text" class="form-control" value="{{ $data->created_at }}" disabled>
+                    {{-- <hr> --}}
+
+                             <div class="d-flex">
+                                <table class="table">
+                                     <thead class="bg-info text-light">
+                                        <tr>
+                                            <td>Tên Người Đặt</td>
+                                            <td>Email</td>
+                                        </tr>
+                                     </thead>
+                                     <tbody>
+                                        <tr>
+                                            <td>{{ $data->name_order }}</td>
+                                            <td>{{ $data->mail_order }}</td>
+                                        </tr>
+                                     </tbody>
+                                </table>
+                            </div>
+
+
+                            <div class="d-flex">
+                                <table class="table">
+                                    <thead class="bg-success text-light">
+                                       <tr>
+                                           <td>Tên Người Nhận</td>
+                                           <td>Số Điện Thoại</td>
+                                           <td>Địa Chỉ</td>
+                                           <td>Ngày Đặt Hàng</td>
+
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr>
+                                           <td>{{ $data->name_order }}</td>
+                                           <td>{{ $data->phone }}</td>
+                                           <td>{{ $data->address }}</td>
+                                           <td>{{ $data->created_at }}</td>
+                                       </tr>
+                                    </tbody>
+                               </table>
+                            {{-- <div class="my-2">
+                                <label for="">Tên Người Nhận</label> <br>
+                                <input type="text" class="form-control" value="{{ $data->name }}" disabled>
+                            </div>
+                            <div class="my-2">
+                                <label for="">Số Điện Thoại</label> <br>
+                                <input type="text" class="form-control" value="{{ $data->phone }}" disabled>
+                            </div>
+                            <div class="my-2">
+                                <label for="">Địa Chỉ</label> <br>
+                                <input type="text" class="form-control" value="{{ $data->address }}" disabled>
+                            </div>
+                            <div class="my-2">
+                                <label for="">Ngày Đặt Hàng</label> <br>
+                                <input type="text" class="form-control" value="{{ $data->created_at }}" disabled>
+                            </div> --}}
+
                     </div>
                 </div>
                 <div class="border m-3">
@@ -51,6 +94,7 @@
                                 <tr>
                                     <td>STT</td>
                                     <td>Tên Sản Phẩm</td>
+                                    <td>Loại Sản Phẩm</td>
                                     <td>Ảnh</td>
                                     <td>Giá</td>
                                     <td>Số Lượng</td>
@@ -62,6 +106,7 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $value->name }}</td> <!-- Sử dụng quan hệ nếu có -->
+                                        <td>{{ $value->variant_name }}</td> <!-- Sử dụng quan hệ nếu có -->
                                         <td><img src="{{ asset($value->image) }}" alt="" width="100px"></td>
                                         <td>{{ number_format($value->price, 0, ',', '.') }} VNĐ</td>
                                         <td>{{ $value->quantity }}</td>
@@ -70,7 +115,8 @@
                                 @endforeach
                                 <tr>
                                     <td></td>
-                                    <td>Tổng Tiền</td>
+                                    <td class="text-uppercase">Tổng Tiền</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

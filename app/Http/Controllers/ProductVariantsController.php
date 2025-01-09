@@ -89,7 +89,8 @@ class ProductVariantsController extends Controller
     public function destroy(string $id)
     {
         $variant = ProductVariants::findOrFail($id);
-        $variant->delete();
+        $variant->update(['quantity' => 0]);
+
 
         // Chuyển hướng về danh sách biến thể sản phẩm với thông báo thành công
         return redirect()

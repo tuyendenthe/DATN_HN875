@@ -25,17 +25,17 @@ class ProductRequest extends FormRequest
 {
     return [
         'name' => 'required|string|max:255',
-        'quantity' => 'required|integer|min:1',
-        'image' => 'required|image',
-        'price' => 'required|numeric|min:1',
-        'content_short' => 'required|string',
+        // 'quantity' => 'required|integer|min:1',
+        'image' => 'required|image|max:255',
+        // 'price' => 'required|numeric|min:1',
+        'content_short' => 'required|string|max:255',
         'content' => 'required|string',
-        'chip' => 'required|string',
-        'ram_id' => 'required',
-        'color' => 'required|string',
-        'memory_id' => 'required',
-        'screen' => 'required|string',
-        'resolution' => 'required|string',
+        'chip' => 'required|string|max:255',
+        // 'ram_id' => 'required|integer',
+        'color' => 'required|string|max:255',
+        // 'memory_id' => 'required|integer',
+        'screen' => 'required|string|max:255',
+        'resolution' => 'required|string|max:255',
     ];
 }
 

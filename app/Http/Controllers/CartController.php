@@ -69,10 +69,10 @@ class CartController extends Controller
             ->limit(4)
             ->get();
 
-
+        // dd($product);
 
         $cart = session()->get('cart', []);
-        $productId = $product->id;
+        $productId = $product->id;// tuyền sửa thử
         $productName = $product->name;
             if ($products->isOnFlashSale()) {
                 $productPrice = $products->flashSale->price_sale;
@@ -142,6 +142,7 @@ class CartController extends Controller
 
         $quantity = 1;
         $image = $product -> image;
+        $id_products=$product -> id;
         $cartItems = session('cart', []);
 
         // Create a unique key for the product-variant combination
@@ -153,6 +154,7 @@ class CartController extends Controller
             $cartItems[$cartKey] = [
                 'product_id' => $productVariantsId,
                 'product_name' => $productName,
+                'id_products' => $id_products,
                 // 'variant_name' => [$variantName1, $variantName2, $variantName3],
                 'quantity' => $quantity,
                 'price' => $productPrice,
