@@ -99,7 +99,7 @@
 
             <div class="col-12">
                 Màu Sắc:
-                <input type="text" name="color" value="{{ old('color') }}" class="form-control">
+                <input type="text" name="color" value="{{ old('color') }}" class="form-control" onkeypress="return validateInput(event)">
                 @error('color')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
@@ -195,6 +195,14 @@
         roleSelected.value = dataAttributes['data-role'];
     });
 </script>
+<script>
+    function validateInput(event) {
+        const char = String.fromCharCode(event.which);
+        // Kiểm tra xem ký tự có phải là chữ cái, dấu hoặc khoảng trắng hay không
+        const regex = /^[\p{L}\s\p{P}]$/u;
+        return regex.test(char);
+    }
+    </script>
 <script>
     class MyUploadAdapter {
         constructor(loader) {

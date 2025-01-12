@@ -42,14 +42,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="price">Giá:</label>
-                                <input type="number" name="price" class="form-control" value="{{ $variant->price }}">
+                                <input type="number" name="price" class="form-control" value="{{ $variant->price }}" min="0">
                                 @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="quantity">Số lượng:</label>
-                                <input type="number" name="quantity" class="form-control" value="{{ $variant->quantity }}">
+                                <input type="number" name="quantity" class="form-control" value="{{ $variant->quantity }}" min="0">
                                 @error('quantity')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
