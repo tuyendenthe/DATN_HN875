@@ -67,7 +67,7 @@
             </div>
             <div class="col-12">
                 Chip :
-                <input type="text" name="chip" value="{{ $product->chip }}" class="form-control">
+                <input type="text" name="chip" value="{{ $product->chip }}" class="form-control" min="0">
                 {{-- @error('chip')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror --}}
@@ -82,14 +82,14 @@
             </div>
             <div class="col-12">
                 Kích Thước Màn Hình:
-                <input type="text" name="screen" value="{{ $product->screen }}" class="form-control">
+                <input type="number" name="screen" value="{{ $product->screen }}" class="form-control" min="0">
                 {{-- @error('screen')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror --}}
             </div>
             <div class="col-12">
                 Độ Phân Giải:
-                <input type="text" name="resolution" value="{{ $product->resolution }}" class="form-control">
+                <input type="number" name="resolution" value="{{ $product->resolution }}" class="form-control" min="0">
                 {{-- @error('resolution')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror --}}
