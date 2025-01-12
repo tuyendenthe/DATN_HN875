@@ -186,14 +186,18 @@
                                     </tbody>
                                     <tfoot>
                                     <tr class="cart-subtotal">
-                                        <th>Tổng Cộng Giỏ Hàng</th>
-                                        <td><span class="amount">{{ number_format($total, 0, ',', '.') }}</span></td>
+                                        <th>Tổng Cộng Giỏ Hàng : </th>
+                                        <td><span class="amount">{{ number_format($total, 0, ',', '.') }} VNĐ</span></td>
                                         <input type="hidden" name="total" value="{{ $total }}">
                                     </tr>
                                     @if(auth()->user())
                                         <tr class="cart-voucher">
                                             <th>Mã Giảm Giá</th>
                                             <td><span class="amount">{{ $discount }}</span></td>
+                                        </tr>
+                                        <tr class="cart-voucher">
+                                            <th>Phí Giao Hàng</th>
+                                            <td><span class="amount">25.000 VNĐ</span></td>
                                         </tr>
                                     @endif
                                     <tr class="shipping">

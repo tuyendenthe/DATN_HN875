@@ -57,6 +57,7 @@ class Product extends Model
     {
         return $this->hasOne(FlashSale::class, 'product_id');
     }
+
     public function isOnFlashSale()
     {
         return $this->flashSale && $this->flashSale->time_end > Carbon::now();
@@ -76,6 +77,20 @@ class Product extends Model
     public function variants()
     {
         return $this->hasMany(ProductVariants::class, 'product_id');
+    }
+    public function hasVariantsInFlashSale()
+    {
+        // Lấy danh sách các biến thể của sản phẩm
+        $variants = $this->variants;
+
+        // Duyệt qua từng biến thể và kiểm tra xem biến thể đó có trong flash sale không
+        foreach ($variants as $variant) {
+            if ($variant->isInFlashSale()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

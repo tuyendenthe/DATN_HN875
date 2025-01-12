@@ -240,6 +240,7 @@ class CheckoutController extends Controller
         $user_id = auth()->check() ? auth()->user()->id : null;
         $name_order = "không có thông tin";
         $mail_order = "không có thông tin";
+        $commit = "Chưa có người cam kết";
         if(auth()->user()){
             $name_order = auth()->user()->name;
             $mail_order = auth()->user()->email;
@@ -258,6 +259,7 @@ class CheckoutController extends Controller
             'payment_method' => $request['payment_method'],
             'total' => $request['subtotall'],
             'status' => 1,
+            'commit' => $commit,
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -423,6 +425,7 @@ class CheckoutController extends Controller
     {
         // Start the query
 
+
         $query = DB::table('bills')
             ->join('statuses', 'bills.status', '=', 'statuses.id')
             ->where('statuses.id', '<=', 3)
@@ -541,7 +544,7 @@ class CheckoutController extends Controller
     {
         // dd($id);
         $data = Bill::find($id);
-        //    dd($data);
+        //    dd();
 
         $statuses = Status::where('id', '>=', $data->status)->get();
 
@@ -551,7 +554,8 @@ class CheckoutController extends Controller
     {
         // dd($id);
         $stt = $request->status_id;
-        Bill::where('id', $id)->update(['status' => $request->status_id]);
+            $commit = auth()->user()->name;
+        Bill::where('id', $id)->update(['status' => $request->status_id,'commit'=>$commit]);
         $data = Bill::findOrFail($id);
         $bill_code = $data['bill_code'];
         // if ($request->$stt = 5) {

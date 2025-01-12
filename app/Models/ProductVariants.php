@@ -24,7 +24,7 @@ class ProductVariants extends Model
     }
     public function flashSales()
     {
-        return $this->belongsTo(FlashSale::class, 'product_id');
+        return $this->hasOne(FlashSale::class, 'product_id');
     }
     public function getFlashSalePriceByVariantId($variantId)
     {

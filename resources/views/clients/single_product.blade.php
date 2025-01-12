@@ -563,13 +563,19 @@
                                                     {{ $variant->ram }}GB - {{ $variant->memory }}GB
                                                 </label>
                                                 <div class="variant-details" id="details-{{ $variant->id }}" style="display: none;">
+                                                    @php
+                                                        
+
+                                                @endphp
                                                     @if($variant -> isInFlashSale())
                                                         @php
+
                                                             $flashSalePrice = $variant->getFlashSalePriceByVariantId($variant->id);
                                                         @endphp
                                                         <del>Giá: {{ number_format($variant->price) }} VND</del>
                                                         <p>Giá Flash Sale: {{ number_format($flashSalePrice) }} VND</p>
                                                     @else
+
                                                     <p>Giá: {{ number_format($variant->price) }} VND</p>
                                                     @endif
                                                     <p>Số lượng còn: {{ $variant->quantity }}</p>
