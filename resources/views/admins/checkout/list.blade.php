@@ -52,6 +52,7 @@
                                         <th>Tổng Tiền</th>
                                         <th>Ngày Mua</th>
                                         <th>Trạng Thái Đơn Hàng</th>
+                                        <th>Người Cam Kết</th>
                                         <th>Thao Tác</th>
                                     </tr>
                                 </thead>
@@ -70,6 +71,7 @@
                                                 <td>{{ $value->total }}</td>
                                                 <td>{{ $value->created_at }}</td>
                                                 <td>{{ $value->status_name }}</td>
+                                                <td>{{ $value->commit }}</td>
                                                 <td>
                                                     <a class="btn btn-danger m-1"
                                                         href="{{ route('checkout.status', $value->id) }}">Sửa Trạng

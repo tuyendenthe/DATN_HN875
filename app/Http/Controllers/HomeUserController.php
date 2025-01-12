@@ -74,6 +74,20 @@ class HomeUserController extends Controller
 
         $products = (Product::with('category', 'flashSale', 'variants'))->findOrFail($id);
         // $categories = Category::all();
+        // foreach($products->variants as $variantt){
+            // echo "<h1> ok nhe </h1>";
+        // if($variantt-> isInFlashSale()){
+        //     $flashSalePrice = $variantt->getFlashSalePriceByVariantId($variantt->id);
+        //     dd( $flashSalePrice);
+        // }
+        // dd($products);
+        // $vra = (ProductVariantsController::)
+        // foreach($products->variants as $variantt){
+        // $fls = FlashSale::where('product_id', '=', $variantt->id)
+
+        // ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->get();
+        // // dd($fls);
+        // }
         $flashSales = FlashSale::with('productVariants.product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
             ->orderBy('time_end', 'asc')
