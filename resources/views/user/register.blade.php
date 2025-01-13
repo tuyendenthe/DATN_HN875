@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Đăng Ký</title>
     <link rel="stylesheet" href="/vendors/feather/feather.css">
     <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
@@ -12,12 +12,13 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
-    
+
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="/images/favicon.png" />
+    {{-- <link rel="shortcut icon" href="/images/favicon.png" /> --}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/techzone.jpg')}}" />
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Toastr CSS -->
@@ -34,15 +35,15 @@
                             <div class="brand-logo">
                                 <img src="/images/logo.svg" alt="logo">
                             </div>
-                            <h4>New here?</h4>
-                            <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+                            <h4>Bạn chưa có tài khoản?</h4>
+                            <h6 class="font-weight-light">Hãy Đăng Ký Ngay</h6>
                             @if (session('success'))
                             <div>{{ session('success') }}</div>
                             @endif
                             <form action="{{ route('user.save') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name">Name</label>
+                                    <label for="name">Tên</label>
                                     <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="form-group">
@@ -50,14 +51,14 @@
                                     <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password (min. 6 characters)</label>
+                                    <label for="password">Mật Khẩu (min. 6 characters)</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button type="submit" class="btn btn-primary">Đăng ký</button>
                             </form>
 
                             <div class="text-center mt-4 font-weight-light">
-                                Already have an account? <a href="/user/login" class="text-primary">Login</a>
+                                Bạn đã có tài khoản? <a href="/user/login" class="text-primary">Đăng Nhập</a>
                             </div>
                         </div>
                     </div>
@@ -73,7 +74,7 @@
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-   
+
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="/vendors/js/vendor.bundle.base.js"></script>

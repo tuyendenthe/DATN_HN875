@@ -19,7 +19,7 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="/admin/profileview">Xem</a></li>
                     <li class="nav-item"> <a class="nav-link" href="/admin/profileedit">Sửa</a></li>
-                </ul> 
+                </ul>
             </div>
         </li> --}}
         <li class="nav-item">
@@ -30,12 +30,12 @@
     </a>
     <div class="collapse" id="chat-support">
         <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/admin1/chats_123">Chat Support</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/admin1/chats_123">Chat Hỗ Trợ</a></li>
         </ul>
     </div>
 </li>
 
-        
+
     </ul>
 </nav>
 

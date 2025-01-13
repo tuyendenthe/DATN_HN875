@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
+    <title>TechZone Chat</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -17,14 +17,14 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
-    
+
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    
-    <link rel="shortcut icon" href="/images/favicon.png" />
-    
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/techzone.jpg')}}" />
+    {{-- <link rel="shortcut icon" href="/images/favicon.png" /> --}}
+
 </head>
 <style>
     .chat-list {
@@ -114,8 +114,8 @@
     .list-group-item.active {
         z-index: 2;
         color: #fff;
-        background-color: #4B49AC;
-        border-color: #4B49AC;
+        background-color: #4ed2f3;
+        border-color: #4ed2f3;
     }
 
     .chat-message {
@@ -204,7 +204,7 @@
     }
 
     .badge-primary {
-        background-color: #007bff;
+        background-color: #4ed2f3;
         /* Badge background color */
         color: #fff;
         /* Badge text color */
@@ -228,7 +228,7 @@
                 <div id="settings-trigger"><i class="ti-settings"></i></div>
                 <div id="theme-settings" class="settings-panel">
                     <i class="settings-close ti-close"></i>
-                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <p class="settings-heading">Giao Diện</p>
                     <div class="sidebar-bg-options selected" id="sidebar-light-theme">
                         <div class="img-ss rounded-circle bg-light border mr-3"></div>Light
                     </div>
@@ -344,13 +344,13 @@
             </div>
             <!-- page-body-wrapper ends -->
         </div>
-      
+
 
         <!-- container-scroller -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    
+
 
         <!-- plugins:js -->
         <script src="/vendors/js/vendor.bundle.base.js"></script>
@@ -413,11 +413,11 @@
                 // Append message to chat container
                 document.getElementById('chatMessageContainer').insertAdjacentHTML('beforeend', messageHtml);
         });
-        </script> 
+        </script>
     <!-- JavaScript to handle profile card click -->
     <script>
 $(document).ready(function() {
-   
+
     $('.chat-item').on('click', function() {
         let profileImage = $(this).find('.profile_img').attr('src');
         let profileName = $(this).find('.profile_name').text();
@@ -425,7 +425,7 @@ $(document).ready(function() {
         $('#receiver_id').val(receiverId);
         $('#chat_img').attr('src', profileImage);
         $('#chat_name').text('Đang Liên hệ với ' + profileName);
-        
+
         // Fetch messages
         $.ajax({
             url: '{{ route('fetch.messagesFromSellerToAdmin') }}',
@@ -556,7 +556,7 @@ $(document).ready(function() {
             if (activeItem) {
                 activeItem.click();
             }
-        }, 10000); 
+        }, 10000);
     }
 </script>
 

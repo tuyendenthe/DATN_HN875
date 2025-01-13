@@ -12,12 +12,14 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
-    
+
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="/images/favicon.png" />
+    {{-- <link rel="shortcut icon" href="/images/favicon.png" /> --}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/techzone.jpg')}}" />
+
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Toastr CSS -->
@@ -59,7 +61,7 @@
                                     <label for="password">Mật khẩu</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100" 
+                                <button type="submit" class="btn btn-primary w-100"
                                 style="background:#198754; color:white; border:1px solid #198754;"
                                 >Đăng nhập</button>
                             </form>
@@ -78,7 +80,7 @@
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-   
+
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="/vendors/js/vendor.bundle.base.js"></script>
@@ -92,5 +94,6 @@
     <script src="/js/settings.js"></script>
     <script src="/js/todolist.js"></script>
 </body>
+
 
 </html>

@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
+    <title>TechZone Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
@@ -76,7 +76,7 @@
                                         <span class="text-danger">{{ $LoggedAdminInfo ['name'] }}</span>
                                         @endif
                                     </h3>
-                                    
+
                                 </div>
                                 @if (session('success'))
                     <div class="alert alert-success fade show" role="alert">
@@ -96,10 +96,10 @@
                                                     <p><strong>Email:</strong> {{ $LoggedAdminInfo->email }}</p>
                                                     <p><strong>Số điện thoai:</strong> {{ $LoggedAdminInfo->phone_number }}</p>
                                                     <p><strong>Loại tài khoản:</strong> {{ $LoggedAdminInfo->role }}</p>
-                                                   
+
                                                     <p><strong>Ngày tạo tài khoản :</strong> {{ $LoggedAdminInfo->created_at}}</p>
 
-                                                    
+
                                                     <p><strong>Bio:</strong> {{ $LoggedAdminInfo->bio}}</p>
 
                                                         <!-- Add more fields as needed -->
@@ -179,7 +179,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-        
+
 
         <!-- plugins:js -->
         <script src="/vendors/js/vendor.bundle.base.js"></script>

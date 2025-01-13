@@ -17,7 +17,8 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="/images/favicon.png" />
+    {{-- <link rel="shortcut icon" href="/images/favicon.png" /> --}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/techzone.jpg')}}" />
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Toastr CSS -->
@@ -31,7 +32,7 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5 shadow">
-                            
+
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
@@ -49,7 +50,7 @@
                                     </ul>
                                 </div>
                             @endif
-                           
+
                             <form action="{{ route('admin.check') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
@@ -60,12 +61,12 @@
                                     <label for="password">Mật khẩu</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100" 
+                                <button type="submit" class="btn btn-primary w-100"
                                 style="background:#198754; color:white; border:1px solid #198754;"
                                 >Đăng nhập</button>
                             </form>
 
-                          
+
 
                         </div>
                     </div>
