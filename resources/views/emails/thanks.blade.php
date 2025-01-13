@@ -116,6 +116,7 @@
     @foreach($products as $product)
         <li>
             <strong>Tên:</strong> {{ $product['product_name'] }} <br>
+            <strong>Loại sản phẩm:</strong> {{ $product['variant_name'] }} <br>
             <strong>Số lượng:</strong> {{ $product['quantity'] }} <br>
             <strong>Giá:</strong> {{ number_format($product['price'], 0, ',', '.') }} VNĐ
         </li>

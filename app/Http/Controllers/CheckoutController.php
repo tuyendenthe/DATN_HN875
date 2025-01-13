@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail; // Thêm import Mail
+use App\Mail\DeliveryConfirmationMail;
 use App\Mail\TestMail; // Import Mailable đã tạo
 use Illuminate\Support\Facades\Session;
 use App\Models\Notification;
@@ -234,6 +235,7 @@ class CheckoutController extends Controller
     {
             //    dd($request);
             // dd(session()->get('cart'));
+
         $idVoucher = $request['voucherId'];
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         $randomString = substr(str_shuffle($characters), 0, 10); // Tạo mã đơn hàng ngẫu nhiên
@@ -331,15 +333,29 @@ class CheckoutController extends Controller
             }
         }
 
-        // Gửi email xác nhận
-        //        Mail::to($request['email'])->send(new TestMail($billRecord, $products));
+        $emailProducts = [];
+    foreach ($products as $item) {
+        $variants = ProductVariants::find($item['productvariants_id']);
+        $emailProducts[] = [
+            'product_name' => ProductVariants::with('product')->find($item['productvariants_id'])->product->name,
+            'quantity' => $item['quantity'],
+            'price' => $item['price'],
+            'variant_name' => $variants->ram."G và ".$variants->memory."G", // Include variant name
+        ];
+    }
+
+    // Send confirmation email
+    Mail::to($request['email'])->send(new TestMail($billRecord, $emailProducts));
 
         // Thông báo quản trị viên
-        Notification::create([
-            'message' => 'Bạn có một đơn hàng mới với mã ' . $randomString,
-            'is_read' => false,
-            'created_at' => now(),
-        ]);
+       // Thông báo quản trị viên
+       Notification::create([
+        'message' => 'Bạn có một đơn hàng mới với mã ' . $randomString, // Use the correct variable
+        'is_read' => false,
+        'bill_code' => $randomString, // Ensure this is set correctly
+        'created_at' => now(),
+    ]);
+
 
         // Cập nhật giỏ hàng
         $cart = session()->get('cart', []);
@@ -352,6 +368,11 @@ class CheckoutController extends Controller
 
         return redirect()->route("checkout.success")->with('success', 'Mua hàng thành công.');
     }
+    public function notifications()
+{
+    $notifications = Notification::orderBy('created_at', 'desc')->get(); // Fetch notifications
+    return view('admin.notifications', compact('notifications'));
+}
 
     public function orderDetail($bill_code)
     {
@@ -444,38 +465,7 @@ class CheckoutController extends Controller
         return view('admins.checkout.list', compact('listCheckouts'));
     }
 
-    // public function detail($bill_code)
-    // {
-    //     // $detail = DB::table('bill_details')
-    //     //     ->join('products', 'bill_details.product_id', '=', 'products.id')
-
-    //     //     ->select('bill_details.*', 'products.name')
-    //     //     ->get();
-
-    //     // $detail = DB::table('bill_details')->where('bill_code', '=', $bill_code)->get();
-
-    //     // Truy vấn thông tin người dùng từ bảng bills
-    //     // $detail_user = DB::table('bills')->where('bill_code', '=', $bill_code)->first();
-    //     // dd($detail);
-    //     // dd($detail_user);
-    //     // dd($bill_code);
-    //     $data = Bill::join('statuses', 'bills.status', '=', 'statuses.id')
-    //     // ->where('user_id', '=', auth()->user()->id)
-    //     ->where('bill_code', '=',$bill_code)
-    //     ->select('bills.*', 'statuses.status_name as status_name') // Chỉ lấy cột `name` từ `statuses`
-    //     ->first();
-    //     // dd($data);
-    //     // $data2 = Bill_detail::where('bill_code','=',$bill_code)->get();
-    //     $detail = DB::table('bill_details')
-    //     ->join('products', 'bill_details.product_id', '=', 'products.id')
-    //     ->where('bill_details.bill_code', $bill_code) // Sử dụng bill_code để lọc
-    //     ->select('bill_details.*', 'products.name','products.image')
-    //     ->get();
-    //     // dd(vars: $data);
-    //     return view('admins.checkout.detail', compact('data', 'detail'));
-    // }
-
-    public function detail($bill_code)
+       public function detail($bill_code)
     {
         $data = Bill::join('statuses', 'bills.status', '=', 'statuses.id')
             ->where('bills.bill_code', '=', $bill_code)
@@ -554,6 +544,15 @@ class CheckoutController extends Controller
         Bill::where('id', $id)->update(['status' => $request->status_id]);
         $data = Bill::findOrFail($id);
         $bill_code = $data['bill_code'];
+
+
+        if ($stt == 4) { // Assuming 3 is the status for delivered
+            // Fetch the bill details
+            $products = Bill_detail::where('bill_code', $bill_code)->get()->toArray();
+
+            // Send the delivery confirmation email
+            Mail::to($data->email)->send(new DeliveryConfirmationMail($data, $products));
+        }
         // if ($request->$stt = 5) {
         //     $data2 = Bill_detail::where('bill_code', '=', $bill_code)->get();
 

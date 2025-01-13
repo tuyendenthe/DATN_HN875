@@ -12,15 +12,28 @@
     </div>
 @endif
 
-<ul class="list-group">
-    @foreach($notifications->sortByDesc('created_at') as $notification)
-        <li class="list-group-item">
-            {{ $notification->message }}
-            @if ($notification->bill_code)
-                {{-- <a href="{{ route('orders.detail', $notification->bill_code) }}" class="btn btn-link">Xem Chi Tiết</a> --}}
+<h1>Notifications</h1>
+
+<ul>
+    @foreach($notifications as $notification)
+        <li>
+            @php
+                // Get the bill code from the notification or the related bill
+                $billCode = $notification->bill_code;
+                if (is_null($billCode)) {
+                    $bill = $notification->bill; // Get the related bill
+                    $billCode = $bill ? $bill->bill_code : null; // Fetch the bill code if the bill exists
+                }
+            @endphp
+
+            @if(trim($billCode)) <!-- Ensure bill_code is trimmed and checked -->
+                <a href="{{ route('checkout.detail', ['bill_code' => $billCode]) }}">
+                    {{ $notification->message }}
+                </a>
             @else
-                <span>(Mã đơn hàng không khả dụng)</span>
+                {{ $notification->message }} (Không có mã hóa đơn)
             @endif
+            {{-- <a href="{{ route('notifications.read', $notification->id) }}">Đánh dấu là đã đọc</a> --}}
         </li>
     @endforeach
 </ul>
