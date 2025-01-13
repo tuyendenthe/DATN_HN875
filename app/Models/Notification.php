@@ -8,5 +8,5 @@ class Notification extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['message', 'is_read'];
+    protected $fillable = ['message', 'is_read','bill_code'];
 }

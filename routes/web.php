@@ -353,6 +353,7 @@ Route::prefix('/bill')->name('bill.')->group(function () {
     Route::post('/bill_cancel/{bill_code}', [CheckoutController::class, 'cancel'])->name('bill_cancel');
 });
 
+
 /* -------------------------------- end_bill -------------------------------- */
 /* -------------------------------- check order -------------------------------- */
 Route::get('/check_order', [CheckoutController::class, 'check_order'])->name('check_order');
