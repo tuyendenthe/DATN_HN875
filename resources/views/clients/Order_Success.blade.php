@@ -43,6 +43,8 @@
       <p>Cảm Ơn Bạn Đã Tin Tưởng<br/> Đơn Hàng Sẽ Được Giao Trong Thời Gian Sớm Nhất. </p>
       <p>Thông Tin Đơn Hàng Đã Được Giửi Qua Email Của Bạn. </p>
 
+
       <a class="os-btn os-btn-danger mt-3" href="http://127.0.0.1:8000/">Tiếp Tục Mua Sắm</a>
+
     </div>
 @endsection

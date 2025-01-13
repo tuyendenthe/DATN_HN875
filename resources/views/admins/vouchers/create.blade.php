@@ -8,7 +8,8 @@
         @csrf
         <div class="form-group">
             <label for="voucher_code">Mã Voucher</label>
-            <input type="text" class="form-control" id="voucher_code" name="voucher_code" required>
+            <input type="text" class="form-control" id="voucher_code" name="voucher_code" required oninput="validateVoucherCode(this)">
+            
         </div>
         {{-- <div class="form-group">
             <label for="quantity">Số lượng</label>
@@ -52,4 +53,18 @@
         document.getElementById('end_date').setAttribute('min', this.value);
     });
     </script>
+    <script>
+        function validateVoucherCode(input) {
+            // Xóa khoảng trắng ở đầu và cuối
+            input.value = input.value.trim();
+        
+            // Chỉ cho phép chữ cái và số
+            input.value = input.value.replace(/[^a-zA-Z0-9]/g, '');
+        
+            // Nếu có ký tự không hợp lệ, thông báo
+            if (input.value.match(/[^a-zA-Z0-9]/)) {
+                alert("Mã voucher chỉ được chứa chữ cái và số, không được chứa dấu hoặc khoảng trắng.");
+            }
+        }
+        </script>
 @endsection

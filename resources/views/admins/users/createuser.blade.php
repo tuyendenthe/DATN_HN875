@@ -54,7 +54,7 @@
                     Quyền tài khoản:
                     <select name="role" class="form-control">
                         @if(auth()->user()->role == 1) <!-- Chỉ Admin tổng mới có thể chọn tất cả -->
-                            <option value="1">Admin</option>
+                            {{-- <option value="1">Admin</option> --}}
                             <option value="3">Nhân Viên</option>
 
                         @endif
