@@ -107,14 +107,14 @@
 
             <div class="col-12">
                 Kích Thước Màn Hình:
-                <input type="number" name="screen" value="{{ old('screen') }}" class="form-control" min="0">
+                <input type="text" name="screen" value="{{ old('screen') }}" class="form-control" min="0">
                 @error('screen')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror
             </div>
             <div class="col-12">
                 Độ Phân Giải:
-                <input type="number" name="resolution" value="{{ old('resolution') }}" class="form-control" min="0">
+                <input type="text" name="resolution" value="{{ old('resolution') }}" class="form-control" min="0">
                 @error('resolution')
                 <span class="" style="color: red">{{ $message }}</span>
                 @enderror

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Send Message</title>
+    <title>Gửi Tin Nhắn</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,19 +24,19 @@
     }
 
     .card-header {
-        background-color: #007bff;
+        background-color: #4ed2f3;
         color: white;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
     }
 
     .btn-primary {
-        background-color: #007bff;
+        background-color: #4ed2f3;
         border: none;
     }
 
     .btn-primary:hover {
-        background-color: #0056b3;
+        background-color: #4ed2f3;
     }
 
     .profile-pic {
@@ -64,9 +64,9 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Profile Picture</th>
-                                    <th>Name</th>
-                                    <th>Action</th>
+                                    <th>Ảnh</th>
+                                    <th>Tên</th>
+                                    <th>Hành Động</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,9 +75,8 @@
                                     <td><img src="{{ asset('storage/' . $user->picture) }}" alt="{{ $user->name }}"
                                             class="profile-pic"></td>
                                     <td>{{ $user->name }}</td>
-                                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#messageModal"
-                                            data-user-id="{{ $user->id }}" data-user-name="{{ $user->name }}">Send
-                                            Message</button></td>
+                                    <td><button class="btn btn-success" data-toggle="modal" data-target="#messageModal"
+                                            data-user-id="{{ $user->id }}" data-user-name="{{ $user->name }}">Gửi</button></td>
                                 </tr>
                                 @endforeach
                             </tbody>

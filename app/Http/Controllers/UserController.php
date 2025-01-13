@@ -32,7 +32,13 @@ public function detail(string $id)
 
 
     public function store(StoreUserRequest $request)
-    {
+    {    $vali= Admin::get();
+        foreach($vali as $value){
+            if($value->username ==$request->name){
+                return back()->with('message1', 'Tên admin bị trùng xin nhập lại.');
+            }
+
+        }
         $check = User::where('email', $request->email)->first();
         if ($check) {
             return redirect()->route('admin1.users.adduser')->with('error', 'Email đã tồn tại.');
@@ -51,15 +57,15 @@ public function detail(string $id)
             $user->update(['image' => $data_images]);
         }
 
-        // if ($request->role == 1 || $request->role == 3) {
-        //     Admin::create([
-        //         'name' => $request->name,
-        //         'email' => $request->email,
-        //         'password' => bcrypt($request->password),
-        //         'status' => 1,
-        //         'username' => $request->name,
-        //     ]);
-        // }
+        if ($request->role == 1 || $request->role == 3) {
+            Admin::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'status' => 1,
+                'username' => $request->name,
+            ]);
+        }
 
         return redirect()->route('admin1.users.listuser')->with('message1', 'Thêm tài khoản thành công.');
     }
