@@ -15,6 +15,13 @@
                             
                             use Illuminate\Support\Carbon;
                         @endphp
+                        <div class="pt-2">
+                            @if ($errors->has('message'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ $errors->first('message') }}
+                                </div>
+                            @endif
+                        </div>
                         <form action="{{route('chart')}}" class="row" method="get">
                             <div class="col-md-4" style="margin-top:30px !important;">
                                 <label for="">Từ ngày</label>

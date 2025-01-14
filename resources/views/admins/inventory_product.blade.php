@@ -10,7 +10,13 @@
             <div class="page-content">
                 <div class="container-fluid">
                   
-                   
+                    <div class="pt-2">
+                        @if ($errors->has('message'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ $errors->first('message') }}
+                            </div>
+                        @endif
+                    </div>
                     <div class="pt-5 ">
                         <div style=" height:100vh;">
                             <h5 class="text-center"> Thống kê tồn kho sản phẩm (số lượng)</h5>

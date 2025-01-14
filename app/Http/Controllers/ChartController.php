@@ -9,12 +9,15 @@ use App\Models\Bill_detail;
 use App\Models\Product;
 use App\Models\ProductVariants;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ChartController extends Controller
 {
     //
     public function index(Request $request)
     {
+        
+        
         if ($request->start) {
             $data_start = Carbon::createFromFormat('Y-m-d', $request->start)->startOfDay()->subDay();
             $data_end = Carbon::createFromFormat('Y-m-d', $request->end)->endOfDay();
@@ -22,13 +25,20 @@ class ChartController extends Controller
             $data_start = Carbon::today('Asia/Ho_Chi_Minh')->startOfDay()->subDay();
             $data_end = Carbon::today('Asia/Ho_Chi_Minh')->endOfDay();
         }
+       
+       
         if ($request->start) {
             $data_start_ = Carbon::createFromFormat('Y-m-d', $request->start)->startOfDay();
         } else {
             $data_start_ = Carbon::today()->startOfDay();
         }
         $data_start_str = $data_start->format('Y-m-d H:i:s');
+       
         $data_end_str = $data_end->format('Y-m-d H:i:s');
+        if ($data_start_str > $data_end_str) {
+            return redirect()->back()->withErrors(['message' => 'Ngày bắt đầu nhỏ hơn ngày kết thúc']);
+        }
+        
         $orders = Bill::where('status', 4)
         ->whereDate('created_at', '>=', $data_start_str)->whereDate('created_at', '<=', $data_end_str)
         ->get();
@@ -73,7 +83,9 @@ class ChartController extends Controller
         $data_start_str = $data_start->format('Y-m-d H:i:s');
 
         $data_end_str = $data_end->format('Y-m-d H:i:s');
-
+        if ($data_start_str > $data_end_str) {
+            return redirect()->back()->withErrors(['message' => 'Ngày bắt đầu nhỏ hơn ngày kết thúc']);
+        }
         $orders = Bill::whereBetween('created_at', [$data_start_str, $data_end_str])->where('status', 4)->with('Bill_detail')
             ->get();
         $productDetails = []; 
@@ -96,10 +108,10 @@ class ChartController extends Controller
         $product_quantity = [];
         $line_data = [];
         foreach ($productDetails as $productId => $productDetail) {
-            $product = ProductVariants::with('product')->find($productDetail['detail']->product_id);
-         
+            $product = Product::find($productDetail['detail']->product_id);
+           
           
-            $product_name[] = $product->product->name;
+            $product_name[] = $product->name;
             $line_data[] =  $productDetail['quantity']*$product->price;
             $product_quantity[] = $productDetail['quantity'];
         }
@@ -125,7 +137,9 @@ class ChartController extends Controller
         $data_start_str = $data_start->format('Y-m-d H:i:s');
 
         $data_end_str = $data_end->format('Y-m-d H:i:s');
-        
+        if ($data_start_str > $data_end_str) {
+            return redirect()->back()->withErrors(['message' => 'Ngày bắt đầu nhỏ hơn ngày kết thúc']);
+        }
         $orderDetails = Bill_detail::where('created_at', '>=', Carbon::now()->subMonth())->get();
         $productQuantities = [];
 
