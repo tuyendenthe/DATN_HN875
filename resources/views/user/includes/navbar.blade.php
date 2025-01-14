@@ -16,8 +16,9 @@
 <body>
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="/images/logo.svg" class="mr-2" alt="logo" /></a>
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/images/logo-mini.svg" alt="logo" /></a>
+            <a class="navbar-brand brand-logo mr-5" href="http://127.0.0.1:8000/"><img src="{{asset('admin/assets/images/techzone.jpg')}}" class="mr-2" alt="logo" /></a>
+            {{-- <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/images/logo-mini.svg" alt="logo" /></a> --}}
+            {{-- <link rel="shortcut icon" type="image/x-icon" href="" /> --}}
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -37,13 +38,13 @@
                     <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                     <i class="fas fa-bell mx-0"></i>
 
-                    </a>                  
-                    
+                    </a>
+
                  <b>   <span id="notificationCount" class="count">&nbsp;  </span> <!-- Initial value here -->
                  </b>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                         <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                       
+
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <div class="preview-icon bg-success">
@@ -53,11 +54,11 @@
                             <div class="preview-item-content">
                                 <h6 class="preview-subject font-weight-normal">New Message</h6>
                                 <p class="font-weight-light small-text mb-0 text-muted">
-                                   
+
                                 </p>
                             </div>
                         </a>
-                      
+
                     </div>
                 </li>
                 <li class="nav-item nav-profile dropdown">
@@ -89,7 +90,7 @@
         </div>
     </nav>
 
-    
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         var notificationCount = document.getElementById('notificationCount');

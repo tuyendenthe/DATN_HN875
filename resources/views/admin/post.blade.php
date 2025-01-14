@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Send Message</title>
+    <title>Gửi Tin Nhắn</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/techzone.jpg')}}" />
     <style>
     body {
         background-color: #f8f9fa;

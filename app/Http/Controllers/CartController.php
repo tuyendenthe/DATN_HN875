@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\FlashSale;
@@ -61,7 +62,7 @@ class CartController extends Controller
         // $variant2_name = Variant::find($variant_id_2) == null ? '' : $variant2->name;
         // $variant3_name = Variant::find($variant_id_3) == null ? '' : $variant3->name;
 
-        $products = (Product::with('category','flashSale'))->findOrFail($product->id);
+        $products = (Product::with('category', 'flashSale'))->findOrFail($product->id);
         // $categories = Category::all();
         $flashSales = FlashSale::with('product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -72,13 +73,13 @@ class CartController extends Controller
         // dd($product);
 
         $cart = session()->get('cart', []);
-        $productId = $product->id;// tuyền sửa thử
+        $productId = $product->id; // tuyền sửa thử
         $productName = $product->name;
-            if ($products->isOnFlashSale()) {
-                $productPrice = $products->flashSale->price_sale;
-            } else {
-                $productPrice = $products->price;
-            }
+        if ($products->isOnFlashSale()) {
+            $productPrice = $products->flashSale->price_sale;
+        } else {
+            $productPrice = $products->price;
+        }
 
 
         //  + $variant1_price + $variant2_price + $variant3_price;
@@ -86,7 +87,7 @@ class CartController extends Controller
         // $variantName2 = $variant2_name;
         // $variantName3 = $variant3_name;
         $quantity = 1;
-        $image = $product -> image;
+        $image = $product->image;
         $cartItems = session('cart', []);
 
         // Create a unique key for the product-variant combination
@@ -117,11 +118,11 @@ class CartController extends Controller
     {
 
         $id = $request->product_variants;
-        $productVariants = ProductVariants::with('product','flashSales')->findOrFail($id);
-//        dd($productVariants);
+        $productVariants = ProductVariants::with('product', 'flashSales')->findOrFail($id);
+        //        dd($productVariants);
         $ram = $productVariants->ram;
         $memory = $productVariants->memory;
-       $product = (Product::with('category','flashSale'))->findOrFail($productVariants->product_id);
+        $product = (Product::with('category', 'flashSale'))->findOrFail($productVariants->product_id);
         // $categories = Category::all();
         $flashSales = FlashSale::with('productVariants.product')
             ->where('time_end', '>', \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
@@ -134,19 +135,19 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
         $productVariantsId = $id;
         $productName = $productVariants->product->name;
-            if ($productVariants->isInFlashSale()) {
-                $productPrice = $priceSale->price_sale;
-            } else {
-                $productPrice = $productVariants->price;
-            }
+        if ($productVariants->isInFlashSale()) {
+            $productPrice = $priceSale->price_sale;
+        } else {
+            $productPrice = $productVariants->price;
+        }
 
 
         $quantity = 1;
 
-        $image = $product -> image;
-        $id_products=$product -> id;
+        $image = $product->image;
+        $id_products = $product->id;
 
-//         $image = $productVariants->product -> image;
+        //         $image = $productVariants->product -> image;
 
         $cartItems = session('cart', []);
 
@@ -164,7 +165,7 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'price' => $productPrice,
                 'image' => $image,
-                'ram' => $ram ,
+                'ram' => $ram,
                 'memory' => $memory
             ];
         }
@@ -215,7 +216,7 @@ class CartController extends Controller
     // }
     public function applyCoupon(Request $request)
     {
-    //    dd($request->all());
+        //    dd($request->all());
         $voucherCode = $request->input('coupon_code');
         $originalPrice = $request->input('total');
         // dd($originalPrice);
@@ -226,22 +227,14 @@ class CartController extends Controller
 
         //  dd($check);
 
-
-
         $voucher = Voucher::where('voucher_code', $voucherCode)->first();
+        if ($voucher == null) {
+            return response()->json(['success' => false, 'message' => 'Voucher không hợp lệ hoặc hết hạn.']);
+        }
         $check =  $voucher->condition;
-//   dd($check);
+        //   dd($check);
 
-
-        if ($voucher && $voucher->quantity > 0 && now()->between($voucher->start_date, $voucher->end_date) ) {
-
-//            if ($voucher->discount_type === 'percentage') {
-//                $discount = ($originalPrice * $voucher->discount_value) / 100;
-//            } elseif ($voucher->discount_type === 'fixed') {
-//                $discount = min($voucher->discount_value, $originalPrice);
-//            } else {
-//                $discount = 0;
-//            }
+        if ($voucher && $voucher !== null && $voucher->quantity > 0 && now()->between($voucher->start_date, $voucher->end_date)) {
             $discount = $voucher->price_sale;
 
             $finalPrice = $originalPrice - $discount;
@@ -257,24 +250,21 @@ class CartController extends Controller
 
             return response()->json(['success' => false, 'message' => 'Voucher không hợp lệ hoặc hết hạn.']);
         }
-
     }
 
 
     public function removeCartItem($key)
     {
         $cart = session()->get('cart');
-//        dd($cart, $key); // Kiểm tra giá trị $cart và $key
+        //        dd($cart, $key); // Kiểm tra giá trị $cart và $key
 
         if (isset($cart[$key])) {
             unset($cart[$key]);
             session()->put('cart', $cart);
             session()->save();
         }
-//        dd($cart, $key); // Kiểm tra giá trị $cart và $key
+        //        dd($cart, $key); // Kiểm tra giá trị $cart và $key
 
         return redirect()->route('cart.view')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
     }
 }
-
-

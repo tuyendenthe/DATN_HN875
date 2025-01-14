@@ -88,8 +88,7 @@
                                                         data-productvariants-id="{{ $item['product_id'] }}"
                                                         data-product-name="{{ $item['product_name'] }}"
                                                         data-product-ram="{{ $item['ram'] }}"
-                                                        data-product-memory="{{ $item['memory'] }}"
-                                                        />
+                                                        data-product-memory="{{ $item['memory'] }}" />
                                                     <!-- Thêm data-product-name -->
                                                 </td>
                                                 <td class="product-thumbnail">
@@ -103,7 +102,8 @@
                                                         href="{{ route('product.details', $item['id_products']) }}">{{ $item['product_name'] }}</a>
                                                 </td>
                                                 <td class="cart-product-variants">
-                                                    <span>RAM:{{$item['ram']}}GB - MEMORY:{{ $item['memory'] }}GB</span>
+                                                    <span>RAM:{{ $item['ram'] }}GB -
+                                                        MEMORY:{{ $item['memory'] }}GB</span>
                                                 </td>
                                                 {{-- <td class="product-variant"> --}}
                                                 {{-- <ul>
@@ -202,8 +202,7 @@
                                         <li>Tổng Tiền <span id="totalAll">0 VNĐ</span></li>
                                     </ul>
                                     <!-- Các trường ẩn -->
-                                    <input type="hidden" id="selectedProducts" name="selectedProducts"
-                                        value="" />
+                                    <input type="hidden" id="selectedProducts" name="selectedProducts" value="" />
                                     <input type="hidden" id="finalDiscount" name="finalDiscount" value="" />
                                     <input type="hidden" id="finalTotal" name="finalTotal" value="" />
                                     <input type="hidden" id="voucherId" name="voucherId" value="">
@@ -294,6 +293,8 @@
                     updateDisplay();
                 });
 
+
+
                 $('#applyCouponForm').on('submit', function(e) {
                     e.preventDefault();
 
@@ -303,7 +304,7 @@
                     // Lấy giá trị từ thẻ <span> và chuyển thành số
                     let totalSelected = $('#totalSelected').text(); // "0 VNĐ"
                     totalSelected = parseInt(totalSelected.replace(/\D/g,
-                    '')); // Loại bỏ các ký tự không phải số
+                        '')); // Loại bỏ các ký tự không phải số
 
                     // Gán giá trị vào input
                     $('#check').val(totalSelected);
@@ -314,7 +315,7 @@
                         return;
                     }
 
-                   // Gửi yêu cầu Ajax để áp dụng mã giảm giá
+                    // Gửi yêu cầu Ajax để áp dụng mã giảm giá
                     $.ajax({
                         url: "{{ route('cart.applyCoupon') }}",
                         method: 'POST',
@@ -331,7 +332,8 @@
 
                                 if (discount > totalSelected) {
                                     alert(
-                                        'Mã giảm giá không vượt quá tổng tiền thanh toán! Mua thêm để sử dụng mã.');
+                                        'Mã giảm giá không vượt quá tổng tiền thanh toán! Mua thêm để sử dụng mã.'
+                                    );
                                     return;
                                 }
 
@@ -342,7 +344,9 @@
                                 alert('Đã áp dụng mã giảm giá thành công!');
                             } else {
                                 alert(response
-                                .message); // Thông báo lỗi nếu mã giảm giá không hợp lệ
+                                    .message); // Thông báo lỗi nếu mã giảm giá không hợp lệ
+                                $('#discount').text(0 + ' VNĐ');
+                                updateDisplay();
 
                             }
                         },

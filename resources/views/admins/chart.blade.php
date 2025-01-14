@@ -2,17 +2,17 @@
 
 @section('content')
 <style>
-    
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <div class="container">
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
-                 
-    
+
+
                         @php
-                            
+
                             use Illuminate\Support\Carbon;
                         @endphp
                         <div class="pt-2">
@@ -29,22 +29,22 @@
                             </div>
                             <div class="col-md-4" style="margin-top:30px !important;">
                                 <label for="">Đến ngày ngày</label>
-    
+
                                 <input type="date" name="end" class="form-control" value="{{Carbon::parse($data_end)->format('Y-m-d')}}">
                             </div>
                             <div class="col-md-4" style="margin-top:30px !important;">
                                 <button class="btn btn-primary" style="margin-top:28px;"><i class="fa-solid fa-filter" style="margin-right:5px;"></i>Tìm kiếm</button>
                             </div>
-                            
+
                         </form>
-                        
-                   
+
+
                     <div class="mt-3 ">
                         <div style=" height:100vh;">
                             <h5 class="text-center"> Thống kê theo biểu đồ</h5>
                             <canvas class="mb-5" id="myChart" ></canvas>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -52,14 +52,28 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        document.querySelector('form').addEventListener('submit', function (event) {
+            // Lấy giá trị từ các trường input
+            const startDate = new Date(document.querySelector('input[name="start"]').value);
+            const endDate = new Date(document.querySelector('input[name="end"]').value);
+
+            // Kiểm tra nếu "Từ ngày" lớn hơn "Đến ngày"
+            if (startDate > endDate) {
+                alert('Thời gian sai, vui lòng kiểm tra lại.');
+                event.preventDefault(); // Ngăn không cho form submit
+            }
+        });
+    </script>
+
+    <script>
     const ctx = document.getElementById('myChart');
-    
+
 
     var dateArray = @json($date);
     var countData = @json($total);
-  
 
-   
+
+
     new Chart(ctx, {
         type: 'line'
         , data: {
@@ -96,7 +110,7 @@
                     }
                 }
             });
-            
+
     </script>
 
 @endsection
