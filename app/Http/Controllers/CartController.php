@@ -182,9 +182,10 @@ class CartController extends Controller
 
         // Lấy giỏ hàng từ session
         $cart = session()->get('cart', []);
+        $vouchers = Voucher::latest()->take(4)->get();
         // dd($cart);
         // Trả về view giỏ hàng
-        return view('clients.cart', compact('cart'));
+        return view('clients.cart', compact('cart','vouchers'));
     }
     // Hàm để cập nhật số lượng sản phẩm trong giỏ hàng
     public function updateQuantity(Request $request, $key)

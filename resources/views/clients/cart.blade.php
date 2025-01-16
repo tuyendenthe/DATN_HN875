@@ -171,10 +171,24 @@
                                             <button class="btn btn-primary" name="apply_coupon" type="submit">Áp
                                                 Dụng</button>
                                         </form>
+                                        @foreach ($vouchers as $vou)
+                                        <div class="mt-3 border p-3">
+                                        <span style="font-size: 13px; width: 550px;">
+                                            Nhập mã <h6 class="mb-0" style="display: inline; color: blue">{{$vou->voucher_code}}</h6> giảm {{number_format($vou->price_sale)}}VNĐ cho đơn hàng từ {{number_format($vou->condition)}} VNĐ @if ($vou->quantity == 0)
+                                                (Đã hết)
+                                             @else
+
+                                            @endif
+
+                                        </span>
+                                        <br>
+                                    </div>
+                                    @endforeach
                                     </div>
                                     <div class="coupon2">
-                                        <button class="os-btn os-btn-info" name="update_cart" type="submit">Tải
-                                            Lại</button>
+                                        {{-- <button  type="submit">Tải
+                                            Lại</button> --}}
+                                            <a href="http://127.0.0.1:8000/cart" class="os-btn os-btn-info" name="update_cart">Tải Lại</a>
 
                                     </div>
                                 </div>

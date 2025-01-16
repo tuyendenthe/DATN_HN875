@@ -20,6 +20,10 @@ class Bill_detail extends Model
     'subtotal',
     'price'
 ];
+public function variant()
+{
+    return $this->belongsTo(ProductVariants::class, 'variant_id');
+}
     }
 
 

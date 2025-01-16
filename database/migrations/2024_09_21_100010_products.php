@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('image');
             $table->longText('content');
             $table->string('chip'); // thêm loại chip cho sản phẩm
-            $table->string('ram');
+           
             $table->string('color');
-            $table->string('memory'); //bộ nhớ
+          
             $table->string('screen');  //kích thước màn
             $table->string('resolution'); // độ phân giải
             $table->string('content_short');

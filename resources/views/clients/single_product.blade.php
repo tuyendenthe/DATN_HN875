@@ -555,8 +555,9 @@
 
                                     <div class="epix-product-label mb-35">
                                         <a href="#" class="title">Chọn cấu hình</a>
+                                        <div class="d-flex ">
                                         @foreach($products->variants as $variant)
-                                            <div class="variant-option">
+                                            <div class="variant-option m-3">
                                                 <input type="radio" {{$variant->quantity == 0 ? 'disabled' : ''}}
                                                 id="variant-{{ $variant->id }}" name="product_variant_id" value="{{ $variant->id }}">
                                                 <label for="variant-{{ $variant->id }}">
@@ -564,7 +565,7 @@
                                                 </label>
                                                 <div class="variant-details" id="details-{{ $variant->id }}" style="display: none;">
                                                     @php
-                                                        
+
 
                                                 @endphp
                                                     @if($variant -> isInFlashSale())
@@ -582,6 +583,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                    </div>
                                     </div>
 
 
@@ -820,44 +822,68 @@
                 </div>
 
                 <div class="row ms-5">
-                    <div class="col-xxl-12">
+                    <div class="">
                         <div class="same-product">
                             <div class="title-container">
                                 <h3>SẢN PHẨM TƯƠNG TỰ</h3>
                             </div>
                             <div class="row">
-                                @foreach($category as $val)
-                                    <div class="col-xxl-3 col-sm-6 col-md-4">
-                                        <div class="epix-single-product-3 mb-40 style-2 text-center swiper-slide">
-                                            <div class="epix-product-thumb-3">
-                                                <div class="epix-action">
-                                                    <a href="{{ route('single_product', $val->id) }}"
-                                                       class="p-cart product-popup-toggle">
-                                                        <i class="fal fa-eye"></i>
-                                                        <i class="fal fa-eye"></i>
-                                                    </a>
-                                                </div>
-                                                <a href="{{ route('single_product', $val->id) }}">
-                                                    <img width="223px" height="376px" src="{{asset($val->image)}}"
-                                                         alt="">
-                                                </a>
-                                            </div>
-                                            <div class="price-box price-box-3">
-                                                @if($val->isOnFlashSale())
-                                                    <span style="width: 100px" class="price flash-sale-price">{{ number_format($val->flashSale->price_sale, 0, ',', '.') }} VNĐ</span>
-                                                    <span style="width: 100px" class="price original-price text-muted">
-                                <del>{{ number_format($val->price, 0, ',', '.') }} VNĐ</del>
-                            </span>
-                                                @else
-                                                    <span style="width: 120px" class="price">{{ number_format($val->price, 0, ',', '.') }} VNĐ</span>
-                                                @endif
-                                                <a style="width: 300px" href="{{ route('single_product', $val->id) }}">Chi
-                                                    tiết sản phẩm</a>
-                                            </div>
-                                            <h5 class="epix-p-title epix-p-title-3">
-                                                <a href="{{ route('single_product', $val->id) }}">{{$val->name}}</a>
-                                            </h5>
+                                @foreach ($category as $item)
+                                <div class="col-xxl-4 col-sm-6 col-md-4">
+                                    <div class="epix-handpicked-product mb-50">
+                                        <div class="epix-h-pro-thumb mr-35">
+                                            <a href="{{ route('single_product', $item->id) }}"><img
+                                                    style="margin-right: 10px" height="150px" width="150px"
+                                                    src="{{ asset($item->image) }}" alt=""></a>
                                         </div>
+                                        <div class="epix-h-pro-content">
+
+                                            <div class="epix-product-content pe-0 ps-0 pt-0 pb-0">
+
+
+                                                <h5 style="width: 200px" class="epix-p-title"><a
+                                                        href="{{ route('single_product', $item->id) }}">{{ $item->name }}</a>
+                                                </h5>
+                                                <div style="width: 200px" class="price-box mb-15">
+
+                                                    @if ($item->isOnFlashSale())
+                                                        <!-- Kiểm tra nếu sản phẩm còn trong thời gian flash sale -->
+                                                        <span
+                                                            class="price flash-sale-price">{{ number_format($item->flashSale->price_sale, 0, ',', '.') }}
+                                                            VNĐ</span>
+                                                        <span class="price original-price text-muted"><del>{{ number_format($item->price, 0, ',', '.') }}
+                                                                VNĐ</del></span>
+                                                    @else
+                                                        <span
+                                                            class="price">{{ number_format($item->variants->min('price'), 0, ',', '.') }}
+                                                            VNĐ</span>
+                                                    @endif
+                                                    <a href="{{ route('single_product', $item->id) }}">Xem chi tiết</a>
+                                                </div>
+                                                <div class="wrap">
+                                                    <span class="epix-p-subtitle">Đánh giá</span>
+                                                    <div class="rating">
+                                                        <i class="fal fa-star"></i>
+                                                        <span>{{ number_format($item->averageRating(), 1) }}</span>
+                                                    </div>
+                                                </div>
+                                                {{-- <div style="width: 200px" class="price-box mb-15">
+                                                    <span class="price">Số phiên bản:
+                                                        {{ $item->variants->count() }}</span>
+                                                    <a href="{{ route('single_product', $item->id) }}">+ Select
+                                                        Option</a>
+                                                </div> --}}
+                                                <div class="d-inline-block">
+                                                    <div class="epix-action">
+                                                        {{-- <a href="cart.html" class="p-cart">
+                                                            <i class="fal fa-shopping-cart"></i>
+                                                            <i class="fal fa-shopping-cart"></i>
+                                                        </a> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     </div>
                                 @endforeach
                             </div>

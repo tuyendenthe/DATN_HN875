@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bill_detail;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductVariants;
 use Illuminate\Support\Facades\Facades;
 use App\Http\Requests\ProductRequest;
 use App\Models\Categories;
@@ -44,6 +46,30 @@ class ProductController extends Controller
         // $Categories = Categories::where('status_delete', Categories::UNDELETE)->get();
         return view('admins.add-product', compact('data',));
     }
+    public function show($id)
+{   
+    // Lấy thông tin sản phẩm
+    $product = Product::findOrFail($id);
+
+    // Lấy danh sách biến thể của sản phẩm
+    $variants = ProductVariants::where('product_id', $id)->get();
+   
+    // Tính tổng số lượng đã bán cho từng biến thể
+    foreach ($variants as $variant) {
+        // $variant->sold = Bill_detail::
+        // where('variant_id', $variant->id)->sum('quantity');
+        $variant->sold = Bill_detail::join('bills', 'bills.id', '=', 'bill_details.bill_id')
+    ->where('variant_id', $variant->id)
+    ->where('status', 4) 
+    ->sum('quantity');
+        
+   }
+    // dd($variants->all());
+
+    // Trả về view
+    return view('admins.detail_products', compact('product', 'variants'));
+}
+
     public function upload_image($imageFile)
     {
         if ($imageFile) {

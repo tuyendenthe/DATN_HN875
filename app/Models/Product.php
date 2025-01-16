@@ -91,6 +91,11 @@ class Product extends Model
         }
 
         return false;
+
     }
+    // public function variantss()
+    // {
+    //     return $this->hasMany(ProductVariants::class, 'product_id', 'id');
+    // }
 
 }

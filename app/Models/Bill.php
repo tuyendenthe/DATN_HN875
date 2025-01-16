@@ -22,6 +22,9 @@ class Bill extends Model
         'total',
         'created_at',
         'commit',
+        'name_order',
+        'mail_order',
+        'voucher',
 
         'status',
     ];
