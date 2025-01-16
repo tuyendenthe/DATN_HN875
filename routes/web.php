@@ -206,6 +206,7 @@ Route::post('/admin/users/update/{id}', [UserController::class, 'updateUser'])->
     Route::get('/product_statistics', [ChartController::class, 'product_statistics'])->name('product_statistics');
     Route::get('/best_selling', [ChartController::class, 'best_selling'])->name('best_selling');
     Route::get('/inventory_product', [ChartController::class, 'inventory_product'])->name('inventory_product');
+    Route::get('/deltail_products/{id}', [ProductController::class, 'show'])->name('admin1.deltail_products');
 //    Route::resource('admin1/memories', MemoryC::class);
 
 

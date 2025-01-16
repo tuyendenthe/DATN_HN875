@@ -115,6 +115,36 @@
                                 @endforeach
                                 <tr>
                                     <td></td>
+                                    <td class="text-uppercase">Tổng Tiền Sản Phẩm</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    @php
+                                        $tong = $data->total +$data->voucher- 25000;
+                                    @endphp
+                                    <td>{{ number_format($tong , 0, ',', '.') }} VNĐ</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="text-uppercase">Mã Giảm Giá</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{ number_format($data->voucher, 0, ',', '.') }} VNĐ</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="text-uppercase">Phí Ship</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>25.000.000 VNĐ</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
                                     <td class="text-uppercase">Tổng Tiền</td>
                                     <td></td>
                                     <td></td>

@@ -33,7 +33,7 @@ class CheckoutController extends Controller
 
         $voucher = Voucher::where('id', $voucherId)->first();
         if (!empty($voucher)) {
-            if ($check <= $voucher->condition) {
+            if ($check < $voucher->condition) {
                 return back()->with('message', 'Đơn hàng không đủ điều kiện áp dụng mã giảm giá.');
             }
         }
@@ -262,6 +262,7 @@ class CheckoutController extends Controller
             'total' => $request['subtotall'],
             'status' => 1,
             'commit' => $commit,
+            'voucher' => $request['voucher'],
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -515,7 +516,8 @@ class CheckoutController extends Controller
         $query = DB::table('bills')
             ->join('statuses', 'bills.status', '=', 'statuses.id')
             ->where('bills.status', '>', 3)
-            ->select('bills.*', 'statuses.status_name');
+            ->select('bills.*', 'statuses.status_name')
+            ->orderBy('bills.id', 'desc');
 
         // Kiểm tra nếu có tìm kiếm theo mã đơn hàng
         if ($request->has('order_id') && !empty($request->order_id)) {
@@ -542,7 +544,7 @@ class CheckoutController extends Controller
     }
     public function updateStatus(Request $request, $id)
     {
-        // dd($id);
+        // dd($request);
         $stt = $request->status_id;
             $commit = auth()->user()->name;
         Bill::where('id', $id)->update(['status' => $request->status_id,'commit'=>$commit]);
@@ -557,16 +559,16 @@ class CheckoutController extends Controller
             // Send the delivery confirmation email
             Mail::to($data->email)->send(new DeliveryConfirmationMail($data, $products));
         }
-        // if ($request->$stt = 5) {
-        //     $data2 = Bill_detail::where('bill_code', '=', $bill_code)->get();
+        if ($stt = 5) {
+            $data2 = Bill_detail::where('bill_code', '=', $bill_code)->get();
 
-        //     foreach ($data2 as $value) {
-        //         $product = ProductVariants::findOrFail($value->product_id);
+            foreach ($data2 as $value) {
+                $product = ProductVariants::findOrFail($value->product_id);
 
-        //         $quantyti = $product->quantity + $value->quantity;
-        //         DB::table('product_variants')->where('id', '=', $value->product_id)->update(['quantity' => $quantyti]);
-        //     };
-        // }
+                $quantyti = $product->quantity + $value->quantity;
+                DB::table('product_variants')->where('id', '=', $value->product_id)->update(['quantity' => $quantyti]);
+            };
+        }
         return redirect()->route("checkout.list")->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
     public function check_order()

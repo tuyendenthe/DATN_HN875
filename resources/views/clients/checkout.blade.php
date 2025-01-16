@@ -193,8 +193,11 @@
                                     @if(auth()->user())
                                         <tr class="cart-voucher">
                                             <th>Mã Giảm Giá</th>
-                                            <td><span class="amount">{{ $discount }}</span></td>
+                                            {{-- <td><span class="amount">{{ $discount }}</span></td> --}}
+                                            <td><span class="amount">{{ number_format($discount, 0, ',', '.') }} VNĐ</span></td>
+                                            <input type="hidden" name="voucher" value="{{ $discount }}">
                                         </tr>
+                                        
                                         <tr class="cart-voucher">
                                             <th>Phí Giao Hàng</th>
                                             <td><span class="amount">25.000 VNĐ</span></td>

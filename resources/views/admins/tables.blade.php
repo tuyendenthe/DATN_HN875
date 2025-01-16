@@ -50,7 +50,7 @@
                                     <th>Loại</th>
                                     <th>Mô tả ngắn</th>
                                     <th>Hành Động</th>
-                                    <th>Thuộc tính</th>
+                                    <th>Biến Thể</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,6 +65,7 @@
                                             <td>{{ $value->category->name }}</td>
                                             <td>{{ $value->content_short }}</td>
                                             <td>
+                                                <a class="btn btn-success m-1" href="{{ route('admin1.deltail_products', $value->id) }}">Chi Tiết</a>
                                                 <a class="btn btn-primary m-1" href="{{ route('products.updateProduct', $value->id) }}">Sửa</a>
                                                 @if ($value->status == 1)
                                                 <form action="{{ route('products.deleteProduct', $value->id) }}" method="post" style="display:inline;">

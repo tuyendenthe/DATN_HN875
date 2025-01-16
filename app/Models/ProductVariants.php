@@ -34,4 +34,8 @@ class ProductVariants extends Model
         // Nếu có flash sale thì trả về giá sale, nếu không thì trả về null
         return $flashSale ? $flashSale->price_sale : null;
     }
+    public function billDetails()
+{
+    return $this->hasMany(Bill_detail::class, 'variants_id');
+}
 }
