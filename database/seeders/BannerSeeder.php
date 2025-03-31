@@ -16,11 +16,11 @@ class BannerSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i=0; $i < 7; $i++) { 
-           Slide::create([
-                'image' => fake()->imageUrl(),
-                'remember_token' => fake()->randomNumber(),    
-           ]);
-        }
+        // for ($i=0; $i < 7; $i++) {
+        //    Slide::create([
+        //         'image' => fake()->imageUrl(),
+        //         'remember_token' => fake()->randomNumber(),
+        //    ]);
+        // }
     }
 }

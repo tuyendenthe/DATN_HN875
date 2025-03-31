@@ -17,8 +17,8 @@ class FlashSale extends Model
         'price_sale'
     ];
 
-    public function product()
+    public function productVariants()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductVariants::class,'product_id');
     }
 }

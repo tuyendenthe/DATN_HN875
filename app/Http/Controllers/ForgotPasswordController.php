@@ -49,6 +49,6 @@ class ForgotPasswordController extends Controller
         // return back()->with('status', 'Link khôi phục mật khẩu đã được gửi!');
         // return redirect()->route('login')->with('status', 'Link khôi phục mật khẩu đã được gửi!');
         return redirect()->route('login')->with([
-            'message' => 'Link khôi phục mật khẩu đã được gửi. Vui lòng kiểm tra Gmail !']);
+            'message1' => 'Link khôi phục mật khẩu đã được gửi. Vui lòng kiểm tra Gmail !']);
     }
 }

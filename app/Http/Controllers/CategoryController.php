@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -12,7 +13,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
+        // $category = Category::all();
+        // return view('admins.category.index', compact('category'));
+        $category = Category::withTrashed()->get();
         return view('admins.category.index', compact('category'));
     }
 
@@ -34,7 +37,8 @@ class CategoryController extends Controller
         ]);
 
         Category::create($request->all());
-        return redirect()->route('category.index')->with('success', 'Thêm thành công.');
+        // return redirect()->route('category.index')->with('success', 'Thêm thành công.');
+        return redirect()->route('category.index')->with('message1', 'Thêm danh mục thành công');
     }
 
     /**
@@ -69,16 +73,58 @@ class CategoryController extends Controller
         ]);
 
         $category->update($request->all());
-        return redirect()->route('category.index')->with('update_success', 'Sửa thành công.');
+
+        return redirect()->route('category.index')->with('message1', 'Sửa thành công.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // public function destroy(string $id)
+    // {
+    //     $category = Category::find($id);
+    //     $category->delete();
+
+    //     return redirect()->route('category.index')->with('message1', 'Xóa thành công.');
+    // }
+    public function destroy(Category $category)
     {
-        $category = Category::find($id);
+        Product::where('category_id', $category->id)->update(['category_id' => 1]);
+
+        // Xóa mềm tất cả sản phẩm thuộc danh mục
+        $category->products()->delete();
+
+        // Xóa mềm danh mục
         $category->delete();
-        return redirect()->route('category.index')->with('delete_success', 'Xóa thành công.');
+
+        return redirect()->route('category.index')->with('message1', 'Xóa danh mục và sản phẩm liên quan thành công.');
+    }
+
+
+    // public function restore(string $id)
+    // {
+    //     $category = Category::withTrashed()->findOrFail($id);
+
+    //     // Khôi phục danh mục
+    //     $category->restore();
+
+    //     // Khôi phục tất cả sản phẩm thuộc danh mục
+    //     $category->products()->withTrashed()->restore();
+
+    //     return redirect()->route('category.index')->with('message1', 'Khôi phục danh mục và sản phẩm liên quan thành công.');
+    // }
+
+    public function restore(string $id)
+    {
+        // Tìm danh mục đã bị xóa mềm, nếu không tìm thấy sẽ báo lỗi
+        $category = Category::withTrashed()->findOrFail($id);
+
+        // Khôi phục danh mục
+        $category->restore();
+
+        // Khôi phục tất cả sản phẩm thuộc danh mục đã bị xóa mềm
+        $category->products()->withTrashed()->restore();
+
+        return redirect()->route('category.index')->with('message1', 'Khôi phục danh mục và sản phẩm liên quan thành công.');
     }
 }

@@ -5,22 +5,23 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Content</th>
-                <th>Star</th>
-                <th>User</th>
-                <th>Product</th>
+                <th>Đánh giá</th>
+                <th>Số sao </th>
+                <th>Người đánh giá</th>
+                <th>Sản phẩm</th>
                 <th>Duyet</th>
-                <th>Actions</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($comments as $comment)
                 <tr>
                     <td>{{ $comment->id }}</td>
-                    <td>{{ $comment->content }}</td>
+                    <td>{{ $comment->comment }}</td>
                     <td>{{ $comment->star }}</td>
-                    <td>{{ $comment->user?->name }}</td>
-                    <td>{{ $comment->product->name }}</td>
+                    <td>{{ $comment->users_name }}</td>
+                    <td>{{ $comment->product_name }}</td>
+
                     <td>
                         <input type="checkbox" class="status-checkbox" data-comment-id="{{ $comment->id }}" {{ $comment->status == 1 ? 'checked' : '' }}>
 
@@ -43,7 +44,7 @@
     $(document).on('change', '.status-checkbox', function() {
         var commentId = $(this).data('comment-id');
         var status = $(this).is(':checked') ? 1 : 0; // lấy trạng thái của checkbox
-        
+
         $.ajax({
             url: "{{ route('update-status') }}",
             method: "POST",

@@ -26,11 +26,9 @@ class User extends Authenticatable
 
         'image',
         'password',
+        'role',
 
-        // 'add',
-        // 'rank',
-        // 'poin',
-        // 'role',
+
     ];
 
 

@@ -53,14 +53,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="price">Giá bán:</label>
-                                <input type="number" name="price" class="form-control" value="{{ old('price') }}">
+                                <input type="number" name="price" class="form-control" value="{{ old('price') }}" min="0">
                                 @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="quantity">Số lượng:</label>
-                                <input type="number" name="quantity" class="form-control" value="{{ old('quantity') }}">
+                                <input type="number" name="quantity" class="form-control" value="{{ old('quantity') }}" min="0">
                                 @error('quantity')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

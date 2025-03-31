@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('bill_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class)->constrained();
-            $table->foreignIdFor(Bill::class)->constrained();
+            $table->integer( 'variants_id');
+            $table->integer( 'bill_id');
             $table->string('bill_code');
             $table->integer( 'quantity');
             $table->integer( 'subtotal');
+            $table->integer( 'price');
             $table->timestamps();
         });
     }

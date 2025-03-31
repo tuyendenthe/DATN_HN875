@@ -6,8 +6,8 @@
                     <div class="footer-widget widget mb-30 widget-about">
                         <div class="widget-about">
                             <h4 class="epix-footer-title">Tải ứng dụng</h4>
-                            <p><a href="index.html">Epixx</a> Ứng dụng hiện đã có trên Google<br>
-                                Play & App Store. Nhận nó ngay bây giờ.</p>
+                            <p><a href=""></a> <br>
+                                </p>
                             <div class="logo-list logo-list-1">
                                 <a href="#"><img src="assets/img/icon/icon-app-store.png"
                                         alt=""></a>

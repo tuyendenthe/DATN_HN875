@@ -16,40 +16,34 @@
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
+
     <div class="container-fluid">
-        <!-- ============================================================== -->
-        <!-- Start Page Content -->
-        <!-- ============================================================== -->
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Danh sách Đơn Hàng</h5>
-
+                        @if (request()->has('order_id') && request()->order_id != '')
+                            <div class="d-flex justify-content-start mb-3">
+                                <a href="{{ route('order.list') }}" class="btn btn-secondary">Quay Lại</a>
+                            </div>
+                        @endif
                         <div class="table-responsive">
+                            <div class="d-flex justify-content-end mb-3">
+                                <form action="{{ route('order.list') }}" method="GET" class="form-inline">
+                                    <i class="bi bi-search"></i>
+                                    <input type="text" placeholder="Nhập mã đơn hàng..." name="order_id" required
+                                        class="form-control mr-2" style="width: 50%;">
+                                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                </form>
+                            </div>
+
                             <table id="zero_config" class="table">
-                                <div class="d-flex justify-content-end  mb-3 " >
-                                    <form action="{{ route('search.order') }}" method="GET" class="form-inline">
-                                        <i class="bi bi-search"></i>
-                                        <input type="text" placeholder="Nhập mã đơn hàng..." name="order_id" required
-                                            class="form-control mr-2" style="width: 15%;">
-                                        <button type="submit" class="btn btn-primary ">Tìm kiếm</button>
-                                    </form>
-                                    <a href="{{ route('checkout.list') }}" class="btn btn-secondary ml-2">Reset Danh
-                                        Sách</a>
-                                </div>
                                 <thead>
                                     <tr>
                                         <th>STT</th>
                                         <th>Mã Đơn Hàng</th>
                                         <th>Tên Khách Hàng</th>
-                                        {{-- <th>Mô tả</th> --}}
                                         <th>Số Điện Thoại</th>
                                         <th>Email</th>
                                         <th>Note</th>
@@ -58,6 +52,7 @@
                                         <th>Tổng Tiền</th>
                                         <th>Ngày Mua</th>
                                         <th>Trạng Thái Đơn Hàng</th>
+                                        <th>Người Cam Kết</th>
                                         <th>Thao Tác</th>
                                     </tr>
                                 </thead>
@@ -76,9 +71,11 @@
                                                 <td>{{ $value->total }}</td>
                                                 <td>{{ $value->created_at }}</td>
                                                 <td>{{ $value->status_name }}</td>
+                                                <td>{{ $value->commit }}</td>
                                                 <td>
                                                     <a class="btn btn-danger m-1"
-                                                        href="{{ route('checkout.status', $value->id) }}">Sửa Trạng Thái</a>
+                                                        href="{{ route('checkout.status', $value->id) }}">Sửa Trạng
+                                                        Thái</a>
                                                     <a class="btn btn-primary m-1"
                                                         href="{{ route('checkout.detail', $value->bill_code) }}">Chi
                                                         Tiết</a>
@@ -92,21 +89,49 @@
                                     @endif
                                 </tbody>
                             </table>
-                        </div>
 
+                            <!-- Phân trang -->
+                            <nav aria-label="...">
+                                <ul class="pagination justify-content-center">
+                                    @if ($listCheckouts->onFirstPage())
+                                        <li class="page-item disabled">
+                                            <a class="page-link">Previous</a>
+                                        </li>
+                                    @else
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="{{ $listCheckouts->previousPageUrl() }}">Previous</a>
+                                        </li>
+                                    @endif
+
+                                    @for ($i = 1; $i <= $listCheckouts->lastPage(); $i++)
+                                        @if ($i == $listCheckouts->currentPage())
+                                            <li class="page-item active" aria-current="page">
+                                                <a class="page-link">{{ $i }}</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                    href="{{ $listCheckouts->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endif
+                                    @endfor
+
+                                    @if ($listCheckouts->hasMorePages())
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $listCheckouts->nextPageUrl() }}">Next</a>
+                                        </li>
+                                    @else
+                                        <li class="page-item disabled">
+                                            <a class="page-link">Next</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End PAge Content -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Right sidebar -->
-        <!-- ============================================================== -->
-        <!-- .right-sidebar -->
-        <!-- ============================================================== -->
-        <!-- End Right sidebar -->
-        <!-- ============================================================== -->
     </div>
 @endsection

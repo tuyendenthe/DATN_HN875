@@ -15,11 +15,11 @@ class BannerController extends Controller
     public function upload_image($imageFile)
     {
         if ($imageFile) {
-            $imageName = time() . '-' . uniqid() . '-' . $imageFile->getClientOriginalExtension();
-
-            $imageFile->move(public_path('uploads'), $imageName);
-            return 'uploads/' . $imageName;
+            $imageName = time() . '-' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
+            $imageFile->move(public_path('uploads'), $imageName); // Đảm bảo thư mục tồn tại
+            return 'uploads/' . $imageName; // Trả về đường dẫn hợp lệ
         }
+        return null; // Trả về null nếu không có file
     }
     public function index()
     {
@@ -41,16 +41,18 @@ class BannerController extends Controller
     public function store(BannerRequest $request)
     {
         $data = $request->all();
-        // if ($request->hasFile('image')) {
-        //     $data['image'] = $this->upload_image($request->file('image'));
-        // }
+
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images/banner','public');
-         }
-         $data['image'] = $path;
- 
+            // Lưu file và lấy đường dẫn
+            $path = $request->file('image')->store('images/banner_covers', 'public');
+            $data['image'] = $path; // Lưu đường dẫn vào mảng dữ liệu
+        } else {
+            return redirect()->back()->withErrors(['image' => 'Vui lòng chọn ảnh.'])->withInput();
+        }
+
+        // Tạo mới slide với dữ liệu đã lưu
         Slide::create($data);
-        return redirect()->route('banner.index')->with('success', 'Them thanh cong');
+        return redirect()->route('banner.index')->with('message1', 'Thêm thành công');
     }
 
     /**
@@ -77,17 +79,24 @@ class BannerController extends Controller
     {
         $data = $request->all();
         $Banner = Slide::findOrFail($id);
+
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images/banner','public');
-            // $data['image'] = $this->upload_image($request->file('image'));
+            // Lưu file mới và lấy đường dẫn
+            $data['image'] = $request->file('image')->store('images/banner_covers', 'public');
+
+            // Kiểm tra và xóa file cũ nếu tồn tại
             if (!empty($Banner->image) && file_exists(public_path($Banner->image))) {
                 // Xóa file cũ
                 unlink(public_path($Banner->image));
             }
+        } else {
+            // Nếu không có file mới, giữ nguyên giá trị cũ
+            $data['image'] = $Banner->image;
         }
 
+        // Cập nhật dữ liệu
         $Banner->update($data);
-        return redirect()->route('banner.index')->with('success', 'Sua thanh cong');
+        return redirect()->route('banner.index')->with('message1', 'Sửa thành công');
     }
 
     /**
@@ -97,6 +106,6 @@ class BannerController extends Controller
     {
         $banner = Slide::find($id);
         $banner->delete();
-        return redirect()->route('banner.index')->with('success', 'Xoa thanh cong');
+        return redirect()->route('banner.index')->with('message1', 'Xoa thanh cong');
     }
 }

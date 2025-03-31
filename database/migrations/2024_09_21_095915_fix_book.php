@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->integer('phone');
             $table->date('fix_date')->nullable();
-
+            $table->unsignedBigInteger(column: 'status_id')->default(1);
             $table->timestamps();
         });
     }

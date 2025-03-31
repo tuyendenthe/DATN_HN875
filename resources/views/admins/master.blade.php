@@ -9,11 +9,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    {{-- <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png"> --}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/techzone.jpg')}}" />
+    <title>TechZone Admin</title>
     <!-- Custom CSS -->
     <link href="{{asset('admin/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link href="{{asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,17 +25,25 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+<style>
+    .nav-link .icon-bell {
+    color: #ccc; /* Màu mặc định */
+}
 
+.nav-link.has-notification .icon-bell {
+    color: gold; /* Màu vàng khi có thông báo */
+}
+</style>
 <body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-    <div class="preloader">
+    {{-- <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
-    </div>
+    </div> --}}
     <div id="main-wrapper">
         @include('blocks.admin.header')
         @include('blocks.admin.sidebar')
@@ -40,11 +51,11 @@
             @yield('content')
             @include('blocks.admin.footer')
         </div>
-       
+
     </div>
 
-    
-  
+
+
     <script src="{{asset('admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('admin/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>

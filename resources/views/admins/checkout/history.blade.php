@@ -31,7 +31,11 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Bảng</h5>
-
+                        @if (request()->has('order_id') && request()->order_id != '')
+                            <div class="d-flex justify-content-start mb-3">
+                                <a href="{{ route('order.list') }}" class="btn btn-secondary">Quay Lại</a>
+                            </div>
+                        @endif
                         <div class="table-responsive">
                             <table id="zero_config" class="table">
                                 <div class="d-flex justify-content-end mb-3">
@@ -56,6 +60,7 @@
                                         <th>Tổng Tiền</th>
                                         <th>Ngày Mua</th>
                                         <th>Trạng Thái Đơn Hàng</th>
+                                        <th>Người Cam kết</th>
                                         <th>Thao Tác</th>
                                     </tr>
                                 </thead>
@@ -77,6 +82,7 @@
                                                 <td>{{ $value->total }}</td>
                                                 <td>{{ $value->created_at }}</td>
                                                 <td>{{ $value->status_name }}</td>
+                                                <td>{{ $value->commit }}</td>
                                                 <td>
 
 
@@ -94,6 +100,42 @@
                                     @endif
                                 </tbody>
                             </table>
+                            <!-- Phân trang -->
+                            <nav aria-label="...">
+                                <ul class="pagination justify-content-center">
+                                    @if ($list->onFirstPage())
+                                        <li class="page-item disabled">
+                                            <a class="page-link">Previous</a>
+                                        </li>
+                                    @else
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $list->previousPageUrl() }}">Previous</a>
+                                        </li>
+                                    @endif
+
+                                    @for ($i = 1; $i <= $list->lastPage(); $i++)
+                                        @if ($i == $list->currentPage())
+                                            <li class="page-item active" aria-current="page">
+                                                <a class="page-link">{{ $i }}</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $list->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endif
+                                    @endfor
+
+                                    @if ($list->hasMorePages())
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $list->nextPageUrl() }}">Next</a>
+                                        </li>
+                                    @else
+                                        <li class="page-item disabled">
+                                            <a class="page-link">Next</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </nav>
                         </div>
 
                     </div>

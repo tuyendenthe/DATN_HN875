@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -14,8 +13,8 @@ class CheckAdminMiddleware
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (Auth::check()) {
             // Kiểm tra vai trò của người dùng
-            if (Auth::user()->role == '1') {
-                return $next($request); // Cho phép truy cập nếu là admin
+            if (Auth::user()->role == '1' || Auth::user()->role == '3') {
+                return $next($request); // Cho phép truy cập nếu là admin hoặc admin phụ
             } else {
                 return redirect()->route('login')->with([
                     'message' => 'Bạn không có quyền. Vui lòng đăng nhập trước!'

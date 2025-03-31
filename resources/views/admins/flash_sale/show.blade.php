@@ -36,13 +36,7 @@
                             <div class="form-group">
                                 <label for="name">Chọn Sản Phẩm</label>
                                 <select class="form-control" name="product_id" required>
-                                    @foreach ($products as $product)
-                                        @if($flashSale->product_id == $product->id)
-                                            <option value="{{ $product->id }}" selected>{{ $product->name }}</option>
-                                        @else
-                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                        @endif
-                                    @endforeach
+                                            <option  value="{{ $flashSale->productVariants->id }}">{{ $flashSale->productVariants->product->name }} | {{$flashSale->productVariants->ram}}GB - {{$flashSale->productVariants->memory}}GB</option>
                                 </select>
                                 @error('product_id')
                                     <span class="text-danger">{{ $message }}</span>

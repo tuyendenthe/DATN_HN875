@@ -1,57 +1,54 @@
 @extends('admins.master')
 
 @section('content')
-    <div class="page-breadcrumb">
-        <div class="row">
-            <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Chỉnh sửa người dùng</h4>
-                <div class="ml-auto text-right">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit User</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container">
+    <h2>Cập nhật tài khoản</h2>
 
-    <div class="container-fluid">
-        <form action="{{ route('admin1.users.update', $user->id) }}" method="post" enctype="multipart/form-data">
-            @method('PUT')
-            @csrf
-            <div class="row">
-                <div class="col-12 mb-3">
-                    <label for="name">Tên:</label>
-                    <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}">
-                    @error('name')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-12 mb-3">
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" class="form-control" value="{{ old('email', $user->email) }}">
-                    @error('email')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-12 mb-3">
-                    <label for="address">Địa chỉ:</label>
-                    <input type="text" name="address" class="form-control" value="{{ old('address', $user->address) }}">
-                    @error('address')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-12 mb-3">
-                    <label for="image">Ảnh:</label>
-                    <input type="file" name="image" class="form-control">
-                    @if ($user->image)
-                        <img src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}" width="100" class="mt-2">
-                    @endif
-                </div>
-                <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
-            </div>
-        </form>
-    </div>
+    @if (session('message1'))
+        <div class="alert alert-success">{{ session('message1') }}</div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
+    <form action="{{ route('admin1.users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label for="name">Tên:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Địa chỉ:</label>
+            <input type="text" class="form-control" id="address" name="address" value="{{ $user->address }}">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mật khẩu:</label>
+            <input type="password" class="form-control" id="password" name="password">
+            <small class="form-text text-muted">Để trống nếu không thay đổi mật khẩu.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Ảnh đại diện:</label>
+            <input type="file" class="form-control" id="image" name="image">
+        </div>
+
+        <div class="form-group">
+            <label for="role">Vai trò:</label>
+            <select class="form-control" id="role" name="role" required>
+                <option value="2" {{ $user->role == 2 ? 'selected' : '' }}>User</option>
+                <option value="3" {{ $user->role == 3 ? 'selected' : '' }}>Admin phụ</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </form>
+</div>
 @endsection

@@ -35,7 +35,8 @@ class CategoryPostController extends Controller
         ]);
 
         Category_post::create($request->all());
-        return redirect()->route('category_post.index')->with('success', 'Thêm thành công.');
+        // return redirect()->route('category_post.index')->with('success', 'Thêm thành công.');
+        return redirect()->route('category_post.index')->with('message1', 'Thêm thành công.');
     }
 
     /**
@@ -46,6 +47,7 @@ class CategoryPostController extends Controller
         $catePost = Category_post::find($id);
 
         return view('category_post.show',compact('catePost'));
+
     }
 
     /**
@@ -72,7 +74,8 @@ class CategoryPostController extends Controller
         ]);
 
         $catePost->update($request->all());
-        return redirect()->route('category_post.index')->with('update_success', 'Sửa thành công.');
+        // return redirect()->route('category_post.index')->with('update_success', 'Sửa thành công.');
+        return redirect()->route('category_post.index')->with('message1', 'Sửa thành công.');
     }
 
     /**
@@ -83,6 +86,6 @@ class CategoryPostController extends Controller
         $catePost = Category_post::find($id);
 
         $catePost->delete();
-        return redirect()->route('category_post.index')->with('delete_success', 'Xóa thành công.');
+        return redirect()->route('category_post.index')->with('message1', 'Xóa thành công.');
     }
 }
